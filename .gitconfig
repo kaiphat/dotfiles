@@ -1,0 +1,42 @@
+[user]
+	email = i.punko@pixelplex.io
+	name = Ilya Punko
+	safecrlf = false
+[core]
+	autocrlf = input
+	safecrlf = false
+	editor = nvim
+  # npm i global diff-so-fancy
+  pager = "diff-so-fancy | less --tabs=4 -RFX"
+  diffFilter = "diff-so-fancy --patch"
+[diff-so-fancy]
+  markEmptyLines = false
+[alias]
+	l = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --max-count 25
+	lm = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --max-count 1000
+	a = add -A
+	f = fetch origin
+	ch = checkout
+	chb = checkout -b
+	c = commit -m
+	ca = commit --amend
+	s = stash
+	sa = stash apply
+	pl = pull origin 
+	p = push origin
+	d = diff HEAD
+  d1 = diff HEAD~1
+	ds = diff HEAD --shortstat
+	ds1 = diff HEAD~1 --shortstat
+	b = branch
+	bd = branch -D
+	m = merge
+  ce = config --global --edit
+  rs = reset --soft HEAD~1
+  cp = cherry-pick
+  re = rebase -i HEAD~20
+[difftool]
+  prompt = true
+[diff]
+  tool = nvim
+

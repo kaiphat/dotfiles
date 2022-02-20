@@ -1,0 +1,12 @@
+\set PROMPT1 '\x1b[34m  \x1b[0m'
+\set PROMPT2 '\x1b[34m  \x1b[0m'
+\set PROMPT3 '\x1b[34m  \x1b[0m'
+\x off
+\pset null '[null]'
+\set HISTFILE ~/.psql_history- :DBNAME
+\set VERBOSITY verbose
+\set HISTCONTROL ignoredups
+\set HISTSIZE 1000
+\pset pager always
+\timing
+\unset QUIET

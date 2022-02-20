@@ -1,0 +1,27 @@
+#!/bin/fish
+
+set paths \
+  .psqlrc \
+  .zshrc \
+  .gitconfig \
+  .config/nvim \
+
+set dotfiles ~/dotfiles
+
+for path in $paths
+  set fullpath ~/$path
+  set item (basename $path)
+
+  if test ! -e $dotfiles/$item
+    cp -r $fullpath $dotfiles 
+  end
+
+  if test -e $dotfiles/$item
+    rm $fullpath
+  end
+
+  if test ! -e $fullpath
+    ln -s $dotfiles/$item $fullpath
+  end
+end
+
