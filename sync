@@ -1,10 +1,14 @@
 #!/bin/fish
 
-set paths \
-  .psqlrc \
-  .zshrc \
-  .gitconfig \
-  .config/nvim \
+set paths       \
+  .psqlrc       \
+  .zshrc        \
+  .gitconfig    \
+  .config/nvim  \
+  .config/kitty \
+  .config/pgcli \
+  .config/qtile \
+  .config/fish  \
 
 set dotfiles ~/dotfiles
 
@@ -24,4 +28,5 @@ for path in $paths
     ln -s $dotfiles/$item $fullpath
   end
 end
+
 
