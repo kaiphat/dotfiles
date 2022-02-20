@@ -1,13 +1,15 @@
-local utils = require('utils.general')
+local utils = require('utils')
 local logger = require('utils.logger')
 
 local map = utils.map
+local lua = utils.lua
+local bindArgs = utils.bindArgs
 
 vim.g.mapleader = ' '
 
 function _G.fileBrowserForCwd() 
   local path = utils.getCurrentPath()
-  require'telescope'.extensions.file_browser.file_browser({ cwd = path, hidden = true })
+  require'telescope'.extensions.file_browser.file_browser { cwd = path, hidden = true }
 end
 
 function _G.moveToConfig()
@@ -44,7 +46,6 @@ map('n', 'cl', 'ct')
 map('n', 'dl', 'dt')
 map('n', 'yl', 'yt')
 map('n', 'vl', 'vt')
-
 map('n', '<A-j>', ':wincmd l<cr>')
 
 map('n', '<A-->', ':vertical resize -10<cr>')
@@ -104,8 +105,8 @@ map('x', '[', 'i[')
 -- utils
 
 -- telescope
-map('n', '<leader>ff', ':lua require"telescope.builtin".find_files({ hidden = true, no_ignore = true })<CR>')
-map('n', '<leader>fe', ':lua require"telescope".extensions.file_browser.file_browser({ hidden = true })<cr>')
+map('n', '<leader>ff', lua('require"telescope.builtin".find_files({ hidden = true, no_ignore = true })'))
+map('n', '<leader>fe', lua('require"telescope".extensions.file_browser.file_browser({ hidden = true })'))
 map('n', '<leader>fg', ':lua require"telescope.builtin".live_grep({ max_results = 50 })<CR>')
 map('n', '<leader>fb', ':Telescope buffers<cr>')
 map('n', '<leader>fs', ':Telescope git_status<cr>')
@@ -113,7 +114,7 @@ map('n', '<leader>fr', ':Telescope lsp_references<cr>')
 map('n', '<leader>fo', ':Telescope oldfiles<cr>')
 map('n', '<leader>fp', ':Telescope resume<cr>')
 map('n', '<leader>fm', ':Telescope marks<cr>')
-map('n', '<leader>fh', ':lua fileBrowserForCwd()<cr>')
+map('n', '<leader>fh', fileBrowserForCwd)
 
 -- nvim tree
 map('n', '<leader>o', ':NvimTreeToggle<cr>')
@@ -137,4 +138,3 @@ map('n', '[', ':lua require"utils.unit".moveToStart()<CR>')
 
 vim.cmd("silent! command PackerStatus lua require 'plugins_list' require('packer').status()")
 vim.cmd("silent! command PackerSync lua require 'plugins_list' require('packer').sync()")
-
