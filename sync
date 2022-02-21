@@ -25,6 +25,7 @@ for path in $paths
   end
 
   if test ! -e $fullpath
+    mkdir -p (dirname $fullpath)
     ln -s $dotfiles/$item $fullpath
   end
 end

@@ -42,14 +42,30 @@ end
 alias g "git"
 alias y "yarn"
 alias n "nvim"
+alias mkdir "mkdir -p"
 alias less "less -MSx4 -FXR --shift 10"
 alias ls "ls -a --group-directories-first --color=auto"
 alias rm "rm -rf"
 alias clip "xclip -selection c"
+
 function fd
   set pattern (string join '*' '' $argv '')
   fdfind -p -g $pattern .
 end
+
+function gp --argument message
+  if test -z "$message"
+    echo 'error: empty message'
+    return
+  end
+
+  set branch (git rev-parse --abbrev-ref HEAD)
+
+  git add -A 
+  and git commit -m "$message" 
+  and git push origin $branch
+end
+
 function ff
   set pattern (string join '*' '' $argv '')
   find . -type f -iwholename $pattern \
