@@ -53,13 +53,13 @@ function fd
   fdfind -p -g $pattern .
 end
 
-function gp --argument message
+function gp -a message
   if test -z "$message"
     echo 'error: empty message'
     return
   end
 
-  set branch (git rev-parse --abbrev-ref HEAD)
+  set branch (git branch --show-current)
 
   git add -A 
   and git commit -m "$message" 
