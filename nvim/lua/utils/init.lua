@@ -37,9 +37,5 @@ M.bindArgs = function(func, ...)
   end
 end
 
-M.lua = function(str) 
-  return ':lua '..str..'<cr>'
-end
-
 
 return M

@@ -41,6 +41,7 @@ end
 # common
 alias g "git"
 alias y "yarn"
+alias grep "grep -i --color"
 alias n "nvim"
 alias mkdir "mkdir -p"
 alias less "less -MSx4 -FXR --shift 10"

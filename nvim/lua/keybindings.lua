@@ -2,23 +2,15 @@ local utils = require('utils')
 local logger = require('utils.logger')
 
 local map = utils.map
-local lua = utils.lua
 local bindArgs = utils.bindArgs
 
 vim.g.mapleader = ' '
 
-function _G.fileBrowserForCwd() 
-  local path = utils.getCurrentPath()
-  require'telescope'.extensions.file_browser.file_browser { cwd = path, hidden = true }
-end
-
-function _G.moveToConfig()
+map('n', '<leader>ee', ":NvimTreeFindFile<cr>")
+map('n', '<leader>ec', function()
   vim.cmd 'lcd ~/dotfiles/nvim'
   vim.cmd 'Telescope find_files'
-end
-
-map('n', '<leader>ee', ":NvimTreeFindFile<cr>")
-map('n', '<leader>ec', ':lua moveToConfig()<cr>')
+end)
 map('n', '<leader>en', ':lua require"telescope.builtin".find_files({ cwd = "~/notes" })<cr>')
 
 map('n', '<F1>', ":w<cr>:e ++ff=dos<cr>:w ++ff=unix<cr>")
@@ -103,18 +95,25 @@ map('x', '{', 'i{')
 map('x', '[', 'i[')
 
 -- utils
+map('v', '<leader>uaq', ':EasyAlign /\\C["(a-z:\']/ {"rm": 0} <cr>')
+map('n', '<leader>ut', function()
+  vim.cmd '%s/\\s\\+$//'
+end)
 
 -- telescope
-map('n', '<leader>ff', lua('require"telescope.builtin".find_files({ hidden = true, no_ignore = true })'))
-map('n', '<leader>fe', lua('require"telescope".extensions.file_browser.file_browser({ hidden = true })'))
-map('n', '<leader>fg', ':lua require"telescope.builtin".live_grep({ max_results = 50 })<CR>')
+map('n', '<leader>ff', ':lua require"telescope.builtin".find_files({ hidden = true, no_ignore = true })<cr>')
+map('n', '<leader>fe', ':lua require"telescope".extensions.file_browser.file_browser({ hidden = true })<cr>')
+map('n', '<leader>fg', ':lua require"telescope.builtin".live_grep({ max_results = 50 })<cr>')
 map('n', '<leader>fb', ':Telescope buffers<cr>')
 map('n', '<leader>fs', ':Telescope git_status<cr>')
 map('n', '<leader>fr', ':Telescope lsp_references<cr>')
 map('n', '<leader>fo', ':Telescope oldfiles<cr>')
 map('n', '<leader>fp', ':Telescope resume<cr>')
 map('n', '<leader>fm', ':Telescope marks<cr>')
-map('n', '<leader>fh', fileBrowserForCwd)
+map('n', '<leader>fh', function()
+  local path = utils.getCurrentPath()
+  require'telescope'.extensions.file_browser.file_browser { cwd = path, hidden = true }
+end)
 
 -- nvim tree
 map('n', '<leader>o', ':NvimTreeToggle<cr>')
@@ -131,10 +130,10 @@ for i = 1, #letters do
 end
 
 -- treesitter unit
-map('x', 'u', ':lua require"utils.unit".select(true)<CR>')
-map('o', 'u', ':<c-u>lua require"utils.unit".select(true)<CR>')
-map('n', ']', ':lua require"utils.unit".moveToEnd()<CR>')
-map('n', '[', ':lua require"utils.unit".moveToStart()<CR>')
+map('x', 'u', ':lua require"utils.unit".select(true)<cr>')
+map('o', 'u', ':<c-u>lua require"utils.unit".select(true)<cr>')
+map('n', ']', ':lua require"utils.unit".moveToEnd()<cr>')
+map('n', '[', ':lua require"utils.unit".moveToStart()<cr>')
 
 vim.cmd("silent! command PackerStatus lua require 'plugins_list' require('packer').status()")
 vim.cmd("silent! command PackerSync lua require 'plugins_list' require('packer').sync()")
