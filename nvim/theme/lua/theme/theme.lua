@@ -51,6 +51,7 @@ local colors = {
   prettyGray    = '#2b2f3a',
   prettyWhite   = '#dae0ee',
   prettyRed     = '#9e6e7a',
+  greenTea      = '#9CC4B2',
 
   dark          = '#202837'
 }
@@ -88,7 +89,7 @@ local themes = {
     method      = colors.light_blue.da(15),
     constructor = colors.brown,
     property    = colors.gray,
-    string      = colors.pink,
+    string      = colors.greenTea,
     statement   = colors.nord_blue,
 
     lineMain    = colors.nordGray1,

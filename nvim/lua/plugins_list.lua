@@ -218,6 +218,11 @@ return packer.startup (
     }
 
     use {
+      'j-hui/fidget.nvim',
+      config = 'require"plugins.fidget"'
+    }
+
+    use {
       'jose-elias-alvarez/null-ls.nvim',
       config = 'require"plugins.null"'
     }

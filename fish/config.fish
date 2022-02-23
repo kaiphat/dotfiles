@@ -24,7 +24,7 @@ alias du "dc up --force-recreate -d -V $1"
 alias dub "dc up --force-recreate --build -d -V $1"
 
 function de --argument container cmd 
-  d exec -it $container node_modules/.bin/sequelize $cmd
+  d exec -it $container node_modules/.bin/sequelize $cmd $argv[3..]
 end
 function dl
   d logs $argv -f -n 99
