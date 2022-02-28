@@ -21,7 +21,7 @@ map('n', ';', ':', { noremap = true })
 map('v', ':', ';')
 map('v', ';', ':', { noremap = true })
 
-map('v', 'p', '<F3>"_dP<F3>')
+map('v', 'p', 'pgvy')
 map('c', '<C-r>', '<C-r>+', { noremap = false })
 map('i', '<C-r>', '<F3><C-r>+<F3>', { noremap = false })
 
@@ -70,7 +70,7 @@ map('n', 'J', 'Jzz')
 map('n', '*', '*zz')
 map('n', '#', '#zz')
 
-map('n', '<Enter>', '@j') -- ???
+-- map('n', '<Enter>', '@j') -- ???
 map('n', ',', '^') -- ???
 map('n', 'Q', 'q')
 

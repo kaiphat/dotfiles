@@ -35,7 +35,7 @@ telescope.setup {
       },
     },
     file_ignore_patterns = {
-      'dotfiles/',
+      -- 'dotfiles/',
       'node_modules/',
       'dist/',
       'data/',
