@@ -26,16 +26,17 @@ local function on_attach(client, bufnr)
   end
 
   -- map('n',   'gD',           '<Cmd>lua   vim.lsp.buf.declaration()<cr>')
-  map('n',   'gd',           '<cmd>lua   vim.lsp.buf.definition()<cr>')
-  map('n',   'K',            '<cmd>lua   vim.lsp.buf.hover()<cr>')
-  map('n',   '<leader>lk',   '<cmd>lua   vim.lsp.buf.signature_help()<cr>')
-  map('n',   '<space>le',    '<cmd>lua   vim.diagnostic.open_float()<cr>')
-  -- map('n',   '[d',           '<cmd>lua   vim.diagnostic.goto_prev()<cr>')
-  -- map('n',   ']d',           '<cmd>lua   vim.diagnostic.goto_next()<cr>')
-  map('n',   '<space>lq',    '<cmd>lua   vim.diagnostic.set_loclist()<cr>')
-  map('n',   '<space>la',    '<cmd>lua   vim.lsp.buf.code_action()<cr>')
-  map('n',   '<space>lr',    '<cmd>lua   vim.lsp.buf.rename()<cr>')
-  map('n',   '<space>lf',    '<cmd>lua   vim.lsp.buf.formatting()<cr>')
+  map('n',   'gd',           ':lua vim.lsp.buf.definition()<cr>')
+  map('n',   'ga',           ':vs<cr>:lua vim.lsp.buf.definition()<cr>')
+  map('n',   'K',            ':lua vim.lsp.buf.hover()<cr>')
+  map('n',   '<leader>lk',   ':lua vim.lsp.buf.signature_help()<cr>')
+  map('n',   '<space>le',    ':lua vim.diagnostic.open_float()<cr>')
+  -- map('n',   '[d',           ':lua   vim.diagnostic.goto_prev()<cr>')
+  -- map('n',   ']d',           ':lua   vim.diagnostic.goto_next()<cr>')
+  map('n',   '<space>lq',    ':lua vim.diagnostic.set_loclist()<cr>')
+  map('n',   '<space>la',    ':lua vim.lsp.buf.code_action()<cr>')
+  map('n',   '<space>lr',    ':lua vim.lsp.buf.rename()<cr>')
+  map('n',   '<space>lf',    ':lua vim.lsp.buf.formatting()<cr>')
 
   if client.resolved_capabilities.document_highlight then
       vim.cmd [[

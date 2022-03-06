@@ -56,10 +56,6 @@ map('i', 'kJ', "<esc>")
 map('i', '<C-l>', "<Right><c-h>")
 map('i', '<C-d>', "<Right>")
 
-map('i', ',', ',<c-g>u')
-map('i', '.', '.<c-g>u')
-map('i', ' ', ' <c-g>u')
-
 map('n', '<esc>', ":nohl<cr>")
 
 map('n', 'Y', 'y$')

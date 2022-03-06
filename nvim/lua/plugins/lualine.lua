@@ -47,8 +47,10 @@ local theme = {
 
 local getPath = function()
   local path = vim.fn.expand('%:p')
-  path = path:gsub("%/home/ilya/work/", "")
-  path = path:gsub("%/home/ilya", "~")
+  path = path
+    :gsub("%/home/ilya/work/", "")
+    :gsub("%/home/ilya", "~")
+    :gsub("//", "/")
   return path
 end
 

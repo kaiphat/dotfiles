@@ -1,0 +1,37 @@
+[note]
+language      = "en"
+default-title = "Untitled"
+filename      = "{{date now \"%Y-%m-%d\"}}:{{slug title}}"
+extension     = "md"
+template      = "default.md"
+id-charset    = "alphanum"
+id-length     = 4
+id-case       = "lower"
+
+[extra]
+author = "kirsan"
+
+[group.notes.test]
+
+[format.markdown]
+hashtags   = true
+colon-tags = true
+
+[tool]
+editor      = "nvim"
+pager       = "less -FIRX"
+fzf-preview = "bat -p --color always {-1}"
+
+[filter]
+recents = "--sort created- --created-after 'last two weeks'"
+
+[alias]
+edlast = "zk edit --limit 1 --sort modified- $@"
+recent = "zk edit --sort created- --created-after 'last two weeks' --interactive"
+lucky  = "zk list --quiet --format full --sort random --limit 1"
+
+[lsp]
+
+[lsp.diagnostics]
+wiki-title = "hint"
+dead-link  = "error"

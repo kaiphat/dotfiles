@@ -3,6 +3,7 @@
 SETUVAR ANDROID_HOME:/home/ilya/Android/Sdk
 SETUVAR EDITOR:nvim
 SETUVAR LESS:\x2dMSx4\x20\x2dFXR\x20\x2d\x2dshift\x2010
+SETUVAR ZK_NOTEBOOK_DIR:/home/ilya/notes
 SETUVAR ZO_CMD:zo
 SETUVAR Z_CMD:z
 SETUVAR Z_DATA:/home/ilya/\x2elocal/share/z/data
