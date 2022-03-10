@@ -67,6 +67,31 @@ function gp -a message
   and git push origin $branch
 end
 
+function gup -a parent count
+  if test -z "$parent"
+    echo 'error: empty parrent'
+    return
+  end
+  if test -z "$count"
+    echo 'error: there isn\'t count'
+    return
+  end
+
+  set branch (git branch --show-current)
+  set stash_name (date +"%F.%T.$branch")
+
+  git add -A
+  and git reset --soft HEAD~$count
+  and git stash save $stash_name
+  and git checkout $parent
+  and git pull origin $parent
+  and git branch -D $branch
+  and git checkout -b $branch
+  and git stash apply
+  and git add -A
+end
+
+
 function ff
   set pattern (string join '*' '' $argv '')
   find . -type f -iwholename $pattern \

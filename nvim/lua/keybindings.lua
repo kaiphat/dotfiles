@@ -95,6 +95,11 @@ map('v', '<leader>uaq', ':EasyAlign /\\C["(a-z:\']/ {"rm": 0} <cr>')
 map('n', '<leader>ut', function()
   vim.cmd '%s/\\s\\+$//'
 end)
+map('x', '<leader>uus', ':s/.*/\\=v:lua.upperSql(submatch(0))/g<cr>:nohl<cr>')
+map('n', '<leader>uus', function() -- upper sql
+  vim.cmd '%s/.*/\\=v:lua.upperSql(submatch(0))'
+  vim.cmd 'nohl'
+end)
 
 -- telescope
 map('n', '<leader>ff', ':lua require"telescope.builtin".find_files({ hidden = true, no_ignore = true })<cr>')

@@ -8,7 +8,7 @@ telescope.setup {
     vimgrep_arguments = {
       'rg',
       '--color=never',
-      '--no-ignore',
+      -- '--no-ignore',
       '--no-heading',
       '--with-filename',
       '--line-number',
