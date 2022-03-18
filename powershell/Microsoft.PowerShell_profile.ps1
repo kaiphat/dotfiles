@@ -1,15 +1,28 @@
-# Install-Module -Name PSReadLine -AllowPrerelease -Scope CurrentUser -Force -SkipPublisherCheck
+function ds {
+  docker stop $(docker ps -q)
+}
+function dcr {
+  docker-compose restart @args
+}
+function gw {
+  cd D:\\Work
+}
+function dps {
+  d ps -a --format "table {{.ID}}\t{{.Names}}" | grep -i --color $args
+}
+function dl {
+  d logs $args -f -n 99
+}
+
 New-Alias -Name n -Value nvim
 New-Alias -Name d -Value docker
 New-Alias -Name dc -Value docker-compose
 New-Alias -Name g -Value git
+New-Alias -Name y -Value yarn
+# New-Alias -Name grep -Value grep
 
-Set-Location D:\Work
-# install scoop https://scoop.sh/
-# https://ohmyposh.dev/docs/prompt
-# scoop install https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/oh-my-posh.json
-oh-my-posh prompt init pwsh --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/v$(oh-my-posh --version)/themes/jandedobbeleer.omp.json | Invoke-Expression
-# Install-Module posh-git -Scope CurrentUser
+# Set-Location D:\Work
+oh-my-posh prompt init pwsh --config ~/.posh-theme.json | Invoke-Expression
 Import-Module posh-git
 
 
