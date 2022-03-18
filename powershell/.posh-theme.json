@@ -1,97 +1,92 @@
 {
-  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
-  "console_title": true,
-  "console_title_style": "template",
-  "console_title_template": "{{if .Root}}(Admin){{end}} {{.Path}}",
   "blocks": [
     {
-      "type": "prompt",
       "alignment": "left",
       "newline": true,
       "segments": [
         {
-          "type": "root",
-          "style": "plain",
           "foreground": "#BF616A",
           "properties": {
-            "prefix": "",
-            "root_icon": " "
-          }
+            "root_icon": " ",
+            "template": "  "
+          },
+          "style": "plain",
+          "type": "root"
         },
         {
-          "type": "path",
-          "style": "plain",
           "foreground": "#729FCF",
           "properties": {
-            "prefix": "",
-            "style": "full"
-          }
+            "style": "full",
+            "display_exit_code": false,
+            "template": "  {{ .Path }} "
+          },
+          "style": "plain",
+          "type": "path"
         }
-      ]
+      ],
+      "type": "prompt"
     },
     {
-      "type": "prompt",
       "alignment": "left",
       "segments": [
         {
-          "type": "git",
-          "style": "plain",
           "foreground": "#E9B189",
           "properties": {
-            "prefix": "",
-            "working_color": "#EEEEEE",
-            "staging_color": "#EEEEEE",
-            "local_changes_color": "#EEEEEE",
             "ahead_and_behind_color": "#EEEEEE",
-            "display_stash_count": "#EEEEEE",
-            "behind_color": "#EEEEEE",
             "ahead_color": "#EEEEEE",
-
-            "display_status": true,
-            "display_status_detail": true,
-            "display_upstream_icon": false,
-
-            "branch_icon": "",
-            "github_icon": "",
+            "behind_color": "#EEEEEE",
             "branch_ahead_icon": "<#88C0D0>\u21e1 </>",
             "branch_behind_icon": "<#88C0D0>\u21e3 </>",
-            "local_working_icon": "<#FFAFD7>\u002a </>"
-          }
+            "branch_icon": "",
+            "fetch_stash_count": "#EEEEEE",
+            "fetch_status": true,
+            "fetch_upstream_icon": false,
+            "github_icon": "",
+            "local_changes_color": "#EEEEEE",
+            "template": "{{ .HEAD }} {{ .BranchStatus }}{{ if .Working.Changed }}<#FFAFD7>* </><#EEEEEE>{{ .Working.String }}</>{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 <#EEEEEE>{{ .Staging.String }}</>{{ end }}{{ if gt .StashCount 0}} \uf692 {{ .StashCount }}{{ end }}{{ if gt .WorktreeCount 0}} \uf1bb {{ .WorktreeCount }}{{ end }} "
+          },
+          "style": "plain",
+          "type": "git"
         }
-      ]
+      ],
+      "type": "prompt"
     },
     {
-      "hello world": "prompt",
       "alignment": "left",
       "segments": [
         {
-          "type": "executiontime",
-          "style": "plain",
           "foreground": "#A3BE8C",
           "properties": {
-            "style": "austin"
-          }
+            "display_exit_code": false,
+            "style": "austin",
+            "template": " {{ .FormattedMs }} "
+          },
+          "style": "plain",
+          "type": "executiontime"
         }
       ]
     },
     {
-      "type": "prompt",
       "alignment": "left",
       "newline": true,
       "segments": [
         {
-          "type": "exit",
-          "style": "plain",
           "foreground": "#B48EAD",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}#BF616A{{ end }}"
+          ],
           "properties": {
-            // "prefix": "\u276f",
-            "prefix": "$",
             "display_exit_code": false,
-            "error_color": "#BF616A",
-            "always_enabled": true
-          }
+            "always_enabled": true,
+            "template": " "
+          },
+          "style": "plain",
+          "type": "exit"
         }
-      ]
+      ],
+      "type": "prompt"
     }
-  ]
+  ],
+  "console_title_template": "{{if .Root}}(Admin){{end}} {{.PWD}}",
+  "version": 1
 }
