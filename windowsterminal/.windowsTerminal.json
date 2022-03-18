@@ -47,10 +47,10 @@
             "command": 
             {
                 "action": "splitPane",
-                "split": "vertical",
+                "split": "auto",
                 "splitMode": "duplicate"
             },
-            "keys": "ctrl+t"
+            "keys": "ctrl+shift+enter"
         },
         {
             "command": 
@@ -61,7 +61,11 @@
             "keys": "ctrl+alt+h"
         },
         {
-            "command": "scrollDownPage",
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "down"
+            },
             "keys": "ctrl+alt+j"
         },
         {
@@ -81,7 +85,11 @@
             "keys": "ctrl+1"
         },
         {
-            "command": "scrollUpPage",
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "up"
+            },
             "keys": "ctrl+alt+k"
         },
         {
@@ -144,28 +152,28 @@
         "list": 
         [
             {
-                "acrylicOpacity": 0.90000000000000002,
+                "acrylicOpacity": 1,
                 "altGrAliasing": false,
                 "antialiasingMode": "grayscale",
                 "backgroundImage": "D:\\Docs\\Resources\\Backgrounds\\6.jpg",
                 "backgroundImageOpacity": 0.0,
                 "bellStyle": "window",
                 "colorScheme": "TokyoNight",
-                "commandline": "pwsh.exe -nologo -WorkingDirectory D:\\Work\\consumer",
+                "commandline": "pwsh.exe -nologo",
                 "cursorShape": "filledBox",
                 "font": 
                 {
-                    "face": "FantasqueSansMono NF",
-                    "size": 11,
+                    "face": "JetBrainsMono NF",
+                    "size": 10,
                     "weight": "normal"
                 },
                 "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
                 "hidden": false,
                 "name": "PowerShell",
-                "padding": "5",
+                "padding": "3",
                 "scrollbarState": "hidden",
                 "source": "Windows.Terminal.PowershellCore",
-                "startingDirectory": "%USERPROFILE%",
+                "startingDirectory": "./",
                 "useAcrylic": false
             },
             {
