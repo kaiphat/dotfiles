@@ -26,10 +26,12 @@ telescope.setup {
       prompt_position = 'top',
       -- preview_width = 0.55,
       horizontal = {
+        preview_cutoff = 40,
         mirror = false,
         width = 0.95
       },
       vertical = {
+        preview_cutoff = 40,
         mirror = false,
         width = 0.95
       },
@@ -86,7 +88,15 @@ telescope.setup {
       mappings = {
       }
     },
+
+    fzf = {
+      fuzzy = true,
+      override_generic_sorter = true,
+      override_file_sorter = true,
+      case_mode = "smart_case",
+    }
   },
 }
 
+telescope.load_extension "fzf"
 telescope.load_extension "file_browser"

@@ -1,11 +1,17 @@
+local ok, log = pcall(require, 'plenary.log')
+
 local M = {}
 
-M.logger = require("plenary.log").new({
-  level = "info"
-})
+if ok then
 
-M.log = function(...)
- M.logger.info(...)
+  M.logger = log.new({
+    level = "info"
+  })
+
+  M.log = function(...)
+   M.logger.info(...)
+  end
+
 end
 
 return M

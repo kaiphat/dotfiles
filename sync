@@ -8,7 +8,7 @@ set paths       \
   .config/kitty \
   .config/pgcli \
   .config/qtile \
-  .config/fish  \
+  .config/fish/config.fish \
   .config/zk  \
 
 set dotfiles ~/dotfiles
@@ -22,7 +22,7 @@ for path in $paths
   end
 
   if test -e $dotfiles/$item
-    rm $fullpath
+    rm -rf $fullpath
   end
 
   if test ! -e $fullpath

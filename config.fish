@@ -1,7 +1,7 @@
 ### ENVIROMENTS ###
 set -U EDITOR nvim
-set -U ANDROID_HOME $HOME/Android/Sdk
 set -U pure_symbol_prompt 
+set -U ANDROID_HOME $HOME/Android/Sdk
 
 # paths
 fish_add_path -aP $snap_bin_path
@@ -12,6 +12,8 @@ fish_add_path -aP $ANDROID_HOME/platform-tools
 fish_add_path -aP /opt/ReactNativeDebugger
 fish_add_path -aP /usr/local/go/bin
 fish_add_path -aP $HOME/go/bin
+fish_add_path -aP /usr/.local/bin
+fish_add_path -aP $HOME/.cargo/bin
 
 ### ALIASES ###
 
@@ -166,3 +168,4 @@ set -U fish_color_param '#ceceef'
 # set -U fish_color_redirection brblue
 # set -U fish_color_status red
 # set -U fish_color_user brgreen
+

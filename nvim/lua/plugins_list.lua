@@ -227,6 +227,11 @@ return packer.startup (
       config = 'require"plugins.null"'
     }
 
+    use {
+      'nvim-telescope/telescope-fzf-native.nvim',
+      run = 'make'
+    }
+
   end
 )
 
