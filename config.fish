@@ -20,7 +20,7 @@ fish_add_path -aP $HOME/.cargo/bin
 
 # docker
 alias d "docker"
-alias ds "d stop (d ps -qa)"
+alias ds "d stop (d ps -q)"
 alias dc "docker-compose"
 alias dcr "dc restart"
 alias du "dc up --force-recreate -d -V $1"

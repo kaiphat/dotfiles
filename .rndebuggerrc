@@ -1,0 +1,21 @@
+{
+  fontFamily: 'mononoki Nerd Font, Consolas, Lucida Console, monospace',
+  windowBounds: {
+    // Size of the debugger window, it will override persisted size
+    // width: 1024,
+    // height: 750,
+
+    // Show frame for debugger window
+    // but due to https://github.com/electron/electron/issues/3647
+    // so we can't have custom title bar if no frame
+    // titleBarStyle: 'hidden',
+    frame: true,
+  },
+  autoUpdate: true,
+  defaultRNPackagerPorts: [8081],
+  editor: 'nvim',
+  defaultReactDevToolsTheme: 'RNDebugger',
+  defaultReactDevToolsPort: 19567,
+  defaultNetworkInspect: true,
+  timesJSLoadToRefreshDevTools: -1,
+}

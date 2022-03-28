@@ -1,15 +1,16 @@
 #!/bin/fish
 
-set paths       \
-  .psqlrc       \
-  .zshrc        \
-  .gitconfig    \
-  .config/nvim  \
-  .config/kitty \
-  .config/pgcli \
-  .config/qtile \
+set paths                  \
+  .psqlrc                  \
+  .zshrc                   \
+  .gitconfig               \
+  .rndebuggerrc            \
+  .config/nvim             \
+  .config/kitty            \
+  .config/pgcli            \
+  .config/qtile            \
   .config/fish/config.fish \
-  .config/zk    \
+  .config/zk               \
 
 set dotfiles ~/dotfiles
 
