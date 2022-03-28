@@ -2,6 +2,7 @@
 
 set paths                  \
   .psqlrc                  \
+  .less                    \
   .zshrc                   \
   .gitconfig               \
   .rndebuggerrc            \
@@ -11,6 +12,7 @@ set paths                  \
   .config/qtile            \
   .config/fish/config.fish \
   .config/zk               \
+  .config/alacritty        \
 
 set dotfiles ~/dotfiles
 
