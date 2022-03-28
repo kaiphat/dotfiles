@@ -9,7 +9,7 @@ set paths       \
   .config/pgcli \
   .config/qtile \
   .config/fish/config.fish \
-  .config/zk  \
+  .config/zk    \
 
 set dotfiles ~/dotfiles
 

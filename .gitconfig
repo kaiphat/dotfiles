@@ -6,7 +6,7 @@
 	autocrlf = input
 	safecrlf = false
 	editor = nvim
-  # npm i global diff-so-fancy
+  # npm i -g diff-so-fancy
   pager = "diff-so-fancy | less --tabs=4 -RFX"
   diffFilter = "diff-so-fancy --patch"
 [diff-so-fancy]
