@@ -31,11 +31,9 @@ return packer.startup (
     }
 
     use {
-      'hoob3rt/lualine.nvim',
+      'feline-nvim/feline.nvim',
       after = 'theme',
-      config = function()
-        require 'plugins.lualine'
-      end
+      config = 'require "plugins.statusline"'
     }
 
     use {

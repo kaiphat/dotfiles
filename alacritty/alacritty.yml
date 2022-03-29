@@ -91,23 +91,23 @@ window:
 # Font configuration
 font:
   normal:
-    family: mononoki Nerd Font
+    family: JetBrains Mono
     style: Regular
   bold:
-    family: mononoki Nerd Font
-    style: Regular
+    family: JetBrains Mono
+    style: Bold
   italic:
-    family: mononoki Nerd Font
-    style: Regular
+    family: JetBrains Mono
+    style: Italic
   bold_italic:
-    family: mononoki Nerd Font
-    style: Regular
+    family: JetBrains Mono
+    style: Bold Italic
 
-  size: 12
+  size: 10
 
   offset:
    x: 0
-   y: -2
+   y: -1
 
   glyph_offset:
    x: 0

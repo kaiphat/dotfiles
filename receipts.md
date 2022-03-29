@@ -24,6 +24,9 @@
   change
   Alt+F2 type r Enter
 
+# patch fonts
+  sudo docker run -v ~/.local/share/fonts/from:/in -v ~/.local/share/fonts/to:/out nerdfonts/patcher -c --careful
+
 ### NVIM ###
 
 # python

@@ -69,6 +69,21 @@ M.upperSql = function(str)
   return str
 end
 
+M.clone_table = function(orig)
+  local orig_type = type(orig)
+  local copy
+  if orig_type == 'table' then
+      copy = {}
+      for orig_key, orig_value in next, orig, nil do
+          copy[clone(orig_key)] = clone(orig_value)
+      end
+      setmetatable(copy, clone(getmetatable(orig)))
+  else
+      copy = orig
+  end
+  return copy
+end
+
 _G.upperSql = M.upperSql
 
 function get_selection()

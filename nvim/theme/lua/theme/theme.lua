@@ -67,7 +67,7 @@ local s = {
   i             = 'italic',
   r             = 'reverse',
   ul            = 'underline',
-  uc            = 'undercurl',
+  ul            = 'undercurl',
 }
 
 local themes = {
