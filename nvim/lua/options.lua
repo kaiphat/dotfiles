@@ -60,6 +60,7 @@ o.iminsert         = 0
 o.foldmethod = 'indent'
 o.foldlevel = 20
 o.pastetoggle = '<F3>'
+o.laststatus = 3
 
 o.fileformat       = 'unix'
 o.binary           = false
