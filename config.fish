@@ -3,6 +3,7 @@ set -U EDITOR nvim
 set -U pure_symbol_prompt 
 set -U ANDROID_HOME $HOME/Android/Sdk
 set -U nvm_default_version v14.18.3
+set -U PAGER 'nvim -c "set nowrap" -R'
 
 # paths
 fish_add_path -aP $snap_bin_path
@@ -43,6 +44,7 @@ end
 
 # common
 alias g "git"
+alias t "tmux"
 alias y "yarn"
 alias grep "grep -i --color"
 alias n "nvim"

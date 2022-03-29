@@ -4,6 +4,7 @@ set paths                  \
   .psqlrc                  \
   .less                    \
   .zshrc                   \
+  .tmux.conf               \
   .gitconfig               \
   .rndebuggerrc            \
   .config/nvim             \
