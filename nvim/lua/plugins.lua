@@ -230,6 +230,11 @@ return packer.startup (
       run = 'make'
     }
 
+    use {
+      'L3MON4D3/LuaSnip',
+      config = 'require"plugins.luasnip"'
+    }
+
   end
 )
 
