@@ -63,35 +63,6 @@ return packer.startup (
     }
 
     use {
-      'hrsh7th/nvim-cmp',
-      -- event = 'InsertEnter',
-      config = function()
-        require 'plugins.cmp'
-      end,
-    }
-
-   use {
-      'hrsh7th/cmp-nvim-lsp',
-      after = 'nvim-cmp',
-   }
-
-   use {
-      'hrsh7th/cmp-buffer',
-      after = 'cmp-nvim-lsp',
-   }
-
-   use {
-     'hrsh7th/vim-vsnip',
-      after = 'cmp-buffer'
-   }
-
-    -- !!!!
-    -- use {
-    --   'ms-jpq/coq_nvim',
-    --   branch = 'coq'
-    -- }
-
-    use {
       'kyazdani42/nvim-tree.lua',
       cmd = {
         'NvimTreeToggle',
@@ -230,9 +201,33 @@ return packer.startup (
       run = 'make'
     }
 
+    -- COMPLETIONS --
+
+    use {
+      'hrsh7th/nvim-cmp',
+      config = function()
+        require 'plugins.cmp'
+      end,
+    }
+
+    use {
+      'hrsh7th/cmp-nvim-lsp',
+    }
+
+    use {
+      'hrsh7th/cmp-buffer',
+      after = 'cmp-nvim-lsp',
+    }
+
     use {
       'L3MON4D3/LuaSnip',
-      config = 'require"plugins.luasnip"'
+      config = 'require "plugins.luasnip"',
+      after = 'nvim-cmp'
+    }
+
+    use {
+      'saadparwaiz1/cmp_luasnip',
+      after = 'LuaSnip'
     }
 
   end

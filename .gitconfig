@@ -23,7 +23,7 @@
 	s = stash
 	sa = stash apply
 	pl = pull origin 
-	p = push -u origin HEAD
+	p = push origin HEAD
 	d = diff HEAD
   d1 = diff HEAD~1
 	ds = diff HEAD --shortstat

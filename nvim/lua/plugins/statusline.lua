@@ -1,5 +1,5 @@
 local getTime = function()
-  return os.date('%H:%M')
+  return os.date('%H:%M:%S')
 end
 
 local getPosition = function()

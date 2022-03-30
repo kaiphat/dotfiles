@@ -66,13 +66,8 @@ map('n', 'J', 'Jzz')
 map('n', '*', '*zz')
 map('n', '#', '#zz')
 
--- map('n', '<Enter>', '@j') -- ???
-map('n', ',', '^') -- ???
+map('n', ',', '^')
 map('n', 'Q', 'q')
-
-map('n', '<leader>sd', "koconsole.log('\\x1b[36m%s\\x1b[0m',)<esc>F,a ")
-map('n', '<leader>sc', "koconsole.log('\\x1b[36m%s\\x1b[0m', JSON.stringify({}, null, 2))<esc>F{a")
-map('n', '<leader>sl', "koconsole.log({})<esc>F{a")
 
 map('o', 'w', 'iw')
 map('o', "'", "i'")
@@ -114,6 +109,11 @@ map('n', '<leader>fm', ':Telescope marks<cr>')
 map('n', '<leader>fh', function()
   local path = utils.getCurrentPath()
   require'telescope'.extensions.file_browser.file_browser { cwd = path, hidden = true }
+end)
+
+-- luasnip
+map({'i', 's'}, '<C-e>', function() 
+  require("luasnip").jump(1) 
 end)
 
 -- nvim tree
