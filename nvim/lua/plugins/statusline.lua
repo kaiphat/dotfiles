@@ -206,6 +206,7 @@ require('feline').setup {
     filetypes = {
       'NvimTree',
       'packer',
+      'Telescope'
     },
   },
   components = {

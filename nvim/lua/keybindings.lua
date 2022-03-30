@@ -136,5 +136,5 @@ map('o', 'u', ':<c-u>lua require"utils.unit".select(true)<cr>')
 map('n', ']', ':lua require"utils.unit".moveToEnd()<cr>')
 map('n', '[', ':lua require"utils.unit".moveToStart()<cr>')
 
-vim.cmd("silent! command PackerStatus lua require 'plugins_list' require('packer').status()")
-vim.cmd("silent! command PackerSync lua require 'plugins_list' require('packer').sync()")
+vim.cmd("silent! command PackerStatus lua require 'plugins' require('packer').status()")
+vim.cmd("silent! command PackerSync lua require 'plugins' require('packer').sync()")
