@@ -14,7 +14,7 @@ ls.config.set_config {
 
 ls.add_snippets('javascript', {
   s('co',
-    fmt("console.log('\\x1b[36m%s\\x1b[0m', JSON.stringify({{{}}}, null, 2)", {
+    fmt("console.log('\\x1b[36m%s\\x1b[0m', JSON.stringify({{{}}}, null, 2))", {
       i(1)
     })
   ),

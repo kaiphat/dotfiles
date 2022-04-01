@@ -83,7 +83,7 @@ search_path_filter = False
 # By default 'PAGER' environment variable is used
 # pager = less -iJMSFXRW -x2 -z-4 --shift 10
 pager = nvim -c "set nowrap" -R
-
+# pager = bat
 
 # Timing of sql statments and table rendering.
 timing = True

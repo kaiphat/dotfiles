@@ -1,9 +1,11 @@
 ### ENVIROMENTS ###
-set -U EDITOR nvim
-set -U pure_symbol_prompt 
-set -U ANDROID_HOME $HOME/Android/Sdk
-set -U nvm_default_version v14.18.3
-# set -U PAGER 'nvim -c "set nowrap" -R'
+set pure_symbol_prompt 
+
+set -x nvm_default_version v14.18.3
+set -x ANDROID_HOME $HOME/Android/Sdk
+set -x EDITOR nvim
+set -x MANPAGER "most"
+set -x PAGER 'nvim -c "set nowrap" -R'
 
 # paths
 fish_add_path -aP $snap_bin_path
@@ -53,6 +55,15 @@ alias less "less -MSx4 -FXR --shift 10"
 alias ls "ls -a --group-directories-first --color=auto"
 alias rm "rm -rf"
 alias clip "xclip -selection c"
+alias pj "xclip -o | jq '.' | clip"
+alias nvim-start "nvim --startuptime _s.log -c exit && tail -100 _s.log | bat && rm _s.log"
+
+function pq
+  xclip -o |\
+  string replace -r -a '\\\n' '\n' |\
+  string replace -a '\\' '' |\
+  clip
+end
 
 function fd
   set pattern (string join '*' '' $argv '')

@@ -2,6 +2,10 @@ vim.cmd('packadd packer.nvim')
 
 local packer = require'packer'
 
+local function r(path)
+  return 'require"plugins.'..path..'"'
+end
+
 packer.init {
   git = {
     clone_timeout = 6000
@@ -17,27 +21,10 @@ packer.init {
 
 return packer.startup (
   function(use)
-    use {
-      'wbthomason/packer.nvim',
-      event = 'VimEnter'
-    }
 
     use {
-      'neovim/nvim-lspconfig',
-      after = 'packer.nvim',
-      config = function()
-        require 'plugins.lsp'
-      end
-    }
-
-    use {
-      'feline-nvim/feline.nvim',
-      after = 'theme',
-      config = 'require "plugins.statusline"'
-    }
-
-    use {
-      'nvim-lua/plenary.nvim'
+      'nvim-lua/plenary.nvim',
+      'rktjmp/lush.nvim'
     }
 
     use {
@@ -46,132 +33,8 @@ return packer.startup (
     }
 
     use {
-      'lewis6991/gitsigns.nvim',
-      event = 'BufRead',
-      config = function()
-        require 'plugins.gitsigns'
-      end
-    }
-
-    use {
-      'windwp/nvim-autopairs',
-      after = 'nvim-cmp',
-      event = 'InsertEnter',
-      config = function()
-        require 'plugins.auto_pairs'
-      end
-    }
-
-    use {
-      'kyazdani42/nvim-tree.lua',
-      cmd = {
-        'NvimTreeToggle',
-        'NvimTreeClose',
-        'NvimTreeOpen',
-      },
-      config = function()
-        require 'plugins.nvim_tree'
-      end
-    }
-
-    use {
-      'nvim-treesitter/nvim-treesitter',
-      event = 'VimEnter',
-      config = function()
-        require 'plugins.tree_sitter'
-      end
-    }
-
-    use {
-      'nvim-telescope/telescope.nvim',
-      module = "telescope",
-      cmd = "Telescope",
-      requires = {
-         {
-            "nvim-telescope/telescope-file-browser.nvim",
-         },
-      },
-      config = function()
-        require 'plugins.telescope'
-      end
-    }
-
-    use { "nvim-telescope/telescope-file-browser.nvim" }
-
-    use {
-      'Pocco81/TrueZen.nvim',
-      cmd = {
-        'TZAtaraxis',
-        'TZMinimalist',
-        'TZFocus'
-      },
-      config = function()
-        require 'plugins.zen'
-      end
-    }
-
-    use {
-      'lukas-reineke/indent-blankline.nvim',
-      event = 'BufRead',
-      config = function()
-        require('plugins.blankline')
-      end
-    }
-
-    use {
-      'norcalli/nvim-colorizer.lua',
-      after = 'packer.nvim',
-      config = function()
-        require('plugins.colorizer')
-      end
-    }
-
-    use {
-      'kyazdani42/nvim-web-devicons',
-      after = 'lush.nvim',
-    }
-
-    use {
-      'phaazon/hop.nvim',
-      cmd = { 'HopChar1' },
-      config = function()
-        require 'plugins.hop'
-      end
-    }
-
-    use {
-      'b3nj5m1n/kommentary',
-      event = 'BufRead',
-      config = function()
-        require 'plugins.kommentary'
-      end
-    }
-
-    use {
-      'sindrets/diffview.nvim',
-      cmd = { 'DiffviewOpen' },
-      config = function()
-        require 'plugins.diffview'
-      end
-    }
-
-    use {
-      'junegunn/vim-easy-align',
-      cmd = { 'EasyAlign' },
-    }
-
-    use {
-      'alvan/vim-closetag',
-      config = function()
-        require 'plugins.closetag'
-      end
-    }
-
-    use {
-      'tpope/vim-fugitive',
-      cmd = {
-        'Git'
-      }
+      'wbthomason/packer.nvim',
+      event = 'VimEnter'
     }
 
     use {
@@ -183,51 +46,154 @@ return packer.startup (
     }
 
     use {
-      'rktjmp/lush.nvim'
+      'kyazdani42/nvim-web-devicons',
+      after = 'theme',
+    }
+
+    use {
+      'feline-nvim/feline.nvim',
+      after = 'nvim-web-devicons',
+      config = r('statusline'),
     }
 
     use {
       'j-hui/fidget.nvim',
-      config = 'require"plugins.fidget"'
+      after = 'nvim-lspconfig',
+      config = r('fidget')
     }
 
     use {
       'jose-elias-alvarez/null-ls.nvim',
-      config = 'require"plugins.null"'
+      after = 'nvim-lspconfig',
+      config = r('null')
+    }
+
+    use {
+      'neovim/nvim-lspconfig',
+      config = r('lsp'),
+      after = 'feline.nvim',
+      setup = function()
+        vim.defer_fn(function()
+            vim.cmd 'if &ft == "packer" | echo "" | else | silent! e %'
+         end, 0)
+      end
+    }
+
+    use {
+      'lewis6991/gitsigns.nvim',
+      after = 'feline.nvim',
+      config = r('gitsigns'),
+    }
+
+    -- ON EVENTS --
+
+    use {
+      'phaazon/hop.nvim',
+      cmd = { 'HopChar1' },
+      config = r('hop')
+    }
+
+    use {
+      'alvan/vim-closetag',
+      event = 'InsertEnter',
+      config = r('closetag')
+    }
+
+    use {
+      'junegunn/vim-easy-align',
+      cmd = { 'EasyAlign' },
+    }
+
+    use {
+      'kyazdani42/nvim-tree.lua',
+      cmd = {
+        'NvimTreeToggle',
+        'NvimTreeClose',
+        'NvimTreeOpen',
+      },
+      config = r('nvim_tree')
+    }
+
+    use {
+      'nvim-treesitter/nvim-treesitter',
+      event = { 'BufRead', 'BufNewFile' },
+      config = r('tree_sitter')
+    }
+
+    use {
+      'norcalli/nvim-colorizer.lua',
+      event = 'BufRead',
+      config = r('colorizer')
+    }
+
+    use {
+      'lukas-reineke/indent-blankline.nvim',
+      event = 'BufRead',
+      config = r('blankline')
+    }
+
+    use {
+      'windwp/nvim-autopairs',
+      after = 'nvim-cmp',
+      event = 'InsertEnter',
+      config = r('auto_pairs')
+    }
+
+    use {
+      'b3nj5m1n/kommentary',
+      config = r('kommentary'),
+      keys = { 'gcc' }
+    }
+
+    use {
+      'beauwilliams/focus.nvim',
+      event = { 'BufRead' },
+      config = r('focus')
+    }
+    -- use {
+    --   'FraserLee/ScratchPad',
+    -- }
+
+    -- TELESCOPE --
+
+    use {
+      'nvim-telescope/telescope.nvim',
+      module = 'telescope',
+      cmd = { "Telescope" },
+      config = r('telescope'),
     }
 
     use {
       'nvim-telescope/telescope-fzf-native.nvim',
-      run = 'make'
+      run = 'make',
+    }
+
+    use {
+      'nvim-telescope/telescope-file-browser.nvim',
     }
 
     -- COMPLETIONS --
 
     use {
       'hrsh7th/nvim-cmp',
-      config = function()
-        require 'plugins.cmp'
-      end,
-    }
-
-    use {
-      'hrsh7th/cmp-nvim-lsp',
-    }
-
-    use {
-      'hrsh7th/cmp-buffer',
-      after = 'cmp-nvim-lsp',
+      config = r('cmp'),
+      event = 'InsertEnter'
     }
 
     use {
       'L3MON4D3/LuaSnip',
-      config = 'require "plugins.luasnip"',
+      config = r('luasnip'),
       after = 'nvim-cmp'
     }
 
     use {
       'saadparwaiz1/cmp_luasnip',
       after = 'LuaSnip'
+    }
+
+    use {
+      'hrsh7th/cmp-buffer',
+      after = 'cmp_luasnip',
     }
 
   end

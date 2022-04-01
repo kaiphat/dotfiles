@@ -27,6 +27,10 @@
 # patch fonts
   sudo docker run -v ~/.local/share/fonts/from:/in -v ~/.local/share/fonts/to:/out nerdfonts/patcher -c --careful
 
+# create pem keys
+  openssl genrsa > privkey.pem
+  openssl req -new -x509 -key privkey.pem > fullchain.pem
+
 ### NVIM ###
 
 # python
@@ -54,3 +58,27 @@
   </fontconfig>
   ```
   fc-cache -r
+  
+
+
+
+
+
+
+
+
+
+  subject=CN = patientory.com
+
+issuer=C = US, O = Let's Encrypt, CN = R3
+
+
+subject=C = US, O = Let's Encrypt, CN = R3
+
+issuer=C = US, O = Internet Security Research Group, CN = ISRG Root X1
+
+
+subject=C = US, O = Internet Security Research Group, CN = ISRG Root X1
+
+issuer=O = Digital Signature Trust Co., CN = DST Root CA X3
+

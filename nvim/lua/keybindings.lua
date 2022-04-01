@@ -16,10 +16,8 @@ map('n', '<leader>en', ':lua require"telescope.builtin".find_files({ cwd = "~/no
 map('n', '<F1>', ":w<cr>:e ++ff=dos<cr>:w ++ff=unix<cr>")
 map('n', '<F9>', ':LspRestart<cr>')
 
-map('n', ':', ';')
-map('n', ';', ':', { noremap = true })
-map('v', ':', ';')
-map('v', ';', ':', { noremap = true })
+map({ 'v', 'n' }, ':', ';')
+map({ 'v', 'n' }, ';', ':', { noremap = true })
 
 map('v', 'p', 'pgvy')
 map('c', '<C-r>', '<C-r>+', { noremap = false })
@@ -29,8 +27,6 @@ map('n', '<C-h>', ':wincmd h<cr>')
 map('n', '<C-j>', ':wincmd j<cr>')
 map('n', '<C-k>', ':wincmd k<cr>')
 map('n', '<C-l>', ':wincmd l<cr>')
-map('n', '<C-[>', ':bp<cr>')
-map('n', '<C-]>', ':bn<cr>')
 
 map('n', '<C-s>', ':wa<cr>')
 
@@ -66,24 +62,16 @@ map('n', 'J', 'Jzz')
 map('n', '*', '*zz')
 map('n', '#', '#zz')
 
-map('n', ',', '^')
+map('n', ',,', '^')
 map('n', 'Q', 'q')
 
-map('o', 'w', 'iw')
-map('o', "'", "i'")
-map('o', '"', 'i"')
-map('o', '`', 'i`')
-map('o', '(', 'i(')
-map('o', '{', 'i{')
-map('o', '[', 'i[')
-
-map('x', 'w', 'iw')
-map('x', "'", "i'")
-map('x', '"', 'i"')
-map('x', '`', 'i`')
-map('x', '(', 'i(')
-map('x', '{', 'i{')
-map('x', '[', 'i[')
+map({ 'o', 'x' }, 'w', 'iw')
+map({ 'o', 'x' }, "'", "i'")
+map({ 'o', 'x' }, '"', 'i"')
+map({ 'o', 'x' }, '`', 'i`')
+map({ 'o', 'x' }, '(', 'i(')
+map({ 'o', 'x' }, '{', 'i{')
+map({ 'o', 'x' }, '[', 'i[')
 
 -- utils
 map('v', '<leader>uaq', ':EasyAlign /\\C["(a-z:\']/ {"rm": 0} <cr>')
@@ -129,6 +117,13 @@ for i = 1, #letters do
     map('n', 'm'..letter, 'm'..letter:upper())
     map('n', "'"..letter, "'"..letter:upper())
 end
+
+-- focus
+map('n', '<leader>mt', function() require'focus'.focus_toogle() end)
+map('n', ',v', function() require'focus'.split_command('l') end)
+map('n', ',s', function() require'focus'.split_command('j') end)
+map('n', ',q', function() vim.cmd 'q' end)
+map('n', ',Q', function() vim.cmd '%bd|e#' end)
 
 -- treesitter unit
 map('x', 'u', ':lua require"utils.unit".select(true)<cr>')
