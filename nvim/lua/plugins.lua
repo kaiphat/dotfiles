@@ -177,7 +177,6 @@ return packer.startup (
     use {
       'hrsh7th/nvim-cmp',
       config = r('cmp'),
-      event = 'InsertEnter'
     }
 
     use {
@@ -194,6 +193,14 @@ return packer.startup (
     use {
       'hrsh7th/cmp-buffer',
       after = 'cmp_luasnip',
+    }
+
+    use {
+      'hrsh7th/cmp-path',
+    }
+
+    use {
+      'hrsh7th/cmp-nvim-lsp',
     }
 
   end

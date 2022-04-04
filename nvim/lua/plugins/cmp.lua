@@ -71,9 +71,6 @@ cmp.setup {
       }
     },
     { name = 'path' },
-    { name = 'spell' },
-    { name = 'treesitter' },
-    { name = 'neorg' },
   },
   experimental = {
     native_menu = false

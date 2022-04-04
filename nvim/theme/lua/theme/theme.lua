@@ -199,7 +199,7 @@ return lush(function()
       LspReferenceWrite                { Visual },
       LspCodeLens                      { LineNr },
 
-      DiagnosticError                  { Error },
+      DiagnosticError                  { WarningMsg },
       DiagnosticWarn                   { WarningMsg },
       DiagnosticInfo                   { fg = c.water },
       DiagnosticHint                   { fg = c.blossom },
@@ -209,10 +209,10 @@ return lush(function()
       DiagnosticSignInfo               { SignColumn, fg = DiagnosticInfo.fg },
       DiagnosticSignHint               { SignColumn, fg = DiagnosticHint.fg },
 
-      DiagnosticVirtualTextError       { fg = c.fg.da(40), bg = none },
-      DiagnosticVirtualTextWarn        { DiagnosticWarn, bg = DiagnosticWarn.fg.saturation(8).li(c.bg.l + 4) },
-      DiagnosticVirtualTextInfo        { DiagnosticInfo, bg = DiagnosticInfo.fg.saturation(8).li(c.bg.l + 4) },
-      DiagnosticVirtualTextHint        { DiagnosticHint, bg = DiagnosticHint.fg.saturation(8).li(c.bg.l + 4) },
+      DiagnosticVirtualTextError       { DiagnosticError, bg = none }, 
+      DiagnosticVirtualTextWarn        { DiagnosticError, bg = none },
+      DiagnosticVirtualTextInfo        { DiagnosticError, bg = none },
+      DiagnosticVirtualTextHint        { DiagnosticError, bg = none },
 
       DiagnosticUnderlineWarn          { gui = s.ul },
       DiagnosticUnderlineInfo          { gui = s.ul },

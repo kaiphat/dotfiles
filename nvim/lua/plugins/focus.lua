@@ -8,8 +8,8 @@ require("focus").setup {
     'Telescope',
     'TelescopePrompt'
   },
-  cursorline = true,
-  signcolumn = true,
-  width = 150,
+  cursorline = false,
+  signcolumn = false,
+  width = 140,
   minwidth = 40
 }

@@ -119,17 +119,22 @@ for i = 1, #letters do
 end
 
 -- focus
-map('n', '<leader>mt', function() require'focus'.focus_toogle() end)
+map('n', '<leader>mt', function() require'focus'.focus_toggle() end)
 map('n', ',v', function() require'focus'.split_command('l') end)
 map('n', ',s', function() require'focus'.split_command('j') end)
-map('n', ',q', function() vim.cmd 'q' end)
-map('n', ',Q', function() vim.cmd '%bd|e#' end)
+map('n', ',x', function()
+  vim.cmd 'wq' 
+end)
+map('n', ',X', function() 
+  vim.cmd 'wa' 
+  vim.cmd '%bd|e#' 
+end)
 
 -- treesitter unit
 map('x', 'u', ':lua require"utils.unit".select(true)<cr>')
 map('o', 'u', ':<c-u>lua require"utils.unit".select(true)<cr>')
-map('n', ']', ':lua require"utils.unit".moveToEnd()<cr>')
-map('n', '[', ':lua require"utils.unit".moveToStart()<cr>')
+map('n', ']]', ':lua require"utils.unit".moveToEnd()<cr>')
+map('n', '[[', ':lua require"utils.unit".moveToStart()<cr>')
 
 vim.cmd("silent! command PackerStatus lua require 'plugins' require('packer').status()")
 vim.cmd("silent! command PackerSync lua require 'plugins' require('packer').sync()")
