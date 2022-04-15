@@ -10,7 +10,6 @@ set paths                  \
   .config/nvim             \
   .config/kitty            \
   .config/pgcli            \
-  .config/qtile            \
   .config/fish/config.fish \
   .config/zk               \
   .config/alacritty        \

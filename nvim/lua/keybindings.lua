@@ -30,10 +30,10 @@ map('n', '<C-l>', ':wincmd l<cr>')
 
 map('n', '<C-s>', ':wa<cr>')
 
-map('n', 'cl', 'ct')
-map('n', 'dl', 'dt')
-map('n', 'yl', 'yt')
-map('n', 'vl', 'vt')
+-- map('n', 'cl', 'ct')
+-- map('n', 'dl', 'dt')
+-- map('n', 'yl', 'yt')
+-- map('n', 'vl', 'vt')
 map('n', '<A-j>', ':wincmd l<cr>')
 
 map('n', '<A-->', ':vertical resize -10<cr>')
@@ -108,7 +108,54 @@ end)
 map('n', '<leader>o', ':NvimTreeToggle<cr>')
 
 -- hop
-map('n', '<leader>j', ':HopChar1<cr>')
+map('n', 's', function()
+   require'hop'.hint_char1 { 
+     direction = require'hop.hint'.HintDirection.AFTER_CURSOR, 
+   }
+end)
+map('n', 'S', function()
+   require'hop'.hint_char1 { 
+     direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, 
+   }
+end)
+map('n', 'f', function()
+   require'hop'.hint_char1 { 
+     direction = require'hop.hint'.HintDirection.AFTER_CURSOR, 
+     current_line_only = true 
+   }
+end)
+map('n', 'F', function()
+   require'hop'.hint_char1 { 
+     direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, 
+     current_line_only = true 
+   }
+end)
+map('o', 'f', function()
+   require'hop'.hint_char1 { 
+     direction = require'hop.hint'.HintDirection.AFTER_CURSOR, 
+     current_line_only = true,
+     inclusive_jump = true
+   }
+end)
+map('o', 'F', function()
+   require'hop'.hint_char1 { 
+     direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, 
+     current_line_only = true,
+     inclusive_jump = true
+   }
+end)
+map({ 'o' }, 'l', function()
+   require'hop'.hint_char1 { 
+     direction = require'hop.hint'.HintDirection.AFTER_CURSOR, 
+     current_line_only = true,
+   }
+end)
+map({ 'o' }, 'L', function()
+   require'hop'.hint_char1 { 
+     direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, 
+     current_line_only = true,
+   }
+end)
 
 -- marks
 local letters = 'abcdefghijklmnopqrstuvwxyz'

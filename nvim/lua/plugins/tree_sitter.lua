@@ -7,4 +7,3 @@ require 'nvim-treesitter.configs'.setup {
   }
 }
 
-local parser_configs = require 'nvim-treesitter.parsers'.get_parser_configs()

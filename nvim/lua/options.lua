@@ -68,6 +68,15 @@ o.binary           = false
 o.shortmess:append("sI")
 o.whichwrap:append("<>hl")
 
+-- vim.filetype.add {
+--   pattern = {
+--     ["*.aa$"] = function(_, _, ext)
+--       logger.log(ext)
+--       return 'markdown'
+--     end
+--   }
+-- }
+
 vim.cmd [[
   augroup highlight_yank
     autocmd!
@@ -99,3 +108,4 @@ local disabled_built_ins = {
 for _, plugin in pairs(disabled_built_ins) do
   vim.g["loaded_" .. plugin] = 1
 end
+

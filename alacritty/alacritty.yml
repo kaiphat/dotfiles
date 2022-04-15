@@ -48,7 +48,7 @@ window:
   #
   # Window opacity as a floating point number from `0.0` to `1.0`.
   # The value `0.0` is completely transparent and `1.0` is opaque.
-  #opacity: 1.0
+  opacity: 0.3
 
   # Startup Mode (changes require restart)
   #
@@ -89,18 +89,19 @@ window:
   #multiplier: 3
 
 # Font configuration
+
 font:
   normal:
-    family: JetBrains Mono
+    family: JetBrainsMono Nerd Font
     style: Regular
   bold:
-    family: JetBrains Mono
+    family: JetBrainsMono Nerd Font
     style: Bold
   italic:
-    family: JetBrains Mono
+    family: JetBrainsMono Nerd Font
     style: Italic
   bold_italic:
-    family: JetBrains Mono
+    family: JetBrainsMono Nerd Font
     style: Bold Italic
 
   size: 10
@@ -109,10 +110,6 @@ font:
    x: 0
    y: -1
 
-  glyph_offset:
-   x: 0
-   y: 0
-
   # use_thin_strokes: true
   # builtin_box_drawing: true
 
@@ -120,11 +117,11 @@ font:
 #draw_bold_text_with_bright_colors: false
 
 # Colors (Tomorrow Night)
-#colors:
+colors:
   # Default colors
-  #primary:
-  #  background: '#1d1f21'
-  #  foreground: '#c5c8c6'
+  primary:
+   background: '#202837'
+   foreground: '#787C99'
 
     # Bright and dim foreground colors
     #
@@ -141,9 +138,9 @@ font:
   #
   # Allowed values are CellForeground/CellBackground, which reference the
   # affected cell, or hexadecimal colors like #ff00ff.
-  #cursor:
-  #  text: CellBackground
-  #  cursor: CellForeground
+  cursor:
+   text: '#304040'
+   cursor: '#D4C1EC'
 
   # Vi mode cursor colors
   #
@@ -158,19 +155,19 @@ font:
   # Search colors
   #
   # Colors used for the search bar and match highlighting.
-  #search:
+  search:
     # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
-    #matches:
-    #  foreground: '#000000'
-    #  background: '#ffffff'
-    #focused_match:
-    #  foreground: '#ffffff'
-    #  background: '#000000'
+    matches:
+     foreground: '#000000'
+     background: '#ff75a0'
+    focused_match:
+     foreground: '#000000'
+     background: '#91b9f1'
 
-    #bar:
-    #  background: '#c5c8c6'
-    #  foreground: '#1d1f21'
+    bar:
+     background: '#404060'
+     foreground: '#a3b8ef'
 
   # Keyboard regex hints
   #hints:
@@ -211,26 +208,25 @@ font:
   #  background: CellForeground
 
   # Normal colors
-  #normal:
-  #  black:   '#1d1f21'
-  #  red:     '#cc6666'
-  #  green:   '#b5bd68'
-  #  yellow:  '#f0c674'
-  #  blue:    '#81a2be'
-  #  magenta: '#b294bb'
-  #  cyan:    '#8abeb7'
-  #  white:   '#c5c8c6'
+  normal:
+    black:   '#404060'
+    red:     '#F7768E'
+    green:   '#9CC4B2'
+    yellow:  '#88C0D0'
+    blue:    '#6e88a6'
+    magenta: '#9398cf'
+    cyan:    '#c8ae9d'
+    white:   '#787C99'
 
-  # Bright colors
-  #bright:
-  #  black:   '#666666'
-  #  red:     '#d54e53'
-  #  green:   '#b9ca4a'
-  #  yellow:  '#e7c547'
-  #  blue:    '#7aa6da'
-  #  magenta: '#c397d8'
-  #  cyan:    '#70c0b1'
-  #  white:   '#eaeaea'
+  bright:
+    black:   '#9CC4B2'
+    red:     '#F7768E'
+    green:   '#9CC4B2'
+    yellow:  '#9398cf'
+    blue:    '#6e88a6'
+    magenta: '#9398cf'
+    cyan:    '#c8ae9d'
+    white:   '#ACB0D0'
 
   # Dim colors
   #
@@ -266,7 +262,7 @@ font:
 # Bell
 #
 # The bell is rung every time the BEL control character is received.
-#bell:
+bell:
   # Visual Bell Animation
   #
   # Animation effect for flashing the screen when the visual bell is rung.
@@ -286,7 +282,7 @@ font:
 
   # Duration of the visual bell flash in milliseconds. A `duration` of `0` will
   # disable the visual bell animation.
-  #duration: 0
+  duration: 1000
 
   # Visual bell animation color.
   #color: '#ffffff'
@@ -671,6 +667,7 @@ font:
 
 key_bindings:
   - { key: F11, action: ToggleFullscreen }
+  - { key: W,   mods:   Control|Shift,         action: Quit }
 
   #- { key: Paste,                                       action: Paste          }
   #- { key: Copy,                                        action: Copy           }
@@ -775,7 +772,6 @@ key_bindings:
   #- { key: H,              mods: Command,                    action: Hide                  }
   #- { key: H,              mods: Command|Alt,                action: HideOtherApplications }
   #- { key: M,              mods: Command,                    action: Minimize              }
-  #- { key: Q,              mods: Command,                    action: Quit                  }
   #- { key: W,              mods: Command,                    action: Quit                  }
   #- { key: N,              mods: Command,                    action: SpawnNewInstance      }
   #- { key: F,              mods: Command|Control,            action: ToggleFullscreen      }

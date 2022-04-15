@@ -20,6 +20,25 @@ ls.add_snippets('javascript', {
   ),
 })
 
+ls.add_snippets('rust', {
+  s('pr',
+    fmt([[
+      println!("{{{}}}");
+    ]], {
+      i(1),
+    })
+  ),
+
+  s('db',
+    fmt([[
+      dbg!({});
+    ]], {
+      i(1),
+    })
+  ),
+
+})
+
 ls.add_snippets('lua', {
   s('im',
     fmt([[

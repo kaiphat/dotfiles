@@ -83,6 +83,7 @@ local themes = {
     wood        = colors.red,
     water       = colors.red,
     sky         = colors.orange,
+    sun   = colors.g2,
 
     select      = colors.prettyRed,
     brackets    = colors.brackets,
@@ -108,95 +109,71 @@ return lush(function()
       Underlined                       { gui = s.ul },
       Bold                             { gui = s.b },
       Italic                           { gui = s.i },
-
       Error                            { fg = c.rose },
       ErrorMsg                         { Error },
       WarningMsg                       { fg = c.wood },
-
       Comment                          { fg = c.bg.li(38).de(24), gui = s.i },
       Conceal                          { fg = c.water, gui = s.b },
-
       Cursor                           { bg = c.fg.li(20), fg = c.bg },
       lCursor                          { Cursor, bg = Cursor.bg.da(35)  },
-
       TermCursor                       { Cursor },
       TermCursorNC                     { lCursor },
-
-      CursorLine                       { fg = none, bg = c.line },
+      CursorLine                       { fg = none, bg = none },
       CursorColumn                     { CursorLine },
       ColorColumn                      { bg = c.wood.saturation(46).lightness(c.bg.l + 18) },
-
       DiffAdd                          { bg = c.leaf.saturation(50).lightness(c.bg.l + 8) },
       DiffChange                       { bg = c.water.saturation(50).lightness(c.bg.l + 8) },
       DiffDelete                       { bg = c.rose.saturation(30).lightness(c.bg.l + 8) },
       DiffText                         { bg = c.water.saturation(50).lightness(c.bg.l + 20), fg = c.fg },
-
       LineNr                           { fg = c.bg.li(35), bg = none },
       SignColumn                       { LineNr },
       FoldColumn                       { LineNr, gui = s.b },
       Folded                           { bg = c.bg.li(14), fg = c.bg.li(64) },
       CursorLineNr                     { LineNr, fg = c.fg, gui = s.b },
-
       MoreMsg                          { fg = c.leaf, gui = s.b },
       NormalFloat                      { bg = c.bg.li(10) },
       FloatBorder                      { fg = c.bg.li(46), bg = none },
-
       Pmenu                            { fg = c.fg.da(20), bg = c.bg.li(10) },
       PmenuSel                         { fg = c.secondFg, bg = c.select },
       PmenuSbar                        { bg = c.bg.li(32) },
       PmenuThumb                       { bg = c.bg.li(50) },
-
       Search                           { fg = c.secondFg, bg = c.select },
       IncSearch                        { fg = c.secondFg, bg = c.select },
       MatchParen                       { fg = c.select },
-
       SpellBad                         { fg = Error.fg.de(30), gui = s.uc, guisp = Error.fg },
       SpellCap                         { SpellBad, guisp = Error.fg.da(10) },
       SpellLocal                       { SpellCap },
       SpellRare                        { SpellBad, guisp = c.wood },
-
       StatusLine                       { bg = c.secondFg, fg = c.fg },
       StatusLineNC                     { bg = c.secondFg, fg = c.fg.li(28) },
       TabLine                          { fg  = c.secondFg, bg = c.rose },
       TabLineSel                       { fg  = c.secondFg, bg = c.thirdFg },
       TabLineFill                      { fg  = c.thirdFg, bg = none },
       VertSplit                        { fg = c.secondFg, bg = none },
-
       Visual                           { fg = none, bg = c.line },
-
       NonText                          { fg = c.bg.li(30) },
       SpecialKey                       { NonText, gui = s.i },
       Whitespace                       { NonText },
       EndOfBuffer                      { NonText },
-
       WildMenu                         { bg = c.blossom, fg = c.bg },
       Directory                        { fg = c.fg.da(15), gui = none },
       Question                         { MoreMsg },
       Title                            { fg = c.fg, gui = s.b },
-
       Constant                         { fg = c.wood, gui = s.i },
       String                           { fg = c.string, gui = none },
-
       Number                           { fg = c.fg, gui = s.i },
       Boolean                          { Number },
-
       Identifier                       { fg = c.fg },
       Function                         { fg = c.fg },
-
       Statement                        { fg = c.statement, gui = s.b },
-
       PreProc                          { Statement },
-
-      Type                             { fg = c.bg.li(58) },
-
       Special                          { fg = c.leaf, gui = s.b },
-
       Delimiter                        { fg = c.bg.li(47) },
       SpecialComment                   { Comment, gui = none },
 
-      LspReferenceText                 { Visual },
-      LspReferenceRead                 { Visual },
-      LspReferenceWrite                { Visual },
+      LspReferenceText                 { bg = c.bg.li(10) },
+      LspReferenceRead                 { LspReferenceText },
+      LspReferenceWrite                { LspReferenceText },
       LspCodeLens                      { LineNr },
 
       DiagnosticError                  { WarningMsg },
@@ -220,10 +197,13 @@ return lush(function()
       DiagnosticUnderlineError         { gui = s.ul },
 
       TSConstructor                    { fg = c.constructor },
+      TSType                           { fg = c.sun },
+      Type                             { TSType },
       TSConstant                       { Identifier, gui = s.b },
       TSConstBuiltin                   { Number },
       TSConstMacro                     { Number },
       TSMethod                         { fg = c.method, gui = s.b },
+      TSFunction                       { TSMethod },
       TSNamespace                      { Special },
       TSProperty                       { fg = c.property },
       TSPunctBracket                   { fg = c.brackets, gui = s.i },
@@ -282,7 +262,7 @@ return lush(function()
       IndentBlanklineChar              { fg = c.bg.li(14).de(22) },
       IndentBlanklineContextChar       { fg  = c.thirdFg.da(40).de(50), bg = none },
 
-      TelescopeSelection               { CursorLine },
+      TelescopeSelection               { bg = c.line },
       TelescopeSelectionCaret          { TelescopeSelection, fg = c.rose },
       TelescopeMatching                { fg = c.blossom, gui = s.b },
       TelescopeBorder                  { fg = FloatBorder.fg },
@@ -311,42 +291,9 @@ return lush(function()
       BufferVisibleSign                { fg = StatusLineNC.fg },
       BufferVisibleIndex               { fg = StatusLineNC.fg },
 
-      CocErrorSign                     { DiagnosticSignError },
-      CocWarningSign                   { DiagnosticSignWarn },
-      CocInfoSign                      { DiagnosticSignInfo },
-      CocHintSign                      { DiagnosticSignHint },
-      CocErrorHighlight                { DiagnosticUnderlineError },
-      CocWarningHighlight              { DiagnosticUnderlineWarn },
-      CocInfoHighlight                 { DiagnosticUnderlineInfo },
-      CocHintHighlight                 { DiagnosticUnderlineHint },
-      CocErrorVirtualText              { DiagnosticVirtualTextError },
-      CocWarningVitualText             { DiagnosticVirtualTextWarn },
-      CocSelectedText                  { SpellBad },
-      CocCodeLens                      { LineNr },
-      CocMarkdownLink                  { fg = c.sky, gui = s.ul },
-
-      NeogitNotificationError          { DiagnosticError },
-      NeogitNotificationWarning        { DiagnosticWarn },
-      NeogitNotificationInfo           { DiagnosticInfo },
-
-      NeogitDiffContextHighlight       { CursorLine },
-      NeogitDiffDeleteHighlight        { DiffDelete },
-      NeogitDiffAddHighlight           { DiffAdd },
-      NeogitHunkHeader                 { LineNr },
-      NeogitHunkHeaderHighlight        { CursorLine, fg = c.fg, gui = s.b },
-
-      WhichKey                         { Statement },
-      WhichKeyGroup                    { Special },
-      WhichKeySeparator                { LineNr },
-      WhichKeyValue                    { Constant },
-
-      TroubleNormal                    { Function },
-      TroubleText                      { Function },
-      TroubleSource                    { Constant },
-
       NvimTreeNormal                   { Normal, fg = none, bg = none },
       NvimTreeVertSplit                { fg = none },
-      NvimTreeCursorLine               { bg = StatusLineNC.bg },
+      NvimTreeCursorLine               { CursorLine },
       NvimTreeCursorColumn             { NvimTreeCursorLine	},
       NvimTreeRootFolder               { fg = c.water, gui = s.b },
       NvimTreeSymlink                  { fg = c.water },

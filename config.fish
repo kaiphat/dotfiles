@@ -1,11 +1,14 @@
 ### ENVIROMENTS ###
-set pure_symbol_prompt 
+# set pure_symbol_prompt 
+# set pure_symbol_prompt 
+set pure_symbol_prompt ❯
 
 set -x nvm_default_version v14.18.3
 set -x ANDROID_HOME $HOME/Android/Sdk
 set -x EDITOR nvim
 set -x MANPAGER "most"
 set -x PAGER 'nvim -c "set nowrap" -R'
+set -x TERMINAL kitty
 
 # paths
 fish_add_path -aP $snap_bin_path
@@ -161,26 +164,37 @@ end
 ### COLORS ###
 set fish_color_command '#81A1C1'
 set fish_color_match 'red' '--bold' '--background=cyan'
-set fish_color_search_match '--background=#333945'
-set fish_color_valid_path
-set fish_color_selection 'green' '--bold' '--background=brblack'
+set fish_color_search_match 'red' '--bold' '--background=red'
+set fish_pager_color_prefix 'red'
+set fish_color_valid_path 
+set fish_color_selection 'green' '--background=brblack'
 set fish_color_param '#ceceef'
 set fish_color_keyword '#ceceef'
-set fish_color_autosuggestion '555' 'brblack'
+set fish_color_autosuggestion '#5c6370'
+set fish_color_quote '#6e88a6'
+set fish_color_history_current '--bold'
+set fish_color_host red
+set fish_color_normal
+set fish_color_operator 'red'
+
 # set fish_color_cancel '-r'
 # set fish_color_comment red
 # set fish_color_cwd green
 # set fish_color_cwd_root red
 # set fish_color_end brmagenta
 # set fish_color_error brred
-# set fish_color_escape 'bryellow' '--bold'
-# set fish_color_history_current '--bold'
-# set fish_color_host normal
-# set fish_color_host_remote yellow
-# set fish_color_normal normal
-# set fish_color_operator bryellow
-# set fish_color_quote yellow
+# set fish_color_escape 'red' '--italic'
+# set fish_color_host_remote red
 # set fish_color_redirection brblue
 # set fish_color_status red
 # set fish_color_user brgreen
 
+### BREW ###
+eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
+### AUTOSTART ###
+if not set -q TMUX
+  set -g TMUX tmux new-session -d -s base
+  eval $TMUX
+  tmux attach
+end

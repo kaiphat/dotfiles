@@ -89,7 +89,7 @@ return packer.startup (
 
     use {
       'phaazon/hop.nvim',
-      cmd = { 'HopChar1' },
+      event = 'BufRead',
       config = r('hop')
     }
 
@@ -142,7 +142,7 @@ return packer.startup (
     use {
       'b3nj5m1n/kommentary',
       config = r('kommentary'),
-      keys = { 'gcc' }
+      event = 'InsertEnter',
     }
 
     use {
@@ -150,6 +150,7 @@ return packer.startup (
       event = { 'BufRead' },
       config = r('focus')
     }
+
     -- use {
     --   'FraserLee/ScratchPad',
     -- }
