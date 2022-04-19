@@ -59,26 +59,3 @@
   ```
   fc-cache -r
   
-
-
-
-
-
-
-
-
-
-  subject=CN = patientory.com
-
-issuer=C = US, O = Let's Encrypt, CN = R3
-
-
-subject=C = US, O = Let's Encrypt, CN = R3
-
-issuer=C = US, O = Internet Security Research Group, CN = ISRG Root X1
-
-
-subject=C = US, O = Internet Security Research Group, CN = ISRG Root X1
-
-issuer=O = Digital Signature Trust Co., CN = DST Root CA X3
-

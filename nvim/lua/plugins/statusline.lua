@@ -150,35 +150,35 @@ table.insert(active_components, {
     }
   },
 
-  {
-    icon = '',
-    provider = getTime,
-    hl = {
-      fg = colors.dark_blue,
-      bg = colors.cyan
-    },
-    right_sep = {
-      str = ' ',
-      hl = {
-        bg = colors.cyan
-      }
-    },
-    left_sep = {
-      {
-        str = 'left_filled',
-        hl = {
-          fg = colors.cyan,
-          bg = colors.light_blue
-        }
-      },
-      {
-        str = ' ',
-        hl = {
-          bg = colors.cyan
-        }
-      },
-    }
-  }
+  -- {
+  --   icon = '',
+  --   provider = getTime,
+  --   hl = {
+  --     fg = colors.dark_blue,
+  --     bg = colors.cyan
+  --   },
+  --   right_sep = {
+  --     str = ' ',
+  --     hl = {
+  --       bg = colors.cyan
+  --     }
+  --   },
+  --   left_sep = {
+  --     {
+  --       str = 'left_filled',
+  --       hl = {
+  --         fg = colors.cyan,
+  --         bg = colors.light_blue
+  --       }
+  --     },
+  --     {
+  --       str = ' ',
+  --       hl = {
+  --         bg = colors.cyan
+  --       }
+  --     },
+  --   }
+  -- }
 })
 
 

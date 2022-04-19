@@ -3,12 +3,12 @@
 # set pure_symbol_prompt 
 set pure_symbol_prompt ❯
 
-set -x nvm_default_version v14.18.3
-set -x ANDROID_HOME $HOME/Android/Sdk
-set -x EDITOR nvim
-set -x MANPAGER "most"
-set -x PAGER 'nvim -c "set nowrap" -R'
-set -x TERMINAL kitty
+set -gx nvm_default_version v14.18.3
+set -gx ANDROID_HOME $HOME/Android/Sdk
+set -gx EDITOR nvim
+set -gx MANPAGER "most"
+set -gx PAGER 'nvim -c "set nowrap" -R'
+set -gx TERMINAL kitty
 
 # paths
 fish_add_path -aP $snap_bin_path
@@ -49,7 +49,7 @@ end
 
 # common
 alias g "git"
-alias t "tmux"
+alias t "tmux attach -t main || tmux new -s main"
 alias y "yarn"
 alias grep "grep -i --color"
 alias n "nvim"
@@ -142,7 +142,9 @@ alias ... "cd ../../"
 
 function db
   set dbs \
-    rpc_server postgres://postgres:postgres@localhost:8000/rpc_server_db
+    rpc "postgres://postgres:postgres@localhost:8000/rpc_server_db" \
+    rpc:dev "postgres://postgres:postgres@10.50.0.21:5432/rpc_server_db --ssh-tunnel devuser@s.pixelplex.by" \
+    rpc:stage "postgres://postgres:postgres@10.50.0.11:5432/rpc_server_db --ssh-tunnel devuser@195.201.109.112"
 
     select pgcli $dbs
 end
@@ -153,12 +155,12 @@ function select
   set dict $argv[2..-1]
 
   for index in (seq 1 2 (count $dict))
-    echo (math "ceil($index/2)") '-' $dict[$index]
+    echo (set_color cyan) (math "ceil($index/2)") (set_color blue)'-' (set_color green)$dict[$index]
   end
 
-  read -p 'echo "Selected number: "' -l number
+  read -p 'echo (set_color blue) "Selected number: "' -l number
 
-  $cmd $dict[(math "$number * 2")]
+  $cmd (string split " " $dict[(math "$number * 2")])
 end
 
 ### COLORS ###
@@ -192,9 +194,3 @@ set fish_color_operator 'red'
 ### BREW ###
 eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
-### AUTOSTART ###
-if not set -q TMUX
-  set -g TMUX tmux new-session -d -s base
-  eval $TMUX
-  tmux attach
-end

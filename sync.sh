@@ -13,6 +13,7 @@ set paths                  \
   .config/fish/config.fish \
   .config/zk               \
   .config/alacritty        \
+  .config/fontconfig/fonts.conf \
 
 set dotfiles ~/dotfiles
 

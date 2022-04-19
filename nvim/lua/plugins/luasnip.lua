@@ -23,7 +23,7 @@ ls.add_snippets('javascript', {
 ls.add_snippets('rust', {
   s('pr',
     fmt([[
-      println!("{{{}}}");
+      println!("{{:?}}", {});
     ]], {
       i(1),
     })
