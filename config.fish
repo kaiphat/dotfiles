@@ -86,6 +86,7 @@ function gp -a message
   and git push origin $branch
 end
 
+# gup develop 1
 function gup -a parent count
   if test -z "$parent"
     echo 'error: empty parrent'
