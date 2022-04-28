@@ -34,15 +34,14 @@ map('n', '<C-s>', ':wa<cr>')
 -- map('n', 'dl', 'dt')
 -- map('n', 'yl', 'yt')
 -- map('n', 'vl', 'vt')
-map('n', '<A-j>', ':wincmd l<cr>')
 
 map('n', '<A-->', ':vertical resize -10<cr>')
 map('n', '<A-=>', ':vertical resize +10<cr>')
 
-map('n', '<A-j>', ':m .+1<cr>==')
-map('n', '<A-k>', ':m .-2<cr>==')
-map('v', '<A-k>', ":m '<-2<cr>gv=gv")
-map('v', '<A-j>', ":m '>+1<cr>gv=gv")
+map('n', '<A-J>', ':m .+1<cr>==')
+map('v', '<A-J>', ":m '>+1<cr>gv=gv")
+map('v', '<A-K>', ":m '<-2<cr>gv=gv")
+map('n', '<A-K>', ':m .-2<cr>==')
 
 map('i', 'jk', "<esc>")
 map('i', 'kj', "<esc>")
@@ -170,7 +169,7 @@ map('n', '<leader>mt', function() require'focus'.focus_toggle() end)
 map('n', ',v', function() require'focus'.split_command('l') end)
 map('n', ',s', function() require'focus'.split_command('j') end)
 map('n', ',x', function()
-  vim.cmd 'wq' 
+  vim.cmd 'q' 
 end)
 map('n', ',X', function() 
   vim.cmd 'wa' 

@@ -70,7 +70,7 @@ end
 
 function fd
   set pattern (string join '*' '' $argv '')
-  fdfind -p -g $pattern .
+  fdfind -HIipg $pattern .
 end
 
 function gp -a message

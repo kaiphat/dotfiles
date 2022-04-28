@@ -1,4 +1,4 @@
-### UBUNTU ###
+### LINUX ###
 
 # disable fn keys
  echo options hid_apple fnmode=0 | sudo tee -a /etc/modprobe.d/hid_apple.conf
@@ -30,6 +30,9 @@
 # create pem keys
   openssl genrsa > privkey.pem
   openssl req -new -x509 -key privkey.pem > fullchain.pem
+
+# copy several files and change name for every
+  pax -rw -s/rpc_dev/rpc/ [rpc_dev]* .
 
 ### NVIM ###
 
