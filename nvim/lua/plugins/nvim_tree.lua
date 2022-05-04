@@ -28,10 +28,10 @@ require 'nvim-tree'.setup {
     }
   },
   update_cwd = true,
-  update_to_buf_dir = {
+  update_focused_file = {
     enable = false,
-    timeout = 500,
-    auto_open = true,
+    update_cwd = false,
+    ignore_list = {},
   },
   git = {
     enable = true,

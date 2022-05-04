@@ -1,25 +1,33 @@
 local config = require 'lspconfig'
 local util = require 'lspconfig/util'
 local map = require('utils').map
+local util = require 'vim.lsp.util'
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+local function format(client, bufnr)
+  vim.keymap.set('n', '<leader>f', function()
+    local params = util.make_formatting_params({})
+    client.request('textDocument/formatting', params, nil, bufnr) 
+  end, {buffer = bufnr})
+end
 
-capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.preselectSupport = true
-capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
-capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
-capabilities.textDocument.completion.completionItem.deprecatedSupport = true
-capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
-capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-   properties = {
-      "documentation",
-      "detail",
-      "additionalTextEdits",
-   },
-}
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+-- capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
+-- capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- capabilities.textDocument.completion.completionItem.preselectSupport = true
+-- capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+-- capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+-- capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+-- capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+-- capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
+-- capabilities.textDocument.completion.completionItem.resolveSupport = {
+--    properties = {
+--       "documentation",
+--       "detail",
+--       "additionalTextEdits",
+--    },
+-- }
 
 local function on_attach(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -35,9 +43,9 @@ local function on_attach(client, bufnr)
   map('n',   '<space>lq',    ':lua vim.diagnostic.set_loclist()<cr>')
   map('n',   '<space>la',    ':lua vim.lsp.buf.code_action()<cr>')
   map('n',   '<space>lr',    ':lua vim.lsp.buf.rename()<cr>')
-  map('n',   '<space>lf',    ':lua vim.lsp.buf.formatting()<cr>')
+  map('n',   '<space>lf',    ':lua vim.lsp.buf.format({ async = true })<cr>')
 
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.document_highlight then
       vim.cmd [[
         augroup lsp_document_highlight
           autocmd! * <buffer>
@@ -50,7 +58,6 @@ end
 
 vim.o.updatetime = 600
 -- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, { focus=false })]]
-
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = false,
@@ -67,9 +74,10 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 
 config.tsserver.setup {
   on_attach = function(client, bufnr)
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
+    client.server_capabilities.document_formatting = false
+    client.server_capabilities.document_range_formatting = false
 
+    format(client, bufnr)
     on_attach(client, bufnr)
   end,
   capabilities = capabilities,
@@ -83,7 +91,10 @@ config.tsserver.setup {
 }
 
 config.rust_analyzer.setup {
-  on_attach = on_attach,
+  on_attach = function(client, bufnr)
+    format(client, bufnr)
+    on_attach(client, bufnr)
+  end,
   settings = {
     ["rust-analyzer"] = {
       assist = {
@@ -101,11 +112,17 @@ config.rust_analyzer.setup {
 }
 
 config.cssls.setup {
-  on_attach = on_attach
+  on_attach = function(client, bufnr)
+    format(client, bufnr)
+    on_attach(client, bufnr)
+  end,
 }
 
 config.html.setup {
-  on_attach = on_attach
+  on_attach = function(client, bufnr)
+    format(client, bufnr)
+    on_attach(client, bufnr)
+  end,
 }
 
 local function lspSymbol(name, icon)

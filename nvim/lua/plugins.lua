@@ -85,6 +85,13 @@ return packer.startup (
       config = r('gitsigns'),
     }
 
+    use {
+      'NTBBloodbath/rest.nvim',
+      opt = true,
+      ft = { 'http' },
+      config = r('rest'),
+    }
+
     -- ON EVENTS --
 
     use {
@@ -151,9 +158,12 @@ return packer.startup (
       config = r('focus')
     }
 
-    -- use {
-    --   'FraserLee/ScratchPad',
-    -- }
+    use {
+      'nvim-neorg/neorg',
+      ft = 'norg',
+      after = 'nvim-treesitter',
+      config = r('neorg')
+    }
 
     -- TELESCOPE --
 

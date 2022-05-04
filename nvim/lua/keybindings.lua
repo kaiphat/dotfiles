@@ -2,7 +2,6 @@ local utils = require('utils')
 local logger = require('utils.logger')
 
 local map = utils.map
-local bindArgs = utils.bindArgs
 
 vim.g.mapleader = ' '
 
@@ -11,7 +10,9 @@ map('n', '<leader>ec', function()
   vim.cmd 'lcd ~/dotfiles/nvim'
   vim.cmd 'Telescope find_files'
 end)
-map('n', '<leader>en', ':lua require"telescope.builtin".find_files({ cwd = "~/notes" })<cr>')
+map('n', '<leader>en', function()
+  require'telescope'.extensions.file_browser.file_browser { cwd = '~/notes' }
+end)
 
 map('n', '<F1>', ":w<cr>:e ++ff=dos<cr>:w ++ff=unix<cr>")
 map('n', '<F9>', ':LspRestart<cr>')
