@@ -11,7 +11,10 @@ map('n', '<leader>ec', function()
   vim.cmd 'Telescope find_files'
 end)
 map('n', '<leader>en', function()
-  require'telescope'.extensions.file_browser.file_browser { cwd = '~/notes' }
+  require'telescope'.extensions.file_browser.file_browser {
+    cwd = '~/notes',
+    grouped = true
+  }
 end)
 
 map('n', '<F1>', ":w<cr>:e ++ff=dos<cr>:w ++ff=unix<cr>")
@@ -86,7 +89,13 @@ end)
 
 -- telescope
 map('n', '<leader>ff', ':lua require"telescope.builtin".find_files({ hidden = true, no_ignore = true })<cr>')
-map('n', '<leader>fe', ':lua require"telescope".extensions.file_browser.file_browser({ hidden = true })<cr>')
+map('n', '<leader>fe', function()
+  require'telescope'.extensions.file_browser.file_browser {
+    hidden = true,
+    grouped = true
+  }
+end)
+
 map('n', '<leader>fg', ':lua require"telescope.builtin".live_grep({ max_results = 50 })<cr>')
 map('n', '<leader>fb', ':Telescope buffers<cr>')
 map('n', '<leader>fs', ':Telescope git_status<cr>')
@@ -96,12 +105,16 @@ map('n', '<leader>fp', ':Telescope resume<cr>')
 map('n', '<leader>fm', ':Telescope marks<cr>')
 map('n', '<leader>fh', function()
   local path = utils.getCurrentPath()
-  require'telescope'.extensions.file_browser.file_browser { cwd = path, hidden = true }
+  require'telescope'.extensions.file_browser.file_browser {
+    cwd = path,
+    hidden = true,
+    grouped = true,
+  }
 end)
 
 -- luasnip
-map({'i', 's'}, '<C-e>', function() 
-  require("luasnip").jump(1) 
+map({'i', 's'}, '<C-e>', function()
+  require("luasnip").jump(1)
 end)
 
 -- nvim tree
@@ -109,50 +122,50 @@ map('n', '<leader>o', ':NvimTreeToggle<cr>')
 
 -- hop
 map('n', 's', function()
-   require'hop'.hint_char1 { 
-     direction = require'hop.hint'.HintDirection.AFTER_CURSOR, 
+   require'hop'.hint_char1 {
+     direction = require'hop.hint'.HintDirection.AFTER_CURSOR,
    }
 end)
 map('n', 'S', function()
-   require'hop'.hint_char1 { 
-     direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, 
+   require'hop'.hint_char1 {
+     direction = require'hop.hint'.HintDirection.BEFORE_CURSOR,
    }
 end)
 map('n', 'f', function()
-   require'hop'.hint_char1 { 
-     direction = require'hop.hint'.HintDirection.AFTER_CURSOR, 
-     current_line_only = true 
+   require'hop'.hint_char1 {
+     direction = require'hop.hint'.HintDirection.AFTER_CURSOR,
+     current_line_only = true
    }
 end)
 map('n', 'F', function()
-   require'hop'.hint_char1 { 
-     direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, 
-     current_line_only = true 
+   require'hop'.hint_char1 {
+     direction = require'hop.hint'.HintDirection.BEFORE_CURSOR,
+     current_line_only = true
    }
 end)
 map('o', 'f', function()
-   require'hop'.hint_char1 { 
-     direction = require'hop.hint'.HintDirection.AFTER_CURSOR, 
+   require'hop'.hint_char1 {
+     direction = require'hop.hint'.HintDirection.AFTER_CURSOR,
      current_line_only = true,
      inclusive_jump = true
    }
 end)
 map('o', 'F', function()
-   require'hop'.hint_char1 { 
-     direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, 
+   require'hop'.hint_char1 {
+     direction = require'hop.hint'.HintDirection.BEFORE_CURSOR,
      current_line_only = true,
      inclusive_jump = true
    }
 end)
 map({ 'o' }, 'l', function()
-   require'hop'.hint_char1 { 
-     direction = require'hop.hint'.HintDirection.AFTER_CURSOR, 
+   require'hop'.hint_char1 {
+     direction = require'hop.hint'.HintDirection.AFTER_CURSOR,
      current_line_only = true,
    }
 end)
 map({ 'o' }, 'L', function()
-   require'hop'.hint_char1 { 
-     direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, 
+   require'hop'.hint_char1 {
+     direction = require'hop.hint'.HintDirection.BEFORE_CURSOR,
      current_line_only = true,
    }
 end)
@@ -170,11 +183,11 @@ map('n', '<leader>mt', function() require'focus'.focus_toggle() end)
 map('n', ',v', function() require'focus'.split_command('l') end)
 map('n', ',s', function() require'focus'.split_command('j') end)
 map('n', ',x', function()
-  vim.cmd 'q' 
+  vim.cmd 'q'
 end)
-map('n', ',X', function() 
-  vim.cmd 'wa' 
-  vim.cmd '%bd|e#' 
+map('n', ',X', function()
+  vim.cmd 'wa'
+  vim.cmd '%bd|e#'
 end)
 
 -- treesitter unit

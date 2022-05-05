@@ -68,22 +68,6 @@ o.binary           = false
 o.shortmess:append("sI")
 o.whichwrap:append("<>hl")
 
--- vim.filetype.add {
---   pattern = {
---     ["*.aa$"] = function(_, _, ext)
---       logger.log(ext)
---       return 'markdown'
---     end
---   }
--- }
-
-vim.cmd [[
-  augroup highlight_yank
-    autocmd!
-    au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
-  augroup END
-]]
-
 local disabled_built_ins = {
   "netrw",
   "netrwPlugin",
