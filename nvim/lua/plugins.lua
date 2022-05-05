@@ -214,6 +214,12 @@ return packer.startup (
       'hrsh7th/cmp-nvim-lsp',
     }
 
+    -- ANOTHER --
+
+    use {
+      'lewis6991/impatient.nvim'
+    }
+
   end
 )
 

@@ -9,6 +9,7 @@ set -gx EDITOR nvim
 set -gx MANPAGER "most"
 set -gx PAGER 'nvim -c "set nowrap" -R'
 set -gx TERMINAL kitty
+# set -gx TERMINAL xterm-256color
 
 # paths
 fish_add_path -aP $snap_bin_path
@@ -53,6 +54,7 @@ alias t "tmux attach -t main || tmux new -s main"
 alias y "yarn"
 alias grep "grep -i --color"
 alias n "nvim"
+alias ssh "kitty +kitten ssh"
 alias mkdir "mkdir -p"
 alias less "less -MSx4 -FXR --shift 10"
 alias ls "ls -a --group-directories-first --color=auto"
@@ -195,3 +197,9 @@ set fish_color_operator 'red'
 ### BREW ###
 eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
+### AUToSTART ###
+if not set -q TMUX
+  set -g TMUX tmux new-session -d -s base
+  eval $TMUX
+  tmux attach-session -d -t base
+end

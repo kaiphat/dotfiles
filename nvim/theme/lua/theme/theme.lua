@@ -7,7 +7,6 @@ local colors = {
   red           = '#DE8C92',
   nord_blue     = '#81A1C1',
   sun           = '#EBCB8B',
-  orange        = '#fca2aa',
   cyan2         = '#91b9f1',
   light_blue    = '#9398cf',
   lightest_blue = '#404060',
@@ -22,13 +21,13 @@ local colors = {
   p             = '#c96090',
   green         = '#7eca9c',
   green2        = '#4ea0bc',
-  green2        = '#e79382',
   nord_blue     = '#81A1C1',
   blue          = '#61afef',
   sun           = '#EBCB8B',
   dark_purple   = '#b892c7',
   teal          = '#519ABA',
   orange        = '#fca2aa',
+  orange2       = '#e79382',
   cyan          = '#a3b8ef',
   cyan_2        = '#bcddee',
   light_blue    = '#9398cf',
@@ -53,7 +52,8 @@ local colors = {
   prettyRed     = '#9e6e7a',
   greenTea      = '#9CC4B2',
 
-  dark          = '#202837'
+  dark          = '#202837',
+  dark_gray    = '#788aa3'
 }
 
 for key, value in pairs(colors) do
@@ -83,7 +83,7 @@ local themes = {
     wood        = colors.red,
     water       = colors.red,
     sky         = colors.orange,
-    sun   = colors.g2,
+    sun         = colors.g2,
 
     select      = colors.prettyRed,
     brackets    = colors.brackets,
@@ -92,11 +92,14 @@ local themes = {
     property    = colors.gray,
     string      = colors.greenTea,
     statement   = colors.nord_blue,
+    number      = colors.red,
+    bool        = colors.orange2,
+    field       = colors.dark_gray,
 
     lineMain    = colors.nordGray1,
     lineBg      = colors.nordGray2,
     lineFg      = colors.nordWhite,
-    line = colors.line
+    line        = colors.line
   }
 }
 
@@ -131,7 +134,7 @@ return lush(function()
       Folded                           { bg = c.bg.li(14), fg = c.bg.li(64) },
       CursorLineNr                     { LineNr, fg = c.fg, gui = s.b },
       MoreMsg                          { fg = c.leaf, gui = s.b },
-      NormalFloat                      { bg = c.bg.li(10) },
+      NormalFloat                      { bg = none },
       FloatBorder                      { fg = c.bg.li(46), bg = none },
       Pmenu                            { fg = c.fg.da(20), bg = c.bg.li(10) },
       PmenuSel                         { fg = c.secondFg, bg = c.select },
@@ -161,7 +164,7 @@ return lush(function()
       Title                            { fg = c.fg, gui = s.b },
       Constant                         { fg = c.wood, gui = s.i },
       String                           { fg = c.string, gui = none },
-      Number                           { fg = c.fg, gui = s.i },
+      Number                           { fg = c.number },
       Boolean                          { Number },
       Identifier                       { fg = c.fg },
       Function                         { fg = c.fg },
@@ -203,6 +206,7 @@ return lush(function()
       TSConstBuiltin                   { Number },
       TSConstMacro                     { Number },
       TSMethod                         { fg = c.method, gui = s.b },
+      TSField                          { fg = c.field },
       TSFunction                       { TSMethod },
       TSNamespace                      { Special },
       TSProperty                       { fg = c.property },
@@ -220,6 +224,8 @@ return lush(function()
       TSNote                           { DiagnosticInfo },
       TSWarning                        { WarningMsg },
       TSDanger                         { Error },
+      TSNumber                         { fg = c.number },
+      TSBoolean                        { fg = c.bool },
 
       markdownH1                       { gui = none },
       markdownTSPunctSpecial           { Special },
