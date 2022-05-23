@@ -149,7 +149,6 @@ return packer.startup (
     use {
       'b3nj5m1n/kommentary',
       config = r('kommentary'),
-      event = 'InsertEnter',
     }
 
     use {

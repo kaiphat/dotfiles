@@ -10,6 +10,6 @@ require("focus").setup {
   },
   cursorline = false,
   signcolumn = false,
-  width = 140,
+  width = 125,
   minwidth = 40
 }

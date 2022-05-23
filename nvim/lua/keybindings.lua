@@ -96,13 +96,18 @@ map('n', '<leader>fe', function()
   }
 end)
 
-map('n', '<leader>fg', ':lua require"telescope.builtin".live_grep({ max_results = 50 })<cr>')
 map('n', '<leader>fb', ':Telescope buffers<cr>')
 map('n', '<leader>fs', ':Telescope git_status<cr>')
 map('n', '<leader>fr', ':Telescope lsp_references<cr>')
 map('n', '<leader>fo', ':Telescope oldfiles<cr>')
 map('n', '<leader>fp', ':Telescope resume<cr>')
 map('n', '<leader>fm', ':Telescope marks<cr>')
+map('n', '<leader>fg', function()
+  require'telescope.builtin'.live_grep {
+    hidden = true,
+    max_results = 50
+  }
+end)
 map('n', '<leader>fh', function()
   local path = utils.getCurrentPath()
   require'telescope'.extensions.file_browser.file_browser {

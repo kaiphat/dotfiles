@@ -3,7 +3,8 @@
 # set pure_symbol_prompt 
 set pure_symbol_prompt ❯
 
-set -gx nvm_default_version v14.18.3
+# set -gx nvm_default_version v14.18.3
+set -gx nvm_default_version v16.15.0
 set -gx ANDROID_HOME $HOME/Android/Sdk
 set -gx EDITOR nvim
 set -gx MANPAGER "most"
@@ -61,6 +62,7 @@ alias ls "ls -a --group-directories-first --color=auto"
 alias rm "rm -rf"
 alias clip "xclip -selection c"
 alias pj "xclip -o | jq '.' | clip"
+alias nest "npx @nestjs/cli"
 alias nvim-start "nvim --startuptime _s.log -c exit && tail -100 _s.log | bat && rm _s.log"
 
 function pq

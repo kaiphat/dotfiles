@@ -56,7 +56,6 @@ telescope.setup {
       "data\\",
       "yarn.lock",
       "*.md",
-      "build",
       "package-lock.json",
       "test",
       "__mocks__",
