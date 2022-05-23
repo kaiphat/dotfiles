@@ -1,5 +1,5 @@
 require('indent_blankline').setup {
-  enabled = false,
+  enabled = true,
   show_current_context = true,
   filetype_exclude = {
     "help",
