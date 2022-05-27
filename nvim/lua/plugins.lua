@@ -168,14 +168,7 @@ return packer.startup (
 
     use {
       'nvim-telescope/telescope.nvim',
-      module = 'telescope',
-      cmd = { "Telescope" },
       config = r('telescope'),
-    }
-
-    use {
-      'nvim-telescope/telescope-fzf-native.nvim',
-      run = 'make',
     }
 
     use {
@@ -211,6 +204,10 @@ return packer.startup (
 
     use {
       'hrsh7th/cmp-nvim-lsp',
+    }
+
+    use {
+      'ray-x/lsp_signature.nvim'
     }
 
     -- ANOTHER --

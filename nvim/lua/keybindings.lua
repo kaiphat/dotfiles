@@ -87,36 +87,6 @@ map('n', '<leader>uus', function() -- upper sql
   vim.cmd 'nohl'
 end)
 
--- telescope
-map('n', '<leader>ff', ':lua require"telescope.builtin".find_files({ hidden = true, no_ignore = true })<cr>')
-map('n', '<leader>fe', function()
-  require'telescope'.extensions.file_browser.file_browser {
-    hidden = true,
-    grouped = true
-  }
-end)
-
-map('n', '<leader>fb', ':Telescope buffers<cr>')
-map('n', '<leader>fs', ':Telescope git_status<cr>')
-map('n', '<leader>fr', ':Telescope lsp_references<cr>')
-map('n', '<leader>fo', ':Telescope oldfiles<cr>')
-map('n', '<leader>fp', ':Telescope resume<cr>')
-map('n', '<leader>fm', ':Telescope marks<cr>')
-map('n', '<leader>fg', function()
-  require'telescope.builtin'.live_grep {
-    hidden = true,
-    max_results = 50
-  }
-end)
-map('n', '<leader>fh', function()
-  local path = utils.getCurrentPath()
-  require'telescope'.extensions.file_browser.file_browser {
-    cwd = path,
-    hidden = true,
-    grouped = true,
-  }
-end)
-
 -- luasnip
 map({'i', 's'}, '<C-e>', function()
   require("luasnip").jump(1)

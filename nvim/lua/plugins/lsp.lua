@@ -3,6 +3,16 @@ local util = require 'lspconfig/util'
 local map = require('utils').map
 local util = require 'vim.lsp.util'
 
+
+require "lsp_signature".setup {
+  bind = true,
+  handler_opts = {
+    border = "rounded"
+  },
+  hint_prefix = " ",
+  hint_enable = false
+}
+
 -- CAPABILITIES --
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)

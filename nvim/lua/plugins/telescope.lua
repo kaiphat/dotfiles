@@ -2,19 +2,62 @@ local telescope = require('telescope')
 local actions = require('telescope.actions')
 local sorters = require('telescope.sorters')
 local previewers = require('telescope.previewers')
+local utils = require('utils')
+
+local map = utils.map
+
+local ignore_patterns = {
+  'docker_volumes_data/**',
+  'data/**',
+  'yarn.lock',
+  'package-lock.json',
+  'test/**',
+  '__mocks__/**',
+}
+
+local vimgrep_arguments = {
+  'rg',
+  '--color=never',
+  '--no-heading',
+  '--with-filename',
+  '--line-number',
+  '--column',
+  '--smart-case',
+  '--trim',
+  '--hidden',
+}
+
+local fd_arguments = {
+  'fdfind',
+  '-t',
+  'f',
+  '--hidden',
+}
+
+local add_ignore_patterns = function()
+  for _, pattern in pairs(ignore_patterns) do
+    table.insert(vimgrep_arguments, '-g')
+    table.insert(vimgrep_arguments, '!'..pattern)
+  end
+
+  for _, pattern in pairs(ignore_patterns) do
+    table.insert(fd_arguments, '-E')
+    table.insert(fd_arguments, pattern)
+  end
+end
+
+local add_no_ignore = function()
+  table.insert(fd_arguments, '--no-ignore')
+  table.insert(vimgrep_arguments, '--no-ignore')
+end
+
+
+add_ignore_patterns()
+-- add_no_ignore()
 
 telescope.setup {
   defaults = {
-    vimgrep_arguments = {
-      'rg',
-      '--color=never',
-      -- '--no-ignore',
-      '--no-heading',
-      '--with-filename',
-      '--line-number',
-      '--column',
-      '--smart-case'
-    },
+    vimgrep_arguments = vimgrep_arguments,
     prompt_prefix = " ",
     selection_caret = "﬌ ",
     entry_prefix = "  ",
@@ -22,44 +65,21 @@ telescope.setup {
     selection_strategy = "reset",
     sorting_strategy = "ascending",
     layout_strategy = "horizontal",
+    layout_strategy = "vertical",
     layout_config = {
       prompt_position = 'top',
       -- preview_width = 0.55,
+      preview_height = 0.7,
       horizontal = {
         preview_cutoff = 40,
         mirror = false,
         width = 0.95
       },
       vertical = {
-        preview_cutoff = 40,
         mirror = false,
-        width = 0.95
+        width = 0.95,
+        height = 0.98,
       },
-    },
-    file_ignore_patterns = {
-      -- 'dotfiles/',
-      'node_modules/',
-      'dist/',
-      'data/',
-      'docker_volumes_data/',
-      'build/',
-      'test/',
-      '.git/',
-      'assets/',
-      '.vscode/',
-      'ios/',
-      -- 'android/',
-      '.expo-schared',
-      "node_modules\\",
-      "dist\\",
-      "docker_volumes_data\\",
-      "data\\",
-      "yarn.lock",
-      "*.md",
-      "package-lock.json",
-      "test",
-      "__mocks__",
-      ".git\\"
     },
     file_sorter =  sorters.get_fuzzy_file,
     generic_sorter =  sorters.get_generic_fuzzy_sorter,
@@ -87,15 +107,51 @@ telescope.setup {
       mappings = {
       }
     },
-
-    fzf = {
-      fuzzy = true,
-      override_generic_sorter = true,
-      override_file_sorter = true,
-      case_mode = "smart_case",
-    }
+    -- fzf = {
+    --   fuzzy = true,
+    --   override_generic_sorter = true,
+    --   override_file_sorter = true,
+    --   case_mode = "ignore_case",
+    -- }
   },
 }
 
-telescope.load_extension "fzf"
 telescope.load_extension "file_browser"
+
+map('n', '<leader>ff', function()
+  require'telescope.builtin'.find_files {
+    find_command = fd_arguments
+  }
+end)
+map('n', '<leader>fe', function()
+  require'telescope'.extensions.file_browser.file_browser {
+    hidden = true,
+    grouped = true
+  }
+end)
+map('n', '<leader>fb', ':Telescope buffers<cr>')
+map('n', '<leader>fs', ':Telescope git_status<cr>')
+map('n', '<leader>fo', ':Telescope oldfiles<cr>')
+map('n', '<leader>fp', ':Telescope resume<cr>')
+map('n', '<leader>fi', function()
+  require'telescope.builtin'.lsp_references {
+    include_declaration = true,
+    include_current_line = true,
+    trim_text = true
+  }
+end)
+map('n', '<leader>fg', function()
+  require'telescope.builtin'.live_grep {
+    hidden = false,
+    disable_coordinates = true
+  }
+end)
+map('n', '<leader>fh', function()
+  local path = utils.getCurrentPath()
+  require'telescope'.extensions.file_browser.file_browser {
+    cwd = path,
+    hidden = true,
+    grouped = true,
+  }
+end)
+
