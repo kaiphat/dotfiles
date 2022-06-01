@@ -1,3 +1,6 @@
+local feline = load('feline')
+if not feline then return end
+
 local getTime = function()
   return os.date('%H:%M:%S')
 end
@@ -198,7 +201,7 @@ table.insert(inactive_components, {
   }, 
 })
 
-require('feline').setup {
+feline.setup {
   theme = {
     bg = colors.dark_blue
   },

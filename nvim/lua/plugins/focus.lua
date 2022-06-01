@@ -1,4 +1,7 @@
-require("focus").setup {
+local focus = load('focus')
+if not focus then return end
+
+focus.setup {
   enable = true,
   autoresize = true,
   excluded_filetypes = {

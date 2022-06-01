@@ -1,4 +1,8 @@
 local o = vim.opt
+local g = vim.g
+
+g.did_load_filetypes = 0
+g.do_filetype_lua = 1
 
 o.tabstop          = 2
 o.softtabstop      = 2
@@ -69,24 +73,26 @@ o.shortmess:append("sI")
 o.whichwrap:append("<>hl")
 
 local disabled_built_ins = {
-  "netrw",
-  "netrwPlugin",
-  "netrwSettings",
-  "netrwFileHandlers",
-  "gzip",
-  "zip",
-  "zipPlugin",
-  "tar",
-  "tarPlugin",
-  "getscript",
-  "getscriptPlugin",
-  "vimball",
-  "vimballPlugin",
   "2html_plugin",
-  "logipat",
-  "rrhelper",
-  "spellfile_plugin",
-  "matchit"
+	"getscript",
+	"getscriptPlugin",
+	"gzip",
+	"logipat",
+	"netrw",
+	"netrwPlugin",
+	"netrwSettings",
+	"netrwFileHandlers",
+	"matchit",
+	"tar",
+	"tarPlugin",
+	"rrhelper",
+	"spellfile_plugin",
+	"vimball",
+	"vimballPlugin",
+	"zip",
+	"zipPlugin",
+	"matchparen",
+	"fzf"
 }
 
 for _, plugin in pairs(disabled_built_ins) do

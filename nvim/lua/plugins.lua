@@ -1,6 +1,5 @@
-vim.cmd('packadd packer.nvim')
-
-local packer = require'packer'
+local packer = load("packer")
+if not packer then return end
 
 local function r(path)
   return 'require"plugins.'..path..'"'
@@ -12,19 +11,20 @@ packer.init {
   },
   display = {
     open_fn = function()
-      return require('packer.util').float { border = 'single' }
+      return require('packer.util').float { border = 'rounded' }
     end
   },
   auto_clean = true,
   compile_on_sync = true,
+  disable_commands = true
 }
 
-return packer.startup (
+packer.startup (
   function(use)
-
     use {
+      'wbthomason/packer.nvim',
       'nvim-lua/plenary.nvim',
-      'rktjmp/lush.nvim'
+      'rktjmp/lush.nvim',
     }
 
     use {
@@ -33,13 +33,7 @@ return packer.startup (
     }
 
     use {
-      'wbthomason/packer.nvim',
-      event = 'VimEnter'
-    }
-
-    use {
       '~/.config/nvim/theme',
-      after = 'lush.nvim',
       config = function()
         vim.cmd 'colorscheme theme'
       end
@@ -162,6 +156,10 @@ return packer.startup (
       ft = 'norg',
       after = 'nvim-treesitter',
       config = r('neorg')
+    }
+
+    use {
+      'jose-elias-alvarez/nvim-lsp-ts-utils'
     }
 
     -- TELESCOPE --

@@ -1,4 +1,7 @@
-require"fidget".setup {
+local fidget = load('fidget')
+if not fidget then return end
+
+fidget.setup {
   text = {
     spinner = "pipe",         
     done = "✔",               

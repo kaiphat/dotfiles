@@ -1,6 +1,9 @@
+local tree = load('nvim-tree')
+if not tree then return end
+
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 
-require 'nvim-tree'.setup {
+tree.setup {
   view = {
     width = 70,
     mappings = {

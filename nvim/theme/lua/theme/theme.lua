@@ -1,4 +1,6 @@
-local lush = require 'lush'
+local lush = load 'lush'
+if not lush then return end
+
 local hsl = lush.hsl
 
 local colors = {

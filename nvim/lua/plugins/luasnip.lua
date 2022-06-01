@@ -1,4 +1,6 @@
-local ls = require 'luasnip'
+local ls = load('luasnip')
+if not ls then return end
+
 local fmt = require('luasnip.extras.fmt').fmt
 local types = require("luasnip.util.types")
 

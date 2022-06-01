@@ -1,8 +1,7 @@
-local u = require('utils')
+local gitsigns = load('gitsigns')
+if not gitsigns then return end
 
-local map = u.map
-
-require('gitsigns').setup { 
+gitsigns.setup { 
   signs = {
     add          = {hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
     change       = {hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},

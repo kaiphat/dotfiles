@@ -1,10 +1,20 @@
-local config = require 'lspconfig'
-local util = require 'lspconfig/util'
-local map = require('utils').map
 local util = require 'vim.lsp.util'
 
+local config = require 'lspconfig'
 
-require "lsp_signature".setup {
+local config = load('lspconfig')
+if not config then return end
+
+local lsp_signature = load('lsp_signature')
+if not lsp_signature then return end
+
+local cmp_nvim_lsp = load('cmp_nvim_lsp')
+if not cmp_nvim_lsp then return end
+
+local nvim_lsp_ts_utils = load('nvim-lsp-ts-utils')
+if not nvim_lsp_ts_utils then return end
+
+lsp_signature.setup {
   bind = true,
   handler_opts = {
     border = "rounded"
@@ -15,7 +25,7 @@ require "lsp_signature".setup {
 
 -- CAPABILITIES --
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
 capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -104,6 +114,10 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 
 config.tsserver.setup {
   on_attach = function(client, bufnr)
+    local ts_utils = nvim_lsp_ts_utils
+    ts_utils.setup({})
+    ts_utils.setup_client(client)
+
     client.server_capabilities.document_formatting = false
     client.server_capabilities.document_range_formatting = false
 
@@ -115,6 +129,7 @@ config.tsserver.setup {
     usePlaceholders = true,
     hostInfo = "neovim"
   },
+  init_options = nvim_lsp_ts_utils.init_options,
   flags = {
     debounce_text_changes = 150,
   }

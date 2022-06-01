@@ -1,4 +1,5 @@
-local autopairs = require('nvim-autopairs')
+local autopairs = load('nvim-autopairs')
+if not autopairs then return end
 
 autopairs.setup({
   check_ts = true,

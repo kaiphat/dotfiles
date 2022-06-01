@@ -14,11 +14,6 @@ M.splitString = function(str, delimiter)
     return result
 end
 
-M.map = function(mode, keys, cmd, opts)
-  opts = opts or { noremap = true, silent = true }
-  vim.keymap.set(mode, keys, cmd, opts)
-end
-
 M.snake = function(s)
   return s:gsub('%f[^%l]%u', '_%1'):gsub('%f[^%a]%d', '_%1'):gsub('%f[^%d]%a', '_%1'):gsub('(%u)(%u%l)', '%1_%2'):upper()
 end
@@ -84,9 +79,7 @@ M.clone_table = function(orig)
   return copy
 end
 
-_G.upperSql = M.upperSql
-
-function get_selection()
+local function get_selection()
   -- does not handle rectangular selection
   local s_start = vim.fn.getpos("'<")
   local s_end = vim.fn.getpos("'>")

@@ -1,4 +1,5 @@
-local cmp = require 'cmp'
+local cmp = load('cmp')
+if not cmp then return end
 
 local sources = {
   buffer     = '[BUF]',
@@ -12,7 +13,10 @@ local sources = {
 cmp.setup {
   snippet = {
     expand = function(args) 
-      require('luasnip').lsp_expand(args.body)
+      local luasnip = u.load('luasnip')
+      if not luasnip then return end
+
+      luasnip.lsp_expand(args.body)
     end
   },
   formatting = {

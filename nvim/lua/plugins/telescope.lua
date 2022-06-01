@@ -1,18 +1,23 @@
-local telescope = require('telescope')
+local telescope = load('telescope')
+if not telescope then return end
+
 local actions = require('telescope.actions')
 local sorters = require('telescope.sorters')
 local previewers = require('telescope.previewers')
-local utils = require('utils')
-
-local map = utils.map
 
 local ignore_patterns = {
-  'docker_volumes_data/**',
-  'data/**',
-  'yarn.lock',
+  'docker_volumes_data/',
+  'data/',
+  '.data/',
+  'test/',
+  '__mocks__/',
+  '.git/',
+
   'package-lock.json',
-  'test/**',
-  '__mocks__/**',
+  'yarn.lock',
+  '*.log',
+  '.gitignore',
+  '*.md',
 }
 
 local vimgrep_arguments = {
@@ -69,7 +74,7 @@ telescope.setup {
     layout_config = {
       prompt_position = 'top',
       -- preview_width = 0.55,
-      preview_height = 0.7,
+      preview_height = 0.6,
       horizontal = {
         preview_cutoff = 40,
         mirror = false,
@@ -142,16 +147,17 @@ map('n', '<leader>fi', function()
 end)
 map('n', '<leader>fg', function()
   require'telescope.builtin'.live_grep {
-    hidden = false,
+    hidden = true,
     disable_coordinates = true
   }
 end)
 map('n', '<leader>fh', function()
-  local path = utils.getCurrentPath()
+  local path = u.getCurrentPath()
   require'telescope'.extensions.file_browser.file_browser {
     cwd = path,
     hidden = true,
     grouped = true,
+    hide_parent_dir = true
   }
 end)
 

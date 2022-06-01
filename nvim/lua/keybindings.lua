@@ -1,7 +1,4 @@
-local utils = require('utils')
 local logger = require('utils.logger')
-
-local map = utils.map
 
 vim.g.mapleader = ' '
 
