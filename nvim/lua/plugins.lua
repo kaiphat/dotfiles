@@ -130,7 +130,10 @@ packer.startup (
     use {
       'lukas-reineke/indent-blankline.nvim',
       event = 'BufRead',
-      config = r('blankline')
+      config = r('blankline'),
+      setup = function()
+        lazy_load "indent-blankline.nvim"
+      end,
     }
 
     use {

@@ -152,7 +152,7 @@ map('n', '<leader>fg', function()
   }
 end)
 map('n', '<leader>fh', function()
-  local path = u.getCurrentPath()
+  local path = getCurrentPath()
   require'telescope'.extensions.file_browser.file_browser {
     cwd = path,
     hidden = true,

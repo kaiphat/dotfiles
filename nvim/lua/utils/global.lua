@@ -13,4 +13,13 @@ _G.map = function(mode, keys, cmd, opts)
   vim.keymap.set(mode, keys, cmd, opts)
 end
 
+_G.lazy_load = function(plugin, timer)
+	if plugin then
+		timer = timer or 0
+		vim.defer_fn(function()
+			require("packer").loader(plugin)
+		end, timer)
+	end
+end
+
 
