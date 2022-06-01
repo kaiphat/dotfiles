@@ -86,8 +86,6 @@ packer.startup (
       config = r('rest'),
     }
 
-    -- ON EVENTS --
-
     use {
       'phaazon/hop.nvim',
       event = 'BufRead',
@@ -117,7 +115,6 @@ packer.startup (
 
     use {
       'nvim-treesitter/nvim-treesitter',
-      event = { 'BufRead', 'BufNewFile' },
       config = r('tree_sitter')
     }
 
@@ -165,8 +162,6 @@ packer.startup (
       'jose-elias-alvarez/nvim-lsp-ts-utils'
     }
 
-    -- TELESCOPE --
-
     use {
       'nvim-telescope/telescope.nvim',
       config = r('telescope'),
@@ -175,8 +170,6 @@ packer.startup (
     use {
       'nvim-telescope/telescope-file-browser.nvim',
     }
-
-    -- COMPLETIONS --
 
     use {
       'hrsh7th/nvim-cmp',
@@ -210,8 +203,6 @@ packer.startup (
     use {
       'ray-x/lsp_signature.nvim'
     }
-
-    -- ANOTHER --
 
     use {
       'lewis6991/impatient.nvim'

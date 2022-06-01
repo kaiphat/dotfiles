@@ -1,22 +1,26 @@
 local fn = vim.fn
 
-local present, impatient = pcall(require, 'impatient')
-if present then impatient.enable_profile() end
+local function check_packer()
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 
-require'utils.global'
-require'options'
-require'autocommands'
-require'keybindings'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system { 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path }
 
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+    vim.cmd "packadd packer.nvim"
 
-if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system { 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path }
+    require 'plugins'
 
-  vim.cmd "packadd packer.nvim"
-
-  require('plugins')
-  require('packer').sync()
+    require('packer').sync()
+  end
 end
 
-require('plugins')
+-- LOADING --
+require 'impatient'
+require 'utils.global'
+require 'options'
+require 'autocommands'
+require 'keybindings'
+
+check_packer()
+
+require 'plugins'

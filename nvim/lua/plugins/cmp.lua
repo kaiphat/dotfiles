@@ -13,7 +13,7 @@ local sources = {
 cmp.setup {
   snippet = {
     expand = function(args) 
-      local luasnip = u.load('luasnip')
+      local luasnip = load('luasnip')
       if not luasnip then return end
 
       luasnip.lsp_expand(args.body)

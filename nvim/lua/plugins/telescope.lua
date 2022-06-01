@@ -1,3 +1,5 @@
+local u = require 'utils'
+
 local telescope = load('telescope')
 if not telescope then return end
 
@@ -152,7 +154,7 @@ map('n', '<leader>fg', function()
   }
 end)
 map('n', '<leader>fh', function()
-  local path = getCurrentPath()
+  local path = u.getCurrentPath()
   require'telescope'.extensions.file_browser.file_browser {
     cwd = path,
     hidden = true,
