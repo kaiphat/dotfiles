@@ -22,49 +22,10 @@ local ignore_patterns = {
   '*.md',
 }
 
-local vimgrep_arguments = {
-  'rg',
-  '--color=never',
-  '--no-heading',
-  '--with-filename',
-  '--line-number',
-  '--column',
-  '--smart-case',
-  '--trim',
-  '--hidden',
-}
-
-local fd_arguments = {
-  'fdfind',
-  '-t',
-  'f',
-  '--hidden',
-}
-
-local add_ignore_patterns = function()
-  for _, pattern in pairs(ignore_patterns) do
-    table.insert(vimgrep_arguments, '-g')
-    table.insert(vimgrep_arguments, '!'..pattern)
-  end
-
-  for _, pattern in pairs(ignore_patterns) do
-    table.insert(fd_arguments, '-E')
-    table.insert(fd_arguments, pattern)
-  end
-end
-
-local add_no_ignore = function()
-  table.insert(fd_arguments, '--no-ignore')
-  table.insert(vimgrep_arguments, '--no-ignore')
-end
-
-
-add_ignore_patterns()
--- add_no_ignore()
-
 telescope.setup {
   defaults = {
-    vimgrep_arguments = vimgrep_arguments,
+    vimgrep_arguments = 'rg',
+    file_ignore_patterns = {},
     prompt_prefix = " ",
     selection_caret = "﬌ ",
     entry_prefix = "  ",
@@ -75,7 +36,6 @@ telescope.setup {
     layout_strategy = "vertical",
     layout_config = {
       prompt_position = 'top',
-      -- preview_width = 0.55,
       preview_height = 0.6,
       horizontal = {
         preview_cutoff = 40,
@@ -114,32 +74,47 @@ telescope.setup {
       mappings = {
       }
     },
-    -- fzf = {
-    --   fuzzy = true,
-    --   override_generic_sorter = true,
-    --   override_file_sorter = true,
-    --   case_mode = "ignore_case",
-    -- }
   },
 }
 
 telescope.load_extension "file_browser"
 
-map('n', '<leader>ff', function()
+map('n', '<leader>fn', function()
   require'telescope.builtin'.find_files {
-    find_command = fd_arguments
-  }
-end)
-map('n', '<leader>fe', function()
-  require'telescope'.extensions.file_browser.file_browser {
+    find_command = {
+      'fdfind',
+      '-t',
+      'f',
+      '-E', 'node_modules/',
+    },
     hidden = true,
-    grouped = true
+    no_ignore = true,
   }
 end)
+
+map('n', '<leader>ff', function()
+  local fd_arguments = {
+    'fdfind',
+    '-t',
+    'f',
+  }
+
+  for _, pattern in pairs(ignore_patterns) do
+    table.insert(fd_arguments, '-E')
+    table.insert(fd_arguments, pattern)
+  end
+
+  require'telescope.builtin'.find_files {
+    find_command = fd_arguments,
+    hidden = true,
+  }
+end)
+
 map('n', '<leader>fb', ':Telescope buffers<cr>')
 map('n', '<leader>fs', ':Telescope git_status<cr>')
 map('n', '<leader>fo', ':Telescope oldfiles<cr>')
 map('n', '<leader>fp', ':Telescope resume<cr>')
+
 map('n', '<leader>fi', function()
   require'telescope.builtin'.lsp_references {
     include_declaration = true,
@@ -147,12 +122,45 @@ map('n', '<leader>fi', function()
     trim_text = true
   }
 end)
+
 map('n', '<leader>fg', function()
   require'telescope.builtin'.live_grep {
     hidden = true,
-    disable_coordinates = true
+    disable_coordinates = true,
+    additional_args = function() 
+      local vimgrep_arguments = {
+        '--color=never',
+        '--no-heading',
+        '--with-filename',
+        '--line-number',
+        '--column',
+        '--smart-case',
+        '--trim',
+        '--hidden',
+      }
+
+      for _, pattern in pairs(ignore_patterns) do
+        table.insert(vimgrep_arguments, '-g')
+        table.insert(vimgrep_arguments, '!'..pattern)
+      end
+
+      return vimgrep_arguments
+    end
   }
 end)
+
+map('n', '<leader>fk', function()
+  require'telescope.builtin'.grep_string {}
+end)
+
+map('n', '<leader>fe', function()
+  require'telescope'.extensions.file_browser.file_browser {
+    hidden = true,
+    grouped = true,
+    hide_parent_dir = true
+  }
+end)
+
 map('n', '<leader>fh', function()
   local path = u.getCurrentPath()
   require'telescope'.extensions.file_browser.file_browser {
@@ -160,6 +168,20 @@ map('n', '<leader>fh', function()
     hidden = true,
     grouped = true,
     hide_parent_dir = true
+  }
+end)
+
+map('n', '<leader>ec', function()
+  require'telescope.builtin'.find_files {
+    cwd = '~/dotfiles/nvim',
+    hidden = true,
+  }
+end)
+
+map('n', '<leader>en', function()
+  require'telescope'.extensions.file_browser.file_browser {
+    cwd = '~/notes',
+    grouped = true
   }
 end)
 

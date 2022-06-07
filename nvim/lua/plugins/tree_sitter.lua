@@ -24,6 +24,7 @@ config.setup {
     'scss',
     'dockerfile',
     'json5',
+    'fish',
   },
   highlight = {
     enable = true,

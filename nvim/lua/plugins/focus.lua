@@ -13,6 +13,6 @@ focus.setup {
   },
   cursorline = false,
   signcolumn = false,
-  width = 125,
-  minwidth = 40
+  -- width = 125,
+  -- minwidth = 10
 }

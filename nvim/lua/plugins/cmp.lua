@@ -19,6 +19,10 @@ cmp.setup {
       luasnip.lsp_expand(args.body)
     end
   },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
   formatting = {
     format = function(entry, vim_item)
       local icon = require 'sources.icons'.icons[vim_item.kind]
@@ -29,7 +33,7 @@ cmp.setup {
       return vim_item
     end,
   },
-  mapping = {
+  mapping = cmp.mapping.preset.insert {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
@@ -59,24 +63,27 @@ cmp.setup {
       end
     end, { "i", "s" }),
   },
-  sources = {
-    { name = 'luasnip' },
+  sources = cmp.config.sources {
+    { 
+      name = 'luasnip',
+      priority = 10
+    },
     {
       name = 'nvim_lsp',
-      -- max_item_count = 10,
+      priority = 9
+    },
+    { 
+      name = 'path',
+      priority = 8
     },
     {
       name = 'buffer',
-      max_item_count = 10,
       option = {
         get_bufnrs = function()
           return vim.api.nvim_list_bufs()
         end
-      }
+      },
+      priority = 7
     },
-    { name = 'path' },
-  },
-  experimental = {
-    native_menu = false
   }
 }

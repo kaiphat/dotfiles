@@ -3,16 +3,6 @@ local logger = require('utils.logger')
 vim.g.mapleader = ' '
 
 map('n', '<leader>ee', ":NvimTreeFindFile<cr>")
-map('n', '<leader>ec', function()
-  vim.cmd 'lcd ~/dotfiles/nvim'
-  vim.cmd 'Telescope find_files'
-end)
-map('n', '<leader>en', function()
-  require'telescope'.extensions.file_browser.file_browser {
-    cwd = '~/notes',
-    grouped = true
-  }
-end)
 
 map('n', '<F1>', ":w<cr>:e ++ff=dos<cr>:w ++ff=unix<cr>")
 map('n', '<F9>', ':LspRestart<cr>')
@@ -31,10 +21,10 @@ map('n', '<C-l>', ':wincmd l<cr>')
 
 map('n', '<C-s>', ':wa<cr>')
 
--- map('n', 'cl', 'ct')
--- map('n', 'dl', 'dt')
--- map('n', 'yl', 'yt')
--- map('n', 'vl', 'vt')
+map('n', 'cl', 'ct')
+map('n', 'dl', 'dt')
+map('n', 'yl', 'yt')
+map('n', 'vl', 'vt')
 
 map('n', '<A-->', ':vertical resize -10<cr>')
 map('n', '<A-=>', ':vertical resize +10<cr>')
@@ -94,52 +84,7 @@ map('n', '<leader>o', ':NvimTreeToggle<cr>')
 
 -- hop
 map('n', 's', function()
-   require'hop'.hint_char1 {
-     direction = require'hop.hint'.HintDirection.AFTER_CURSOR,
-   }
-end)
-map('n', 'S', function()
-   require'hop'.hint_char1 {
-     direction = require'hop.hint'.HintDirection.BEFORE_CURSOR,
-   }
-end)
-map('n', 'f', function()
-   require'hop'.hint_char1 {
-     direction = require'hop.hint'.HintDirection.AFTER_CURSOR,
-     current_line_only = true
-   }
-end)
-map('n', 'F', function()
-   require'hop'.hint_char1 {
-     direction = require'hop.hint'.HintDirection.BEFORE_CURSOR,
-     current_line_only = true
-   }
-end)
-map('o', 'f', function()
-   require'hop'.hint_char1 {
-     direction = require'hop.hint'.HintDirection.AFTER_CURSOR,
-     current_line_only = true,
-     inclusive_jump = true
-   }
-end)
-map('o', 'F', function()
-   require'hop'.hint_char1 {
-     direction = require'hop.hint'.HintDirection.BEFORE_CURSOR,
-     current_line_only = true,
-     inclusive_jump = true
-   }
-end)
-map({ 'o' }, 'l', function()
-   require'hop'.hint_char1 {
-     direction = require'hop.hint'.HintDirection.AFTER_CURSOR,
-     current_line_only = true,
-   }
-end)
-map({ 'o' }, 'L', function()
-   require'hop'.hint_char1 {
-     direction = require'hop.hint'.HintDirection.BEFORE_CURSOR,
-     current_line_only = true,
-   }
+   require'hop'.hint_char1 { }
 end)
 
 -- marks
@@ -152,8 +97,8 @@ end
 
 -- focus
 map('n', '<leader>mt', function() require'focus'.focus_toggle() end)
-map('n', ',v', function() require'focus'.split_command('l') end)
-map('n', ',s', function() require'focus'.split_command('j') end)
+map('n', ',v', function() vim.cmd 'vs' end)
+map('n', ',s', function() vim.cmd 'sp' end)
 map('n', ',x', function()
   vim.cmd 'q'
 end)

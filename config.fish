@@ -31,6 +31,7 @@ alias d "docker"
 alias ds "d stop (d ps -q)"
 alias dc "docker-compose"
 alias dcr "dc restart"
+alias di "docker inspect"
 alias du "dc up --force-recreate -d -V $1"
 alias dub "dc up --force-recreate --build -d -V $1"
 
@@ -64,6 +65,7 @@ alias clip "xclip -selection c"
 alias pj "xclip -o | jq '.' | clip"
 alias nest "npx @nestjs/cli"
 alias nvim-start "nvim --startuptime _s.log -c exit && tail -100 _s.log | bat && rm _s.log"
+alias ... "cd ../../"
 
 function pq
   xclip -o |\
@@ -123,13 +125,12 @@ function ff
   -not -path "*/dist/*" \
   -not -path "*/.git/*"
 end
-function di
-  set preview "git diff $argv --color=always -- {-1}"
-  git diff $argv --name-only | fzf -m --ansi --preview $preview
-end
+# function di
+#   set preview "git diff $argv --color=always -- {-1}"
+#   git diff $argv --name-only | fzf -m --ansi --preview $preview
+# end
 
 # cd
-alias ... "cd ../../"
 # function go
 #   set paths \
 #     rpc_server ~/work/patientory/ptoynetwork-dApp/rpc_server \
