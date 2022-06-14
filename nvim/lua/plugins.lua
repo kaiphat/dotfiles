@@ -25,8 +25,19 @@ packer.startup (
       'wbthomason/packer.nvim',
       'nvim-lua/plenary.nvim',
       'rktjmp/lush.nvim',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-nvim-lsp',
+      'ray-x/lsp_signature.nvim',
+      'lewis6991/impatient.nvim',
+      'nvim-telescope/telescope-file-browser.nvim',
+      'jose-elias-alvarez/nvim-lsp-ts-utils',
+      'nvim-treesitter/nvim-treesitter-context',
     }
 
+    use {
+      'ggandor/lightspeed.nvim',
+      config = r('lightspeed')
+    }
     use {
       'nvim-lua/popup.nvim',
       after = 'plenary.nvim',
@@ -87,12 +98,6 @@ packer.startup (
     }
 
     use {
-      'phaazon/hop.nvim',
-      event = 'BufRead',
-      config = r('hop')
-    }
-
-    use {
       'alvan/vim-closetag',
       event = 'InsertEnter',
       config = r('closetag')
@@ -146,12 +151,6 @@ packer.startup (
     }
 
     use {
-      'beauwilliams/focus.nvim',
-      event = { 'BufRead' },
-      config = r('focus')
-    }
-
-    use {
       'nvim-neorg/neorg',
       ft = 'norg',
       after = 'nvim-treesitter',
@@ -159,16 +158,14 @@ packer.startup (
     }
 
     use {
-      'jose-elias-alvarez/nvim-lsp-ts-utils'
+      'beauwilliams/focus.nvim',
+      event = { 'BufRead' },
+      config = r('focus')
     }
 
     use {
       'nvim-telescope/telescope.nvim',
       config = r('telescope'),
-    }
-
-    use {
-      'nvim-telescope/telescope-file-browser.nvim',
     }
 
     use {
@@ -192,22 +189,9 @@ packer.startup (
       after = 'cmp_luasnip',
     }
 
-    use {
-      'hrsh7th/cmp-path',
-    }
-
-    use {
-      'hrsh7th/cmp-nvim-lsp',
-    }
-
-    use {
-      'ray-x/lsp_signature.nvim'
-    }
-
-    use {
-      'lewis6991/impatient.nvim'
-    }
-
+    -- use {
+    --   'Vonr/align.nvim'
+    -- }
   end
 )
 

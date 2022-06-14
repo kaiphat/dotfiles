@@ -9,6 +9,7 @@ local previewers = require('telescope.previewers')
 
 local ignore_patterns = {
   'docker_volumes_data/',
+  'node_modules/',
   'data/',
   '.data/',
   'test/',
@@ -24,7 +25,9 @@ local ignore_patterns = {
 
 telescope.setup {
   defaults = {
-    vimgrep_arguments = 'rg',
+    vimgrep_arguments = {
+      'rg',
+    },
     file_ignore_patterns = {},
     prompt_prefix = " ",
     selection_caret = "﬌ ",
@@ -107,6 +110,7 @@ map('n', '<leader>ff', function()
   require'telescope.builtin'.find_files {
     find_command = fd_arguments,
     hidden = true,
+    no_ignore = false,
   }
 end)
 
@@ -150,7 +154,28 @@ map('n', '<leader>fg', function()
 end)
 
 map('n', '<leader>fk', function()
-  require'telescope.builtin'.grep_string {}
+  require'telescope.builtin'.grep_string {
+    disable_coordinates = true,
+    additional_args = function() 
+      local vimgrep_arguments = {
+        '--color=never',
+        '--no-heading',
+        '--with-filename',
+        '--line-number',
+        '--column',
+        '--smart-case',
+        '--trim',
+        '--hidden',
+      }
+
+      for _, pattern in pairs(ignore_patterns) do
+        table.insert(vimgrep_arguments, '-g')
+        table.insert(vimgrep_arguments, '!'..pattern)
+      end
+
+      return vimgrep_arguments
+    end
+  }
 end)
 
 map('n', '<leader>fe', function()

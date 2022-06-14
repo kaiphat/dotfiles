@@ -2,7 +2,7 @@ local indent_blankline = load('indent_blankline')
 if not indent_blankline then return end
 
 indent_blankline.setup {
-  enabled = true,
+  enabled = false,
   show_current_context = true,
   filetype_exclude = {
     "help",

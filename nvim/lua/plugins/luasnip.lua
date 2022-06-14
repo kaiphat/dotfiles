@@ -22,6 +22,17 @@ ls.add_snippets('javascript', {
   ),
 })
 
+ls.add_snippets('javascript', {
+  s('cc',
+    fmt([[
+      export class {} {{
+      }}
+    ]], {
+      i(1, 'ClassName')
+    })
+  ),
+})
+
 ls.add_snippets('rust', {
   s('pr',
     fmt([[
@@ -54,4 +65,6 @@ ls.add_snippets('lua', {
 })
 
 ls.filetype_extend('typescript', { 'javascript' })
+ls.filetype_extend('javascriptreact', { 'javascript' })
+ls.filetype_extend('typescriptreact', { 'javascript' })
 

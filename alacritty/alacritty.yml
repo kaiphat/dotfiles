@@ -93,7 +93,7 @@ window:
 font:
   normal:
     family: JetBrainsMono Nerd Font
-    style: Regular
+    style: Medium
   bold:
     family: JetBrainsMono Nerd Font
     style: Bold

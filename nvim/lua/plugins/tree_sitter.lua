@@ -4,6 +4,9 @@ if not install then return end
 local config = load('nvim-treesitter.configs')
 if not config then return end
 
+local context = load('treesitter-context')
+if not context then return end
+
 install.compilers = { "clang", "gcc" }
 
 config.setup {
@@ -24,11 +27,19 @@ config.setup {
     'scss',
     'dockerfile',
     'json5',
-    'fish',
+    'fish'
   },
   highlight = {
     enable = true,
     use_languagetree = true,
-  }
+  },
+  indent = {
+    enable = true,
+    disable = {
+    }
+  },
 }
 
+context.setup {
+  enable = true
+}

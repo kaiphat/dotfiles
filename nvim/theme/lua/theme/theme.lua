@@ -55,7 +55,7 @@ local colors = {
   greenTea      = '#9CC4B2',
 
   dark          = '#202837',
-  dark_gray    = '#788aa3'
+  dark_gray     = '#788aa3'
 }
 
 for key, value in pairs(colors) do
@@ -228,6 +228,8 @@ return lush(function()
       TSDanger                         { Error },
       TSNumber                         { fg = c.number },
       TSBoolean                        { fg = c.bool },
+
+      TreesitterContext                { bg = c.bg.li(10).de(10) },
 
       markdownH1                       { gui = none },
       markdownTSPunctSpecial           { Special },

@@ -82,11 +82,6 @@ end)
 -- nvim tree
 map('n', '<leader>o', ':NvimTreeToggle<cr>')
 
--- hop
-map('n', 's', function()
-   require'hop'.hint_char1 { }
-end)
-
 -- marks
 local letters = 'abcdefghijklmnopqrstuvwxyz'
 for i = 1, #letters do
@@ -106,6 +101,11 @@ map('n', ',X', function()
   vim.cmd 'wa'
   vim.cmd '%bd|e#'
 end)
+
+-- ts lsp utils
+map('n', '<leader>ti', ':TSLspImportAll<cr>')
+map('n', '<leader>tr', ':TSLspRenameFile<cr>')
+map('n', '<leader>to', ':TSLspOrganize<cr>')
 
 -- treesitter unit
 map('x', 'u', ':lua require"utils.unit".select(true)<cr>')

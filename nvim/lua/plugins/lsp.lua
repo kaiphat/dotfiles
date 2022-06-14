@@ -114,9 +114,10 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 
 config.tsserver.setup {
   on_attach = function(client, bufnr)
-    local ts_utils = nvim_lsp_ts_utils
-    ts_utils.setup({})
-    ts_utils.setup_client(client)
+    nvim_lsp_ts_utils.setup {
+      auto_inlay_hints = false
+    }
+    nvim_lsp_ts_utils.setup_client(client)
 
     client.server_capabilities.document_formatting = false
     client.server_capabilities.document_range_formatting = false
