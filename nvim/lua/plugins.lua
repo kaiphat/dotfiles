@@ -35,6 +35,11 @@ packer.startup (
     }
 
     use {
+      'rcarriga/nvim-notify',
+      config = r('notify')
+    }
+
+    use {
       'ggandor/lightspeed.nvim',
       config = r('lightspeed')
     }

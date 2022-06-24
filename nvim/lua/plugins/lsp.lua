@@ -62,7 +62,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 local function format(client, bufnr)
   vim.keymap.set('n', '<leader>f', function()
     local params = util.make_formatting_params({})
-    client.request('textDocument/formatting', params, nil, bufnr) 
+    client.request('textDocument/formatting', params, nil, bufnr)
   end, { buffer = bufnr })
 end
 
@@ -115,7 +115,13 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 config.tsserver.setup {
   on_attach = function(client, bufnr)
     nvim_lsp_ts_utils.setup {
-      auto_inlay_hints = false
+      auto_inlay_hints = false,
+      import_all_priorities = {
+        same_file = 4,
+        local_files = 3,
+        buffer_content = 2,
+        buffers = 1,
+      },
     }
     nvim_lsp_ts_utils.setup_client(client)
 

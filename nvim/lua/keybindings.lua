@@ -1,8 +1,7 @@
+local u = require('utils')
 local logger = require('utils.logger')
 
 vim.g.mapleader = ' '
-
-map('n', '<leader>ee', ":NvimTreeFindFile<cr>")
 
 map('n', '<F1>', ":w<cr>:e ++ff=dos<cr>:w ++ff=unix<cr>")
 map('n', '<F9>', ':LspRestart<cr>')
@@ -74,6 +73,19 @@ map('n', '<leader>uus', function() -- upper sql
   vim.cmd 'nohl'
 end)
 
+local rootPath = u.getCurrentPath()
+
+map('n', '<leader>uc', function()
+  local path = u.getCurrentPath()
+  vim.cmd ('lcd '..path)
+  vim.notify(' cwd changed to current place')
+end)
+
+map('n', '<leader>ur', function()
+  vim.cmd ('lcd '..rootPath)
+  vim.notify(' cwd changed to root')
+end)
+
 -- luasnip
 map({'i', 's'}, '<C-e>', function()
   require("luasnip").jump(1)
@@ -112,6 +124,10 @@ map('x', 'u', ':lua require"utils.unit".select(true)<cr>')
 map('o', 'u', ':<c-u>lua require"utils.unit".select(true)<cr>')
 map('n', ']]', ':lua require"utils.unit".moveToEnd()<cr>')
 map('n', '[[', ':lua require"utils.unit".moveToStart()<cr>')
+
+-- map('n', 's', function()
+--   require'lightspeed'.sx:go({ ['omni?'] = true })
+-- end)
 
 vim.cmd("silent! command PackerStatus lua require 'plugins' require('packer').status()")
 vim.cmd("silent! command PackerSync lua require 'plugins' require('packer').sync()")
