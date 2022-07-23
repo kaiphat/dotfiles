@@ -53,7 +53,7 @@ telescope.setup {
     },
     file_sorter =  sorters.get_fuzzy_file,
     generic_sorter =  sorters.get_generic_fuzzy_sorter,
-    path_display = {},
+    path_display = { 'truncate' },
     winblend = 0,
     border = {},
     borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
@@ -80,7 +80,7 @@ telescope.setup {
   },
 }
 
-telescope.load_extension "file_browser"
+telescope.load_extension 'file_browser'
 
 map('n', '<leader>fn', function()
   require'telescope.builtin'.find_files {
@@ -89,6 +89,7 @@ map('n', '<leader>fn', function()
       '-t',
       'f',
       '-E', 'node_modules/',
+      '-E', '.git/',
     },
     hidden = true,
     no_ignore = true,

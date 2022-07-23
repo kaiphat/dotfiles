@@ -60,7 +60,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 
 -- FUNCTIONS --
 local function format(client, bufnr)
-  vim.keymap.set('n', '<leader>f', function()
+  map('n', '<leader>lf', function()
     local params = util.make_formatting_params({})
     client.request('textDocument/formatting', params, nil, bufnr)
   end, { buffer = bufnr })
@@ -80,7 +80,7 @@ local function on_attach(client, bufnr)
   map('n',   '<space>lq',    ':lua vim.diagnostic.set_loclist()<cr>')
   map('n',   '<space>la',    ':lua vim.lsp.buf.code_action()<cr>')
   map('n',   '<space>lr',    ':lua vim.lsp.buf.rename()<cr>')
-  map('n',   '<space>lf',    ':lua vim.lsp.buf.format({ async = true })<cr>')
+  -- map('n',   '<space>lf',    vim.lsp.buf.formatting)
 
   if client.server_capabilities.document_highlight then
     local group = 'lsp_document_highlight'

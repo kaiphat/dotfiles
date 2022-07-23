@@ -32,6 +32,15 @@ packer.startup (
       'nvim-telescope/telescope-file-browser.nvim',
       'jose-elias-alvarez/nvim-lsp-ts-utils',
       'nvim-treesitter/nvim-treesitter-context',
+      'nvim-lua/popup.nvim',
+      'saadparwaiz1/cmp_luasnip',
+      'hrsh7th/cmp-buffer',
+      'kyazdani42/nvim-web-devicons',
+    }
+
+    use {
+      'ThePrimeagen/harpoon',
+      config = r('harpoon')
     }
 
     use {
@@ -43,45 +52,25 @@ packer.startup (
       'ggandor/lightspeed.nvim',
       config = r('lightspeed')
     }
-    use {
-      'nvim-lua/popup.nvim',
-      after = 'plenary.nvim',
-    }
-
-    use {
-      '~/.config/nvim/theme',
-      config = function()
-        vim.cmd 'colorscheme theme'
-      end
-    }
-
-    use {
-      'kyazdani42/nvim-web-devicons',
-      after = 'theme',
-    }
 
     use {
       'feline-nvim/feline.nvim',
-      after = 'nvim-web-devicons',
       config = r('statusline'),
     }
 
     use {
       'j-hui/fidget.nvim',
-      after = 'nvim-lspconfig',
       config = r('fidget')
     }
 
     use {
       'jose-elias-alvarez/null-ls.nvim',
-      after = 'nvim-lspconfig',
       config = r('null')
     }
 
     use {
       'neovim/nvim-lspconfig',
       config = r('lsp'),
-      after = 'feline.nvim',
       setup = function()
         vim.defer_fn(function()
             vim.cmd 'if &ft == "packer" | echo "" | else | silent! e %'
@@ -91,21 +80,7 @@ packer.startup (
 
     use {
       'lewis6991/gitsigns.nvim',
-      after = 'feline.nvim',
       config = r('gitsigns'),
-    }
-
-    use {
-      'NTBBloodbath/rest.nvim',
-      opt = true,
-      ft = { 'http' },
-      config = r('rest'),
-    }
-
-    use {
-      'alvan/vim-closetag',
-      event = 'InsertEnter',
-      config = r('closetag')
     }
 
     use {
@@ -124,19 +99,17 @@ packer.startup (
     }
 
     use {
-      'nvim-treesitter/nvim-treesitter',
-      config = r('tree_sitter')
+     'nvim-treesitter/nvim-treesitter',
+     config = r('tree_sitter')
     }
 
     use {
       'norcalli/nvim-colorizer.lua',
-      event = 'BufRead',
       config = r('colorizer')
     }
 
     use {
       'lukas-reineke/indent-blankline.nvim',
-      event = 'BufRead',
       config = r('blankline'),
       setup = function()
         lazy_load "indent-blankline.nvim"
@@ -145,8 +118,6 @@ packer.startup (
 
     use {
       'windwp/nvim-autopairs',
-      after = 'nvim-cmp',
-      event = 'InsertEnter',
       config = r('auto_pairs')
     }
 
@@ -158,7 +129,6 @@ packer.startup (
     use {
       'nvim-neorg/neorg',
       ft = 'norg',
-      after = 'nvim-treesitter',
       config = r('neorg')
     }
 
@@ -181,17 +151,13 @@ packer.startup (
     use {
       'L3MON4D3/LuaSnip',
       config = r('luasnip'),
-      after = 'nvim-cmp'
     }
 
     use {
-      'saadparwaiz1/cmp_luasnip',
-      after = 'LuaSnip'
-    }
-
-    use {
-      'hrsh7th/cmp-buffer',
-      after = 'cmp_luasnip',
+      '~/.config/nvim/theme',
+      config = function()
+        vim.cmd 'colorscheme theme'
+      end
     }
 
     -- use {

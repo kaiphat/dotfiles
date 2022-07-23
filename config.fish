@@ -41,10 +41,6 @@ end
 function dl
   d logs $argv -f -n 99
 end
-function dlc
-  d logs $argv -f -n 999 | \
-  awk '/\x1b\[36m/,/\x1b\[0m/'
-end
 function dps
   d ps -a --format "table {{.ID}}\t{{.Names}}" | \
   grep $argv
@@ -117,42 +113,12 @@ function gup -a parent count
   and git add -A
 end
 
-
 function ff
   set pattern (string join '*' '' $argv '')
   find . -type f -iwholename $pattern \
   -not -path "*/node_modules/*" \
   -not -path "*/dist/*" \
   -not -path "*/.git/*"
-end
-# function di
-#   set preview "git diff $argv --color=always -- {-1}"
-#   git diff $argv --name-only | fzf -m --ansi --preview $preview
-# end
-
-# cd
-# function go
-#   set paths \
-#     rpc_server ~/work/patientory/ptoynetwork-dApp/rpc_server \
-#     consumer   ~/work/patientory/consumer-dApp \
-#     flact      ~/work/flact \
-#     economics  ~/work/patientory/ptoynetwork-airdrop-and-transfer-service \
-#     neith      ~/work/patientory/neith-enterprise-portal \
-#     hospital   ~/work/patientory/hospital-net \
-#     poligon    ~/work/poligon \
-#     nvim       ~/.config/nvim \
-#     patientory ~/work/patientory
-#
-#   select cd $paths
-# end
-
-function db
-  set dbs \
-    rpc "postgres://postgres:postgres@localhost:8000/rpc_server_db" \
-    rpc:dev "postgres://postgres:postgres@10.50.0.21:5432/rpc_server_db --ssh-tunnel devuser@s.pixelplex.by" \
-    rpc:stage "postgres://postgres:postgres@10.50.0.11:5432/rpc_server_db --ssh-tunnel devuser@195.201.109.112"
-
-    select pgcli $dbs
 end
 
 #common functions
@@ -200,7 +166,7 @@ set fish_color_operator 'red'
 ### BREW ###
 eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
-### AUToSTART ###
+### AUTOSTART ###
 if not set -q TMUX
   set -g TMUX tmux new-session -d -s base
   eval $TMUX

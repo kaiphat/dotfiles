@@ -27,11 +27,13 @@ config.setup {
     'scss',
     'dockerfile',
     'json5',
-    'fish'
+    'fish',
+    'glimmer',
   },
   highlight = {
     enable = true,
     use_languagetree = true,
+    additional_vim_regex_highlighting = true,
   },
   indent = {
     enable = true,

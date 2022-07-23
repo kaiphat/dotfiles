@@ -14,7 +14,8 @@ set paths                  \
   .config/zk               \
   .config/alacritty        \
   .config/fontconfig/fonts.conf \
-  .config/wezterm/wezterm.lua
+  .config/wezterm/wezterm.lua \
+  .config/helix 
 
 set dotfiles ~/dotfiles
 

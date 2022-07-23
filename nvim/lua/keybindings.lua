@@ -95,7 +95,7 @@ end)
 map('n', '<leader>o', ':NvimTreeToggle<cr>')
 
 -- marks
-local letters = 'abcdefghijklmnopqrstuvwxyz'
+local letters = 'abcdeghijkloqrstuvwxyz'
 for i = 1, #letters do
     local letter = letters:sub(i, i)
     map('n', 'm'..letter, 'm'..letter:upper())
@@ -124,6 +124,20 @@ map('x', 'u', ':lua require"utils.unit".select(true)<cr>')
 map('o', 'u', ':<c-u>lua require"utils.unit".select(true)<cr>')
 map('n', ']]', ':lua require"utils.unit".moveToEnd()<cr>')
 map('n', '[[', ':lua require"utils.unit".moveToStart()<cr>')
+
+-- harpoon
+map('n', 'mm', function()
+  require("harpoon.mark").add_file()
+end)
+map('n', "'m", function()
+  require("harpoon.ui").toggle_quick_menu()
+end)
+map('n', 'mn', function()
+  require("harpoon.ui").nav_next()    
+end)
+map('n', 'mp', function()
+  require("harpoon.ui").nav_prev()
+end)
 
 -- map('n', 's', function()
 --   require'lightspeed'.sx:go({ ['omni?'] = true })

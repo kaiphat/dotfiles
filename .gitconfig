@@ -23,7 +23,9 @@
 	s = stash
 	sa = stash apply
 	pl = pull origin 
-	p = push origin HEAD
+	plh = pull origin HEAD
+	p = push origin
+  ph = push origin HEAD
 	d = diff HEAD
   d1 = diff HEAD~1
 	ds = diff HEAD --shortstat
@@ -34,7 +36,6 @@
   ce = config --global --edit
   rs = reset --soft HEAD~1
   cp = cherry-pick
-  re = rebase -i HEAD~20
 [difftool]
   prompt = true
 [diff]

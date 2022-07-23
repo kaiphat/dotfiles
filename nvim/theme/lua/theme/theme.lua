@@ -3,8 +3,61 @@ if not lush then return end
 
 local hsl = lush.hsl
 
+local pastel = {
+   white = "#b5bcc9",
+   darker_black = "#10171e",
+   black = "#131a21", --  nvim bg
+   black2 = "#1a2128",
+   one_bg = "#1e252c",
+   one_bg2 = "#2a3138",
+   one_bg3 = "#363d44",
+   grey = "#363d44",
+   grey_fg = "#4e555c",
+   grey_fg2 = "#51585f",
+   light_grey = "#545b62",
+   red = "#ef8891",
+   baby_pink = "#fca2aa",
+   pink = "#fca2af",
+   line = "#272e35", -- for lines like vertsplit
+   green = "#9fe8c3",
+   vibrant_green = "#9ce5c0",
+   blue = "#99aee5",
+   nord_blue = "#9aa8cf",
+   yellow = "#fbdf90",
+   sun = "#fbdf9a",
+   purple = "#c2a2e3",
+   dark_purple = "#b696d7",
+   teal = "#92dbb6",
+   orange = "#EDA685",
+   cyan = "#b5c3ea",
+   statusline_bg = "#181f26",
+   lightbg = "#222930",
+   pmenu_bg = "#ef8891",
+   folder_bg = "#99aee5",
+}
+
+local pastel_16 = {
+   base0A = "#f5d595",
+   base04 = "#4f565d",
+   base07 = "#b5bcc9",
+   base05 = "#ced4df",
+   base0E = "#c2a2e3",
+   base0D = "#a3b8ef",
+   base0C = "#abb9e0",
+   base0B = "#9ce5c0",
+   base02 = "#31383f",
+   base0F = "#e88e9b",
+   base03 = "#40474e",
+   base08 = "#ef8891",
+   base01 = "#2c333a",
+   base00 = "#131a21",
+   base09 = "#EDA685",
+   base06 = "#d3d9e4",
+}
+
 local colors = {
   white         = '#abb2bf',
+  white = "#b5bcc9",
   light_white   = '#ceceef',
   red           = '#DE8C92',
   nord_blue     = '#81A1C1',
@@ -18,7 +71,7 @@ local colors = {
   theme_7       = '#43d08a',
   theme_9       = '#282c34',
   theme_13      = '#2c323c',
-  line          = '#333944',
+  line          = '#40474e',
   pink          = '#ff75a0',
   p             = '#c96090',
   green         = '#7eca9c',
@@ -26,24 +79,27 @@ local colors = {
   nord_blue     = '#81A1C1',
   blue          = '#61afef',
   sun           = '#EBCB8B',
-  dark_purple   = '#b892c7',
   teal          = '#519ABA',
   orange        = '#fca2aa',
   orange2       = '#e79382',
   cyan          = '#a3b8ef',
   cyan_2        = '#bcddee',
   light_blue    = '#9398cf',
+  purple        = "#c2a2e3",
+  dark_purple   = "#b696d7",
+  dark_purple   = "#b892c7",
   lightest_blue = '#404060',
   brackets      = '#757595',
   a             = '#536162',
 
   red           = '#e06c75',
+  red           = "#ef8891",
   green         = '#56b6c2',
   green         = '#7eca9c',
   g2            = '#66A5AD',
   gray          = '#6e88a6',
   brown         = '#c8ae9d',
-  select        = '#ffcc66',
+  select        = '#fbdf9a',
   nordGray1     = '#4c566a',
   nordGray2     = '#3b4252',
   nordWhite     = '#d8dee9',
@@ -51,7 +107,7 @@ local colors = {
 
   prettyGray    = '#2b2f3a',
   prettyWhite   = '#dae0ee',
-  prettyRed     = '#9e6e7a',
+  prettyRed     = '#fca2af',
   greenTea      = '#9CC4B2',
 
   dark          = '#202837',
@@ -69,7 +125,7 @@ local s = {
   i             = 'italic',
   r             = 'reverse',
   ul            = 'underline',
-  ul            = 'undercurl',
+  uc            = 'undercurl',
 }
 
 local themes = {
@@ -101,7 +157,7 @@ local themes = {
     lineMain    = colors.nordGray1,
     lineBg      = colors.nordGray2,
     lineFg      = colors.nordWhite,
-    line        = colors.line
+    line        = colors.line,
   }
 }
 
@@ -196,10 +252,10 @@ return lush(function()
       DiagnosticVirtualTextInfo        { DiagnosticError, bg = none },
       DiagnosticVirtualTextHint        { DiagnosticError, bg = none },
 
-      DiagnosticUnderlineWarn          { gui = s.ul },
-      DiagnosticUnderlineInfo          { gui = s.ul },
-      DiagnosticUnderlineHint          { gui = s.ul },
-      DiagnosticUnderlineError         { gui = s.ul },
+      DiagnosticUnderlineWarn          { gui = s.uc },
+      DiagnosticUnderlineInfo          { gui = s.uc },
+      DiagnosticUnderlineHint          { gui = s.uc },
+      DiagnosticUnderlineError         { gui = s.uc },
 
       TSConstructor                    { fg = c.constructor },
       TSType                           { fg = c.sun },
@@ -272,9 +328,10 @@ return lush(function()
       IndentBlanklineChar              { fg = c.bg.li(14).de(22) },
       IndentBlanklineContextChar       { fg  = c.thirdFg.da(40).de(50), bg = none },
 
+      TelescopeNormal                  { fg = c.fg.da(10) },
       TelescopeSelection               { bg = c.line },
       TelescopeSelectionCaret          { TelescopeSelection, fg = c.rose },
-      TelescopeMatching                { fg = c.blossom, gui = s.b },
+      TelescopeMatching                { fg = c.select, gui = s.b },
       TelescopeBorder                  { fg = FloatBorder.fg },
       TelescopePromptPrefix            { TelescopeBorder },
 
@@ -322,5 +379,8 @@ return lush(function()
 
       NnnNormal                        { NvimTreeNormal },
       NnnNormalNC                      { NnnNormal },
+
+      -- LightspeedLabel                  { fg = c.purple, gui = s.ul },
+      -- LightspeedShortcut               { bg = c.purple },
     }
 end)
