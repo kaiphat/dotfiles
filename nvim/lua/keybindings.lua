@@ -1,7 +1,4 @@
 local u = require('utils')
-local logger = require('utils.logger')
-
-vim.g.mapleader = ' '
 
 map('n', '<F1>', ":w<cr>:e ++ff=dos<cr>:w ++ff=unix<cr>")
 map('n', '<F9>', ':LspRestart<cr>')
@@ -77,18 +74,21 @@ local rootPath = u.getCurrentPath()
 
 map('n', '<leader>uc', function()
   local path = u.getCurrentPath()
-  vim.cmd ('lcd '..path)
+  vim.cmd('lcd ' .. path)
   vim.notify(' cwd changed to current place')
 end)
 
 map('n', '<leader>ur', function()
-  vim.cmd ('lcd '..rootPath)
+  vim.cmd('lcd ' .. rootPath)
   vim.notify(' cwd changed to root')
 end)
 
 -- luasnip
-map({'i', 's'}, '<C-e>', function()
+map({ 'i', 's' }, '<C-e>', function()
   require("luasnip").jump(1)
+end)
+map({ 'i', 's' }, '<C-d>', function()
+  require("luasnip").change_choice(1)
 end)
 
 -- nvim tree
@@ -97,13 +97,13 @@ map('n', '<leader>o', ':NvimTreeToggle<cr>')
 -- marks
 local letters = 'abcdeghijkloqrstuvwxyz'
 for i = 1, #letters do
-    local letter = letters:sub(i, i)
-    map('n', 'm'..letter, 'm'..letter:upper())
-    map('n', "'"..letter, "'"..letter:upper())
+  local letter = letters:sub(i, i)
+  map('n', 'm' .. letter, 'm' .. letter:upper())
+  map('n', "'" .. letter, "'" .. letter:upper())
 end
 
 -- focus
-map('n', '<leader>mt', function() require'focus'.focus_toggle() end)
+map('n', '<leader>mt', function() require 'focus'.focus_toggle() end)
 map('n', ',v', function() vim.cmd 'vs' end)
 map('n', ',s', function() vim.cmd 'sp' end)
 map('n', ',x', function()
@@ -133,7 +133,7 @@ map('n', "'m", function()
   require("harpoon.ui").toggle_quick_menu()
 end)
 map('n', 'mn', function()
-  require("harpoon.ui").nav_next()    
+  require("harpoon.ui").nav_next()
 end)
 map('n', 'mp', function()
   require("harpoon.ui").nav_prev()
@@ -143,5 +143,5 @@ end)
 --   require'lightspeed'.sx:go({ ['omni?'] = true })
 -- end)
 
-vim.cmd("silent! command PackerStatus lua require 'plugins' require('packer').status()")
-vim.cmd("silent! command PackerSync lua require 'plugins' require('packer').sync()")
+--vim.cmd("silent! command PackerStatus lua require 'plugins' require('packer').status()")
+--vim.cmd("silent! command PackerSync lua require 'plugins' require('packer').sync()")

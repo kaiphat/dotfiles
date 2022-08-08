@@ -22,4 +22,22 @@ _G.lazy_load = function(plugin, timer)
 	end
 end
 
+_G.is_number = function(value)
+  return tonumber(value) ~= nil
+end
+
+_G.merge_tables = function(first, second)
+  local result = {}
+
+  for a, b in pairs(first) do
+    result[a] = b
+  end
+
+  for a, b in pairs(second) do
+    result[a] = b
+  end
+
+  return result
+end
+
 

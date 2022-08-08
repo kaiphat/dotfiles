@@ -10,7 +10,7 @@
 # fish plugins
   curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
   fisher install jethrokuan/z
-  fisher install pure-fish/pure
+  <!-- fisher install pure-fish/pure -->
   fisher install acomagu/fish-async-prompt
   fisher install jorgebucaran/autopair.fish
   fisher install jorgebucaran/nvm.fish

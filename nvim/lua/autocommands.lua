@@ -1,5 +1,3 @@
-local fn = vim.fn
-
 vim.api.nvim_create_autocmd({ 'BufReadPost' }, {
   group = vim.api.nvim_create_augroup('LastPosition', {}),
   callback = function()
@@ -14,8 +12,7 @@ vim.api.nvim_create_autocmd({ 'BufReadPost' }, {
 })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function() 
-    vim.highlight.on_yank { timeout = 700 } 
+  callback = function()
+    vim.highlight.on_yank { timeout = 700 }
   end
 })
-

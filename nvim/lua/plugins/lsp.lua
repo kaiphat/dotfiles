@@ -1,7 +1,5 @@
 local util = require 'vim.lsp.util'
 
-local config = require 'lspconfig'
-
 local config = load('lspconfig')
 if not config then return end
 
@@ -36,11 +34,11 @@ capabilities.textDocument.completion.completionItem.deprecatedSupport = true
 capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
 capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
 capabilities.textDocument.completion.completionItem.resolveSupport = {
-   properties = {
-      "documentation",
-      "detail",
-      "additionalTextEdits",
-   },
+  properties = {
+    "documentation",
+    "detail",
+    "additionalTextEdits",
+  },
 }
 
 -- AUTO HIGHLIGHTS --
@@ -58,60 +56,73 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 --   end
 -- })
 
--- FUNCTIONS --
-local function format(client, bufnr)
+local function lspSymbol(name, icon)
+  vim.fn.sign_define('LspDiagnosticsSign' .. name, { text = icon, numhl = 'LspDiagnosticsSign' .. name })
+end
+
+lspSymbol('Error', '│')
+lspSymbol('Information', '│')
+lspSymbol('Hint', '│')
+lspSymbol('Warning', '│')
+
+local null_ls_format = function(client, bufnr)
   map('n', '<leader>lf', function()
     local params = util.make_formatting_params({})
     client.request('textDocument/formatting', params, nil, bufnr)
   end, { buffer = bufnr })
 end
 
+-- FUNCTIONS --
 local function on_attach(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- map('n',   'gD',           '<Cmd>lua   vim.lsp.buf.declaration()<cr>')
-  map('n',   'gd',           ':lua vim.lsp.buf.definition()<cr>')
-  map('n',   'ga',           ':vs<cr>:lua vim.lsp.buf.definition()<cr>')
-  map('n',   'K',            ':lua vim.lsp.buf.hover()<cr>')
-  map('n',   '<leader>lk',   ':lua vim.lsp.buf.signature_help()<cr>')
-  map('n',   '<space>le',    ':lua vim.diagnostic.open_float()<cr>')
-  map('n',   '[d',           ':lua vim.diagnostic.goto_prev()<cr>')
-  map('n',   ']d',           ':lua vim.diagnostic.goto_next()<cr>')
-  map('n',   '<space>lq',    ':lua vim.diagnostic.set_loclist()<cr>')
-  map('n',   '<space>la',    ':lua vim.lsp.buf.code_action()<cr>')
-  map('n',   '<space>lr',    ':lua vim.lsp.buf.rename()<cr>')
-  -- map('n',   '<space>lf',    vim.lsp.buf.formatting)
+  map('n', 'gd', ':lua vim.lsp.buf.definition()<cr>')
+  map('n', 'ga', ':vs<cr>:lua vim.lsp.buf.definition()<cr>')
+  map('n', 'K', ':lua vim.lsp.buf.hover()<cr>')
+  map('n', '<leader>lk', ':lua vim.lsp.buf.signature_help()<cr>')
+  map('n', '<space>le', ':lua vim.diagnostic.open_float()<cr>')
+  map('n', '[d', ':lua vim.diagnostic.goto_prev()<cr>')
+  map('n', ']d', ':lua vim.diagnostic.goto_next()<cr>')
+  map('n', '<space>lq', ':lua vim.diagnostic.set_loclist()<cr>')
+  map('n', '<space>la', ':lua vim.lsp.buf.code_action()<cr>')
+  map('n', '<space>lr', ':lua vim.lsp.buf.rename()<cr>')
+  map('n', '<space>lf', vim.lsp.buf.formatting)
 
   if client.server_capabilities.document_highlight then
     local group = 'lsp_document_highlight'
-    vim.api.nvim_create_augroup(group, {})
+    vim.api.nvim_create_augroup(group, { clear = false })
+    vim.api.nvim_clear_autocmds({
+      buffer = bufnr,
+      group = group,
+    })
     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
       group = group,
-      buffer = 0,
+      buffer = bufnr,
       callback = vim.lsp.buf.document_highlight,
     })
     vim.api.nvim_create_autocmd('CursorMoved', {
       group = group,
-      buffer = 0,
+      buffer = bufnr,
       callback = vim.lsp.buf.clear_references,
     })
   end
 end
 
-vim.o.updatetime = 600
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = false,
-    -- virtual_text = {
-    --   spacing = 4,
-    --   prefix = " "
-    -- },
+  vim.lsp.diagnostic.on_publish_diagnostics,
+  {
+    -- virtual_text = false,
+    virtual_text = {
+      spacing = 8,
+      prefix = " "
+    },
     signs = false,
     underline = true,
     update_in_insert = false
   }
 )
 
+-- SERVERS --
 config.tsserver.setup {
   on_attach = function(client, bufnr)
     nvim_lsp_ts_utils.setup {
@@ -125,27 +136,32 @@ config.tsserver.setup {
     }
     nvim_lsp_ts_utils.setup_client(client)
 
+    client.server_capabilities.document_highlight = true
     client.server_capabilities.document_formatting = false
     client.server_capabilities.document_range_formatting = false
 
-    format(client, bufnr)
     on_attach(client, bufnr)
+    null_ls_format(client, bufnr)
   end,
   capabilities = capabilities,
-  init_options = {
-    usePlaceholders = true,
-    hostInfo = "neovim"
-  },
   init_options = nvim_lsp_ts_utils.init_options,
   flags = {
     debounce_text_changes = 150,
   }
 }
 
+config.jsonls.setup {
+  capabilities = capabilities,
+  on_attach = function(client, bufnr)
+    on_attach(client, bufnr)
+    null_ls_format(client, bufnr)
+  end
+}
+
 config.rust_analyzer.setup {
   capabilities = capabilities,
   on_attach = function(client, bufnr)
-    format(client, bufnr)
+    client.server_capabilities.document_highlight = true
     on_attach(client, bufnr)
   end,
   settings = {
@@ -165,24 +181,29 @@ config.rust_analyzer.setup {
 }
 
 config.cssls.setup {
-  on_attach = function(client, bufnr)
-    format(client, bufnr)
-    on_attach(client, bufnr)
-  end,
+  capabilities = capabilities,
+  on_attach = on_attach,
 }
 
 config.html.setup {
-  on_attach = function(client, bufnr)
-    format(client, bufnr)
-    on_attach(client, bufnr)
-  end,
+  capabilities = capabilities,
+  on_attach = on_attach,
 }
 
-local function lspSymbol(name, icon)
-   vim.fn.sign_define('LspDiagnosticsSign' .. name, { text = icon, numhl = 'LspDiagnosticsSign' .. name })
-end
-
-lspSymbol('Error', '│')
-lspSymbol('Information', '│')
-lspSymbol('Hint', '│')
-lspSymbol('Warning', '│')
+-- brew install lua-language-server
+config.sumneko_lua.setup {
+  on_attach = function(client, bufnr)
+    client.server_capabilities.document_highlight = true
+    on_attach(client, bufnr)
+    null_ls_format(client, bufnr)
+  end,
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = {
+          'vim',
+        }
+      }
+    }
+  }
+}

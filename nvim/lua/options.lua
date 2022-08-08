@@ -1,9 +1,10 @@
 local o = vim.opt
 local g = vim.g
 
-g.did_load_filetypes = 0
-g.do_filetype_lua = 1
+g.mapleader          = ' '
+g.do_filetype_lua    = 1
 
+o.updatetime       = 500
 o.tabstop          = 2
 o.softtabstop      = 2
 o.expandtab        = true
@@ -17,7 +18,7 @@ o.mouse            = 'a'
 o.wrap             = true
 o.title            = true
 o.hidden           = true
-o.cmdheight        = 1
+o.cmdheight        = 0
 o.scrolloff        = 10
 o.shiftwidth       = 2
 o.numberwidth      = 3
@@ -47,7 +48,8 @@ o.splitbelow       = true
 o.breakindent      = true
 o.fixendofline     = false
 o.termguicolors    = true
-o.signcolumn       = 'yes'
+o.signcolumn       = 'no'
+-- o.signcolumn       = 'yes'
 o.colorcolumn      = '99999'
 vim.wo.colorcolumn = '99999'
 o.encoding         = 'utf-8'
@@ -91,7 +93,6 @@ local disabled_built_ins = {
 	"vimballPlugin",
 	"zip",
 	"zipPlugin",
-	"matchparen",
 	"fzf"
 }
 

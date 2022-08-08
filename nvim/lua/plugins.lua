@@ -1,8 +1,10 @@
+local fn = vim.fn
+
 local packer = load("packer")
 if not packer then return end
 
 local function r(path)
-  return 'require"plugins.'..path..'"'
+  return 'require"plugins.' .. path .. '"'
 end
 
 packer.init {
@@ -19,7 +21,22 @@ packer.init {
   disable_commands = true
 }
 
-packer.startup (
+local packer_bootstrap
+local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+if fn.empty(fn.glob(install_path)) > 0 then
+  packer_bootstrap = fn.system {
+    'git',
+    'clone',
+    '--depth',
+    '1',
+    'https://github.com/wbthomason/packer.nvim',
+    install_path
+  }
+
+  vim.cmd "packadd packer.nvim"
+end
+
+packer.startup(
   function(use)
     use {
       'wbthomason/packer.nvim',
@@ -36,11 +53,17 @@ packer.startup (
       'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-buffer',
       'kyazdani42/nvim-web-devicons',
+      'nvim-telescope/telescope-ui-select.nvim',
     }
 
     use {
       'ThePrimeagen/harpoon',
       config = r('harpoon')
+    }
+
+    use {
+      'Pocco81/true-zen.nvim',
+      config = r('zen')
     }
 
     use {
@@ -73,8 +96,8 @@ packer.startup (
       config = r('lsp'),
       setup = function()
         vim.defer_fn(function()
-            vim.cmd 'if &ft == "packer" | echo "" | else | silent! e %'
-         end, 0)
+          vim.cmd 'if &ft == "packer" | echo "" | else | silent! e %'
+        end, 0)
       end
     }
 
@@ -99,8 +122,8 @@ packer.startup (
     }
 
     use {
-     'nvim-treesitter/nvim-treesitter',
-     config = r('tree_sitter')
+      'nvim-treesitter/nvim-treesitter',
+      config = r('tree_sitter')
     }
 
     use {
@@ -141,6 +164,7 @@ packer.startup (
     use {
       'nvim-telescope/telescope.nvim',
       config = r('telescope'),
+      tag = '0.1.0',
     }
 
     use {
@@ -163,6 +187,12 @@ packer.startup (
     -- use {
     --   'Vonr/align.nvim'
     -- }
+
+    if packer_bootstrap then
+      require('packer').sync()
+    end
   end
 )
 
+vim.cmd("silent! command PackerStatus lua require 'plugins' require('packer').status()")
+vim.cmd("silent! command PackerSync lua require 'plugins' require('packer').sync()")

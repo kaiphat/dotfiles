@@ -27,8 +27,8 @@ window:
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
-   x: 3
-   y: 3
+   x: 0
+   y: 0
 
   # Spread additional padding evenly around the terminal content.
   dynamic_padding: false
@@ -91,24 +91,37 @@ window:
 # Font configuration
 
 font:
-  normal:
-    family: JetBrainsMono Nerd Font
-    style: Medium
-  bold:
-    family: JetBrainsMono Nerd Font
-    style: Bold
-  italic:
-    family: JetBrainsMono Nerd Font
-    style: Italic
-  bold_italic:
-    family: JetBrainsMono Nerd Font
-    style: Bold Italic
 
-  size: 10
+# normal:
+#   family: JetBrainsMono Nerd Font
+#   style: Medium
+# bold:
+#   family: JetBrainsMono Nerd Font
+#   style: Bold
+# italic:
+#   family: JetBrainsMono Nerd Font
+#   style: Italic
+# bold_italic:
+#   family: JetBrainsMono Nerd Font
+#   style: Bold Italic
+  normal:
+    family: CaskaydiaCovePL Nerd Font
+    style: Regular
+  bold:
+    family: CaskaydiaCovePL Nerd Font
+    style: Regular
+  italic:
+    family: CaskaydiaCovePL Nerd Font
+    style: Regular
+  bold_italic:
+    family: CaskaydiaCovePL Nerd Font
+    style: Regular
+
+  size: 10.5
 
   offset:
    x: 0
-   y: -1
+   y: 2
 
   # use_thin_strokes: true
   # builtin_box_drawing: true

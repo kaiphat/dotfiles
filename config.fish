@@ -10,6 +10,7 @@ set -gx EDITOR nvim
 set -gx MANPAGER "most"
 set -gx PAGER 'nvim -c "set nowrap" -R'
 set -gx TERMINAL kitty
+set -U fish_greeting
 # set -gx TERMINAL xterm-256color
 
 # paths
@@ -50,6 +51,7 @@ end
 alias g "git"
 alias t "tmux attach -t main || tmux new -s main"
 alias y "yarn"
+alias fd "fdfind"
 alias grep "grep -i --color"
 alias n "nvim"
 alias ssh "kitty +kitten ssh"
@@ -68,11 +70,6 @@ function pq
   string replace -r -a '\\\n' '\n' |\
   string replace -a '\\' '' |\
   clip
-end
-
-function fd
-  set pattern (string join '*' '' $argv '')
-  fdfind -HIipg $pattern .
 end
 
 function gp -a message
@@ -168,7 +165,8 @@ eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 ### AUTOSTART ###
 if not set -q TMUX
-  set -g TMUX tmux new-session -d -s base
-  eval $TMUX
-  tmux attach-session -d -t base
+  set -g TMUX 1
+  tmux attach -t main || tmux new -s main
 end
+
+starship init fish | source  

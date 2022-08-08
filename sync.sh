@@ -2,6 +2,7 @@
 
 set paths                  \
   .psqlrc                  \
+  .config/starship.toml   \
   .less                    \
   .zshrc                   \
   .tmux.conf               \

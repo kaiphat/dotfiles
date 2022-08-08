@@ -1,10 +1,6 @@
 local feline = load('feline')
 if not feline then return end
 
-local getTime = function()
-  return os.date('%H:%M:%S')
-end
-
 local getPosition = function()
   local current_line = vim.fn.line(".")
   local total_line = vim.fn.line("$")
@@ -21,7 +17,7 @@ local getPosition = function()
     total_line = '0' .. total_line
   end
 
-  return current_line..':'..total_line
+  return current_line .. ':' .. total_line
 end
 
 local colors = {
@@ -43,7 +39,8 @@ table.insert(active_components, {
     provider = {
       name = 'file_info',
       opts = {
-        type = 'relative'
+        type = 'relative',
+        file_modified_icon = ''
       }
     },
     hl = {
@@ -71,7 +68,7 @@ table.insert(active_components, {
         }
       }
     }
-  }, 
+  },
 
   {
     icon = '+',
@@ -197,8 +194,8 @@ table.insert(inactive_components, {
     hl = {
       fg = colors.cyan,
     },
-    left_sep = ' ', 
-  }, 
+    left_sep = ' ',
+  },
 })
 
 feline.setup {
@@ -217,4 +214,3 @@ feline.setup {
     inactive = inactive_components,
   }
 }
-

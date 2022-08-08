@@ -4,10 +4,10 @@ if not install then return end
 local config = load('nvim-treesitter.configs')
 if not config then return end
 
-local context = load('treesitter-context')
-if not context then return end
+--local context = load('treesitter-context')
+--if not context then return end
 
-install.compilers = { "clang", "gcc" }
+install.compilers = { "gcc" }
 
 config.setup {
   ensure_installed = {
@@ -39,9 +39,9 @@ config.setup {
     enable = true,
     disable = {
     }
-  },
+  }
 }
 
-context.setup {
-  enable = true
-}
+--context.setup {
+ -- enable = true
+--}

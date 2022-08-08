@@ -1,6 +1,11 @@
 local indent_blankline = load('indent_blankline')
 if not indent_blankline then return end
 
+local symbols = {
+  '¦',
+  '▏',
+}
+
 indent_blankline.setup {
   enabled = true,
   show_current_context = true,
@@ -15,9 +20,9 @@ indent_blankline.setup {
     "norg",
     "md"
   },
-  char = "▏",
+  char = symbols[1],
+  context_char = symbols[1],
   buftype_exclude = { "terminal" },
   show_trailing_blankline_indent = false,
   show_current_context_start = false,
-  context_patterns = { 'class', 'function', 'method', 'object', 'for', 'if', 'else', 'while', 'array', 'try', 'catch', 'html' }
 }

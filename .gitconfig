@@ -19,19 +19,21 @@
 	ch = checkout
 	chb = checkout -b
 	c = commit -m
-	ca = commit --amend
+	ca = commit --amend --no-edit
 	s = stash
 	sa = stash apply
 	pl = pull origin 
-	plh = pull origin HEAD
+	plh = !git pull origin $(git rev-parse --abbrev-ref HEAD)
 	p = push origin
   ph = push origin HEAD
+	plh = !git push origin $(git rev-parse --abbrev-ref HEAD)
 	d = diff HEAD
   d1 = diff HEAD~1
 	ds = diff HEAD --shortstat
 	ds1 = diff HEAD~1 --shortstat
-	b = branch
-	bd = branch -D
+  # list branches sorted by last modified
+  b = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+  bd = branch -D
 	m = merge
   ce = config --global --edit
   rs = reset --soft HEAD~1
