@@ -2,12 +2,15 @@ local indent_blankline = load('indent_blankline')
 if not indent_blankline then return end
 
 local symbols = {
-  '¦',
   '▏',
+  '⏐',
+  '┊',
+  '¦',
 }
 
 indent_blankline.setup {
   enabled = true,
+  show_first_indent_level = false,
   show_current_context = true,
   filetype_exclude = {
     "help",

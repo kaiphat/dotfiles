@@ -86,7 +86,12 @@ local function on_attach(client, bufnr)
   map('n', '<space>lq', ':lua vim.diagnostic.set_loclist()<cr>')
   map('n', '<space>la', ':lua vim.lsp.buf.code_action()<cr>')
   map('n', '<space>lr', ':lua vim.lsp.buf.rename()<cr>')
-  map('n', '<space>lf', vim.lsp.buf.formatting)
+  map('n', '<space>lf', function()
+    vim.lsp.buf.format {
+      async = true,
+      bufnr = bufnr,
+    }
+  end)
 
   if client.server_capabilities.document_highlight then
     local group = 'lsp_document_highlight'

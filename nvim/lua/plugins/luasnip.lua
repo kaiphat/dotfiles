@@ -2,8 +2,8 @@ local ls = load('luasnip')
 if not ls then return end
 
 local fmt = require('luasnip.extras.fmt').fmt
-local rep = require("luasnip.extras").rep
-local types = require("luasnip.util.types")
+-- local rep = require("luasnip.extras").rep
+-- local types = require("luasnip.util.types")
 
 local s = ls.snippet
 local t = ls.text_node
@@ -11,19 +11,14 @@ local c = ls.choice_node
 local i = ls.insert_node
 local f = ls.function_node
 
-local function change(func, index) 
+local function change(func, index)
   index = index or 1
 
   return f(function(args)
-    local str = args[1][1] 
+    local str = args[1][1]
 
     return { func(str) or "" }
   end, { index })
-end
-
-
-local copy = function(args)
-	return args[1]
 end
 
 ls.config.set_config {
@@ -42,21 +37,21 @@ ls.add_snippets('javascript', {
 
   s('nc', -- new class
     fmt(
-    [[
+      [[
       export class {} {{
       }}
-    ]], {
+    ]] , {
       i(1, 'ClassName')
     })
   ),
 
   s('nm', -- new async method
     fmt(
-    [[
+      [[
       {}{}({}) {{
         {}
       }}
-    ]], {
+    ]] , {
       c(1, {
         t('async '),
         t('')
@@ -69,12 +64,12 @@ ls.add_snippets('javascript', {
 
   s('nf', -- new function
     fmt(
-    [[
+      [[
       const {} = {}({}) => {{
         const {}
         return
       }}
-    ]], {
+    ]] , {
       i(1, 'name'),
       c(2, {
         t('async '),
@@ -87,11 +82,11 @@ ls.add_snippets('javascript', {
 
   s('naf', -- new async function
     fmt(
-    [[
+      [[
       const {} = async ({}) => {{
         {}
       }}
-    ]], {
+    ]] , {
       i(1, 'name'),
       i(2),
       i(3),
@@ -100,9 +95,9 @@ ls.add_snippets('javascript', {
 
   s('in', -- inject
     fmt(
-    [[
+      [[
       @Inject() private readonly {2}!: {1}
-    ]], {
+    ]] , {
       i(1, 'name'),
       change(function(str)
         return str:gsub("%a", string.lower, 1)
@@ -112,11 +107,11 @@ ls.add_snippets('javascript', {
 
   s('map', -- inject
     fmt(
-    [[
+      [[
       const {} = {}.map(({}) => {{
         return {}
       }})
-    ]], {
+    ]] , {
       change(function(name)
         return name:sub(1, #name - 1)
       end),
@@ -132,11 +127,11 @@ ls.add_snippets('javascript', {
 
   s('red', -- reduce
     fmt(
-    [[
+      [[
       const {} = {}.reduce((acc, {}) => {{
         return acc
       }}, {{}})
-    ]], {
+    ]] , {
       change(function(name)
         return name:sub(1, #name - 1)
       end),
@@ -149,11 +144,11 @@ ls.add_snippets('javascript', {
 
   s('if', -- if
     fmt(
-    [[
+      [[
       if({}) {{
         {}
       }}
-    ]], {
+    ]] , {
       i(1, 'condition'),
       i(2)
     })
@@ -161,13 +156,13 @@ ls.add_snippets('javascript', {
 
   s('ifel', -- if else
     fmt(
-    [[
+      [[
       if({}) {{
         {}
       }} else {{
         {}
       }}
-    ]], {
+    ]] , {
       i(1, 'condition'),
       i(2),
       i(3),
@@ -199,4 +194,11 @@ ls.add_snippets('rust', {
 ls.filetype_extend('typescript', { 'javascript' })
 ls.filetype_extend('javascriptreact', { 'javascript' })
 ls.filetype_extend('typescriptreact', { 'javascript' })
+
+map({ 'i', 's' }, '<C-e>', function()
+  ls.jump(1)
+end)
+map({ 'i', 's' }, '<C-d>', function()
+  ls.change_choice(1)
+end)
 

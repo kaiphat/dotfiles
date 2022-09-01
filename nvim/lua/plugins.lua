@@ -54,6 +54,7 @@ packer.startup(
       'hrsh7th/cmp-buffer',
       'kyazdani42/nvim-web-devicons',
       'nvim-telescope/telescope-ui-select.nvim',
+      'nvim-treesitter/playground',
     }
 
     use {
@@ -175,6 +176,16 @@ packer.startup(
     use {
       'L3MON4D3/LuaSnip',
       config = r('luasnip'),
+    }
+
+    use {
+      'otavioschwanck/cool-substitute.nvim',
+      config = r('substitute'),
+    }
+
+    use {
+      'nvim-telescope/telescope-fzf-native.nvim',
+      run = 'make'
     }
 
     use {

@@ -93,10 +93,18 @@ telescope.setup {
 
     ['ui-select'] = {
       themes.get_cursor()
+    },
+
+    fzf = {
+      fuzzy = true,
+      override_generic_sorter = true,
+      override_file_sorter = true,
+      case_mode = "smart_case",
     }
   },
 }
 
+telescope.load_extension 'fzf'
 telescope.load_extension 'file_browser'
 telescope.load_extension 'ui-select'
 
@@ -111,6 +119,13 @@ map('n', '<leader>fn', function()
     },
     hidden = true,
     no_ignore = true,
+  }
+end)
+
+map('n', '<leader>fj', function()
+  require 'telescope.builtin'.find_files {
+    hidden = true,
+    no_ignore = false,
   }
 end)
 
@@ -146,7 +161,7 @@ map('n', '<leader>fi', function()
   }
 end)
 
-map('n', '<leader>fg', function()
+map('n', '<leader>fl', function()
   require 'telescope.builtin'.live_grep {
     hidden = true,
     disable_coordinates = true,

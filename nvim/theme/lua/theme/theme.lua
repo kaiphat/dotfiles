@@ -253,10 +253,10 @@ return lush(function()
     DiagnosticVirtualTextInfo { DiagnosticError, bg = none },
     DiagnosticVirtualTextHint { DiagnosticError, bg = none },
 
-    DiagnosticUnderlineWarn { gui = s.uc },
-    DiagnosticUnderlineInfo { gui = s.uc },
-    DiagnosticUnderlineHint { gui = s.uc },
-    DiagnosticUnderlineError { gui = s.uc },
+    DiagnosticUnderlineWarn { gui = s.ul },
+    DiagnosticUnderlineInfo { gui = s.ul },
+    DiagnosticUnderlineHint { gui = s.ul },
+    DiagnosticUnderlineError { gui = s.ul },
 
     TSConstructor { fg = c.constructor },
     TSType { fg = c.sun },

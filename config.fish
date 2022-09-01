@@ -12,6 +12,8 @@ set -gx PAGER 'nvim -c "set nowrap" -R'
 set -gx TERMINAL kitty
 set -U fish_greeting
 # set -gx TERMINAL xterm-256color
+function fish_right_prompt 
+end
 
 # paths
 fish_add_path -aP $snap_bin_path
@@ -169,4 +171,4 @@ if not set -q TMUX
   tmux attach -t main || tmux new -s main
 end
 
-starship init fish | source  
+# starship init fish | source  

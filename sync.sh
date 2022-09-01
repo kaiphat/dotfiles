@@ -16,7 +16,9 @@ set paths                  \
   .config/alacritty        \
   .config/fontconfig/fonts.conf \
   .config/wezterm/wezterm.lua \
-  .config/helix 
+  .config/helix \
+  .config/picom \
+  .config/awesome 
 
 set dotfiles ~/dotfiles
 

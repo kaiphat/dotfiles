@@ -51,13 +51,9 @@ map('n', '#', '#zz')
 map('n', ',,', '^')
 map('n', 'Q', 'q')
 
-map({ 'o', 'x' }, 'w', 'iw')
-map({ 'o', 'x' }, "'", "i'")
-map({ 'o', 'x' }, '"', 'i"')
-map({ 'o', 'x' }, '`', 'i`')
-map({ 'o', 'x' }, '(', 'i(')
-map({ 'o', 'x' }, '{', 'i{')
-map({ 'o', 'x' }, '[', 'i[')
+for char in string.gmatch('wp\'"`<({[', '.') do
+  map({ 'o', 'x' }, char, 'i' .. char)
+end
 
 -- utils
 map('v', '<leader>uaq', ':EasyAlign /\\C["(a-z:\']/ {"rm": 0} <cr>')
@@ -83,21 +79,12 @@ map('n', '<leader>ur', function()
   vim.notify(' cwd changed to root')
 end)
 
--- luasnip
-map({ 'i', 's' }, '<C-e>', function()
-  require("luasnip").jump(1)
-end)
-map({ 'i', 's' }, '<C-d>', function()
-  require("luasnip").change_choice(1)
-end)
-
 -- nvim tree
 map('n', '<leader>o', ':NvimTreeToggle<cr>')
 
 -- marks
-local letters = 'abcdeghijkloqrstuvwxyz'
-for i = 1, #letters do
-  local letter = letters:sub(i, i)
+--
+for letter in string.gmatch('abcdeghijkloqrstuvwxyz', '.') do
   map('n', 'm' .. letter, 'm' .. letter:upper())
   map('n', "'" .. letter, "'" .. letter:upper())
 end
@@ -139,9 +126,3 @@ map('n', 'mp', function()
   require("harpoon.ui").nav_prev()
 end)
 
--- map('n', 's', function()
---   require'lightspeed'.sx:go({ ['omni?'] = true })
--- end)
-
---vim.cmd("silent! command PackerStatus lua require 'plugins' require('packer').status()")
---vim.cmd("silent! command PackerSync lua require 'plugins' require('packer').sync()")

@@ -91,37 +91,36 @@ window:
 # Font configuration
 
 font:
-
-# normal:
-#   family: JetBrainsMono Nerd Font
-#   style: Medium
-# bold:
-#   family: JetBrainsMono Nerd Font
-#   style: Bold
-# italic:
-#   family: JetBrainsMono Nerd Font
-#   style: Italic
-# bold_italic:
-#   family: JetBrainsMono Nerd Font
-#   style: Bold Italic
   normal:
-    family: CaskaydiaCovePL Nerd Font
-    style: Regular
+    family: JetBrainsMono Nerd Font
+    style: Medium
   bold:
-    family: CaskaydiaCovePL Nerd Font
-    style: Regular
+    family: JetBrainsMono Nerd Font
+    style: Bold
   italic:
-    family: CaskaydiaCovePL Nerd Font
-    style: Regular
+    family: JetBrainsMono Nerd Font
+    style: Italic
   bold_italic:
-    family: CaskaydiaCovePL Nerd Font
-    style: Regular
+    family: JetBrainsMono Nerd Font
+    style: Bold Italic
+# normal:
+#   family: CaskaydiaCovePL Nerd Font
+#   style: Regular
+# bold:
+#   family: CaskaydiaCovePL Nerd Font
+#   style: Regular
+# italic:
+#   family: CaskaydiaCovePL Nerd Font
+#   style: Regular
+# bold_italic:
+#   family: CaskaydiaCovePL Nerd Font
+#   style: Regular
 
-  size: 10.5
+  size: 11.5
 
   offset:
    x: 0
-   y: 2
+   y: 0
 
   # use_thin_strokes: true
   # builtin_box_drawing: true
@@ -153,7 +152,7 @@ colors:
   # affected cell, or hexadecimal colors like #ff00ff.
   cursor:
    text: '#304040'
-   cursor: '#D4C1EC'
+   cursor: '#fbdf90'
 
   # Vi mode cursor colors
   #
