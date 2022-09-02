@@ -51,9 +51,13 @@ map('n', '#', '#zz')
 map('n', ',,', '^')
 map('n', 'Q', 'q')
 
-for char in string.gmatch('wp\'"`<({[', '.') do
+for char in string.gmatch('w\'"`<({[', '.') do
   map({ 'o', 'x' }, char, 'i' .. char)
 end
+map('n', 'yp', 'yip')
+map('n', 'dp', 'dip')
+map('n', 'vp', 'vip')
+map('n', 'cp', 'cip')
 
 -- utils
 map('v', '<leader>uaq', ':EasyAlign /\\C["(a-z:\']/ {"rm": 0} <cr>')

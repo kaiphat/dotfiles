@@ -5,15 +5,13 @@ local wezterm = require 'wezterm'
 local font = function(name, params)
   local names = {
     name,
-    'Noto Color Emoji',
-    'Material Design Icons Desktop',
     'JetBrainsMono Nerd Font',
   }
 
   return wezterm.font_with_fallback(names, params)
 end
 
-local fonts = {
+local font_config = ({
   jet_brains = {
     font_size = 10.8,
     -- font = wezterm.font('JetBrainsMono Nerd Font', { weight = 'Medium' }),
@@ -31,7 +29,7 @@ local fonts = {
     line_height = 1.1,
   },
   mononoki = {
-    font_size = 11,
+    font_size = 11.6,
     font = font 'mononoki Nerd Font',
     line_height = 1.1,
     font_rules = {
@@ -41,7 +39,7 @@ local fonts = {
       }
     }
   }
-}
+}).mononoki
 
 -- UTILS --
 
@@ -108,19 +106,14 @@ local padding = {
 
 -- RESULT --
 
-local font_config = merge {
-  {
-    cell_width = 1.0,
-    line_height = 1.0,
-  },
-  fonts.mononoki,
-}
-
 local config = {
   colors = colors,
   window_padding = padding,
   enable_tab_bar = false,
   scrollback_lines = 10000,
+  animation_fps = 60,
+  dpi = 192,
+  enable_wayland = true,
 }
 
 return merge {
