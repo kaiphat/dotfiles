@@ -26,15 +26,18 @@ _G.is_number = function(value)
   return tonumber(value) ~= nil
 end
 
-_G.merge_tables = function(first, second)
-  local result = {}
+_G.is_table = function(table)
+  return type(table) == 'table'
+end
 
-  for a, b in pairs(first) do
-    result[a] = b
-  end
 
-  for a, b in pairs(second) do
-    result[a] = b
+_G.merge_tables = function(list)
+  local result = list[1]
+
+  for i = 2, #list do
+    for key, value in pairs(list[i]) do
+      result[key] = value
+    end
   end
 
   return result

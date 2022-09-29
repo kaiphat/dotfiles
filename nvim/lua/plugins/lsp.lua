@@ -175,11 +175,20 @@ config.rust_analyzer.setup {
         importGranularity = "module",
         importPrefix = "self",
       },
+      diagnostics = {
+        enable = true,
+        enableExperimental = true,
+      },
       cargo = {
         loadOutDirsFromCheck = true
       },
       procMacro = {
         enable = true
+      },
+      inlayHints = {
+        chainingHints = true,
+        parameterHints = true,
+        typeHints = true,
       },
     }
   }

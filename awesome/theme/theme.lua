@@ -1,13 +1,18 @@
 local gears = require("gears")
+local gshape = require("gears.shape")
 local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
 local theme = dofile(themes_path .. "default/theme.lua")
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
-local helpers = require("helpers")
 local icons = require("icons")
 
+function rrect(radius)
+	return function(cr, width, height)
+		gshape.rounded_rect(cr, width, height, radius)
+	end
+end
 
 --- Ui Fonts
 theme.font_name = "mononoki Nerd Font"
@@ -188,7 +193,7 @@ theme.border_radius = 12
 
 --- Edge snap
 theme.snap_bg = theme.color8
-theme.snap_shape = helpers.ui.rrect(0)
+theme.snap_shape = rrect(0)
 
 --- Main Menu
 theme.main_menu_bg = theme.lighter_black
@@ -204,7 +209,7 @@ theme.hotkeys_fg = theme.white
 theme.hotkeys_modifiers_fg = theme.white
 theme.hotkeys_font = theme.font_name .. "Medium 12"
 theme.hotkeys_description_font = theme.font_name .. "Regular 10"
-theme.hotkeys_shape = helpers.ui.rrect(theme.border_radius)
+theme.hotkeys_shape = rrect(theme.border_radius)
 theme.hotkeys_group_margin = dpi(50)
 
 --- Tag list
@@ -225,7 +230,7 @@ theme.tag_preview_widget_border_color = theme.wibar_bg
 theme.tag_preview_widget_border_width = 0
 
 --- Layout List
-theme.layoutlist_shape_selected = helpers.ui.rrect(theme.border_radius)
+theme.layoutlist_shape_selected = rrect(theme.border_radius)
 theme.layoutlist_bg_selected = theme.widget_bg
 
 --- Gaps

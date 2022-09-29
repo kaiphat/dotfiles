@@ -1,2 +1,2 @@
-require 'autostart'
-require 'handle_errors'
+require(... ..'.autostart')
+require(... ..'.handle_errors')

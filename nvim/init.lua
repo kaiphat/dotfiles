@@ -5,5 +5,5 @@ require 'options'
 require 'autocommands'
 require 'keybindings'
 require 'plugins'
--- TODO: require 'theme'
+require 'theme'
 

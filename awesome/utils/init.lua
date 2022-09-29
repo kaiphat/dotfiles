@@ -1,1 +1,1 @@
-require 'global'
+require(... ..'.global')

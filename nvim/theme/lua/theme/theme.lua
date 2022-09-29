@@ -110,7 +110,7 @@ local colors = {
   prettyRed   = '#fca2af',
   greenTea    = '#9CC4B2',
 
-  dark      = '#202837',
+  dark      = '#252938',
   dark_gray = '#788aa3'
 }
 
@@ -195,6 +195,8 @@ return lush(function()
     MoreMsg { fg = c.leaf, gui = s.b },
     NormalFloat { bg = none },
     FloatBorder { fg = c.bg.li(46), bg = none },
+    FloatShadow { bg = none },
+    FloatShadowThrough { bg = none },
     Pmenu { fg = c.fg.da(20), bg = c.bg.li(10) },
     PmenuSel { fg = c.secondFg, bg = c.select },
     PmenuSbar { bg = c.bg.li(32) },
@@ -253,10 +255,10 @@ return lush(function()
     DiagnosticVirtualTextInfo { DiagnosticError, bg = none },
     DiagnosticVirtualTextHint { DiagnosticError, bg = none },
 
-    DiagnosticUnderlineWarn { gui = s.ul },
-    DiagnosticUnderlineInfo { gui = s.ul },
-    DiagnosticUnderlineHint { gui = s.ul },
-    DiagnosticUnderlineError { gui = s.ul },
+    DiagnosticUnderlineWarn { gui = s.ul, sp = c.constructor },
+    DiagnosticUnderlineInfo { gui = s.ul, sp = c.constructor },
+    DiagnosticUnderlineHint { gui = s.ul, sp = c.constructor },
+    DiagnosticUnderlineError { gui = s.ul, sp = c.constructor },
 
     TSConstructor { fg = c.constructor },
     TSType { fg = c.sun },
@@ -353,6 +355,9 @@ return lush(function()
     HopNextKey1 { fg = c.constructor },
     HopNextKey2 { fg = c.constructor },
     HopUnmatched { LightspeedGreyWash },
+
+    FidgetTask { fg = c.constructor },
+    FidgetTitle { fg = c.constructor },
 
     BufferCurrent { TabLineSel },
     BufferVisible { fg = StatusLineNC.fg },

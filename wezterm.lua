@@ -13,33 +13,66 @@ end
 
 local font_config = ({
   jet_brains = {
-    font_size = 10.8,
-    -- font = wezterm.font('JetBrainsMono Nerd Font', { weight = 'Medium' }),
+    font_size = 9.38,
     font = wezterm.font('JetBrainsMono Nerd Font'),
-    line_height = 1.0,
+    font_rules = {
+      {
+        font = font('JetBrainsMono Nerd Font', { weight = 'Bold' })
+      }
+    },
+    line_height = 1.27,
+  },
+  iosevka = {
+    font_size = 10.1,
+    font = wezterm.font('Iosevka Nerd Font'),
+    line_height = 0.98,
+    font_rules = {
+      {
+        font = font('Iosevka Nerd Font', { italic = false, weight = 'Medium' })
+      }
+    }
   },
   victor_mono = {
     font_size = 10.4,
-    font = font('VictorMono-Bold'),
-    line_height = 1.05,
+    font = font('VictorMono'),
+    line_height = 1,
+    font_rules = {
+      {
+        font = font('VictorMono', { italic = false })
+      }
+    }
   },
   caskaydia = {
-    font_size = 10.8,
+    font_size = 10,
     font = font('CaskaydiaCovePL Nerd Font'),
     line_height = 1.1,
+    font_rules = {
+      {
+        font = font('CaskaydiaCovePL Nerd Font', { italic = false, weight = 'Thin' })
+      }
+    }
   },
   mononoki = {
-    font_size = 11.6,
+    font_size = 10,
     font = font 'mononoki Nerd Font',
     line_height = 1.1,
     font_rules = {
       {
-        italic = true,
-        font = font('mononoki Nerd Font', { italic = false })
+        font = font('mononoki Nerd Font', { italic = false, weight = 'Bold' })
+      }
+    }
+  },
+  fira = {
+    font_size = 10.1,
+    font = font 'FiraCode Nerd Font',
+    line_height = 1.2,
+    font_rules = {
+      {
+        font = font('FiraCode Nerd Font', { italic = false, weight = 'Medium' })
       }
     }
   }
-}).mononoki
+}).jet_brains
 
 -- UTILS --
 
@@ -111,9 +144,9 @@ local config = {
   window_padding = padding,
   enable_tab_bar = false,
   scrollback_lines = 10000,
-  animation_fps = 60,
   dpi = 192,
   enable_wayland = true,
+  window_background_opacity = 1.0
 }
 
 return merge {

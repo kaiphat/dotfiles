@@ -51,13 +51,11 @@ map('n', '#', '#zz')
 map('n', ',,', '^')
 map('n', 'Q', 'q')
 
-for char in string.gmatch('w\'"`<({[', '.') do
-  map({ 'o', 'x' }, char, 'i' .. char)
+for char in string.gmatch('w\'"`p<({[', '.') do
+  for command in string.gmatch('ydvc', '.') do
+    map('n', command .. char, command .. 'i' .. char)
+  end
 end
-map('n', 'yp', 'yip')
-map('n', 'dp', 'dip')
-map('n', 'vp', 'vip')
-map('n', 'cp', 'cip')
 
 -- utils
 map('v', '<leader>uaq', ':EasyAlign /\\C["(a-z:\']/ {"rm": 0} <cr>')
@@ -118,7 +116,7 @@ map('n', '[[', ':lua require"utils.unit".moveToStart()<cr>')
 
 -- harpoon
 map('n', 'mm', function()
-  require("harpoon.mark").add_file()
+  require("harpoon.mark").toggle_file()
 end)
 map('n', "'m", function()
   require("harpoon.ui").toggle_quick_menu()
@@ -129,4 +127,3 @@ end)
 map('n', 'mp', function()
   require("harpoon.ui").nav_prev()
 end)
-

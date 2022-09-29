@@ -12,7 +12,7 @@ local sources = {
 
 cmp.setup {
   snippet = {
-    expand = function(args) 
+    expand = function(args)
       local luasnip = load('luasnip')
       if not luasnip then return end
 
@@ -64,7 +64,7 @@ cmp.setup {
     end, { "i", "s" }),
   },
   sources = cmp.config.sources {
-    { 
+    {
       name = 'luasnip',
       priority = 10
     },
@@ -72,7 +72,7 @@ cmp.setup {
       name = 'nvim_lsp',
       priority = 9
     },
-    { 
+    {
       name = 'path',
       priority = 8
     },

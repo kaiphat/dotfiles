@@ -3,18 +3,23 @@ require 'theme'
 require 'settings'
 require 'autostart'
 
+local awesome = require 'awesome'
+local naughty = require 'naughty'
+local wallpaper = require 'gears.wallpaper'
+local beautiful = require 'beautiful'
+
+beautiful.useless_gap = 10
 
 pcall(require, "luarocks.loader")
+require("awful.autofocus")
+require("awful.hotkeys_popup.keys")
 
 local gears = require("gears")
 local awful = require("awful")
-require("awful.autofocus")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
-require("awful.hotkeys_popup.keys")
-
 local debian = require("debian.menu")
 local has_fdo, freedesktop = pcall(require, "freedesktop")
 
@@ -32,54 +37,46 @@ awful.layout.layouts = {
   awful.layout.suit.max.fullscreen,
   awful.layout.suit.magnifier,
   awful.layout.suit.corner.nw,
-
-
-
 }
 
 
+local client = client
+local modkey = settings.modkey
+local terminal = settings.terminal
 
 
-myawesomemenu = {
-  { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-  { "manual", terminal .. " -e man awesome" },
-  { "edit config", editor_cmd .. " " .. awesome.conffile },
-  { "restart", awesome.restart },
-  { "quit", function() awesome.quit() end },
-}
+-- myawesomemenu = {
+--   { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
+--   { "manual", terminal .. " -e man awesome" },
+--   { "edit config", editor_cmd .. " " .. awesome.conffile },
+--   { "restart", awesome.restart },
+--   { "quit", function() awesome.quit() end },
+-- }
 
-local menu_awesome = { "awesome", myawesomemenu, beautiful.awesome_icon }
-local menu_terminal = { "open terminal", terminal }
+-- local menu_awesome = { "awesome", myawesomemenu, beautiful.awesome_icon }
+-- local menu_terminal = { "open terminal", terminal }
 
-if has_fdo then
-  mymainmenu = freedesktop.menu.build({
-    before = { menu_awesome },
-    after = { menu_terminal }
-  })
-else
-  mymainmenu = awful.menu({
-    items = {
-      menu_awesome,
-      { "Debian", debian.menu.Debian_menu.Debian },
-      menu_terminal,
-    }
-  })
-end
+-- if has_fdo then
+--   mymainmenu = freedesktop.menu.build({
+--     before = { menu_awesome },
+--     after = { menu_terminal }
+--   })
+-- else
+--   mymainmenu = awful.menu({
+--     items = {
+--       menu_awesome,
+--       { "Debian", debian.menu.Debian_menu.Debian },
+--       menu_terminal,
+--     }
+--   })
+-- end
 
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
+local mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
   menu = mymainmenu })
-
-
 menubar.utils.terminal = terminal
-
-
-
-mykeyboardlayout = awful.widget.keyboardlayout()
-
-
-
-mytextclock = wibox.widget.textclock()
+local mykeyboardlayout = awful.widget.keyboardlayout()
+local mytextclock = wibox.widget.textclock()
 
 
 local taglist_buttons = gears.table.join(
@@ -121,72 +118,26 @@ local tasklist_buttons = gears.table.join(
     awful.client.focus.byidx(-1)
   end))
 
-local function set_wallpaper(s)
+-- local function set_wallpaper(s)
 
-  if beautiful.wallpaper then
-    local wallpaper = beautiful.wallpaper
+--   if beautiful.wallpaper then
+--     local wallpaper = beautiful.wallpaper
 
-    if type(wallpaper) == "function" then
-      wallpaper = wallpaper(s)
-    end
-    gears.wallpaper.maximized(wallpaper, s, true)
-  end
-end
+--     if type(wallpaper) == "function" then
+--       wallpaper = wallpaper(s)
+--     end
+--     gears.wallpaper.maximized(wallpaper, s, true)
+--   end
+-- end
 
-screen.connect_signal("property::geometry", set_wallpaper)
+-- screen.connect_signal("property::geometry", set_wallpaper)
+
+
 
 awful.screen.connect_for_each_screen(function(s)
+  wallpaper.maximized('/home/ipunko/Pictures/pexels-brady-knoll-5409751.jpg', s)
 
-  set_wallpaper(s)
-
-
-  awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
-
-
-  s.mypromptbox = awful.widget.prompt()
-
-
-  s.mylayoutbox = awful.widget.layoutbox(s)
-  s.mylayoutbox:buttons(gears.table.join(
-    awful.button({}, 1, function() awful.layout.inc(1) end),
-    awful.button({}, 3, function() awful.layout.inc(-1) end),
-    awful.button({}, 4, function() awful.layout.inc(1) end),
-    awful.button({}, 5, function() awful.layout.inc(-1) end)))
-
-  s.mytaglist = awful.widget.taglist {
-    screen  = s,
-    filter  = awful.widget.taglist.filter.all,
-    buttons = taglist_buttons
-  }
-
-
-  s.mytasklist = awful.widget.tasklist {
-    screen  = s,
-    filter  = awful.widget.tasklist.filter.currenttags,
-    buttons = tasklist_buttons
-  }
-
-
-  s.mywibox = awful.wibar({ position = "top", screen = s })
-
-
-  s.mywibox:setup {
-    layout = wibox.layout.align.horizontal,
-    {
-      layout = wibox.layout.fixed.horizontal,
-      mylauncher,
-      s.mytaglist,
-      s.mypromptbox,
-    },
-    s.mytasklist,
-    {
-      layout = wibox.layout.fixed.horizontal,
-      mykeyboardlayout,
-      wibox.widget.systray(),
-      mytextclock,
-      s.mylayoutbox,
-    },
-  }
+  top_panel(s)
 end)
 
 
@@ -300,30 +251,18 @@ globalkeys = gears.table.join(
     { description = "show the menubar", group = "launcher" })
 )
 
-clientkeys = gears.table.join(
+local clientkeys = gears.table.join(
   awful.key({ modkey, }, "f",
     function(c)
       c.fullscreen = not c.fullscreen
       c:raise()
-    end,
-    { description = "toggle fullscreen", group = "client" }),
-  awful.key({ modkey, "Shift" }, "c", function(c) c:kill() end,
-    { description = "close", group = "client" }),
-  awful.key({ modkey, "Control" }, "space", awful.client.floating.toggle,
-    { description = "toggle floating", group = "client" }),
-  awful.key({ modkey, "Control" }, "Return", function(c) c:swap(awful.client.getmaster()) end,
-    { description = "move to master", group = "client" }),
-  awful.key({ modkey, }, "o", function(c) c:move_to_screen() end,
-    { description = "move to screen", group = "client" }),
-  awful.key({ modkey, }, "t", function(c) c.ontop = not c.ontop end,
-    { description = "toggle keep on top", group = "client" }),
-  awful.key({ modkey, }, "n",
-    function(c)
-
-
-      c.minimized = true
-    end,
-    { description = "minimize", group = "client" }),
+    end, { description = "toggle fullscreen", group = "client" }),
+  awful.key({ modkey, "Shift" }, "c", function(c) c:kill() end, { description = "close", group = "client" }),
+  awful.key({ modkey, "Control" }, "space", awful.client.floating.toggle, { description = "toggle floating", group = "client" }),
+  awful.key({ modkey, "Control" }, "Return", function(c) c:swap(awful.client.getmaster()) end, { description = "move to master", group = "client" }),
+  awful.key({ modkey, }, "o", function(c) c:move_to_screen() end, { description = "move to screen", group = "client" }),
+  awful.key({ modkey, }, "t", function(c) c.ontop = not c.ontop end, { description = "toggle keep on top", group = "client" }),
+  awful.key({ modkey, }, "n", function(c) c.minimized = true end, { description = "minimize", group = "client" }),
   awful.key({ modkey, }, "m",
     function(c)
       c.maximized = not c.maximized
@@ -343,9 +282,6 @@ clientkeys = gears.table.join(
     end,
     { description = "(un)maximize horizontally", group = "client" })
 )
-
-
-
 
 for i = 1, 9 do
   globalkeys = gears.table.join(globalkeys,
@@ -412,10 +348,7 @@ clientbuttons = gears.table.join(
 root.keys(globalkeys)
 
 
-
-
 awful.rules.rules = {
-
   { rule = {},
     properties = { border_width = beautiful.border_width,
       border_color = beautiful.border_normal,
@@ -427,9 +360,8 @@ awful.rules.rules = {
       placement = awful.placement.no_overlap + awful.placement.no_offscreen
     }
   },
-
-
-  { rule_any = {
+  { 
+    rule_any = {
     instance = {
       "DTA",
       "copyq",
@@ -447,9 +379,6 @@ awful.rules.rules = {
       "veromix",
       "xtightvncviewer"
     },
-
-
-
     name = {
       "Event Tester",
     },
@@ -464,31 +393,19 @@ awful.rules.rules = {
   { rule_any = { type = { "normal", "dialog" }
   }, properties = { titlebars_enabled = true }
   },
-
-
-
-
 }
 
 
-
-
 client.connect_signal("manage", function(c)
-
-
-
-
   if awesome.startup
       and not c.size_hints.user_position
       and not c.size_hints.program_position then
-
     awful.placement.no_offscreen(c)
   end
 end)
 
 
 client.connect_signal("request::titlebars", function(c)
-
   local buttons = gears.table.join(
     awful.button({}, 1, function()
       c:emit_signal("request::activate", "titlebar", { raise = true })
@@ -526,10 +443,6 @@ client.connect_signal("request::titlebars", function(c)
   }
 end)
 
-
-client.connect_signal("mouse::enter", function(c)
-  c:emit_signal("request::activate", "mouse_enter", { raise = false })
-end)
-
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+

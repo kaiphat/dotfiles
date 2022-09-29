@@ -1,6 +1,8 @@
-_G.settings = {
-  modkey = 'Mod4',
-  terminal = 'wezterm',
-  editor = 'nvim',
-  editor_cmd = settings.terminal .. " -e " .. settings.editor,
-}
+_G.settings = {}
+
+local s = _G.settings
+
+s.modkey = 'Mod4'
+s.terminal = 'wezterm'
+s.editor = 'nvim'
+s.editor_cmd = s.terminal .. " -e " .. s.editor

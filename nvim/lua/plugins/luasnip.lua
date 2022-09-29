@@ -24,6 +24,7 @@ end
 ls.config.set_config {
   history = true,
   updateevents = "TextChanged,TextChangedI",
+	delete_check_events = 'TextChanged,InsertLeave',
 }
 
 -- JAVASCRIPT --
@@ -176,9 +177,12 @@ ls.add_snippets('javascript', {
 ls.add_snippets('rust', {
   s('pr',
     fmt([[
-      println!("{{:?}}", {});
+      println!("\x1b[36m{2}: {{:?}}\x1b[0m", {1});
     ]], {
       i(1),
+      change(function(str)
+        return str
+      end)
     })
   ),
 
@@ -201,4 +205,3 @@ end)
 map({ 'i', 's' }, '<C-d>', function()
   ls.change_choice(1)
 end)
-

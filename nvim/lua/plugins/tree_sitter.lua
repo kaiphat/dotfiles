@@ -29,6 +29,8 @@ config.setup {
     'json5',
     'fish',
     'glimmer',
+    'scheme',
+    'sql',
   },
   highlight = {
     enable = true,

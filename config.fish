@@ -51,6 +51,7 @@ end
 
 # common
 alias g "git"
+alias todo "nvim ~/notes/deals.norg -c \"set signcolumn=no\""
 alias t "tmux attach -t main || tmux new -s main"
 alias y "yarn"
 alias fd "fdfind"

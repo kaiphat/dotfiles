@@ -41,7 +41,7 @@ packer.startup(
     use {
       'wbthomason/packer.nvim',
       'nvim-lua/plenary.nvim',
-      'rktjmp/lush.nvim',
+      -- 'rktjmp/lush.nvim',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-nvim-lsp',
       'ray-x/lsp_signature.nvim',
@@ -54,7 +54,6 @@ packer.startup(
       'hrsh7th/cmp-buffer',
       'kyazdani42/nvim-web-devicons',
       'nvim-telescope/telescope-ui-select.nvim',
-      'nvim-treesitter/playground',
     }
 
     use {
@@ -156,10 +155,10 @@ packer.startup(
       config = r('neorg')
     }
 
+    use 'anuvyklack/middleclass'
     use {
-      'beauwilliams/focus.nvim',
-      event = { 'BufRead' },
-      config = r('focus')
+      'anuvyklack/windows.nvim',
+      config = r('windows'),
     }
 
     use {
@@ -188,12 +187,12 @@ packer.startup(
       run = 'make'
     }
 
-    use {
-      '~/.config/nvim/theme',
-      config = function()
-        vim.cmd 'colorscheme theme'
-      end
-    }
+    -- use {
+    --   '~/.config/nvim/theme',
+    --   config = function()
+    --     vim.cmd 'colorscheme theme'
+    --   end
+    -- }
 
     -- use {
     --   'Vonr/align.nvim'
@@ -205,5 +204,10 @@ packer.startup(
   end
 )
 
-vim.cmd("silent! command PackerStatus lua require 'plugins' require('packer').status()")
-vim.cmd("silent! command PackerSync lua require 'plugins' require('packer').sync()")
+vim.api.nvim_create_user_command('PackerStatus', function()
+  require('packer').status()
+end, {})
+
+vim.api.nvim_create_user_command('PackerSync', function()
+  require('packer').sync()
+end, {})

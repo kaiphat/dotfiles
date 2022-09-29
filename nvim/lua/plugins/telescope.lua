@@ -110,7 +110,7 @@ telescope.load_extension 'fzf'
 telescope.load_extension 'file_browser'
 telescope.load_extension 'ui-select'
 
-map('n', '<leader>fn', function()
+map('n', '<leader>ff', function()
   require 'telescope.builtin'.find_files {
     find_command = {
       'fdfind',
@@ -126,29 +126,29 @@ end)
 
 map('n', '<leader>fj', function()
   require 'telescope.builtin'.find_files {
-    hidden = true,
+    hidden = false,
     no_ignore = false,
   }
 end)
 
-map('n', '<leader>ff', function()
-  local fd_arguments = {
-    'fdfind',
-    '-t',
-    'f',
-  }
+-- map('n', '<leader>ff', function()
+--   local fd_arguments = {
+--     'fdfind',
+--     '-t',
+--     'f',
+--   }
 
-  for _, pattern in pairs(ignore_patterns) do
-    table.insert(fd_arguments, '-E')
-    table.insert(fd_arguments, pattern)
-  end
+--   for _, pattern in pairs(ignore_patterns) do
+--     table.insert(fd_arguments, '-E')
+--     table.insert(fd_arguments, pattern)
+--   end
 
-  require 'telescope.builtin'.find_files {
-    find_command = fd_arguments,
-    hidden = true,
-    no_ignore = false,
-  }
-end)
+--   require 'telescope.builtin'.find_files {
+--     find_command = fd_arguments,
+--     hidden = true,
+--     no_ignore = false,
+--   }
+-- end)
 
 map('n', '<leader>fb', ':Telescope buffers<cr>')
 map('n', '<leader>fs', ':Telescope git_status<cr>')

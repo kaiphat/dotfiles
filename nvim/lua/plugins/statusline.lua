@@ -64,7 +64,7 @@ table.insert(active_components, {
         str = 'right_filled',
         hl = {
           fg = colors.cyan,
-          bg = colors.dark_blue,
+          -- bg = colors.dark_blue,
         }
       }
     }
@@ -115,9 +115,30 @@ table.insert(active_components, {
     provider = 'git_branch',
     hl = {
       fg = colors.yellow,
+      bg = colors.dark_blue
     },
-    right_sep = ' ',
-    left_sep = ' ',
+    right_sep = {
+      {
+        str = ' ',
+        hl = {
+          bg = colors.dark_blue,
+        },
+      },
+    },
+    left_sep = {
+      {
+        str = 'left_filled',
+        hl = {
+          fg = colors.dark_blue,
+        }
+      },
+      {
+        str = ' ',
+        hl = {
+          bg = colors.dark_blue,
+        }
+      },
+    }
   },
 
   {
@@ -136,10 +157,18 @@ table.insert(active_components, {
     left_sep = {
       {
         str = 'left_filled',
-        hl = {
-          fg = colors.light_blue,
-          bg = colors.dark_blue
-        }
+        hl = function()
+          if require('feline.providers.git').git_info_exists() then
+            return {
+              bg = colors.dark_blue,
+              fg = colors.light_blue,
+            }
+          else
+            return {
+              fg = colors.light_blue,
+            }
+          end
+        end,
       },
       {
         str = ' ',
@@ -200,7 +229,7 @@ table.insert(inactive_components, {
 
 feline.setup {
   theme = {
-    bg = colors.dark_blue
+    bg = 'NONE'
   },
   disable = {
     filetypes = {
