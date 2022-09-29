@@ -5,7 +5,6 @@
 --   one_bg = '#1e252c',
 --   one_bg2 = '#2a3138',
 --   one_bg3 = '#363d44',
---   grey = '#363d44',
 --   grey_fg = '#4e555c',
 --   grey_fg2 = '#51585f',
 --   light_grey = '#545b62',
@@ -33,23 +32,23 @@ local c = {
   bg = '#202837',
   fg = '#b4b6d7',
   one_bg2 = '#2a3143',
+  one_bg3 = '#405879',
 
   cyan         = '#a3b8ef',
   blue_gray    = '#9398cf',
   blue_nord    = '#81A1C1',
   blue_darkest = '#404060',
   select       = '#fbdf9a',
-  red          = '#fca2af',
+  red          = '#fc828f',
+  red_dark     = '#aa6666',
   green_blue   = '#66A5AD',
   green_tea    = '#9CC4B2',
   brown        = '#c8ae9d',
   orange       = '#fca2aa',
   orange_dark  = '#EDA685',
   nord_gray_2  = '#3b4252',
-  black_gray   = '#40474e',
   gray         = '#6e88a6',
   gray_blue    = '#788aa3',
-  pink         = '#ff75a0',
 }
 
 local h = {}
@@ -69,15 +68,15 @@ h.Bold = { h.Bold, }
 h.Italic = { h.It }
 h.Error = { fg = c.blue_gray }
 h.ErrorMsg = { h.Error }
-h.WarningMsg = { fg = c.red }
+h.WarningMsg = { fg = c.red_dark }
 h.Comment = { fg = c.gray_blue, h.It }
 h.Conceal = { fg = c.red, h.Bold }
-h.Cursor = { bg = c.fg, fg = c.bg }
-h.lCursor = { h.Cursor }
-h.TermCursor = { h.Cursor }
-h.TermCursorNC = { h.lCursor }
+h.Cursor = { fg = nil, bg = c.one_bg3 }
+-- h.lCursor = { h.Cursor }
+-- h.TermCursor = { h.Cursor }
+-- h.TermCursorNC = { h.lCursor }
+-- h.CursorColumn = { h.CursorLine }
 h.CursorLine = { fg = nil, bg = nil }
-h.CursorColumn = { h.CursorLine }
 h.ColorColumn = { bg = c.red }
 h.DiffAdd = { bg = c.green_blue }
 h.DiffChange = { bg = c.red }
@@ -106,7 +105,7 @@ h.TabLine = { fg = c.blue_darkest, bg = c.blue_gray }
 h.TabLineSel = { fg = c.blue_darkest, bg = c.cyan }
 h.TabLineFill = { fg = c.cyan, bg = nil }
 h.VertSplit = { fg = c.blue_darkest, bg = nil }
-h.Visual = { fg = nil, bg = c.black_gray }
+h.Visual = { fg = nil, bg = c.one_bg3 }
 h.NonText = { fg = c.bg }
 h.SpecialKey = { h.NonText, h.It }
 h.Whitespace = { h.NonText }
@@ -127,7 +126,7 @@ h.Special = { fg = c.green_blue, h.Bold }
 h.Delimiter = { fg = c.gray_blue }
 h.SpecialComment = { h.Comment, gui = nil }
 
-h.LspReferenceText = { bg = c.bg }
+h.LspReferenceText = { bg = h.Visual.bg }
 h.LspReferenceRead = { h.LspReferenceText }
 h.LspReferenceWrite = { h.LspReferenceText }
 h.LspCodeLens = { h.LineNr }
@@ -147,7 +146,7 @@ h.DiagnosticVirtualTextWarn = { h.DiagnosticVirtualTextError }
 h.DiagnosticVirtualTextInfo = { h.DiagnosticVirtualTextError }
 h.DiagnosticVirtualTextHint = { h.DiagnosticVirtualTextError }
 
-h.DiagnosticUnderlineWarn = { h.Ul, sp = c.pink }
+h.DiagnosticUnderlineWarn = { h.Ul, sp = h.WarningMsg.fg }
 h.DiagnosticUnderlineInfo = { h.DiagnosticUnderlineWarn }
 h.DiagnosticUnderlineHint = { h.DiagnosticUnderlineWarn }
 h.DiagnosticUnderlineError = { h.DiagnosticUnderlineWarn }
@@ -219,11 +218,11 @@ h.GitGutterAdd = { h.GitSignsAdd }
 h.GitGutterChange = { h.GitSignsChange }
 h.GitGutterDelete = { h.GitSignsDelete }
 
-h.IndentBlanklineChar = { fg = c.black_gray }
+h.IndentBlanklineChar = { fg = h.Visual.bg }
 h.IndentBlanklineContextChar = { fg = c.blue_nord, bg = nil }
 
 h.TelescopeNormal = { fg = c.fg }
-h.TelescopeSelection = { bg = c.black_gray }
+h.TelescopeSelection = { bg = h.Visual.bg }
 h.TelescopeSelectionCaret = { h.TelescopeSelection, fg = c.blue_gray }
 h.TelescopeMatching = { fg = c.red, h.Bold }
 h.TelescopeBorder = { fg = h.FloatBorder.fg }

@@ -20,7 +20,7 @@ local font_config = ({
         font = font('JetBrainsMono Nerd Font', { weight = 'Bold' })
       }
     },
-    line_height = 1.27,
+    line_height = 1.23,
   },
   iosevka = {
     font_size = 10.1,
