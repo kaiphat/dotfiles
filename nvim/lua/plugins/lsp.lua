@@ -163,6 +163,24 @@ config.jsonls.setup {
   end
 }
 
+config.pylsp.setup {
+  capabilities = capabilities,
+  on_attach = function(client, bufnr)
+    on_attach(client, bufnr)
+    null_ls_format(client, bufnr)
+  end,
+  settings = {
+    pylsp = {
+      plugins = {
+        pycodestyle = {
+          ignore = {'W391'},
+          maxLineLength = 100
+        }
+      }
+    }
+  }
+}
+
 config.rust_analyzer.setup {
   capabilities = capabilities,
   on_attach = function(client, bufnr)

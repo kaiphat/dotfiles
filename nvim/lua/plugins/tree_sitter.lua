@@ -31,6 +31,7 @@ config.setup {
     'glimmer',
     'scheme',
     'sql',
+    'python',
   },
   highlight = {
     enable = true,

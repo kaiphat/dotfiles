@@ -17,7 +17,7 @@ local font_config = ({
     font = wezterm.font('JetBrainsMono Nerd Font'),
     font_rules = {
       {
-        font = font('JetBrainsMono Nerd Font', { weight = 'Bold' })
+        font = font('JetBrainsMono Nerd Font', { weight = 'Medium' })
       }
     },
     line_height = 1.23,

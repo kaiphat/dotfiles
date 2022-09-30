@@ -12,16 +12,17 @@ $character
 """
 
 [directory]
-style="bold yellow"
+style="bold green"
 truncate_to_repo=false
 truncation_length=2
 
 [character]
 success_symbol = "[❯](bold green)" 
 error_symbol = "[❯](bold red)" 
+vicmd_symbol = "[❯](bold green)" 
 
 [git_branch]
-style = "bold blue"
+style = "bold red"
 format="$branch "
 
 [git_status]
