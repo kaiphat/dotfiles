@@ -13,19 +13,28 @@ end
 
 local font_config = ({
   jet_brains = {
-    font_size = 9.38,
+    -- font_size = 9.6,
+    font_size = 10.2,
     font = wezterm.font('JetBrainsMono Nerd Font'),
     font_rules = {
       {
-        font = font('JetBrainsMono Nerd Font', { weight = 'Medium' })
-      }
+        italic = true,
+        font = font('JetBrainsMono Nerd Font', { italic = true, weight = 'Medium' }),
+      },
+      {
+        intensity = 'Bold',
+        font = font('JetBrainsMono Nerd Font', { weight = 'Medium' }),
+      },
+      {
+        font = font('JetBrainsMono Nerd Font', { weight = 'Medium' }),
+      },
     },
-    line_height = 1.23,
+    line_height = 1.19,
   },
   iosevka = {
-    font_size = 10.1,
+    font_size = 11,
     font = wezterm.font('Iosevka Nerd Font'),
-    line_height = 0.98,
+    line_height = 1.14,
     font_rules = {
       {
         font = font('Iosevka Nerd Font', { italic = false, weight = 'Medium' })
@@ -35,7 +44,7 @@ local font_config = ({
   victor_mono = {
     font_size = 10.4,
     font = font('VictorMono'),
-    line_height = 1,
+    line_height = 1.24,
     font_rules = {
       {
         font = font('VictorMono', { italic = false })
@@ -43,35 +52,35 @@ local font_config = ({
     }
   },
   caskaydia = {
-    font_size = 10,
+    font_size = 10.4,
     font = font('CaskaydiaCovePL Nerd Font'),
-    line_height = 1.1,
+    line_height = 1.3,
     font_rules = {
       {
-        font = font('CaskaydiaCovePL Nerd Font', { italic = false, weight = 'Thin' })
+        font = font('CaskaydiaCovePL Nerd Font', { italic = false, weight = 'Regular' })
       }
     }
   },
   mononoki = {
-    font_size = 10,
+    font_size = 10.9,
     font = font 'mononoki Nerd Font',
-    line_height = 1.1,
+    line_height = 1.23,
     font_rules = {
       {
-        font = font('mononoki Nerd Font', { italic = false, weight = 'Bold' })
+        font = font('mononoki Nerd Font', { italic = false, weight = 'Medium' })
       }
     }
   },
   fira = {
-    font_size = 10.1,
+    font_size = 10,
     font = font 'FiraCode Nerd Font',
-    line_height = 1.2,
+    line_height = 1.37,
     font_rules = {
       {
         font = font('FiraCode Nerd Font', { italic = false, weight = 'Medium' })
       }
     }
-  }
+  },
 }).jet_brains
 
 -- UTILS --

@@ -2,7 +2,6 @@ local o = vim.opt
 local g = vim.g
 
 g.mapleader          = ' '
-g.do_filetype_lua    = 1
 
 o.updatetime       = 500
 o.tabstop          = 2
@@ -12,7 +11,7 @@ o.wildmenu         = true
 o.wildignorecase   = true
 o.wildmode         = 'longest,full'
 o.wildoptions      = 'pum'
-o.pumblend         = 5
+o.pumblend         = 0
 o.pumheight        = 15
 o.mouse            = 'a'
 o.wrap             = true
@@ -48,6 +47,7 @@ o.splitbelow       = true
 o.breakindent      = true
 o.fixendofline     = false
 o.termguicolors    = true
+o.splitkeep        = 'screen'
 o.signcolumn       = 'no'
 o.signcolumn       = 'yes'
 o.colorcolumn      = '99999'

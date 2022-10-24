@@ -3,6 +3,7 @@ if not indent_blankline then return end
 
 local symbols = {
   '▏',
+  '│',
   '⏐',
   '┊',
   '¦',

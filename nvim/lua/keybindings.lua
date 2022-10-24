@@ -85,8 +85,7 @@ end)
 map('n', '<leader>o', ':NvimTreeToggle<cr>')
 
 -- marks
---
-for letter in string.gmatch('abcdeghijkloqrstuvwxyz', '.') do
+for letter in string.gmatch('abcdefghijkloqrstuvwxyz', '.') do
   map('n', 'm' .. letter, 'm' .. letter:upper())
   map('n', "'" .. letter, "'" .. letter:upper())
 end
@@ -103,10 +102,15 @@ map('n', ',X', function()
   vim.cmd '%bd|e#'
 end)
 
+map('n', '<leader>i', function()
+   require'hop'.hint_char1 { }
+end)
+
 -- ts lsp utils
-map('n', '<leader>ti', ':TSLspImportAll<cr>')
-map('n', '<leader>tr', ':TSLspRenameFile<cr>')
-map('n', '<leader>to', ':TSLspOrganize<cr>')
+map('n', '<leader>ti', ':TypescriptAddMissingImports<cr>')
+map('n', '<leader>tr', ':TypescriptRenameFile<cr>')
+map('n', '<leader>td', ':TypescriptRemoveUnused<cr>')
+map('n', '<leader>to', ':TypescriptOrganizeImports<cr>')
 
 -- treesitter unit
 map('x', 'u', ':lua require"utils.unit".select(true)<cr>')

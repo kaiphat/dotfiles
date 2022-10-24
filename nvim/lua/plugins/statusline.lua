@@ -104,6 +104,16 @@ table.insert(active_components, {
       fg = colors.pink
     },
     left_sep = ' ',
+  },
+
+  -- gap
+  {
+    provider = function()
+      return ' '
+    end,
+    hl = {
+      fg = colors.pink
+    },
   }
 })
 

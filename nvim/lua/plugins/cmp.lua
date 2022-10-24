@@ -20,8 +20,12 @@ cmp.setup {
     end
   },
   window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
+    completion = {
+      winhighlight = "FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+    },
+    documentation = {
+      winhighlight = "FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+    }
   },
   formatting = {
     format = function(entry, vim_item)

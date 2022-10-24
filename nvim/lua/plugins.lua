@@ -41,24 +41,36 @@ packer.startup(
     use {
       'wbthomason/packer.nvim',
       'nvim-lua/plenary.nvim',
-      -- 'rktjmp/lush.nvim',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-nvim-lsp',
       'ray-x/lsp_signature.nvim',
       'lewis6991/impatient.nvim',
       'nvim-telescope/telescope-file-browser.nvim',
-      'jose-elias-alvarez/nvim-lsp-ts-utils',
       'nvim-treesitter/nvim-treesitter-context',
       'nvim-lua/popup.nvim',
       'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-buffer',
       'kyazdani42/nvim-web-devicons',
       'nvim-telescope/telescope-ui-select.nvim',
+      'jose-elias-alvarez/typescript.nvim',
+      'nvim-treesitter/playground'
+      -- 'MunifTanjim/nui.nvim',
     }
 
     use {
       'ThePrimeagen/harpoon',
       config = r('harpoon')
+    }
+
+    -- use {
+    --   'folke/noice.nvim',
+    --   config = r('noice')
+    -- }
+
+    use {
+      'phaazon/hop.nvim',
+      branch = 'v2',
+      config = r('hop')
     }
 
     use {
@@ -69,11 +81,6 @@ packer.startup(
     use {
       'rcarriga/nvim-notify',
       config = r('notify')
-    }
-
-    use {
-      'ggandor/lightspeed.nvim',
-      config = r('lightspeed')
     }
 
     use {

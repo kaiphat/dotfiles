@@ -33,12 +33,14 @@ local c = {
   fg = '#b4b6d7',
   one_bg2 = '#2a3143',
   one_bg3 = '#405879',
+  one_bg4 = '#486892',
 
   cyan         = '#a3b8ef',
   blue_gray    = '#9398cf',
+  purple       = '#c2a2e3',
   blue_nord    = '#81A1C1',
   blue_darkest = '#404060',
-  select       = '#fbdf9a',
+  yellow       = '#fbdf9a',
   red          = '#fc828f',
   red_dark     = '#aa6666',
   green_blue   = '#66A5AD',
@@ -51,230 +53,288 @@ local c = {
   gray_blue    = '#788aa3',
 }
 
-local h = {}
+local hl = {}
+
+C = ""
 
 -- BASE --
-
-h.It   = { italic = true }
-h.Bold = { bold = true }
-h.Ul   = { underline = true }
-h.Uc   = { undercurl = true }
+hl.It   = { italic = true }
+hl.Bold = { bold = true }
+hl.Ul   = { underline = true }
+hl.Uc   = { undercurl = true }
 
 -- GENERAL --
-
-h.Normal = { fg = c.fg, bg = c.bg }
-h.Underlined = { h.Ul }
-h.Bold = { h.Bold, }
-h.Italic = { h.It }
-h.Error = { fg = c.blue_gray }
-h.ErrorMsg = { h.Error }
-h.WarningMsg = { fg = c.red_dark }
-h.Comment = { fg = c.gray_blue, h.It }
-h.Conceal = { fg = c.red, h.Bold }
-h.Cursor = { fg = nil, bg = c.one_bg3 }
+hl.Normal = { fg = c.fg, bg = c.bg }
+hl.Underlined = { hl.Ul }
+hl.Bold = { hl.Bold, }
+hl.Italic = { hl.It }
+hl.Error = { fg = c.blue_gray }
+hl.ErrorMsg = { hl.Error }
+hl.WarningMsg = { fg = c.red_dark }
+hl.Comment = { fg = c.gray_blue, hl.It }
+hl.Conceal = { fg = c.red, hl.Bold }
+hl.Cursor = { fg = nil, bg = c.one_bg3 }
 -- h.lCursor = { h.Cursor }
 -- h.TermCursor = { h.Cursor }
 -- h.TermCursorNC = { h.lCursor }
 -- h.CursorColumn = { h.CursorLine }
-h.CursorLine = { fg = nil, bg = nil }
-h.ColorColumn = { bg = c.red }
-h.DiffAdd = { bg = c.green_blue }
-h.DiffChange = { bg = c.red }
-h.DiffDelete = { bg = c.blue_gray }
-h.DiffText = { bg = c.red, fg = c.fg }
-h.LineNr = { fg = c.bg, bg = nil }
-h.SignColumn = { h.LineNr }
-h.FoldColumn = { h.LineNr, h.Bold }
-h.Folded = { bg = c.bg, fg = c.bg }
-h.CursorLineNr = { h.LineNr, fg = c.fg, h.Bold }
-h.MoreMsg = { fg = c.green_blue }
-h.NormalFloat = { bg = c.one_bg2 }
-h.FloatBorder = { fg = c.gray_blue, bg = nil }
-h.FloatShadow = { bg = nil }
-h.FloatShadowThrough = { bg = nil }
-h.Pmenu = { fg = c.fg, bg = c.bg }
-h.PmenuSel = { fg = c.blue_darkest, bg = c.red }
-h.PmenuSbar = { bg = c.bg }
-h.PmenuThumb = { bg = c.bg }
-h.Search = { fg = c.blue_darkest, bg = c.red }
-h.IncSearch = { fg = c.blue_darkest, bg = c.red }
-h.MatchParen = { fg = c.red }
-h.StatusLine = { bg = nil, fg = nil, gui = nil }
-h.StatusLineNC = { bg = c.blue_darkest, fg = c.fg }
-h.TabLine = { fg = c.blue_darkest, bg = c.blue_gray }
-h.TabLineSel = { fg = c.blue_darkest, bg = c.cyan }
-h.TabLineFill = { fg = c.cyan, bg = nil }
-h.VertSplit = { fg = c.blue_darkest, bg = nil }
-h.Visual = { fg = nil, bg = c.one_bg3 }
-h.NonText = { fg = c.bg }
-h.SpecialKey = { h.NonText, h.It }
-h.Whitespace = { h.NonText }
-h.EndOfBuffer = { h.NonText }
-h.WildMenu = { bg = c.select, fg = c.bg }
-h.Directory = { fg = c.fg, gui = nil }
-h.Question = { h.MoreMsg }
-h.Title = { fg = c.fg, h.Bold }
-h.Constant = { fg = c.red, h.It }
-h.String = { fg = c.green_tea, gui = nil }
-h.Number = { fg = c.red }
-h.Boolean = { h.Number }
-h.Identifier = { fg = c.fg }
-h.Function = { fg = c.fg }
-h.Statement = { fg = c.blue_nord, h.Bold }
-h.PreProc = { h.Statement }
-h.Special = { fg = c.green_blue, h.Bold }
-h.Delimiter = { fg = c.gray_blue }
-h.SpecialComment = { h.Comment, gui = nil }
+hl.CursorLine = { fg = nil, bg = nil }
+hl.ColorColumn = { bg = c.red }
+hl.DiffAdd = { bg = c.green_blue }
+hl.DiffChange = { bg = c.red }
+hl.DiffDelete = { bg = c.blue_gray }
+hl.DiffText = { bg = c.red, fg = c.fg }
+hl.LineNr = { fg = c.gray_blue, bg = nil }
+hl.SignColumn = { hl.LineNr }
+hl.FoldColumn = { hl.LineNr, hl.Bold }
+hl.Folded = { bg = c.bg, fg = c.bg }
+hl.CursorLineNr = { hl.LineNr, fg = c.fg, hl.Bold }
+hl.MoreMsg = { fg = c.green_blue }
+hl.Float = { bg = c.one_bg2 }
+hl.NormalFloat = { bg = c.one_bg2 }
+hl.FloatBorder = { fg = hl.NormalFloat.bg, bg = hl.NormalFloat.bg }
+hl.FloatShadow = { bg = nil }
+hl.FloatShadowThrough = { bg = nil }
+hl.Visual = { fg = c.fg, bg = c.one_bg3 }
+hl.Pmenu = { hl.NormalFloat }
+hl.PmenuSel = { hl.Visual }
+hl.PmenuSbar = { bg = c.bg }
+hl.PmenuThumb = { bg = hl.Visual.bg }
+hl.Search = { fg = c.blue_darkest, bg = c.red }
+hl.IncSearch = { fg = c.blue_darkest, bg = c.red }
+hl.MatchParen = { fg = c.red, bg = nil }
+hl.StatusLine = { bg = nil, fg = nil, gui = nil }
+hl.StatusLineNC = { bg = c.blue_darkest, fg = c.fg }
+hl.TabLine = { fg = c.blue_darkest, bg = c.blue_gray }
+hl.TabLineSel = { fg = c.blue_darkest, bg = c.cyan }
+hl.TabLineFill = { fg = c.cyan, bg = nil }
+hl.VertSplit = { fg = c.blue_darkest, bg = nil }
+hl.NonText = { fg = c.bg }
+hl.SpecialKey = { hl.NonText, hl.It }
+hl.Whitespace = { hl.NonText }
+hl.EndOfBuffer = { hl.NonText }
+hl.WildMenu = { bg = c.yellow, fg = c.bg }
+hl.Directory = { fg = c.fg, gui = nil }
+hl.Question = { hl.MoreMsg }
+hl.Title = { fg = c.fg, hl.Bold }
+hl.Constant = { fg = c.red, hl.It }
+hl.String = { fg = c.green_tea, gui = nil }
+hl.Number = { fg = c.red }
+hl.Boolean = { hl.Number }
+hl.Identifier = { fg = c.fg }
+hl.Function = { fg = c.fg }
+hl.Statement = { fg = c.blue_nord, hl.Bold }
+hl.PreProc = { hl.Statement }
+hl.Special = { fg = c.green_blue, hl.Bold }
+hl.Delimiter = { fg = c.gray_blue }
+hl.SpecialComment = { hl.Comment, gui = nil }
 
-h.LspReferenceText = { bg = h.Visual.bg }
-h.LspReferenceRead = { h.LspReferenceText }
-h.LspReferenceWrite = { h.LspReferenceText }
-h.LspCodeLens = { h.LineNr }
+-- HARPOON --
+hl.HarpoonBorder = { hl.FloatBorder }
 
-h.DiagnosticError = { h.WarningMsg }
-h.DiagnosticWarn = { h.WarningMsg }
-h.DiagnosticInfo = { fg = c.red }
-h.DiagnosticHint = { fg = c.select }
+-- LSP --
+hl.LspReferenceText = { bg = hl.Visual.bg }
+hl.LspReferenceRead = { hl.LspReferenceText }
+hl.LspReferenceWrite = { hl.LspReferenceText }
+hl.LspCodeLens = { hl.LineNr }
 
-h.DiagnosticSignError = { h.SignColumn, fg = h.DiagnosticError.fg }
-h.DiagnosticSignWarn = { h.SignColumn, fg = h.DiagnosticWarn.fg }
-h.DiagnosticSignInfo = { h.SignColumn, fg = h.DiagnosticInfo.fg }
-h.DiagnosticSignHint = { h.SignColumn, fg = h.DiagnosticHint.fg }
+hl.DiagnosticError = { hl.WarningMsg }
+hl.DiagnosticWarn = { hl.WarningMsg }
+hl.DiagnosticInfo = { fg = c.red }
+hl.DiagnosticHint = { fg = c.yellow }
 
-h.DiagnosticVirtualTextError = { h.DiagnosticError, bg = nil }
-h.DiagnosticVirtualTextWarn = { h.DiagnosticVirtualTextError }
-h.DiagnosticVirtualTextInfo = { h.DiagnosticVirtualTextError }
-h.DiagnosticVirtualTextHint = { h.DiagnosticVirtualTextError }
+hl.DiagnosticSignError = { hl.SignColumn, fg = hl.DiagnosticError.fg }
+hl.DiagnosticSignWarn = { hl.SignColumn, fg = hl.DiagnosticWarn.fg }
+hl.DiagnosticSignInfo = { hl.SignColumn, fg = hl.DiagnosticInfo.fg }
+hl.DiagnosticSignHint = { hl.SignColumn, fg = hl.DiagnosticHint.fg }
 
-h.DiagnosticUnderlineWarn = { h.Ul, sp = h.WarningMsg.fg }
-h.DiagnosticUnderlineInfo = { h.DiagnosticUnderlineWarn }
-h.DiagnosticUnderlineHint = { h.DiagnosticUnderlineWarn }
-h.DiagnosticUnderlineError = { h.DiagnosticUnderlineWarn }
+hl.DiagnosticVirtualTextError = { hl.DiagnosticError, bg = nil }
+hl.DiagnosticVirtualTextWarn = { hl.DiagnosticVirtualTextError }
+hl.DiagnosticVirtualTextInfo = { hl.DiagnosticVirtualTextError }
+hl.DiagnosticVirtualTextHint = { hl.DiagnosticVirtualTextError }
 
-h.TSConstructor = { fg = c.brown }
-h.TSType = { fg = c.green_blue }
-h.Type = { h.TSType }
-h.TSConstant = { h.Identifier, h.Bold }
-h.TSConstBuiltin = { h.Number }
-h.TSConstMacro = { h.Number }
-h.TSMethod = { fg = c.blue_gray, h.Bold }
-h.TSField = { fg = c.gray_blue }
-h.TSFunction = { h.TSMethod }
-h.TSNamespace = { h.Special }
-h.TSProperty = { fg = c.gray }
-h.TSPunctBracket = { fg = c.gray, h.It }
-h.TSPunctDelimiter = { h.TSPunctBracket }
-h.TSPunctSpecial = { h.TSPunctBracket }
-h.TSStringEscape = { fg = c.red, bg = nil }
-h.TSVariable = { h.Identifier }
-h.TSVariableBuiltin = { h.Number }
-h.TSTag = { h.Special }
-h.TSEmphasis = { h.Italic }
-h.TSUnderline = { h.Underlined }
-h.TSStrong = { h.Bold }
-h.TSLiteral = { fg = c.red }
-h.TSNote = { h.DiagnosticInfo }
-h.TSWarning = { h.WarningMsg }
-h.TSDanger = { h.Error }
-h.TSNumber = { fg = c.red }
-h.TSBoolean = { fg = c.orange_dark }
+hl.DiagnosticUnderlineWarn = { hl.Ul, sp = hl.WarningMsg.fg }
+hl.DiagnosticUnderlineInfo = { hl.DiagnosticUnderlineWarn }
+hl.DiagnosticUnderlineHint = { hl.DiagnosticUnderlineWarn }
+hl.DiagnosticUnderlineError = { hl.DiagnosticUnderlineWarn }
 
-h.TreesitterContext = { bg = c.nord_gray_2 }
+-- TREESITTER --
+hl['@constructor'] = { fg = c.brown }
+hl['@type'] = { fg = c.green_blue }
+hl['@constant'] = { hl.Identifier, hl.Bold }
+hl['@const.builtin'] = { hl.Number }
+hl['@const.macro'] = { hl.Number }
+hl['@method'] = { fg = c.blue_gray, hl.Bold }
+hl['@field'] = { fg = c.gray_blue }
+hl['@function'] = { hl['@method'] }
+hl['@function'] = { hl['@method'] }
+hl['@namespace'] = { hl.Special }
+hl['@property'] = { fg = c.gray }
+hl['@punct.bracket'] = { fg = c.one_bg4, hl.It, bg = nil }
+hl['@punct.delimiter'] = { hl['@punct.bracket'] }
+hl['@punct.special'] = { hl['@punct.bracket'] }
+hl['@string.escape'] = { fg = c.red, bg = nil }
+hl['@variable'] = { hl.Identifier }
+hl['@variable.builtin'] = { hl.Number }
+hl['@tag'] = { hl.Special }
+hl['@emphasis'] = { hl.Italic }
+hl['@underline'] = { hl.Underlined }
+hl['@strong'] = { hl.Bold }
+hl['@literal'] = { fg = c.red }
+hl['@note'] = { hl.DiagnosticInfo }
+hl['@warning'] = { hl.WarningMsg }
+hl['@danger'] = { hl.Error }
+hl['@number'] = { fg = c.red }
+hl['@boolean'] = { fg = c.orange_dark }
+-- visual parents
+hl.Type = { fg = c.orange_dark }
 
-h.markdownH1 = { gui = nil }
-h.markdownTSPunctSpecial = { h.Special }
-h.markdownTSStringEscape = { h.SpecialKey }
-h.markdownTSTextReference = { h.Identifier, h.Ul }
-h.markdownTSEmphasis = { h.Italic }
-h.markdownTSTitle = { h.Statement }
-h.markdownTSLiteral = { h.Type }
-h.markdownTSURI = { h.SpecialComment }
+-- NEORD --
+hl['@neorg.headings.1.title'] = { fg = c.purple }
 
-h.diffAdded = { fg = c.green_blue }
-h.diffRemoved = { fg = c.blue_gray }
-h.diffChanged = { fg = c.red }
-h.diffOldFile = { fg = c.blue_gray, h.It }
-h.diffNewFile = { fg = c.green_blue, h.It }
-h.diffFile = { fg = c.red, h.Bold }
-h.diffLine = { fg = c.select, h.Bold }
-h.diffIndexLine = { fg = c.red }
+-- TREESITTER CONTEXT --
+hl.TreesitterContext = { hl.Visual }
 
-h.gitcommitOverflow = { h.WarningMsg }
+-- h.diffAdded = { fg = c.green_blue }
+-- h.diffRemoved = { fg = c.blue_gray }
+-- h.diffChanged = { fg = c.red }
+-- h.diffOldFile = { fg = c.blue_gray, h.It }
+-- h.diffNewFile = { fg = c.green_blue, h.It }
+-- h.diffFile = { fg = c.red, h.Bold }
+-- h.diffLine = { fg = c.select, h.Bold }
+-- h.diffIndexLine = { fg = c.red }
 
-h.markdownUrl = { h.markdownTSURI }
-h.markdownCode = { h.markdownTSLiteral }
-h.markdownLinkText = { h.markdownTSTextReference }
-h.markdownLinkTextDelimiter = { h.Delimiter }
+-- h.gitcommitOverflow = { h.WarningMsg }
 
-h.helpHyperTextEntry = { h.Special }
-h.helpHyperTextJump = { h.Constant }
-h.helpSpecial = { h.Type }
-h.helpOption = { h.Constant }
+-- MARKDOWN --
+hl.markdownH1 = { gui = nil }
+hl.markdownTSPunctSpecial = { hl.Special }
+hl.markdownTSStringEscape = { hl.SpecialKey }
+hl.markdownTSTextReference = { hl.Identifier, hl.Ul }
+hl.markdownTSEmphasis = { hl.Italic }
+hl.markdownTSTitle = { hl.Statement }
+hl.markdownTSLiteral = { hl.Type }
+hl.markdownTSURI = { hl.SpecialComment }
+hl.markdownUrl = { hl.markdownTSURI }
+hl.markdownCode = { hl.markdownTSLiteral }
+hl.markdownLinkText = { hl.markdownTSTextReference }
+hl.markdownLinkTextDelimiter = { hl.Delimiter }
 
-h.GitSignsAdd = { h.SignColumn, fg = c.green_blue }
-h.GitSignsChange = { h.SignColumn, fg = c.red }
-h.GitSignsDelete = { h.SignColumn, fg = c.blue_gray }
-h.GitGutterAdd = { h.GitSignsAdd }
-h.GitGutterChange = { h.GitSignsChange }
-h.GitGutterDelete = { h.GitSignsDelete }
+-- h.helpHyperTextEntry = { h.Special }
+-- h.helpHyperTextJump = { h.Constant }
+-- h.helpSpecial = { h.Type }
+-- h.helpOption = { h.Constant }
 
-h.IndentBlanklineChar = { fg = h.Visual.bg }
-h.IndentBlanklineContextChar = { fg = c.blue_nord, bg = nil }
+-- GIT --
+hl.GitSignsAdd = { fg = c.green_blue }
+hl.GitSignsChange = { fg = c.cyan }
+hl.GitSignsDelete = { fg = c.cyan }
 
-h.TelescopeNormal = { fg = c.fg }
-h.TelescopeSelection = { bg = h.Visual.bg }
-h.TelescopeSelectionCaret = { h.TelescopeSelection, fg = c.blue_gray }
-h.TelescopeMatching = { fg = c.red, h.Bold }
-h.TelescopeBorder = { fg = h.FloatBorder.fg }
-h.TelescopePromptPrefix = { h.TelescopeBorder }
+hl.GitSignsAddLn = { hl.GitSignsAdd }
+hl.GitSignsChangeLn = { hl.GitSignsChange }
+hl.GitSignsDeleteLn = { hl.GitSignsDelete }
 
-h.Sneak = { h.Search }
-h.SneakLabel = { h.WildMenu }
-h.SneakLabelMask = { bg = c.select, fg = c.select }
+hl.GitSignsAddPreview = { fg = c.blue_darkest, bg = hl.GitSignsAdd.fg }
+hl.GitSignsChangePreview = { fg = c.blue_darkest, bg = hl.GitSignsChange.fg }
+hl.GitSignsDeletePreview = { fg = c.blue_darkest, bg = hl.GitSignsDelete.fg }
 
-h.LightspeedLabelOverlapped = { fg = c.select, h.Ul }
-h.LightspeedLabelDistantOverlapped = { fg = c.orange, h.Ul }
-h.LightspeedOneCharMatch = { h.SneakLabel, h.Bold }
-h.LightspeedMaskedChar = { h.Conceal }
-h.LightspeedUnlabeledMatch = { h.Bold }
-h.LightspeedPendingOpArea = { h.SneakLabel }
-h.LightspeedPendingChangeOpArea = { fg = c.select }
-h.LightspeedGreyWash = { fg = h.Comment.fg }
+hl.GitGutterAdd = { hl.GitSignsAdd }
+hl.GitGutterChange = { hl.GitSignsChange }
+hl.GitGutterDelete = { hl.GitSignsDelete }
 
-h.HopNextKey = { fg = c.brown }
-h.HopNextKey1 = { fg = c.brown }
-h.HopNextKey2 = { fg = c.brown }
-h.HopUnmatched = { h.LightspeedGreyWash }
+-- NOTIFY --
+hl.NotifyINFOBody = { hl.NormalFloat }
+hl.NotifyWARNBody = { hl.NormalFloat }
+hl.NotifyERRORBody = { hl.NormalFloat }
+hl.NotifyDEBUGBody = { hl.NormalFloat }
+hl.NotifyTRACEBody = { hl.NormalFloat }
 
-h.FidgetTask = { fg = c.gray }
-h.FidgetTitle = { fg = c.gray }
+-- hl.NotifyDEBUGTitle = { fg = c.red }
+-- hl.NotifyINFOTitle29 = { fg = c.red }
+-- hl.NotifyINFOTitle30 = { fg = c.red }
 
-h.BufferCurrent = { h.TabLineSel }
-h.BufferVisible = { fg = h.StatusLineNC.fg }
-h.BufferVisibleSign = { fg = h.StatusLineNC.fg }
-h.BufferVisibleIndex = { fg = h.StatusLineNC.fg }
+hl.NotifyINFOBorder = { fg = hl.NormalFloat.bg, bg = hl.NormalFloat.bg }
+hl.NotifyWARNBorder = { hl.NotifyINFOBorder }
+hl.NotifyERRORBorder = { hl.NotifyINFOBorder }
+hl.NotifyDEBUGBorder = { hl.NotifyINFOBorder }
+hl.NotifyTRACEBorder = { hl.NotifyINFOBorder }
 
-h.NvimTreeNormal = { fg = nil, bg = nil }
-h.NvimTreeVertSplit = { fg = nil }
-h.NvimTreeCursorLine = { h.CursorLine }
-h.NvimTreeCursorColumn = { h.NvimTreeCursorLine }
-h.NvimTreeRootFolder = { fg = c.red, h.Bold }
-h.NvimTreeSymlink = { fg = c.red }
-h.NvimTreeGitDirty = { h.diffChanged }
-h.NvimTreeGitNew = { h.diffAdded }
-h.NvimTreeGitDeleted = { h.diffRemoved }
-h.NvimTreeExecFile = { fg = c.fg }
-h.NvimTreeSpecialFile = { fg = c.fg, gui = nil }
+-- INDENT --
+hl.IndentBlanklineChar = { fg = c.blue_darkest }
+hl.IndentBlanklineContextChar = { fg = c.one_bg3 }
 
-h.CmpItemAbbr = { fg = c.fg }
-h.CmpItemAbbrDeprecated = { fg = c.orange }
-h.CmpItemAbbrMatch = { fg = c.green_tea, h.Bold }
-h.CmpItemAbbrMatchFuzzy = { fg = c.green_tea, h.Bold }
-h.CmpItemKind = { fg = c.gray }
-h.CmpItemMenu = { fg = c.gray }
+-- TELESCOPE --
+hl.TelescopeNormal = { fg = c.fg, bg = hl.NormalFloat.bg }
+hl.TelescopeSelection = { bg = hl.Visual.bg }
+hl.TelescopeMatching = { fg = c.red, hl.Bold }
+hl.TelescopeBorder = { fg = hl.NormalFloat.bg, bg = hl.NormalFloat.bg }
 
-h.NnnNormal = { h.NvimTreeNormal }
-h.NnnNormalNC = { h.NnnNormal }
+C = c.gray_blue
+hl.TelescopeSelectionCaret = { hl.TelescopeSelection, fg = C }
+hl.TelescopePromptPrefix = { fg = C }
+hl.TelescopePromptCounter = { fg = C }
+hl.TelescopePromptTitle = { fg = C }
+
+C = c.nord_gray_2
+hl.TelescopePromptNormal = { bg = C }
+hl.TelescopePromptBorder = { fg = C, bg = C }
+
+-- SNEAK --
+hl.Sneak = { hl.Search }
+hl.SneakLabel = { hl.WildMenu }
+hl.SneakLabelMask = { bg = c.yellow, fg = c.yellow }
+
+-- LIGHTSPEED --
+hl.LightspeedLabelOverlapped = { fg = c.yellow, hl.Ul }
+hl.LightspeedLabelDistantOverlapped = { fg = c.orange, hl.Ul }
+hl.LightspeedOneCharMatch = { hl.SneakLabel, hl.Bold }
+hl.LightspeedMaskedChar = { hl.Conceal }
+hl.LightspeedUnlabeledMatch = { hl.Bold }
+hl.LightspeedPendingOpArea = { hl.SneakLabel }
+hl.LightspeedPendingChangeOpArea = { fg = c.yellow }
+hl.LightspeedGreyWash = { fg = hl.Comment.fg }
+
+-- HOP --
+C = c.yellow
+hl.HopNextKey = { fg = c.purple }
+hl.HopNextKey1 = { fg = c.green_tea }
+hl.HopNextKey2 = { fg = c.purple }
+hl.HopUnmatched = { fg = '#445577' }
+
+-- FIDGET --
+C = c.gray
+hl.FidgetTask = { fg = C }
+hl.FidgetTitle = { fg = C }
+
+hl.BufferCurrent = { hl.TabLineSel }
+hl.BufferVisible = { fg = hl.StatusLineNC.fg }
+hl.BufferVisibleSign = { fg = hl.StatusLineNC.fg }
+hl.BufferVisibleIndex = { fg = hl.StatusLineNC.fg }
+
+-- NVIM TREE --
+hl.NvimTreeNormal = { fg = nil, bg = nil }
+hl.NvimTreeVertSplit = { fg = nil }
+hl.NvimTreeCursorLine = { hl.CursorLine }
+hl.NvimTreeCursorColumn = { hl.NvimTreeCursorLine }
+hl.NvimTreeRootFolder = { fg = c.red, hl.Bold }
+hl.NvimTreeSymlink = { fg = c.red }
+hl.NvimTreeGitDirty = { hl.diffChanged }
+hl.NvimTreeGitNew = { hl.diffAdded }
+hl.NvimTreeGitDeleted = { hl.diffRemoved }
+hl.NvimTreeExecFile = { fg = c.fg }
+hl.NvimTreeSpecialFile = { fg = c.fg, gui = nil }
+
+-- CMP --
+hl.CmpItemAbbr = { fg = c.fg }
+hl.CmpItemAbbrDeprecated = { fg = c.orange }
+hl.CmpItemAbbrMatch = { fg = c.green_tea, hl.Bold }
+hl.CmpItemAbbrMatchFuzzy = { fg = c.green_tea, hl.Bold }
+hl.CmpItemKind = { fg = c.gray }
+hl.CmpItemMenu = { fg = c.gray }
+hl.CmpItemMenuDefault = { hl.NormalFloat }
+
+hl.NnnNormal = { hl.NvimTreeNormal }
+hl.NnnNormalNC = { hl.NnnNormal }
 
 
 -- HIGHLIGHT --
@@ -297,8 +357,8 @@ local function flat(options)
   for key, value in pairs(options) do
     if is_table(value) then
       options = merge_tables {
+        value,
         remove_from_table(options, key),
-        value
       }
 
       need_repeat = true
@@ -312,7 +372,7 @@ local function flat(options)
   end
 end
 
-local function hl(list)
+local function highlight(list)
   for group, options in pairs(list) do
     local flat_options = flat(options)
 
@@ -324,4 +384,4 @@ local function hl(list)
   end
 end
 
-hl(h)
+highlight(hl)

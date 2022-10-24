@@ -32,9 +32,9 @@ end
 
 
 _G.merge_tables = function(list)
-  local result = list[1]
+  local result = {}
 
-  for i = 2, #list do
+  for i = 1, #list do
     for key, value in pairs(list[i]) do
       result[key] = value
     end

@@ -9,8 +9,8 @@ if not lsp_signature then return end
 local cmp_nvim_lsp = load('cmp_nvim_lsp')
 if not cmp_nvim_lsp then return end
 
-local nvim_lsp_ts_utils = load('nvim-lsp-ts-utils')
-if not nvim_lsp_ts_utils then return end
+local typescript = load('typescript')
+if not typescript then return end
 
 lsp_signature.setup {
   bind = true,
@@ -23,7 +23,7 @@ lsp_signature.setup {
 
 -- CAPABILITIES --
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
 capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -128,30 +128,22 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 
 -- SERVERS --
-config.tsserver.setup {
-  on_attach = function(client, bufnr)
-    nvim_lsp_ts_utils.setup {
-      auto_inlay_hints = false,
-      import_all_priorities = {
-        same_file = 4,
-        local_files = 3,
-        buffer_content = 2,
-        buffers = 1,
-      },
+typescript.setup {
+  disable_commands = false,
+  debug = false,
+  server = {
+    on_attach = function(client, bufnr)
+      client.server_capabilities.document_highlight = true
+      client.server_capabilities.document_formatting = false
+      client.server_capabilities.document_range_formatting = false
+
+      on_attach(client, bufnr)
+      null_ls_format(client, bufnr)
+    end,
+    capabilities = capabilities,
+    flags = {
+      debounce_text_changes = 150,
     }
-    nvim_lsp_ts_utils.setup_client(client)
-
-    client.server_capabilities.document_highlight = true
-    client.server_capabilities.document_formatting = false
-    client.server_capabilities.document_range_formatting = false
-
-    on_attach(client, bufnr)
-    null_ls_format(client, bufnr)
-  end,
-  capabilities = capabilities,
-  init_options = nvim_lsp_ts_utils.init_options,
-  flags = {
-    debounce_text_changes = 150,
   }
 }
 
@@ -173,7 +165,7 @@ config.pylsp.setup {
     pylsp = {
       plugins = {
         pycodestyle = {
-          ignore = {'W391'},
+          ignore = { 'W391' },
           maxLineLength = 100
         }
       }

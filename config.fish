@@ -1,23 +1,23 @@
 ### ENVIROMENTS ###
-# set pure_symbol_prompt 
-# set pure_symbol_prompt 
-set pure_symbol_prompt ❯
-set pure_symbol_prompt ❮
-set pure_reverse_prompt_symbol_in_vimode false
-set vicmd_symbol ">>>"
+set pure_symbol_prompt '$'
+#set pure_symbol_prompt 
+#set pure_symbol_prompt ❯
 
 # set -gx nvm_default_version v14.18.3
-set -gx nvm_default_version v16.15.0
+set -gx nvm_default_version v16.14.2
 set -gx ANDROID_HOME $HOME/Android/Sdk
 set -gx EDITOR nvim
 set -gx MANPAGER "most"
 set -gx PAGER 'nvim -c "set nowrap" -R'
-set -gx TERMINAL kitty
-
+set -gx TERMINAL wezterm
+set -gx NODE_OPTIONS "--max-old-space-size=4096"
 set -U fish_greeting
-set -g fish_key_bindings fish_vi_key_bindings
 
 function fish_right_prompt 
+end
+
+function fish_user_key_bindings
+  fish_default_key_bindings
 end
 
 # paths
@@ -31,10 +31,6 @@ fish_add_path -aP /usr/local/go/bin
 fish_add_path -aP $HOME/go/bin
 fish_add_path -aP /usr/.local/bin
 fish_add_path -aP $HOME/.cargo/bin
-
-function fish_user_key_bindings
-  fish_vi_key_bindings
-end
 
 ### ALIASES ###
 
@@ -61,6 +57,7 @@ end
 # common
 alias g "git"
 alias todo "nvim ~/notes/deals.norg -c \"set signcolumn=no\""
+alias notes "nvim ~/notes/notes.norg -c \"set signcolumn=no\""
 alias t "tmux attach -t main || tmux new -s main"
 alias y "yarn"
 alias fd "fdfind"
@@ -130,7 +127,7 @@ function ff
   -not -path "*/.git/*"
 end
 
-#common functions
+#utils functions
 function select
   set cmd $argv[1]
   set dict $argv[2..-1]
@@ -181,4 +178,4 @@ if not set -q TMUX
   tmux attach -t main || tmux new -s main
 end
 
-starship init fish | source  
+# starship init fish | source  

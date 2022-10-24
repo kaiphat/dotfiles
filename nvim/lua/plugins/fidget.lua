@@ -3,7 +3,7 @@ if not fidget then return end
 
 fidget.setup {
   text = {
-    spinner = "pipe",
+    spinner = "meter",
     done = "✔",
     commenced = "Started",
     completed = "Completed",

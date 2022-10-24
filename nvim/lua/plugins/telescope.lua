@@ -34,8 +34,8 @@ telescope.setup {
     file_ignore_patterns = {},
 
     prompt_prefix = "  ",
-    selection_caret = " ﬌ ",
-    entry_prefix = "   ",
+    selection_caret = " ",
+    entry_prefix = " ",
 
     initial_mode = "insert",
     selection_strategy = "reset",
@@ -89,6 +89,14 @@ telescope.setup {
 
   extensions = {
     file_browser = {
+      layout_config = {
+        prompt_position = 'top',
+        vertical = {
+          preview_height = 0.3,
+          width = 0.7,
+          height = 0.96,
+        },
+      },
       mappings = {
       }
     },
@@ -160,6 +168,26 @@ map('n', '<leader>fi', function()
     include_declaration = true,
     include_current_line = true,
     trim_text = true
+  }
+end)
+
+map('n', '<leader>fq', function()
+  require 'telescope.builtin'.live_grep {
+    hidden = true,
+    disable_coordinates = true,
+    additional_args = function()
+      local vimgrep_arguments = {
+        '--color=never',
+        '--no-heading',
+        '--with-filename',
+        '--line-number',
+        '--column',
+        '--smart-case',
+        '--trim',
+      }
+
+      return vimgrep_arguments
+    end
   }
 end)
 
