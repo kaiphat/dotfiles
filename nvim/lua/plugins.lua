@@ -53,8 +53,8 @@ packer.startup(
       'kyazdani42/nvim-web-devicons',
       'nvim-telescope/telescope-ui-select.nvim',
       'jose-elias-alvarez/typescript.nvim',
-      'nvim-treesitter/playground'
-      -- 'MunifTanjim/nui.nvim',
+      'nvim-treesitter/playground',
+      'MunifTanjim/nui.nvim',
     }
 
     use {
@@ -62,10 +62,15 @@ packer.startup(
       config = r('harpoon')
     }
 
-    -- use {
-    --   'folke/noice.nvim',
-    --   config = r('noice')
-    -- }
+    use {
+      'folke/noice.nvim',
+      config = r('noice')
+    }
+
+    use {
+      'sindrets/diffview.nvim',
+      config = r('diffview')
+    }
 
     use {
       'phaazon/hop.nvim',

@@ -184,6 +184,9 @@ map('n', '<leader>fq', function()
         '--column',
         '--smart-case',
         '--trim',
+        '--hidden=false',
+        '--no-ignore=true',
+        '-g=!node_modules/',
       }
 
       return vimgrep_arguments
@@ -208,8 +211,7 @@ map('n', '<leader>fl', function()
       }
 
       for _, pattern in pairs(ignore_patterns) do
-        table.insert(vimgrep_arguments, '-g')
-        table.insert(vimgrep_arguments, '!' .. pattern)
+        table.insert(vimgrep_arguments, '-g=!' .. pattern)
       end
 
       return vimgrep_arguments
@@ -233,8 +235,7 @@ map('n', '<leader>fk', function()
       }
 
       for _, pattern in pairs(ignore_patterns) do
-        table.insert(vimgrep_arguments, '-g')
-        table.insert(vimgrep_arguments, '!' .. pattern)
+        table.insert(vimgrep_arguments, '-g=!' .. pattern)
       end
 
       return vimgrep_arguments

@@ -37,22 +37,42 @@ font:
   size: 11.9
   offset:
     x: -1
-    y: 2
+    y: 1
   glyph_offset:
-    x: -1
+    x: 0
     y: 1
   normal:
     family: mononoki Nerd Font
-    style: Regular
+    style: Bold
   bold:
     family: mononoki Nerd Font
-    style: Regular
+    style: Bold
   italic:
     family: mononoki Nerd Font
-    style: Regular
+    style: Bold
   bold_italic:
     family: mononoki Nerd Font
-    style: Regular
+    style: Bold
+
+  # size: 12
+  # offset:
+  #   x: 0
+  #   y: 1
+  # glyph_offset:
+  #   x: 0
+  #   y: 0
+  # normal:
+  #   family: FantasqueSansMono Nerd Font
+  #   style: Regular
+  # bold:
+  #   family: FantasqueSansMono Nerd Font
+  #   style: Regular
+  # italic:
+  #   family: FantasqueSansMono Nerd Font
+  #   style: Regular
+  # bold_italic:
+  #   family: FantasqueSansMono Nerd Font
+  #   style: Regular
 
   # size: 10.9
   # offset:
@@ -73,6 +93,66 @@ font:
   # bold_italic:
   #   family: Hack Nerd Font
   #   style: Regular
+
+  # size: 12
+  # offset:
+  #   x: 0
+  #   y: 1
+  # glyph_offset:
+  #   x: 0
+  #   y: 1
+  # normal:
+  #   family: UbuntuMono Nerd Font
+  #   style: Regular
+  # bold:
+  #   family: UbuntuMono Nerd Font
+  #   style: Regular
+  # italic:
+  #   family: UbuntuMono Nerd Font
+  #   style: Regular
+  # bold_italic:
+  #   family: UbuntuMono Nerd Font
+  #   style: Regular
+    
+  # size: 11
+  # offset:
+  #   x: 0
+  #   y: -2
+  # glyph_offset:
+  #   x: 0
+  #   y: 0
+  # normal:
+  #   family: Victor Mono
+  #   style: Regular
+  # bold:
+  #   family: Victor Mono
+  #   style: Regular
+  # italic:
+  #   family: Victor Mono
+  #   style: Regular
+  # bold_italic:
+  #   family: Victor Mono
+  #   style: Regular
+
+  # size: 11.5
+  # offset:
+  #   x: 0
+  #   y: -1
+  # glyph_offset:
+  #   x: 0
+  #   y: -1
+  # normal:
+  #   family: Iosevka Nerd Font
+  #   style: SemiBold
+  # bold:
+  #   family: Iosevka Nerd Font
+  #   style: SemiBold
+  # italic:
+  #   family: Iosevka Nerd Font
+  #   style: SemiBold
+  # bold_italic:
+  #   family: Iosevka Nerd Font
+  #   style: SemiBold
 
 colors:
   primary:
@@ -102,6 +182,16 @@ colors:
     magenta: '#9398cf'
     cyan:    '#c8ae9d'
     white:   '#ACB0D0'
+
+mouse: 
+  hide_when_typing: true
+
+cursor:
+  a: 1
+  style:
+    blinking: Always
+  blink_interval: 800
+  thickness: 0.3
 
 key_bindings:
   - { key: F11, action: ToggleFullscreen }

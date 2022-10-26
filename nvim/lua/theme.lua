@@ -1,5 +1,3 @@
---   white = '#b5bcc9',
---   darker_black = '#10171e',
 --   black = '#131a21', --  nvim bg
 --   black2 = '#1a2128',
 --   one_bg = '#1e252c',
@@ -41,7 +39,7 @@ local c = {
   blue_nord    = '#81A1C1',
   blue_darkest = '#404060',
   yellow       = '#fbdf9a',
-  red          = '#fc828f',
+  red          = '#ef8891',
   red_dark     = '#aa6666',
   green_blue   = '#66A5AD',
   green_tea    = '#9CC4B2',
@@ -87,7 +85,7 @@ hl.DiffText = { bg = c.red, fg = c.fg }
 hl.LineNr = { fg = c.gray_blue, bg = nil }
 hl.SignColumn = { hl.LineNr }
 hl.FoldColumn = { hl.LineNr, hl.Bold }
-hl.Folded = { bg = c.bg, fg = c.bg }
+hl.Folded = { fg = c.gray }
 hl.CursorLineNr = { hl.LineNr, fg = c.fg, hl.Bold }
 hl.MoreMsg = { fg = c.green_blue }
 hl.Float = { bg = c.one_bg2 }
@@ -98,7 +96,7 @@ hl.FloatShadowThrough = { bg = nil }
 hl.Visual = { fg = c.fg, bg = c.one_bg3 }
 hl.Pmenu = { hl.NormalFloat }
 hl.PmenuSel = { hl.Visual }
-hl.PmenuSbar = { bg = c.bg }
+hl.PmenuSbar = { bg = c.bg } -- scroll
 hl.PmenuThumb = { bg = hl.Visual.bg }
 hl.Search = { fg = c.blue_darkest, bg = c.red }
 hl.IncSearch = { fg = c.blue_darkest, bg = c.red }
@@ -157,6 +155,10 @@ hl.DiagnosticUnderlineWarn = { hl.Ul, sp = hl.WarningMsg.fg }
 hl.DiagnosticUnderlineInfo = { hl.DiagnosticUnderlineWarn }
 hl.DiagnosticUnderlineHint = { hl.DiagnosticUnderlineWarn }
 hl.DiagnosticUnderlineError = { hl.DiagnosticUnderlineWarn }
+
+-- NOICE --
+-- hl.NoiceCmdlinePopup = { hl.NormalFloat }
+-- hl.NoiceCmdlinePopupBorderCmdline = { hl.FloatBorder }
 
 -- TREESITTER --
 hl['@constructor'] = { fg = c.brown }
@@ -241,6 +243,11 @@ hl.GitSignsDeletePreview = { fg = c.blue_darkest, bg = hl.GitSignsDelete.fg }
 hl.GitGutterAdd = { hl.GitSignsAdd }
 hl.GitGutterChange = { hl.GitSignsChange }
 hl.GitGutterDelete = { hl.GitSignsDelete }
+
+hl.DiffAdd = { bg = '#223233' }
+hl.DiffChange = { bg = '#223233' }
+hl.DiffText = { bg = hl.Visual.bg }
+hl.DiffDelete = { bg = '#321911', fg = '#321911' }
 
 -- NOTIFY --
 hl.NotifyINFOBody = { hl.NormalFloat }

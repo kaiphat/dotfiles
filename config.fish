@@ -3,8 +3,9 @@ set pure_symbol_prompt '$'
 #set pure_symbol_prompt 
 #set pure_symbol_prompt ❯
 
-# set -gx nvm_default_version v14.18.3
-set -gx nvm_default_version v16.14.2
+#set -gx nvm_default_version v14.18.3
+#set -gx nvm_default_version v16.14.2
+set -gx nvm_default_version v18.12.0
 set -gx ANDROID_HOME $HOME/Android/Sdk
 set -gx EDITOR nvim
 set -gx MANPAGER "most"
