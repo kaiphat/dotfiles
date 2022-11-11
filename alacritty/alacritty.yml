@@ -17,104 +17,144 @@ font:
   size: 10.5
   glyph_offset:
     x: 0
-    y: 0
+    y: 1
   offset:
     x: 0
-    y: 0
+    y: 2
   normal:
     family: JetBrainsMono Nerd Font
-    style: SemiBold
-  bold:
-    family: JetBrainsMono Nerd Font
-    style: SemiBold
-  italic:
-    family: JetBrainsMono Nerd Font
-    style: Semi Bold
-  bold_italic:
-    family: JetBrainsMono Nerd Font
-    style: Medium
-
-  size: 11.9
-  offset:
-    x: -1
-    y: 1
-  glyph_offset:
-    x: 0
-    y: 1
-  normal:
-    family: mononoki Nerd Font
     style: Bold
   bold:
-    family: mononoki Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Bold
   italic:
-    family: mononoki Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Bold
   bold_italic:
-    family: mononoki Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Bold
 
-  # size: 12
+  # size: 11.9
   # offset:
+  #   x: -1
+  #   y: 1
+  # glyph_offset:
   #   x: 0
   #   y: 1
+  # normal:
+  #   family: mononoki Nerd Font
+  #   style: Bold
+  # bold:
+  #   family: mononoki Nerd Font
+  #   style: Bold
+  # italic:
+  #   family: mononoki Nerd Font
+  #   style: Bold
+  # bold_italic:
+  #   family: mononoki Nerd Font
+  #   style: Bold
+
+  # size: 10.5
+  # offset:
+  #   x: 0
+  #   y: 2
   # glyph_offset:
   #   x: 0
   #   y: 0
   # normal:
-  #   family: FantasqueSansMono Nerd Font
+  #   family: CaskaydiaCovePL Nerd Font
   #   style: Regular
   # bold:
-  #   family: FantasqueSansMono Nerd Font
+  #   family: CaskaydiaCovePL Nerd Font
   #   style: Regular
   # italic:
-  #   family: FantasqueSansMono Nerd Font
+  #   family: CaskaydiaCovePL Nerd Font
   #   style: Regular
   # bold_italic:
-  #   family: FantasqueSansMono Nerd Font
+  #   family: CaskaydiaCovePL Nerd Font
   #   style: Regular
 
-  # size: 10.9
-  # offset:
-  #   x: 0
-  #   y: 0
-  # glyph_offset:
-  #   x: 0
-  #   y: 0
-  # normal:
-  #   family: Hack Nerd Font
-  #   style: Regular
-  # bold:
-  #   family: Hack Nerd Font
-  #   style: Regular
-  # italic:
-  #   family: Hack Nerd Font
-  #   style: Regular
-  # bold_italic:
-  #   family: Hack Nerd Font
-  #   style: Regular
-
-  # size: 12
-  # offset:
-  #   x: 0
-  #   y: 1
-  # glyph_offset:
-  #   x: 0
-  #   y: 1
-  # normal:
-  #   family: UbuntuMono Nerd Font
-  #   style: Regular
-  # bold:
-  #   family: UbuntuMono Nerd Font
-  #   style: Regular
-  # italic:
-  #   family: UbuntuMono Nerd Font
-  #   style: Regular
-  # bold_italic:
-  #   family: UbuntuMono Nerd Font
-  #   style: Regular
-    
   # size: 11
+  # offset:
+  #   x: 0
+  #   y: 2
+  # glyph_offset:
+  #   x: 0
+  #   y: 1
+  # normal:
+  #   family: FantasqueSansMono Nerd Font
+  #   style: Bold
+  # bold:
+  #   family: FantasqueSansMono Nerd Font
+  #   style: Bold
+  # italic:
+  #   family: FantasqueSansMono Nerd Font
+  #   style: Bold
+  # bold_italic:
+  #   family: FantasqueSansMono Nerd Font
+  #   style: Bold
+
+  # size: 10
+  # offset:
+  #   x: 0
+  #   y: 0
+  # glyph_offset:
+  #   x: 0
+  #   y: 0
+  # normal:
+  #   family: FiraCode Nerd Font
+  #   style: Medium
+  # bold:
+  #   family: FiraCode Nerd Font
+  #   style: Medium
+  # italic:
+  #   family: FiraCode Nerd Font
+  #   style: Medium
+  # bold_italic:
+  #   family: FiraCode Nerd Font
+  #   style: Medium
+
+  # size: 10
+  # offset:
+  #   x: 0
+  #   y: 0
+  # glyph_offset:
+  #   x: 0
+  #   y: 0
+  # normal:
+  #   family: Hack Nerd Font
+  #   style: Bold
+  # bold:
+  #   family: Hack Nerd Font
+  #   style: Bold
+  # italic:
+  #   family: Hack Nerd Font
+  #   style: Bold
+  # bold_italic:
+  #   family: Hack Nerd Font
+  #   style: Bold
+
+  # size: 11.5
+  # offset:
+  #   x: 0
+  #   y: 1
+  # glyph_offset:
+  #   x: 0
+  #   y: 1
+  # normal:
+  #   family: UbuntuMono Nerd Font
+  #   style: Bold
+  # bold:
+  #   family: UbuntuMono Nerd Font
+  #   style: Bold
+  # italic:
+  #   family: UbuntuMono Nerd Font
+  #   style: Bold
+  # bold_italic:
+  #   family: UbuntuMono Nerd Font
+  #   style: Bold
+    
+  # size: 10.5
   # offset:
   #   x: 0
   #   y: -2
@@ -123,18 +163,18 @@ font:
   #   y: 0
   # normal:
   #   family: Victor Mono
-  #   style: Regular
+  #   style: Bold
   # bold:
   #   family: Victor Mono
-  #   style: Regular
+  #   style: Bold
   # italic:
   #   family: Victor Mono
-  #   style: Regular
+  #   style: Bold
   # bold_italic:
   #   family: Victor Mono
-  #   style: Regular
+  #   style: Bold
 
-  # size: 11.5
+  # size: 11
   # offset:
   #   x: 0
   #   y: -1
@@ -143,16 +183,16 @@ font:
   #   y: -1
   # normal:
   #   family: Iosevka Nerd Font
-  #   style: SemiBold
+  #   style: Bold
   # bold:
   #   family: Iosevka Nerd Font
-  #   style: SemiBold
+  #   style: Bold
   # italic:
   #   family: Iosevka Nerd Font
-  #   style: SemiBold
+  #   style: Bold
   # bold_italic:
   #   family: Iosevka Nerd Font
-  #   style: SemiBold
+  #   style: Bold
 
 colors:
   primary:
@@ -182,6 +222,9 @@ colors:
     magenta: '#9398cf'
     cyan:    '#c8ae9d'
     white:   '#ACB0D0'
+
+# shell:
+#   program: /home/linuxbrew/.linuxbrew/bin/nu
 
 mouse: 
   hide_when_typing: true

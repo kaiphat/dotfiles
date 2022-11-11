@@ -22,7 +22,8 @@ indent_blankline.setup {
     "TelescopePrompt",
     "TelescopeResults",
     "norg",
-    "md"
+    "md",
+    'mason'
   },
   char = symbols[1],
   context_char = symbols[1],

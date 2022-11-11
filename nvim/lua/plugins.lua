@@ -43,7 +43,6 @@ packer.startup(
       'nvim-lua/plenary.nvim',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-nvim-lsp',
-      'ray-x/lsp_signature.nvim',
       'lewis6991/impatient.nvim',
       'nvim-telescope/telescope-file-browser.nvim',
       'nvim-treesitter/nvim-treesitter-context',
@@ -55,11 +54,29 @@ packer.startup(
       'jose-elias-alvarez/typescript.nvim',
       'nvim-treesitter/playground',
       'MunifTanjim/nui.nvim',
+      'onsails/lspkind.nvim',
+      'williamboman/mason-lspconfig.nvim',
     }
 
     use {
       'ThePrimeagen/harpoon',
       config = r('harpoon')
+    }
+
+    use {
+      'williamboman/mason.nvim',
+      config = r('mason')
+    }
+
+    use {
+      'nvim-neo-tree/neo-tree.nvim',
+      config = r('neotree'),
+      branch = 'v2.x',
+    }
+
+    use {
+      'kylechui/nvim-surround',
+      config = r('surround'),
     }
 
     use {
@@ -124,16 +141,6 @@ packer.startup(
     }
 
     use {
-      'kyazdani42/nvim-tree.lua',
-      cmd = {
-        'NvimTreeToggle',
-        'NvimTreeClose',
-        'NvimTreeOpen',
-      },
-      config = r('nvim_tree')
-    }
-
-    use {
       'nvim-treesitter/nvim-treesitter',
       config = r('tree_sitter')
     }
@@ -187,11 +194,6 @@ packer.startup(
     use {
       'L3MON4D3/LuaSnip',
       config = r('luasnip'),
-    }
-
-    use {
-      'otavioschwanck/cool-substitute.nvim',
-      config = r('substitute'),
     }
 
     use {

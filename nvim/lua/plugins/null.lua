@@ -6,7 +6,7 @@ local formattings = null_ls.builtins.formatting
 -- local formatting = 
 null_ls.setup {
   sources = {
-    formattings.prettier.with({
+    formattings.prettierd.with({
       filetypes = {
         "html",
         "json",

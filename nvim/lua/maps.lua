@@ -68,21 +68,18 @@ map('n', '<leader>uus', function() -- upper sql
   vim.cmd 'nohl'
 end)
 
-local rootPath = u.getCurrentPath()
+local root_path = u.get_current_path()
 
 map('n', '<leader>uc', function()
-  local path = u.getCurrentPath()
+  local path = u.get_current_path()
   vim.cmd('lcd ' .. path)
   vim.notify(' cwd changed to current place')
 end)
 
 map('n', '<leader>ur', function()
-  vim.cmd('lcd ' .. rootPath)
+  vim.cmd('lcd ' .. root_path)
   vim.notify(' cwd changed to root')
 end)
-
--- nvim tree
-map('n', '<leader>o', ':NvimTreeToggle<cr>')
 
 -- marks
 for letter in string.gmatch('abcdefghijkloqrstuvwxyz', '.') do
@@ -103,7 +100,7 @@ map('n', ',X', function()
 end)
 
 map('n', '<leader>i', function()
-   require'hop'.hint_char1 { }
+  require 'hop'.hint_char1 {}
 end)
 
 -- ts lsp utils
@@ -130,4 +127,26 @@ map('n', 'mn', function()
 end)
 map('n', 'mp', function()
   require("harpoon.ui").nav_prev()
+end)
+
+-- neo tree
+map('n', '<leader>o', function()
+  require("neo-tree.command").execute {
+    source = 'filesystem',
+    position = 'float',
+    dir = u.get_current_path(),
+  }
+end)
+map('n', '<leader>O', function()
+  require("neo-tree.command").execute {
+    source = 'filesystem',
+    position = 'float',
+    dir = root_path,
+  }
+end)
+map('n', '<leader><C-o>', function()
+  require("neo-tree.command").execute {
+    source = 'git_status',
+    position = 'float',
+  }
 end)

@@ -2,7 +2,7 @@ local logger = require('utils.logger')
 
 local M = {}
 
-M.getCurrentPath = function()
+M.get_current_path = function()
   return vim.fn.expand('%:p:h')
 end
 

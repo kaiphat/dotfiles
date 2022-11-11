@@ -35,15 +35,16 @@ local c = {
 
   cyan         = '#a3b8ef',
   blue_gray    = '#9398cf',
+  blue_gray    = '#99aee5',
   purple       = '#c2a2e3',
   blue_nord    = '#81A1C1',
   blue_darkest = '#404060',
   yellow       = '#fbdf9a',
   red          = '#ef8891',
-  red_dark     = '#aa6666',
   green_blue   = '#66A5AD',
   green_tea    = '#9CC4B2',
   brown        = '#c8ae9d',
+  brown        = '#EDA685',
   orange       = '#fca2aa',
   orange_dark  = '#EDA685',
   nord_gray_2  = '#3b4252',
@@ -68,7 +69,7 @@ hl.Bold = { hl.Bold, }
 hl.Italic = { hl.It }
 hl.Error = { fg = c.blue_gray }
 hl.ErrorMsg = { hl.Error }
-hl.WarningMsg = { fg = c.red_dark }
+hl.WarningMsg = { fg = c.red }
 hl.Comment = { fg = c.gray_blue, hl.It }
 hl.Conceal = { fg = c.red, hl.Bold }
 hl.Cursor = { fg = nil, bg = c.one_bg3 }
@@ -157,8 +158,8 @@ hl.DiagnosticUnderlineHint = { hl.DiagnosticUnderlineWarn }
 hl.DiagnosticUnderlineError = { hl.DiagnosticUnderlineWarn }
 
 -- NOICE --
--- hl.NoiceCmdlinePopup = { hl.NormalFloat }
--- hl.NoiceCmdlinePopupBorderCmdline = { hl.FloatBorder }
+hl.NoiceCmdlineIcon = { fg = c.blue_gray }
+hl.NoiceCmdlineIconSearch = { fg = c.blue_gray }
 
 -- TREESITTER --
 hl['@constructor'] = { fg = c.brown }
@@ -190,6 +191,13 @@ hl['@number'] = { fg = c.red }
 hl['@boolean'] = { fg = c.orange_dark }
 -- visual parents
 hl.Type = { fg = c.orange_dark }
+
+-- NEO TREE --
+hl.NeoTreeNormal = { hl.NormalFloat }
+hl.NeoTreeDimText = { fg = c.one_bg4 }
+hl.NeoTreeDotfile = { hl.NeoTreeDimText }
+hl.NeoTreeMessage = { hl.NeoTreeDimText }
+hl.NeoTreeTitleBar = { hl.NeoTreeDimText }
 
 -- NEORD --
 hl['@neorg.headings.1.title'] = { fg = c.purple }
@@ -255,6 +263,11 @@ hl.NotifyWARNBody = { hl.NormalFloat }
 hl.NotifyERRORBody = { hl.NormalFloat }
 hl.NotifyDEBUGBody = { hl.NormalFloat }
 hl.NotifyTRACEBody = { hl.NormalFloat }
+
+hl.NotifyINFOTitle = { fg = c.green_tea }
+hl.NotifyINFOIcon = { hl.NotifyINFOTitle }
+hl.NotifyErrorTitle = { fg = c.red }
+hl.NotifyErrorIcon = { hl.NotifyErrorTitle }
 
 -- hl.NotifyDEBUGTitle = { fg = c.red }
 -- hl.NotifyINFOTitle29 = { fg = c.red }

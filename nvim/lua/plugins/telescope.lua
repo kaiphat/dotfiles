@@ -10,6 +10,8 @@ local sorters = require('telescope.sorters')
 local previewers = require('telescope.previewers')
 local themes = require("telescope.themes")
 
+local fb_actions = require "telescope".extensions.file_browser.actions
+
 local ignore_patterns = {
   'docker_volumes_data/',
   'node_modules/',
@@ -98,6 +100,9 @@ telescope.setup {
         },
       },
       mappings = {
+        ['i'] = {
+          ['<C-u>'] = fb_actions.goto_parent_dir,
+        }
       }
     },
 
@@ -118,46 +123,6 @@ telescope.load_extension 'fzf'
 telescope.load_extension 'file_browser'
 telescope.load_extension 'ui-select'
 
-map('n', '<leader>ff', function()
-  require 'telescope.builtin'.find_files {
-    find_command = {
-      'fdfind',
-      '-t',
-      'f',
-      '-E', 'node_modules/',
-      '-E', '.git/',
-    },
-    hidden = true,
-    no_ignore = true,
-  }
-end)
-
-map('n', '<leader>fj', function()
-  require 'telescope.builtin'.find_files {
-    hidden = false,
-    no_ignore = false,
-  }
-end)
-
--- map('n', '<leader>ff', function()
---   local fd_arguments = {
---     'fdfind',
---     '-t',
---     'f',
---   }
-
---   for _, pattern in pairs(ignore_patterns) do
---     table.insert(fd_arguments, '-E')
---     table.insert(fd_arguments, pattern)
---   end
-
---   require 'telescope.builtin'.find_files {
---     find_command = fd_arguments,
---     hidden = true,
---     no_ignore = false,
---   }
--- end)
-
 map('n', '<leader>fb', ':Telescope buffers<cr>')
 map('n', '<leader>fs', ':Telescope git_status<cr>')
 map('n', '<leader>fo', ':Telescope oldfiles<cr>')
@@ -171,29 +136,47 @@ map('n', '<leader>fi', function()
   }
 end)
 
-map('n', '<leader>fq', function()
-  require 'telescope.builtin'.live_grep {
+map('n', '<leader>fj', function()
+  require 'telescope.builtin'.find_files {
+    find_command = {
+      'fdfind',
+      '-t=f',
+      '-E=test/',
+    },
+    hidden = false,
+    no_ignore = false,
+  }
+end)
+map('n', '<leader>fJ', function()
+  require 'telescope.builtin'.find_files {
+    find_command = {
+      'fdfind',
+      '-t',
+      'f',
+      '-E', 'node_modules/',
+      '-E', '.git/',
+    },
     hidden = true,
-    disable_coordinates = true,
-    additional_args = function()
-      local vimgrep_arguments = {
-        '--color=never',
-        '--no-heading',
-        '--with-filename',
-        '--line-number',
-        '--column',
-        '--smart-case',
-        '--trim',
-        '--hidden=false',
-        '--no-ignore=true',
-        '-g=!node_modules/',
-      }
-
-      return vimgrep_arguments
-    end
+    no_ignore = true,
+  }
+end)
+map('n', '<leader>fk', function()
+  local path = u.get_current_path()
+  require 'telescope'.extensions.file_browser.file_browser {
+    cwd = path,
+    hidden = true,
+    grouped = true,
+    hide_parent_dir = true
   }
 end)
 
+map('n', '<leader>fK', function()
+  require 'telescope'.extensions.file_browser.file_browser {
+    hidden = true,
+    grouped = true,
+    hide_parent_dir = true
+  }
+end)
 map('n', '<leader>fl', function()
   require 'telescope.builtin'.live_grep {
     hidden = true,
@@ -218,8 +201,31 @@ map('n', '<leader>fl', function()
     end
   }
 end)
+map('n', '<leader>fL', function()
+  require 'telescope.builtin'.live_grep {
+    hidden = true,
+    disable_coordinates = true,
+    additional_args = function()
+      local vimgrep_arguments = {
+        '--color=never',
+        '--no-heading',
+        '--with-filename',
+        '--line-number',
+        '--column',
+        '--smart-case',
+        '--trim',
+        '--hidden=false',
+        '--no-ignore=true',
+        '-g=!node_modules/',
+        '-g=!dist/',
+      }
 
-map('n', '<leader>fk', function()
+      return vimgrep_arguments
+    end
+  }
+end)
+
+map('n', '<leader>fh', function()
   require 'telescope.builtin'.grep_string {
     disable_coordinates = true,
     additional_args = function()
@@ -240,24 +246,6 @@ map('n', '<leader>fk', function()
 
       return vimgrep_arguments
     end
-  }
-end)
-
-map('n', '<leader>fe', function()
-  require 'telescope'.extensions.file_browser.file_browser {
-    hidden = true,
-    grouped = true,
-    hide_parent_dir = true
-  }
-end)
-
-map('n', '<leader>fh', function()
-  local path = u.getCurrentPath()
-  require 'telescope'.extensions.file_browser.file_browser {
-    cwd = path,
-    hidden = true,
-    grouped = true,
-    hide_parent_dir = true
   }
 end)
 

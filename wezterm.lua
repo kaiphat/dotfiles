@@ -14,22 +14,22 @@ end
 local font_config = ({
   jet_brains = {
     -- font_size = 9.6,
-    font_size = 10.2,
+    font_size = 10.5,
     font = wezterm.font('JetBrainsMono Nerd Font'),
     font_rules = {
       {
         italic = true,
-        font = font('JetBrainsMono Nerd Font', { italic = true, weight = 'Medium' }),
+        font = font('JetBrainsMono Nerd Font', { italic = true, weight = 'Bold' }),
       },
       {
         intensity = 'Bold',
-        font = font('JetBrainsMono Nerd Font', { weight = 'Medium' }),
+        font = font('JetBrainsMono Nerd Font', { weight = 'Bold' }),
       },
       {
-        font = font('JetBrainsMono Nerd Font', { weight = 'Medium' }),
+        font = font('JetBrainsMono Nerd Font', { weight = 'Bold' }),
       },
     },
-    line_height = 1.19,
+    line_height = 1.2,
   },
   iosevka = {
     font_size = 11,
@@ -138,11 +138,10 @@ local colors = {
   },
 }
 
-local padding_value = 7
 local padding = {
-  left = padding_value,
-  right = padding_value,
-  top = padding_value,
+  left = 4,
+  right = 4,
+  top = 6,
   bottom = 0,
 }
 
@@ -155,7 +154,7 @@ local config = {
   scrollback_lines = 10000,
   dpi = 192,
   enable_wayland = true,
-  window_background_opacity = 1.0
+  window_background_opacity = 1.0,
 }
 
 return merge {

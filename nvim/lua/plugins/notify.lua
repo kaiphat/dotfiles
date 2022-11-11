@@ -9,7 +9,8 @@ notify.setup {
     vim.wo[win].wrap = true
     vim.api.nvim_win_set_option(win, 'wrap', true)
   end,
-  stages = 'fade'
+  stages = 'fade',
+  render = 'minimal',
 }
 
 vim.notify = notify

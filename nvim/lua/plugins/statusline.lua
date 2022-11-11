@@ -69,9 +69,8 @@ table.insert(active_components, {
       }
     }
   },
-
   {
-    icon = '+',
+    icon = '✚',
     provider = 'git_diff_added',
     hl = {
       fg = colors.green
@@ -98,7 +97,7 @@ table.insert(active_components, {
   },
 
   {
-    icon = '✗',
+    icon = '✖',
     provider = 'diagnostic_errors',
     hl = {
       fg = colors.pink

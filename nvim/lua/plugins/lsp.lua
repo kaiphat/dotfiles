@@ -3,23 +3,11 @@ local util = require 'vim.lsp.util'
 local config = load('lspconfig')
 if not config then return end
 
-local lsp_signature = load('lsp_signature')
-if not lsp_signature then return end
-
 local cmp_nvim_lsp = load('cmp_nvim_lsp')
 if not cmp_nvim_lsp then return end
 
 local typescript = load('typescript')
 if not typescript then return end
-
-lsp_signature.setup {
-  bind = true,
-  handler_opts = {
-    border = "rounded"
-  },
-  hint_prefix = " ",
-  hint_enable = false
-}
 
 -- CAPABILITIES --
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -214,7 +202,6 @@ config.html.setup {
   on_attach = on_attach,
 }
 
--- brew install lua-language-server
 config.sumneko_lua.setup {
   on_attach = function(client, bufnr)
     client.server_capabilities.document_highlight = true
@@ -223,6 +210,9 @@ config.sumneko_lua.setup {
   end,
   settings = {
     Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      },
       diagnostics = {
         globals = {
           'vim',

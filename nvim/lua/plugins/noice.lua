@@ -1,6 +1,15 @@
 local noice = load('noice')
 if not noice then return end
 
+local default_opts = {
+  win_options = {
+    winhighlight = {
+      Normal = "NormalFloat",
+      FloatBorder = "FloatBorder"
+    },
+  }
+}
+
 noice.setup {
   cmdline = {
     format = {
@@ -12,27 +21,22 @@ noice.setup {
       help = { pattern = "^:%s*h%s+", icon = "" },
       input = {}, -- Used by input()
     },
-    lsp_progress = {
-      enabled = true,
+    opts = default_opts,
+  },
+
+  lsp = {
+    progress = {
+      enabled = false,
+    },
+    override = {
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = false,
+      ["vim.lsp.util.stylize_markdown"] = false,
+      ["cmp.entry.get_documentation"] = false,
     },
   },
 
-  views = {
-    cmdline = {
-      win_options = {
-        winhighlight = {
-          Normal = "NormalFloat",
-          FloatBorder = "FloatBorder"
-        },
-      }
-    },
-    cmdline_popup = {
-      win_options = {
-        winhighlight = {
-          Normal = "NormalFloat",
-          FloatBorder = "FloatBorder"
-        },
-      }
-    }
+  format = {
+    notify = { "{message}" },
   }
+
 }

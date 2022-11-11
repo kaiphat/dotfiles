@@ -18,7 +18,8 @@ set paths                  \
   .config/wezterm/wezterm.lua \
   .config/helix \
   .config/picom \
-  .config/awesome 
+  .config/awesome \
+  .config/nushell
 
 set dotfiles ~/dotfiles
 
