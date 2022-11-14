@@ -26,17 +26,24 @@ noice.setup {
 
   lsp = {
     progress = {
-      enabled = false,
+      enabled = true,
     },
     override = {
-      ["vim.lsp.util.convert_input_to_markdown_lines"] = false,
-      ["vim.lsp.util.stylize_markdown"] = false,
-      ["cmp.entry.get_documentation"] = false,
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      ["vim.lsp.util.stylize_markdown"] = true,
+      ["cmp.entry.get_documentation"] = true,
     },
   },
 
   format = {
-    notify = { "{message}" },
-  }
+  },
+
+  routes = {
+    -- show macro recording
+    {
+      view = "notify",
+      filter = { event = "msg_showmode" },
+    },
+  },
 
 }

@@ -1,11 +1,3 @@
---   black = '#131a21', --  nvim bg
---   black2 = '#1a2128',
---   one_bg = '#1e252c',
---   one_bg2 = '#2a3138',
---   one_bg3 = '#363d44',
---   grey_fg = '#4e555c',
---   grey_fg2 = '#51585f',
---   light_grey = '#545b62',
 --   red = '#ef8891',
 --   baby_pink = '#fca2aa',
 --   pink = '#fca2af',
@@ -26,6 +18,34 @@
 --   pmenu_bg = '#ef8891',
 --   folder_bg = '#99aee5',
 
+-- Rosewater	#f2d5cf
+-- Flamingo	#eebebe
+-- aPink	#f4b8e4
+-- Mauve	#ca9ee6
+-- aRed	#e78284
+-- aMaroon	#ea999c
+-- Peach	#ef9f76
+-- aYellow	#e5c890
+-- aGreen	#a6d189
+-- aTeal	#81c8be
+-- Sky	#99d1db
+-- Sapphire	#85c1dc
+-- aBlue	#8caaee
+-- aLavender	#babbf1
+-- Text	#c6d0f5
+-- Subtext1	#b5bfe2
+-- Subtext0	#a5adce
+-- Overlay2	#949cbb
+-- Overlay1	#838ba7
+-- Overlay0	#737994
+-- Surface2	#626880
+-- Surface1	#51576d
+-- Surface0	#414559
+-- Base	#303446
+-- Mantle	#292c3c
+-- Crust	#232634
+
+
 local c = {
   bg = '#202837',
   fg = '#b4b6d7',
@@ -35,18 +55,16 @@ local c = {
 
   cyan         = '#a3b8ef',
   blue_gray    = '#9398cf',
-  blue_gray    = '#99aee5',
   purple       = '#c2a2e3',
   blue_nord    = '#81A1C1',
   blue_darkest = '#404060',
   yellow       = '#fbdf9a',
   red          = '#ef8891',
-  green_blue   = '#66A5AD',
+  green_blue   = '#66A0A0',
   green_tea    = '#9CC4B2',
   brown        = '#c8ae9d',
-  brown        = '#EDA685',
   orange       = '#fca2aa',
-  orange_dark  = '#EDA685',
+  orange_dark  = '#ef9f76',
   nord_gray_2  = '#3b4252',
   gray         = '#6e88a6',
   gray_blue    = '#788aa3',
@@ -108,7 +126,7 @@ hl.TabLine = { fg = c.blue_darkest, bg = c.blue_gray }
 hl.TabLineSel = { fg = c.blue_darkest, bg = c.cyan }
 hl.TabLineFill = { fg = c.cyan, bg = nil }
 hl.VertSplit = { fg = c.blue_darkest, bg = nil }
-hl.NonText = { fg = c.bg }
+hl.NonText = { fg = c.one_bg3 }
 hl.SpecialKey = { hl.NonText, hl.It }
 hl.Whitespace = { hl.NonText }
 hl.EndOfBuffer = { hl.NonText }
@@ -160,6 +178,9 @@ hl.DiagnosticUnderlineError = { hl.DiagnosticUnderlineWarn }
 -- NOICE --
 hl.NoiceCmdlineIcon = { fg = c.blue_gray }
 hl.NoiceCmdlineIconSearch = { fg = c.blue_gray }
+hl.NoiceLspProgressTitle = { fg = c.blue_gray }
+hl.NoiceLspProgressClient = { fg = c.blue_gray }
+hl.NoiceLspProgressSpinner = { fg = c.blue_gray }
 
 -- TREESITTER --
 hl['@constructor'] = { fg = c.brown }

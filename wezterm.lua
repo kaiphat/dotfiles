@@ -19,14 +19,14 @@ local font_config = ({
     font_rules = {
       {
         italic = true,
-        font = font('JetBrainsMono Nerd Font', { italic = true, weight = 'Bold' }),
+        font = font('JetBrainsMono Nerd Font', { italic = true, weight = 'Medium' }),
       },
       {
         intensity = 'Bold',
-        font = font('JetBrainsMono Nerd Font', { weight = 'Bold' }),
+        font = font('JetBrainsMono Nerd Font', { weight = 'Medium' }),
       },
       {
-        font = font('JetBrainsMono Nerd Font', { weight = 'Bold' }),
+        font = font('JetBrainsMono Nerd Font', { weight = 'Medium' }),
       },
     },
     line_height = 1.2,
@@ -81,7 +81,7 @@ local font_config = ({
       }
     }
   },
-}).jet_brains
+}).caskaydia
 
 -- UTILS --
 
@@ -141,8 +141,8 @@ local colors = {
 local padding = {
   left = 4,
   right = 4,
-  top = 6,
-  bottom = 0,
+  top = 1,
+  bottom = 2,
 }
 
 -- RESULT --

@@ -29,21 +29,6 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
   },
 }
 
--- AUTO HIGHLIGHTS --
--- vim.api.nvim_create_autocmd("CursorHold", {
---   callback = function()
---     local opts = {
---       focusable = false,
---       close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
---       border = 'rounded',
---       source = 'always',
---       prefix = ' ',
---       scope = 'cursor',
---     }
---     vim.diagnostic.open_float(nil, opts)
---   end
--- })
-
 local function lspSymbol(name, icon)
   vim.fn.sign_define('LspDiagnosticsSign' .. name, { text = icon, numhl = 'LspDiagnosticsSign' .. name })
 end

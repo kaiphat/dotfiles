@@ -4,9 +4,6 @@ if not install then return end
 local config = load('nvim-treesitter.configs')
 if not config then return end
 
---local context = load('treesitter-context')
---if not context then return end
-
 install.compilers = { "gcc" }
 
 config.setup {
@@ -32,6 +29,8 @@ config.setup {
     'scheme',
     'sql',
     'python',
+    'bash',
+    'regex',
   },
   highlight = {
     enable = true,
@@ -44,7 +43,3 @@ config.setup {
     }
   }
 }
-
---context.setup {
- -- enable = true
---}

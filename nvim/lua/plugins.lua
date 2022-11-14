@@ -111,11 +111,6 @@ packer.startup(
     }
 
     use {
-      'j-hui/fidget.nvim',
-      config = r('fidget')
-    }
-
-    use {
       'jose-elias-alvarez/null-ls.nvim',
       config = r('null')
     }

@@ -5,11 +5,8 @@ local mason_lspconfig = load("mason-lspconfig")
 if not mason_lspconfig then return end
 
 mason_lspconfig.setup {
-  automatic_installation = true,
+  automatic_installation = false,
 }
 
 mason.setup {
-  ui = {
-    check_outdated_packages_on_open = false,
-  },
 }
