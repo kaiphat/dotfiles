@@ -18,10 +18,12 @@ let-env MANPAGER = 'most'
 let-env PAGER = 'nvim -c "set nowrap" -R'
 let-env TERMINAL = 'wezterm'
 let-env NODE_OPTIONS = '--max-old-space-size=4096'
+let-env LS_COLORS = (vivid generate nord | str trim)
+
 
 # STARSHIP
-mkdir ~/.cache/starship
-starship init nu | save ~/.cache/starship/init.nu
+# mkdir ~/.cache/starship
+# starship init nu | save ~/.cache/starship/init.nu
 
 # ZOXIDE
 zoxide init nushell | save ~/.zoxide.nu

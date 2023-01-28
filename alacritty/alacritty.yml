@@ -3,79 +3,79 @@ env:
 
 window:
   padding:
-   x: 8
-   y: 8
-  opacity: 1
+   x: 0
+   y: 0
+  opacity: 0.9
   dynamic_padding: false
-  startup_mode: Fullscreen
+  startup_mode: Maximized
 
 scrolling:
-  history: 10000
+  history: 100000
   multiplier: 3
 
 font:
-  size: 10.5
+  size: 9.5
   glyph_offset:
     x: 0
-    y: 1
+    y: -1
   offset:
-    x: 0
-    y: 2
+    x: -1
+    y: -2
   normal:
     family: JetBrainsMono Nerd Font
-    style: Bold
+    style: Medium
   bold:
     family: JetBrainsMono Nerd Font
-    style: Bold
+    style: Medium
   italic:
     family: JetBrainsMono Nerd Font
-    style: Bold
+    style: Medium
   bold_italic:
     family: JetBrainsMono Nerd Font
-    style: Bold
-
-  # size: 11.9
-  # offset:
-  #   x: -1
-  #   y: 1
-  # glyph_offset:
-  #   x: 0
-  #   y: 1
-  # normal:
-  #   family: mononoki Nerd Font
-  #   style: Bold
-  # bold:
-  #   family: mononoki Nerd Font
-  #   style: Bold
-  # italic:
-  #   family: mononoki Nerd Font
-  #   style: Bold
-  # bold_italic:
-  #   family: mononoki Nerd Font
-  #   style: Bold
-
-  # size: 10.5
-  # offset:
-  #   x: 0
-  #   y: 2
-  # glyph_offset:
-  #   x: 0
-  #   y: 0
-  # normal:
-  #   family: CaskaydiaCovePL Nerd Font
-  #   style: Regular
-  # bold:
-  #   family: CaskaydiaCovePL Nerd Font
-  #   style: Regular
-  # italic:
-  #   family: CaskaydiaCovePL Nerd Font
-  #   style: Regular
-  # bold_italic:
-  #   family: CaskaydiaCovePL Nerd Font
-  #   style: Regular
+    style: Medium
 
   # size: 11
   # offset:
+  #   x: -1
+  #   y: -2
+  # glyph_offset:
+  #   x: 0
+  #   y: -1
+  # normal:
+  #   family: mononoki Nerd Font
+  #   style: Medium
+  # bold:
+  #   family: mononoki Nerd Font
+  #   style: Medium
+  # italic:
+  #   family: mononoki Nerd Font
+  #   style: Medium
+  # bold_italic:
+  #   family: mononoki Nerd Font
+  #   style: Medium
+
+  # size: 9.5
+  # offset:
+  #   x: 0
+  #   y: 0
+  # glyph_offset:
+  #   x: 0
+  #   y: 0
+  # normal:
+  #   family: CaskaydiaCovePL Nerd Font
+  #   style: Regular
+  # bold:
+  #   family: CaskaydiaCovePL Nerd Font
+  #   style: Regular
+  # italic:
+  #   family: CaskaydiaCovePL Nerd Font
+  #   style: Regular
+  # bold_italic:
+  #   family: CaskaydiaCovePL Nerd Font
+  #   style: Regular
+
+  # size: 10
+  # offset:
   #   x: 0
   #   y: 2
   # glyph_offset:
@@ -94,7 +94,7 @@ font:
   #   family: FantasqueSansMono Nerd Font
   #   style: Bold
 
-  # size: 10
+  # size: 9
   # offset:
   #   x: 0
   #   y: 0
@@ -114,7 +114,7 @@ font:
   #   family: FiraCode Nerd Font
   #   style: Medium
 
-  # size: 10
+  # size: 9
   # offset:
   #   x: 0
   #   y: 0
@@ -134,10 +134,10 @@ font:
   #   family: Hack Nerd Font
   #   style: Bold
 
-  # size: 11.5
+  # size: 10
   # offset:
   #   x: 0
-  #   y: 1
+  #   y: 2
   # glyph_offset:
   #   x: 0
   #   y: 1
@@ -154,10 +154,10 @@ font:
   #   family: UbuntuMono Nerd Font
   #   style: Bold
     
-  # size: 10.5
+  # size: 9
   # offset:
   #   x: 0
-  #   y: -2
+  #   y: 0
   # glyph_offset:
   #   x: 0
   #   y: 0
@@ -174,7 +174,7 @@ font:
   #   family: Victor Mono
   #   style: Bold
 
-  # size: 11
+  # size: 11.6
   # offset:
   #   x: 0
   #   y: -1
@@ -183,16 +183,16 @@ font:
   #   y: -1
   # normal:
   #   family: Iosevka Nerd Font
-  #   style: Bold
+  #   style: Medium
   # bold:
   #   family: Iosevka Nerd Font
-  #   style: Bold
+  #   style: Medium
   # italic:
   #   family: Iosevka Nerd Font
-  #   style: Bold
+  #   style: Medium
   # bold_italic:
   #   family: Iosevka Nerd Font
-  #   style: Bold
+  #   style: Medium
 
 colors:
   primary:
@@ -200,7 +200,8 @@ colors:
    foreground: '#787C99'
 
   cursor:
-   text: '#304040'
+   text: '#000000'
+   cursor: '#99d1db'
    cursor: '#fbdf90'
 
   normal:
@@ -223,17 +224,32 @@ colors:
     cyan:    '#c8ae9d'
     white:   '#ACB0D0'
 
-# shell:
-#   program: /home/linuxbrew/.linuxbrew/bin/nu
+shell:
+  # program: /home/ipunko/.cargo/bin/nu
+  program: /usr/bin/fish
 
 mouse: 
   hide_when_typing: true
 
+bell:
+# Values for `animation`:
+#   - Ease
+#   - EaseOut
+#   - EaseOutSine
+#   - EaseOutQuad
+#   - EaseOutCubic
+#   - EaseOutQuart
+#   - EaseOutQuint
+#   - EaseOutExpo
+#   - EaseOutCirc
+#   - Linear
+  animation: EaseOutCubic
+  duration: 750
+
 cursor:
-  a: 1
   style:
     blinking: Always
-  blink_interval: 800
+  blink_interval: 750
   thickness: 0.3
 
 key_bindings:

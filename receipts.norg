@@ -1,5 +1,11 @@
 * LINUX
 
+** prevent C-d exit for fish
+   - funced fish_user_key_bindings
+   - add `bind \cd delete-char` to end
+   - save and close
+   - funcsave fish_user_key_bindings
+
 ** change default shell
    - which $shell
    - chsh -s $which_output

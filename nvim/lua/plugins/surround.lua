@@ -1,6 +1,10 @@
-local surround = load('nvim-surround')
-if not surround then return end
+return {
+  'kylechui/nvim-surround',
+  config = function()
+    local surround = require 'nvim-surround'
 
-surround.setup {
+    surround.setup {
 
+    }
+  end
 }

@@ -1,53 +1,107 @@
-local util = require 'vim.lsp.util'
-
-local config = load('lspconfig')
-if not config then return end
-
-local cmp_nvim_lsp = load('cmp_nvim_lsp')
-if not cmp_nvim_lsp then return end
-
-local typescript = load('typescript')
-if not typescript then return end
-
--- CAPABILITIES --
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-
-capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.preselectSupport = true
-capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
-capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
-capabilities.textDocument.completion.completionItem.deprecatedSupport = true
-capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
-capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = {
-    "documentation",
-    "detail",
-    "additionalTextEdits",
-  },
-}
-
-local function lspSymbol(name, icon)
-  vim.fn.sign_define('LspDiagnosticsSign' .. name, { text = icon, numhl = 'LspDiagnosticsSign' .. name })
+local function set_lsp_maps()
+  map('n', '<leader>ti', ':TypescriptAddMissingImports<cr>')
+  map('n', '<leader>tr', ':TypescriptRenameFile<cr>')
+  map('n', '<leader>td', ':TypescriptRemoveUnused<cr>')
+  map('n', '<leader>to', ':TypescriptOrganizeImports<cr>')
 end
 
-lspSymbol('Error', '│')
-lspSymbol('Information', '│')
-lspSymbol('Hint', '│')
-lspSymbol('Warning', '│')
+local function set_lsp_symbols()
+  local char = '│'
 
-local null_ls_format = function(client, bufnr)
+  for _, hint in ipairs({ 'Error', 'Information', 'Hint', 'Warning' }) do
+    vim.fn.sign_define('LspDiagnosticsSign' .. hint, {
+      text = char,
+      numhl = 'LspDiagnosticsSign' .. hint
+    })
+  end
+
+end
+
+local function has_formatter(ft)
+  local sources = require('null-ls.sources')
+  local available = sources.get_available(ft, 'NULL_LS_FORMATTING')
+  return #available > 0
+end
+
+local function setup_formatting(client, buf)
+  local util = require 'vim.lsp.util'
+
+  local ft = vim.api.nvim_buf_get_option(buf, 'filetype')
+  local enable = false
+
+  if has_formatter(ft) then
+    enable = client.name == 'null-ls'
+  else
+    enable = not (client.name == 'null-ls')
+  end
+
+  if client.name == 'tsserver' then
+    enable = false
+  end
+
+  client.server_capabilities.documentFormattingProvider = enable
+
   map('n', '<leader>lf', function()
     local params = util.make_formatting_params({})
-    client.request('textDocument/formatting', params, nil, bufnr)
-  end, { buffer = bufnr })
+    client.request('textDocument/formatting', params, nil, buf)
+  end, { buffer = buf })
+
 end
 
--- FUNCTIONS --
+local servers = {
+  typescript = {
+    disable_commands = false,
+    debug = false,
+    is_highlight = true,
+  },
+  sumneko_lua = {
+    is_highlight = true,
+    settings = {
+      Lua = {
+        workspace = {
+          checkThirdParty = false,
+        },
+        runtime = {
+          version = 'LuaJIT',
+        },
+        diagnostics = {
+          globals = {
+            'vim',
+          }
+        }
+      }
+    }
+  },
+  rust_analyzer = {
+    is_highlight = true,
+    settings = {
+      ["rust-analyzer"] = {
+        assist = {
+          importGranularity = "module",
+          importPrefix = "self",
+        },
+        diagnostics = {
+          enable = true,
+          enableExperimental = true,
+        },
+        cargo = {
+          loadOutDirsFromCheck = true
+        },
+        procMacro = {
+          enable = true
+        },
+        inlayHints = {
+          chainingHints = true,
+          parameterHints = true,
+          typeHints = true,
+        },
+      }
+    }
+  }
+}
+
 local function on_attach(client, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  setup_formatting(client, bufnr)
 
   map('n', 'gd', ':lua vim.lsp.buf.definition()<cr>')
   map('n', 'ga', ':vs<cr>:lua vim.lsp.buf.definition()<cr>')
@@ -59,16 +113,12 @@ local function on_attach(client, bufnr)
   map('n', '<space>lq', ':lua vim.diagnostic.set_loclist()<cr>')
   map('n', '<space>la', ':lua vim.lsp.buf.code_action()<cr>')
   map('n', '<space>lr', ':lua vim.lsp.buf.rename()<cr>')
-  map('n', '<space>lf', function()
-    vim.lsp.buf.format {
-      async = true,
-      bufnr = bufnr,
-    }
-  end)
 
   if client.server_capabilities.document_highlight then
     local group = 'lsp_document_highlight'
+
     vim.api.nvim_create_augroup(group, { clear = false })
+
     vim.api.nvim_clear_autocmds({
       buffer = bufnr,
       group = group,
@@ -86,123 +136,80 @@ local function on_attach(client, bufnr)
   end
 end
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics,
-  {
-    -- virtual_text = false,
-    virtual_text = {
-      spacing = 8,
-      prefix = " "
-    },
-    signs = false,
-    underline = true,
-    update_in_insert = false
-  }
-)
+return {
+  'neovim/nvim-lspconfig',
+  event = 'BufReadPre',
+  dependencies = {
+    'hrsh7th/cmp-nvim-lsp',
+    'jose-elias-alvarez/null-ls.nvim',
+    'jose-elias-alvarez/typescript.nvim',
+  },
+  config = function()
+    local config = require 'lspconfig'
+    local typescript = require 'typescript'
+    local cmp_nvim_lsp = require 'cmp_nvim_lsp'
 
--- SERVERS --
-typescript.setup {
-  disable_commands = false,
-  debug = false,
-  server = {
-    on_attach = function(client, bufnr)
-      client.server_capabilities.document_highlight = true
-      client.server_capabilities.document_formatting = false
-      client.server_capabilities.document_range_formatting = false
-
-      on_attach(client, bufnr)
-      null_ls_format(client, bufnr)
-    end,
-    capabilities = capabilities,
-    flags = {
-      debounce_text_changes = 150,
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+    capabilities.textDocument.foldingRange = {
+      dynamicRegistration = false,
+      lineFoldingOnly = true,
     }
-  }
-}
 
-config.jsonls.setup {
-  capabilities = capabilities,
-  on_attach = function(client, bufnr)
-    on_attach(client, bufnr)
-    null_ls_format(client, bufnr)
+    set_lsp_symbols()
+    set_lsp_maps()
+
+    -- FUNCTIONS --
+    vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+      vim.lsp.diagnostic.on_publish_diagnostics,
+      {
+        -- virtual_text = false,
+        virtual_text = {
+          spacing = 8,
+          prefix = " "
+        },
+        signs = false,
+        underline = true,
+        update_in_insert = false
+      }
+    )
+
+    for server, opts in pairs(servers) do
+      if server == 'typescript' then
+        typescript.setup(
+          vim.tbl_deep_extend('force', {}, opts, {
+            server = {
+              on_attach = function(client, buf)
+                if opts.is_highlight then
+                  client.server_capabilities.document_highlight = true
+                end
+
+                on_attach(client, buf)
+              end,
+              capabilities = capabilities,
+              flags = {
+                debounce_text_changes = 150,
+              },
+            }
+          })
+        )
+      else
+        config[server].setup(
+          vim.tbl_deep_extend('force', {
+            on_attach = function(client, buf)
+              if opts.is_highlight then
+                client.server_capabilities.document_highlight = true
+              end
+
+              on_attach(client, buf)
+            end,
+            capabilities = capabilities,
+            flags = {
+              debounce_text_changes = 150,
+            },
+          }, opts)
+        )
+      end
+    end
   end
-}
-
-config.pylsp.setup {
-  capabilities = capabilities,
-  on_attach = function(client, bufnr)
-    on_attach(client, bufnr)
-    null_ls_format(client, bufnr)
-  end,
-  settings = {
-    pylsp = {
-      plugins = {
-        pycodestyle = {
-          ignore = { 'W391' },
-          maxLineLength = 100
-        }
-      }
-    }
-  }
-}
-
-config.rust_analyzer.setup {
-  capabilities = capabilities,
-  on_attach = function(client, bufnr)
-    client.server_capabilities.document_highlight = true
-    on_attach(client, bufnr)
-  end,
-  settings = {
-    ["rust-analyzer"] = {
-      assist = {
-        importGranularity = "module",
-        importPrefix = "self",
-      },
-      diagnostics = {
-        enable = true,
-        enableExperimental = true,
-      },
-      cargo = {
-        loadOutDirsFromCheck = true
-      },
-      procMacro = {
-        enable = true
-      },
-      inlayHints = {
-        chainingHints = true,
-        parameterHints = true,
-        typeHints = true,
-      },
-    }
-  }
-}
-
-config.cssls.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-
-config.html.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-}
-
-config.sumneko_lua.setup {
-  on_attach = function(client, bufnr)
-    client.server_capabilities.document_highlight = true
-    on_attach(client, bufnr)
-    null_ls_format(client, bufnr)
-  end,
-  settings = {
-    Lua = {
-      runtime = {
-        version = 'LuaJIT',
-      },
-      diagnostics = {
-        globals = {
-          'vim',
-        }
-      }
-    }
-  }
 }

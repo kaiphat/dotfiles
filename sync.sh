@@ -18,8 +18,15 @@ set paths                  \
   .config/wezterm/wezterm.lua \
   .config/helix \
   .config/picom \
+  .config/bspwm \
+  .config/sxhkd \
+  .config/rofi \
+  .config/polybar \
+  .config/nushell \
+  .config/zathura \
   .config/awesome \
-  .config/nushell
+  .config/i3 \
+  .config/dunst
 
 set dotfiles ~/dotfiles
 

@@ -2,6 +2,9 @@
 	email = i.punko@pixelplex.io
 	name = Ilya Punko
 	safecrlf = false
+	signingkey = 6944BAF93A2A7005
+[commit]
+  gpgsign = true
 [core]
 	autocrlf = input
 	safecrlf = false
@@ -12,31 +15,37 @@
 [diff-so-fancy]
   markEmptyLines = false
 [alias]
-	l = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --max-count 12
-	lm = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --max-count 1000
-	a = add -A
-	f = fetch origin
-	ch = checkout
+	l   = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --max-count 12
+	lm  = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --max-count 1000
+	a   = add -A
+	f   = fetch origin
+	ch  = checkout
+	chd  = checkout develop
 	chb = checkout -b
-	c = commit -m
-	ca = commit --amend --no-edit
-	s = stash
-	sa = stash apply
-	pl = pull origin 
+	c   = commit -m
+	ca  = commit --amend --no-edit
+	s   = stash
+	sa  = stash apply
+	pl  = pull origin
+  plr  = !sh -c 'git pull origin $1 --rebase' --
 	plh = !git pull origin $(git rev-parse --abbrev-ref HEAD)
-	p = push origin
-  ph = push origin HEAD
-	d = diff HEAD
-  d1 = diff HEAD~1
-	ds = diff HEAD --shortstat
+	p   = push origin
+  ph  = push origin HEAD
+  phf = push origin HEAD -f
+	d   = diff HEAD
+  d1  = diff HEAD~1
+	ds  = diff HEAD --shortstat
 	ds1 = diff HEAD~1 --shortstat
   # list branches sorted by last modified
-  b = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
-  bd = branch -D
-	m = merge
-  ce = config --global --edit
-  rs = reset --soft HEAD~1
-  cp = cherry-pick
+  b   = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+  bd  = branch -D
+	m   = merge
+  ce  = config --global --edit
+  rs  = !sh -c 'git reset --soft HEAD~$1' --
+  refresh  = !sh -c 'git reset --hard HEAD~100 && git plh' --
+  rc  = rebase --continue
+  ra  = rebase --abort
+  cp  = cherry-pick
 [difftool]
   prompt = true
 [diff]

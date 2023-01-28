@@ -3,21 +3,16 @@
 --   pink = '#fca2af',
 --   line = '#272e35', -- for lines like vertsplit
 --   green = '#9fe8c3',
---   vibrant_green = '#9ce5c0',
 --   blue = '#99aee5',
 --   nord_blue = '#9aa8cf',
---   yellow = '#fbdf90',
 --   sun = '#fbdf9a',
 --   purple = '#c2a2e3',
---   dark_purple = '#b696d7',
---   teal = '#92dbb6',
 --   orange = '#EDA685',
 --   cyan = '#b5c3ea',
 --   statusline_bg = '#181f26',
 --   lightbg = '#222930',
 --   pmenu_bg = '#ef8891',
 --   folder_bg = '#99aee5',
-
 -- Rosewater	#f2d5cf
 -- Flamingo	#eebebe
 -- aPink	#f4b8e4
@@ -41,31 +36,34 @@
 -- Surface2	#626880
 -- Surface1	#51576d
 -- Surface0	#414559
--- Base	#303446
--- Mantle	#292c3c
--- Crust	#232634
 
 
 local c = {
   bg = '#202837',
   fg = '#b4b6d7',
-  one_bg2 = '#2a3143',
+  one_bg2 = '#384155',
   one_bg3 = '#405879',
   one_bg4 = '#486892',
+  one_bg5 = '#253147',
 
   cyan         = '#a3b8ef',
   blue_gray    = '#9398cf',
   purple       = '#c2a2e3',
   blue_nord    = '#81A1C1',
+  teal         = '#81c8be',
+  blue         = '#8caaee',
+  lavender     = '#babbf1',
+  sapphire     = '#85c1dc',
+  pink         = '#f4b8e4',
   blue_darkest = '#404060',
   yellow       = '#fbdf9a',
   red          = '#ef8891',
+  r1           = '#cb7f9a',
   green_blue   = '#66A0A0',
   green_tea    = '#9CC4B2',
   brown        = '#c8ae9d',
   orange       = '#fca2aa',
   orange_dark  = '#ef9f76',
-  nord_gray_2  = '#3b4252',
   gray         = '#6e88a6',
   gray_blue    = '#788aa3',
 }
@@ -81,8 +79,10 @@ hl.Ul   = { underline = true }
 hl.Uc   = { undercurl = true }
 
 -- GENERAL --
-hl.Normal = { fg = c.fg, bg = c.bg }
-hl.Underlined = { hl.Ul }
+hl.Normal = { fg = c.fg, bg = nil }
+hl.NormalNC = { fg = c.fg, bg = nil }
+hl.SignColumn = { fg = c.fg, bg = nil }
+hl.Underlined = { hl.Uc }
 hl.Bold = { hl.Bold, }
 hl.Italic = { hl.It }
 hl.Error = { fg = c.blue_gray }
@@ -108,7 +108,7 @@ hl.Folded = { fg = c.gray }
 hl.CursorLineNr = { hl.LineNr, fg = c.fg, hl.Bold }
 hl.MoreMsg = { fg = c.green_blue }
 hl.Float = { bg = c.one_bg2 }
-hl.NormalFloat = { bg = c.one_bg2 }
+hl.NormalFloat = { bg = c.one_bg5 }
 hl.FloatBorder = { fg = hl.NormalFloat.bg, bg = hl.NormalFloat.bg }
 hl.FloatShadow = { bg = nil }
 hl.FloatShadowThrough = { bg = nil }
@@ -117,8 +117,8 @@ hl.Pmenu = { hl.NormalFloat }
 hl.PmenuSel = { hl.Visual }
 hl.PmenuSbar = { bg = c.bg } -- scroll
 hl.PmenuThumb = { bg = hl.Visual.bg }
-hl.Search = { fg = c.blue_darkest, bg = c.red }
-hl.IncSearch = { fg = c.blue_darkest, bg = c.red }
+hl.Search = { fg = c.one_bg2, bg = c.pink }
+hl.IncSearch = { fg = c.one_bg2, bg = c.pink }
 hl.MatchParen = { fg = c.red, bg = nil }
 hl.StatusLine = { bg = nil, fg = nil, gui = nil }
 hl.StatusLineNC = { bg = c.blue_darkest, fg = c.fg }
@@ -170,7 +170,7 @@ hl.DiagnosticVirtualTextWarn = { hl.DiagnosticVirtualTextError }
 hl.DiagnosticVirtualTextInfo = { hl.DiagnosticVirtualTextError }
 hl.DiagnosticVirtualTextHint = { hl.DiagnosticVirtualTextError }
 
-hl.DiagnosticUnderlineWarn = { hl.Ul, sp = hl.WarningMsg.fg }
+hl.DiagnosticUnderlineWarn = { hl.Uc, sp = hl.WarningMsg.fg, undercurl = true }
 hl.DiagnosticUnderlineInfo = { hl.DiagnosticUnderlineWarn }
 hl.DiagnosticUnderlineHint = { hl.DiagnosticUnderlineWarn }
 hl.DiagnosticUnderlineError = { hl.DiagnosticUnderlineWarn }
@@ -182,23 +182,28 @@ hl.NoiceLspProgressTitle = { fg = c.blue_gray }
 hl.NoiceLspProgressClient = { fg = c.blue_gray }
 hl.NoiceLspProgressSpinner = { fg = c.blue_gray }
 
+hl.NoiceVirtualText = { fg = c.one_bg2, bg = c.pink }
+
 -- TREESITTER --
 hl['@constructor'] = { fg = c.brown }
-hl['@type'] = { fg = c.green_blue }
-hl['@constant'] = { hl.Identifier, hl.Bold }
+hl['@type'] = { fg = c.gray_blue }
+hl['@field'] = { fg = c.cyan }
+hl['@property'] = { fg = c.cyan }
+hl['@keyword'] = { fg = c.teal }
+hl['@string'] = { fg = c.green_tea }
+hl['@constant'] = { fg = c.lavender }
 hl['@const.builtin'] = { hl.Number }
 hl['@const.macro'] = { hl.Number }
 hl['@method'] = { fg = c.blue_gray, hl.Bold }
-hl['@field'] = { fg = c.gray_blue }
 hl['@function'] = { hl['@method'] }
-hl['@function'] = { hl['@method'] }
+hl['@parameter'] = { fg = c.r1 }
 hl['@namespace'] = { hl.Special }
-hl['@property'] = { fg = c.gray }
-hl['@punct.bracket'] = { fg = c.one_bg4, hl.It, bg = nil }
+hl['@punctuation'] = { hl.It, fg = c.one_bg4, bg = nil }
+hl['@punct.bracket'] = { hl.It, fg = c.one_bg4, bg = nil }
 hl['@punct.delimiter'] = { hl['@punct.bracket'] }
 hl['@punct.special'] = { hl['@punct.bracket'] }
 hl['@string.escape'] = { fg = c.red, bg = nil }
-hl['@variable'] = { hl.Identifier }
+hl['@variable'] = { hl.Identifier, hl.Bold }
 hl['@variable.builtin'] = { hl.Number }
 hl['@tag'] = { hl.Special }
 hl['@emphasis'] = { hl.Italic }
@@ -304,11 +309,15 @@ hl.NotifyTRACEBorder = { hl.NotifyINFOBorder }
 hl.IndentBlanklineChar = { fg = c.blue_darkest }
 hl.IndentBlanklineContextChar = { fg = c.one_bg3 }
 
+-- MINI --
+hl.MiniIndentscopeSymbol = { fg = c.one_bg3 }
+hl.MiniTrailspace = { bg = c.sapphire }
+
 -- TELESCOPE --
-hl.TelescopeNormal = { fg = c.fg, bg = hl.NormalFloat.bg }
+hl.TelescopeNormal = { fg = c.fg, bg = c.bg }
 hl.TelescopeSelection = { bg = hl.Visual.bg }
-hl.TelescopeMatching = { fg = c.red, hl.Bold }
-hl.TelescopeBorder = { fg = hl.NormalFloat.bg, bg = hl.NormalFloat.bg }
+hl.TelescopeMatching = { hl.Search }
+hl.TelescopeBorder = { fg = c.bg, bg = c.bg }
 
 C = c.gray_blue
 hl.TelescopeSelectionCaret = { hl.TelescopeSelection, fg = C }
@@ -316,7 +325,7 @@ hl.TelescopePromptPrefix = { fg = C }
 hl.TelescopePromptCounter = { fg = C }
 hl.TelescopePromptTitle = { fg = C }
 
-C = c.nord_gray_2
+C = c.one_bg2
 hl.TelescopePromptNormal = { bg = C }
 hl.TelescopePromptBorder = { fg = C, bg = C }
 

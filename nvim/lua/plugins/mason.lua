@@ -1,12 +1,37 @@
-local mason = load('mason')
-if not mason then return end
-
-local mason_lspconfig = load("mason-lspconfig")
-if not mason_lspconfig then return end
-
-mason_lspconfig.setup {
-  automatic_installation = false,
+local tools = {
+  'stylua',
+  'lua-language-server',
+  'prettierd',
+  'rust-analyzer',
+  'typescript-language-server',
+  'json-lsp',
 }
 
-mason.setup {
+return {
+  {
+    'williamboman/mason.nvim',
+    dependencies = {
+      'williamboman/mason-lspconfig.nvim',
+    },
+    config = function()
+
+      local mason = require 'mason'
+      local mr = require 'mason-registry'
+      local mason_lspconfig = require 'mason-lspconfig'
+
+      mason.setup()
+
+      for _, tool in ipairs(tools) do
+        local p = mr.get_package(tool)
+        if not p:is_installed() then
+          p:install()
+        end
+      end
+
+      mason_lspconfig.setup {
+        automatic_installation = true,
+      }
+
+    end,
+  }
 }

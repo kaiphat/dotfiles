@@ -1,28 +1,32 @@
-local null_ls = load('null-ls')
-if not null_ls then return end
+return {
+  'jose-elias-alvarez/null-ls.nvim',
+  event = 'BufReadPre',
+  config = function()
+    local null_ls = require 'null-ls'
+    local formattings = null_ls.builtins.formatting
 
-local formattings = null_ls.builtins.formatting
-
--- local formatting = 
-null_ls.setup {
-  sources = {
-    formattings.prettierd.with({
-      filetypes = {
-        "html",
-        "json",
-        "yaml",
-        "markdown",
-        "css",
-        "scss",
-        "javascript",
-        "typescript",
-        "javascriptreact",
-        "typescriptreact",
-        "js",
-        "ts",
-      },
-      -- extra_args = { '--single-quote', '--semi', 'false' },
-    }),
-    formattings.stylua
-  }
+    null_ls.setup {
+      debounce = 150,
+      sources = {
+        formattings.prettierd.with({
+          filetypes = {
+            'html',
+            'json',
+            'yaml',
+            'markdown',
+            'css',
+            'scss',
+            'javascript',
+            'typescript',
+            'javascriptreact',
+            'typescriptreact',
+            'js',
+            'ts',
+          },
+          -- extra_args = { '--single-quote', '--semi', 'false' },
+        }),
+        formattings.stylua
+      }
+    }
+  end
 }

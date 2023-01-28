@@ -2,86 +2,103 @@ local wezterm = require 'wezterm'
 
 -- FONTS --
 
-local font = function(name, params)
+local get_font_params = function(name, params)
   local names = {
     name,
-    'JetBrainsMono Nerd Font',
+    {
+      family = "Symbols Nerd Font Mono",
+      scale = 0.6,
+    }
   }
 
   return wezterm.font_with_fallback(names, params)
 end
 
+local function get_font_rules(name, params)
+  local names = {
+    name,
+    {
+      family = "Symbols Nerd Font Mono",
+      scale = 0.65,
+    }
+  }
+
+  return {
+    {
+      font = wezterm.font_with_fallback(names, params)
+    }
+  }
+end
+
+local weights = {
+  R = 'Regular',
+  B = 'Bold',
+  SB = 'DemiBold',
+  M = 'Medium'
+}
+
 local font_config = ({
   jet_brains = {
-    -- font_size = 9.6,
+    font_size = 9.4,
+    cell_width = 0.87,
+    line_height = 0.89,
+    font = get_font_params('JetBrainsMono Nerd Font'),
+    font_rules = get_font_rules('JetBrainsMono Nerd Font', { weight = weights.M }),
+  },
+  iosevka = {
     font_size = 10.5,
-    font = wezterm.font('JetBrainsMono Nerd Font'),
+    line_height = 0.81,
+    cell_width = 1,
+    font = get_font_params('Iosevka SS12'),
+    font_rules = get_font_rules('Iosevka SS12', { italic = false, weight = weights.SB })
+  },
+  victor_mono = {
+    font_size = 10,
+    line_height = 0.80,
+    font = get_font_params('VictorMono'),
+    font_rules = get_font_rules('VictorMono', { italic = false })
+  },
+  caskaydia = {
+    font_size = 10,
+    line_height = 0.94,
+    cell_width = 0.83,
+    font = wezterm.font('CaskaydiaCovePL Nerd Font'),
     font_rules = {
       {
         italic = true,
-        font = font('JetBrainsMono Nerd Font', { italic = true, weight = 'Medium' }),
+        font = wezterm.font('CaskaydiaCovePL Nerd Font', { italic = false, weight = 'Regular' })
       },
       {
         intensity = 'Bold',
-        font = font('JetBrainsMono Nerd Font', { weight = 'Medium' }),
+        font = wezterm.font('CaskaydiaCovePL Nerd Font', { italic = false, weight = 'Regular' })
       },
       {
-        font = font('JetBrainsMono Nerd Font', { weight = 'Medium' }),
-      },
-    },
-    line_height = 1.2,
-  },
-  iosevka = {
-    font_size = 11,
-    font = wezterm.font('Iosevka Nerd Font'),
-    line_height = 1.14,
-    font_rules = {
-      {
-        font = font('Iosevka Nerd Font', { italic = false, weight = 'Medium' })
-      }
-    }
-  },
-  victor_mono = {
-    font_size = 10.4,
-    font = font('VictorMono'),
-    line_height = 1.24,
-    font_rules = {
-      {
-        font = font('VictorMono', { italic = false })
-      }
-    }
-  },
-  caskaydia = {
-    font_size = 10.4,
-    font = font('CaskaydiaCovePL Nerd Font'),
-    line_height = 1.3,
-    font_rules = {
-      {
-        font = font('CaskaydiaCovePL Nerd Font', { italic = false, weight = 'Regular' })
+        font = wezterm.font('CaskaydiaCovePL Nerd Font', { italic = false, weight = 'Regular' })
       }
     }
   },
   mononoki = {
-    font_size = 10.9,
-    font = font 'mononoki Nerd Font',
-    line_height = 1.23,
-    font_rules = {
-      {
-        font = font('mononoki Nerd Font', { italic = false, weight = 'Medium' })
-      }
-    }
+    font_size = 10,
+    cell_width = 0.83,
+    line_height = 0.98,
+    font = get_font_params('mononoki Nerd Font'),
+    font_rules = get_font_rules('mononoki Nerd Font', { italic = false, weight = weights.B })
   },
   fira = {
-    font_size = 10,
-    font = font 'FiraCode Nerd Font',
-    line_height = 1.37,
-    font_rules = {
-      {
-        font = font('FiraCode Nerd Font', { italic = false, weight = 'Medium' })
-      }
-    }
+    font_size = 9.3,
+    line_height = 0.9,
+    cell_width = 0.83,
+    font = get_font_params('FiraCode Nerd Font'),
+    font_rules = get_font_rules('FiraCode Nerd Font', { italic = false, weight = weights.B })
   },
-}).caskaydia
+  hack = {
+    font_size = 10,
+    line_height = 1,
+    cell_width = 0.8,
+    font = get_font_params('Hack Nerd Font'),
+    font_rules = get_font_rules('Hack Nerd Font', { italic = false, weight = weights.R })
+  },
+}).iosevka
 
 -- UTILS --
 
@@ -139,22 +156,28 @@ local colors = {
 }
 
 local padding = {
-  left = 4,
-  right = 4,
-  top = 1,
-  bottom = 2,
+  left = 0,
+  right = 0,
+  top = 0,
+  bottom = 0,
 }
 
 -- RESULT --
+
+-- local gpus = wezterm.gui.enumerate_gpus()
 
 local config = {
   colors = colors,
   window_padding = padding,
   enable_tab_bar = false,
   scrollback_lines = 10000,
-  dpi = 192,
-  enable_wayland = true,
-  window_background_opacity = 1.0,
+  cursor_blink_rate = 750,
+  max_fps = 120,
+  animation_fps = 120,
+  window_background_opacity = 1,
+  enable_kitty_graphics = true,
+  default_cursor_style = 'BlinkingBlock',
+  freetype_load_target = 'HorizontalLcd',
 }
 
 return merge {

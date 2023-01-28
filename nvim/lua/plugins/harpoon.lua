@@ -1,8 +1,29 @@
-local harpoon = load("harpoon")
-if not harpoon then return end
+return {
+  'ThePrimeagen/harpoon',
+  config = function()
+    local harpoon = require 'harpoon'
 
-require("harpoon").setup({
-	menu = {
+    harpoon.setup {
+      menu = {
         width = 100
-	},
-})
+      },
+    }
+
+    local ui = require('harpoon.ui')
+    local mark = require('harpoon.mark')
+
+    map('n', 'mm', function()
+      mark.toggle_file()
+    end)
+    map('n', "'m", function()
+      ui.toggle_quick_menu()
+    end)
+    map('n', 'mn', function()
+      ui.nav_next()
+    end)
+    map('n', 'mp', function()
+      ui.nav_prev()
+    end)
+
+  end,
+}

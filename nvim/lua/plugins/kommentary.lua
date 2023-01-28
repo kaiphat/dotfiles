@@ -1,9 +1,16 @@
-local kommentary = load('kommentary.config')
-if not kommentary then return end
+return {
+  'echasnovski/mini.comment',
+  config = function()
 
-kommentary.use_extended_mappings()
+    local comment = require 'mini.comment'
 
-kommentary.configure_language("default", {
-  prefer_single_line_comments = true,
-  ignore_whitespace = true
-})
+    comment.setup {
+      mappings = {
+        comment = 'gc',
+        comment_line = 'gcc',
+        textobject = 'gc',
+      },
+    }
+
+  end
+}

@@ -1,5 +1,8 @@
-local colorizer = load('colorizer')
-if not colorizer then return end
+return {
+  'norcalli/nvim-colorizer.lua',
+  config = function()
+    local colorizer = require 'colorizer'
 
-colorizer.setup()
-
+    colorizer.setup()
+  end
+}

@@ -1,4 +1,4 @@
-local u = require('utils')
+local u = require 'utils'
 
 map('n', '<F1>', ":w<cr>:e ++ff=dos<cr>:w ++ff=unix<cr>")
 map('n', '<F9>', ':LspRestart<cr>')
@@ -42,13 +42,17 @@ map('n', '<esc>', ":nohl<cr>")
 
 map('n', 'Y', 'y$')
 
-map('n', 'n', 'nzz')
-map('n', 'N', 'Nzz')
+-- map('n', 'n', 'nzz')
+-- map('n', 'N', 'Nzz')
 map('n', 'J', 'Jzz')
-map('n', '*', '*zz')
-map('n', '#', '#zz')
+-- map('n', '*', '*zz')
+-- map('n', '#', '#zz')
 
 map('n', ',,', '^')
+map('n', ',s', ':split<cr>')
+map('n', ',v', ':vsplit<cr>')
+map('n', ",x", ':q<cr>')
+
 map('n', 'Q', 'q')
 
 for char in string.gmatch('w\'"`p<({[', '.') do
@@ -58,11 +62,9 @@ for char in string.gmatch('w\'"`p<({[', '.') do
 end
 
 -- utils
-map('v', '<leader>uaq', ':EasyAlign /\\C["(a-z:\']/ {"rm": 0} <cr>')
 map('n', '<leader>ut', function()
   vim.cmd '%s/\\s\\+$//'
 end)
-map('x', '<leader>uus', ':s/.*/\\=v:lua.upperSql(submatch(0))/g<cr>:nohl<cr>')
 map('n', '<leader>uus', function() -- upper sql
   vim.cmd '%s/.*/\\=v:lua.upperSql(submatch(0))'
   vim.cmd 'nohl'
@@ -86,67 +88,3 @@ for letter in string.gmatch('abcdefghijkloqrstuvwxyz', '.') do
   map('n', 'm' .. letter, 'm' .. letter:upper())
   map('n', "'" .. letter, "'" .. letter:upper())
 end
-
--- focus
-map('n', '<leader>mt', function() require 'focus'.focus_toggle() end)
-map('n', ',v', function() vim.cmd 'vs' end)
-map('n', ',s', function() vim.cmd 'sp' end)
-map('n', ',x', function()
-  vim.cmd 'q'
-end)
-map('n', ',X', function()
-  vim.cmd 'wa'
-  vim.cmd '%bd|e#'
-end)
-
-map('n', '<leader>i', function()
-  require 'hop'.hint_char1 {}
-end)
-
--- ts lsp utils
-map('n', '<leader>ti', ':TypescriptAddMissingImports<cr>')
-map('n', '<leader>tr', ':TypescriptRenameFile<cr>')
-map('n', '<leader>td', ':TypescriptRemoveUnused<cr>')
-map('n', '<leader>to', ':TypescriptOrganizeImports<cr>')
-
--- treesitter unit
-map('x', 'u', ':lua require"utils.unit".select(true)<cr>')
-map('o', 'u', ':<c-u>lua require"utils.unit".select(true)<cr>')
-map('n', ']]', ':lua require"utils.unit".moveToEnd()<cr>')
-map('n', '[[', ':lua require"utils.unit".moveToStart()<cr>')
-
--- harpoon
-map('n', 'mm', function()
-  require("harpoon.mark").toggle_file()
-end)
-map('n', "'m", function()
-  require("harpoon.ui").toggle_quick_menu()
-end)
-map('n', 'mn', function()
-  require("harpoon.ui").nav_next()
-end)
-map('n', 'mp', function()
-  require("harpoon.ui").nav_prev()
-end)
-
--- neo tree
-map('n', '<leader>o', function()
-  require("neo-tree.command").execute {
-    source = 'filesystem',
-    position = 'float',
-    dir = u.get_current_path(),
-  }
-end)
-map('n', '<leader>O', function()
-  require("neo-tree.command").execute {
-    source = 'filesystem',
-    position = 'float',
-    dir = root_path,
-  }
-end)
-map('n', '<leader><C-o>', function()
-  require("neo-tree.command").execute {
-    source = 'git_status',
-    position = 'float',
-  }
-end)

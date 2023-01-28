@@ -1,8 +1,19 @@
-local hop = load('hop')
-if not hop then return end
+return {
+  'phaazon/hop.nvim',
+  branch = 'v2',
+  config = function()
 
-hop.setup {
-  keys = 'jfkdls;aieowpqQFPDLS:AIEOWKJ',
-  case_insensitive = false,
-  -- uppercase_labels = true,
+    local hop = require 'hop'
+
+    hop.setup {
+      keys = 'jfkdls;aieowpqQFPDLS:AIEOWKJ',
+      case_insensitive = false,
+      -- uppercase_labels = true,
+    }
+
+    map('n', '<leader>i', function()
+      hop.hint_char1 {}
+    end)
+
+  end
 }

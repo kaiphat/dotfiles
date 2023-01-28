@@ -1,9 +1,6 @@
-local feline = load('feline')
-if not feline then return end
-
-local getPosition = function()
-  local current_line = vim.fn.line(".")
-  local total_line = vim.fn.line("$")
+local get_position = function()
+  local current_line = vim.fn.line('.')
+  local total_line = vim.fn.line('$')
 
   if current_line < 10 then
     current_line = '00' .. current_line
@@ -30,197 +27,163 @@ local colors = {
   pink       = '#ff75a0',
 }
 
-local active_components = {}
-local inactive_components = {}
-
-table.insert(active_components, {
+local active_components = {
   {
-    icon = '',
-    provider = {
-      name = 'file_info',
-      opts = {
-        type = 'relative',
-        file_modified_icon = ''
-      }
-    },
-    hl = {
-      fg = colors.dark_blue,
-      bg = colors.cyan
-    },
-    left_sep = {
-      str = ' ',
+    {
+      icon = '',
+      provider = {
+        name = 'file_info',
+        opts = {
+          type = 'relative',
+          file_modified_icon = ''
+        }
+      },
       hl = {
-        bg = colors.cyan,
-      }
-    },
-    right_sep = {
-      {
+        fg = colors.dark_blue,
+        bg = colors.cyan
+      },
+      left_sep = {
         str = ' ',
         hl = {
           bg = colors.cyan,
-        },
+        }
       },
-      {
-        str = 'right_filled',
-        hl = {
-          fg = colors.cyan,
-          -- bg = colors.dark_blue,
+      right_sep = {
+        {
+          str = ' ',
+          hl = {
+            bg = colors.cyan,
+          },
+        },
+        {
+          str = 'right_filled',
+          hl = {
+            fg = colors.cyan,
+            -- bg = colors.dark_blue,
+          }
         }
       }
-    }
-  },
-  {
-    icon = '✚',
-    provider = 'git_diff_added',
-    hl = {
-      fg = colors.green
     },
-    left_sep = ' ',
-  },
-
-  {
-    icon = '~',
-    provider = 'git_diff_changed',
-    hl = {
-      fg = colors.yellow
-    },
-    left_sep = ' ',
-  },
-
-  {
-    icon = '-',
-    provider = 'git_diff_removed',
-    hl = {
-      fg = colors.red
-    },
-    left_sep = ' ',
-  },
-
-  {
-    icon = '✖',
-    provider = 'diagnostic_errors',
-    hl = {
-      fg = colors.pink
-    },
-    left_sep = ' ',
-  },
-
-  -- gap
-  {
-    provider = function()
-      return ' '
-    end,
-    hl = {
-      fg = colors.pink
-    },
-  }
-})
-
-table.insert(active_components, {})
-
-table.insert(active_components, {
-  {
-    icon = ' ',
-    provider = 'git_branch',
-    hl = {
-      fg = colors.yellow,
-      bg = colors.dark_blue
-    },
-    right_sep = {
-      {
-        str = ' ',
-        hl = {
-          bg = colors.dark_blue,
-        },
-      },
-    },
-    left_sep = {
-      {
-        str = 'left_filled',
-        hl = {
-          fg = colors.dark_blue,
-        }
-      },
-      {
-        str = ' ',
-        hl = {
-          bg = colors.dark_blue,
-        }
-      },
-    }
-  },
-
-  {
-    icon = ' ',
-    provider = getPosition,
-    hl = {
-      fg = colors.dark_blue,
-      bg = colors.light_blue
-    },
-    right_sep = {
-      str = ' ',
+    {
+      icon = '+',
+      provider = 'git_diff_added',
       hl = {
-        bg = colors.light_blue
+        fg = colors.green
+      },
+      left_sep = ' ',
+    },
+
+    {
+      icon = '~',
+      provider = 'git_diff_changed',
+      hl = {
+        fg = colors.yellow
+      },
+      left_sep = ' ',
+    },
+
+    {
+      icon = '-',
+      provider = 'git_diff_removed',
+      hl = {
+        fg = colors.red
+      },
+      left_sep = ' ',
+    },
+
+    {
+      icon = 'x',
+      provider = 'diagnostic_errors',
+      hl = {
+        fg = colors.pink
+      },
+      left_sep = ' ',
+    },
+
+    -- gap
+    {
+      provider = function()
+        return ' '
+      end,
+      hl = {
+        fg = colors.pink
+      },
+    },
+  },
+  {},
+  {
+    {
+      icon = ' ',
+      provider = 'git_branch',
+      hl = {
+        fg = colors.yellow,
+        bg = colors.dark_blue
+      },
+      right_sep = {
+        {
+          str = ' ',
+          hl = {
+            bg = colors.dark_blue,
+          },
+        },
+      },
+      left_sep = {
+        {
+          str = 'left_filled',
+          hl = {
+            fg = colors.dark_blue,
+          }
+        },
+        {
+          str = ' ',
+          hl = {
+            bg = colors.dark_blue,
+          }
+        },
       }
     },
-    left_sep = {
-      {
-        str = 'left_filled',
-        hl = function()
-          if require('feline.providers.git').git_info_exists() then
-            return {
-              bg = colors.dark_blue,
-              fg = colors.light_blue,
-            }
-          else
-            return {
-              fg = colors.light_blue,
-            }
-          end
-        end,
+
+    {
+      icon = ' ',
+      provider = get_position,
+      hl = {
+        fg = colors.dark_blue,
+        bg = colors.light_blue
       },
-      {
+      right_sep = {
         str = ' ',
         hl = {
           bg = colors.light_blue
         }
       },
-    }
-  },
+      left_sep = {
+        {
+          str = 'left_filled',
+          hl = function()
+            if require('feline.providers.git').git_info_exists() then
+              return {
+                bg = colors.dark_blue,
+                fg = colors.light_blue,
+              }
+            else
+              return {
+                fg = colors.light_blue,
+              }
+            end
+          end,
+        },
+        {
+          str = ' ',
+          hl = {
+            bg = colors.light_blue
+          }
+        },
+      }
+    },
+  }
+}
 
-  -- {
-  --   icon = '',
-  --   provider = getTime,
-  --   hl = {
-  --     fg = colors.dark_blue,
-  --     bg = colors.cyan
-  --   },
-  --   right_sep = {
-  --     str = ' ',
-  --     hl = {
-  --       bg = colors.cyan
-  --     }
-  --   },
-  --   left_sep = {
-  --     {
-  --       str = 'left_filled',
-  --       hl = {
-  --         fg = colors.cyan,
-  --         bg = colors.light_blue
-  --       }
-  --     },
-  --     {
-  --       str = ' ',
-  --       hl = {
-  --         bg = colors.cyan
-  --       }
-  --     },
-  --   }
-  -- }
-})
-
-
-table.insert(inactive_components, {
+local inactive_components = {
   {
     icon = '',
     provider = {
@@ -234,21 +197,28 @@ table.insert(inactive_components, {
     },
     left_sep = ' ',
   },
-})
+}
 
-feline.setup {
-  theme = {
-    bg = 'NONE'
-  },
-  disable = {
-    filetypes = {
-      'NvimTree',
-      'packer',
-      'Telescope'
-    },
-  },
-  components = {
-    active = active_components,
-    inactive = inactive_components,
-  }
+return {
+  'feline-nvim/feline.nvim',
+  config = function()
+    local feline = require 'feline'
+
+    feline.setup {
+      theme = {
+        bg = 'NONE'
+      },
+      disable = {
+        filetypes = {
+          'NvimTree',
+          'packer',
+          'Telescope'
+        },
+      },
+      components = {
+        active = active_components,
+        inactive = inactive_components,
+      }
+    }
+  end
 }

@@ -1,18 +1,20 @@
 ### ENVIROMENTS ###
-set pure_symbol_prompt '$'
-#set pure_symbol_prompt 
-#set pure_symbol_prompt ❯
+#set pure_symbol_prompt '$'
+#set pure_symbol_prompt ''
+set pure_symbol_prompt ❯
 
 #set -gx nvm_default_version v14.18.3
 #set -gx nvm_default_version v16.14.2
 set -gx nvm_default_version v18.12.0
 set -gx ANDROID_HOME $HOME/Android/Sdk
 set -gx EDITOR nvim
-set -gx MANPAGER "most"
+set -gx MANPAGER 'less'
 set -gx PAGER 'nvim -c "set nowrap" -R'
 set -gx TERMINAL wezterm
-set -gx NODE_OPTIONS "--max-old-space-size=4096"
+set -gx LUA_DIR /usr/bin/lua
+set -gx LD_LIBRARY_PATH /opt/oracle/instantclient_21_8
 set -U fish_greeting
+set -U ignoreeof true
 
 function fish_right_prompt 
 end
@@ -31,7 +33,12 @@ fish_add_path -aP /opt/ReactNativeDebugger
 fish_add_path -aP /usr/local/go/bin
 fish_add_path -aP $HOME/go/bin
 fish_add_path -aP /usr/.local/bin
+fish_add_path -aP /usr/bin/lua
+fish_add_path -aP /usr/bin/i3
+fish_add_path -aP /usr/bin/i3bar
 fish_add_path -aP $HOME/.cargo/bin
+fish_add_path -aP $HOME/.cargo/bin/rustc
+fish_add_path -aP $HOME/.krew/bin
 
 ### ALIASES ###
 
@@ -55,25 +62,44 @@ function dps
   grep $argv
 end
 
-# common
+# common #
 alias g "git"
 alias todo "nvim ~/notes/deals.norg -c \"set signcolumn=no\""
 alias notes "nvim ~/notes/notes.norg -c \"set signcolumn=no\""
-alias t "tmux attach -t main || tmux new -s main"
+# tmux #
+#alias ssh "wezterm ssh"
+alias t "tmux"
+alias tn "t new-session -s"
+alias ta "t attach-session"
+alias td "t detach"
+alias st "speedtest"
 alias y "yarn"
 alias fd "fdfind"
 alias grep "grep -i --color"
 alias n "nvim"
-alias ssh "kitty +kitten ssh"
+alias req "http -p Bb"
 alias mkdir "mkdir -p"
 alias less "less -MSx4 -FXR --shift 10"
-alias ls "ls -a --group-directories-first --color=auto"
+alias ls "ls -A --group-directories-first --color=auto"
 alias rm "rm -rf"
 alias clip "xclip -selection c"
 alias pj "xclip -o | jq '.' | clip"
 alias nest "npx @nestjs/cli"
 alias nvim-start "nvim --startuptime _s.log -c exit && tail -100 _s.log | bat && rm _s.log"
 alias ... "cd ../../"
+
+
+# kuber namespaces #
+alias kuber-namespace-gladwin-prod "aws eks update-kubeconfig --profile gladwin --region eu-central-1 --name gladwin-frankfurt-prod"
+alias kuber-namespace-gladwin-stage "aws eks update-kubeconfig --region eu-central-1 --name gladwin-frankfurt-stage"
+alias kuber-namespace-gladwin-dev "cat ~/.kube/config-dev > ~/.kube/config"
+# databases #
+alias db-gladwin-prod "kubectl -n 768-gladwin-tech-production port-forward pod/acid-gladwindb-0 8000:5432"
+alias db-gladwin-dev "kubectl -n 768-gladwin-tech-develop port-forward pod/acid-gladwindb-0 8000:5432"
+alias db-gladwin-stage "kubectl -n 768-gladwin-tech-staging port-forward pod/acid-gladwindb-0 8000:5432"
+alias db-green-prod "ssh -4 -L 1234:10.1.1.210:5432 green"
+alias db-green-master "ssh -4 -L 1234:localhost:27182 pp-master"
+alias redis-gladwin-prod "kubectl -n 768-gladwin-tech-production port-forward pod/rfr-redis-0 27777:26379"
 
 function pq
   xclip -o |\
@@ -93,31 +119,6 @@ function gp -a message
   git add -A 
   and git commit -m "$message" 
   and git push origin $branch
-end
-
-# gup develop 1
-function gup -a parent count
-  if test -z "$parent"
-    echo 'error: empty parrent'
-    return
-  end
-  if test -z "$count"
-    echo 'error: there isn\'t count'
-    return
-  end
-
-  set branch (git branch --show-current)
-  set stash_name (date +"%F.%T.$branch")
-
-  git add -A
-  and git reset --soft HEAD~$count
-  and git stash save $stash_name
-  and git checkout $parent
-  and git pull origin $parent
-  and git branch -D $branch
-  and git checkout -b $branch
-  and git stash apply
-  and git add -A
 end
 
 function ff
@@ -173,10 +174,17 @@ set fish_color_operator 'red'
 ### BREW ###
 eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
-### AUTOSTART ###
-if not set -q TMUX
-  set -g TMUX 1
-  tmux attach -t main || tmux new -s main
+### TMUX ###
+function refresh_tmux_vars --on-event="fish_preexec"
+  if set -q TMUX
+    tmux showenv -s | string replace -rf '^((?:SSH|DISPLAY).*?)=(".*?"); export.*' 'set -gx $1 $2' | source
+  end
 end
 
-# starship init fish | source  
+### AUTOSTART ###
+#if not set -q TMUX
+#  set -g TMUX 1
+#  tmux attach -t main || tmux new -s main
+#end
+
+#alias ssh "kitty +kitten ssh"
