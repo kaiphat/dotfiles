@@ -37,35 +37,34 @@
 -- Surface1	#51576d
 -- Surface0	#414559
 
-
 local c = {
-  bg = '#202837',
-  fg = '#b4b6d7',
-  one_bg2 = '#384155',
-  one_bg3 = '#405879',
-  one_bg4 = '#486892',
-  one_bg5 = '#253147',
+  bg = "#202837",
+  fg = "#b4b6d7",
+  one_bg2 = "#384155",
+  one_bg3 = "#405879",
+  one_bg4 = "#486892",
+  one_bg5 = "#253147",
 
-  cyan         = '#a3b8ef',
-  blue_gray    = '#9398cf',
-  purple       = '#c2a2e3',
-  blue_nord    = '#81A1C1',
-  teal         = '#81c8be',
-  blue         = '#8caaee',
-  lavender     = '#babbf1',
-  sapphire     = '#85c1dc',
-  pink         = '#f4b8e4',
-  blue_darkest = '#404060',
-  yellow       = '#fbdf9a',
-  red          = '#ef8891',
-  r1           = '#cb7f9a',
-  green_blue   = '#66A0A0',
-  green_tea    = '#9CC4B2',
-  brown        = '#c8ae9d',
-  orange       = '#fca2aa',
-  orange_dark  = '#ef9f76',
-  gray         = '#6e88a6',
-  gray_blue    = '#788aa3',
+  cyan = "#a3b8ef",
+  blue_gray = "#9398cf",
+  purple = "#c2a2e3",
+  blue_nord = "#81A1C1",
+  teal = "#81c8be",
+  blue = "#8caaee",
+  lavender = "#babbf1",
+  sapphire = "#85c1dc",
+  pink = "#f4b8e4",
+  blue_darkest = "#404060",
+  yellow = "#fbdf9a",
+  red = "#ef8891",
+  r1 = "#cb7f9a",
+  green_blue = "#66A0A0",
+  green_tea = "#9CC4B2",
+  brown = "#c8ae9d",
+  orange = "#fca2aa",
+  orange_dark = "#ef9f76",
+  gray = "#6e88a6",
+  gray_blue = "#788aa3",
 }
 
 local hl = {}
@@ -73,17 +72,17 @@ local hl = {}
 C = ""
 
 -- BASE --
-hl.It   = { italic = true }
+hl.It = { italic = true }
 hl.Bold = { bold = true }
-hl.Ul   = { underline = true }
-hl.Uc   = { undercurl = true }
+hl.Ul = { underline = true }
+hl.Uc = { undercurl = true }
 
 -- GENERAL --
 hl.Normal = { fg = c.fg, bg = nil }
 hl.NormalNC = { fg = c.fg, bg = nil }
 hl.SignColumn = { fg = c.fg, bg = nil }
 hl.Underlined = { hl.Uc }
-hl.Bold = { hl.Bold, }
+hl.Bold = { hl.Bold }
 hl.Italic = { hl.It }
 hl.Error = { fg = c.blue_gray }
 hl.ErrorMsg = { hl.Error }
@@ -185,36 +184,45 @@ hl.NoiceLspProgressSpinner = { fg = c.blue_gray }
 hl.NoiceVirtualText = { fg = c.one_bg2, bg = c.pink }
 
 -- TREESITTER --
-hl['@constructor'] = { fg = c.brown }
-hl['@type'] = { fg = c.gray_blue }
-hl['@field'] = { fg = c.cyan }
-hl['@property'] = { fg = c.cyan }
-hl['@keyword'] = { fg = c.teal }
-hl['@string'] = { fg = c.green_tea }
-hl['@constant'] = { fg = c.lavender }
-hl['@const.builtin'] = { hl.Number }
-hl['@const.macro'] = { hl.Number }
-hl['@method'] = { fg = c.blue_gray, hl.Bold }
-hl['@function'] = { hl['@method'] }
-hl['@parameter'] = { fg = c.r1 }
-hl['@namespace'] = { hl.Special }
-hl['@punctuation'] = { hl.It, fg = c.one_bg4, bg = nil }
-hl['@punct.bracket'] = { hl.It, fg = c.one_bg4, bg = nil }
-hl['@punct.delimiter'] = { hl['@punct.bracket'] }
-hl['@punct.special'] = { hl['@punct.bracket'] }
-hl['@string.escape'] = { fg = c.red, bg = nil }
-hl['@variable'] = { hl.Identifier, hl.Bold }
-hl['@variable.builtin'] = { hl.Number }
-hl['@tag'] = { hl.Special }
-hl['@emphasis'] = { hl.Italic }
-hl['@underline'] = { hl.Underlined }
-hl['@strong'] = { hl.Bold }
-hl['@literal'] = { fg = c.red }
-hl['@note'] = { hl.DiagnosticInfo }
-hl['@warning'] = { hl.WarningMsg }
-hl['@danger'] = { hl.Error }
-hl['@number'] = { fg = c.red }
-hl['@boolean'] = { fg = c.orange_dark }
+hl["@constructor"] = { fg = c.brown }
+hl["@type"] = { fg = c.gray_blue }
+hl["@field"] = { fg = c.cyan }
+hl["@property"] = { fg = c.cyan }
+hl["@keyword"] = { fg = c.teal }
+hl["@string"] = { fg = c.green_tea }
+-- hl["@text"] = { underline = nil, undercurl = nil }
+-- hl["@spell"] = { underline = nil, undercurl = nil }
+hl["@text.uri"] = { fg = c.red, underline = nil }
+hl["@constant"] = { fg = c.lavender }
+hl["@const.builtin"] = { hl.Number }
+hl["@const.macro"] = { hl.Number }
+hl["@method"] = { fg = c.blue_gray, hl.Bold }
+hl["@function"] = { hl["@method"] }
+hl["@parameter"] = { fg = c.r1 }
+hl["@namespace"] = { hl.Special }
+hl["@punctuation"] = { hl.It, fg = c.one_bg4, bg = nil }
+hl["@punct.bracket"] = { hl.It, fg = c.one_bg4, bg = nil }
+hl["@punct.delimiter"] = { hl["@punct.bracket"] }
+hl["@punct.special"] = { hl["@punct.bracket"] }
+hl["@string.escape"] = { fg = c.red, bg = nil }
+hl["@variable"] = { hl.Identifier, hl.Bold }
+hl["@variable.builtin"] = { hl.Number }
+hl["@tag"] = { hl.Special }
+hl["@tag.delimiter"] = { hl.It, fg = c.one_bg4, bg = nil }
+hl["@tag.attribute"] = { fg = c.blue }
+hl["@emphasis"] = { hl.Italic }
+hl["@underline"] = { hl.Underlined }
+hl["@strong"] = { hl.Bold }
+hl["@literal"] = { fg = c.red }
+hl["@note"] = { hl.DiagnosticInfo }
+hl["@warning"] = { hl.WarningMsg }
+hl["@danger"] = { hl.Error }
+hl["@number"] = { fg = c.red }
+hl["@boolean"] = { fg = c.orange_dark }
+
+-- HTML --
+hl.htmlLink = { hl["@text.uri"] }
+
 -- visual parents
 hl.Type = { fg = c.orange_dark }
 
@@ -225,8 +233,8 @@ hl.NeoTreeDotfile = { hl.NeoTreeDimText }
 hl.NeoTreeMessage = { hl.NeoTreeDimText }
 hl.NeoTreeTitleBar = { hl.NeoTreeDimText }
 
--- NEORD --
-hl['@neorg.headings.1.title'] = { fg = c.purple }
+-- NEORG --
+hl["@neorg.headings.1.title"] = { fg = c.purple }
 
 -- TREESITTER CONTEXT --
 hl.TreesitterContext = { hl.Visual }
@@ -278,10 +286,10 @@ hl.GitGutterAdd = { hl.GitSignsAdd }
 hl.GitGutterChange = { hl.GitSignsChange }
 hl.GitGutterDelete = { hl.GitSignsDelete }
 
-hl.DiffAdd = { bg = '#223233' }
-hl.DiffChange = { bg = '#223233' }
+hl.DiffAdd = { bg = "#223233" }
+hl.DiffChange = { bg = "#223233" }
 hl.DiffText = { bg = hl.Visual.bg }
-hl.DiffDelete = { bg = '#321911', fg = '#321911' }
+hl.DiffDelete = { bg = "#321911", fg = "#321911" }
 
 -- NOTIFY --
 hl.NotifyINFOBody = { hl.NormalFloat }
@@ -349,7 +357,7 @@ C = c.yellow
 hl.HopNextKey = { fg = c.purple }
 hl.HopNextKey1 = { fg = c.green_tea }
 hl.HopNextKey2 = { fg = c.purple }
-hl.HopUnmatched = { fg = '#445577' }
+hl.HopUnmatched = { fg = "#445577" }
 
 -- FIDGET --
 C = c.gray
@@ -386,7 +394,6 @@ hl.CmpItemMenuDefault = { hl.NormalFloat }
 hl.NnnNormal = { hl.NvimTreeNormal }
 hl.NnnNormalNC = { hl.NnnNormal }
 
-
 -- HIGHLIGHT --
 
 local function remove_from_table(table, target_key)
@@ -406,16 +413,16 @@ local function flat(options)
 
   for key, value in pairs(options) do
     if is_table(value) then
-      options = merge_tables {
+      options = merge_tables({
         value,
         remove_from_table(options, key),
-      }
+      })
 
       need_repeat = true
     end
   end
 
-  if (need_repeat) then
+  if need_repeat then
     return flat(options)
   else
     return options
@@ -427,7 +434,7 @@ local function highlight(list)
     local flat_options = flat(options)
 
     for key, value in pairs(options) do
-      options[key] = value or 'NONE'
+      options[key] = value or "NONE"
     end
 
     vim.api.nvim_set_hl(0, group, flat_options)

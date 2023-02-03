@@ -4,20 +4,20 @@ return {
 
     local nnp = require 'no-neck-pain'
 
-    -- nnp.setup {
-    --   enableOnVimEnter = false,
+    nnp.setup {
+      enableOnVimEnter = false,
 
-    --   width = 120,
+      width = 105,
 
-    --   buffers = {
-    --     backgroundColor = nil,
+      buffers = {
+        backgroundColor = nil,
 
-    --     bo = {
-    --       filetype = 'norg',
-    --     }
-    --   },
+        bo = {
+          filetype = 'norg',
+        }
+      },
 
-   -- }
+   }
 
   end
 }

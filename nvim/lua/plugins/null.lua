@@ -6,7 +6,7 @@ return {
     local formattings = null_ls.builtins.formatting
 
     null_ls.setup {
-      debounce = 150,
+      debounce = 10,
       sources = {
         formattings.prettierd.with({
           filetypes = {

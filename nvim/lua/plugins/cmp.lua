@@ -1,44 +1,65 @@
 local function has_words_before()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+local function source_comparator(item1, item2)
+  local sources = {
+    nvim_lsp = 3,
+    buffer = 2,
+    luasnip = 1,
+  }
+
+  print(item1.source.name, item2.source.name)
+  local a = sources[item1.source.name] or 0
+  local b = sources[item2.source.name] or 0
+
+  if a == b then
+    return nil
+  else
+    return a > b
+  end
 end
 
 return {
-  'hrsh7th/nvim-cmp',
+  "hrsh7th/nvim-cmp",
   event = "InsertEnter",
   dependencies = {
-    'hrsh7th/cmp-path',
-    'hrsh7th/cmp-nvim-lsp',
-    'saadparwaiz1/cmp_luasnip',
-    'hrsh7th/cmp-buffer',
-    'onsails/lspkind.nvim',
+    "hrsh7th/cmp-path",
+    "hrsh7th/cmp-nvim-lsp",
+    "saadparwaiz1/cmp_luasnip",
+    "hrsh7th/cmp-buffer",
+    "onsails/lspkind.nvim",
   },
   config = function()
-    local cmp = require 'cmp'
-    local luasnip = require 'luasnip'
+    local cmp = require("cmp")
+    local luasnip = require("luasnip")
+    local compare = require("cmp.config.compare")
 
-    cmp.setup {
+    compare.locality.lines_count = 300
+
+    cmp.setup({
       preselect = cmp.PreselectMode.None,
-      -- local compare = require 'cmp.config.compare'
-      -- sorting = {
-      --   priority_weight = 2,
-      --   comparators = {
-      --     compare.offset,
-      --     compare.exact,
-      --     compare.recently_used,
-      --     compare.locality,
-      --     compare.length,
-      --     compare.score,
-      --     compare.scopes,
-      --     compare.kind,
-      --     compare.sort_text,
-      --     compare.order,
-      --   },
-      -- },
+      sorting = {
+        priority_weight = 2,
+        comparators = {
+          compare.recently_used,
+          source_comparator,
+          compare.locality,
+          compare.scopes,
+          compare.score,
+          compare.offset,
+          compare.length,
+          -- compare.kind,
+          -- compare.sort_text,
+          -- compare.order,
+          -- compare.exact,
+        },
+      },
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
-        end
+        end,
       },
       duplicates = {
         nvim_lsp = 1,
@@ -55,7 +76,7 @@ return {
         },
         documentation = {
           winhighlight = "FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
-        }
+        },
       },
       -- formatting = {
       --   format = function(entry, vim_item)
@@ -78,17 +99,20 @@ return {
           return kind
         end,
       },
-      mapping = cmp.mapping.preset.insert {
-        ["<C-p>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
-        ["<C-n>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
+      completion = {
+        keyword_length = 2,
+      },
+      mapping = cmp.mapping.preset.insert({
+        ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+        ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-Space>"] = cmp.mapping.complete(),
         -- ['<C-e>'] = cmp.mapping.close(),
-        ["<CR>"] = cmp.mapping.confirm {
+        ["<CR>"] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Insert,
           select = true,
-        },
+        }),
         -- ["<CR>"] = cmp.mapping.confirm { select = false },
         -- ["<Tab>"] = cmp.mapping(function(fallback)
         --   if cmp.visible() then
@@ -111,7 +135,7 @@ return {
           else
             fallback()
           end
-        end, { "i", "s", }),
+        end, { "i", "s" }),
         ["<S-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
@@ -121,35 +145,33 @@ return {
             fallback()
           end
         end, { "i", "s" }),
-      },
-      sources = cmp.config.sources {
+      }),
+      perfomance = {},
+      sources = cmp.config.sources({
         {
-          name = 'luasnip',
-          priority = 1
+          name = "nvim_lsp",
         },
         {
-          name = 'nvim_lsp',
-          priority = 9
+          name = "luasnip",
         },
         {
-          name = 'path',
-          priority = 8
+          name = "path",
         },
         {
-          name = 'buffer',
+          name = "buffer",
           option = {
             get_bufnrs = function()
               return vim.api.nvim_list_bufs()
-            end
+            end,
+            keyword_pattern = [[\k\+]],
           },
-          priority = 7
         },
-      },
+      }),
       experimental = {
         ghost_text = {
           hl_group = "LspCodeLens",
         },
-      }
-    }
-  end
+      },
+    })
+  end,
 }
