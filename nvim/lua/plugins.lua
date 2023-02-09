@@ -1,4 +1,4 @@
-local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -21,6 +21,9 @@ require('lazy').setup('plugins', {
   },
   change_detection = {
     enabled = false,
+  },
+  ui = {
+    border = 'rounded',
   },
   performance = {
     rtp = {
@@ -48,6 +51,6 @@ require('lazy').setup('plugins', {
         'tohtml',
         'tutor',
       },
-    }
-  }
+    },
+  },
 })

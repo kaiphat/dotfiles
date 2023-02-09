@@ -11,7 +11,6 @@ _G.is_table = function(table)
   return type(table) == 'table'
 end
 
-
 _G.merge_tables = function(list)
   local result = {}
 
@@ -26,4 +25,9 @@ end
 
 _G.assign = function(t1, t2)
   return vim.tbl_deep_extend('force', {}, t1, t2)
+end
+
+_G.merge = function(...)
+  local args = { ... }
+  return vim.tbl_extend('force', {}, unpack(args))
 end

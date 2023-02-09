@@ -1,7 +1,6 @@
 return {
   'L3MON4D3/LuaSnip',
   config = function()
-
     local ls = require 'luasnip'
     local fmt = require('luasnip.extras.fmt').fmt
     -- local rep = require("luasnip.extras").rep
@@ -19,145 +18,171 @@ return {
       return f(function(args)
         local str = args[1][1]
 
-        return { func(str) or "" }
+        return { func(str) or '' }
       end, { index })
     end
 
     ls.config.set_config {
       history = true,
-      updateevents = "TextChanged,TextChangedI",
+      updateevents = 'TextChanged,TextChangedI',
       delete_check_events = 'TextChanged,InsertLeave',
     }
 
     -- JAVASCRIPT --
 
     ls.add_snippets('javascript', {
-      s('co',
-        fmt("console.log('\\x1b[36m%s\\x1b[0m', JSON.stringify({{{}}}, null, 2))", {
-          i(1)
+      s(
+        'co',
+        fmt('console.log(\'\\x1b[36m%s\\x1b[0m\', JSON.stringify({{{}}}, null, 2))', {
+          i(1),
         })
       ),
 
-      s('nc', -- new class
+      s(
+        'nc', -- new class
         fmt(
           [[
             export class {} {{
             }}
-          ]], {
-          i(1, 'ClassName')
-        })
+          ]],
+          {
+            i(1, 'ClassName'),
+          }
+        )
       ),
 
-      s('nm', -- new async method
+      s(
+        'nm', -- new async method
         fmt(
           [[
             {}{}({}) {{
               {}
             }}
-          ]], {
-          c(1, {
-            t('async '),
-            t('')
-          }),
-          i(2, 'name'),
-          i(3, ''),
-          i(4, ''),
-        })
+          ]],
+          {
+            c(1, {
+              t 'async ',
+              t '',
+            }),
+            i(2, 'name'),
+            i(3, ''),
+            i(4, ''),
+          }
+        )
       ),
 
-      s('nf', -- new function
+      s(
+        'nf', -- new function
         fmt(
           [[
             const {} = {}({}) => {{
               const {}
               return
             }}
-          ]], {
-          i(1, 'name'),
-          c(2, {
-            t('async '),
-            t('')
-          }),
-          i(3),
-          i(4),
-        })
+          ]],
+          {
+            i(1, 'name'),
+            c(2, {
+              t 'async ',
+              t '',
+            }),
+            i(3),
+            i(4),
+          }
+        )
       ),
 
-      s('naf', -- new async function
+      s(
+        'naf', -- new async function
         fmt(
           [[
             const {} = async ({}) => {{
               {}
             }}
-          ]], {
-          i(1, 'name'),
-          i(2),
-          i(3),
-        })
+          ]],
+          {
+            i(1, 'name'),
+            i(2),
+            i(3),
+          }
+        )
       ),
 
-      s('in', -- inject
+      s(
+        'in', -- inject
         fmt(
           [[
             @Inject() private readonly {2}!: {1}
-          ]], {
-          i(1, 'name'),
-          change(function(str)
-            return str:gsub("%a", string.lower, 1)
-          end)
-        })
+          ]],
+          {
+            i(1, 'name'),
+            change(function(str)
+              return str:gsub('%a', string.lower, 1)
+            end),
+          }
+        )
       ),
 
-      s('map', -- inject
+      s(
+        'map', -- inject
         fmt(
           [[
             const {} = {}.map(({}) => {{
               return {}
             }})
-          ]], {
-          change(function(name)
-            return name:sub(1, #name - 1)
-          end),
-          i(1, 'list'),
-          change(function(name)
-            return name:sub(1, #name - 1)
-          end),
-          change(function(name)
-            return name:sub(1, #name - 1)
-          end),
-        })
+          ]],
+          {
+            change(function(name)
+              return name:sub(1, #name - 1)
+            end),
+            i(1, 'list'),
+            change(function(name)
+              return name:sub(1, #name - 1)
+            end),
+            change(function(name)
+              return name:sub(1, #name - 1)
+            end),
+          }
+        )
       ),
 
-      s('red', -- reduce
+      s(
+        'red', -- reduce
         fmt(
           [[
             const {} = {}.reduce((acc, {}) => {{
               return acc
             }}, {{}})
-          ]], {
-          change(function(name)
-            return name:sub(1, #name - 1)
-          end),
-          i(1, 'list'),
-          change(function(name)
-            return name:sub(1, #name - 1)
-          end),
-        })
+          ]],
+          {
+            change(function(name)
+              return name:sub(1, #name - 1)
+            end),
+            i(1, 'list'),
+            change(function(name)
+              return name:sub(1, #name - 1)
+            end),
+          }
+        )
       ),
 
-      s('if', -- if
+      s(
+        'if', -- if
         fmt(
           [[
             if({}) {{
               {}
             }}
-          ]], {
-          i(1, 'condition'),
-          i(2)
-        })
+          ]],
+          {
+            i(1, 'condition'),
+            i(2),
+          }
+        )
       ),
 
-      s('ifel', -- if else
+      s(
+        'ifel', -- if else
         fmt(
           [[
             if({}) {{
@@ -165,47 +190,59 @@ return {
             }} else {{
               {}
             }}
-          ]], {
-          i(1, 'condition'),
-          i(2),
-          i(3),
-        })
+          ]],
+          {
+            i(1, 'condition'),
+            i(2),
+            i(3),
+          }
+        )
       ),
 
-      s('on', -- if else
+      s(
+        'on', -- if else
         fmt(
           [[
               async onApplicationBootstrap() {{
                 const a = await this.{}
                 console.log('\x1b[36m%s\x1b[0m', JSON.stringify({{a}}, null, 2))
               }}
-            ]], {
-          i(1),
-        })
+            ]],
+          {
+            i(1),
+          }
+        )
       ),
-
     })
 
     -- RUST --
 
     ls.add_snippets('rust', {
-      s('pr',
-        fmt([[
+      s(
+        'pr',
+        fmt(
+          [[
             println!("\x1b[36m{2}: {{:?}}\x1b[0m", {1});
-          ]], {
-          i(1),
-          change(function(str)
-            return str
-          end)
-        })
+          ]],
+          {
+            i(1),
+            change(function(str)
+              return str
+            end),
+          }
+        )
       ),
 
-      s('db',
-        fmt([[
+      s(
+        'db',
+        fmt(
+          [[
             dbg!({});
-          ]], {
-          i(1),
-        })
+          ]],
+          {
+            i(1),
+          }
+        )
       ),
     })
 
@@ -219,6 +256,5 @@ return {
     map({ 'i', 's' }, '<C-d>', function()
       ls.change_choice(1)
     end)
-
-  end
+  end,
 }

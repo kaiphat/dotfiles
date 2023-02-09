@@ -8,25 +8,19 @@ return {
     null_ls.setup {
       debounce = 10,
       sources = {
-        formattings.prettierd.with({
-          filetypes = {
-            'html',
-            'json',
-            'yaml',
-            'markdown',
-            'css',
-            'scss',
-            'javascript',
-            'typescript',
-            'javascriptreact',
-            'typescriptreact',
-            'js',
-            'ts',
+        formattings.prettierd.with {
+          prefer_local = 'node_modules/.bin',
+          extra_filetypes = {},
+        },
+        formattings.stylua.with {
+          extra_args = {
+            '--quote-style',
+            'ForceSingle',
+            '--call-parentheses',
+            'None',
           },
-          -- extra_args = { '--single-quote', '--semi', 'false' },
-        }),
-        formattings.stylua
-      }
+        },
+      },
     }
-  end
+  end,
 }

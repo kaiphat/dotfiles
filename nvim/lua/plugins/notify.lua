@@ -10,16 +10,19 @@ local get_stages = function(stages_util)
       if not next_row then
         return nil
       end
+      if next_row == 0 then
+        next_row = 1
+      end
       return {
         relative = 'editor',
         anchor = 'NE',
         width = state.message.width,
         height = state.message.height,
         col = col(),
-        row = next_row + 1,
+        row = next_row, --+ 1,
         border = 'rounded',
         style = 'minimal',
-        opacity = 0,
+        opacity = 50,
       }
     end,
     function()
@@ -65,8 +68,9 @@ return {
       end,
       stages = get_stages(stages_util),
       render = 'minimal',
+      background_colour = 'NormalFloat',
     }
 
     vim.notify = notify
-  end
+  end,
 }

@@ -1,61 +1,61 @@
 return {
   {
-    "nvim-treesitter/playground",
+    'nvim-treesitter/playground',
     cmd = {
-      "TSPlaygroundToggle",
-      "TSHighlightCapturesUnderCursor",
+      'TSPlaygroundToggle',
+      'TSHighlightCapturesUnderCursor',
     },
   },
 
   {
-    "nvim-treesitter/nvim-treesitter",
-    event = "BufReadPost",
+    'nvim-treesitter/nvim-treesitter',
+    event = 'BufReadPost',
     dependencies = {
-      "nvim-treesitter/nvim-treesitter-context",
+      'nvim-treesitter/nvim-treesitter-context',
     },
     config = function()
-      local install = require("nvim-treesitter.install")
-      local config = require("nvim-treesitter.configs")
+      local install = require 'nvim-treesitter.install'
+      local config = require 'nvim-treesitter.configs'
 
-      install.compilers = { "gcc" }
+      install.compilers = { 'gcc' }
 
-      config.setup({
+      config.setup {
         ensure_installed = {
-          "javascript",
-          "rust",
-          "typescript",
-          "toml",
-          "yaml",
-          "vim",
-          "tsx",
-          "markdown",
-          "json",
-          "lua",
-          "make",
-          "css",
-          "html",
-          "scss",
-          "dockerfile",
-          "json5",
-          "fish",
-          "glimmer",
-          "scheme",
-          "sql",
-          "python",
-          "bash",
-          "regex",
-          "norg",
+          'javascript',
+          'rust',
+          'typescript',
+          'toml',
+          'yaml',
+          'vim',
+          'tsx',
+          'markdown',
+          'json',
+          'lua',
+          'make',
+          'css',
+          'html',
+          'scss',
+          'dockerfile',
+          'json5',
+          'fish',
+          'glimmer',
+          'scheme',
+          'sql',
+          'python',
+          'bash',
+          'regex',
+          'norg',
         },
         query_linter = {
           enable = true,
           use_virtual_text = true,
-          lint_events = { "BufWrite", "CursorHold" },
+          lint_events = { 'BufWrite', 'CursorHold' },
         },
         textsubjects = {
           enable = true,
           keymaps = {
-            ["."] = "textsubjects-smart",
-            [";"] = "textsubjects-container-outer",
+            ['.'] = 'textsubjects-smart',
+            [';'] = 'textsubjects-container-outer',
           },
         },
         highlight = {
@@ -67,17 +67,17 @@ return {
           enable = true,
           disable = {},
         },
-      })
+      }
 
-      local unit = require("utils.unit")
+      local unit = require 'utils.unit'
 
-      map({ "x", "o" }, "u", function()
+      map({ 'x', 'o' }, 'u', function()
         unit.select(true)
       end)
-      map("n", "]]", function()
+      map('n', ']]', function()
         unit.moveToEnd()
       end)
-      map("n", "[[", function()
+      map('n', '[[', function()
         unit.moveToStart()
       end)
     end,

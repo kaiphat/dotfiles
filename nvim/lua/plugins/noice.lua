@@ -6,10 +6,10 @@ return {
     noice.setup {
       views = {
         cmdline_popup = {
-          border = {
-            style = 'none',
-            padding = { 1, 2 }
-          },
+          -- border = {
+          --   style = 'none',
+          --   padding = { 1, 2 }
+          -- },
           position = {
             row = '50%',
             col = '50%',
@@ -17,9 +17,19 @@ return {
           win_options = {
             winhighlight = {
               Normal = 'NormalFloat',
-              FloatBorder = 'FloatBorder'
+              FloatBorder = 'FloatBorder',
             },
           },
+        },
+
+        mini = {
+          win_options = {
+            winblend = 0,
+          },
+        },
+
+        notify = {
+          merge = true,
         },
       },
 
@@ -38,6 +48,7 @@ return {
       lsp = {
         progress = {
           enabled = true,
+          view = 'notify',
         },
         override = {
           ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
@@ -46,8 +57,7 @@ return {
         },
       },
 
-      format = {
-      },
+      format = {},
 
       presets = {
         bottom_search = false,
@@ -63,14 +73,13 @@ return {
             event = 'msg_show',
             find = '%d+L, %d+B',
           },
-          view = 'mini',
+          view = 'notify',
         },
         {
           view = 'notify',
           filter = { event = 'msg_showmode' },
         },
       },
-
     }
-  end
+  end,
 }

@@ -10,12 +10,13 @@ exec --no-startup-id $dir/alt_layout.py
 
 # THEME #
 # gaps inner 15
-gaps inner 11
+gaps inner 10
 gaps outer 0
-hide_edge_borders smart
-font pango:JetBrainsMono Nerd Font 9
 
-for_window [class="^.*"] border pixel 0
+font pango:JetBrainsMono Nerd Font 9
+smart_borders on
+hide_edge_borders smart
+default_border pixel 0
 
 floating_modifier $mod
 
