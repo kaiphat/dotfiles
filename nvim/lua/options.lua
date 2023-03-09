@@ -1,8 +1,6 @@
 local o = vim.opt
 local g = vim.g
 
-local home = os.getenv( "HOME" )
-
 g.mapleader = ' '
 
 o.guicursor = 'a:blinkon1,i-ci-ve:ver25-blinkon1'
@@ -29,7 +27,7 @@ o.number = false
 o.relativenumber = false
 o.showcmd = false
 o.undofile = true
-o.undodir = home..'/local/share/nvimundodir/'
+o.undodir = add_to_home_path 'local/share/nvimundodir/'
 o.autoread = true
 o.autowrite = true
 o.infercase = true

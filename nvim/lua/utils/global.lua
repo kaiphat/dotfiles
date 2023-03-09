@@ -31,3 +31,7 @@ _G.merge = function(...)
   local args = { ... }
   return vim.tbl_extend('force', {}, unpack(args))
 end
+
+_G.add_to_home_path = function(path)
+  return os.getenv 'HOME' .. '/' .. path
+end

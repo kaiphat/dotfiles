@@ -29,7 +29,7 @@ return {
             '-l',
             'postgresql',
             '-c',
-            '/home/ipunko/dotfiles/sql_formatter.json',
+            add_to_home_path('dotfiles/sql_formatter.json'),
           },
         },
       },

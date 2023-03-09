@@ -174,25 +174,25 @@ font:
   #   family: Victor Mono
   #   style: Bold
 
-  size: 10.5
-  offset:
-    x: 0
-    y: 0
-  glyph_offset:
-    x: 0
-    y: 0
-  normal:
-    family: Iosevka Custom
-    style: ExtraBold
-  bold:
-    family: Iosevka Custom
-    style: ExtraBold
-  italic:
-    family: Iosevka Custom
-    style: ExtraBold
-  bold_italic:
-    family: Iosevka Custom
-    style: ExtraBold
+  # size: 10.5
+  # offset:
+  #   x: 0
+  #   y: 0
+  # glyph_offset:
+  #   x: 0
+  #   y: 0
+  # normal:
+  #   family: Iosevka Custom
+  #   style: ExtraBold
+  # bold:
+  #   family: Iosevka Custom
+  #   style: ExtraBold
+  # italic:
+  #   family: Iosevka Custom
+  #   style: ExtraBold
+  # bold_italic:
+  #   family: Iosevka Custom
+  #   style: ExtraBold
 
 colors:
   primary:
