@@ -3,8 +3,13 @@ local tools = {
   'lua-language-server',
   'prettierd',
   'rust-analyzer',
-  'typescript-language-server',
+  -- 'typescript-language-server',
   'json-lsp',
+  'css-lsp',
+  'html-lsp',
+  'json-lsp',
+  'stylua',
+  'sql-formatter',
 }
 
 return {
@@ -19,7 +24,11 @@ return {
       local mr = require 'mason-registry'
       local mason_lspconfig = require 'mason-lspconfig'
 
-      mason.setup()
+      mason.setup {
+        ui = {
+          border = 'rounded',
+        }
+      }
 
       for _, tool in ipairs(tools) do
         local p = mr.get_package(tool)

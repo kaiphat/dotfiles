@@ -27,10 +27,6 @@ return {
             winblend = 0,
           },
         },
-
-        notify = {
-          merge = true,
-        },
       },
 
       cmdline = {
@@ -47,7 +43,7 @@ return {
 
       lsp = {
         progress = {
-          enabled = true,
+          enabled = false,
           view = 'notify',
         },
         override = {
@@ -65,6 +61,7 @@ return {
 
         inc_rename = true,
         long_message_to_split = true,
+        lsp_doc_border = true,
       },
 
       routes = {

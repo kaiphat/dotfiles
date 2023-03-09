@@ -11,12 +11,14 @@ set -gx EDITOR nvim
 set -gx MANPAGER 'less'
 set -gx PAGER 'nvim -c "set nowrap" -R'
 set -gx TERMINAL wezterm
+# curl https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo | tic -x -
+set -gx TERM xterm-256color
 set -gx LUA_DIR /usr/bin/lua
 set -gx LD_LIBRARY_PATH /opt/oracle/instantclient_21_8
 set -U fish_greeting
 set -U ignoreeof true
 
-function fish_right_prompt 
+function fish_right_prompt
 end
 
 function fish_user_key_bindings
@@ -39,6 +41,7 @@ fish_add_path -aP /usr/bin/i3bar
 fish_add_path -aP $HOME/.cargo/bin
 fish_add_path -aP $HOME/.cargo/bin/rustc
 fish_add_path -aP $HOME/.krew/bin
+fish_add_path -aP $HOME/.local/share/bob/nvim-bin
 
 ### ALIASES ###
 
@@ -51,7 +54,7 @@ alias di "docker inspect"
 alias du "dc up --force-recreate -d -V $1"
 alias dub "dc up --force-recreate --build -d -V $1"
 
-function de --argument container cmd 
+function de --argument container cmd
   d exec -it $container node_modules/.bin/sequelize $cmd $argv[3..]
 end
 function dl
@@ -89,17 +92,21 @@ alias nvim-start "nvim --startuptime _s.log -c exit && tail -100 _s.log | bat &&
 alias ... "cd ../../"
 
 
-# kuber namespaces #
-alias kuber-namespace-gladwin-prod "aws eks update-kubeconfig --profile gladwin --region eu-central-1 --name gladwin-frankfurt-prod"
-alias kuber-namespace-gladwin-stage "aws eks update-kubeconfig --region eu-central-1 --name gladwin-frankfurt-stage"
-alias kuber-namespace-gladwin-dev "cat ~/.kube/config-dev > ~/.kube/config"
-# databases #
-alias db-gladwin-prod "kubectl -n 768-gladwin-tech-production port-forward pod/acid-gladwindb-0 8000:5432"
-alias db-gladwin-dev "kubectl -n 768-gladwin-tech-develop port-forward pod/acid-gladwindb-0 8000:5432"
-alias db-gladwin-stage "kubectl -n 768-gladwin-tech-staging port-forward pod/acid-gladwindb-0 8000:5432"
-alias db-green-prod "ssh -4 -L 1234:10.1.1.210:5432 green"
-alias db-green-master "ssh -4 -L 1234:localhost:27182 pp-master"
-alias redis-gladwin-prod "kubectl -n 768-gladwin-tech-production port-forward pod/rfr-redis-0 27777:26379"
+### PROJECT ALIASES ###
+# gladwin
+alias gladwin-prod-kuber-namespace "aws eks update-kubeconfig --profile gladwin --region eu-central-1 --name gladwin-frankfurt-prod"
+alias gladwin-stage-kuber-namespace "aws eks update-kubeconfig --region eu-central-1 --name gladwin-frankfurt-stage"
+alias gladwin-dev-kuber-namespace "cat ~/.kube/config-dev > ~/.kube/config"
+
+alias gladwin-prod-db "kubectl -n 768-gladwin-tech-production port-forward pod/acid-gladwindb-0 8000:5432"
+alias gladwin-dev-db "kubectl -n 768-gladwin-tech-develop port-forward pod/acid-gladwindb-0 8000:5432"
+alias gladwin-stage-db "kubectl -n 768-gladwin-tech-staging port-forward pod/acid-gladwindb-0 8000:5432"
+
+alias gladwin-prod-redis "kubectl -n 768-gladwin-tech-production port-forward pod/rfr-redis-0 27777:26379"
+
+# green
+alias green-prod-db "ssh -4 -L 1234:10.1.1.210:5432 green"
+alias green-master-db "ssh -4 -L 1234:localhost:27182 pp-master"
 
 function pq
   xclip -o |\
@@ -116,8 +123,8 @@ function gp -a message
 
   set branch (git branch --show-current)
 
-  git add -A 
-  and git commit -m "$message" 
+  git add -A
+  and git commit -m "$message"
   and git push origin $branch
 end
 
@@ -148,7 +155,7 @@ set fish_color_command '#81A1C1'
 set fish_color_match 'red' '--bold' '--background=cyan'
 set fish_color_search_match 'red' '--bold' '--background=red'
 set fish_pager_color_prefix 'red'
-set fish_color_valid_path 
+set fish_color_valid_path
 set fish_color_selection 'green' '--background=brblack'
 set fish_color_param '#ceceef'
 set fish_color_keyword '#ceceef'
@@ -188,3 +195,7 @@ end
 #end
 
 #alias ssh "kitty +kitten ssh"
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH

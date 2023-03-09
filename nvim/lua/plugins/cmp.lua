@@ -5,10 +5,10 @@ end
 
 local function source_comparator(item1, item2)
   local sources = {
-    nvim_lsp = 3,
-    copilot = 3,
-    buffer = 2,
-    luasnip = 1,
+    nvim_lsp = 30,
+    luasnip = 31,
+    treesitter = 30,
+    buffer = 20,
   }
 
   local a = sources[item1.source.name] or 0
@@ -29,6 +29,7 @@ return {
     'hrsh7th/cmp-nvim-lsp',
     'saadparwaiz1/cmp_luasnip',
     'hrsh7th/cmp-buffer',
+    'ray-x/cmp-treesitter',
     'onsails/lspkind.nvim',
   },
   config = function()
@@ -39,21 +40,20 @@ return {
     compare.locality.lines_count = 300
 
     cmp.setup {
-      preselect = cmp.PreselectMode.None,
+      preselect = cmp.PreselectMode.Item,
       sorting = {
         priority_weight = 2,
         comparators = {
-          compare.recently_used,
-          source_comparator,
-          compare.locality,
-          compare.scopes,
-          compare.score,
           compare.offset,
-          compare.length,
-          -- compare.kind,
+          compare.exact,
+          -- compare.scopes,
+          compare.score,
+          compare.recently_used,
+          compare.locality,
+          compare.kind,
           -- compare.sort_text,
-          -- compare.order,
-          -- compare.exact,
+          compare.length,
+          compare.order,
         },
       },
       snippet = {
@@ -61,36 +61,46 @@ return {
           luasnip.lsp_expand(args.body)
         end,
       },
-      duplicates = {
-        nvim_lsp = 1,
-        luasnip = 1,
-        cmp_tabnine = 1,
-        buffer = 1,
-        path = 1,
-      },
       window = {
         completion = {
-          winhighlight = 'FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
+          border = 'rounded',
+          winhighlight = 'NormalFloat:FloatBorder,CursorLine:Visual,Search:None',
           col_offset = -2,
           side_padding = 0,
+          scrollbar = false,
         },
         documentation = {
-          winhighlight = 'FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
+          border = 'rounded',
+          scrollbar = false,
+          winhighlight = 'NormalFloat:FloatBorder,CursorLine:Visual,Search:None',
         },
       },
       formatting = {
         fields = { 'kind', 'abbr', 'menu' },
         format = function(entry, vim_item)
-          local kind = require('lspkind').cmp_format { mode = 'symbol_text', maxwidth = 50 } (entry, vim_item)
+          local is_treesitter = entry.source.name == 'treesitter'
+
+          local kind = require('lspkind').cmp_format {
+            mode = 'symbol_text',
+            maxwidth = 50,
+            preset = 'default',
+          }(entry, vim_item)
+
           local strings = vim.split(kind.kind, '%s', { trimempty = true })
-          kind.kind = ' ' .. strings[1]
-          kind.menu = ' ' -- "    (" .. strings[2] .. ")"
+
+          if is_treesitter then
+            kind.kind = ' ' .. ''
+          else
+            kind.kind = ' ' .. strings[1]
+          end
+          kind.menu = ' '
 
           return kind
         end,
       },
       completion = {
-        keyword_length = 2,
+        completeopt = 'menu,menuone,noinsert',
+        keyword_length = 0,
       },
       mapping = cmp.mapping.preset.insert {
         ['<C-p>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
@@ -126,7 +136,7 @@ return {
           end
         end, { 'i', 's' }),
       },
-      perfomance = {},
+      performance = {},
       sources = cmp.config.sources {
         {
           name = 'nvim_lsp',
@@ -145,6 +155,9 @@ return {
             end,
             keyword_pattern = [[\k\+]],
           },
+        },
+        {
+          name = 'treesitter',
         },
       },
       experimental = {

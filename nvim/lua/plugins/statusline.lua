@@ -1,6 +1,6 @@
-local get_position = function()
-  local current_line = vim.fn.line('.')
-  local total_line = vim.fn.line('$')
+local function get_position()
+  local current_line = vim.fn.line '.'
+  local total_line = vim.fn.line '$'
 
   if current_line < 10 then
     current_line = '00' .. current_line
@@ -18,13 +18,13 @@ local get_position = function()
 end
 
 local colors = {
-  dark_blue  = '#404060',
-  cyan       = '#a3b8ef',
+  dark_blue = '#404060',
+  cyan = '#a3b8ef',
   light_blue = '#9398cf',
-  green      = '#7eca9c',
-  yellow     = '#EBCB8B',
-  red        = '#e06c75',
-  pink       = '#ff75a0',
+  green = '#7eca9c',
+  yellow = '#EBCB8B',
+  red = '#e06c75',
+  pink = '#ff75a0',
 }
 
 local active_components = {
@@ -35,18 +35,18 @@ local active_components = {
         name = 'file_info',
         opts = {
           type = 'relative',
-          file_modified_icon = ''
-        }
+          file_modified_icon = '',
+        },
       },
       hl = {
         fg = colors.dark_blue,
-        bg = colors.cyan
+        bg = colors.cyan,
       },
       left_sep = {
         str = ' ',
         hl = {
           bg = colors.cyan,
-        }
+        },
       },
       right_sep = {
         {
@@ -60,15 +60,15 @@ local active_components = {
           hl = {
             fg = colors.cyan,
             -- bg = colors.dark_blue,
-          }
-        }
-      }
+          },
+        },
+      },
     },
     {
       icon = '+',
       provider = 'git_diff_added',
       hl = {
-        fg = colors.green
+        fg = colors.green,
       },
       left_sep = ' ',
     },
@@ -77,7 +77,7 @@ local active_components = {
       icon = '~',
       provider = 'git_diff_changed',
       hl = {
-        fg = colors.yellow
+        fg = colors.yellow,
       },
       left_sep = ' ',
     },
@@ -86,7 +86,7 @@ local active_components = {
       icon = '-',
       provider = 'git_diff_removed',
       hl = {
-        fg = colors.red
+        fg = colors.red,
       },
       left_sep = ' ',
     },
@@ -95,7 +95,7 @@ local active_components = {
       icon = 'x',
       provider = 'diagnostic_errors',
       hl = {
-        fg = colors.pink
+        fg = colors.pink,
       },
       left_sep = ' ',
     },
@@ -106,7 +106,7 @@ local active_components = {
         return ' '
       end,
       hl = {
-        fg = colors.pink
+        fg = colors.pink,
       },
     },
   },
@@ -117,7 +117,7 @@ local active_components = {
       provider = 'git_branch',
       hl = {
         fg = colors.yellow,
-        bg = colors.dark_blue
+        bg = colors.dark_blue,
       },
       right_sep = {
         {
@@ -132,15 +132,15 @@ local active_components = {
           str = 'left_filled',
           hl = {
             fg = colors.dark_blue,
-          }
+          },
         },
         {
           str = ' ',
           hl = {
             bg = colors.dark_blue,
-          }
+          },
         },
-      }
+      },
     },
 
     {
@@ -148,13 +148,13 @@ local active_components = {
       provider = get_position,
       hl = {
         fg = colors.dark_blue,
-        bg = colors.light_blue
+        bg = colors.light_blue,
       },
       right_sep = {
         str = ' ',
         hl = {
-          bg = colors.light_blue
-        }
+          bg = colors.light_blue,
+        },
       },
       left_sep = {
         {
@@ -175,12 +175,12 @@ local active_components = {
         {
           str = ' ',
           hl = {
-            bg = colors.light_blue
-          }
+            bg = colors.light_blue,
+          },
         },
-      }
+      },
     },
-  }
+  },
 }
 
 local inactive_components = {
@@ -189,8 +189,8 @@ local inactive_components = {
     provider = {
       name = 'file_info',
       opts = {
-        type = 'relative'
-      }
+        type = 'relative',
+      },
     },
     hl = {
       fg = colors.cyan,
@@ -206,19 +206,19 @@ return {
 
     feline.setup {
       theme = {
-        bg = 'NONE'
+        bg = 'NONE',
       },
       disable = {
         filetypes = {
           'NvimTree',
           'packer',
-          'Telescope'
+          'Telescope',
         },
       },
       components = {
         active = active_components,
         inactive = inactive_components,
-      }
+      },
     }
-  end
+  end,
 }

@@ -1,5 +1,3 @@
-@theme "~/.config/rofi/theme.rasi"
-
 configuration {
     modi: "drun";
     icon-theme: "Oranchelo";
@@ -15,3 +13,5 @@ configuration {
     display-Network: " 󰤨  Network";
     sidebar-mode: false;
 }
+
+@theme "~/.config/rofi/theme.rasi"

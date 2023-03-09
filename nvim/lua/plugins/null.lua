@@ -18,6 +18,18 @@ return {
             'ForceSingle',
             '--call-parentheses',
             'None',
+            '--indent-width',
+            '2',
+            '--indent-type',
+            'Spaces',
+          },
+        },
+        formattings.sql_formatter.with {
+          extra_args = {
+            '-l',
+            'postgresql',
+            '-c',
+            '/home/ipunko/dotfiles/sql_formatter.json',
           },
         },
       },

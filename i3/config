@@ -10,18 +10,17 @@ exec --no-startup-id $dir/alt_layout.py
 
 # THEME #
 # gaps inner 15
-gaps inner 10
+gaps inner 15
 gaps outer 0
 
 font pango:JetBrainsMono Nerd Font 9
-smart_borders on
 hide_edge_borders smart
 default_border pixel 0
 
 floating_modifier $mod
 
 # APPLICATIONS #
-bindsym $mod+Return exec --no-startup-id kitty --start-as maximized
+bindsym $mod+Return exec --no-startup-id alacritty
 bindsym $mod+Shift+a exec --no-startup-id alacritty
 bindsym $mod+Shift+w exec --no-startup-id wezterm
 bindsym $mod+Shift+b exec --no-startup-id brave-browser

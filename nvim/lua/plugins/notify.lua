@@ -2,11 +2,93 @@ local function col()
   return vim.opt.columns:get() - 1
 end
 
+local client_notifs = {}
+
+local function get_notif_data(client_id, token)
+  if not client_notifs[client_id] then
+    client_notifs[client_id] = {}
+  end
+
+  if not client_notifs[client_id][token] then
+    client_notifs[client_id][token] = {}
+  end
+
+  return client_notifs[client_id][token]
+end
+
+local spinner_frames = { '⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷' }
+
+local function update_spinner(client_id, token, title)
+  local state = get_notif_data(client_id, token)
+
+  if state.spinner then
+    local new_spinner = (state.spinner % #spinner_frames) + 1
+
+    state.spinner = new_spinner
+    state.notification = vim.notify(spinner_frames[new_spinner] .. ' ' .. title, nil, {
+      hide_from_history = true,
+      replace = state.notification,
+    })
+
+    if not state.is_report then
+      vim.defer_fn(function()
+        update_spinner(client_id, token, title)
+      end, 100)
+    end
+  end
+end
+
+local function format_title(title, client_name)
+  return client_name .. (#title > 0 and ': ' .. title or '')
+end
+
+local function format_message(message, percentage)
+  return (percentage and percentage .. '%\t' or '') .. (message or '')
+end
+
+vim.lsp.handlers['$/progress'] = function(_, result, ctx)
+  local client_id = ctx.client_id
+
+  local val = result.value
+
+  if not val.kind then
+    return
+  end
+
+  local state = get_notif_data(client_id, result.token)
+  local client_name = vim.lsp.get_client_by_id(client_id).name
+
+  if val.kind == 'begin' then
+    local title = format_title(val.title, client_name)
+
+    state.notification = vim.notify(spinner_frames[1] .. ' ' .. title, 'info', {
+      timeout = false,
+    })
+
+    state.spinner = 1
+    update_spinner(client_id, result.token, title)
+  elseif val.kind == 'report' and state then
+    state.is_report = true
+
+    state.notification = vim.notify(format_message(val.message, val.percentage), 'info', {
+      replace = state.notification,
+    })
+  elseif val.kind == 'end' and state then
+    state.notification = vim.notify(client_name .. ': complete', 'info', {
+      replace = state.notification,
+      timeout = 2000,
+    })
+
+    state.spinner = nil
+  end
+end
+
 local get_stages = function(stages_util)
   return {
     function(state)
-      local next_height = state.message.height
+      local next_height = state.message.height + 2
       local next_row = stages_util.available_slot(state.open_windows, next_height, stages_util.DIRECTION.TOP_DOWN)
+
       if not next_row then
         return nil
       end
@@ -19,7 +101,7 @@ local get_stages = function(stages_util)
         width = state.message.width,
         height = state.message.height,
         col = col(),
-        row = next_row, --+ 1,
+        row = next_row,
         border = 'rounded',
         style = 'minimal',
         opacity = 50,
@@ -31,8 +113,21 @@ local get_stages = function(stages_util)
         col = { col() },
       }
     end,
-    function()
+    function(state, win)
+      local slot = stages_util.slot_after_previous(win, state.open_windows, stages_util.DIRECTION.TOP_DOWN)
+
+      if slot == 0 then
+        slot = 1
+      end
+
       return {
+        row = {
+          slot,
+          frequency = 30,
+          complete = function()
+            return true
+          end,
+        },
         col = { col() },
         time = true,
       }
@@ -59,13 +154,13 @@ return {
     local stages_util = require 'notify.stages.util'
 
     notify.setup {
-      max_width = 60,
-      minimum_width = 30,
+      -- max_width = 40,
+      minimum_width = 40,
       fps = 60,
-      on_open = function(win)
-        vim.wo[win].wrap = true
-        vim.api.nvim_win_set_option(win, 'wrap', true)
-      end,
+      -- on_open = function(win)
+      --   vim.wo[win].wrap = true
+      --   vim.api.nvim_win_set_option(win, 'wrap', true)
+      -- end,
       stages = get_stages(stages_util),
       render = 'minimal',
       background_colour = 'NormalFloat',

@@ -5,7 +5,7 @@ window:
   padding:
    x: 0
    y: 0
-  opacity: 0.9
+  opacity: 0.93
   dynamic_padding: false
   startup_mode: Maximized
 
@@ -14,73 +14,73 @@ scrolling:
   multiplier: 3
 
 font:
-  size: 9.5
+  size: 9
   glyph_offset:
     x: 0
-    y: -1
+    y: 0
   offset:
-    x: -1
-    y: -2
+    x: 0
+    y: -1
   normal:
-    family: JetBrainsMono Nerd Font
-    style: Medium
+    family: JetBrainsMonoNL Nerd Font
+    style: ExtraBold
   bold:
-    family: JetBrainsMono Nerd Font
-    style: Medium
+    family: JetBrainsMonoNL Nerd Font
+    style: ExtraBold
   italic:
-    family: JetBrainsMono Nerd Font
-    style: Medium
+    family: JetBrainsMonoNL Nerd Font
+    style: ExtraBold
   bold_italic:
-    family: JetBrainsMono Nerd Font
-    style: Medium
-
-  # size: 11
-  # offset:
-  #   x: -1
-  #   y: -2
-  # glyph_offset:
-  #   x: 0
-  #   y: -1
-  # normal:
-  #   family: mononoki Nerd Font
-  #   style: Medium
-  # bold:
-  #   family: mononoki Nerd Font
-  #   style: Medium
-  # italic:
-  #   family: mononoki Nerd Font
-  #   style: Medium
-  # bold_italic:
-  #   family: mononoki Nerd Font
-  #   style: Medium
-
-  # size: 9.5
-  # offset:
-  #   x: 0
-  #   y: 0
-  # glyph_offset:
-  #   x: 0
-  #   y: 0
-  # normal:
-  #   family: CaskaydiaCovePL Nerd Font
-  #   style: Regular
-  # bold:
-  #   family: CaskaydiaCovePL Nerd Font
-  #   style: Regular
-  # italic:
-  #   family: CaskaydiaCovePL Nerd Font
-  #   style: Regular
-  # bold_italic:
-  #   family: CaskaydiaCovePL Nerd Font
-  #   style: Regular
+    family: JetBrainsMonoNL Nerd Font
+    style: ExtraBold
 
   # size: 10
   # offset:
   #   x: 0
-  #   y: 2
+  #   y: 0
   # glyph_offset:
   #   x: 0
+  #   y: 0
+  # normal:
+  #   family: mononoki Nerd Font
+  #   style: Bold
+  # bold:
+  #   family: mononoki Nerd Font
+  #   style: Bold
+  # italic:
+  #   family: mononoki Nerd Font
+  #   style: Bold
+  # bold_italic:
+  #   family: mononoki Nerd Font
+  #   style: Bold
+
+  # size: 9.9
+  # offset:
+  #   x: 0
   #   y: 1
+  # glyph_offset:
+  #   x: 0
+  #   y: 0
+  # normal:
+  #   family: CaskaydiaCovePL Nerd Font
+  #   style: Bold
+  # bold:
+  #   family: CaskaydiaCovePL Nerd Font
+  #   style: Bold
+  # italic:
+  #   family: CaskaydiaCovePL Nerd Font
+  #   style: Bold
+  # bold_italic:
+  #   family: CaskaydiaCovePL Nerd Font
+  #   style: Bold
+
+  # size: 10.9
+  # offset:
+  #   x: 0
+  #   y: 0
+  # glyph_offset:
+  #   x: 0
+  #   y: 0
   # normal:
   #   family: FantasqueSansMono Nerd Font
   #   style: Bold
@@ -137,7 +137,7 @@ font:
   # size: 10
   # offset:
   #   x: 0
-  #   y: 2
+  #   y: 1
   # glyph_offset:
   #   x: 0
   #   y: 1
@@ -153,7 +153,7 @@ font:
   # bold_italic:
   #   family: UbuntuMono Nerd Font
   #   style: Bold
-    
+
   # size: 9
   # offset:
   #   x: 0
@@ -174,25 +174,25 @@ font:
   #   family: Victor Mono
   #   style: Bold
 
-  # size: 11.6
-  # offset:
-  #   x: 0
-  #   y: -1
-  # glyph_offset:
-  #   x: 0
-  #   y: -1
-  # normal:
-  #   family: Iosevka Nerd Font
-  #   style: Medium
-  # bold:
-  #   family: Iosevka Nerd Font
-  #   style: Medium
-  # italic:
-  #   family: Iosevka Nerd Font
-  #   style: Medium
-  # bold_italic:
-  #   family: Iosevka Nerd Font
-  #   style: Medium
+  size: 10.5
+  offset:
+    x: 0
+    y: 0
+  glyph_offset:
+    x: 0
+    y: 0
+  normal:
+    family: Iosevka Custom
+    style: ExtraBold
+  bold:
+    family: Iosevka Custom
+    style: ExtraBold
+  italic:
+    family: Iosevka Custom
+    style: ExtraBold
+  bold_italic:
+    family: Iosevka Custom
+    style: ExtraBold
 
 colors:
   primary:
@@ -228,21 +228,10 @@ shell:
   # program: /home/ipunko/.cargo/bin/nu
   program: /usr/bin/fish
 
-mouse: 
+mouse:
   hide_when_typing: true
 
 bell:
-# Values for `animation`:
-#   - Ease
-#   - EaseOut
-#   - EaseOutSine
-#   - EaseOutQuad
-#   - EaseOutCubic
-#   - EaseOutQuart
-#   - EaseOutQuint
-#   - EaseOutExpo
-#   - EaseOutCirc
-#   - Linear
   animation: EaseOutCubic
   duration: 750
 

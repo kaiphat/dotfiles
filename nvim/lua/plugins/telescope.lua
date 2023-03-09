@@ -2,7 +2,6 @@ local u = require 'utils'
 
 return {
   'nvim-telescope/telescope.nvim',
-  tag = '0.1.0',
   dependencies = {
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     { 'nvim-telescope/telescope-file-browser.nvim' },
@@ -127,7 +126,15 @@ return {
     telescope.load_extension 'file_browser'
     telescope.load_extension 'ui-select'
 
-    map('n', '<leader>fb', ':Telescope buffers<cr>')
+    map('n', '<leader>fb', function ()
+      builtin.buffers {
+        ignore_current_buffer = true,
+        cwd_only = true,
+        sort_lastused = true,
+        trim_text = true,
+        show_all_buffers = false,
+      }
+    end)
     map('n', '<leader>fs', ':Telescope git_status<cr>')
     map('n', '<leader>fo', function()
       builtin.oldfiles {
@@ -138,7 +145,7 @@ return {
     map('n', '<leader>fi', function()
       builtin.lsp_references {
         include_declaration = true,
-        include_current_line = true,
+        include_current_line = false,
         trim_text = true
       }
     end)
@@ -163,6 +170,7 @@ return {
           'f',
           '-E', 'node_modules/',
           '-E', '.git/',
+          '-E', 'dist/',
         },
         hidden = true,
         no_ignore = true,
@@ -178,7 +186,8 @@ return {
         cwd = path,
         hidden = true,
         grouped = true,
-        hide_parent_dir = true
+        hide_parent_dir = true,
+        git_status = false
       }
     end)
 
@@ -186,7 +195,8 @@ return {
       telescope.extensions.file_browser.file_browser {
         hidden = true,
         grouped = true,
-        hide_parent_dir = true
+        hide_parent_dir = true,
+        git_status = false
       }
     end
 
@@ -204,7 +214,8 @@ return {
             '--with-filename',
             '--line-number',
             '--column',
-            '--smart-case',
+            -- '--smart-case',
+            '--ignore-case',
             '--trim',
             '--hidden',
           }

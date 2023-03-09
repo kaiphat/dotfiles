@@ -1,7 +1,8 @@
 #! /bin/bash
 
-# picom -b
-nitrogen --set-scaled ~/Pictures/Wallpapers/tim-marshall-nuc-mltC4iQ-unsplash\(1\).jpg &
+picom -b &
+nitrogen --set-scaled ~/Pictures/Wallpapers/wallhaven-4opomm_3840x2160.png &
+/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 setxkbmap us -option ctrl:swapcaps &
 xsetroot -cursor_name left_ptr &
 xset r rate 220 50 & # type speed

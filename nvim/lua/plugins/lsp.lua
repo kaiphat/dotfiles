@@ -22,36 +22,18 @@ local function has_formatter(buf)
   return #available > 0
 end
 
-local function setup_formatting(client, buf)
-  map('n', '<leader>lf', function()
-    vim.lsp.buf.format {
-      filter = function(cl)
-        local is_null_ls = cl.name == 'null-ls'
-        local is_support = client.supports_method 'textDocument/formatting'
-
-        if not is_null_ls and is_support then
-          return true
-        end
-
-        if is_null_ls and has_formatter(buf) then
-          return true
-        end
-
-        return false
-      end,
-      bufnr = buf,
-    }
-  end, { buffer = buf })
-end
-
 local servers = {
   typescript = {
     disable_commands = false,
     debug = false,
+    -- server = {
+    --   -- cmd = { 'bunx', '--bun', 'typescript-language-server', '--stdio' },
+    --   cmd = { 'bun', 'run', 'typescript-language-server', '--stdio' },
+    -- },
   },
   cssls = {},
   html = {},
-  sumneko_lua = {
+  lua_ls = {
     settings = {
       Lua = {
         workspace = {
@@ -64,6 +46,9 @@ local servers = {
           globals = {
             'vim',
           },
+        },
+        format = {
+          enable = false,
         },
       },
     },
@@ -106,9 +91,7 @@ local servers = {
   },
 }
 
-local function on_attach(client, bufnr)
-  setup_formatting(client, bufnr)
-
+local function on_attach()
   map('n', 'gd', ':lua vim.lsp.buf.definition()<cr>')
   map('n', 'ga', ':vs<cr>:lua vim.lsp.buf.definition()<cr>')
   map('n', 'K', ':lua vim.lsp.buf.hover()<cr>')
@@ -120,26 +103,26 @@ local function on_attach(client, bufnr)
   map('n', '<space>la', ':lua vim.lsp.buf.code_action()<cr>')
   map('n', '<space>lr', ':lua vim.lsp.buf.rename()<cr>')
 
-  if client.server_capabilities.document_highlight then
-    local group = 'lsp_document_highlight'
-
-    vim.api.nvim_create_augroup(group, { clear = false })
-
-    vim.api.nvim_clear_autocmds {
-      buffer = bufnr,
-      group = group,
-    }
-    vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-      group = group,
-      buffer = bufnr,
-      callback = vim.lsp.buf.document_highlight,
-    })
-    vim.api.nvim_create_autocmd('CursorMoved', {
-      group = group,
-      buffer = bufnr,
-      callback = vim.lsp.buf.clear_references,
-    })
-  end
+  -- if client.server_capabilities.document_highlight then
+  --   local group = 'lsp_document_highlight'
+  --
+  --   vim.api.nvim_create_augroup(group, { clear = false })
+  --
+  --   vim.api.nvim_clear_autocmds {
+  --     buffer = bufnr,
+  --     group = group,
+  --   }
+  --   vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+  --     group = group,
+  --     buffer = bufnr,
+  --     callback = vim.lsp.buf.document_highlight,
+  --   })
+  --   vim.api.nvim_create_autocmd('CursorMoved', {
+  --     group = group,
+  --     buffer = bufnr,
+  --     callback = vim.lsp.buf.clear_references,
+  --   })
+  -- end
 end
 
 return {
@@ -162,6 +145,18 @@ return {
       lineFoldingOnly = true,
     }
 
+    -- vim.api.nvim_create_autocmd({ 'filetype' }, {
+    --   pattern = 'typescript',
+    --   callback = function(args)
+    --     vim.lsp.start {
+    --       name = 'bun',
+    --       cmd = { 'bunx', '--bun', 'typescript-language-server', '--stdio' },
+    --       -- replace this with the root marker, check the docs for more info
+    --       root_dir = vim.loop.cwd(),
+    --     }
+    --   end,
+    -- })
+
     set_lsp_symbols()
     set_lsp_maps()
 
@@ -177,13 +172,25 @@ return {
       update_in_insert = false,
     })
 
+    vim.lsp.handlers['textDocument/definition'] = function(_, result)
+      if not result or vim.tbl_isempty(result) then
+        print '[LSP] Could not find definition'
+        return
+      end
+
+      if vim.tbl_islist(result) then
+        vim.lsp.util.jump_to_location(result[1], 'utf-8')
+      else
+        vim.lsp.util.jump_to_location(result, 'utf-8')
+      end
+    end
+
     for server, opts in pairs(servers) do
       if server == 'typescript' then
         typescript.setup(vim.tbl_deep_extend('force', {}, opts, {
           server = {
             on_attach = function(client, buf)
-              client.server_capabilities.document_highlight = true
-
+              client.server_capabilities.semanticTokensProvider = nil
               on_attach(client, buf)
             end,
             capabilities = capabilities,
@@ -195,8 +202,7 @@ return {
       else
         config[server].setup(vim.tbl_deep_extend('force', {
           on_attach = function(client, buf)
-            client.server_capabilities.document_highlight = not (opts.is_not_highlight or false)
-
+            client.server_capabilities.semanticTokensProvider = nil
             on_attach(client, buf)
           end,
           capabilities = capabilities,
@@ -206,5 +212,11 @@ return {
         }, opts))
       end
     end
+
+    map('n', '<leader>lf', function()
+      vim.lsp.buf.format {
+        timeout_ms = 5000,
+      }
+    end)
   end,
 }

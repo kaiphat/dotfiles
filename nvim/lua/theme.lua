@@ -44,7 +44,6 @@ local c = {
   one_bg3 = '#405879',
   one_bg4 = '#486892',
   one_bg5 = '#253147',
-
   cyan = '#a3b8ef',
   blue_gray = '#9398cf',
   purple = '#c2a2e3',
@@ -167,10 +166,10 @@ H.DiagnosticVirtualTextWarn = merge(H.DiagnosticVirtualTextError)
 H.DiagnosticVirtualTextInfo = merge(H.DiagnosticVirtualTextError)
 H.DiagnosticVirtualTextHint = merge(H.DiagnosticVirtualTextError)
 
-H.DiagnosticUnderlineWarn = merge(H.Uc, { sp = H.WarningMsg.fg, undercurl = true })
-H.DiagnosticUnderlineInfo = merge(H.DiagnosticUnderlineWarn)
-H.DiagnosticUnderlineHint = merge(H.DiagnosticUnderlineWarn)
-H.DiagnosticUnderlineError = merge(H.DiagnosticUnderlineWarn)
+H.DiagnosticUnderlineWarn = merge(H.Uc, { sp = c.blue_gray })
+H.DiagnosticUnderlineInfo = H.DiagnosticUnderlineWarn
+H.DiagnosticUnderlineHint = H.DiagnosticUnderlineWarn
+H.DiagnosticUnderlineError = H.DiagnosticUnderlineWarn
 
 -- NOICE --
 H.NoiceCmdlineIcon = { fg = c.blue_gray }
@@ -187,6 +186,8 @@ H.NoiceMini = { fg = c.lavender, bg = nil }
 -- TREESITTER --
 H['@constructor'] = { fg = c.brown }
 H['@type'] = { fg = c.gray_blue }
+H['@class'] = { fg = c.sapphire }
+H['@enum'] = { fg = c.pink }
 H['@field'] = { fg = c.cyan }
 H['@property'] = { fg = c.cyan }
 H['@keyword'] = { fg = c.teal }
@@ -220,12 +221,20 @@ H['@warning'] = merge(H.WarningMsg)
 H['@danger'] = merge(H.Error)
 H['@number'] = { fg = c.red }
 H['@boolean'] = { fg = c.orange_dark }
+-- semantic tokens below
+-- @class
+-- @struct
+-- @enum
+-- @enumMember
+-- @event
+-- @interface
+-- @modifier
+-- @regexp
+-- @typeParameter
+-- @decorator
 
 -- HTML --
 H.htmlLink = merge(H['@text.uri'])
-
--- visual parents
-H.Type = { fg = c.orange_dark }
 
 -- NEO TREE --
 H.NeoTreeNormal = merge(H.NormalFloat)
@@ -234,6 +243,12 @@ H.NeoTreeDotfile = merge(H.NeoTreeDimText)
 H.NeoTreeMessage = merge(H.NeoTreeDimText)
 H.NeoTreeTitleBar = merge(H.NeoTreeDimText)
 H.NeoTreeFloatBorder = merge(H.FloatBorder)
+H.NeoTreeGitAdded = { fg = c.green_tea }
+H.NeoTreeGitStaged = H.NeoTreeGitAdded
+H.NeoTreeGitUnstaged = H.NeoTreeGitAdded
+H.NeoTreeGitModified = { fg = c.green_blue }
+H.NeoTreeGitDeleted = { fg = c.red }
+H.NeoTreeGitUntracked = H.NeoTreeGitUnstaged
 
 -- NEORG --
 H['@neorg.headings.1.title'] = { fg = c.purple }
@@ -259,7 +274,7 @@ H.markdownTSStringEscape = merge(H.SpecialKey)
 H.markdownTSTextReference = merge(H.Identifier, H.Ul)
 H.markdownTSEmphasis = merge(H.Italic)
 H.markdownTSTitle = merge(H.Statement)
-H.markdownTSLiteral = merge(H.Type)
+H.markdownTSLiteral = H.Statement
 H.markdownTSURI = merge(H.SpecialComment)
 H.markdownUrl = merge(H.markdownTSURI)
 H.markdownCode = merge(H.markdownTSLiteral)
@@ -272,6 +287,9 @@ H.markdownLinkTextDelimiter = merge(H.Delimiter)
 -- h.helpOption = { h.Constant }
 
 -- GIT --
+local add = '#223233'
+local delete = '#321911'
+
 H.GitSignsAdd = { fg = c.green_blue }
 H.GitSignsChange = { fg = c.cyan }
 H.GitSignsDelete = { fg = c.cyan }
@@ -280,18 +298,18 @@ H.GitSignsAddLn = merge(H.GitSignsAdd)
 H.GitSignsChangeLn = merge(H.GitSignsChange)
 H.GitSignsDeleteLn = merge(H.GitSignsDelete)
 
-H.GitSignsAddPreview = merge(H.GitSignsAdd, { fg = c.blue_darkest })
-H.GitSignsChangePreview = merge(H.GitSignsChange, { fg = c.blue_darkest })
-H.GitSignsDeletePreview = merge(H.GitSignsDelete, { fg = c.blue_darkest })
+H.GitSignsAddPreview = { bg = add }
+H.GitSignsChangePreview = { bg = delete }
+H.GitSignsDeletePreview = { bg = delete }
 
 H.GitGutterAdd = merge(H.GitSignsAdd)
-H.GitGutterChange = merge(H.GitSignsChange)
-H.GitGutterDelete = merge(H.GitSignsDelete)
+H.GitGutterChange = { fg = c.pink }
+H.GitGutterDelete = { fg = c.pink }
 
 H.DiffAdd = { bg = '#223233' }
 H.DiffChange = { bg = '#223233' }
-H.DiffText = merge(H.Visual, { fg = nil })
-H.DiffDelete = { bg = '#321911', fg = '#321911' }
+H.DiffText = merge(H.Visual, { fg = nil, underline = nil })
+H.DiffDelete = { bg = '#321911' }
 
 -- NOTIFY --
 H.NotifyINFOBody = merge(H.NormalFloat)
@@ -380,8 +398,8 @@ H.NvimTreeSpecialFile = { fg = c.fg, gui = nil }
 -- CMP --
 H.CmpItemAbbr = { fg = c.fg }
 H.CmpItemAbbrDeprecated = { fg = c.orange }
-H.CmpItemAbbrMatch = merge(H.Bold, { fg = c.green_tea })
-H.CmpItemAbbrMatchFuzzy = merge(H.Bold, { fg = c.green_tea })
+H.CmpItemAbbrMatch = merge(H.Bold, { fg = c.teal })
+H.CmpItemAbbrMatchFuzzy = merge(H.Bold, { fg = c.teal })
 H.CmpItemKind = { fg = c.gray }
 H.CmpItemMenu = { fg = c.gray }
 H.CmpItemMenuDefault = merge(H.NormalFloat)

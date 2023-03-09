@@ -1,5 +1,6 @@
 return {
   {
+    enabled = false,
     'nvim-treesitter/playground',
     cmd = {
       'TSPlaygroundToggle',
@@ -11,7 +12,7 @@ return {
     'nvim-treesitter/nvim-treesitter',
     event = 'BufReadPost',
     dependencies = {
-      'nvim-treesitter/nvim-treesitter-context',
+      -- 'nvim-treesitter/nvim-treesitter-context',
     },
     config = function()
       local install = require 'nvim-treesitter.install'
@@ -45,6 +46,8 @@ return {
           'bash',
           'regex',
           'norg',
+          'kdl',
+          'proto',
         },
         query_linter = {
           enable = true,

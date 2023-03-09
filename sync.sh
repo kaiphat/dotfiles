@@ -26,6 +26,7 @@ set paths                  \
   .config/zathura \
   .config/awesome \
   .config/i3 \
+  .config/zellij \
   .config/dunst
 
 set dotfiles ~/dotfiles
@@ -35,7 +36,7 @@ for path in $paths
   set item (basename $path)
 
   if test ! -e $dotfiles/$item
-    cp -r $fullpath $dotfiles 
+    cp -r $fullpath $dotfiles
   end
 
   if test -e $dotfiles/$item

@@ -5,9 +5,11 @@ return {
     local nnp = require 'no-neck-pain'
 
     nnp.setup {
-      enableOnVimEnter = false,
+      autocmds = {
+        enableOnVimEnter = false,
+      },
 
-      width = 105,
+      width = 120,
 
       buffers = {
         backgroundColor = nil,
