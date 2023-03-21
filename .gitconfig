@@ -2,7 +2,7 @@
 	email = i.punko@pixelplex.io
 	name = Ilya Punko
 	safecrlf = false
-	signingkey = 6944BAF93A2A7005
+	signingkey = 7859612C85FCED73
 [commit]
   gpgsign = true
 [core]

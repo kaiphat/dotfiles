@@ -1,21 +1,37 @@
 local wezterm = require 'wezterm'
 
--- FONTS --
+--
+-- UTILS
+--
 
-local function get_font_rules(name, params)
-  local names = {
-    name,
-    {
-      family = 'Symbols Nerd Font Mono',
-      scale = 0.6,
-    },
-  }
+local function merge(...)
+  local args = { ... }
+  return vim.tbl_extend('force', {}, unpack(args))
+end
 
-  return {
-    {
-      font = wezterm.font_with_fallback(names, params),
+--
+-- FONTS
+--
+
+local function build_font_params(name, with_italic, weight, params)
+  return merge(params, {
+    font = wezterm.font(name),
+    font_rules = {
+      {
+        italic = true,
+        font = wezterm.font_with_fallback {
+          {
+            family = name,
+            weight = weight,
+            italic = with_italic,
+          },
+        },
+      },
+      {
+        font = wezterm.font_with_fallback({ name }, { weight = weight }),
+      },
     },
-  }
+  })
 end
 
 local weights = {
@@ -26,78 +42,30 @@ local weights = {
 }
 
 local font_config = ({
-  jet_brains = {
-    font_size = 10,
+  jet_brains = build_font_params('JetBrainsMono Nerd Font', true, weights.B, {
+    font_size = 9.3,
     cell_width = 1,
     line_height = 1,
-    font = wezterm.font 'JetBrainsMono',
-    font_rules = get_font_rules('JetBrains Mono Bold', { weight = weights.R }),
-  },
-  iosevka = {
-    font_size = 10.5,
-    line_height = 1,
-    cell_width = 1,
-    font = wezterm.font 'Iosevka',
-    font_rules = get_font_rules('Iosevka SS14', { italic = false, weight = weights.B }),
-  },
-  victor_mono = {
-    font_size = 10,
-    line_height = 0.80,
-    font = wezterm.font 'VictorMono',
-    font_rules = get_font_rules('VictorMono', { italic = false }),
-  },
-  caskaydia = {
-    font_size = 10.6,
-    line_height = 1.1,
-    cell_width = 1,
-    font = wezterm.font 'CaskaydiaCovePL Nerd Font',
-    font_rules = get_font_rules('CaskaydiaCovePL Nerd Font', { italic = false, weight = weights.R }),
-  },
-  mononoki = {
+  }),
+  mononoki = build_font_params('mononoki Nerd Font', true, weights.B, {
     font_size = 11,
     cell_width = 0.8,
-    line_height = 1.1,
-    font = wezterm.font 'mononoki Nerd Font',
-    font_rules = get_font_rules('mononoki', { italic = false, weight = weights.R }),
-  },
-  fira = {
-    font_size = 10,
-    line_height = 1.2,
-    cell_width = 1,
-    font = wezterm.font 'Fira Code',
-    font_rules = get_font_rules('Fira Code', { italic = false, weight = weights.R }),
-  },
-  hack = {
-    font_size = 11,
     line_height = 1,
-    cell_width = 1,
-    font = wezterm.font 'Hack Nerd Font',
-    font_rules = get_font_rules('Hack Nerd Font', { italic = false, weight = weights.R }),
-  },
-}).mononoki
+  }),
+}).jet_brains
 
--- UTILS --
-
-local merge = function(list)
-  local result = list[1]
-
-  for i = 2, #list do
-    for key, value in pairs(list[i]) do
-      result[key] = value
-    end
-  end
-
-  return result
-end
-
--- EVENTS --
+--
+-- EVENTS
+--
 
 wezterm.on('gui-startup', function(cmd)
   local _, _, window = wezterm.mux.spawn_window(cmd or {})
   window:gui_window():maximize()
 end)
 
--- THEME --
+--
+-- THEME
+--
 
 local backgrounds = {
   '202837',
@@ -144,9 +112,9 @@ local padding = {
   bottom = 0,
 }
 
--- RESULT --
-
--- local gpus = wezterm.gui.enumerate_gpus()
+--
+-- RESULT
+--
 
 local config = {
   colors = colors,
@@ -156,13 +124,10 @@ local config = {
   cursor_blink_rate = 750,
   max_fps = 120,
   animation_fps = 120,
-  window_background_opacity = 1,
-  enable_kitty_graphics = true,
+  window_background_opacity = 0.94,
   default_cursor_style = 'BlinkingBlock',
   warn_about_missing_glyphs = false,
+  use_cap_height_to_scale_fallback_fonts = true,
 }
 
-return merge {
-  config,
-  font_config,
-}
+return merge(config, font_config)

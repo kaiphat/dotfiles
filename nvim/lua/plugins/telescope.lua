@@ -153,7 +153,7 @@ return {
     map('n', '<leader>fj', function()
       builtin.find_files {
         find_command = {
-          'fdfind',
+          'fd',
           '-t=f',
           '-E=test/',
         },
@@ -165,7 +165,7 @@ return {
     local function find_all_files()
       builtin.find_files {
         find_command = {
-          'fdfind',
+          'fd',
           '-t',
           'f',
           '-E', 'node_modules/',

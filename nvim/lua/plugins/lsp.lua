@@ -33,6 +33,9 @@ local servers = {
   },
   cssls = {},
   html = {},
+  pylsp = {
+
+  },
   lua_ls = {
     settings = {
       Lua = {

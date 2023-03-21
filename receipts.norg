@@ -1,4 +1,13 @@
 * LINUX
+** change font and themes
+   lxappearence
+
+** change cursor
+   https://wiki.archlinux.org/title/Cursor_themes
+
+** nvidia drivers
+   - `sudo pacman -S --needed nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader`
+   - `sudo pacman -S linux-headers`
 
 ** prevent C-d exit for fish
    - funced fish_user_key_bindings
@@ -11,8 +20,8 @@
    - chsh -s $which_output
 
 ** disable fn keys
-   echo options hid_apple fnmode=0 | sudo tee -a /etc/modprobe.d/hid_apple.conf
-   sudo update-initramfs -u -k all
+   `echo options hid_apple fnmode=0 | sudo tee -a /etc/modprobe.d/hid_apple.conf`
+   `sudo update-initramfs -u -k all`
 
 ** get all mon fonts
    fc-list : family spacing outline scalable | grep -e spacing=100 -e spacing=90 | grep -e outline=True | grep -e scalable=True
@@ -44,6 +53,25 @@
 ** copy several files and change name for every
    pax -rw -s/rpc_dev/rpc/ [rpc_dev]* .
 
+** fix flash
+   `fdisk -l` to list the devices table
+   `fdisk /dev/sdb`
+   p to print the partition table of the device
+   d to delete partitions
+   n to create a new partition if you don't know how to use it you can press m to launch help
+   t to assign the tipe of partition, I usually use linux ext4
+   w to write the new partition table in the device Is very important to press w
+   OR `sudo pacman -S gparted` GUI for flash format
+
+** format flash
+   `sudo mkfs.vfat -n 'kaiphat' /dev/sdb1 -v -c -F 32`
+
+** setup razer
+   - install `openrazer-daemon`
+   - run `sudo gpasswd -a $USER plugdev`
+   - `yay -S razergenie`
+   - run program, set 1600 dpi
+
 * NVIM
 
 ** python
@@ -51,24 +79,10 @@
    pip uninstall -y neovim pynvim msgpack greenlet
    pip install neovim
 
-* KITTY
+* Arch
 
-** font support
-   mkdir ~/.config/fontconfig/fonts.conf
-
-   ```
-   <?xml version="1.0"?>
-   <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-   <fontconfig>
-   <match target="scan">
-   <test name="family">
-   <string>mononoki Nerd Font</string>
-   </test>
-   <edit name="spacing">
-   <int>100</int>
-   </edit>
-   </match>
-   </fontconfig>
-   ```
-   fc-cache -r
-
+** change loading message
+   - `sudo nvim /boot/loader/loader.conf`
+   - `timeout 0`
+   - `sudo nvim /boot/loader/entries/2023-03-10_10-26-33_linux.conf`
+   - add `rw quiet splash`

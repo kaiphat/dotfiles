@@ -82,7 +82,7 @@ return {
 
           local kind = require('lspkind').cmp_format {
             mode = 'symbol_text',
-            maxwidth = 50,
+            maxwidth = 25,
             preset = 'default',
           }(entry, vim_item)
 
@@ -93,7 +93,8 @@ return {
           else
             kind.kind = ' ' .. strings[1]
           end
-          kind.menu = ' '
+
+          kind.menu = entry.completion_item.detail
 
           return kind
         end,

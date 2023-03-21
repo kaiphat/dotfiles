@@ -1,18 +1,23 @@
+#! /bin/bash
+
 ## SXHKD CONFIG ##
-super + @space
-	~/dotfiles/sxhkd/layout
+super + space
+  {setxkbmap ru, setxkbmap us}
 
 @Print
-  scrot -s -q 100 -f -e 'xclip -selection clipboard -t image/png -i $f'
+  scrot -s -q 100 -f -e 'xclip -selection clipboard -t image/png -i $f; mkdir ~/screenshots; mv $f -f -t ~/screenshots/'
+
+shift + @Print
+  scrot -u -s -q 100 -f -e 'xclip -selection clipboard -t image/png -i $f; mkdir ~/screenshots; mv $f -f -t ~/screenshots/'
 
 super + Return
-	wezterm
-
-super + shift + a
 	alacritty
 
+super + e
+	thunar
+
 super + shift + b
-	brave-browser
+	brave
 
 super + shift + d
 	dbeaver-ce
@@ -20,44 +25,62 @@ super + shift + d
 super + shift + s
 	slack
 
+super + shift + t
+  steam
+
 super + shift + m
 	telegram-desktop
+
+super + shift + z
+	~/dotfiles/scripts/open_books.sh
 
 super + e
 	nautilus
 
-# program launcher
 super + d
 	rofi -show drun
 
-# make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
 
-super + shift + q
-	bspc quit
-
-super + shift + r
+super + ctrl + r
 	bspc wm -r
 
-# close and kill
-super + c
+super + shift + c
 	bspc node -c
 
+# super + z
+#   bspc node -t \~fullscreen
+
+super + shift + ctrl + r
+  reboot
+
+super + shift + ctrl + q
+  poweroff
+
+super + ctrl + s
+  systemctl suspend
+
+super + Tab
+	bspc node -f last
+
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+super + {1-9,0}
+	bspc desktop -f ^{1-9,10}
+
+super + shift + {1-9,0}
+  bspc node -d ^{1-9,10} --follow
+
 # alternate between the tiled and monocle layout
-super + m
+super + z
 	bspc desktop -l next
 
-# send the newest marked node to the newest preselected node
-super + y
-	bspc node newest.marked.local -n newest.!automatic.local
-
-# swap the current node and the biggest window
-super + g
-	bspc node -s biggest.window
-
-super + a
-  bspc node -t \~fullscreen
+super + f
+  bspc node -t ~floating
 
 super + {t,shift + t,shift + @space}
 	bspc node -t {tiled,pseudo_tiled,floating}
@@ -74,57 +97,31 @@ super + {_,shift + }{h,j,k,l}
 super + {p,b,comma,period}
 	bspc node -f @{parent,brother,first,second}
 
-# focus the next/previous window in the current desktop
-super + {_,shift + }c
-	bspc node -f {next,prev}.local.!hidden.window
+super + grave
+  bspc desktop -l monocle; \
+  bspc node -f next.local.window -a
 
 # focus the next/previous desktop in the current monitor
 super + bracket{left,right}
 	bspc desktop -f {prev,next}.local
 
-# focus the last node/desktop
-super + Tab
-	bspc node -f last
-
-# focus the older or newer node in the focus history
-super + {o,i}
-	bspc wm -h off; \
-	bspc node {older,newer} -f; \
-	bspc wm -h on
-
-# focus or send to the given desktop
-super + {1-9,0}
-	bspc desktop -f '^{1-9,10}'
-
-# PRESELECT
 super + ctrl + {h,j,k,l}
 	bspc node -p {west,south,north,east}
 
 super + ctrl + {1-9}
 	bspc node -o 0.{1-9}
 
-super + ctrl + space
-	bspc node -p cancel
-
-super + ctrl + shift + space
-	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+super + s
+  bspc node -n 'last.!automatic.local'
 
 # AUDIO
 XF86AudioRaiseVolume
-	amixer -D pulse set Master 3%+
+  pactl set-sink-volume @DEFAULT_SINK@ +5%
+	#wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%+
 XF86AudioLowerVolume
-	amixer -D pulse set Master 3%-
+  pactl set-sink-volume @DEFAULT_SINK@ -5%
+	#wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%-
 XF86AudioMute
-	amixer set Master {mute, unmute}
+  pactl set-sink-mute @DEFAULT_SINK@ toggle
+  #wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 
-# expand a window by moving one of its side outward
-super + alt + {h,j,k,l}
-	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
-
-# contract a window by moving one of its side inward
-super + alt + shift + {h,j,k,l}
-	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
-
-# move a floating window
-super + {Left,Down,Up,Right}
-	bspc node -v {-20 0,0 20,0 -20,20 0}

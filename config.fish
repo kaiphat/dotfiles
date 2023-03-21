@@ -17,6 +17,7 @@ set -gx LUA_DIR /usr/bin/lua
 set -gx LD_LIBRARY_PATH /opt/oracle/instantclient_21_8
 set -U fish_greeting
 set -U ignoreeof true
+set -U SXHKD_SHELL sh
 
 function fish_right_prompt
 end
@@ -42,6 +43,8 @@ fish_add_path -aP $HOME/.cargo/bin
 fish_add_path -aP $HOME/.cargo/bin/rustc
 fish_add_path -aP $HOME/.krew/bin
 fish_add_path -aP $HOME/.local/share/bob/nvim-bin
+fish_add_path -aP $HOME/.local/bin/razer-cli
+fish_add_path -aP $HOME/.yarn/bin
 
 ### ALIASES ###
 
@@ -77,7 +80,6 @@ alias ta "t attach-session"
 alias td "t detach"
 alias st "speedtest"
 alias y "yarn"
-alias fd "fdfind"
 alias grep "grep -i --color"
 alias n "nvim"
 alias req "http -p Bb"
@@ -179,7 +181,7 @@ set fish_color_operator 'red'
 # set fish_color_user brgreen
 
 ### BREW ###
-eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+#eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 ### TMUX ###
 function refresh_tmux_vars --on-event="fish_preexec"
@@ -199,3 +201,6 @@ end
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
+
+#set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /home/kaiphat/.ghcup/bin # ghcup-env
+set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /home/kaiphat/.ghcup/bin # ghcup-env

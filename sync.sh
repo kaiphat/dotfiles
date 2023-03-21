@@ -27,7 +27,8 @@ set paths                  \
   .config/awesome \
   .config/i3 \
   .config/zellij \
-  .config/dunst
+  .config/dunst \
+  .config/qtile
 
 set dotfiles ~/dotfiles
 
