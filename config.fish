@@ -45,11 +45,15 @@ fish_add_path -aP $HOME/.krew/bin
 fish_add_path -aP $HOME/.local/share/bob/nvim-bin
 fish_add_path -aP $HOME/.local/bin/razer-cli
 fish_add_path -aP $HOME/.yarn/bin
+fish_add_path -aP $HOME/.local/bin
+set -gx PATH $PATH $HOME/.krew/bin
 
 ### ALIASES ###
 
 # docker
 alias d "docker"
+alias dstop "sudo systemctl stop docker.socket"
+alias dstart "sudo systemctl start docker.service"
 alias ds "d stop (d ps -q)"
 alias dc "docker-compose"
 alias dcr "dc restart"
@@ -96,13 +100,22 @@ alias ... "cd ../../"
 
 ### PROJECT ALIASES ###
 # gladwin
-alias gladwin-prod-kuber-namespace "aws eks update-kubeconfig --profile gladwin --region eu-central-1 --name gladwin-frankfurt-prod"
+alias gladwin-prod-kuber-namespace "aws eks update-kubeconfig --region eu-central-1 --name gladwin-frankfurt-prod"
 alias gladwin-stage-kuber-namespace "aws eks update-kubeconfig --region eu-central-1 --name gladwin-frankfurt-stage"
 alias gladwin-dev-kuber-namespace "cat ~/.kube/config-dev > ~/.kube/config"
 
-alias gladwin-prod-db "kubectl -n 768-gladwin-tech-production port-forward pod/acid-gladwindb-0 8000:5432"
-alias gladwin-dev-db "kubectl -n 768-gladwin-tech-develop port-forward pod/acid-gladwindb-0 8000:5432"
-alias gladwin-stage-db "kubectl -n 768-gladwin-tech-staging port-forward pod/acid-gladwindb-0 8000:5432"
+function gladwin-prod-db
+  gladwin-prod-kuber-namespace
+  kubectl -n 768-gladwin-tech-production port-forward pod/acid-gladwindb-2 8000:5432
+end
+function gladwin-dev-db
+  gladwin-dev-kuber-namespace
+  kubectl -n 768-gladwin-tech-develop port-forward pod/acid-gladwindb-1 5432:5432
+end
+function gladwin-stage-db
+  gladwin-stage-kuber-namespace
+  kubectl -n 768-gladwin-tech-staging port-forward pod/acid-gladwindb-0 8000:5432
+end
 
 alias gladwin-prod-redis "kubectl -n 768-gladwin-tech-production port-forward pod/rfr-redis-0 27777:26379"
 
@@ -202,5 +215,4 @@ end
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
 
-#set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /home/kaiphat/.ghcup/bin # ghcup-env
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /home/kaiphat/.ghcup/bin # ghcup-env

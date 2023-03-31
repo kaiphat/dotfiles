@@ -1,72 +1,62 @@
-## MODULES ##
+#
+# MODULES
+#
 
-module completions {
-  def "nu-complete git branches" [] {
-    ^git branch | lines | each { |line| $line | str replace '[\*\+] ' '' | str trim }
+#
+# ALIASES
+#
+
+old-alias g = git
+old-alias t = tmux
+old-alias n = nvim
+old-alias d = docker
+old-alias y = yarn
+old-alias dc = docker-compose
+
+alias tn = t new-session -s
+alias ta = t attach-session
+alias td  = t detach
+
+alias dcr = dc restart
+alias di = docker inspect
+def ds [] {
+  let containers = (docker ps -q | lines);
+  docker stop $containers;
+}
+def dps [name = ''] {
+  let containers = (docker ps -a | from ssv | select ID STATUS CREATED NAMES PORTS);
+  if $name == '' {
+    $containers
+  } else {
+    $containers | where NAMES =~ $name
   }
-
-  def "nu-complete git remotes" [] {
-    ^git remote | lines | each { |line| $line | str trim }
-  }
-
-  export extern "git checkout" [
-    branch?: string@"nu-complete git branches" # name of the branch to checkout
-    -b: string                                 # create and checkout a new branch
-    -B: string                                 # create/reset and checkout a branch
-    -l                                         # create reflog for new branch
-    --guess                                    # second guess 'git checkout <no-such-branch>' (default)
-    --overlay                                  # use overlay mode (default)
-    --quiet(-q)                                # suppress progress reporting
-    --recurse-submodules: string               # control recursive updating of submodules
-    --progress                                 # force progress reporting
-    --merge(-m)                                # perform a 3-way merge with the new branch
-    --conflict: string                         # conflict style (merge or diff3)
-    --detach(-d)                               # detach HEAD at named commit
-    --track(-t)                                # set upstream info for new branch
-    --force(-f)                                # force checkout (throw away local modifications)
-    --orphan: string                           # new unparented branch
-    --overwrite-ignore                         # update ignored files (default)
-    --ignore-other-worktrees                   # do not check if another worktree is holding the given ref
-    --ours(-2)                                 # checkout our version for unmerged files
-    --theirs(-3)                               # checkout their version for unmerged files
-    --patch(-p)                                # select hunks interactively
-    --ignore-skip-worktree-bits                # do not limit pathspecs to sparse entries only
-    --pathspec-from-file: string               # read pathspec from file
-  ]
-
-  export extern "git push" [
-    remote?: string@"nu-complete git remotes", # the name of the remote
-    refspec?: string@"nu-complete git branches"# the branch / refspec
-    --verbose(-v)                              # be more verbose
-    --quiet(-q)                                # be more quiet
-    --repo: string                             # repository
-    --all                                      # push all refs
-    --mirror                                   # mirror all refs
-    --delete(-d)                               # delete refs
-    --tags                                     # push tags (can't be used with --all or --mirror)
-    --dry-run(-n)                              # dry run
-    --porcelain                                # machine-readable output
-    --force(-f)                                # force updates
-    --force-with-lease: string                 # require old value of ref to be at this value
-    --recurse-submodules: string               # control recursive pushing of submodules
-    --thin                                     # use thin pack
-    --receive-pack: string                     # receive pack program
-    --exec: string                             # receive pack program
-    --set-upstream(-u)                         # set upstream for git pull/status
-    --progress                                 # force progress reporting
-    --prune                                    # prune locally removed refs
-    --no-verify                                # bypass pre-push hook
-    --follow-tags                              # push missing but relevant tags
-    --signed: string                           # GPG sign the push
-    --atomic                                   # request atomic transaction on remote side
-    --push-option(-o): string                  # option to transmit
-    --ipv4(-4)                                 # use IPv4 addresses only
-    --ipv6(-6)                                 # use IPv6 addresses only
-  ]
 }
 
-use completions *
+alias todo = nvim ~/notes/deals.norg -c 'set signcolumn=no'
+alias notes = nvim ~/notes/notes.norg -c 'set signcolumn=no'
 
+alias nest = npx @nestjs/cli
+alias nvim-start = (nvim --startuptime _s.log -c exit and tail -100 _s.log | bat and rm _s.log)
+
+### PROJECT ALIASES ###
+# gladwin
+alias gladwin-prod-kuber-namespace = aws eks update-kubeconfig --region eu-central-1 --name gladwin-frankfurt-prod"
+alias gladwin-stage-kuber-namespace = aws eks update-kubeconfig --region eu-central-1 --name gladwin-frankfurt-stage"
+alias gladwin-dev-kuber-namespace = cat ~/.kube/config-dev > ~/.kube/config
+
+alias gladwin-prod-db = kubectl -n 768-gladwin-tech-production port-forward pod/acid-gladwindb-2 8000:5432
+alias gladwin-dev-db = kubectl -n 768-gladwin-tech-develop port-forward pod/acid-gladwindb-1 5432:5432
+alias gladwin-stage-db = kubectl -n 768-gladwin-tech-staging port-forward pod/acid-gladwindb-0 8000:5432
+
+alias gladwin-prod-redis = kubectl -n 768-gladwin-tech-production port-forward pod/rfr-redis-0 27777:26379
+
+# green
+alias green-prod-db = ssh -4 -L 1234:10.1.1.210:5432 green
+alias green-master-db = ssh -4 -L 1234:localhost:27182 pp-master
+
+#
+# THEME
+#
 let base00 = "#24273a" # base
 let base01 = "#1e2030" # mantle
 let base02 = "#363a4f" # surface0
@@ -121,6 +111,13 @@ let theme = {
     shape_custom: {attr: b}
 }
 
+#
+# CONFIG
+#
+let carapace_completer = {|spans|
+  carapace $spans.0 nushell $spans | from json
+}
+
 let-env config = {
   ls: {
     use_ls_colors: true # use the LS_COLORS environment variable to colorize output
@@ -152,26 +149,26 @@ let-env config = {
     partial: true  # set this to false to prevent partial filling of the prompt
     algorithm: "prefix"  # prefix or fuzzy
     external: {
-      enable: true # set to false to prevent nushell looking into $env.PATH to find more suggestions, `false` recommended for WSL users as this look up my be very slow
-      max_results: 100 # setting it lower can improve completion performance at the cost of omitting some options
-      completer: null # check 'carapace_completer' above as an example
+      enable: true
+      completer: $carapace_completer
     }
   }
   filesize: {
     metric: true # true => KB, MB, GB (ISO standard), false => KiB, MiB, GiB (Windows standard)
     format: "auto" # b, kb, kib, mb, mib, gb, gib, tb, tib, pb, pib, eb, eib, zb, zib, auto
-  } show_banner: false
+  }
+  show_banner: false
   color_config: $theme
   use_grid_icons: true
   footer_mode: "25" # always, never, number_of_rows, auto
   float_precision: 2
   use_ansi_coloring: true
-  edit_mode: emacs # emacs, vi
+  edit_mode: vi # emacs, vi
   menus: [
       {
         name: completion_menu
         only_buffer_difference: false
-        marker: "| "
+        marker: ""
         type: {
             layout: columnar
             columns: 4
@@ -187,7 +184,7 @@ let-env config = {
       {
         name: history_menu
         only_buffer_difference: true
-        marker: "? "
+        marker: ""
         type: {
             layout: list
             page_size: 10
@@ -353,52 +350,17 @@ let-env config = {
   ]
 }
 
-## UTILS ##
+#
+# UTILS
+#
 
 def check_env [name] {
   (env | where name == $name | length) != 0
 }
 
-## ALIASES ##
-
-alias d = docker
-alias dc = docker-compose
-alias dcr = dc restart
-alias ds = d stop (d ps -q)
-alias di = docker inspect
-def dps [name = ''] {
-  let a = (docker ps -a | detect columns | select ID STATUS CREATED NAMES PORTS);
-  if $name == '' {
-    $a
-  } else {
-    $a | where NAMES =~ $name
-  }
-}
-
-alias g = git
-alias todo = nvim ~/notes/deals.norg -c "set signcolumn=no"
-alias notes = nvim ~/notes/notes.norg -c "set signcolumn=no"
-alias t = tmux new-session -A -s
-alias y = yarn
-alias fd = fdfind
-alias grep = grep -i --color
-alias n = nvim
-alias ssh = kitty +kitten ssh
-alias mkdir = mkdir -p
-alias less = less -MSx4 -FXR --shift 10
-alias rm = rm -rf
-alias clip = xclip -selection c
-alias pj = (xclip -o | jq '.' | clip)
-alias nest = npx @nestjs/cli
-alias nvim-start = (nvim --startuptime _s.log -c exit && tail -100 _s.log | bat && rm _s.log)
-
-## PLUGINS ##
+#
+# PLUGINS
+#
 
 source ~/.zoxide.nu
-
-#oh-my-posh init nu --config ~/dotfiles/nushell/pure.json
-source ~/.oh-my-posh.nu
-
-# source ~/.cache/starship/init.nu
-
-
+source ~/.cache/starship/init.nu

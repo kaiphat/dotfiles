@@ -221,6 +221,10 @@ H['@warning'] = merge(H.WarningMsg)
 H['@danger'] = merge(H.Error)
 H['@number'] = { fg = c.red }
 H['@boolean'] = { fg = c.orange_dark }
+H['@structure'] = { fg = c.orange_dark }
+H['@storageclass'] = { fg = c.orange_dark }
+H['@storageclass'] = { fg = c.orange_dark }
+H['@type.definition'] = { fg = c.orange_dark }
 -- semantic tokens below
 -- @class
 -- @struct

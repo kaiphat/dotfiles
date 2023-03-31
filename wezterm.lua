@@ -4,55 +4,73 @@ local wezterm = require 'wezterm'
 -- UTILS
 --
 
-local function merge(...)
+local merge = function(...)
   local args = { ... }
-  return vim.tbl_extend('force', {}, unpack(args))
+  local result = {}
+
+  for _, t in ipairs(args) do
+    for key, value in pairs(t) do
+      result[key] = value
+    end
+  end
+
+  return result
 end
 
 --
 -- FONTS
 --
 
+local weights = {
+  R = 'Regular',
+  B = 'Bold',
+  SB = 'DemiBold',
+  EB = 'ExtraBold',
+  M = 'Medium',
+}
+
 local function build_font_params(name, with_italic, weight, params)
+  local font = wezterm.font_with_fallback {
+    { family = name, weight = weight },
+    { family = 'JetBrainsMono Nerd Font' },
+  }
+
   return merge(params, {
-    font = wezterm.font(name),
+    font = font,
     font_rules = {
       {
         italic = true,
-        font = wezterm.font_with_fallback {
-          {
-            family = name,
-            weight = weight,
-            italic = with_italic,
-          },
-        },
+        font = wezterm.font(name, { italic = with_italic, weight = weight }),
       },
       {
-        font = wezterm.font_with_fallback({ name }, { weight = weight }),
+        font = font,
       },
     },
   })
 end
 
-local weights = {
-  R = 'Regular',
-  B = 'Bold',
-  SB = 'DemiBold',
-  M = 'Medium',
-}
-
 local font_config = ({
-  jet_brains = build_font_params('JetBrainsMono Nerd Font', true, weights.B, {
-    font_size = 9.3,
-    cell_width = 1,
-    line_height = 1,
+  jet_brains = build_font_params('JetBrainsMono Nerd Font', true, weights.M, {
+    font_size = 9.4,
+    cell_width = 0.8,
+    line_height = 1.1,
   }),
   mononoki = build_font_params('mononoki Nerd Font', true, weights.B, {
     font_size = 11,
     cell_width = 0.8,
     line_height = 1,
   }),
-}).jet_brains
+  victor = build_font_params('VictorMono Nerd Font', true, weights.B, {
+    font_size = 9.5,
+    cell_width = 1,
+    line_height = 1,
+  }),
+  iosevka_ss12 = build_font_params('Iosevka SS12', true, weights.B, {
+    font_size = 10.2,
+    cell_width = 1,
+    line_height = 1,
+  }),
+}).iosevka_ss12
 
 --
 -- EVENTS

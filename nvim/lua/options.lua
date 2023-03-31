@@ -84,6 +84,7 @@ o.laststatus = 3
 -- o.formatoptions = "jcroqlnt" -- tcqj
 o.grepprg = 'rg --vimgrep'
 o.fileformat = 'unix'
+o.fileformats = { 'unix', 'dos' }
 o.binary = false
 o.joinspaces = false -- No double spaces with join after a dot
 

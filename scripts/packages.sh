@@ -59,6 +59,8 @@ sudo pacman -S --needed --noconfirm \
   ttf-jetbrains-mono-nerd \
   ttf-mononoki-nerd \
   otf-cascadia-code-nerd \
+  ttc-iosevka-ss12 \
+  postgresql \
 
 yay_packages=( \
   "brave-bin" \

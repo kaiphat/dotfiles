@@ -3,7 +3,7 @@ local tools = {
   'lua-language-server',
   'prettierd',
   'rust-analyzer',
-  -- 'typescript-language-server',
+  'typescript-language-server',
   'json-lsp',
   'css-lsp',
   'html-lsp',

@@ -37,6 +37,8 @@ bspc rule -a Steam desktop=4
 bspc rule -a Pomodoro desktop=4
 bspc rule -a Spotify desktop=4
 
+bspc rule -a "Toggl Desktop" desktop=10 state=floating
+
 bspc rule -a Zathura state=tiled
 
 mygames=$(ls ~/.steam/steam/steamapps | grep appmanifest | sed 's/[^0-9]*//g')
@@ -46,6 +48,6 @@ done
 
 ###### RUN APPLICATIONS ######
 
-pgrep alacritty        > /dev/null || alacritty &
+pgrep wezterm          > /dev/null || wezterm &
 pgrep brave            > /dev/null || brave &
 pgrep telegram-desktop > /dev/null || telegram-desktop &
