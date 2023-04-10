@@ -1,8 +1,8 @@
 local wezterm = require 'wezterm'
 
---
--- UTILS
---
+------------------------------------------------------------
+------- UTILS ----------------------------------------------
+------------------------------------------------------------
 
 local merge = function(...)
   local args = { ... }
@@ -17,9 +17,9 @@ local merge = function(...)
   return result
 end
 
---
--- FONTS
---
+------------------------------------------------------------
+------- FONTS ----------------------------------------------
+------------------------------------------------------------
 
 local weights = {
   R = 'Regular',
@@ -50,10 +50,10 @@ local function build_font_params(name, with_italic, weight, params)
 end
 
 local font_config = ({
-  jet_brains = build_font_params('JetBrainsMono Nerd Font', true, weights.M, {
+  jet_brains = build_font_params('JetBrainsMono Nerd Font', true, weights.B, {
     font_size = 9.4,
     cell_width = 0.8,
-    line_height = 1.1,
+    line_height = 1,
   }),
   mononoki = build_font_params('mononoki Nerd Font', true, weights.B, {
     font_size = 11,
@@ -70,20 +70,30 @@ local font_config = ({
     cell_width = 1,
     line_height = 1,
   }),
-}).iosevka_ss12
+  iosevka = build_font_params('Iosevka Nerd Font', true, weights.B, {
+    font_size = 10.4,
+    cell_width = 1,
+    line_height = 1,
+  }),
+  fira = build_font_params('FiraCode Nerd Font', false, weights.M, {
+    font_size = 9.8,
+    cell_width = 0.8,
+    line_height = 1,
+  }),
+}).jet_brains
 
---
--- EVENTS
---
+------------------------------------------------------------
+------- EVENTS ---------------------------------------------
+------------------------------------------------------------
 
 wezterm.on('gui-startup', function(cmd)
   local _, _, window = wezterm.mux.spawn_window(cmd or {})
   window:gui_window():maximize()
 end)
 
---
--- THEME
---
+------------------------------------------------------------
+------- THEME ----------------------------------------------
+------------------------------------------------------------
 
 local backgrounds = {
   '202837',
@@ -130,9 +140,9 @@ local padding = {
   bottom = 0,
 }
 
---
--- RESULT
---
+------------------------------------------------------------
+------- RESULT ---------------------------------------------
+------------------------------------------------------------
 
 local config = {
   colors = colors,
@@ -140,12 +150,25 @@ local config = {
   enable_tab_bar = false,
   scrollback_lines = 10000,
   cursor_blink_rate = 750,
-  max_fps = 120,
-  animation_fps = 120,
+  max_fps = 60,
+  animation_fps = 60,
   window_background_opacity = 0.94,
   default_cursor_style = 'BlinkingBlock',
   warn_about_missing_glyphs = false,
   use_cap_height_to_scale_fallback_fonts = true,
+  disable_default_key_bindings = true,
+  keys = {
+    {
+      key = 'C',
+      mods = 'CTRL',
+      action = wezterm.action.CopyTo 'Clipboard',
+    },
+    {
+      key = 'V',
+      mods = 'CTRL',
+      action = wezterm.action.PasteFrom 'Clipboard',
+    },
+  },
 }
 
 return merge(config, font_config)

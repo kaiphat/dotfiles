@@ -86,3 +86,30 @@
    - `timeout 0`
    - `sudo nvim /boot/loader/entries/2023-03-10_10-26-33_linux.conf`
    - add `rw quiet splash`
+
+** wifi
+   - check dhcpcd
+   - check iwd or reload
+   - `sudo systemctl enable iwd.service`
+   - `sudo systemctl enable dhcpcd.service`
+   - `ip link set wlan0 up`
+   - `iwctl`
+   - `device list`
+   - add to `/etc/iwd/main.conf`
+     [General]
+     EnableNetworkConfiguration=true
+   - `station wlan0 scan`
+   - `station wlan0 get-networks`
+   - `iwctl station wlan0 connect {name} --passphrase {password}`
+
+   - or you can `sudo pacman -S networkmanager`
+   - `nmcli device wifi list`
+   - `nmcli device connect {name} password {password}`
+   - disable dhcpcd service
+
+** connect device by usb
+   - `yay -S jmtpfs`
+   - `mkdir ~/mnt`
+   - `jmtpfs ~/mnt`
+
+

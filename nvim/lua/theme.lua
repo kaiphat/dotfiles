@@ -1,69 +1,69 @@
---   red = '#ef8891',
---   baby_pink = '#fca2aa',
---   pink = '#fca2af',
---   line = '#272e35', -- for lines like vertsplit
---   green = '#9fe8c3',
---   blue = '#99aee5',
---   nord_blue = '#9aa8cf',
---   sun = '#fbdf9a',
---   purple = '#c2a2e3',
---   orange = '#EDA685',
---   cyan = '#b5c3ea',
---   statusline_bg = '#181f26',
---   lightbg = '#222930',
---   pmenu_bg = '#ef8891',
---   folder_bg = '#99aee5',
--- Rosewater	#f2d5cf
--- Flamingo	#eebebe
--- aPink	#f4b8e4
--- Mauve	#ca9ee6
--- aRed	#e78284
--- aMaroon	#ea999c
--- Peach	#ef9f76
--- aYellow	#e5c890
--- aGreen	#a6d189
--- aTeal	#81c8be
--- Sky	#99d1db
--- Sapphire	#85c1dc
--- aBlue	#8caaee
--- aLavender	#babbf1
--- Text	#c6d0f5
--- Subtext1	#b5bfe2
--- Subtext0	#a5adce
--- Overlay2	#949cbb
--- Overlay1	#838ba7
--- Overlay0	#737994
--- Surface2	#626880
--- Surface1	#51576d
--- Surface0	#414559
+-- red           #ef8891
+-- baby_pink     #fca2aa
+-- pink          #fca2af
+-- line          #272e35 -- for lines like vertsplit
+-- green         #9fe8c3
+-- blue          #99aee5
+-- nord_blue     #9aa8cf
+-- sun           #fbdf9a
+-- purple        #c2a2e3
+-- orange        #EDA685
+-- cyan          #b5c3ea
+-- statusline_bg #181f26
+-- lightbg       #222930
+-- pmenu_bg      #ef8891
+-- folder_bg     #99aee5
+-- Rosewater     #f2d5cf
+-- Flamingo      #eebebe
+-- aPink         #f4b8e4
+-- Mauve         #ca9ee6
+-- aRed          #e78284
+-- aMaroon       #ea999c
+-- Peach         #ef9f76
+-- aYellow       #e5c890
+-- aGreen        #a6d189
+-- aTeal         #81c8be
+-- Sky           #99d1db
+-- Sapphire      #85c1dc
+-- aBlue         #8caaee
+-- aLavender     #babbf1
+-- Text          #c6d0f5
+-- Subtext1      #b5bfe2
+-- Subtext0      #a5adce
+-- Overlay2      #949cbb
+-- Overlay1      #838ba7
+-- Overlay0      #737994
+-- Surface2      #626880
+-- Surface1      #51576d
+-- Surface0      #414559
 
 local c = {
-  bg = '#202837',
-  fg = '#b4b6d7',
-  one_bg2 = '#384155',
-  one_bg3 = '#405879',
-  one_bg4 = '#486892',
-  one_bg5 = '#253147',
-  cyan = '#a3b8ef',
-  blue_gray = '#9398cf',
-  purple = '#c2a2e3',
-  blue_nord = '#81A1C1',
-  teal = '#81c8be',
-  blue = '#8caaee',
-  lavender = '#babbf1',
-  sapphire = '#85c1dc',
-  pink = '#f4b8e4',
+  bg           = '#202837',
+  fg           = '#b4b6d7',
+  one_bg2      = '#384155',
+  one_bg3      = '#405879',
+  one_bg4      = '#486892',
+  one_bg5      = '#253147',
+  cyan         = '#a3b8ef',
+  blue_gray    = '#9398cf',
+  purple       = '#c2a2e3',
+  blue_nord    = '#81A1C1',
+  teal         = '#81c8be',
+  blue         = '#8caaee',
+  lavender     = '#babbf1',
+  sapphire     = '#85c1dc',
+  pink         = '#f4b8e4',
   blue_darkest = '#404060',
-  yellow = '#fbdf9a',
-  red = '#ef8891',
-  r1 = '#cb7f9a',
-  green_blue = '#66A0A0',
-  green_tea = '#9CC4B2',
-  brown = '#c8ae9d',
-  orange = '#fca2aa',
-  orange_dark = '#ef9f76',
-  gray = '#6e88a6',
-  gray_blue = '#788aa3',
+  yellow       = '#fbdf9a',
+  red          = '#ef8891',
+  r1           = '#cb7f9a',
+  green_blue   = '#66A0A0',
+  green_tea    = '#9CC4B2',
+  brown        = '#c8ae9d',
+  orange       = '#fca2aa',
+  orange_dark  = '#ef9f76',
+  gray         = '#6e88a6',
+  gray_blue    = '#788aa3',
 }
 
 local H = {}

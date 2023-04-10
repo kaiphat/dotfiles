@@ -42,11 +42,7 @@ map('n', '<esc>', ":nohl<cr>")
 
 map('n', 'Y', 'y$')
 
--- map('n', 'n', 'nzz')
--- map('n', 'N', 'Nzz')
 map('n', 'J', 'Jzz')
--- map('n', '*', '*zz')
--- map('n', '#', '#zz')
 
 map('n', ',,', '^')
 map('n', ',s', ':split<cr>')

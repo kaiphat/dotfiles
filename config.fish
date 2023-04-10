@@ -1,17 +1,17 @@
-### ENVIROMENTS ###
+############################################################
+####### ENVIROMENTS ########################################
+############################################################
+
 #set pure_symbol_prompt '$'
 #set pure_symbol_prompt ''
 set pure_symbol_prompt ❯
 
-#set -gx nvm_default_version v14.18.3
-#set -gx nvm_default_version v16.14.2
 set -gx nvm_default_version v18.12.0
 set -gx ANDROID_HOME $HOME/Android/Sdk
 set -gx EDITOR nvim
-set -gx MANPAGER 'less'
-set -gx PAGER 'nvim -c "set nowrap" -R'
+set -gx MANPAGER 'nvim +Man! -c "set nowrap"'
+set -gx PAGER 'nvim +Man! -c "set nowrap"'
 set -gx TERMINAL wezterm
-# curl https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo | tic -x -
 set -gx TERM xterm-256color
 set -gx LUA_DIR /usr/bin/lua
 set -gx LD_LIBRARY_PATH /opt/oracle/instantclient_21_8
@@ -48,7 +48,10 @@ fish_add_path -aP $HOME/.yarn/bin
 fish_add_path -aP $HOME/.local/bin
 set -gx PATH $PATH $HOME/.krew/bin
 
-### ALIASES ###
+
+############################################################
+####### ALIASES ############################################
+############################################################
 
 # docker
 alias d "docker"
@@ -97,8 +100,10 @@ alias nest "npx @nestjs/cli"
 alias nvim-start "nvim --startuptime _s.log -c exit && tail -100 _s.log | bat && rm _s.log"
 alias ... "cd ../../"
 
+############################################################
+####### PROJECT ALIASES ####################################
+############################################################
 
-### PROJECT ALIASES ###
 # gladwin
 alias gladwin-prod-kuber-namespace "aws eks update-kubeconfig --region eu-central-1 --name gladwin-frankfurt-prod"
 alias gladwin-stage-kuber-namespace "aws eks update-kubeconfig --region eu-central-1 --name gladwin-frankfurt-stage"
@@ -118,6 +123,11 @@ function gladwin-stage-db
 end
 
 alias gladwin-prod-redis "kubectl -n 768-gladwin-tech-production port-forward pod/rfr-redis-0 27777:26379"
+
+# pgcli
+alias edit-aliases "nvim ~/.config/fish/conf.d/aliases.fish"
+alias pg:gladwin:local "pgcli postgresql://postgres:root@127.0.0.1:27682/gladwin"
+alias pg:gladwin:local:test "pgcli postgresql://postgres:root@127.0.0.1:22222/gladwin"
 
 # green
 alias green-prod-db "ssh -4 -L 1234:10.1.1.210:5432 green"
@@ -165,7 +175,11 @@ function select
   $cmd (string split " " $dict[(math "$number * 2")])
 end
 
-### COLORS ###
+
+############################################################
+####### COLORS #############################################
+############################################################
+
 set fish_color_command '#81A1C1'
 set fish_color_match 'red' '--bold' '--background=cyan'
 set fish_color_search_match 'red' '--bold' '--background=red'
@@ -193,26 +207,34 @@ set fish_color_operator 'red'
 # set fish_color_status red
 # set fish_color_user brgreen
 
-### BREW ###
+
+############################################################
+####### BREW ###############################################
+############################################################
+
 #eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
-### TMUX ###
+
+############################################################
+####### TMUX ###############################################
+############################################################
+
 function refresh_tmux_vars --on-event="fish_preexec"
   if set -q TMUX
     tmux showenv -s | string replace -rf '^((?:SSH|DISPLAY).*?)=(".*?"); export.*' 'set -gx $1 $2' | source
   end
 end
 
-### AUTOSTART ###
+
+############################################################
+####### AUTOSTART ##########################################
+############################################################
+
 #if not set -q TMUX
 #  set -g TMUX 1
 #  tmux attach -t main || tmux new -s main
 #end
 
-#alias ssh "kitty +kitten ssh"
-
-# bun
-set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH
-
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /home/kaiphat/.ghcup/bin # ghcup-env
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/kaiphat/google-cloud-sdk/path.fish.inc' ]; . '/home/kaiphat/google-cloud-sdk/path.fish.inc'; end

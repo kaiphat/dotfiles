@@ -25,13 +25,13 @@ if ! command -v rustc &> /dev/null; then
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 fi
 
-cargo install \
-  bob-nvim
-
-if ! command -v nvim &> /dev/null; then
-  bob install latest
-  bob use latest
-fi
+# cargo install \
+#   bob-nvim
+#
+# if ! command -v nvim &> /dev/null; then
+#   bob install latest
+#   bob use latest
+# fi
 
 sudo pacman -S --needed --noconfirm \
   yarn \
@@ -61,9 +61,11 @@ sudo pacman -S --needed --noconfirm \
   otf-cascadia-code-nerd \
   ttc-iosevka-ss12 \
   postgresql \
+  networkmanager \
 
 yay_packages=( \
   "brave-bin" \
+  "jmtpfs"
 )
 
 for package in "${yay_packages[@]}"; do

@@ -72,6 +72,8 @@ return {
         },
       }
 
+      vim.treesitter.language.register('fish', 'man')
+
       local unit = require 'utils.unit'
 
       map({ 'x', 'o' }, 'u', function()

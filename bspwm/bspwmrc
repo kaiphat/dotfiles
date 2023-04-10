@@ -1,31 +1,39 @@
 #! /bin/bash
 
-###### STARTUP ######
+############################################################
+####### STARTUP ############################################
+############################################################
 
 ~/dotfiles/scripts/autostart.sh
 
-###### WINDOW CONFIGUARTION ######
+############################################################
+####### WINDOW CONFIGUARTION ###############################
+############################################################
 
 bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 
-bspc config window_gap            4
+bspc config window_gap            21
 bspc config split_ratio           0.5
 bspc config borderless_monocle    true
 bspc config gapless_monocle       false
 bspc config focus_follows_pointer true
 bspc config top_padding           0
 
-###### BSPWM COLORING ######
+############################################################
+####### BSPWM COLORING #####################################
+############################################################
 
-bspc config border_width 0
+bspc config border_width            0
 bspc config -n focused border_width 0
-bspc config normal_border_color   "#4C566A"
-bspc config active_border_color   "#a3b8ef"
-bspc config focused_border_color  "#a3b8ef"
-bspc config presel_feedback_color "#a3b8ef"
-bspc config urgent_border_color   "#a3b8ef"
+bspc config normal_border_color     "#4C566A"
+bspc config active_border_color     "#a3b8ef"
+bspc config focused_border_color    "#a3b8ef"
+bspc config presel_feedback_color   "#a3b8ef"
+bspc config urgent_border_color     "#a3b8ef"
 
-###### APPLICATION RULES ######
+############################################################
+####### APPLICATION RULES ##################################
+############################################################
 
 bspc rule -a Brave-browser desktop=2
 
@@ -46,7 +54,9 @@ for game in $mygames; do
   bspc rule -a steam_app_$game desktop=^10 follow=on
 done
 
-###### RUN APPLICATIONS ######
+######################################
+########## RUN APPLICATIONS ##########
+######################################
 
 pgrep wezterm          > /dev/null || wezterm &
 pgrep brave            > /dev/null || brave &

@@ -4,7 +4,7 @@ M.get_current_path = function()
   return vim.fn.expand '%:p:h'
 end
 
-M.splitString = function(str, delimiter)
+M.split_string = function(str, delimiter)
   local result = {}
   for match in (str .. delimiter):gmatch('(.-)' .. delimiter) do
     table.insert(result, match)
@@ -27,43 +27,6 @@ M.camel = function(s)
     local rest = string.sub(word, 3)
     return string.upper(first) .. rest
   end)
-end
-
-M.bindArgs = function(func, ...)
-  local args = { ... }
-  return function()
-    return func(unpack(args))
-  end
-end
-
-M.upperSql = function(str)
-  local words = {
-    'select',
-    'join',
-    'from',
-    'order by',
-    'limit',
-    'where',
-    'as',
-    'in',
-    'on',
-    'and',
-    'case',
-    'then',
-    'if',
-    'when',
-    'is',
-    'null',
-    'group by',
-    'else',
-    'end',
-  }
-
-  for _, word in pairs(words) do
-    str = str:gsub(word .. ' ', word:upper() .. ' ')
-  end
-
-  return str
 end
 
 M.clone_table = function(orig)

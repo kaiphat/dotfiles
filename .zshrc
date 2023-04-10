@@ -45,14 +45,6 @@ SPACESHIP_PROMPT_ADD_NEWLINE=false
 export C1='\x1b[34m'
 export NO='\x1b[0m'
 export LESS="-iMSx4 -FXR"
-# export PAGER="sed \"
-# s/\sRECORD//;
-# s//$C1\0$NO/;
-# s/\s\]--/ ]---------/;
-# s/^\(([0-9]\+ [rows]\+)\)/$C1\1$NO/;
-# s/^\(-\[\ [0-9]\+\ \][-+]\+\)/$C1\1$NO/;
-# s/|/$C1|$NO/g;
-# s/^\([-+]\+\)/$C1\1$NO/\" 2>/dev/null | less"
 
 # variables
 export EDITOR=nvim
