@@ -1,10 +1,10 @@
-############################################################
-####### ENVIROMENTS ########################################
-############################################################
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   ENVIROMENTS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-#set pure_symbol_prompt '$'
-#set pure_symbol_prompt ''
-set pure_symbol_prompt ❯
+# set pure_symbol_prompt '$'
+set pure_symbol_prompt '➜ '
+# set pure_symbol_prompt ❯
 
 set -gx nvm_default_version v18.12.0
 set -gx ANDROID_HOME $HOME/Android/Sdk
@@ -18,6 +18,8 @@ set -gx LD_LIBRARY_PATH /opt/oracle/instantclient_21_8
 set -U fish_greeting
 set -U ignoreeof true
 set -U SXHKD_SHELL sh
+
+bind \cd delete-char
 
 function fish_right_prompt
 end
@@ -49,9 +51,12 @@ fish_add_path -aP $HOME/.local/bin
 set -gx PATH $PATH $HOME/.krew/bin
 
 
-############################################################
-####### ALIASES ############################################
-############################################################
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   ALIASES   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+# edit
+alias edit-aliases "nvim ~/.config/fish/conf.d/aliases.fish"
 
 # docker
 alias d "docker"
@@ -80,7 +85,6 @@ alias g "git"
 alias todo "nvim ~/notes/deals.norg -c \"set signcolumn=no\""
 alias notes "nvim ~/notes/notes.norg -c \"set signcolumn=no\""
 # tmux #
-#alias ssh "wezterm ssh"
 alias t "tmux"
 alias tn "t new-session -s"
 alias ta "t attach-session"
@@ -100,39 +104,6 @@ alias nest "npx @nestjs/cli"
 alias nvim-start "nvim --startuptime _s.log -c exit && tail -100 _s.log | bat && rm _s.log"
 alias ... "cd ../../"
 
-############################################################
-####### PROJECT ALIASES ####################################
-############################################################
-
-# gladwin
-alias gladwin-prod-kuber-namespace "aws eks update-kubeconfig --region eu-central-1 --name gladwin-frankfurt-prod"
-alias gladwin-stage-kuber-namespace "aws eks update-kubeconfig --region eu-central-1 --name gladwin-frankfurt-stage"
-alias gladwin-dev-kuber-namespace "cat ~/.kube/config-dev > ~/.kube/config"
-
-function gladwin-prod-db
-  gladwin-prod-kuber-namespace
-  kubectl -n 768-gladwin-tech-production port-forward pod/acid-gladwindb-2 8000:5432
-end
-function gladwin-dev-db
-  gladwin-dev-kuber-namespace
-  kubectl -n 768-gladwin-tech-develop port-forward pod/acid-gladwindb-1 5432:5432
-end
-function gladwin-stage-db
-  gladwin-stage-kuber-namespace
-  kubectl -n 768-gladwin-tech-staging port-forward pod/acid-gladwindb-0 8000:5432
-end
-
-alias gladwin-prod-redis "kubectl -n 768-gladwin-tech-production port-forward pod/rfr-redis-0 27777:26379"
-
-# pgcli
-alias edit-aliases "nvim ~/.config/fish/conf.d/aliases.fish"
-alias pg:gladwin:local "pgcli postgresql://postgres:root@127.0.0.1:27682/gladwin"
-alias pg:gladwin:local:test "pgcli postgresql://postgres:root@127.0.0.1:22222/gladwin"
-
-# green
-alias green-prod-db "ssh -4 -L 1234:10.1.1.210:5432 green"
-alias green-master-db "ssh -4 -L 1234:localhost:27182 pp-master"
-
 function pq
   xclip -o |\
   string replace -r -a '\\\n' '\n' |\
@@ -149,8 +120,8 @@ function gp -a message
   set branch (git branch --show-current)
 
   git add -A
-  and git commit -m "$message"
-  and git push origin $branch
+  git commit -m "$message"
+  git push origin $branch
 end
 
 function ff
@@ -175,10 +146,9 @@ function select
   $cmd (string split " " $dict[(math "$number * 2")])
 end
 
-
-############################################################
-####### COLORS #############################################
-############################################################
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   COLORS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 set fish_color_command '#81A1C1'
 set fish_color_match 'red' '--bold' '--background=cyan'
@@ -207,17 +177,15 @@ set fish_color_operator 'red'
 # set fish_color_status red
 # set fish_color_user brgreen
 
-
-############################################################
-####### BREW ###############################################
-############################################################
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   BREW   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 #eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
-
-############################################################
-####### TMUX ###############################################
-############################################################
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   TMUX   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 function refresh_tmux_vars --on-event="fish_preexec"
   if set -q TMUX
@@ -225,10 +193,9 @@ function refresh_tmux_vars --on-event="fish_preexec"
   end
 end
 
-
-############################################################
-####### AUTOSTART ##########################################
-############################################################
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   AUTOSTART   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 #if not set -q TMUX
 #  set -g TMUX 1

@@ -237,6 +237,7 @@ H['@type.definition'] = { fg = c.orange_dark }
 -- @typeParameter
 -- @decorator
 
+H.Type = H['@type']
 -- HTML --
 H.htmlLink = merge(H['@text.uri'])
 

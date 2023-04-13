@@ -41,43 +41,50 @@ _G.get_row_col = function()
   return cursor[1], cursor[2]
 end
 
--- _G.create_title = function(char)
---   local prefix_length = 10
---
---   char = char or '#'
---
---   local row = get_row_col()
---   local line = vim.api.nvim_buf_get_lines(0, row - 1, row, false)[1]
---   local trimmed_line = trim_string(line)
---   local line_length = trimmed_line:len()
---
---   local prefix = generate_string(char, prefix_length)
---   local prefix_line = prefix .. generate_string(char, line_length + 2) .. prefix
---   local title = prefix .. ' ' .. trimmed_line .. ' ' .. prefix
---
---   vim.api.nvim_buf_set_lines(0, row - 1, row, true, { prefix_line, title, prefix_line })
--- end
-
 _G.create_title = function(char)
-  local length = 7
-  local max_length = 60
+  local MAX_LENGTH = 60
+  local SPACE_LENGTH = 3
+  local DEFAULT_CHAR = '┈'
 
   char = char or '#'
 
   local row = get_row_col()
 
-  local left = string.rep(char, length)
-  local right = string.rep(char, max_length)
-  local line = vim.trim(vim.api.nvim_get_current_line():gsub(char, ''))
-  local next_line = vim.api.nvim_buf_get_lines(0, row, row + 1, false)[1]
-  local raw_title = left .. ' ' .. line .. ' ' .. right
-  local title = raw_title:sub(1, max_length)
+  local line = vim.trim(vim.api.nvim_get_current_line():gsub(char, ''):gsub(DEFAULT_CHAR, ''))
+  local left_line_length = math.floor((MAX_LENGTH - #line - SPACE_LENGTH * 2) / 2)
+  local left = DEFAULT_CHAR:rep(left_line_length)
+  local right = DEFAULT_CHAR:rep(MAX_LENGTH - #line - SPACE_LENGTH * 2 - left_line_length)
 
-  local border = string.rep(char, #title)
+  local next_line = vim.api.nvim_buf_get_lines(0, row, row + 1, false)[1]
+  local space = (' '):rep(SPACE_LENGTH)
+  local title = char .. ' ' .. left .. space .. line .. space .. right
+
+  local border = char .. ' ' .. DEFAULT_CHAR:rep(MAX_LENGTH)
 
   vim.api.nvim_buf_set_lines(0, row - 1, row, true, { border, title, border })
 
   if vim.trim(next_line) ~= '' then
     vim.api.nvim_buf_set_lines(0, row + 2, row + 2, true, { '' })
   end
+end
+
+_G.create_sub_title = function(char)
+  local MAX_LENGTH = 60
+  local SPACE_LENGTH = 5
+  local DEFAULT_CHAR = '┈'
+
+  char = char or '#'
+
+  local row = get_row_col()
+
+  local line = vim.trim(vim.api.nvim_get_current_line():gsub(char, ''):gsub(DEFAULT_CHAR, ''))
+  local free_space = MAX_LENGTH - #line - SPACE_LENGTH * 2
+  local left_line_length = math.floor(free_space / 2)
+  local left = DEFAULT_CHAR:rep(left_line_length)
+  local right = DEFAULT_CHAR:rep(free_space - left_line_length)
+
+  local space = (' '):rep(SPACE_LENGTH)
+  local title = char .. ' ' .. left .. space .. line .. space .. right
+
+  vim.api.nvim_buf_set_lines(0, row - 1, row, true, { title })
 end

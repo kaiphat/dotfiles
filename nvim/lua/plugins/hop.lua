@@ -6,7 +6,7 @@ return {
     local hop = require 'hop'
 
     hop.setup {
-      keys = 'jfkdls;aieowpqQFPDLS:AIEOWKJ',
+      keys = 'kdls;aieowpqQFPDLS:AIEOWKJjf',
       case_insensitive = false,
       -- uppercase_labels = true,
     }

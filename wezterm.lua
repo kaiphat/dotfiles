@@ -1,8 +1,8 @@
 local wezterm = require 'wezterm'
 
-------------------------------------------------------------
-------- UTILS ----------------------------------------------
-------------------------------------------------------------
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   UTILS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 local merge = function(...)
   local args = { ... }
@@ -17,9 +17,9 @@ local merge = function(...)
   return result
 end
 
-------------------------------------------------------------
-------- FONTS ----------------------------------------------
-------------------------------------------------------------
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   FONTS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 local weights = {
   R = 'Regular',
@@ -58,42 +58,47 @@ local font_config = ({
   mononoki = build_font_params('mononoki Nerd Font', true, weights.B, {
     font_size = 11,
     cell_width = 0.8,
-    line_height = 1,
+    line_height = 1.1,
   }),
   victor = build_font_params('VictorMono Nerd Font', true, weights.B, {
-    font_size = 9.5,
+    font_size = 10.3,
     cell_width = 1,
     line_height = 1,
   }),
-  iosevka_ss12 = build_font_params('Iosevka SS12', true, weights.B, {
-    font_size = 10.2,
-    cell_width = 1,
-    line_height = 1,
-  }),
-  iosevka = build_font_params('Iosevka Nerd Font', true, weights.B, {
+  iosevka_ss12 = build_font_params('Iosevka SS12', true, weights.EB, {
     font_size = 10.4,
     cell_width = 1,
-    line_height = 1,
+    line_height = 1.1,
   }),
-  fira = build_font_params('FiraCode Nerd Font', false, weights.M, {
+  iosevka = build_font_params('Iosevka Nerd Font', true, weights.EB, {
+    font_size = 10.4,
+    cell_width = 1,
+    line_height = 1.1,
+  }),
+  fira = build_font_params('FiraCode Nerd Font', false, weights.B, {
     font_size = 9.8,
     cell_width = 0.8,
     line_height = 1,
   }),
-}).jet_brains
+  caskaydia = build_font_params('CaskaydiaCove Nerd Font Mono', true, weights.B, {
+    font_size = 10.3,
+    cell_width = 0.8,
+    line_height = 1.1,
+  }),
+}).victor
 
-------------------------------------------------------------
-------- EVENTS ---------------------------------------------
-------------------------------------------------------------
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   EVENTS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 wezterm.on('gui-startup', function(cmd)
   local _, _, window = wezterm.mux.spawn_window(cmd or {})
   window:gui_window():maximize()
 end)
 
-------------------------------------------------------------
-------- THEME ----------------------------------------------
-------------------------------------------------------------
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   THEME   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 local backgrounds = {
   '202837',
@@ -140,9 +145,9 @@ local padding = {
   bottom = 0,
 }
 
-------------------------------------------------------------
-------- RESULT ---------------------------------------------
-------------------------------------------------------------
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   RESULT   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 local config = {
   colors = colors,

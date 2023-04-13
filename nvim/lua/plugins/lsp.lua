@@ -16,72 +16,6 @@ local function set_lsp_symbols()
   end
 end
 
-local servers = {
-  typescript = {
-    disable_commands = false,
-    debug = false,
-  },
-  cssls = {},
-  html = {},
-  pylsp = {},
-  lua_ls = {
-    settings = {
-      Lua = {
-        workspace = {
-          checkThirdParty = false,
-        },
-        runtime = {
-          version = 'LuaJIT',
-        },
-        diagnostics = {
-          globals = {
-            'vim',
-          },
-        },
-        format = {
-          enable = false,
-        },
-      },
-    },
-  },
-  emmet_ls = {
-    is_not_highlight = true,
-    filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
-    init_options = {
-      html = {
-        options = {
-          ['bem.enabled'] = true,
-        },
-      },
-    },
-  },
-  rust_analyzer = {
-    settings = {
-      ['rust-analyzer'] = {
-        assist = {
-          importGranularity = 'module',
-          importPrefix = 'self',
-        },
-        diagnostics = {
-          enable = true,
-          enableExperimental = true,
-        },
-        cargo = {
-          loadOutDirsFromCheck = true,
-        },
-        procMacro = {
-          enable = true,
-        },
-        inlayHints = {
-          chainingHints = true,
-          parameterHints = true,
-          typeHints = true,
-        },
-      },
-    },
-  },
-}
-
 local function on_attach()
   map('n', 'gd', ':lua vim.lsp.buf.definition()<cr>')
   map('n', 'ga', ':vs<cr>:lua vim.lsp.buf.definition()<cr>')
@@ -93,6 +27,87 @@ local function on_attach()
   map('n', '<space>lq', ':lua vim.diagnostic.set_loclist()<cr>')
   map('n', '<space>la', ':lua vim.lsp.buf.code_action()<cr>')
   map('n', '<space>lr', ':lua vim.lsp.buf.rename()<cr>')
+end
+
+local function get_servers(capabilities)
+  return {
+    typescript = {
+      server = {
+        on_attach = function(client)
+          client.server_capabilities.semanticTokensProvider = nil
+          on_attach()
+        end,
+        capabilities = capabilities,
+        flags = {
+          debounce_text_changes = 150,
+        },
+      },
+      disable_commands = false,
+      debug = false,
+    },
+    cssls = {},
+    sqlls = {
+
+    },
+    html = {},
+    pylsp = {},
+    lua_ls = {
+      settings = {
+        Lua = {
+          workspace = {
+            checkThirdParty = false,
+          },
+          runtime = {
+            version = 'LuaJIT',
+          },
+          diagnostics = {
+            globals = {
+              'vim',
+            },
+          },
+          format = {
+            enable = false,
+          },
+        },
+      },
+    },
+    emmet_ls = {
+      is_not_highlight = true,
+      filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
+      init_options = {
+        html = {
+          options = {
+            ['bem.enabled'] = true,
+          },
+        },
+      },
+    },
+    rust_analyzer = {
+      settings = {
+        ['rust-analyzer'] = {
+          assist = {
+            importGranularity = 'module',
+            importPrefix = 'self',
+          },
+          diagnostics = {
+            enable = true,
+            enableExperimental = true,
+          },
+          cargo = {
+            loadOutDirsFromCheck = true,
+          },
+          procMacro = {
+            enable = true,
+          },
+          inlayHints = {
+            chainingHints = true,
+            parameterHints = true,
+            typeHints = true,
+          },
+        },
+      },
+    },
+  }
 end
 
 return {
@@ -143,32 +158,25 @@ return {
       end
     end
 
-    for server, opts in pairs(servers) do
-      if server == 'typescript' then
-        typescript.setup(vim.tbl_deep_extend('force', {}, opts, {
-          server = {
-            on_attach = function(client)
-              client.server_capabilities.semanticTokensProvider = nil
-              on_attach()
-            end,
-            capabilities = capabilities,
-            flags = {
-              debounce_text_changes = 150,
-            },
-          },
-        }))
+    for server_name, opts in pairs(get_servers(capabilities)) do
+      local server
+
+      if server_name == 'typescript' then
+        server = typescript
       else
-        config[server].setup(vim.tbl_deep_extend('force', {
-          on_attach = function(client)
-            client.server_capabilities.semanticTokensProvider = nil
-            on_attach()
-          end,
-          capabilities = capabilities,
-          flags = {
-            debounce_text_changes = 150,
-          },
-        }, opts))
+        server = config[server_name]
       end
+
+      server.setup(merge({
+        on_attach = function(client)
+          client.server_capabilities.semanticTokensProvider = nil
+          on_attach()
+        end,
+        capabilities = capabilities,
+        flags = {
+          debounce_text_changes = 150,
+        },
+      }, opts))
     end
 
     map('n', '<leader>lf', function()
