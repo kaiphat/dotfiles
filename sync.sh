@@ -1,53 +1,52 @@
 #!/bin/fish
 
-set paths                  \
-  .psqlrc                  \
-  .config/starship.toml   \
-  .less                    \
-  .zshrc                   \
-  .tmux.conf               \
-  .gitconfig               \
-  .rndebuggerrc            \
-  .config/nvim             \
-  .config/kitty            \
-  .config/pgcli            \
-  .config/fish/config.fish \
-  .config/zk               \
-  .config/alacritty        \
-  .config/fontconfig/fonts.conf \
-  .config/wezterm/wezterm.lua \
-  .config/helix \
-  .config/picom \
-  .config/bspwm \
-  .config/sxhkd \
-  .config/rofi \
-  .config/polybar \
-  .config/nushell \
-  .config/zathura \
-  .config/awesome \
-  .config/i3 \
-  .config/zellij \
-  .config/dunst \
-  .config/qtile
-
 set dotfiles ~/dotfiles
 
-for path in $paths
-  set fullpath ~/$path
-  set item (basename $path)
+set home_paths                    \
+    .psqlrc                       \
+    .less                         \
+    .zshrc                        \
+    .tmux.conf                    \
+    .gitconfig                    \
+    .rndebuggerrc                 \
 
-  if test ! -e $dotfiles/$item
-    cp -r $fullpath $dotfiles
-  end
+set config_paths                  \
+    nvim                          \
+    kitty                         \
+    pgcli                         \
+    starship.toml                 \
+    fish/config.fish              \
+    zk                            \
+    alacritty                     \
+    fontconfig/fonts.conf         \
+    wezterm/wezterm.lua           \
+    helix                         \
+    picom                         \
+    bspwm                         \
+    sxhkd                         \
+    rofi                          \
+    polybar                       \
+    nushell                       \
+    zathura                       \
+    i3                            \
+    zellij                        \
+    dunst                         \
 
-  if test -e $dotfiles/$item
-    rm -rf $fullpath
-  end
+function copy -a target_dir -a paths
+  for path in $$paths
+    set fullpath $target_dir/$path
+    set item (basename $fullpath)
 
-  if test ! -e $fullpath
-    mkdir -p (dirname $fullpath)
-    ln -s $dotfiles/$item $fullpath
+    if test -e $dotfiles/$item
+      rm -rf $fullpath
+    end
+
+    if test ! -e $fullpath
+      mkdir -p (dirname $fullpath)
+      ln -s $dotfiles/$item $fullpath
+    end
   end
 end
 
-
+copy ~ home_paths
+copy ~/.config config_paths

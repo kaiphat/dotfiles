@@ -55,10 +55,10 @@ set -gx PATH $PATH $HOME/.krew/bin
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   ALIASES   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-# edit
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     edit     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 alias edit-aliases "nvim ~/.config/fish/conf.d/aliases.fish"
 
-# docker
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     docker     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 alias d "docker"
 alias dstop "sudo systemctl stop docker.socket"
 alias dstart "sudo systemctl start docker.service"
@@ -80,11 +80,11 @@ function dps
   grep $argv
 end
 
-# common #
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     common     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 alias g "git"
 alias todo "nvim ~/notes/deals.norg -c \"set signcolumn=no\""
 alias notes "nvim ~/notes/notes.norg -c \"set signcolumn=no\""
-# tmux #
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     tmux     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 alias t "tmux"
 alias tn "t new-session -s"
 alias ta "t attach-session"
@@ -104,13 +104,6 @@ alias nest "npx @nestjs/cli"
 alias nvim-start "nvim --startuptime _s.log -c exit && tail -100 _s.log | bat && rm _s.log"
 alias ... "cd ../../"
 
-function pq
-  xclip -o |\
-  string replace -r -a '\\\n' '\n' |\
-  string replace -a '\\' '' |\
-  clip
-end
-
 function gp -a message
   if test -z "$message"
     echo 'error: empty message'
@@ -124,15 +117,7 @@ function gp -a message
   git push origin $branch
 end
 
-function ff
-  set pattern (string join '*' '' $argv '')
-  find . -type f -iwholename $pattern \
-  -not -path "*/node_modules/*" \
-  -not -path "*/dist/*" \
-  -not -path "*/.git/*"
-end
-
-#utils functions
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     utils functions     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 function select
   set cmd $argv[1]
   set dict $argv[2..-1]
@@ -197,10 +182,10 @@ end
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   AUTOSTART   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-#if not set -q TMUX
-#  set -g TMUX 1
-#  tmux attach -t main || tmux new -s main
-#end
+if not set -q TMUX
+ set -g TMUX 1
+ tmux attach -t main || tmux new -s main
+end
 
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /home/kaiphat/.ghcup/bin # ghcup-env
 # The next line updates PATH for the Google Cloud SDK.

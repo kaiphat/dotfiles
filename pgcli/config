@@ -144,38 +144,38 @@ show_bottom_toolbar = False
 
 # Custom colors for the completion menu, toolbar, etc.
 [colors]
-Token.Menu.Completions.Completion.Current = "bg:#ff5f5f #e4e4e4"
-Token.Menu.Completions.Completion = "bg:#4e4e4e #e4e4e4"
-Token.Menu.Completions.Meta.Current = "bg:#ff5f5f #8a8a8a"
-Token.Menu.Completions.Meta = "bg:#4e4e4e #8a8a8a"
-Token.Menu.Completions.MultiColumnMeta = "bg:#aaffff #000000"
-Token.Menu.Completions.ProgressButton = "bg:#6666aa #6666aa"
-Token.Menu.Completions.ProgressBar = "bg:#6666aa #6666aa"
+Token.Menu.Completions.Completion.Current = "bg:#5f5f87 #e4e4e4"
+Token.Menu.Completions.Completion         = "bg:#262626 #e4e4e4"
+Token.Menu.Completions.Meta.Current       = "bg:#5f5f87 #e4e4e4"
+Token.Menu.Completions.Meta               = "bg:#262626 #e4e4e4"
+Token.Menu.Completions.MultiColumnMeta    = "bg:#aaffff #000000"
+Token.Menu.Completions.ProgressButton     = "bg:#6666aa #6666aa"
+Token.Menu.Completions.ProgressBar        = "bg:#6666aa #6666aa"
 
-Token.SelectedText = "#ffffff bg:#6666aa"
-Token.SearchMatch = "#ffffff bg:#4444aa"
-Token.SearchMatch.Current = "#ffffff bg:#44aa44"
+Token.SelectedText        = "bg:#6666aa #e4e4e4"
+Token.SearchMatch         = "bg:#4444aa #e4e4e4"
+Token.SearchMatch.Current = "bg:#44aa44 #e4e4e4"
 
-Token.Toolbar = "bg:#00005f #a8a8a8"
-Token.Toolbar.Off = "bg:#00005f #aaaaaa"
-Token.Toolbar.On = "bg:#00005f #888888"
-Token.Toolbar.Search = noinherit bold
-Token.Toolbar.Search.Text = nobold
-Token.Toolbar.System = noinherit bold
-Token.Toolbar.Arg = noinherit bold
-Token.Toolbar.Arg.Text = nobold
-Token.Toolbar.Transaction.Valid = "bg:#222222 #00ff5f bold"
+Token.Toolbar                    = "bg:#00005f #a8a8a8"
+Token.Toolbar.Off                = "bg:#00005f #aaaaaa"
+Token.Toolbar.On                 = "bg:#00005f #888888"
+Token.Toolbar.Search             = noinherit bold
+Token.Toolbar.Search.Text        = nobold
+Token.Toolbar.System             = noinherit bold
+Token.Toolbar.Arg                = noinherit bold
+Token.Toolbar.Arg.Text           = nobold
+Token.Toolbar.Transaction.Valid  = "bg:#222222 #00ff5f bold"
 Token.Toolbar.Transaction.Failed = "bg:#222222 #ff005f bold"
 
-Token.Output.Header = "#6e88a6 bold"
-Token.Output.OddRow = "#81A1C1"
+Token.Output.Header  = "#6e88a6 bold"
+Token.Output.OddRow  = "#81A1C1"
 Token.Output.EvenRow = "#81A1C1"
 
-Token.Prompt = "#afafff"
+Token.Prompt         = "#afafff"
 Token.Literal.String = "#87d7af"
 Token.Literal.Number = "#ffaf87"
-Token.Keyword = "bold #afd7ff"
-Token.Continuation = "#ffaf87"
+Token.Keyword        = "bold #afd7ff"
+Token.Continuation   = "#ffaf87"
 
 # Named queries are queries you can execute by name.
 [named queries]
