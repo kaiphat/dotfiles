@@ -2,9 +2,8 @@
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   ENVIROMENTS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-# set pure_symbol_prompt '$'
 set pure_symbol_prompt '➜ '
-# set pure_symbol_prompt ❯
+set pure_symbol_prompt ❯
 
 set -gx nvm_default_version v18.12.0
 set -gx ANDROID_HOME $HOME/Android/Sdk
@@ -182,11 +181,11 @@ end
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   AUTOSTART   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-if not set -q TMUX
- set -g TMUX 1
+if status is-interactive 
+and not set -q TMUX
  tmux attach -t main || tmux new -s main
 end
 
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /home/kaiphat/.ghcup/bin # ghcup-env
-# The next line updates PATH for the Google Cloud SDK.
+# The next line updates PATH for the Google Cloud SDK
 if [ -f '/home/kaiphat/google-cloud-sdk/path.fish.inc' ]; . '/home/kaiphat/google-cloud-sdk/path.fish.inc'; end

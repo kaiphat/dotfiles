@@ -5,7 +5,7 @@ window:
   padding:
    x: 0
    y: 0
-  opacity: 0.93
+  opacity: 0.96
   dynamic_padding: false
   startup_mode: Maximized
 
@@ -13,9 +13,9 @@ scrolling:
   history: 100000
   multiplier: 3
 
-############################################################
-####### FONTS ##############################################
-############################################################
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   FONTS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 font:
   size: 10
@@ -58,7 +58,47 @@ font:
   #   family: mononoki Nerd Font
   #   style: Bold Italic
 
-  # size: 9.9
+  # size: 11
+  # offset:
+  #   x: -1
+  #   y: 0
+  # glyph_offset:
+  #   x: 0
+  #   y: 0
+  # normal:
+  #   family: CaskaydiaCove Nerd Font
+  #   style: Regular
+  # bold:
+  #   family: CaskaydiaCove Nerd Font
+  #   style: Regular
+  # italic:
+  #   family: CaskaydiaCove Nerd Font
+  #   style: Regular
+  # bold_italic:
+  #   family: CaskaydiaCove Nerd Font
+  #   style: Regular
+
+  # size: 12
+  # offset:
+  #   x: -1
+  #   y: 0
+  # glyph_offset:
+  #   x: 0
+  #   y: 0
+  # normal:
+  #   family: UbuntuMono Nerd Font
+  #   style: Regular
+  # bold:
+  #   family: UbuntuMono Nerd Font
+  #   style: Regular
+  # italic:
+  #   family: UbuntuMono Nerd Font
+  #   style: Regular
+  # bold_italic:
+  #   family: UbuntuMono Nerd Font
+  #   style: Regular
+
+  # size: 11
   # offset:
   #   x: 0
   #   y: 0
@@ -66,61 +106,41 @@ font:
   #   x: 0
   #   y: 0
   # normal:
-  #   family: CaskaydiaCove Nerd Font
-  #   style: SemiBold
+  #   family: VictorMono Nerd Font Mono
+  #   style: Bold
   # bold:
-  #   family: CaskaydiaCove Nerd Font
-  #   style: SemiBold
+  #   family: VictorMono Nerd Font Mono
+  #   style: Bold
   # italic:
-  #   family: CaskaydiaCove Nerd Font
-  #   style: SemiBold
+  #   family: VictorMono Nerd Font Mono
+  #   style: Bold Italic
   # bold_italic:
-  #   family: CaskaydiaCove Nerd Font
-  #   style: SemiBold
+  #   family: VictorMono Nerd Font Mono
+  #   style: Bold Italic
 
-  size: 12
+  size: 11
   offset:
-    x: -1
-    y: 0
+    x: 0
+    y: -2
   glyph_offset:
     x: 0
-    y: 0
+    y: -1
   normal:
-    family: UbuntuMono Nerd Font
+    family: Iosevka SS12
     style: Bold
   bold:
-    family: UbuntuMono Nerd Font
+    family: Iosevka SS12
     style: Bold
   italic:
-    family: UbuntuMono Nerd Font
-    style: Bold
+    family: Iosevka SS12
+    style: Bold Italic
   bold_italic:
-    family: UbuntuMono Nerd Font
-    style: Bold
+    family: Iosevka SS12
+    style: Bold Italic
 
-  # size: 10
-  # offset:
-  #   x: 0
-  #   y: 0
-  # glyph_offset:
-  #   x: 0
-  #   y: 1
-  # normal:
-  #   family: VictorMono Nerd Font Mono
-  #   style: Bold
-  # bold:
-  #   family: VictorMono Nerd Font Mono
-  #   style: Bold
-  # italic:
-  #   family: VictorMono Nerd Font Mono
-  #   style: Bold Italic
-  # bold_italic:
-  #   family: VictorMono Nerd Font Mono
-  #   style: Bold Italic
-
-############################################################
-####### COLORS #############################################
-############################################################
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   COLORS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 colors:
   primary:
@@ -153,8 +173,8 @@ colors:
     white:   '#ACB0D0'
 
 shell:
-  # program: /home/ipunko/.cargo/bin/nu
   program: /usr/bin/fish
+  # program: /home/ipunko/.cargo/bin/nu
 
 mouse:
   hide_when_typing: true

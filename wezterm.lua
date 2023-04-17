@@ -75,6 +75,11 @@ local font_config = ({
     cell_width = 1,
     line_height = 1.1,
   }),
+  iosevka_custom = build_font_params('Iosevka Custom', true, weights.B, {
+    font_size = 10.4,
+    cell_width = 1,
+    line_height = 1,
+  }),
   fira = build_font_params('FiraCode Nerd Font', false, weights.B, {
     font_size = 9.8,
     cell_width = 0.8,
@@ -85,7 +90,7 @@ local font_config = ({
     cell_width = 0.8,
     line_height = 1.1,
   }),
-}).victor
+}).iosevka_custom
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   EVENTS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈

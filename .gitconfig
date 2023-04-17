@@ -5,6 +5,8 @@
 	signingkey = 7859612C85FCED73
 [commit]
   gpgsign = true
+[pull]
+  rebase = false
 [core]
 	autocrlf = input
 	safecrlf = false
@@ -28,6 +30,7 @@
 	sa  = stash apply
 	pl  = pull origin
   plr  = !sh -c 'git pull origin $1 --rebase' --
+  plnr  = !sh -c 'git pull origin $1 --no-rebase' --
 	plh = !git pull origin $(git rev-parse --abbrev-ref HEAD)
 	p   = push origin
   ph  = push origin HEAD
