@@ -49,10 +49,10 @@ bspc rule -a "Toggl Desktop" desktop=10 state=floating
 
 bspc rule -a Zathura state=tiled
 
-mygames=$(ls ~/.steam/steam/steamapps | grep appmanifest | sed 's/[^0-9]*//g')
-for game in $mygames; do
-  bspc rule -a steam_app_$game desktop=^10 follow=on
-done
+# mygames=$(ls ~/.steam/steam/steamapps | grep appmanifest | sed 's/[^0-9]*//g')
+# for game in $mygames; do
+#   bspc rule -a steam_app_$game desktop=^10 follow=on
+# done
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   RUN APPLICATIONS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈

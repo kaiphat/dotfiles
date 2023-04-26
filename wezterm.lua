@@ -75,10 +75,10 @@ local font_config = ({
     cell_width = 1,
     line_height = 1.1,
   }),
-  iosevka_custom = build_font_params('Iosevka Custom', true, weights.B, {
-    font_size = 10.4,
+  iosevka_custom = build_font_params('Iosevka Custom', false, weights.B, {
+    font_size = 10.5,
     cell_width = 1,
-    line_height = 1,
+    line_height = 1.1,
   }),
   fira = build_font_params('FiraCode Nerd Font', false, weights.B, {
     font_size = 9.8,
@@ -90,7 +90,7 @@ local font_config = ({
     cell_width = 0.8,
     line_height = 1.1,
   }),
-}).iosevka_custom
+}).mononoki
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   EVENTS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -162,7 +162,7 @@ local config = {
   cursor_blink_rate = 750,
   max_fps = 60,
   animation_fps = 60,
-  window_background_opacity = 0.94,
+  window_background_opacity = 0.9,
   default_cursor_style = 'BlinkingBlock',
   warn_about_missing_glyphs = false,
   use_cap_height_to_scale_fallback_fonts = true,

@@ -1,10 +1,10 @@
 #! /bin/bash
 
-picom -b &
 pgrep -x sxhkd > /dev/null || sxhkd &
+picom -b &
 xsetroot -cursor_name left_ptr &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-nitrogen --set-scaled ~/pictures/wallhaven-4opomm_1920x1080.png &
+feh --bg-scale ~/pictures/wallhaven-4opomm_1920x1080.png &
 xset r rate 220 38 & # type speed
 killall -q dunst &
 dunst &

@@ -8,7 +8,6 @@ local tools = {
   'css-lsp',
   'html-lsp',
   'json-lsp',
-  'stylua',
   'sql-formatter',
 }
 

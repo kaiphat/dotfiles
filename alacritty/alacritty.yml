@@ -5,7 +5,7 @@ window:
   padding:
    x: 0
    y: 0
-  opacity: 0.96
+  opacity: 0.9
   dynamic_padding: false
   startup_mode: Maximized
 
@@ -38,25 +38,25 @@ font:
     family: JetBrainsMono Nerd Font
     style: Bold Italic
 
-  # size: 11
-  # offset:
-  #   x: -1
-  #   y: 0
-  # glyph_offset:
-  #   x: 0
-  #   y: 0
-  # normal:
-  #   family: mononoki Nerd Font
-  #   style: Bold
-  # bold:
-  #   family: mononoki Nerd Font
-  #   style: Bold
-  # italic:
-  #   family: mononoki Nerd Font
-  #   style: Bold Italic
-  # bold_italic:
-  #   family: mononoki Nerd Font
-  #   style: Bold Italic
+  size: 11
+  offset:
+    x: -1
+    y: 1
+  glyph_offset:
+    x: 0
+    y: 0
+  normal:
+    family: mononoki Nerd Font
+    style: Bold
+  bold:
+    family: mononoki Nerd Font
+    style: Bold
+  italic:
+    family: mononoki Nerd Font
+    style: Bold Italic
+  bold_italic:
+    family: mononoki Nerd Font
+    style: Bold Italic
 
   # size: 11
   # offset:
@@ -118,25 +118,25 @@ font:
   #   family: VictorMono Nerd Font Mono
   #   style: Bold Italic
 
-  size: 11
-  offset:
-    x: 0
-    y: -2
-  glyph_offset:
-    x: 0
-    y: -1
-  normal:
-    family: Iosevka SS12
-    style: Bold
-  bold:
-    family: Iosevka SS12
-    style: Bold
-  italic:
-    family: Iosevka SS12
-    style: Bold Italic
-  bold_italic:
-    family: Iosevka SS12
-    style: Bold Italic
+  # size: 11
+  # offset:
+  #   x: 0
+  #   y: -2
+  # glyph_offset:
+  #   x: 0
+  #   y: -1
+  # normal:
+  #   family: Iosevka SS12
+  #   style: Bold
+  # bold:
+  #   family: Iosevka SS12
+  #   style: Bold
+  # italic:
+  #   family: Iosevka SS12
+  #   style: Bold Italic
+  # bold_italic:
+  #   family: Iosevka SS12
+  #   style: Bold Italic
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   COLORS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -151,6 +151,7 @@ colors:
    text: '#000000'
    cursor: '#99d1db'
    cursor: '#fbdf90'
+   cursor: '#c6d0f5'
 
   normal:
     black:   '#404060'

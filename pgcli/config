@@ -110,7 +110,7 @@ vi = True
 on_error = STOP
 
 # Set threshold for row limit. Use 0 to disable limiting.
-row_limit = 1000
+row_limit = 100
 
 # Skip intro on startup and goodbye on exit
 less_chatty = True
@@ -126,6 +126,8 @@ less_chatty = True
 # \# - "@" sign if logged in as superuser, '>' in other case
 # \n - Newline
 # \dsn_alias - name of dsn alias if -D option is used (empty otherwise)
+# multiline_continuation_char = " "
+# prompt = "❯ "
 prompt = "➜  "
 multiline_continuation_char = " "
 

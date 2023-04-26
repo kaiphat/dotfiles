@@ -84,3 +84,7 @@ for letter in string.gmatch('abcdefghijkloqrstuvwxyz', '.') do
   map('n', 'm' .. letter, 'm' .. letter:upper())
   map('n', "'" .. letter, "'" .. letter:upper())
 end
+
+map('n', '<leader>l', function ()
+  create_log()
+end)

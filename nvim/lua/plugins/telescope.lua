@@ -286,6 +286,13 @@ return {
       }
     end)
 
+    map('n', '<leader>es', function()
+      builtin.find_files {
+        cwd = '~/dotfiles',
+        hidden = true,
+      }
+    end)
+
     map('n', '<leader>en', function()
       telescope.extensions.file_browser.file_browser {
         cwd = '~/notes',

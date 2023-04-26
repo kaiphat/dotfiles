@@ -2,8 +2,10 @@
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   ENVIROMENTS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-set pure_symbol_prompt '➜ '
-set pure_symbol_prompt ❯
+set -gx PROMPT_CHAR '❯'
+set -gx PROMPT_CHAR '➜ '
+
+set pure_symbol_prompt $PROMPT_CHAR
 
 set -gx nvm_default_version v18.12.0
 set -gx ANDROID_HOME $HOME/Android/Sdk
@@ -17,14 +19,11 @@ set -gx LD_LIBRARY_PATH /opt/oracle/instantclient_21_8
 set -U fish_greeting
 set -U ignoreeof true
 set -U SXHKD_SHELL sh
+set -U XDG_CONFIG_HOME ~/.config
 
 bind \cd delete-char
 
 function fish_right_prompt
-end
-
-function fish_user_key_bindings
-  fish_default_key_bindings
 end
 
 # paths
@@ -49,7 +48,6 @@ fish_add_path -aP $HOME/.yarn/bin
 fish_add_path -aP $HOME/.local/bin
 set -gx PATH $PATH $HOME/.krew/bin
 
-
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   ALIASES   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -68,9 +66,6 @@ alias di "docker inspect"
 alias du "dc up --force-recreate -d -V $1"
 alias dub "dc up --force-recreate --build -d -V $1"
 
-function de --argument container cmd
-  d exec -it $container node_modules/.bin/sequelize $cmd $argv[3..]
-end
 function dl
   d logs $argv -f -n 99
 end
@@ -92,7 +87,7 @@ alias st "speedtest"
 alias y "yarn"
 alias grep "grep -i --color"
 alias n "nvim"
-alias req "http -p Bb"
+alias req "http -p mbh"
 alias mkdir "mkdir -p"
 alias less "less -MSx4 -FXR --shift 10"
 alias ls "ls -A --group-directories-first --color=auto"
@@ -103,11 +98,18 @@ alias nest "npx @nestjs/cli"
 alias nvim-start "nvim --startuptime _s.log -c exit && tail -100 _s.log | bat && rm _s.log"
 alias ... "cd ../../"
 
+function git-recreate-from -a root_branch
+  if test -z "$root_branch"; echo 'error: need a root_branch argument'; return; end
+
+  set branch (git branch --show-current)
+  git ch $root_branch
+  git bd $branch
+  git plh
+  git chb $branch
+end
+
 function gp -a message
-  if test -z "$message"
-    echo 'error: empty message'
-    return
-  end
+  if test -z "$message"; echo '{message} is not implemented'; return; end
 
   set branch (git branch --show-current)
 
@@ -181,9 +183,10 @@ end
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   AUTOSTART   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-if status is-interactive 
+if status is-interactive
 and not set -q TMUX
- tmux attach -t main || tmux new -s main
+  tmux attach -t main || tmux new -s main
+  tmux kill-session -t 0
 end
 
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /home/kaiphat/.ghcup/bin # ghcup-env

@@ -28,7 +28,7 @@ return {
       delete_check_events = 'TextChanged,InsertLeave',
     }
 
-    -- JAVASCRIPT --
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     JAVASCRIPT     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
     ls.add_snippets('javascript', {
       s(
@@ -47,6 +47,19 @@ return {
           ]],
           {
             i(1, 'ClassName'),
+          }
+        )
+      ),
+
+      s(
+        'im', -- import
+        fmt(
+          [[
+            import {{ {} }} from '{}'
+          ]],
+          {
+            i(2, 'from'),
+            i(1, 'name'),
           }
         )
       ),
@@ -215,7 +228,7 @@ return {
       ),
     })
 
-    -- RUST --
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     RUST     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
     ls.add_snippets('rust', {
       s(

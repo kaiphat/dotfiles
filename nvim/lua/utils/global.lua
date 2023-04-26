@@ -88,3 +88,20 @@ _G.create_sub_title = function(char)
 
   vim.api.nvim_buf_set_lines(0, row - 1, row, true, { title })
 end
+
+_G.create_log = function()
+  local ft = vim.bo.filetype
+
+  if ft == 'typescript' or ft == 'javascript' then
+    local word_under_cursor = vim.fn.expand '<cword>'
+
+    vim.cmd.normal 'f{]}'
+
+    local row = get_row_col()
+    local new_line = 'console.log(\'\x1b[36m%s\x1b[0m\', JSON.stringify({ ' .. word_under_cursor .. ' }, null, 2))'
+
+    vim.api.nvim_buf_set_lines(0, row, row, true, { new_line })
+    vim.cmd.normal 'j==f{ll'
+  end
+end
+
