@@ -3,12 +3,35 @@ _G.map = function(mode, keys, cmd, opts)
   vim.keymap.set(mode, keys, cmd, opts)
 end
 
+_G.dark_theme_enabled = function()
+  return os.getenv('DARK_THEME') == '1'
+end
+
+_G.get_current_path = function()
+  return vim.fn.expand '%:p:h'
+end
+
 _G.is_number = function(value)
   return tonumber(value) ~= nil
 end
 
 _G.is_table = function(table)
   return type(table) == 'table'
+end
+
+_G.concat = function(a, b)
+  for _, value in ipairs(b) do
+    table.insert(a, value)
+  end
+  return a
+end
+
+_G.map_list = function(list, handler)
+  local result = {}
+  for index, value in ipairs(list) do
+    table.insert(result, handler(value, index))
+  end
+  return result
 end
 
 _G.merge_tables = function(list)
@@ -88,20 +111,3 @@ _G.create_sub_title = function(char)
 
   vim.api.nvim_buf_set_lines(0, row - 1, row, true, { title })
 end
-
-_G.create_log = function()
-  local ft = vim.bo.filetype
-
-  if ft == 'typescript' or ft == 'javascript' then
-    local word_under_cursor = vim.fn.expand '<cword>'
-
-    vim.cmd.normal 'f{]}'
-
-    local row = get_row_col()
-    local new_line = 'console.log(\'\x1b[36m%s\x1b[0m\', JSON.stringify({ ' .. word_under_cursor .. ' }, null, 2))'
-
-    vim.api.nvim_buf_set_lines(0, row, row, true, { new_line })
-    vim.cmd.normal 'j==f{ll'
-  end
-end
-

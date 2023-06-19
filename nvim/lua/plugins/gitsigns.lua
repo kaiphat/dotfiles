@@ -16,6 +16,7 @@ return {
         changedelete = { hl = 'GitSignsChange', text = char, numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn' },
         untracked    = { hl = 'GitSignsAdd', text = char, numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
       },
+      signcolumn = false,
       linehl = false,
       numhl = false,
       current_line_blame = false,
@@ -43,6 +44,7 @@ return {
         map('n', '<leader>hu', gs.undo_stage_hunk)
         map('n', '<leader>hR', gs.reset_buffer)
         map('n', '<leader>hc', gs.preview_hunk)
+        map('n', '<F2>', gs.toggle_signs)
         map('n', '<leader>hb', function() gs.blame_line { full = true } end)
         map('n', '<leader>hB', gs.toggle_current_line_blame)
         map('n', '<leader>hd', gs.diffthis)

@@ -3,13 +3,14 @@ return {
   dependencies = {
     'anuvyklack/middleclass',
   },
+  enabled = true,
   config = function()
     local windows = require 'windows'
 
     windows.setup {
       autowidth = {
         enable = true,
-        winwidth = 20,
+        winwidth = 50,
         winminwidth = 10,
         filetype = {
           help = 2,

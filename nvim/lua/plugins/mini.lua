@@ -52,6 +52,7 @@ return {
 
   {
     'echasnovski/mini.indentscope',
+    enabled = false,
     config = function()
       local symbols = {
         '▏',

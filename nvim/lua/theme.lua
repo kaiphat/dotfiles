@@ -39,7 +39,7 @@
 
 local c = {
   bg           = '#202837',
-  fg           = '#b4b6d7',
+  fg           = '#c4c6e7',
   one_bg2      = '#384155',
   one_bg3      = '#405879',
   one_bg4      = '#486892',
@@ -174,6 +174,7 @@ H.DiagnosticUnderlineError = H.DiagnosticUnderlineWarn
 -- NOICE --
 H.NoiceCmdlineIcon = { fg = c.blue_gray }
 H.NoiceCmdlinePopupBorder = merge(H.FloatBorder)
+H.NoiceCmdlinePopupTitle = { fg = c.fg }
 H.NoiceCmdlinePopupBorderSearch = merge(H.NoiceCmdlinePopupBorder)
 H.NoiceCmdlineIconSearch = { fg = c.blue_gray }
 H.NoiceLspProgressTitle = { fg = c.blue_gray }
@@ -346,14 +347,23 @@ H.IndentBlanklineContextChar = { fg = c.one_bg3 }
 H.MiniIndentscopeSymbol = { fg = c.one_bg3 }
 H.MiniTrailspace = { bg = c.sapphire }
 
+-- CMP --
+H.CmpItemAbbr = { fg = c.fg }
+H.CmpItemAbbrDeprecated = { fg = c.orange }
+H.CmpItemAbbrMatch = merge(H.Bold, { fg = c.teal })
+H.CmpItemAbbrMatchFuzzy = merge(H.Bold, { fg = c.teal })
+H.CmpItemKind = { fg = c.gray }
+H.CmpItemMenu = { fg = c.gray }
+H.CmpItemMenuDefault = merge(H.NormalFloat)
+
 -- TELESCOPE --
 H.TelescopeNormal = { fg = c.fg, bg = nil }
 H.TelescopeSelection = merge(H.Visual, { fg = nil })
-H.TelescopeMatching = merge(H.Search)
+H.TelescopeMatching = { fg = H.CmpItemAbbrMatch.fg }
 H.TelescopeBorder = merge(H.FloatBorder)
 
 H.TelescopeSelectionCaret = merge(H.TelescopeSelection, { fg = c.red })
-H.TelescopeTitle = merge(H.FloatBorder)
+H.TelescopeTitle = merge(H.TelescopeNormal)
 H.TelescopePromptPrefix = H.TelescopeTitle
 H.TelescopePromptCounter = H.TelescopeTitle
 H.TelescopePromptTitle = H.TelescopeTitle
@@ -399,15 +409,6 @@ H.NvimTreeRootFolder = merge(H.Bold, { fg = c.red })
 H.NvimTreeSymlink = { fg = c.red }
 H.NvimTreeExecFile = { fg = c.fg }
 H.NvimTreeSpecialFile = { fg = c.fg, gui = nil }
-
--- CMP --
-H.CmpItemAbbr = { fg = c.fg }
-H.CmpItemAbbrDeprecated = { fg = c.orange }
-H.CmpItemAbbrMatch = merge(H.Bold, { fg = c.teal })
-H.CmpItemAbbrMatchFuzzy = merge(H.Bold, { fg = c.teal })
-H.CmpItemKind = { fg = c.gray }
-H.CmpItemMenu = { fg = c.gray }
-H.CmpItemMenuDefault = merge(H.NormalFloat)
 
 H.NnnNormal = merge(H.NvimTreeNormal)
 H.NnnNormalNC = merge(H.NnnNormal)

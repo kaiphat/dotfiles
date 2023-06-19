@@ -3,10 +3,16 @@ local g = vim.g
 
 g.mapleader = ' '
 
+if vim.fn.has "nvim-0.10" == 1 then
+  o.smoothscroll = true --Scroll by screen line rather than by line when wrap is set. nvim 0.10 only
+end
+
 o.guicursor = 'a:blinkon1,i-ci-ve:ver25-blinkon1'
+o.selection = "old"
 o.tabstop = 2
 o.softtabstop = 2
 o.expandtab = true
+o.fileencoding = "utf-8"
 o.wildmenu = true
 o.wildignorecase = true
 o.wildmode = 'longest,full'
@@ -14,7 +20,7 @@ o.wildoptions = 'pum'
 o.pumblend = 0
 o.pumheight = 15
 o.mouse = 'a'
-o.wrap = true
+o.wrap = false
 o.title = true
 o.hidden = true
 o.cmdheight = 1
@@ -27,6 +33,9 @@ o.number = false
 o.relativenumber = false
 o.showcmd = false
 o.undofile = true
+o.virtualedit = "block"
+o.writebackup = false
+o.history = 1000
 o.undodir = add_to_home_path '.local/share/nvimundodir/'
 o.autoread = true
 o.autowrite = true

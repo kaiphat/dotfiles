@@ -7,6 +7,10 @@ return {
       menu = {
         width = 100
       },
+
+      global_settings = {
+        mark_branch = true,
+      }
     }
 
     local ui = require('harpoon.ui')

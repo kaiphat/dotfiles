@@ -110,7 +110,7 @@ vi = True
 on_error = STOP
 
 # Set threshold for row limit. Use 0 to disable limiting.
-row_limit = 100
+row_limit = 20
 
 # Skip intro on startup and goodbye on exit
 less_chatty = True
@@ -127,8 +127,8 @@ less_chatty = True
 # \n - Newline
 # \dsn_alias - name of dsn alias if -D option is used (empty otherwise)
 # multiline_continuation_char = " "
-# prompt = "❯ "
-prompt = "➜  "
+prompt = "❯ "
+# prompt = "➜  "
 multiline_continuation_char = " "
 
 # Number of lines to reserve for the suggestion menu
@@ -147,48 +147,76 @@ show_bottom_toolbar = False
 # Custom colors for the completion menu, toolbar, etc.
 [colors]
 Token.Menu.Completions.Completion.Current = "bg:#5f5f87 #e4e4e4"
-Token.Menu.Completions.Completion         = "bg:#262626 #e4e4e4"
-Token.Menu.Completions.Meta.Current       = "bg:#5f5f87 #e4e4e4"
-Token.Menu.Completions.Meta               = "bg:#262626 #e4e4e4"
-Token.Menu.Completions.MultiColumnMeta    = "bg:#aaffff #000000"
-Token.Menu.Completions.ProgressButton     = "bg:#6666aa #6666aa"
-Token.Menu.Completions.ProgressBar        = "bg:#6666aa #6666aa"
+Token.Menu.Completions.Completion = "bg:#262626 #e4e4e4"
+Token.Menu.Completions.Meta.Current = "bg:#5f5f87 #e4e4e4"
+Token.Menu.Completions.Meta = "bg:#262626 #e4e4e4"
+Token.Menu.Completions.MultiColumnMeta = "bg:#aaffff #000000"
+Token.Menu.Completions.ProgressButton = "bg:#6666aa #6666aa"
+Token.Menu.Completions.ProgressBar = "bg:#6666aa #6666aa"
 
-Token.SelectedText        = "bg:#6666aa #e4e4e4"
-Token.SearchMatch         = "bg:#4444aa #e4e4e4"
+Token.SelectedText = "bg:#6666aa #e4e4e4"
+Token.SearchMatch = "bg:#4444aa #e4e4e4"
 Token.SearchMatch.Current = "bg:#44aa44 #e4e4e4"
 
-Token.Toolbar                    = "bg:#00005f #a8a8a8"
-Token.Toolbar.Off                = "bg:#00005f #aaaaaa"
-Token.Toolbar.On                 = "bg:#00005f #888888"
-Token.Toolbar.Search             = noinherit bold
-Token.Toolbar.Search.Text        = nobold
-Token.Toolbar.System             = noinherit bold
-Token.Toolbar.Arg                = noinherit bold
-Token.Toolbar.Arg.Text           = nobold
-Token.Toolbar.Transaction.Valid  = "bg:#222222 #00ff5f bold"
+Token.Toolbar = "bg:#00005f #a8a8a8"
+Token.Toolbar.Off = "bg:#00005f #aaaaaa"
+Token.Toolbar.On = "bg:#00005f #888888"
+Token.Toolbar.Search = noinherit bold
+Token.Toolbar.Search.Text = nobold
+Token.Toolbar.System = noinherit bold
+Token.Toolbar.Arg = noinherit bold
+Token.Toolbar.Arg.Text = nobold
+Token.Toolbar.Transaction.Valid = "bg:#222222 #00ff5f bold"
 Token.Toolbar.Transaction.Failed = "bg:#222222 #ff005f bold"
 
-Token.Output.Header  = "#6e88a6 bold"
-Token.Output.OddRow  = "#81A1C1"
+Token.Output.Header = "#6e88a6 bold"
+Token.Output.OddRow = "#81A1C1"
 Token.Output.EvenRow = "#81A1C1"
 
-Token.Prompt         = "#afafff"
+Token.Prompt = "#afafff"
 Token.Literal.String = "#87d7af"
 Token.Literal.Number = "#ffaf87"
-Token.Keyword        = "bold #afd7ff"
-Token.Continuation   = "#ffaf87"
+Token.Keyword = "bold #afd7ff"
+Token.Continuation = "#ffaf87"
 
 # Named queries are queries you can execute by name.
 [named queries]
-update_active_workers = '''update worker w
-  set status = 'ACTIVE'
-  where w.status = 'DELETED_AUTOMATICALLY'
-  and exists (
-  select *
-  from mat_view_worker_statistics_5m s
-  where s."workerId" = w.id and s."minedAt" > now() - '180d'::interval
-  )'''
+get_timescaledb_sizes = '''SELECT
+    short_table_name,
+    ca.materialization_hypertable_name,
+    ca.view_name mat_view_name,
+    g.view_name,
+    pg_size_pretty(table_size) AS table_size,
+    pg_size_pretty(indexes_size) AS indexes_size,
+    pg_size_pretty(total_size) AS total_size
+FROM (
+    SELECT
+        table_name,
+        short_table_name,
+        pg_table_size(table_name) AS table_size,
+        pg_indexes_size(table_name) AS indexes_size,
+        pg_total_relation_size(table_name) AS total_size
+    FROM (
+        SELECT ('"' || table_schema || '"."' || table_name || '"') AS table_name,
+        table_name short_table_name
+        FROM information_schema.tables
+    ) AS all_tables
+    ORDER BY total_size DESC
+) AS pretty_sizes
+left join timescaledb_information.chunks c on c.chunk_name = pretty_sizes.short_table_name
+left join timescaledb_information.continuous_aggregates ca on ca.materialization_hypertable_name = c.hypertable_name
+left join timescaledb_information.continuous_aggregates g on g.hypertable_name = c.hypertable_name
+limit 100'''
+get_stats = "select now() - query_start duration, pid, query from pg_stat_activity where pg_stat_activity.query_start is not null order by duration desc limit 100"
+get_stat_for_period = '''SELECT
+	ROUND(mean_exec_time::NUMERIC, 2) AS mean,
+	ROUND(total_exec_time::NUMERIC, 2) AS total,
+	calls,
+	ROUND((100 * total_exec_time / SUM(total_exec_time::NUMERIC) OVER ())::NUMERIC, 2) AS percentage_cpu,
+	query
+FROM pg_stat_statements
+ORDER BY mean DESC
+LIMIT 20'''
 
 # DSN to call by -D option
 [alias_dsn]

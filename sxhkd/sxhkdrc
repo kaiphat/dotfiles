@@ -4,10 +4,10 @@
 super + space
   {setxkbmap ru, setxkbmap us}
 
-@Print
+Print
   scrot -s -q 100 -f -e 'xclip -selection clipboard -t image/png -i $f; mkdir ~/screenshots; mv $f -f -t ~/screenshots/'
 
-shift + @Print
+shift + Print
   scrot -u -s -q 100 -f -e 'xclip -selection clipboard -t image/png -i $f; mkdir ~/screenshots; mv $f -f -t ~/screenshots/'
 
 super + Return

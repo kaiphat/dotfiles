@@ -2,23 +2,53 @@ local ts_utils = require 'nvim-treesitter.ts_utils'
 
 local M = {}
 
-local get_text = function(bufnr, line)
+local function get_row_col()
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  return cursor[1], cursor[2]
+end
+
+local function get_text(bufnr, line)
   return vim.api.nvim_buf_get_lines(bufnr, line - 1, line, false)[1]
 end
 
-local get_node_for_cursor = function(cursor)
-  if cursor == nil then
-    cursor = vim.api.nvim_win_get_cursor(0)
+local function get_first_not_empty_col(bufnr, row)
+  local col = 1
+  local text = get_text(bufnr, row)
+
+  vim.notify(text)
+  while text:sub(col, col) == ' ' do
+    col = col + 1
   end
-  local root = ts_utils.get_root_for_position(unpack { cursor[1] - 1, cursor[2] })
+
+  return col
+end
+
+local function get_not_empty_row(bufnr, row, decrement)
+  local text = get_text(bufnr, row)
+
+  while vim.trim(text) == '' do
+    row = row - decrement
+    text = get_text(bufnr, row)
+  end
+
+  return row
+end
+
+local function get_node(row, col)
+  if row == nil then
+    row, col = get_row_col()
+  end
+
+  local root = ts_utils.get_root_for_position(unpack { row - 1, col })
+
   if not root then
     return
   end
-  return root:named_descendant_for_range(cursor[1] - 1, cursor[2], cursor[1] - 1, cursor[2])
+  return root:named_descendant_for_range(row - 1, col, row - 1, col)
 end
 
-local get_main_node = function(cursor)
-  local node = get_node_for_cursor(cursor)
+local get_main_node = function(row, col)
+  local node = get_node(row, col)
   if node == nil then
     return node
   end
@@ -66,27 +96,27 @@ end
 
 local function get_selection_range(outer)
   local bufnr = vim.api.nvim_get_current_buf()
-  local cursor = vim.api.nvim_win_get_cursor(0)
+  local init_row = get_row_col()
+  local row, col = get_row_col()
 
-  local sel_row = cursor[1]
-  local sel_col = cursor[2]
-  if outer and get_text(bufnr, sel_row) == '' then
-    sel_row = move_row_while_empty(bufnr, sel_row, 1) + 1
-    sel_col = 0
+  if outer and get_text(bufnr, row) == '' then
+    row = move_row_while_empty(bufnr, row, 1) + 1
+    col = 0
   end
   if outer then
-    sel_col = move_col_while_empty(bufnr, sel_row)
+    col = move_col_while_empty(bufnr, row)
   end
 
-  local node = get_main_node { sel_row, sel_col }
+  local node = get_main_node(row, col)
   if node == nil then
     return
   end
+
   local start_row, start_col, end_row, end_col = node:range()
 
   local mode = 'v'
   if outer then
-    if cursor[1] < sel_row then
+    if init_row < row then
       start_row = move_row_while_empty(bufnr, start_row, -1) - 1
     else
       local text = get_text(bufnr, end_row + 2)
@@ -97,12 +127,12 @@ local function get_selection_range(outer)
       end
     end
   end
-  return start_row, start_col, end_row, end_col, mode, node
+  return node, start_row, start_col, end_row, end_col, mode
 end
 
 M.select = function(outer)
   local bufnr = vim.api.nvim_get_current_buf()
-  local start_row, start_col, end_row, end_col, mode = get_selection_range(outer)
+  local _, start_row, start_col, end_row, end_col, mode = get_selection_range(outer)
   if start_row == nil then
     return
   end
@@ -118,7 +148,7 @@ M.highlight_unit = function(higroup)
   if last_start then
     vim.api.nvim_buf_clear_namespace(bufnr, highlight_ns, 0, -1)
   end
-  local start_row, start_col, end_row, end_col = get_selection_range()
+  local _, start_row, start_col, end_row, end_col = get_selection_range()
   if start_row == nil then
     return
   end
@@ -168,55 +198,43 @@ M.change = function()
   vim.cmd 'startinsert'
 end
 
-M.moveToStart = function()
-  local bufnr = vim.api.nvim_get_current_buf()
-  local _, _, _, _, _, node = get_selection_range(true)
-
-  if not node then
-    return
-  end
-
-  local prev_node = ts_utils.get_previous_node(node, false, false)
-
-  if prev_node then
-    local start_row, start_col = prev_node:range()
-    vim.fn.setpos('.', { bufnr, start_row + 1, start_col + 1, 0 })
-    return
-  end
-
-  local parent = node:parent()
-  if not parent then
-    return
-  end
-
-  local start_row, start_col = parent:range()
+local function focus_node(node, bufnr)
+  local start_row, start_col = node:range()
   vim.fn.setpos('.', { bufnr, start_row + 1, start_col + 1, 0 })
+  vim.cmd.normal '^'
 end
 
-M.moveToEnd = function()
+local function move(direction)
   local bufnr = vim.api.nvim_get_current_buf()
-  local _, _, _, _, _, node = get_selection_range(true)
+  local row = get_row_col()
+  local target_row = get_not_empty_row(bufnr, row, direction)
+  local target_col = get_first_not_empty_col(bufnr, target_row)
+
+  local node = get_node(target_row, target_col)
 
   if not node then
     return
   end
 
-  local next_node = ts_utils.get_next_node(node, false, false)
-
-  if next_node then
-    local start_row, start_col = next_node:range()
-    vim.fn.setpos('.', { bufnr, start_row + 1, start_col + 1, 0 })
-    return
+  local target_node
+  if direction == 1 then
+    target_node = ts_utils.get_previous_node(node, false, false)
+  else
+    target_node = ts_utils.get_next_node(node, false, false)
   end
 
-  local parent = node:parent()
-  if not parent then
+  if target_node then
+    focus_node(target_node, bufnr)
     return
   end
+end
 
-  local start_row, start_col = parent:range()
+M.move_up = function()
+  move(1)
+end
 
-  vim.fn.setpos('.', { bufnr, start_row + 1, start_col + 1, 0 })
+M.move_down = function()
+  move(-1)
 end
 
 return M

@@ -25,8 +25,24 @@ local function on_attach()
   map('n', '[d', ':lua vim.diagnostic.goto_prev()<cr>')
   map('n', ']d', ':lua vim.diagnostic.goto_next()<cr>')
   map('n', '<space>lq', ':lua vim.diagnostic.set_loclist()<cr>')
+  map('n', '<space>lq', ':lua vim.diagnostic.setqflist()<cr>')
+  map('n', '<space>ls', function()
+    vim.diagnostic.show()
+  end)
   map('n', '<space>la', ':lua vim.lsp.buf.code_action()<cr>')
   map('n', '<space>lr', ':lua vim.lsp.buf.rename()<cr>')
+
+  -- map('n', '<space>lc', ':lua vim.lsp.codelens.run()<cr>')
+  -- vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI', 'InsertLeave' }, {
+  --   pattern = '*',
+  --   callback = vim.lsp.codelens.refresh,
+  -- })
+  --
+  -- vim.api.nvim_create_autocmd('LspDetach', {
+  --   callback = function(opt)
+  --     vim.lsp.codelens.clear(opt.data.client_id, opt.buf)
+  --   end,
+  -- })
 end
 
 local function get_servers(capabilities)
@@ -46,9 +62,7 @@ local function get_servers(capabilities)
       debug = false,
     },
     cssls = {},
-    sqlls = {
-
-    },
+    sqlls = {},
     html = {},
     pylsp = {},
     lua_ls = {
@@ -134,11 +148,23 @@ return {
     set_lsp_maps()
 
     -- FUNCTIONS --
+    local orig_set_signs = vim.lsp.diagnostic.set_signs
+    local set_signs_limited = function(diagnostics, bufnr, client_id, sign_ns, opts)
+      opts = opts or {}
+      opts.severity_limit = 'Error'
+      orig_set_signs(diagnostics, bufnr, client_id, sign_ns, opts)
+    end
+
+    vim.lsp.diagnostic.set_signs = set_signs_limited
     vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
       -- virtual_text = false,
       virtual_text = {
         spacing = 8,
         prefix = ' ',
+        -- severity = {
+        -- Specify a range of severities
+        --   min = vim.diagnostic.severity.ERROR,
+        -- },
       },
       signs = false,
       underline = true,

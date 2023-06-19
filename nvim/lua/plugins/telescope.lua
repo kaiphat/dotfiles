@@ -1,4 +1,23 @@
-local u = require 'utils'
+local always_ignore_patterns = {
+  '.git/',
+  'dist/',
+  'node_modules/',
+  'build/',
+  'docker_volumes_data/',
+  'yarn.lock',
+}
+
+local ignore_patterns = concat({
+  'data/',
+  '.data/',
+  'test/',
+  'tests/',
+  '__mocks__/',
+  'package-lock.json',
+  '*.log',
+  '.gitignore',
+  '*.md',
+}, always_ignore_patterns)
 
 return {
   'nvim-telescope/telescope.nvim',
@@ -13,23 +32,8 @@ return {
     local sorters = require 'telescope.sorters'
     local previewers = require 'telescope.previewers'
     local themes = require 'telescope.themes'
+    local actions = require 'telescope.actions'
     local fb_actions = telescope.extensions.file_browser.actions
-
-    local ignore_patterns = {
-      'docker_volumes_data/',
-      'node_modules/',
-      'data/',
-      '.data/',
-      'test/',
-      '__mocks__/',
-      '.git/',
-
-      'package-lock.json',
-      'yarn.lock',
-      '*.log',
-      '.gitignore',
-      '*.md',
-    }
 
     telescope.setup {
       defaults = {
@@ -38,25 +42,28 @@ return {
         },
         file_ignore_patterns = {},
 
-        prompt_prefix = '  ',
+        prompt_prefix = '  ',
         selection_caret = ' ',
         entry_prefix = ' ',
 
         initial_mode = 'insert',
         selection_strategy = 'reset',
         sorting_strategy = 'ascending',
-        -- layout_strategy = 'horizontal',
         layout_strategy = 'vertical',
         layout_config = {
           prompt_position = 'top',
           horizontal = {
             preview_height = 0.6,
             preview_cutoff = 40,
-            width = 0.95
+            width = 0.95,
           },
           vertical = {
             preview_height = 0.6,
-            width = 0.7,
+            width = function(_, max_columns)
+              local max = 120
+              local percentage = 0.7
+              return math.min(math.floor(percentage * max_columns), max)
+            end,
             height = 0.96,
           },
           cursor = {
@@ -85,32 +92,24 @@ return {
         results_title = '',
         mappings = {
           i = {
-            ['<C-w>'] = function()
-              vim.api.nvim_input '<c-s-w>'
-            end,
-          }
+            ['<C-j>'] = actions.move_selection_next,
+            ['<C-k>'] = actions.move_selection_previous,
+            ['<C-l>'] = actions.select_default,
+          },
         },
       },
 
       extensions = {
         file_browser = {
-          layout_config = {
-            prompt_position = 'top',
-            vertical = {
-              preview_height = 0.3,
-              width = 0.7,
-              height = 0.96,
-            },
-          },
           mappings = {
             ['i'] = {
-              ['<C-u>'] = fb_actions.goto_parent_dir,
-            }
-          }
+              ['<C-h>'] = fb_actions.goto_parent_dir,
+            },
+          },
         },
 
         ['ui-select'] = {
-          themes.get_cursor()
+          themes.get_cursor(),
         },
 
         fzf = {
@@ -118,7 +117,7 @@ return {
           override_generic_sorter = true,
           override_file_sorter = true,
           case_mode = 'smart_case',
-        }
+        },
       },
     }
 
@@ -126,7 +125,7 @@ return {
     telescope.load_extension 'file_browser'
     telescope.load_extension 'ui-select'
 
-    map('n', '<leader>fb', function ()
+    map('n', '<leader>fb', function()
       builtin.buffers {
         ignore_current_buffer = true,
         cwd_only = true,
@@ -135,18 +134,24 @@ return {
         show_all_buffers = false,
       }
     end)
-    map('n', '<leader>fs', ':Telescope git_status<cr>')
     map('n', '<leader>fo', function()
       builtin.oldfiles {
+        tiebreak = function(current_entry, existing_entry)
+          return current_entry.index < existing_entry.index
+        end,
       }
     end)
-    map('n', '<leader>fp', ':Telescope resume<cr>')
-
+    map('n', '<leader>fp', function()
+      builtin.resume {}
+    end)
     map('n', '<leader>fi', function()
       builtin.lsp_references {
         include_declaration = true,
         include_current_line = false,
-        trim_text = true
+        trim_text = true,
+        jump_type = 'vsplit',
+        fname_width = 50,
+        show_line = false,
       }
     end)
 
@@ -162,78 +167,75 @@ return {
       }
     end)
 
-    local function find_all_files()
+    map('n', '<leader>dj', function()
       builtin.find_files {
-        find_command = {
-          'fd',
-          '-t',
-          'f',
-          '-E', 'node_modules/',
-          '-E', '.git/',
-          '-E', 'dist/',
-        },
+        find_command = concat(
+          {
+            'fd',
+            '-t',
+            'f',
+          },
+          map_list(always_ignore_patterns, function(pattern)
+            return '-E=' .. pattern
+          end)
+        ),
         hidden = true,
         no_ignore = true,
       }
-    end
-
-    map('n', '<leader>fJ', find_all_files)
-    map('n', '<leader>FJ', find_all_files)
+    end)
 
     map('n', '<leader>fk', function()
-      local path = u.get_current_path()
+      local path = get_current_path()
       telescope.extensions.file_browser.file_browser {
         cwd = path,
         hidden = true,
         grouped = true,
         hide_parent_dir = true,
-        git_status = false
+        git_status = false,
+        respect_gitignore = false,
+        select_buffer = true,
       }
     end)
 
-    local function file_browser_root()
+    map('n', '<leader>dk', function()
       telescope.extensions.file_browser.file_browser {
         hidden = true,
         grouped = true,
         hide_parent_dir = true,
-        git_status = false
+        git_status = false,
+        respect_gitignore = false,
+        select_buffer = true,
       }
-    end
-
-    map('n', '<leader>fK', file_browser_root)
-    map('n', '<leader>FK', file_browser_root)
+    end)
 
     map('n', '<leader>fl', function()
       builtin.live_grep {
         hidden = true,
         disable_coordinates = true,
-        additional_args = function()
-          local vimgrep_arguments = {
+        additional_args = concat(
+          {
             '--color=never',
             '--no-heading',
             '--with-filename',
             '--line-number',
             '--column',
-            '--ignore-case',
+            '--smart-case',
             '--trim',
             '--hidden',
-          }
-
-          for _, pattern in pairs(ignore_patterns) do
-            table.insert(vimgrep_arguments, '-g=!' .. pattern)
-          end
-
-          return vimgrep_arguments
-        end
+          },
+          map_list(ignore_patterns, function(pattern)
+            return '-g=!' .. pattern
+          end)
+        ),
       }
     end)
 
-    local function live_grep_all()
+    map('n', '<leader>dl', function()
       builtin.live_grep {
         hidden = true,
         disable_coordinates = true,
-        additional_args = function()
-          local vimgrep_arguments = {
+        additional_args = concat(
+          {
             '--color=never',
             '--no-heading',
             '--with-filename',
@@ -243,23 +245,19 @@ return {
             '--trim',
             '--hidden=false',
             '--no-ignore=true',
-            '-g=!node_modules/',
-            '-g=!dist/',
-          }
-
-          return vimgrep_arguments
-        end
+          },
+          map_list(always_ignore_patterns, function(pattern)
+            return '-g=!' .. pattern
+          end)
+        ),
       }
-    end
-
-    map('n', '<leader>fL', live_grep_all)
-    map('n', '<leader>FL', live_grep_all)
+    end)
 
     map('n', '<leader>fh', function()
       builtin.grep_string {
         disable_coordinates = true,
-        additional_args = function()
-          local vimgrep_arguments = {
+        additional_args = concat(
+          {
             '--color=never',
             '--no-heading',
             '--with-filename',
@@ -268,21 +266,33 @@ return {
             '--smart-case',
             '--trim',
             '--hidden',
-          }
-
-          for _, pattern in pairs(ignore_patterns) do
-            table.insert(vimgrep_arguments, '-g=!' .. pattern)
-          end
-
-          return vimgrep_arguments
-        end
+          },
+          map_list(ignore_patterns, function(pattern)
+            return '-g=!' .. pattern
+          end)
+        ),
       }
     end)
 
-    map('n', '<leader>ec', function()
-      builtin.find_files {
-        cwd = '~/dotfiles/nvim',
-        hidden = true,
+    map('n', '<leader>dh', function()
+      builtin.grep_string {
+        disable_coordinates = true,
+        additional_args = concat(
+          {
+            '--color=never',
+            '--no-heading',
+            '--with-filename',
+            '--line-number',
+            '--column',
+            '--ignore-case',
+            '--trim',
+            '--hidden=false',
+            '--no-ignore=true',
+          },
+          map_list(always_ignore_patterns, function(pattern)
+            return '-g=!' .. pattern
+          end)
+        ),
       }
     end)
 
@@ -290,14 +300,21 @@ return {
       builtin.find_files {
         cwd = '~/dotfiles',
         hidden = true,
+        find_command = {
+            'fd',
+            '-t',
+            'f',
+            '-E=.git/'
+        },
       }
     end)
 
     map('n', '<leader>en', function()
       telescope.extensions.file_browser.file_browser {
         cwd = '~/notes',
-        grouped = true
+        grouped = true,
+        select_buffer = true
       }
     end)
-  end
+  end,
 }

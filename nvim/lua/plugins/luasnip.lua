@@ -28,12 +28,12 @@ return {
       delete_check_events = 'TextChanged,InsertLeave',
     }
 
--- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     JAVASCRIPT     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+    -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     JAVASCRIPT     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
     ls.add_snippets('javascript', {
       s(
         'co',
-        fmt('console.log(\'\\x1b[36m%s\\x1b[0m\', JSON.stringify({{{}}}, null, 2))', {
+        fmt('console.dir({{ {} }}, {{ depth: 9 }})', {
           i(1),
         })
       ),
@@ -228,7 +228,7 @@ return {
       ),
     })
 
--- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     RUST     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+    -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     RUST     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
     ls.add_snippets('rust', {
       s(

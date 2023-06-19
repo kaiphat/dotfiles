@@ -25,6 +25,7 @@ return {
           },
         },
         formattings.sql_formatter.with {
+          extra_filetypes = { 'man' },
           extra_args = {
             '-l',
             'postgresql',

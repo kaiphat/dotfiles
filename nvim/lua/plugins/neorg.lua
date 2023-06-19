@@ -1,6 +1,6 @@
 return {
   'nvim-neorg/neorg',
-  ft = 'norg',
+  event = "BufReadPre,BufNew *.norg",
   build = ':Neorg sync-parsers',
   config = function()
     local neorg = require 'neorg'
@@ -8,8 +8,8 @@ return {
     neorg.setup {
       load = {
         ['core.defaults'] = {},
-        ['core.norg.concealer'] = {},
-        ['core.norg.dirman'] = {
+        ['core.concealer'] = {},
+        ['core.dirman'] = {
           config = {
             workspaces = {
               main = '~/notes'
@@ -19,8 +19,8 @@ return {
         ['core.keybinds'] = {
           config = {
             hook = function(keybinds)
-              keybinds.remap_event('norg', 'n', 'gd', 'core.norg.qol.todo_items.todo.task_done')
-              keybinds.remap_event('norg', 'n', 'gu', 'core.norg.qol.todo_items.todo.task_undone')
+              keybinds.remap_event('norg', 'n', 'gd', 'core.qol.todo_items.todo.task_done')
+              keybinds.remap_event('norg', 'n', 'gu', 'core.qol.todo_items.todo.task_undone')
             end,
             default_keybinds = true
           }

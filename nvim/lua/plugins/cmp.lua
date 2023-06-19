@@ -29,11 +29,11 @@ return {
     'hrsh7th/cmp-nvim-lsp',
     'saadparwaiz1/cmp_luasnip',
     'hrsh7th/cmp-buffer',
-    'ray-x/cmp-treesitter',
     'onsails/lspkind.nvim',
   },
   config = function()
     local cmp = require 'cmp'
+    local types = require 'cmp.types'
     local luasnip = require 'luasnip'
     local compare = require 'cmp.config.compare'
 
@@ -100,12 +100,24 @@ return {
         end,
       },
       completion = {
+        autocomplete = {
+          types.cmp.TriggerEvent.TextChanged,
+        },
         completeopt = 'menu,menuone,noinsert',
-        keyword_length = 0,
+        keyword_length = 1,
+      },
+      matching = {
+        disallow_fuzzy_matching = true,
+        disallow_fullfuzzy_matching = true,
+        disallow_partial_fuzzy_matching = true,
+        disallow_partial_matching = false,
+        disallow_prefix_unmatching = true,
       },
       mapping = cmp.mapping.preset.insert {
         ['<C-p>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
+        ['<C-k>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
         ['<C-n>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
+        ['<C-j>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
@@ -137,7 +149,11 @@ return {
           end
         end, { 'i', 's' }),
       },
-      performance = {},
+      performance = {
+        debounce = 0,
+        throttle = 0,
+        fetching_timeout = 500,
+      },
       sources = cmp.config.sources {
         {
           name = 'nvim_lsp',
@@ -151,14 +167,21 @@ return {
         {
           name = 'buffer',
           option = {
+            -- get_bufnrs = function()
+            --   return vim.api.nvim_list_bufs()
+            -- end,
             get_bufnrs = function()
-              return vim.api.nvim_list_bufs()
+              local bufs = {}
+              for _, win in ipairs(vim.api.nvim_list_wins()) do
+                bufs[vim.api.nvim_win_get_buf(win)] = true
+              end
+              return vim.tbl_keys(bufs)
             end,
+            indexing_interval = 300,
+            indexing_batch_size = 100,
+            max_indexed_line_length = 1024 * 400,
             keyword_pattern = [[\k\+]],
           },
-        },
-        {
-          name = 'treesitter',
         },
       },
       experimental = {

@@ -7,5 +7,12 @@ return {
       hlgroup = 'LspReferenceText',
       cw_hlgroup = 'LspReferenceText',
     }
+
+    vim.api.nvim_create_autocmd('BufRead', {
+      pattern = { '*.*' },
+      callback = function(data)
+        hl.attach(data.buf)
+      end,
+    })
   end,
 }

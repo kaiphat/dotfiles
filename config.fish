@@ -2,8 +2,10 @@
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   ENVIROMENTS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-set -gx PROMPT_CHAR '❯'
+set -gx DARK_THEME 1
+
 set -gx PROMPT_CHAR '➜ '
+set -gx PROMPT_CHAR '❯'
 
 set pure_symbol_prompt $PROMPT_CHAR
 
@@ -22,6 +24,7 @@ set -U SXHKD_SHELL sh
 set -U XDG_CONFIG_HOME ~/.config
 
 bind \cd delete-char
+bind \cw backward-kill-word
 
 function fish_right_prompt
 end
@@ -54,6 +57,8 @@ set -gx PATH $PATH $HOME/.krew/bin
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     edit     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 alias edit-aliases "nvim ~/.config/fish/conf.d/aliases.fish"
+alias todo "nvim ~/notes/deals.norg -c \"set signcolumn=no\""
+alias notes "nvim ~/notes/notes.norg -c \"set signcolumn=no\""
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     docker     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 alias d "docker"
@@ -66,19 +71,17 @@ alias di "docker inspect"
 alias du "dc up --force-recreate -d -V $1"
 alias dub "dc up --force-recreate --build -d -V $1"
 
-function dl
-  d logs $argv -f -n 99
-end
-function dps
-  d ps -a --format "table {{.ID}}\t{{.Names}}" | \
-  grep $argv
+alias w "watson"
+alias wr "w report --day"
+alias wstart "watson start"
+alias wst "watson stop"
+function wry
+  set yesterday (date +%Y-%m-%d --date='yesterday')
+  w report --from $yesterday --to $yesterday
 end
 
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     common     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 alias g "git"
-alias todo "nvim ~/notes/deals.norg -c \"set signcolumn=no\""
-alias notes "nvim ~/notes/notes.norg -c \"set signcolumn=no\""
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     tmux     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+alias k "kubectl"
 alias t "tmux"
 alias tn "t new-session -s"
 alias ta "t attach-session"
@@ -87,6 +90,7 @@ alias st "speedtest"
 alias y "yarn"
 alias grep "grep -i --color"
 alias n "nvim"
+alias nread "nvim -c \"set nowrap\""
 alias req "http -p mbh"
 alias mkdir "mkdir -p"
 alias less "less -MSx4 -FXR --shift 10"
@@ -97,6 +101,15 @@ alias pj "xclip -o | jq '.' | clip"
 alias nest "npx @nestjs/cli"
 alias nvim-start "nvim --startuptime _s.log -c exit && tail -100 _s.log | bat && rm _s.log"
 alias ... "cd ../../"
+
+function dl
+  d logs $argv -f -n 99
+end
+
+function dps
+  d ps -a --format "table {{.ID}}\t{{.Names}}" | \
+  grep $argv
+end
 
 function git-recreate-from -a root_branch
   if test -z "$root_branch"; echo 'error: need a root_branch argument'; return; end
@@ -116,20 +129,6 @@ function gp -a message
   git add -A
   git commit -m "$message"
   git push origin $branch
-end
-
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     utils functions     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-function select
-  set cmd $argv[1]
-  set dict $argv[2..-1]
-
-  for index in (seq 1 2 (count $dict))
-    echo (set_color cyan) (math "ceil($index/2)") (set_color blue)'-' (set_color green)$dict[$index]
-  end
-
-  read -p 'echo (set_color blue) "Selected number: "' -l number
-
-  $cmd (string split " " $dict[(math "$number * 2")])
 end
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -167,7 +166,7 @@ set fish_color_operator 'red'
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   BREW   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-#eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+# eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   TMUX   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -185,8 +184,8 @@ end
 
 if status is-interactive
 and not set -q TMUX
+  tmux kill-session -t 0 || true
   tmux attach -t main || tmux new -s main
-  tmux kill-session -t 0
 end
 
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /home/kaiphat/.ghcup/bin # ghcup-env

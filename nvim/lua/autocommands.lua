@@ -16,3 +16,5 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank { timeout = 700 }
   end
 })
+
+-- command! Squeeze %s/\v(\n\n)\n+/\1/e -- will squeeze 2+ newlines in a row into one in the whole buffer.

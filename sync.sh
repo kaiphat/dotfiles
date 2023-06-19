@@ -31,6 +31,7 @@ set config_paths                  \
     i3                            \
     zellij                        \
     dunst                         \
+    watson                        \
 
 function copy -a target_dir -a paths
   for path in $$paths

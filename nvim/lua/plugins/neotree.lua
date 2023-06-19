@@ -1,5 +1,3 @@
-local u = require 'utils'
-
 vim.g.neo_tree_remove_legacy_commands = 1
 
 return {
@@ -32,7 +30,7 @@ return {
         },
         popup = {
           size = {
-            width = 50,
+            width = 70,
             height = '60%',
           },
         },
@@ -98,6 +96,7 @@ return {
           ['c'] = 'copy',
           ['m'] = 'move',
           ['q'] = 'close_window',
+          ['<C-c>'] = 'close_window',
           ['R'] = 'refresh',
           ['?'] = 'show_help',
           ['<'] = 'prev_source',
@@ -117,7 +116,7 @@ return {
       },
     }
 
-    local root_path = u.get_current_path()
+    local root_path = get_current_path()
     local cmd = require 'neo-tree.command'
 
     map('n', '<leader>o', function()

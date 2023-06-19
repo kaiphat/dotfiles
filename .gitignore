@@ -1,2 +1,5 @@
 tmux*
 history.txt
+
+watson/*
+!watson/config

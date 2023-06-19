@@ -1,14 +1,5 @@
 return {
   {
-    enabled = false,
-    'nvim-treesitter/playground',
-    cmd = {
-      'TSPlaygroundToggle',
-      'TSHighlightCapturesUnderCursor',
-    },
-  },
-
-  {
     'nvim-treesitter/nvim-treesitter',
     event = 'BufReadPost',
     dependencies = {
@@ -48,6 +39,7 @@ return {
           'norg',
           'kdl',
           'proto',
+          'markdown_inline',
         },
         query_linter = {
           enable = true,
@@ -70,9 +62,17 @@ return {
           enable = true,
           disable = {},
         },
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = '<Enter>',
+            node_incremental = '<Enter>',
+            node_decremental = '<BS>',
+          },
+        },
       }
 
-      vim.treesitter.language.register('fish', 'man')
+      -- vim.treesitter.language.register('markdown', 'man')
 
       local unit = require 'utils.unit'
 
@@ -80,10 +80,10 @@ return {
         unit.select(true)
       end)
       map('n', ']]', function()
-        unit.moveToEnd()
+        unit.move_down()
       end)
       map('n', '[[', function()
-        unit.moveToStart()
+        unit.move_up()
       end)
     end,
   },

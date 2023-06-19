@@ -1,9 +1,5 @@
 local M = {}
 
-M.get_current_path = function()
-  return vim.fn.expand '%:p:h'
-end
-
 M.split_string = function(str, delimiter)
   local result = {}
   for match in (str .. delimiter):gmatch('(.-)' .. delimiter) do

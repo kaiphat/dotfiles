@@ -1,0 +1,4 @@
+[options]
+log_current = true
+report_current = true
+stop_on_start = true
