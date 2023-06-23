@@ -1,4 +1,6 @@
-local always_ignore_patterns = {
+local M = {}
+
+M.always_ignore_patterns = {
   '.git/',
   'dist/',
   'node_modules/',
@@ -7,7 +9,7 @@ local always_ignore_patterns = {
   'yarn.lock',
 }
 
-local ignore_patterns = concat({
+M.ignore_patterns = concat({
   'data/',
   '.data/',
   'test/',
@@ -17,7 +19,204 @@ local ignore_patterns = concat({
   '*.log',
   '.gitignore',
   '*.md',
-}, always_ignore_patterns)
+}, M.always_ignore_patterns)
+
+M.add_mappings = function()
+  local telescope = require 'telescope'
+  local builtin = require 'telescope.builtin'
+
+  map('n', '<leader>fb', function()
+    builtin.buffers {
+      ignore_current_buffer = true,
+      cwd_only = true,
+      sort_lastused = true,
+      trim_text = true,
+      show_all_buffers = false,
+    }
+  end)
+  map('n', '<leader>fo', function()
+    builtin.oldfiles {
+      tiebreak = function(current_entry, existing_entry)
+        return current_entry.index < existing_entry.index
+      end,
+    }
+  end)
+  map('n', '<leader>fp', function()
+    builtin.resume {}
+  end)
+  map('n', '<leader>fi', function()
+    builtin.lsp_references {
+      include_declaration = true,
+      include_current_line = false,
+      trim_text = true,
+      jump_type = 'vsplit',
+      fname_width = 50,
+      show_line = false,
+    }
+  end)
+
+  map('n', '<leader>fj', function()
+    builtin.find_files {
+      find_command = {
+        'fd',
+        '-t=f',
+        '-E=test/',
+      },
+      hidden = false,
+      no_ignore = false,
+    }
+  end)
+
+  map('n', '<leader>dj', function()
+    builtin.find_files {
+      find_command = concat(
+        {
+          'fd',
+          '-t',
+          'f',
+        },
+        map_list(M.always_ignore_patterns, function(pattern)
+          return '-E=' .. pattern
+        end)
+      ),
+      hidden = true,
+      no_ignore = true,
+    }
+  end)
+
+  map('n', '<leader>fk', function()
+    local path = get_current_path()
+    telescope.extensions.file_browser.file_browser {
+      cwd = path,
+      hidden = true,
+      grouped = true,
+      hide_parent_dir = true,
+      git_status = false,
+      respect_gitignore = false,
+      select_buffer = true,
+    }
+  end)
+
+  map('n', '<leader>dk', function()
+    telescope.extensions.file_browser.file_browser {
+      hidden = true,
+      grouped = true,
+      hide_parent_dir = true,
+      git_status = false,
+      respect_gitignore = false,
+      select_buffer = true,
+    }
+  end)
+
+  map('n', '<leader>fl', function()
+    builtin.live_grep {
+      hidden = true,
+      disable_coordinates = true,
+      additional_args = concat(
+        {
+          '--color=never',
+          '--no-heading',
+          '--with-filename',
+          '--line-number',
+          '--column',
+          '--smart-case',
+          '--trim',
+          '--hidden',
+        },
+        map_list(M.ignore_patterns, function(pattern)
+          return '-g=!' .. pattern
+        end)
+      ),
+    }
+  end)
+
+  map('n', '<leader>dl', function()
+    builtin.live_grep {
+      hidden = true,
+      disable_coordinates = true,
+      additional_args = concat(
+        {
+          '--color=never',
+          '--no-heading',
+          '--with-filename',
+          '--line-number',
+          '--column',
+          '--ignore-case',
+          '--trim',
+          '--hidden=false',
+          '--no-ignore=true',
+        },
+        map_list(M.always_ignore_patterns, function(pattern)
+          return '-g=!' .. pattern
+        end)
+      ),
+    }
+  end)
+
+  map('n', '<leader>fh', function()
+    builtin.grep_string {
+      disable_coordinates = true,
+      additional_args = concat(
+        {
+          '--color=never',
+          '--no-heading',
+          '--with-filename',
+          '--line-number',
+          '--column',
+          '--smart-case',
+          '--trim',
+          '--hidden',
+        },
+        map_list(M.ignore_patterns, function(pattern)
+          return '-g=!' .. pattern
+        end)
+      ),
+    }
+  end)
+
+  map('n', '<leader>dh', function()
+    builtin.grep_string {
+      disable_coordinates = true,
+      additional_args = concat(
+        {
+          '--color=never',
+          '--no-heading',
+          '--with-filename',
+          '--line-number',
+          '--column',
+          '--ignore-case',
+          '--trim',
+          '--hidden=false',
+          '--no-ignore=true',
+        },
+        map_list(M.always_ignore_patterns, function(pattern)
+          return '-g=!' .. pattern
+        end)
+      ),
+    }
+  end)
+
+  map('n', '<leader>es', function()
+    builtin.find_files {
+      cwd = '~/dotfiles',
+      hidden = true,
+      find_command = {
+        'fd',
+        '-t',
+        'f',
+        '-E=.git/',
+      },
+    }
+  end)
+
+  map('n', '<leader>en', function()
+    telescope.extensions.file_browser.file_browser {
+      cwd = '~/notes',
+      grouped = true,
+      select_buffer = true,
+    }
+  end)
+end
 
 return {
   'nvim-telescope/telescope.nvim',
@@ -28,7 +227,6 @@ return {
   },
   config = function()
     local telescope = require 'telescope'
-    local builtin = require 'telescope.builtin'
     local sorters = require 'telescope.sorters'
     local previewers = require 'telescope.previewers'
     local themes = require 'telescope.themes'
@@ -125,196 +323,6 @@ return {
     telescope.load_extension 'file_browser'
     telescope.load_extension 'ui-select'
 
-    map('n', '<leader>fb', function()
-      builtin.buffers {
-        ignore_current_buffer = true,
-        cwd_only = true,
-        sort_lastused = true,
-        trim_text = true,
-        show_all_buffers = false,
-      }
-    end)
-    map('n', '<leader>fo', function()
-      builtin.oldfiles {
-        tiebreak = function(current_entry, existing_entry)
-          return current_entry.index < existing_entry.index
-        end,
-      }
-    end)
-    map('n', '<leader>fp', function()
-      builtin.resume {}
-    end)
-    map('n', '<leader>fi', function()
-      builtin.lsp_references {
-        include_declaration = true,
-        include_current_line = false,
-        trim_text = true,
-        jump_type = 'vsplit',
-        fname_width = 50,
-        show_line = false,
-      }
-    end)
-
-    map('n', '<leader>fj', function()
-      builtin.find_files {
-        find_command = {
-          'fd',
-          '-t=f',
-          '-E=test/',
-        },
-        hidden = false,
-        no_ignore = false,
-      }
-    end)
-
-    map('n', '<leader>dj', function()
-      builtin.find_files {
-        find_command = concat(
-          {
-            'fd',
-            '-t',
-            'f',
-          },
-          map_list(always_ignore_patterns, function(pattern)
-            return '-E=' .. pattern
-          end)
-        ),
-        hidden = true,
-        no_ignore = true,
-      }
-    end)
-
-    map('n', '<leader>fk', function()
-      local path = get_current_path()
-      telescope.extensions.file_browser.file_browser {
-        cwd = path,
-        hidden = true,
-        grouped = true,
-        hide_parent_dir = true,
-        git_status = false,
-        respect_gitignore = false,
-        select_buffer = true,
-      }
-    end)
-
-    map('n', '<leader>dk', function()
-      telescope.extensions.file_browser.file_browser {
-        hidden = true,
-        grouped = true,
-        hide_parent_dir = true,
-        git_status = false,
-        respect_gitignore = false,
-        select_buffer = true,
-      }
-    end)
-
-    map('n', '<leader>fl', function()
-      builtin.live_grep {
-        hidden = true,
-        disable_coordinates = true,
-        additional_args = concat(
-          {
-            '--color=never',
-            '--no-heading',
-            '--with-filename',
-            '--line-number',
-            '--column',
-            '--smart-case',
-            '--trim',
-            '--hidden',
-          },
-          map_list(ignore_patterns, function(pattern)
-            return '-g=!' .. pattern
-          end)
-        ),
-      }
-    end)
-
-    map('n', '<leader>dl', function()
-      builtin.live_grep {
-        hidden = true,
-        disable_coordinates = true,
-        additional_args = concat(
-          {
-            '--color=never',
-            '--no-heading',
-            '--with-filename',
-            '--line-number',
-            '--column',
-            '--ignore-case',
-            '--trim',
-            '--hidden=false',
-            '--no-ignore=true',
-          },
-          map_list(always_ignore_patterns, function(pattern)
-            return '-g=!' .. pattern
-          end)
-        ),
-      }
-    end)
-
-    map('n', '<leader>fh', function()
-      builtin.grep_string {
-        disable_coordinates = true,
-        additional_args = concat(
-          {
-            '--color=never',
-            '--no-heading',
-            '--with-filename',
-            '--line-number',
-            '--column',
-            '--smart-case',
-            '--trim',
-            '--hidden',
-          },
-          map_list(ignore_patterns, function(pattern)
-            return '-g=!' .. pattern
-          end)
-        ),
-      }
-    end)
-
-    map('n', '<leader>dh', function()
-      builtin.grep_string {
-        disable_coordinates = true,
-        additional_args = concat(
-          {
-            '--color=never',
-            '--no-heading',
-            '--with-filename',
-            '--line-number',
-            '--column',
-            '--ignore-case',
-            '--trim',
-            '--hidden=false',
-            '--no-ignore=true',
-          },
-          map_list(always_ignore_patterns, function(pattern)
-            return '-g=!' .. pattern
-          end)
-        ),
-      }
-    end)
-
-    map('n', '<leader>es', function()
-      builtin.find_files {
-        cwd = '~/dotfiles',
-        hidden = true,
-        find_command = {
-            'fd',
-            '-t',
-            'f',
-            '-E=.git/'
-        },
-      }
-    end)
-
-    map('n', '<leader>en', function()
-      telescope.extensions.file_browser.file_browser {
-        cwd = '~/notes',
-        grouped = true,
-        select_buffer = true
-      }
-    end)
+    M.add_mappings()
   end,
 }

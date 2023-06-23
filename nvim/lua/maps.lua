@@ -5,7 +5,7 @@ map({ 'v', 'n' }, ':', ';')
 map({ 'v', 'n' }, ';', ':', { noremap = true })
 
 map('v', 'y', 'ygv<esc>')
-map('v', 'p', ':put! "0=`]<cr>')
+map('v', 'p', 'p=`]gvy')
 map('v', '<', '<gv')
 map('v', '>', '>gv')
 
@@ -40,11 +40,6 @@ map('n', 'cl', 'ct')
 map('n', 'dl', 'dt')
 map('n', 'yl', 'yt')
 map('n', 'vl', 'vt')
-map('n', '<C-a>', function()
-  vim.g.minianimate_disable = true
-  vim.cmd 'normal! gg0vG$'
-  vim.g.minianimate_disable = false
-end)
 
 map('n', 'x', function()
   if vim.fn.col '.' == 1 then

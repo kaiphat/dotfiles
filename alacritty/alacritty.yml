@@ -38,32 +38,32 @@ font:
     family: JetBrainsMono Nerd Font
     style: SemiBold Italic
 
-  # size: 12.5
+  size: 12
+  offset:
+    x: -1
+    y: 2
+  glyph_offset:
+    x: 0
+    y: 1
+  normal:
+    family: Agave Nerd Font
+    style: Regular
+  bold:
+    family: Agave Nerd Font
+    style: Regular
+  italic:
+    family: Agave Nerd Font
+    style: Regular
+  bold_italic:
+    family: Agave Nerd Font
+    style: Regular
+
+  # size: 11
   # offset:
-  #   x: 0
-  #   y: 2
-  # glyph_offset:
   #   x: 0
   #   y: 1
-  # normal:
-  #   family: Agave Nerd Font
-  #   style: Regular
-  # bold:
-  #   family: Agave Nerd Font
-  #   style: Regular
-  # italic:
-  #   family: Agave Nerd Font
-  #   style: Regular
-  # bold_italic:
-  #   family: Agave Nerd Font
-  #   style: Regular
-
-  # size: 12
-  # offset:
-  #   x: -1
-  #   y: -1
   # glyph_offset:
-  #   x: -1
+  #   x: 0
   #   y: 0
   # normal:
   #   family: Mononoki Nerd Font
@@ -118,25 +118,25 @@ font:
   #   family: CaskaydiaCove Nerd Font
   #   style: Medium
 
-  # size: 13
+  # size: 11
   # offset:
-  #   x: -1
+  #   x: 0
   #   y: 0
   # glyph_offset:
   #   x: 0
   #   y: 0
   # normal:
   #   family: UbuntuMono Nerd Font
-  #   style: Regular
+  #   style: Bold
   # bold:
   #   family: UbuntuMono Nerd Font
-  #   style: Regular
+  #   style: Bold
   # italic:
   #   family: UbuntuMono Nerd Font
-  #   style: Regular
+  #   style: Bold
   # bold_italic:
   #   family: UbuntuMono Nerd Font
-  #   style: Regular
+  #   style: Bold
 
   # size: 9
   # offset:

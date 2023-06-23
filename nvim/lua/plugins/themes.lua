@@ -4,7 +4,6 @@ return {
     enabled = dark_theme_enabled(),
     config = function ()
       require('theme')
-      print('theme')
     end
   },
   {

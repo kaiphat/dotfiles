@@ -1,4 +1,6 @@
-local function get_position()
+local M = {}
+
+M.get_position = function()
   local current_line = vim.fn.line '.'
   local total_line = vim.fn.line '$'
 
@@ -17,7 +19,7 @@ local function get_position()
   return current_line .. ':' .. total_line
 end
 
-local colors = {
+M.colors = {
   dark_blue = '#404060',
   cyan = '#a3b8ef',
   light_blue = '#9398cf',
@@ -27,7 +29,7 @@ local colors = {
   pink = '#ff75a0',
 }
 
-local active_components = {
+M.active_components = {
   {
     {
       icon = '',
@@ -39,26 +41,26 @@ local active_components = {
         },
       },
       hl = {
-        fg = colors.dark_blue,
-        bg = colors.cyan,
+        fg = M.colors.dark_blue,
+        bg = M.colors.cyan,
       },
       left_sep = {
         str = ' ',
         hl = {
-          bg = colors.cyan,
+          bg = M.colors.cyan,
         },
       },
       right_sep = {
         {
           str = ' ',
           hl = {
-            bg = colors.cyan,
+            bg = M.colors.cyan,
           },
         },
         {
           str = 'right_filled',
           hl = {
-            fg = colors.cyan,
+            fg = M.colors.cyan,
             -- bg = colors.dark_blue,
           },
         },
@@ -68,7 +70,7 @@ local active_components = {
       icon = '+',
       provider = 'git_diff_added',
       hl = {
-        fg = colors.green,
+        fg = M.colors.green,
       },
       left_sep = ' ',
     },
@@ -77,7 +79,7 @@ local active_components = {
       icon = '~',
       provider = 'git_diff_changed',
       hl = {
-        fg = colors.yellow,
+        fg = M.colors.yellow,
       },
       left_sep = ' ',
     },
@@ -86,7 +88,7 @@ local active_components = {
       icon = '-',
       provider = 'git_diff_removed',
       hl = {
-        fg = colors.red,
+        fg = M.colors.red,
       },
       left_sep = ' ',
     },
@@ -95,7 +97,7 @@ local active_components = {
       icon = 'x',
       provider = 'diagnostic_errors',
       hl = {
-        fg = colors.pink,
+        fg = M.colors.pink,
       },
       left_sep = ' ',
     },
@@ -106,7 +108,7 @@ local active_components = {
         return ' '
       end,
       hl = {
-        fg = colors.pink,
+        fg = M.colors.pink,
       },
     },
   },
@@ -116,14 +118,14 @@ local active_components = {
       icon = ' ',
       provider = 'git_branch',
       hl = {
-        fg = colors.yellow,
-        bg = colors.dark_blue,
+        fg = M.colors.yellow,
+        bg = M.colors.dark_blue,
       },
       right_sep = {
         {
           str = ' ',
           hl = {
-            bg = colors.dark_blue,
+            bg = M.colors.dark_blue,
           },
         },
       },
@@ -131,13 +133,13 @@ local active_components = {
         {
           str = 'left_filled',
           hl = {
-            fg = colors.dark_blue,
+            fg = M.colors.dark_blue,
           },
         },
         {
           str = ' ',
           hl = {
-            bg = colors.dark_blue,
+            bg = M.colors.dark_blue,
           },
         },
       },
@@ -145,15 +147,15 @@ local active_components = {
 
     {
       icon = ' ',
-      provider = get_position,
+      provider = M.get_position,
       hl = {
-        fg = colors.dark_blue,
-        bg = colors.light_blue,
+        fg = M.colors.dark_blue,
+        bg = M.colors.light_blue,
       },
       right_sep = {
         str = ' ',
         hl = {
-          bg = colors.light_blue,
+          bg = M.colors.light_blue,
         },
       },
       left_sep = {
@@ -162,12 +164,12 @@ local active_components = {
           hl = function()
             if require('feline.providers.git').git_info_exists() then
               return {
-                bg = colors.dark_blue,
-                fg = colors.light_blue,
+                bg = M.colors.dark_blue,
+                fg = M.colors.light_blue,
               }
             else
               return {
-                fg = colors.light_blue,
+                fg = M.colors.light_blue,
               }
             end
           end,
@@ -175,7 +177,7 @@ local active_components = {
         {
           str = ' ',
           hl = {
-            bg = colors.light_blue,
+            bg = M.colors.light_blue,
           },
         },
       },
@@ -183,7 +185,7 @@ local active_components = {
   },
 }
 
-local inactive_components = {
+M.inactive_components = {
   {
     icon = '',
     provider = {
@@ -193,7 +195,7 @@ local inactive_components = {
       },
     },
     hl = {
-      fg = colors.cyan,
+      fg = M.colors.cyan,
     },
     left_sep = ' ',
   },
@@ -216,8 +218,8 @@ return {
         },
       },
       components = {
-        active = active_components,
-        inactive = inactive_components,
+        active = M.active_components,
+        inactive = M.inactive_components,
       },
     }
   end,

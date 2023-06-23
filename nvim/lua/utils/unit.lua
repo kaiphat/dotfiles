@@ -23,11 +23,11 @@ local function get_first_not_empty_col(bufnr, row)
   return col
 end
 
-local function get_not_empty_row(bufnr, row, decrement)
+local function get_not_empty_row(bufnr, row, increment)
   local text = get_text(bufnr, row)
 
   while vim.trim(text) == '' do
-    row = row - decrement
+    row = row + increment
     text = get_text(bufnr, row)
   end
 
@@ -217,12 +217,13 @@ local function move(direction)
   end
 
   local target_node
-  if direction == 1 then
+  if direction == -1 then
     target_node = ts_utils.get_previous_node(node, false, false)
   else
     target_node = ts_utils.get_next_node(node, false, false)
   end
 
+  print(target_node)
   if target_node then
     focus_node(target_node, bufnr)
     return
@@ -230,11 +231,11 @@ local function move(direction)
 end
 
 M.move_up = function()
-  move(1)
+  move(-1)
 end
 
 M.move_down = function()
-  move(-1)
+  move(1)
 end
 
 return M
