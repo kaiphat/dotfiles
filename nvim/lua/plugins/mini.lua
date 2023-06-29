@@ -1,3 +1,13 @@
+local M = {}
+
+M.chars = {
+  '▏',
+  '│',
+  '⏐',
+  '┊',
+  '¦',
+}
+
 return {
   {
     'echasnovski/mini.align',
@@ -32,6 +42,10 @@ return {
       local trail = require 'mini.trailspace'
 
       trail.setup {}
+
+      map('n', '<leader>ut', function()
+        trail.trim()
+      end)
     end,
   },
 
@@ -54,18 +68,9 @@ return {
     'echasnovski/mini.indentscope',
     enabled = false,
     config = function()
-      local symbols = {
-        '▏',
-        '│',
-        '⏐',
-        '┊',
-        '¦',
-      }
-
       local indent = require 'mini.indentscope'
 
       indent.setup {
-
         draw = {
           delay = 100,
         },
@@ -78,7 +83,7 @@ return {
           try_as_border = false,
         },
 
-        symbol = symbols[1],
+        symbol = M.chars[1],
       }
     end,
   },

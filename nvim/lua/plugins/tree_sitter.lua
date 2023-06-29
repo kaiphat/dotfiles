@@ -1,10 +1,28 @@
+local M = {}
+
+M.get_mappings = function()
+  local unit = require 'utils.unit'
+
+  map({ 'x', 'o' }, 'u', function()
+    unit.select(true)
+  end)
+  map('n', ']]', function()
+    unit.move_down()
+  end)
+  map('n', '[[', function()
+    unit.move_up()
+  end)
+end
+
 return {
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+    enabled = false
+  },
+
   {
     'nvim-treesitter/nvim-treesitter',
     event = 'BufReadPost',
-    dependencies = {
-      -- 'nvim-treesitter/nvim-treesitter-context',
-    },
     config = function()
       local install = require 'nvim-treesitter.install'
       local config = require 'nvim-treesitter.configs'
@@ -73,18 +91,7 @@ return {
       }
 
       -- vim.treesitter.language.register('markdown', 'man')
-
-      local unit = require 'utils.unit'
-
-      map({ 'x', 'o' }, 'u', function()
-        unit.select(true)
-      end)
-      map('n', ']]', function()
-        unit.move_down()
-      end)
-      map('n', '[[', function()
-        unit.move_up()
-      end)
+      M.get_mappings()
     end,
   },
 }

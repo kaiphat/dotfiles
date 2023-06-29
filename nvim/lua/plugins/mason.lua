@@ -1,4 +1,6 @@
-local tools = {
+local M = {}
+
+M.tools = {
   'stylua',
   'lua-language-server',
   'prettierd',
@@ -11,6 +13,18 @@ local tools = {
   'sql-formatter',
 }
 
+M.install = function()
+  local mr = require 'mason-registry'
+
+  for _, tool in ipairs(M.tools) do
+    local p = mr.get_package(tool)
+
+    if not p:is_installed() then
+      p:install()
+    end
+  end
+end
+
 return {
   {
     'williamboman/mason.nvim',
@@ -18,28 +32,21 @@ return {
       'williamboman/mason-lspconfig.nvim',
     },
     config = function()
-
       local mason = require 'mason'
-      local mr = require 'mason-registry'
       local mason_lspconfig = require 'mason-lspconfig'
 
       mason.setup {
         ui = {
           border = 'rounded',
-        }
+          width = 0.5,
+        },
       }
-
-      for _, tool in ipairs(tools) do
-        local p = mr.get_package(tool)
-        if not p:is_installed() then
-          p:install()
-        end
-      end
 
       mason_lspconfig.setup {
         automatic_installation = true,
       }
 
+      M.install()
     end,
-  }
+  },
 }

@@ -217,6 +217,117 @@ get_stat_for_period = '''SELECT
 FROM pg_stat_statements
 ORDER BY mean DESC
 LIMIT 20'''
+aaa = '''with
+bh as (
+  select "blockHeight", "distributionId" from reward_distribution
+  where "payoutSystemId" = 'PPLNS'
+  and "accountId" = $1
+),
+pb as (
+  select * from processed_block pb
+  where pb."blockHeight" not in (select "blockHeight" from bh)
+  and pb."distributionId" in (select "distributionId" from bh)
+),
+s as (
+    select pb."blockHeight", pb."distributionId", sum(mvws5.difficulty) from pb
+    join mat_view_worker_statistics_5m mvws5
+    on mvws5."accountId" = $1 and pb."blockHeight" = mvws5."blockHeight"
+    group by pb."blockHeight", pb."distributionId"
+),
+r as (
+    select rs.id "rewardId", * from s
+    join account a on a.id = $1
+    left join account_group ag ON ag.id = a."accountGroupId"
+    left join reward_setting rs ON rs.id = ag."rewardSettingId"
+)
+insert into reward_distribution (
+"accountId",
+"blockHeight",
+"rewardSettingId",
+"amount",
+"bonusAmount",
+"finalAmount",
+"finalBonusAmount",
+"finalTotalAmount",
+"finalFee",
+"poolBonusAmount",
+"status",
+"distributionId",
+"coin",
+"sumAccountDiff",
+"finalTotalAmountWithoutBoost",
+"referralSettingId",
+"referralAmount",
+"type",
+"parentId",
+"payoutSystemId"
+) select
+$1,
+r."blockHeight",
+coalesce(r."customRewardSettingId", r."rewardId"),
+'0',
+'0',
+'0',
+'0',
+'0',
+'0',
+'0',
+'PROCESSED',
+r."distributionId",
+'BTC',
+r."sum",
+'0',
+null,
+'0',
+'MINING_REVENUE',
+null,
+'PPLNS'
+from r'''
+aab = '''with
+bh as (
+  select "blockHeight", "distributionId" from reward_distribution
+  where "payoutSystemId" = 'PPLNS'
+  and "accountId" = $1
+),
+pb as (
+  select * from processed_block pb
+  where pb."blockHeight" not in (select "blockHeight" from bh)
+  and pb."distributionId" in (select "distributionId" from bh)
+),
+s as (
+    select pb."blockHeight", pb."distributionId", sum(mvws5.difficulty) from pb
+    join mat_view_worker_statistics_5m mvws5
+    on mvws5."accountId" = $1 and pb."blockHeight" = mvws5."blockHeight"
+    group by pb."blockHeight", pb."distributionId"
+),
+r as (
+    select rs.id "rewardId", * from s
+    join account a on a.id = $1
+    left join account_group ag ON ag.id = a."accountGroupId"
+    left join reward_setting rs ON rs.id = ag."rewardSettingId"
+)
+select
+$1,
+r."blockHeight",
+coalesce(r."customRewardSettingId", r."rewardId"),
+'0',
+'0',
+'0',
+'0',
+'0',
+'0',
+'0',
+'PROCESSED',
+r."distributionId",
+'BTC',
+r."sum",
+'0',
+null,
+'0',
+'MINING_REVENUE',
+null,
+'PPLNS'
+from r'''
 
 # DSN to call by -D option
 [alias_dsn]

@@ -1,3 +1,5 @@
+local M = {}
+
 map('n', '<F1>', ':w<cr>:e ++ff=dos<cr>:w ++ff=unix<cr>')
 map('n', '<F9>', ':LspRestart<cr>')
 
@@ -10,6 +12,22 @@ map('v', '<', '<gv')
 map('v', '>', '>gv')
 
 map({ 'c', 'i' }, '<C-r>', '<C-r>+', { noremap = false })
+
+-- M.macros_record_is_active = false
+-- for char in string.gmatch('abcdefghijklmnopqrstuvwxyz', '.') do
+--   map('n', 'q'..char, function()
+--     if M.macros_record_is_active then
+--       print('@'..char..' end')
+--     else
+--       print('@'..char..' end')
+--     end
+--
+--     M.macros_record_is_active = not M.macros_record_is_active
+--
+--     vim.cmd.normal('q'..char)
+--   end, { noremap = false })
+-- end
+
 
 map('n', '<C-h>', ':wincmd h<cr>')
 map('n', '<C-j>', ':wincmd j<cr>')
@@ -36,10 +54,9 @@ map('n', '<C-u>', function()
   vim.api.nvim_feedkeys('4k', 'n', true)
 end)
 
-map('n', 'cl', 'ct')
-map('n', 'dl', 'dt')
-map('n', 'yl', 'yt')
-map('n', 'vl', 'vt')
+for command in string.gmatch('ydvc', '.') do
+  map('n', command .. 'l', command .. 't')
+end
 
 map('n', 'x', function()
   if vim.fn.col '.' == 1 then
@@ -82,36 +99,24 @@ map('n', ',s', ':split<cr>')
 map('n', ',v', ':vsplit<cr>')
 map('n', ',x', ':q<cr>')
 
-map('n', 'Q', 'q')
-
-for char in string.gmatch('w\'"`p<({[', '.') do
+for char in string.gmatch([[w'"`p[<({]], '.') do
   for command in string.gmatch('ydvc', '.') do
     map('n', command .. char, command .. 'i' .. char)
   end
 end
 
--- utils
-map('n', '<leader>ut', function()
-  vim.cmd '%s/\\s\\+$//'
-end)
-map('n', '<leader>uus', function() -- upper sql
-  vim.cmd '%s/.*/\\=v:lua.upperSql(submatch(0))'
-  vim.cmd 'nohl'
-end)
-
-local is_root = true
-local root_path = get_current_path()
+M.is_root = true
+M.root_path = get_current_path()
 
 map('n', '<leader>ur', function()
-  if is_root then
-    local path = get_current_path()
-    vim.cmd('lcd ' .. path)
+  if M.is_root then
+    vim.cmd('lcd ' .. get_current_path())
     vim.notify 'cwd changed to current place'
-    is_root = false
+    M.is_root = false
   else
-    vim.cmd('lcd ' .. root_path)
+    vim.cmd('lcd ' .. M.root_path)
     vim.notify 'cwd changed to root'
-    is_root = true
+    M.is_root = true
   end
 end)
 
@@ -138,11 +143,8 @@ map('n', '<leader>lw', function()
   vim.cmd.normal 'j=='
 end)
 
--- map('n', '<leader>ld', function()
---   local ft = vim.bo.filetype
---   print(ft)
---
---   if ft == 'typescript' or ft == 'javascript' then
---     -- todo
---   end
--- end)
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     utils     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+map('n', '<leader>uf', function()
+  print(vim.bo.filetype)
+end)

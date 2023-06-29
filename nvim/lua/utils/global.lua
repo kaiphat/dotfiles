@@ -4,7 +4,7 @@ _G.map = function(mode, keys, cmd, opts)
 end
 
 _G.dark_theme_enabled = function()
-  return os.getenv('DARK_THEME') == '1'
+  return os.getenv 'DARK_THEME' == '1'
 end
 
 _G.get_current_path = function()
@@ -110,4 +110,13 @@ _G.create_sub_title = function(char)
   local title = char .. ' ' .. left .. space .. line .. space .. right
 
   vim.api.nvim_buf_set_lines(0, row - 1, row, true, { title })
+end
+
+_G.get_terminal_width = function()
+  local handle = io.popen 'tput cols'
+  if handle then
+    local result = handle:read '*a'
+    handle:close()
+    return tonumber(result)
+  end
 end

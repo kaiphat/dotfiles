@@ -59,6 +59,13 @@ bspc rule -a motion_recorder desktop=^10 follow=on
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   RUN APPLICATIONS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-pgrep wezterm          > /dev/null || wezterm &
-pgrep brave            > /dev/null || brave &
-pgrep telegram-desktop > /dev/null || telegram-desktop &
+apps=(
+  alacritty \
+  brave \
+  slack \
+  telegram-desktop \
+)
+
+for app in "${apps[@]}"; do
+  pgrep $app > /dev/null || $app &
+done

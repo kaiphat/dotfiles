@@ -1,4 +1,6 @@
-local chars = {
+local M = {}
+
+M.chars = {
   '▏',
   '│',
   '⏐',
@@ -27,9 +29,10 @@ return {
         'norg',
         'md',
         'mason',
+        'markdown',
       },
-      char = chars[1],
-      context_char = chars[1],
+      char = M.chars[1],
+      context_char = M.chars[1],
       buftype_exclude = { 'terminal' },
       show_trailing_blankline_indent = false,
       show_current_context_start = false,

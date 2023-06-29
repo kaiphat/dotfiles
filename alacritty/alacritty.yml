@@ -5,7 +5,7 @@ window:
   padding:
    x: 0
    y: 0
-  opacity: 0.85
+  opacity: 0.82
   dynamic_padding: false
   startup_mode: Maximized
 
@@ -38,10 +38,10 @@ font:
     family: JetBrainsMono Nerd Font
     style: SemiBold Italic
 
-  size: 12
+  size: 11
   offset:
-    x: -1
-    y: 2
+    x: 0
+    y: 3
   glyph_offset:
     x: 0
     y: 1
@@ -98,7 +98,7 @@ font:
   #   family: VictorMono Nerd Font
   #   style: Bold
 
-  # size: 10
+  # size: 11
   # offset:
   #   x: -1
   #   y: 1
@@ -107,36 +107,36 @@ font:
   #   y: 0
   # normal:
   #   family: CaskaydiaCove Nerd Font
-  #   style: Medium
+  #   style: Regular
   # bold:
   #   family: CaskaydiaCove Nerd Font
-  #   style: Medium
+  #   style: Regular
   # italic:
   #   family: CaskaydiaCove Nerd Font
-  #   style: Medium
+  #   style: Regular
   # bold_italic:
   #   family: CaskaydiaCove Nerd Font
-  #   style: Medium
+  #   style: Regular
 
-  # size: 11
+  # size: 12
   # offset:
   #   x: 0
-  #   y: 0
+  #   y: 1
   # glyph_offset:
   #   x: 0
-  #   y: 0
+  #   y: 1
   # normal:
   #   family: UbuntuMono Nerd Font
-  #   style: Bold
+  #   style: Regular
   # bold:
   #   family: UbuntuMono Nerd Font
-  #   style: Bold
+  #   style: Regular
   # italic:
   #   family: UbuntuMono Nerd Font
-  #   style: Bold
+  #   style: Regular
   # bold_italic:
   #   family: UbuntuMono Nerd Font
-  #   style: Bold
+  #   style: Regular
 
   # size: 9
   # offset:
@@ -158,25 +158,25 @@ font:
   #   family: Hack Nerd Font Mono
   #   style: Regular
 
-  # size: 11
+  # size: 11.5
   # offset:
   #   x: 0
   #   y: 0
   # glyph_offset:
   #   x: 0
-  #   y: 0
+  #   y: 1
   # normal:
   #   family: Inconsolata Nerd Font Mono
-  #   style: Bold
+  #   style: Regular
   # bold:
   #   family: Inconsolata Nerd Font Mono
-  #   style: Bold
+  #   style: Regular
   # italic:
   #   family: Inconsolata Nerd Font Mono
-  #   style: Bold
+  #   style: Regular
   # bold_italic:
   #   family: Inconsolata Nerd Font Mono
-  #   style: Bold
+  #   style: Regular
 
   # size: 10
   # offset:
@@ -218,25 +218,25 @@ font:
   #   family: Iosevka Custom
   #   style: Medium
 
-  # size: 10.5
+  # size: 10.9
   # offset:
   #   x: 0
-  #   y: 2
+  #   y: 1
   # glyph_offset:
   #   x: 0
-  #   y: 0
+  #   y: 1
   # normal:
-  #   family: IosevkaTerm Nerd Font
-  #   style: Bold
+  #   family: Iosevka SS16
+  #   style: SemiBold
   # bold:
-  #   family: IosevkaTerm Nerd Font
-  #   style: Bold
+  #   family: Iosevka SS16
+  #   style: SemiBold
   # italic:
-  #   family: IosevkaTerm Nerd Font
-  #   style: Bold
+  #   family: Iosevka SS16
+  #   style: SemiBold
   # bold_italic:
-  #   family: IosevkaTerm Nerd Font
-  #   style: Bold
+  #   family: Iosevka SS16
+  #   style: SemiBold
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   COLORS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -250,8 +250,8 @@ colors:
   cursor:
    text: '#000000'
    cursor: '#99d1db'
-   cursor: '#fbdf90'
    cursor: '#c6d0f5'
+   cursor: '#fbdf90'
 
   normal:
     black:   '#404060'

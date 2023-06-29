@@ -51,6 +51,7 @@ local c = {
   teal         = '#81c8be',
   blue         = '#8caaee',
   lavender     = '#babbf1',
+  sky          = '#7a8bb1',
   sapphire     = '#85c1dc',
   pink         = '#f4b8e4',
   blue_darkest = '#404060',
@@ -87,11 +88,8 @@ H.WarningMsg = { fg = c.red }
 H.Comment = merge(H.It, { fg = c.gray_blue })
 H.Conceal = merge(H.Bold, { fg = c.red })
 H.Cursor = { fg = nil, bg = c.one_bg3 }
--- h.lCursor = { h.Cursor }
--- h.TermCursor = { h.Cursor }
--- h.TermCursorNC = { h.lCursor }
--- h.CursorColumn = { h.CursorLine }
-H.CursorLine = { fg = nil, bg = nil }
+H.CursorLine = { fg = nil, bg = c.one_bg3 }
+H.CursorColumn = H.CursorLine
 H.ColorColumn = { bg = c.red }
 H.DiffAdd = { bg = c.green_blue }
 H.DiffChange = { bg = c.red }
@@ -105,7 +103,7 @@ H.CursorLineNr = merge(H.LineNr, H.Bold, { fg = c.fg })
 H.MoreMsg = { fg = c.green_blue }
 H.Float = { bg = nil, fg = c.cyan }
 H.NormalFloat = { fg = c.cyan, bg = nil }
-H.FloatBorder = merge(H.NormalFloat, H.Bold, { fg = c.blue_darkest })
+H.FloatBorder = merge(H.NormalFloat, H.Bold, { fg = c.sky })
 H.FloatShadow = { bg = nil }
 H.FloatShadowThrough = { bg = nil }
 H.Visual = { fg = c.fg, bg = c.one_bg3 }
@@ -174,7 +172,7 @@ H.DiagnosticUnderlineError = H.DiagnosticUnderlineWarn
 -- NOICE --
 H.NoiceCmdlineIcon = { fg = c.blue_gray }
 H.NoiceCmdlinePopupBorder = merge(H.FloatBorder)
-H.NoiceCmdlinePopupTitle = { fg = c.fg }
+H.NoiceCmdlinePopupTitle = { fg = c.blue_gray }
 H.NoiceCmdlinePopupBorderSearch = merge(H.NoiceCmdlinePopupBorder)
 H.NoiceCmdlineIconSearch = { fg = c.blue_gray }
 H.NoiceLspProgressTitle = { fg = c.blue_gray }
@@ -345,7 +343,7 @@ H.IndentBlanklineContextChar = { fg = c.one_bg3 }
 
 -- MINI --
 H.MiniIndentscopeSymbol = { fg = c.one_bg3 }
-H.MiniTrailspace = { bg = c.sapphire }
+H.MiniTrailspace = { bg = c.one_bg3 }
 
 -- CMP --
 H.CmpItemAbbr = { fg = c.fg }
@@ -413,6 +411,8 @@ H.NvimTreeSpecialFile = { fg = c.fg, gui = nil }
 H.NnnNormal = merge(H.NvimTreeNormal)
 H.NnnNormalNC = merge(H.NnnNormal)
 
+H.ChatGPTTotalTokensBorder = { fg = c.blue_darkest }
+H.ChatGPTTotalTokens = { fg = c.fg, bg = H.ChatGPTTotalTokensBorder.fg }
 -- HIGHLIGHT --
 
 for group, highlights in pairs(H) do

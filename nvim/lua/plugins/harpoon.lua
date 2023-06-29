@@ -28,6 +28,10 @@ return {
     map('n', 'mp', function()
       ui.nav_prev()
     end)
-
+    -- map('n', '<Tab>', function()
+    --   ui.nav_prev()
+    -- end)
+    --
+    --
   end,
 }

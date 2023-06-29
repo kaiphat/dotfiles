@@ -3,16 +3,16 @@ local g = vim.g
 
 g.mapleader = ' '
 
-if vim.fn.has "nvim-0.10" == 1 then
+if vim.fn.has 'nvim-0.10' == 1 then
   o.smoothscroll = true --Scroll by screen line rather than by line when wrap is set. nvim 0.10 only
 end
 
 o.guicursor = 'a:blinkon1,i-ci-ve:ver25-blinkon1'
-o.selection = "old"
+o.selection = 'old'
 o.tabstop = 2
 o.softtabstop = 2
 o.expandtab = true
-o.fileencoding = "utf-8"
+o.fileencoding = 'utf-8'
 o.wildmenu = true
 o.wildignorecase = true
 o.wildmode = 'longest,full'
@@ -33,7 +33,7 @@ o.number = false
 o.relativenumber = false
 o.showcmd = false
 o.undofile = true
-o.virtualedit = "block"
+o.virtualedit = 'block'
 o.writebackup = false
 o.history = 1000
 o.undodir = add_to_home_path '.local/share/nvimundodir/'
@@ -53,7 +53,10 @@ o.autoindent = true
 o.smartindent = true
 o.copyindent = true
 o.ignorecase = true
-o.cursorline = true
+
+o.cursorline = false
+o.cursorcolumn = false
+
 o.lazyredraw = false
 o.splitright = true
 o.splitbelow = true
@@ -75,8 +78,8 @@ o.fillchars = {
   -- vertright = "┣",
   -- verthoriz = "╋",
   eob = ' ',
-  foldopen = '',
-  foldclose = '',
+  foldopen = '',
+  foldclose = '',
   diff = '╱',
 }
 o.showbreak = '   '
@@ -87,10 +90,8 @@ o.imsearch = 0
 o.iminsert = 0
 o.foldmethod = 'indent'
 o.foldlevel = 20
-o.pastetoggle = '<F3>'
 o.laststatus = 3
 
--- o.formatoptions = "jcroqlnt" -- tcqj
 o.grepprg = 'rg --vimgrep'
 o.fileformat = 'unix'
 o.fileformats = { 'unix', 'dos' }

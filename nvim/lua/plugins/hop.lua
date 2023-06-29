@@ -2,7 +2,6 @@ return {
   'phaazon/hop.nvim',
   branch = 'v2',
   config = function()
-
     local hop = require 'hop'
 
     hop.setup {
@@ -14,6 +13,5 @@ return {
     map('n', '<leader>i', function()
       hop.hint_char1 {}
     end)
-
-  end
+  end,
 }

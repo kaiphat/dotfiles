@@ -34,6 +34,7 @@ M.add_mappings = function()
       show_all_buffers = false,
     }
   end)
+
   map('n', '<leader>fo', function()
     builtin.oldfiles {
       tiebreak = function(current_entry, existing_entry)
@@ -41,9 +42,11 @@ M.add_mappings = function()
       end,
     }
   end)
+
   map('n', '<leader>fp', function()
     builtin.resume {}
   end)
+
   map('n', '<leader>fi', function()
     builtin.lsp_references {
       include_declaration = true,
@@ -222,15 +225,15 @@ return {
   'nvim-telescope/telescope.nvim',
   dependencies = {
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-    { 'nvim-telescope/telescope-file-browser.nvim' },
-    { 'nvim-telescope/telescope-ui-select.nvim' },
+    'nvim-telescope/telescope-file-browser.nvim',
+    'nvim-telescope/telescope-ui-select.nvim',
   },
   config = function()
     local telescope = require 'telescope'
-    local sorters = require 'telescope.sorters'
     local previewers = require 'telescope.previewers'
     local themes = require 'telescope.themes'
     local actions = require 'telescope.actions'
+
     local fb_actions = telescope.extensions.file_browser.actions
 
     telescope.setup {
@@ -258,7 +261,7 @@ return {
           vertical = {
             preview_height = 0.6,
             width = function(_, max_columns)
-              local max = 120
+              local max = 130
               local percentage = 0.7
               return math.min(math.floor(percentage * max_columns), max)
             end,
@@ -274,8 +277,8 @@ return {
             },
           },
         },
-        file_sorter = sorters.get_fuzzy_file,
-        generic_sorter = sorters.get_generic_fuzzy_sorter,
+        -- file_sorter = sorters.fuzzy_with_index_bias,
+        -- generic_sorter = sorters.get_generic_fuzzy_sorter,
         path_display = { 'truncate' },
         winblend = 0,
         border = {},
