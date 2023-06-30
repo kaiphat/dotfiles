@@ -28,6 +28,8 @@ return {
     config = function()
       local chat = require 'chatgpt'
 
+      M.set_mappings()
+
       chat.setup {
         api_key_cmd = 'echo ' .. M.key,
 
@@ -71,8 +73,6 @@ return {
           n = 1,
         },
       }
-
-      M.set_mappings()
     end,
   },
 }

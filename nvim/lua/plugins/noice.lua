@@ -86,13 +86,7 @@ return {
             event = 'msg_show',
             find = '%d+L, %d+B',
           },
-        },
-        {
-          view = 'notify',
-          filter = {
-            event = 'msg_showmode',
-          },
-        },
+        }
       },
     }
   end,

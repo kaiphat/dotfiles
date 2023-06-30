@@ -1,5 +1,15 @@
 local M = {}
 
+local C = {
+  dark_blue = '#404060',
+  cyan = '#a3b8ef',
+  light_blue = '#9398cf',
+  green = '#7eca9c',
+  yellow = '#EBCB8B',
+  red = '#e06c75',
+  pink = '#ff75a0',
+}
+
 M.get_position = function()
   local current_line = vim.fn.line '.'
   local total_line = vim.fn.line '$'
@@ -19,186 +29,166 @@ M.get_position = function()
   return current_line .. ':' .. total_line
 end
 
-M.colors = {
-  dark_blue = '#404060',
-  cyan = '#a3b8ef',
-  light_blue = '#9398cf',
-  green = '#7eca9c',
-  yellow = '#EBCB8B',
-  red = '#e06c75',
-  pink = '#ff75a0',
-}
-
-M.active_components = {
-  {
-    {
-      icon = '',
-      provider = {
-        name = 'file_info',
-        opts = {
-          type = 'relative',
-          file_modified_icon = '',
-        },
-      },
-      hl = {
-        fg = M.colors.dark_blue,
-        bg = M.colors.cyan,
-      },
-      left_sep = {
-        str = ' ',
-        hl = {
-          bg = M.colors.cyan,
-        },
-      },
-      right_sep = {
-        {
-          str = ' ',
-          hl = {
-            bg = M.colors.cyan,
-          },
-        },
-        {
-          str = 'right_filled',
-          hl = {
-            fg = M.colors.cyan,
-            -- bg = colors.dark_blue,
-          },
-        },
-      },
-    },
-    {
-      icon = '+',
-      provider = 'git_diff_added',
-      hl = {
-        fg = M.colors.green,
-      },
-      left_sep = ' ',
-    },
-
-    {
-      icon = '~',
-      provider = 'git_diff_changed',
-      hl = {
-        fg = M.colors.yellow,
-      },
-      left_sep = ' ',
-    },
-
-    {
-      icon = '-',
-      provider = 'git_diff_removed',
-      hl = {
-        fg = M.colors.red,
-      },
-      left_sep = ' ',
-    },
-
-    {
-      icon = 'x',
-      provider = 'diagnostic_errors',
-      hl = {
-        fg = M.colors.pink,
-      },
-      left_sep = ' ',
-    },
-
-    -- gap
-    {
-      provider = function()
-        return ' '
-      end,
-      hl = {
-        fg = M.colors.pink,
-      },
-    },
-  },
-  {},
-  {
-    {
-      icon = ' ',
-      provider = 'git_branch',
-      hl = {
-        fg = M.colors.yellow,
-        bg = M.colors.dark_blue,
-      },
-      right_sep = {
-        {
-          str = ' ',
-          hl = {
-            bg = M.colors.dark_blue,
-          },
-        },
-      },
-      left_sep = {
-        {
-          str = 'left_filled',
-          hl = {
-            fg = M.colors.dark_blue,
-          },
-        },
-        {
-          str = ' ',
-          hl = {
-            bg = M.colors.dark_blue,
-          },
-        },
-      },
-    },
-
-    {
-      icon = ' ',
-      provider = M.get_position,
-      hl = {
-        fg = M.colors.dark_blue,
-        bg = M.colors.light_blue,
-      },
-      right_sep = {
-        str = ' ',
-        hl = {
-          bg = M.colors.light_blue,
-        },
-      },
-      left_sep = {
-        {
-          str = 'left_filled',
-          hl = function()
-            if require('feline.providers.git').git_info_exists() then
-              return {
-                bg = M.colors.dark_blue,
-                fg = M.colors.light_blue,
-              }
-            else
-              return {
-                fg = M.colors.light_blue,
-              }
-            end
-          end,
-        },
-        {
-          str = ' ',
-          hl = {
-            bg = M.colors.light_blue,
-          },
-        },
-      },
-    },
-  },
-}
-
-M.inactive_components = {
-  {
-    icon = '',
-    provider = {
-      name = 'file_info',
-      opts = {
-        type = 'relative',
-      },
-    },
+M.build_gap = function(bg)
+  return {
+    str = ' ',
     hl = {
-      fg = M.colors.cyan,
+      bg = bg,
     },
-    left_sep = ' ',
+  }
+end
+
+M.path = {
+  icon = '',
+  provider = {
+    name = 'file_info',
+    opts = {
+      type = 'relative',
+      file_modified_icon = '',
+    },
   },
+  hl = {
+    fg = C.dark_blue,
+    bg = C.cyan,
+  },
+  left_sep = M.build_gap(C.cyan),
+  right_sep = {
+    M.build_gap(C.cyan),
+    {
+      str = 'right_filled',
+      hl = function()
+        local bg = nil
+
+        if require('noice').api.statusline.mode.has() then
+          bg = C.yellow
+        end
+
+        return {
+          fg = C.cyan,
+          bg = bg,
+        }
+      end,
+    },
+  },
+}
+
+M.macros = {
+  enabled = require('noice').api.statusline.mode.has,
+  icon = '',
+  provider = function()
+    return require('noice').api.statusline.mode.get()
+  end,
+  hl = {
+    bg = C.yellow,
+    fg = C.dark_blue,
+  },
+  left_sep = M.build_gap(C.yellow),
+  right_sep = {
+    M.build_gap(C.yellow),
+    {
+      str = 'right_filled',
+      hl = {
+        fg = C.yellow,
+      },
+    },
+  },
+}
+
+M.git_diff_added = {
+  icon = '+',
+  provider = 'git_diff_added',
+  hl = {
+    fg = C.green,
+  },
+  left_sep = M.build_gap(),
+}
+
+M.git_diff_changed = {
+  icon = '~',
+  provider = 'git_diff_changed',
+  hl = {
+    fg = C.yellow,
+  },
+  left_sep = M.build_gap(),
+}
+
+M.git_diff_removed = {
+  icon = '-',
+  provider = 'git_diff_removed',
+  hl = {
+    fg = C.red,
+  },
+  left_sep = M.build_gap(),
+}
+
+M.diagnostic_errors = {
+  icon = 'x',
+  provider = 'diagnostic_errors',
+  hl = {
+    fg = C.pink,
+  },
+  left_sep = M.build_gap(),
+}
+
+M.git_branch = {
+  icon = ' ',
+  provider = 'git_branch',
+  hl = {
+    fg = C.yellow,
+    bg = C.dark_blue,
+  },
+  right_sep = M.build_gap(C.dark_blue),
+  left_sep = {
+    {
+      str = 'left_filled',
+      hl = {
+        fg = C.dark_blue,
+      },
+    },
+    M.build_gap(C.dark_blue),
+  },
+}
+
+M.position = {
+  icon = ' ',
+  provider = M.get_position,
+  hl = {
+    fg = C.dark_blue,
+    bg = C.light_blue,
+  },
+  right_sep = M.build_gap(C.light_blue),
+  left_sep = {
+    {
+      str = 'left_filled',
+      hl = function()
+        if require('feline.providers.git').git_info_exists() then
+          return {
+            bg = C.dark_blue,
+            fg = C.light_blue,
+          }
+        else
+          return {
+            fg = C.light_blue,
+          }
+        end
+      end,
+    },
+    M.build_gap(C.light_blue),
+  },
+}
+
+M.left_components = {
+  M.path,
+  M.macros,
+  M.git_diff_added,
+  M.git_diff_removed,
+  M.git_diff_changed,
+  M.diagnostic_errors,
+}
+
+M.right_components = {
+  M.git_branch,
+  M.position,
 }
 
 return {
@@ -218,8 +208,10 @@ return {
         },
       },
       components = {
-        active = M.active_components,
-        inactive = M.inactive_components,
+        active = {
+          M.left_components,
+          M.rigth_components,
+        },
       },
     }
   end,

@@ -14,6 +14,7 @@ set config_paths                  \
     nvim                          \
     kitty                         \
     pgcli                         \
+    litecli                       \
     starship.toml                 \
     fish/config.fish              \
     zk                            \
