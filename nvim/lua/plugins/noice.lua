@@ -15,7 +15,7 @@ return {
           --   padding = { 1, 2 }
           -- },
           position = {
-            row = '50%',
+            row = '35%',
             col = '50%',
           },
           win_options = {
@@ -75,6 +75,13 @@ return {
         {
           filter = {
             event = 'msg_show',
+            kind = 'search_count',
+          },
+          opts = { skip = true },
+        },
+        {
+          filter = {
+            event = 'msg_show',
             kind = '',
             find = 'written',
           },
@@ -86,7 +93,7 @@ return {
             event = 'msg_show',
             find = '%d+L, %d+B',
           },
-        }
+        },
       },
     }
   end,

@@ -87,6 +87,13 @@ M.on_attach = function(client)
   if client.supports_method 'textDocument/semanticTokens' then
     client.server_capabilities.semanticTokensProvider = nil
   end
+
+  if client.supports_method 'textDocument/inlayHint' then
+    vim.lsp.buf.inlay_hint(0, true)
+    -- map('n', '<leader>ui', function()
+    --   vim.lsp.buf.inlay_hint(0, true)
+    -- end)
+  end
 end
 
 M.get_servers = function()

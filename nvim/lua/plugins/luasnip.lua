@@ -36,7 +36,7 @@ M.add_rust_snippets = function()
       fmt(
         [[
             println!("\x1b[36m{2}: {{:?}}\x1b[0m", {1});
-          ]],
+        ]],
         {
           i(1),
           M.change(function(str)
@@ -280,6 +280,7 @@ return {
     }
 
     M.set_mappings()
+
     M.add_javascript_snippets()
     M.add_rust_snippets()
 

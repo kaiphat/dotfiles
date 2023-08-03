@@ -3,31 +3,12 @@ local M = {}
 map('n', '<F1>', ':w<cr>:e ++ff=dos<cr>:w ++ff=unix<cr>')
 map('n', '<F9>', ':LspRestart<cr>')
 
-map({ 'v', 'n' }, ':', ';')
-map({ 'v', 'n' }, ';', ':', { noremap = true })
-
 map('v', 'y', 'ygv<esc>')
 map('v', 'p', 'p=`]gvy')
 map('v', '<', '<gv')
 map('v', '>', '>gv')
 
 map({ 'c', 'i' }, '<C-r>', '<C-r>+', { noremap = false })
-
--- M.macros_record_is_active = false
--- for char in string.gmatch('abcdefghijklmnopqrstuvwxyz', '.') do
---   map('n', 'q'..char, function()
---     if M.macros_record_is_active then
---       print('@'..char..' end')
---     else
---       print('@'..char..' end')
---     end
---
---     M.macros_record_is_active = not M.macros_record_is_active
---
---     vim.cmd.normal('q'..char)
---   end, { noremap = false })
--- end
-
 
 map('n', '<C-h>', ':wincmd h<cr>')
 map('n', '<C-j>', ':wincmd j<cr>')

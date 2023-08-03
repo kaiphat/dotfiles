@@ -30,6 +30,8 @@ return {
         'md',
         'mason',
         'markdown',
+        'lazy',
+        'noice',
       },
       char = M.chars[1],
       context_char = M.chars[1],

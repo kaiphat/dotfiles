@@ -38,27 +38,87 @@ font:
     family: JetBrainsMono Nerd Font
     style: SemiBold Italic
 
-  size: 11
+  # size: 10
+  # offset:
+  #   x: 0
+  #   y: 4
+  # glyph_offset:
+  #   x: 0
+  #   y: 1
+  # normal:
+  #   family: Agave Nerd Font
+  #   style: Bold
+  # bold:
+  #   family: Agave Nerd Font
+  #   style: Bold
+  # italic:
+  #   family: Agave Nerd Font
+  #   style: Bold
+  # bold_italic:
+  #   family: Agave Nerd Font
+  #   style: Bold
+
+  size: 10.5
   offset:
-    x: 0
-    y: 3
+    x: -1
+    y: 2
   glyph_offset:
     x: 0
     y: 1
   normal:
-    family: Agave Nerd Font
-    style: Regular
+    family: Mononoki Nerd Font
+    style: Bold
   bold:
-    family: Agave Nerd Font
-    style: Regular
+    family: Mononoki Nerd Font
+    style: Bold
   italic:
-    family: Agave Nerd Font
-    style: Regular
+    family: Mononoki Nerd Font
+    style: Bold Italic
   bold_italic:
-    family: Agave Nerd Font
-    style: Regular
+    family: Mononoki Nerd Font
+    style: Bold Italic
 
   # size: 11
+  # offset:
+  #   x: 0
+  #   y: 0
+  # glyph_offset:
+  #   x: 0
+  #   y: 0
+  # normal:
+  #   family: Operator Mono Lig
+  #   style: Bold
+  # bold:
+  #   family: Operator Mono Lig
+  #   style: Bold
+  # italic:
+  #   family: Operator Mono Lig
+  #   style: Bold Italic
+  # bold_italic:
+  #   family: Operator Mono Lig
+  #   style: Bold Italic
+
+  # size: 10
+  # offset:
+  #   x: -1
+  #   y: 2
+  # glyph_offset:
+  #   x: 0
+  #   y: 1
+  # normal:
+  #   family: MonoLisa
+  #   style: Bold
+  # bold:
+  #   family: MonoLisa
+  #   style: Bold
+  # italic:
+  #   family: MonoLisa
+  #   style: Bold Italic
+  # bold_italic:
+  #   family: MonoLisa
+  #   style: Bold Italic
+
+  # size: 9
   # offset:
   #   x: 0
   #   y: 1
@@ -66,37 +126,37 @@ font:
   #   x: 0
   #   y: 0
   # normal:
-  #   family: Mononoki Nerd Font
-  #   style: Bold
+  #   family: Roboto Mono
+  #   style: Medium
   # bold:
-  #   family: Mononoki Nerd Font
-  #   style: Bold
+  #   family: Roboto Mono
+  #   style: Medium
   # italic:
-  #   family: Mononoki Nerd Font
-  #   style: Bold
+  #   family: Roboto Mono
+  #   style: Medium Italic
   # bold_italic:
-  #   family: Mononoki Nerd Font
-  #   style: Bold
+  #   family: Roboto Mono
+  #   style: Medium Italic
 
-  # size: 11
+  # size: 9.9
   # offset:
   #   x: 0
   #   y: -3
   # glyph_offset:
   #   x: 0
-  #   y: -1
+  #   y: -2
   # normal:
   #   family: VictorMono Nerd Font
-  #   style: SemiBold
+  #   style: Bold
   # bold:
   #   family: VictorMono Nerd Font
-  #   style: SemiBold
+  #   style: Bold
   # italic:
   #   family: VictorMono Nerd Font
-  #   style: SemiBold
+  #   style: Bold Italic
   # bold_italic:
   #   family: VictorMono Nerd Font
-  #   style: Bold
+  #   style: Bold Italic
 
   # size: 11
   # offset:
@@ -118,7 +178,7 @@ font:
   #   family: CaskaydiaCove Nerd Font
   #   style: Regular
 
-  # size: 12
+  # size: 11
   # offset:
   #   x: 0
   #   y: 1
@@ -127,16 +187,16 @@ font:
   #   y: 1
   # normal:
   #   family: UbuntuMono Nerd Font
-  #   style: Regular
+  #   style: Bold
   # bold:
   #   family: UbuntuMono Nerd Font
-  #   style: Regular
+  #   style: Bold
   # italic:
   #   family: UbuntuMono Nerd Font
-  #   style: Regular
+  #   style: Bold
   # bold_italic:
   #   family: UbuntuMono Nerd Font
-  #   style: Regular
+  #   style: Bold
 
   # size: 9
   # offset:
@@ -147,96 +207,16 @@ font:
   #   y: 0
   # normal:
   #   family: Hack Nerd Font Mono
-  #   style: Regular
+  #   style: Bold
   # bold:
   #   family: Hack Nerd Font Mono
-  #   style: Regular
+  #   style: Bold
   # italic:
   #   family: Hack Nerd Font Mono
-  #   style: Regular
+  #   style: Bold
   # bold_italic:
   #   family: Hack Nerd Font Mono
-  #   style: Regular
-
-  # size: 11.5
-  # offset:
-  #   x: 0
-  #   y: 0
-  # glyph_offset:
-  #   x: 0
-  #   y: 1
-  # normal:
-  #   family: Inconsolata Nerd Font Mono
-  #   style: Regular
-  # bold:
-  #   family: Inconsolata Nerd Font Mono
-  #   style: Regular
-  # italic:
-  #   family: Inconsolata Nerd Font Mono
-  #   style: Regular
-  # bold_italic:
-  #   family: Inconsolata Nerd Font Mono
-  #   style: Regular
-
-  # size: 10
-  # offset:
-  #   x: -1
-  #   y: 0
-  # glyph_offset:
-  #   x: 0
-  #   y: 0
-  # normal:
-  #   family: FiraCode Nerd Font
-  #   style: Medium
-  # bold:
-  #   family: FiraCode Nerd Font
-  #   style: Medium
-  # italic:
-  #   family: FiraCode Nerd Font
-  #   style: Medium
-  # bold_italic:
-  #   family: FiraCode Nerd Font
-  #   style: Medium
-
-  # size: 12
-  # offset:
-  #   x: 0
-  #   y: -2
-  # glyph_offset:
-  #   x: 0
-  #   y: -1
-  # normal:
-  #   family: Iosevka Custom
-  #   style: Medium
-  # bold:
-  #   family: Iosevka Custom
-  #   style: Medium
-  # italic:
-  #   family: Iosevka Custom
-  #   style: Medium
-  # bold_italic:
-  #   family: Iosevka Custom
-  #   style: Medium
-
-  # size: 10.9
-  # offset:
-  #   x: 0
-  #   y: 1
-  # glyph_offset:
-  #   x: 0
-  #   y: 1
-  # normal:
-  #   family: Iosevka SS16
-  #   style: SemiBold
-  # bold:
-  #   family: Iosevka SS16
-  #   style: SemiBold
-  # italic:
-  #   family: Iosevka SS16
-  #   style: SemiBold
-  # bold_italic:
-  #   family: Iosevka SS16
-  #   style: SemiBold
+  #   style: Bold
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   COLORS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈

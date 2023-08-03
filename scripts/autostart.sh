@@ -4,7 +4,7 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 picom -b &
 xsetroot -cursor_name left_ptr &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-feh --bg-scale ~/pictures/cristian-palmer-XexawgzYOBc-unsplash.jpg &
+feh --bg-scale ~/pictures/imgur_17.jpg &
 xset r rate 220 38 & # type speed
 killall -q dunst &
 dunst &

@@ -32,7 +32,18 @@ return {
     config = function()
       local m = require 'mini.surround'
 
-      m.setup {}
+      local key = '<leader>'
+      m.setup {
+        mappings = {
+          add = key .. 'sa',
+          delete = key .. 'sd',
+          find = key .. 'sf',
+          find_left = key .. 'sF',
+          highlight = key .. 'sh',
+          replace = key .. 'sr',
+          update_n_lines = key .. 'sn',
+        },
+      }
     end,
   },
 

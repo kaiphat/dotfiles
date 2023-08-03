@@ -121,7 +121,6 @@ M.get_mappings = function()
 end
 
 M.add_autocmd = function()
-  -- Setting keyword_length 0 but making it only appear if only characters before cursor
   vim.api.nvim_create_autocmd({ 'TextChangedI', 'TextChangedP' }, {
     callback = function()
       local line = vim.api.nvim_get_current_line()
@@ -161,8 +160,8 @@ return {
     local luasnip = require 'luasnip'
     local compare = require 'cmp.config.compare'
 
-
     cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+
     compare.locality.lines_count = 300
 
     cmp.setup {

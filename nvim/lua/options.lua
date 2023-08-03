@@ -85,7 +85,9 @@ o.fillchars = {
 o.showbreak = '   '
 o.completeopt = 'menuone,noselect'
 o.complete = '.,w,b,u,t,U,s,k,d,i'
-o.keymap = 'russian-jcukenwin'
+o.langmap = [[
+ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
+]]
 o.imsearch = 0
 o.iminsert = 0
 o.foldmethod = 'indent'

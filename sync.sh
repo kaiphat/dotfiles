@@ -13,6 +13,7 @@ set home_paths                    \
 set config_paths                  \
     nvim                          \
     kitty                         \
+    awesome                       \
     pgcli                         \
     litecli                       \
     starship.toml                 \

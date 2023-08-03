@@ -54,51 +54,52 @@ local function build_font_params(name, with_italic, weight, params)
 end
 
 local font_config = ({
-  jet_brains = build_font_params('JetBrainsMono Nerd Font', false, weights.B, {
-    font_size = 9,
-    cell_width = 1,
-    line_height = 1.25,
-  }),
-  mononoki = build_font_params('mononoki Nerd Font', false, weights.B, {
-    font_size = 10.4,
+  jet_brains = build_font_params('JetBrains Mono', true, weights.R, {
+    font_size = 9.4,
     cell_width = 0.8,
-    line_height = 1.25,
-  }),
-  agave = build_font_params('agave Nerd Font', false, weights.R, {
-    font_size = 12.3,
-    cell_width = 0.8,
-    line_height = 1.25,
-  }),
-  victor = build_font_params('VictorMono Nerd Font', false, weights.B, {
-    font_size = 10,
-    cell_width = 1,
-    line_height = 1,
-  }),
-  iosevka = build_font_params('Iosevka Term', false, weights.EB, {
-    font_size = 9.9,
-    cell_width = 1,
-    line_height = 1.2,
-  }),
-  iosevka_custom = build_font_params('Iosevka Custom', false, weights.B, {
-    font_size = 9.9,
-    cell_width = 1,
     line_height = 1.15,
   }),
-  caskaydia = build_font_params('CaskaydiaCove Nerd Font Mono', false, weights.R, {
+  mononoki = build_font_params('mononoki Nerd Font', true, weights.B, {
     font_size = 10,
+    cell_width = 0.8,
+    line_height = 1.3,
+  }),
+  agave = build_font_params('agave Nerd Font', false, weights.R, {
+    font_size = 11,
     cell_width = 0.8,
     line_height = 1.25,
   }),
-}).agave
-
--- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
--- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   EVENTS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
--- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-wezterm.on('gui-startup', function(cmd)
-  local _, _, window = wezterm.mux.spawn_window(cmd or {})
-  window:gui_window():maximize()
-end)
+  victor = build_font_params('VictorMono Nerd Font', false, weights.SB, {
+    font_size = 11,
+    cell_width = 1,
+    line_height = 0.9,
+  }),
+  iosevka = build_font_params('Iosevka Term', false, weights.R, {
+    font_size = 10,
+    cell_width = 1,
+    line_height = 1.1,
+  }),
+  caskaydia = build_font_params('Cascadia Code', true, weights.M, {
+    font_size = 8.7,
+    cell_width = 1,
+    line_height = 1.3,
+  }),
+  fant = build_font_params('Fantasque Sans Mono', false, weights.R, {
+    font_size = 10,
+    cell_width = 1,
+    line_height = 1.25,
+  }),
+  roboto = build_font_params('Roboto Mono', true, weights.R, {
+    font_size = 10,
+    cell_width = 1,
+    line_height = 1.1,
+  }),
+  fira = build_font_params('Fira Code', false, weights.R, {
+    font_size = 8.5,
+    cell_width = 1,
+    line_height = 1.25,
+  }),
+}).caskaydia
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   THEME   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -107,7 +108,7 @@ end)
 local dark_colors = {
   foreground = '#787C99',
   background = '#202837',
-  cursor_bg = '#c6d0f5',
+  cursor_bg = '#ffcc66',
   cursor_border = '#c6d0f5',
   cursor_fg = '#404060',
   selection_fg = '#333355',
@@ -166,14 +167,15 @@ local light_colors = {
   },
 }
 
-local colors
-if os.getenv 'DARK_THEME' == '1' then
-  colors = dark_colors
-else
-  colors = light_colors
+local function get_colors()
+  if os.getenv 'DARK_THEME' == '1' then
+    return dark_colors
+  else
+    return light_colors
+  end
 end
 
-local padding = {
+local paddings = {
   left = 0,
   right = 0,
   top = 0,
@@ -185,22 +187,21 @@ local padding = {
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 local config = {
-  colors = colors,
-  window_padding = padding,
+  front_end = 'WebGpu',
+  colors = get_colors(),
+  window_padding = paddings,
   enable_tab_bar = false,
   scrollback_lines = 10000,
-  cursor_blink_rate = 750,
+  cursor_blink_rate = 1000,
   max_fps = 100,
   animation_fps = 100,
-  window_background_opacity = 0.95,
+  window_background_opacity = 0.87,
   default_cursor_style = 'BlinkingBlock',
   warn_about_missing_glyphs = false,
-  use_cap_height_to_scale_fallback_fonts = false,
+  use_cap_height_to_scale_fallback_fonts = true,
   disable_default_key_bindings = true,
-  freetype_load_target = 'HorizontalLcd',
-  freetype_render_target = 'HorizontalLcd',
-  adjust_window_size_when_changing_font_size = true,
-  allow_square_glyphs_to_overflow_width = 'Always',
+  adjust_window_size_when_changing_font_size = false,
+
   keys = {
     {
       key = 'C',
@@ -211,6 +212,16 @@ local config = {
       key = 'V',
       mods = 'CTRL',
       action = wezterm.action.PasteFrom 'Clipboard',
+    },
+    {
+      key = '=',
+      mods = 'CTRL',
+      action = wezterm.action.IncreaseFontSize,
+    },
+    {
+      key = '-',
+      mods = 'CTRL',
+      action = wezterm.action.DecreaseFontSize,
     },
   },
 }

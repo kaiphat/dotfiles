@@ -293,6 +293,9 @@ return {
         results_title = '',
         mappings = {
           i = {
+            ['<C-w>'] = function()
+              vim.api.nvim_input '<c-s-w>'
+            end,
             ['<C-j>'] = actions.move_selection_next,
             ['<C-k>'] = actions.move_selection_previous,
             ['<C-l>'] = actions.select_default,

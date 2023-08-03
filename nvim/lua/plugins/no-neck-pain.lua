@@ -12,6 +12,7 @@ end
 
 return {
   'shortcuts/no-neck-pain.nvim',
+  enabled = false,
   config = function()
     local nnp = require 'no-neck-pain'
 
@@ -33,6 +34,10 @@ return {
         bo = {
           filetype = 'norg',
         },
+
+        right = {
+          enabled = true,
+        }
       },
     }
 

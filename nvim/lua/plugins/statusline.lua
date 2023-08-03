@@ -11,20 +11,17 @@ local C = {
 }
 
 M.get_position = function()
-  local current_line = vim.fn.line '.'
-  local total_line = vim.fn.line '$'
-
-  if current_line < 10 then
-    current_line = '00' .. current_line
-  elseif current_line < 100 and current_line > 9 then
-    current_line = '0' .. current_line
+  local function add_zeroes(number)
+    if number < 10 then
+      return '00' .. number
+    elseif number < 100 then
+      return '0' .. number
+    end
+    return number
   end
 
-  if total_line < 10 then
-    total_line = '00' .. total_line
-  elseif total_line < 100 and total_line > 9 then
-    total_line = '0' .. total_line
-  end
+  local current_line = add_zeroes(vim.fn.line '.')
+  local total_line = add_zeroes(vim.fn.line '$')
 
   return current_line .. ':' .. total_line
 end
@@ -210,7 +207,7 @@ return {
       components = {
         active = {
           M.left_components,
-          M.rigth_components,
+          M.right_components,
         },
       },
     }

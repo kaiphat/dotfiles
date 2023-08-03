@@ -18,8 +18,11 @@ return {
       },
       ignore = {
         buftype = { 'quickfix' },
-        filetype = { 'NvimTree', 'neo-tree', 'undotree', 'gundo', 'norg' },
+        filetype = { 'NvimTree', 'neo-tree', 'undotree', 'gundo' },
       },
+      animation = {
+        enable = false
+      }
     }
   end,
 }

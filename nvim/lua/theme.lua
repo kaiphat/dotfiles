@@ -111,8 +111,8 @@ H.Pmenu = merge(H.NormalFloat)
 H.PmenuSel = merge(H.Visual)
 H.PmenuSbar = { bg = c.bg } -- scroll
 H.PmenuThumb = merge(H.Visual, { fg = nil })
-H.Search = { fg = c.one_bg2, bg = c.pink }
-H.IncSearch = { fg = c.one_bg2, bg = c.pink }
+H.Search = { fg = c.one_bg2, bg = c.teal }
+H.IncSearch = { fg = c.one_bg2, bg = c.teal }
 H.MatchParen = { fg = c.red, bg = nil }
 H.StatusLine = { bg = nil, fg = nil, gui = nil }
 H.StatusLineNC = { bg = c.blue_darkest, fg = c.fg }
@@ -390,7 +390,7 @@ H.HopNextKey2 = { fg = c.purple }
 H.HopUnmatched = { fg = '#445577' }
 
 -- FIDGET --
-H.FidgetTask = { fg = c.gray }
+
 H.FidgetTitle = H.FidgetTask
 
 H.BufferCurrent = merge(H.TabLineSel)
@@ -413,7 +413,10 @@ H.NnnNormalNC = merge(H.NnnNormal)
 
 H.ChatGPTTotalTokensBorder = { fg = c.blue_darkest }
 H.ChatGPTTotalTokens = { fg = c.fg, bg = H.ChatGPTTotalTokensBorder.fg }
--- HIGHLIGHT --
+
+H.FlashLabel = { bg = c.purple, fg = c.bg }
+H.FlashMatch = { bg = c.teal, fg = c.bg }
+H.FlashCurrent = { bg = c.teal, fg = c.bg }
 
 for group, highlights in pairs(H) do
   for key, value in pairs(highlights) do
