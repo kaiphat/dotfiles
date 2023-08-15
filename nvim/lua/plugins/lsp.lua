@@ -12,7 +12,7 @@ M.set_lsp_symbols = function()
 end
 
 M.add_mappings = function()
-  map('n', 'ga', function()
+  map('n', 'go', function()
     vim.cmd 'vs'
     vim.lsp.buf.definition()
   end)

@@ -102,6 +102,9 @@ alias nest "npx @nestjs/cli"
 alias nvim-start "nvim --startuptime _s.log -c exit && tail -100 _s.log | bat && rm _s.log"
 alias ... "cd ../../"
 
+alias vpn-job-up "sudo wg-quick up ~/vpn.conf"
+alias vpn-job-down "sudo wg-quick down ~/vpn.conf"
+
 function dl
   d logs $argv -f -n 99
 end

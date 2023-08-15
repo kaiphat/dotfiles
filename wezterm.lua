@@ -54,9 +54,9 @@ local function build_font_params(name, with_italic, weight, params)
 end
 
 local font_config = ({
-  jet_brains = build_font_params('JetBrains Mono', true, weights.R, {
-    font_size = 9.4,
-    cell_width = 0.8,
+  jet_brains = build_font_params('JetBrains Mono', true, weights.M, {
+    font_size = 8.8,
+    cell_width = 1,
     line_height = 1.15,
   }),
   mononoki = build_font_params('mononoki Nerd Font', true, weights.B, {
@@ -74,8 +74,13 @@ local font_config = ({
     cell_width = 1,
     line_height = 0.9,
   }),
-  iosevka = build_font_params('Iosevka Term', false, weights.R, {
+  iosevka = build_font_params('Iosevka Term', false, weights.M, {
     font_size = 10,
+    cell_width = 1,
+    line_height = 1.1,
+  }),
+  iosevka_ss08 = build_font_params('Iosevka SS08', true, weights.SB, {
+    font_size = 9.5,
     cell_width = 1,
     line_height = 1.1,
   }),
@@ -89,8 +94,8 @@ local font_config = ({
     cell_width = 1,
     line_height = 1.25,
   }),
-  roboto = build_font_params('Roboto Mono', true, weights.R, {
-    font_size = 10,
+  roboto = build_font_params('Roboto Mono', true, weights.M, {
+    font_size = 9,
     cell_width = 1,
     line_height = 1.1,
   }),
@@ -99,7 +104,7 @@ local font_config = ({
     cell_width = 1,
     line_height = 1.25,
   }),
-}).caskaydia
+}).fant
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   THEME   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -191,6 +196,7 @@ local config = {
   colors = get_colors(),
   window_padding = paddings,
   enable_tab_bar = false,
+  enable_scroll_bar = false,
   scrollback_lines = 10000,
   cursor_blink_rate = 1000,
   max_fps = 100,

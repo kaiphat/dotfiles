@@ -4,7 +4,7 @@ map('n', '<F1>', ':w<cr>:e ++ff=dos<cr>:w ++ff=unix<cr>')
 map('n', '<F9>', ':LspRestart<cr>')
 
 map('v', 'y', 'ygv<esc>')
-map('v', 'p', 'p=`]gvy')
+map('v', 'p', 'pgvy=`]')
 map('v', '<', '<gv')
 map('v', '>', '>gv')
 
