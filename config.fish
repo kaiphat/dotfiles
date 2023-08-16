@@ -4,8 +4,8 @@
 
 set -gx DARK_THEME 1
 
-set -Ux PROMPT_CHAR '➜ '
 set -Ux PROMPT_CHAR '❯'
+set -Ux PROMPT_CHAR '➜ '
 
 set pure_symbol_prompt $PROMPT_CHAR
 
@@ -185,6 +185,8 @@ end
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   AUTOSTART   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
+zoxide init fish | source
+
 if status is-interactive
 and not set -q TMUX
   tmux kill-session -t 0 || true
@@ -197,3 +199,4 @@ if [ -f '/home/kaiphat/google-cloud-sdk/path.fish.inc' ]; . '/home/kaiphat/googl
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/kaiphat/google-cloud-sdk/path.fish.inc' ]; . '/home/kaiphat/google-cloud-sdk/path.fish.inc'; end
+

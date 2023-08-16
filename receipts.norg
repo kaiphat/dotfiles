@@ -112,4 +112,34 @@
    - `mkdir ~/mnt`
    - `jmtpfs ~/mnt`
 
+** plymouth
+   1. Install `mkinitcpio`
+   2. Update linux kernel
+   3. sudo nvim /etc/mkinitcpio.conf
+   `MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)`
+   add to HOOKS `plymouth` `HOOKS=(base udev plymouth autodetect modconf kms keyboard keymap consolefont block filesystems fsck)`
+   and commect splash image if needed
+   4. sudo mkinitcpio -p linux
+   5. ❯ sudo nvim /etc/default/grub
+   6. Add `quiet splash` to GRUB_CMDLINE_LINUX_DEFAULT
+   7. ❯ sudo grub-mkconfig -o /boot/grub/grub.cfg
+   8. ❯ sudo nvim /etc/plymouth/plymouthd.conf
+   ```
+   [Daemon]
+   Theme=bgrt
+   ShowDelay=0
+   DeviceTimeout=0
+   ```
+   9. ❯ sudo plymouth-set-default-theme -R bgrt
+   10. reboot
+
+
+
+
+
+
+
+
+
+
 

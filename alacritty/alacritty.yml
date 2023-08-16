@@ -5,7 +5,7 @@ window:
   padding:
    x: 0
    y: 0
-  opacity: 0.82
+  opacity: 0.9
   dynamic_padding: false
   startup_mode: Maximized
 
@@ -38,25 +38,25 @@ font:
     family: JetBrainsMono Nerd Font
     style: SemiBold Italic
 
-  # size: 10
-  # offset:
-  #   x: 0
-  #   y: 4
-  # glyph_offset:
-  #   x: 0
-  #   y: 1
-  # normal:
-  #   family: Agave Nerd Font
-  #   style: Bold
-  # bold:
-  #   family: Agave Nerd Font
-  #   style: Bold
-  # italic:
-  #   family: Agave Nerd Font
-  #   style: Bold
-  # bold_italic:
-  #   family: Agave Nerd Font
-  #   style: Bold
+  size: 11
+  offset:
+    x: 0
+    y: 3
+  glyph_offset:
+    x: 0
+    y: 1
+  normal:
+    family: Agave Nerd Font
+    style: Regular
+  bold:
+    family: Agave Nerd Font
+    style: Regular
+  italic:
+    family: Agave Nerd Font
+    style: Regular
+  bold_italic:
+    family: Agave Nerd Font
+    style: Regular
 
   # size: 10.5
   # offset:
@@ -78,25 +78,25 @@ font:
   #   family: Mononoki Nerd Font
   #   style: Bold Italic
 
-  size: 10
-  offset:
-    x: 0
-    y: 1
-  glyph_offset:
-    x: 0
-    y: 1
-  normal:
-    family: Operator Mono Lig
-    style: Bold
-  bold:
-    family: Operator Mono Lig
-    style: Bold
-  italic:
-    family: Operator Mono Lig
-    style: Bold Italic
-  bold_italic:
-    family: Operator Mono Lig
-    style: Bold Italic
+  # size: 10
+  # offset:
+  #   x: 0
+  #   y: 1
+  # glyph_offset:
+  #   x: 0
+  #   y: 1
+  # normal:
+  #   family: Operator Mono Lig
+  #   style: Bold
+  # bold:
+  #   family: Operator Mono Lig
+  #   style: Bold
+  # italic:
+  #   family: Operator Mono Lig
+  #   style: Bold Italic
+  # bold_italic:
+  #   family: Operator Mono Lig
+  #   style: Bold Italic
 
   # size: 10
   # offset:

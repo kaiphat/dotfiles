@@ -1,5 +1,5 @@
 configuration {
-    font:				"mononoki Nerd Font 11.5";
+    font:				"Agave Nerd Font 11.5";
     show-icons:				true;
     show-match:				false;
     display-drun:			"Apps";
