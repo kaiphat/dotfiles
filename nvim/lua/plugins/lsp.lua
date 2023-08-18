@@ -120,6 +120,9 @@ M.get_servers = function()
     cssls = {},
     sqlls = {},
     html = {},
+    emmet_language_server = {
+
+    },
     pylsp = {},
     lua_ls = {
       settings = {
@@ -137,17 +140,6 @@ M.get_servers = function()
           },
           format = {
             enable = false,
-          },
-        },
-      },
-    },
-    emmet_ls = {
-      is_not_highlight = true,
-      filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
-      init_options = {
-        html = {
-          options = {
-            ['bem.enabled'] = true,
           },
         },
       },
