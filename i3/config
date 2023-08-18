@@ -1,11 +1,12 @@
 # VARS #
 set $mod Mod4
 set $dir ~/dotfiles/i3
+set $scripts_dir ~/dotfiles/scripts
 set $refresh_i3status killall -SIGUSR1 i3status
 
 # STARTUP #
-exec --no-startup-id $dir/startup.sh
-exec --no-startup-id $dir/alt_layout.py
+exec --no-startup-id $scripts_dir/startup.sh
+exec --no-startup-id $dir/layout.py
 # exec --no-startup-id ~/dotfiles/polybar/start.sh
 
 # THEME #
@@ -13,7 +14,7 @@ exec --no-startup-id $dir/alt_layout.py
 gaps inner 15
 gaps outer 0
 
-font pango:JetBrainsMono Nerd Font 9
+font pango:Agave Nerd Font 9
 hide_edge_borders smart
 default_border pixel 0
 
@@ -34,13 +35,11 @@ assign [class="Brave-browser"] 2
 assign [class="Slack"] 3
 assign [class="Telegram"] 3
 assign [class="DBeaver"] 4
-# assign [class="Gcr-prompter"] floating enable
 for_window [title="Library"] floating enable
 
 # SCRIPTS #
-bindsym $mod+space exec --no-startup-id $dir/layout.sh
-bindsym $mod+Control+s exec --no-startup-id $dir/sleep.sh
-bindsym Print exec --no-startup-id $dir/screenshot.sh
+bindsym $mod+Control+s exec --no-startup-id $scripts_dir/sleep.sh
+bindsym Print exec --no-startup-id $scripts_dir/screenshot.sh
 
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status

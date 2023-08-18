@@ -9,7 +9,7 @@ set -Ux PROMPT_CHAR '➜ '
 
 set pure_symbol_prompt $PROMPT_CHAR
 
-set -gx nvm_default_version v18.12.0
+set -gx nvm_default_version v18.16.0
 set -gx ANDROID_HOME $HOME/Android/Sdk
 set -gx EDITOR nvim
 set -gx MANPAGER 'nvim +Man! -c "set nowrap"'
@@ -63,7 +63,10 @@ alias notes "nvim ~/notes/notes.norg -c \"set signcolumn=no\""
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     docker     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 alias d "docker"
 alias dstop "sudo systemctl stop docker.socket"
-alias dstart "sudo systemctl start docker.service"
+function dstart
+  sudo systemctl start docker.service
+  ds
+end
 alias ds "d stop (d ps -q)"
 alias dc "docker-compose"
 alias dcr "dc restart"
@@ -96,14 +99,17 @@ alias mkdir "mkdir -p"
 alias less "less -MSx4 -FXR --shift 10"
 alias ls "ls -A --group-directories-first --color=auto"
 alias rm "rm -rf"
+alias cp "cp -r --verbose"
 alias clip "xclip -selection c"
 alias pj "xclip -o | jq '.' | clip"
 alias nest "npx @nestjs/cli"
 alias nvim-start "nvim --startuptime _s.log -c exit && tail -100 _s.log | bat && rm _s.log"
 alias ... "cd ../../"
 
-alias vpn-job-up "sudo wg-quick up ~/vpn.conf"
-alias vpn-job-down "sudo wg-quick down ~/vpn.conf"
+alias vpn:job:up "sudo wg-quick up ~/vpn.conf"
+alias vpn:job:down "sudo wg-quick down ~/vpn.conf"
+alias vpn:job-all:up "sudo wg-quick up ~/vpn.all.conf"
+alias vpn:job-all:down "sudo wg-quick down ~/vpn.all.conf"
 
 function dl
   d logs $argv -f -n 99

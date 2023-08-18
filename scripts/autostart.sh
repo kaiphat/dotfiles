@@ -1,6 +1,5 @@
 #! /bin/bash
 
-pgrep -x sxhkd > /dev/null || sxhkd &
 picom -b &
 xsetroot -cursor_name left_ptr &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &

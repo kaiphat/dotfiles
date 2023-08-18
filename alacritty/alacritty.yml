@@ -18,27 +18,27 @@ scrolling:
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 font:
-  size: 10
+  size: 9
   offset:
-    x: -1
-    y: 0
+    x: 0
+    y: 1
   glyph_offset:
     x: 0
-    y: 0
+    y: 1
   normal:
-    family: JetBrainsMono Nerd Font
-    style: SemiBold
+    family: JetBrains Mono
+    style: Medium
   bold:
-    family: JetBrainsMono Nerd Font
-    style: SemiBold
+    family: JetBrains Mono
+    style: Medium
   italic:
-    family: JetBrainsMono Nerd Font
-    style: SemiBold Italic
+    family: JetBrains Mono
+    style: Medium Italic
   bold_italic:
-    family: JetBrainsMono Nerd Font
-    style: SemiBold Italic
+    family: JetBrains Mono
+    style: Medium Italic
 
-  size: 11
+  size: 10.5
   offset:
     x: 0
     y: 3
