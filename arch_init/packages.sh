@@ -28,7 +28,8 @@ pacman_packages=(\
 )
 
 yay_packages=( \
-  "jmtpfs"
+  "jmtpfs" \
+  "brave-bin" \
 )
 
 sudo pacman -Syu --noconfirm
