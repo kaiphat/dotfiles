@@ -2,6 +2,9 @@
 
 pacman_packages=(\
   "fish" \
+  "tmux" \
+  "zoxide" \
+  "translate-shell" \
   "yarn" \
   "nodejs" \
   "sxiv" \

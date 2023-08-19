@@ -106,6 +106,9 @@ alias nest "npx @nestjs/cli"
 alias nvim-start "nvim --startuptime _s.log -c exit && tail -100 _s.log | bat && rm _s.log"
 alias ... "cd ../../"
 
+alias enru "trans en:ru -show-original no -show-prompt-message no -show-languages no"
+alias ruen "trans ru:en -show-original no -show-prompt-message no -show-languages no"
+
 alias vpn:job:up "sudo wg-quick up ~/vpn.conf"
 alias vpn:job:down "sudo wg-quick down ~/vpn.conf"
 alias vpn:job-all:up "sudo wg-quick up ~/vpn.all.conf"

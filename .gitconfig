@@ -4,7 +4,7 @@
 	safecrlf = false
 	signingkey = F44D20890E3B31E0
 [commit]
-  gpgsign = true
+  gpgsign = false
 [pull]
   rebase = false
 [core]

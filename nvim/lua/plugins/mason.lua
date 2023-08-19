@@ -1,7 +1,6 @@
 local M = {}
 
 M.tools = {
-  'stylua',
   'lua-language-server',
   'prettierd',
   'rust-analyzer',
@@ -11,29 +10,18 @@ M.tools = {
   'html-lsp',
   'json-lsp',
   'sql-formatter',
+  'emmet-language-server',
 }
-
-M.install = function()
-  local mr = require 'mason-registry'
-
-  for _, tool in ipairs(M.tools) do
-    local p = mr.get_package(tool)
-
-    if not p:is_installed() then
-      p:install()
-    end
-  end
-end
 
 return {
   {
     'williamboman/mason.nvim',
     dependencies = {
-      'williamboman/mason-lspconfig.nvim',
+      'WhoIsSethDaniel/mason-tool-installer.nvim',
     },
     config = function()
       local mason = require 'mason'
-      local mason_lspconfig = require 'mason-lspconfig'
+      local tool_installer = require 'mason-tool-installer'
 
       mason.setup {
         ui = {
@@ -42,11 +30,9 @@ return {
         },
       }
 
-      mason_lspconfig.setup {
-        automatic_installation = true,
+      tool_installer.setup {
+        ensure_installed = M.tools,
       }
-
-      M.install()
     end,
   },
 }
