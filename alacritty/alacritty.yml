@@ -5,7 +5,7 @@ window:
   padding:
    x: 0
    y: 0
-  opacity: 0.9
+  opacity: 0.95
   dynamic_padding: false
   startup_mode: Maximized
 
@@ -38,50 +38,50 @@ font:
     family: JetBrains Mono
     style: Medium Italic
 
-  size: 10.5
-  offset:
-    x: 0
-    y: 3
-  glyph_offset:
-    x: 0
-    y: 1
-  normal:
-    family: Agave Nerd Font
-    style: Regular
-  bold:
-    family: Agave Nerd Font
-    style: Regular
-  italic:
-    family: Agave Nerd Font
-    style: Regular
-  bold_italic:
-    family: Agave Nerd Font
-    style: Regular
-
   # size: 10.5
   # offset:
-  #   x: -1
+  #   x: 0
+  #   y: 3
+  # glyph_offset:
+  #   x: 0
+  #   y: 1
+  # normal:
+  #   family: Agave Nerd Font
+  #   style: Regular
+  # bold:
+  #   family: Agave Nerd Font
+  #   style: Regular
+  # italic:
+  #   family: Agave Nerd Font
+  #   style: Regular
+  # bold_italic:
+  #   family: Agave Nerd Font
+  #   style: Regular
+
+  # size: 10
+  # offset:
+  #   x: 0
   #   y: 2
   # glyph_offset:
   #   x: 0
   #   y: 1
   # normal:
   #   family: Mononoki Nerd Font
-  #   style: Bold
+  #   style: Regular
   # bold:
   #   family: Mononoki Nerd Font
-  #   style: Bold
+  #   style: Regular
   # italic:
   #   family: Mononoki Nerd Font
-  #   style: Bold Italic
+  #   style: Italic
   # bold_italic:
   #   family: Mononoki Nerd Font
-  #   style: Bold Italic
+  #   style: Italic
 
-  # size: 10
+  # size: 9.5
   # offset:
   #   x: 0
-  #   y: 1
+  #   y: 2
   # glyph_offset:
   #   x: 0
   #   y: 1
@@ -138,25 +138,25 @@ font:
   #   family: Roboto Mono
   #   style: Medium Italic
 
-  # size: 9.9
-  # offset:
-  #   x: 0
-  #   y: -3
-  # glyph_offset:
-  #   x: 0
-  #   y: -2
-  # normal:
-  #   family: VictorMono Nerd Font
-  #   style: Bold
-  # bold:
-  #   family: VictorMono Nerd Font
-  #   style: Bold
-  # italic:
-  #   family: VictorMono Nerd Font
-  #   style: Bold Italic
-  # bold_italic:
-  #   family: VictorMono Nerd Font
-  #   style: Bold Italic
+  size: 9.5
+  offset:
+    x: 0
+    y: -1
+  glyph_offset:
+    x: 0
+    y: 0
+  normal:
+    family: VictorMono Nerd Font
+    style: Bold
+  bold:
+    family: VictorMono Nerd Font
+    style: Bold
+  italic:
+    family: VictorMono Nerd Font
+    style: Bold
+  bold_italic:
+    family: VictorMono Nerd Font
+    style: Bold
 
   # size: 11
   # offset:
@@ -218,20 +218,42 @@ font:
   #   family: Hack Nerd Font Mono
   #   style: Bold
 
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   COLORS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+  # size: 9
+  # offset:
+  #   x: 0
+  #   y: 2
+  # glyph_offset:
+  #   x: 0
+  #   y: 1
+  # normal:
+  #   family: Fira Code
+  #   style: Regular
+  # bold:
+  #   family: Fira Code
+  #   style: Regular
+  # italic:
+  #   family: Fira Code
+  #   style: Regular
+  # bold_italic:
+  #   family: Fira Code
+  #   style: Regular
+
+#┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+#┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   COLORS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+#┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 colors:
   primary:
-   background: '#202837'
+    #background: '#202837'
+   background: '#292640'
    foreground: '#787C99'
 
   cursor:
    text: '#000000'
-   cursor: '#99d1db'
-   cursor: '#c6d0f5'
-   cursor: '#fbdf90'
+   # cursor: '#99d1db'
+   # cursor: '#c6d0f5'
+   # cursor: '#fbdf90'
+   cursor: '#baaaff'
 
   normal:
     black:   '#404060'

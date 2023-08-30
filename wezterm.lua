@@ -31,12 +31,11 @@ local weights = {
 }
 
 local function build_font_params(name, with_italic, weight, params)
-  local scale = 0.8
+  local scale = 1
+
   local font = wezterm.font_with_fallback {
     { family = name, weight = weight },
-    { family = 'JetBrains Mono', scale = scale },
-    { family = 'Symbols Nerd Font Mono', scale = scale },
-    { family = 'Noto Color Emoji', scale = scale },
+    { family = 'Agave Nerd Font', scale = scale },
   }
 
   return merge(params, {
@@ -54,8 +53,8 @@ local function build_font_params(name, with_italic, weight, params)
 end
 
 local font_config = ({
-  jet_brains = build_font_params('JetBrains Mono', true, weights.M, {
-    font_size = 8.8,
+  jet_brains = build_font_params('JetBrains Mono', true, weights.R, {
+    font_size = 8.7,
     cell_width = 1,
     line_height = 1.15,
   }),
@@ -64,13 +63,13 @@ local font_config = ({
     cell_width = 0.8,
     line_height = 1.3,
   }),
-  agave = build_font_params('agave Nerd Font', false, weights.R, {
+  agave = build_font_params('Agave Nerd Font', false, weights.R, {
     font_size = 11,
     cell_width = 0.8,
     line_height = 1.25,
   }),
   victor = build_font_params('VictorMono Nerd Font', false, weights.SB, {
-    font_size = 11,
+    font_size = 10,
     cell_width = 1,
     line_height = 0.9,
   }),
@@ -94,17 +93,17 @@ local font_config = ({
     cell_width = 1,
     line_height = 1.25,
   }),
-  roboto = build_font_params('Roboto Mono', true, weights.M, {
-    font_size = 9,
+  roboto = build_font_params('Roboto Mono', false, weights.R, {
+    font_size = 8.7,
     cell_width = 1,
-    line_height = 1.1,
+    line_height = 1.15,
   }),
   fira = build_font_params('Fira Code', false, weights.R, {
     font_size = 8.5,
     cell_width = 1,
     line_height = 1.25,
   }),
-}).fant
+}).victor
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   THEME   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -112,8 +111,9 @@ local font_config = ({
 
 local dark_colors = {
   foreground = '#787C99',
-  background = '#202837',
-  cursor_bg = '#ffcc66',
+  --background = '#202837',
+  background = '#292640',
+  cursor_bg = '#baaaff',
   cursor_border = '#c6d0f5',
   cursor_fg = '#404060',
   selection_fg = '#333355',
@@ -199,9 +199,9 @@ local config = {
   enable_scroll_bar = false,
   scrollback_lines = 10000,
   cursor_blink_rate = 1000,
-  max_fps = 100,
-  animation_fps = 100,
-  window_background_opacity = 0.87,
+  max_fps = 50,
+  animation_fps = 50,
+  window_background_opacity = 0.99,
   default_cursor_style = 'BlinkingBlock',
   warn_about_missing_glyphs = false,
   use_cap_height_to_scale_fallback_fonts = true,

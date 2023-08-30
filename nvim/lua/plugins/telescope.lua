@@ -7,6 +7,7 @@ M.always_ignore_patterns = {
   'build/',
   'docker_volumes_data/',
   'yarn.lock',
+  'Cargo.lock',
 }
 
 M.ignore_patterns = concat({
@@ -60,11 +61,16 @@ M.add_mappings = function()
 
   map('n', '<leader>fj', function()
     builtin.find_files {
-      find_command = {
-        'fd',
-        '-t=f',
-        '-E=test/',
-      },
+      find_command = concat(
+        {
+          'fd',
+          '-t=f',
+          '-E=test/',
+        },
+        map_list(M.always_ignore_patterns, function(pattern)
+          return '-E=' .. pattern
+        end)
+      ),
       hidden = false,
       no_ignore = false,
     }

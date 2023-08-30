@@ -4,7 +4,7 @@ local g = vim.g
 g.mapleader = ' '
 
 if vim.fn.has 'nvim-0.10' == 1 then
-  o.smoothscroll = true --Scroll by screen line rather than by line when wrap is set. nvim 0.10 only
+  o.smoothscroll = true
 end
 
 o.guicursor = 'a:blinkon1,i-ci-ve:ver25-blinkon1'
@@ -85,9 +85,8 @@ o.fillchars = {
 o.showbreak = '   '
 o.completeopt = 'menuone,noselect'
 o.complete = '.,w,b,u,t,U,s,k,d,i'
-o.langmap = [[
-ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
-]]
+o.langmap =
+  'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz'
 o.imsearch = 0
 o.iminsert = 0
 o.foldmethod = 'indent'

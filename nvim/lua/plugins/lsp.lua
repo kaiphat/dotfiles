@@ -83,45 +83,37 @@ M.set_handlers = function()
   end
 end
 
-M.on_attach = function(client)
+M.on_attach = function(client, bufnr)
   if client.supports_method 'textDocument/semanticTokens' then
     client.server_capabilities.semanticTokensProvider = nil
   end
 
-  if client.supports_method 'textDocument/inlayHint' then
-    vim.lsp.buf.inlay_hint(0, true)
-    -- map('n', '<leader>ui', function()
-    --   vim.lsp.buf.inlay_hint(0, true)
-    -- end)
-  end
+  -- vim.api.nvim_create_augroup('lsp_augroup', { clear = true })
+  --
+  -- vim.api.nvim_create_autocmd('InsertEnter', {
+  --   buffer = bufnr,
+  --   callback = function()
+  --     vim.lsp.inlay_hint(bufnr, true)
+  --   end,
+  --   group = 'lsp_augroup',
+  -- })
+  --
+  -- vim.api.nvim_create_autocmd('InsertLeave', {
+  --   buffer = bufnr,
+  --   callback = function()
+  --     vim.lsp.inlay_hint(bufnr, false)
+  --   end,
+  --   group = 'lsp_augroup',
+  -- })
 end
 
 M.get_servers = function()
   return {
-    -- tsserver = {
-    --   flags = {
-    --     debounce_text_changes = 150,
-    --   },
-    --   disable_commands = false,
-    --   debug = false,
-    -- },
-    typescript = {
-      custom_server = require 'typescript',
-      custom_settings = {
-        server = {
-          on_attach = M.on_attach,
-          capabilities = M.get_capabilities(),
-          flags = {
-            debounce_text_changes = 150,
-          },
-        },
-      },
-    },
     cssls = {},
     sqlls = {},
     html = {},
     emmet_language_server = {
-
+      filetypes = { 'rust' },
     },
     pylsp = {},
     lua_ls = {
@@ -139,6 +131,9 @@ M.get_servers = function()
             },
           },
           format = {
+            enable = false,
+          },
+          hint = {
             enable = false,
           },
         },
@@ -198,25 +193,31 @@ end
 
 return {
   {
-    'jose-elias-alvarez/typescript.nvim',
+    'pmizio/typescript-tools.nvim',
     enabled = true,
     event = 'BufReadPre',
     config = function()
-      map('n', '<leader>ti', ':TypescriptAddMissingImports<cr>')
-      map('n', '<leader>tr', ':TypescriptRenameFile<cr>')
-      map('n', '<leader>td', ':TypescriptRemoveUnused<cr>')
-      map('n', '<leader>to', ':TypescriptOrganizeImports<cr>')
-    end,
-  },
-
-  {
-    'pmizio/typescript-tools.nvim',
-    enabled = false,
-    event = 'BufReadPre',
-    config = function()
       local ts = require 'typescript-tools'
+      local mason_registry = require 'mason-registry'
+      local tsserver_path = mason_registry.get_package('typescript-language-server'):get_install_path()
 
-      ts.setup {}
+      ts.setup {
+        on_attach = M.on_attach,
+        settings = {
+          tsserver_path = tsserver_path .. '/node_modules/typescript/lib/tsserver.js',
+          tsserver_file_preferences = {
+            includeInlayParameterNameHints = 'all',
+          },
+          tsserver_format_options = {
+            allowRenameOfImportPath = true,
+          },
+        },
+      }
+
+      map('n', '<leader>ti', ':TSToolsAddMissingImports<cr>')
+      map('n', '<leader>tr', ':TypescriptRenameFile<cr>')
+      map('n', '<leader>td', ':TSToolsRemoveUnused<cr>')
+      map('n', '<leader>to', ':TSToolsOrganizeImports<cr>')
     end,
   },
 
@@ -226,8 +227,7 @@ return {
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'jose-elias-alvarez/null-ls.nvim',
-      -- 'pmizio/typescript-tools.nvim',
-      'jose-elias-alvarez/typescript.nvim',
+      'pmizio/typescript-tools.nvim',
     },
     config = function()
       local config = require 'lspconfig'

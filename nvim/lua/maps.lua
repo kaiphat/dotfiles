@@ -3,6 +3,16 @@ local M = {}
 map('n', '<F1>', ':w<cr>:e ++ff=dos<cr>:w ++ff=unix<cr>')
 map('n', '<F9>', ':LspRestart<cr>')
 
+local is_wrapped = false
+map('n', '<F4>', function()
+  if is_wrapped then
+    vim.cmd 'set nowrap'
+  else
+    vim.cmd 'set wrap'
+  end
+  is_wrapped = not is_wrapped
+end)
+
 map('v', 'y', 'ygv<esc>')
 map('v', 'p', 'pgvy=`]')
 map('v', '<', '<gv')

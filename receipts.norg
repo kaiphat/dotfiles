@@ -134,6 +134,9 @@
    10. reboot
 
 
+* postgres
+** restore from backup
+   `pg_restore -h 127.0.0.1 -p 28162 -d estatex -U postgres  ~/backup.sql`
 
 
 

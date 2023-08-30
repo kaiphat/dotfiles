@@ -6,6 +6,7 @@ pacman_packages=(\
   "zoxide" \
   "translate-shell" \
   "yarn" \
+  "npm" \
   "nodejs" \
   "sxiv" \
   "unrar" \
@@ -22,6 +23,7 @@ pacman_packages=(\
   "xclip" \
   "postgresql" \
   "networkmanager" \
+  "python" \
 
   # applications
   "telegram-desktop" \
