@@ -1,11 +1,13 @@
 return {
+
   {
     dir = '../theme.lua',
     enabled = dark_theme_enabled(),
-    config = function ()
-      require('theme')
-    end
+    config = function()
+      require 'theme'
+    end,
   },
+
   {
     'projekt0n/github-nvim-theme',
     enabled = not dark_theme_enabled(),

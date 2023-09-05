@@ -155,12 +155,12 @@ return {
   },
   config = function()
     local cmp = require 'cmp'
-    local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+    -- local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
     local types = require 'cmp.types'
     local luasnip = require 'luasnip'
     local compare = require 'cmp.config.compare'
 
-    cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+    -- cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
     compare.locality.lines_count = 300
 

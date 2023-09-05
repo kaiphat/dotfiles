@@ -158,25 +158,25 @@ font:
     family: VictorMono Nerd Font
     style: Bold
 
-  # size: 11
-  # offset:
-  #   x: -1
-  #   y: 1
-  # glyph_offset:
-  #   x: 0
-  #   y: 0
-  # normal:
-  #   family: CaskaydiaCove Nerd Font
-  #   style: Regular
-  # bold:
-  #   family: CaskaydiaCove Nerd Font
-  #   style: Regular
-  # italic:
-  #   family: CaskaydiaCove Nerd Font
-  #   style: Regular
-  # bold_italic:
-  #   family: CaskaydiaCove Nerd Font
-  #   style: Regular
+  size: 9
+  offset:
+    x: 0
+    y: 3
+  glyph_offset:
+    x: 0
+    y: 1
+  normal:
+    family: Cascadia Mono PL
+    style: SemiBold
+  bold:
+    family: Cascadia Mono PL
+    style: SemiBold
+  italic:
+    family: Cascadia Mono PL
+    style: SemiBold Italic
+  bold_italic:
+    family: Cascadia Mono PL
+    style: SemiBold Italic
 
   # size: 11
   # offset:

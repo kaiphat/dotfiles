@@ -5,10 +5,10 @@ super + space
   {setxkbmap ru, setxkbmap us}
 
 Print
-  scrot -s -q 100 -f -e 'xclip -selection clipboard -t image/png -i $f; mkdir ~/screenshots; mv $f -f -t ~/screenshots/'
+  ~/dotfiles/scripts/screenshot.sh
 
 shift + Print
-  scrot -u -s -q 100 -f -e 'xclip -selection clipboard -t image/png -i $f; mkdir ~/screenshots; mv $f -f -t ~/screenshots/'
+  ~/dotfiles/scripts/current_window_screenshot.sh
 
 super + Return
 	alacritty

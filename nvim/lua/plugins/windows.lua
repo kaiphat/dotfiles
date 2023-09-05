@@ -16,13 +16,15 @@ return {
           help = 2,
         },
       },
+
       ignore = {
         buftype = { 'quickfix' },
         filetype = { 'NvimTree', 'neo-tree', 'undotree', 'gundo' },
       },
+
       animation = {
-        enable = false
-      }
+        enable = false,
+      },
     }
   end,
 }

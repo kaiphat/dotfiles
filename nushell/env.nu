@@ -1,37 +1,45 @@
-# PATHS
-let-env PATH = ($env.PATH | prepend '$snap_bin_path')
-let-env PATH = ($env.PATH | prepend '$ANDROID_HOME/emulator')
-let-env PATH = ($env.PATH | prepend '$ANDROID_HOME/tools')
-let-env PATH = ($env.PATH | prepend '$ANDROID_HOME/tools/bin')
-let-env PATH = ($env.PATH | prepend '$ANDROID_HOME/platform-tools')
-let-env PATH = ($env.PATH | prepend '/opt/ReactNativeDebugger')
-let-env PATH = ($env.PATH | prepend '/usr/local/go/bin')
-let-env PATH = ($env.PATH | prepend '/usr/.local/bin')
-let-env PATH = ($env.PATH | prepend "/home/kaiphat/.config/carapace/bin")
-let-env PATH = ($env.PATH | prepend '$HOME/go/bin')
-let-env PATH = ($env.PATH | prepend '$HOME/.cargo/bin')
-let-env PATH = ($env.PATH | prepend '$HOME/.krew/bin')
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   PATHS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-# ENVS
-let-env PROMPT_INDICATOR_VI_INSERT = ""
-let-env PROMPT_INDICATOR_VI_NORMAL = ""
-let-env nvm_default_version = 'v18.12.0'
-let-env ANDROID_HOME = '$HOME/Android/Sdk'
-let-env EDITOR = 'nvim'
-let-env MANPAGER = 'most'
-let-env PAGER = 'nvim -c "set nowrap" -R'
-let-env TERMINAL = 'wezterm'
-let-env NODE_OPTIONS = '--max-old-space-size=4096'
-let-env SXHKD_SHELL = 'nu'
+$env.PATH | prepend '$snap_bin_path'
+$env.PATH | prepend '$ANDROID_HOME/emulator'
+$env.PATH | prepend '$ANDROID_HOME/tools'
+$env.PATH | prepend '$ANDROID_HOME/tools/bin'
+$env.PATH | prepend '$ANDROID_HOME/platform-tools'
+$env.PATH | prepend '/opt/ReactNativeDebugger'
+$env.PATH | prepend '/usr/local/go/bin'
+$env.PATH | prepend '/usr/.local/bin'
+$env.PATH | prepend "/home/kaiphat/.config/carapace/bin"
+$env.PATH | prepend '$HOME/go/bin'
+$env.PATH | prepend '$HOME/.cargo/bin'
+$env.PATH | prepend '$HOME/.krew/bin'
 
-#
-# STARTSHIP
-#
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   ENVS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+$env.PROMPT_INDICATOR_VI_INSERT = ""
+$env.PROMPT_INDICATOR_VI_NORMAL = ""
+$env.nvm_default_version = 'v18.12.0'
+$env.ANDROID_HOME = '$HOME/Android/Sdk'
+$env.EDITOR = 'nvim'
+$env.MANPAGER = 'most'
+$env.PAGER = 'nvim -c "set nowrap" -R'
+$env.TERMINAL = 'wezterm'
+$env.NODE_OPTIONS = '--max-old-space-size=4096'
+$env.SXHKD_SHELL = 'nu'
+
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   STARTSHIP   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
 mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
 
-#
-# ZOXIDE
-#
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   ZOXIDE   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
 zoxide init nushell | save -f ~/.zoxide.nu
 

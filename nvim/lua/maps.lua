@@ -111,7 +111,8 @@ map('n', '<leader>ur', function()
   end
 end)
 
--- marks
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     marks     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
 for letter in string.gmatch('abcdefghijkloqrstuvwxyz', '.') do
   map('n', 'm' .. letter, 'm' .. letter:upper())
   map('n', '\'' .. letter, '\'' .. letter:upper())

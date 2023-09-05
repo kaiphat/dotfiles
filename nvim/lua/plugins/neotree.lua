@@ -16,9 +16,6 @@ M.set_mappings = function()
       reveal_file = vim.fn.expand '%:p',
     }
   end)
-  map('n', '<leader>p', function()
-    cmd.execute {}
-  end)
   map('n', '<leader>O', function()
     cmd.execute {
       source = 'filesystem',

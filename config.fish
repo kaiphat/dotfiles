@@ -4,8 +4,9 @@
 
 set -gx DARK_THEME 1
 
-set -Ux PROMPT_CHAR '❯'
 set -Ux PROMPT_CHAR '➜'
+set -Ux PROMPT_CHAR '❯'
+set -Ux PROMPT_CHAR '󰵈 '
 
 set pure_symbol_prompt $PROMPT_CHAR
 
@@ -49,7 +50,6 @@ fish_add_path -aP $HOME/.local/share/bob/nvim-bin
 fish_add_path -aP $HOME/.local/bin/razer-cli
 fish_add_path -aP $HOME/.yarn/bin
 fish_add_path -aP $HOME/.local/bin
-set -gx PATH $PATH $HOME/.krew/bin
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   ALIASES   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -98,21 +98,15 @@ alias req "http -p mbh"
 alias mkdir "mkdir -p"
 alias less "less -MSx4 -FXR --shift 10"
 alias ls "ls -A --group-directories-first --color=auto"
-alias rm "rm -rf"
+alias rm "rm -rf --verbose"
 alias cp "cp -r --verbose"
 alias clip "xclip -selection c"
 alias pj "xclip -o | jq '.' | clip"
-alias nest "npx @nestjs/cli"
 alias nvim-start "nvim --startuptime _s.log -c exit && tail -100 _s.log | bat && rm _s.log"
 alias ... "cd ../../"
 
 alias enru "trans en:ru -show-original no -show-prompt-message no -show-languages no"
 alias ruen "trans ru:en -show-original no -show-prompt-message no -show-languages no"
-
-alias vpn:job:up "sudo wg-quick up ~/vpn.conf"
-alias vpn:job:down "sudo wg-quick down ~/vpn.conf"
-alias vpn:job-all:up "sudo wg-quick up ~/vpn.all.conf"
-alias vpn:job-all:down "sudo wg-quick down ~/vpn.all.conf"
 
 function dl
   d logs $argv -f -n 99
@@ -201,11 +195,3 @@ and not set -q TMUX
   tmux kill-session -t 0 || true
   tmux attach -t main || tmux new -s main
 end
-
-set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /home/kaiphat/.ghcup/bin # ghcup-env
-# The next line updates PATH for the Google Cloud SDK
-if [ -f '/home/kaiphat/google-cloud-sdk/path.fish.inc' ]; . '/home/kaiphat/google-cloud-sdk/path.fish.inc'; end
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/kaiphat/google-cloud-sdk/path.fish.inc' ]; . '/home/kaiphat/google-cloud-sdk/path.fish.inc'; end
-
