@@ -16,7 +16,7 @@ M.languages = {
   'html',
   'scss',
   'dockerfile',
-  'json5',
+  -- 'json5',
   'fish',
   'glimmer',
   'scheme',

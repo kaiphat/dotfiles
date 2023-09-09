@@ -78,25 +78,25 @@ font:
   #   family: Mononoki Nerd Font
   #   style: Italic
 
-  # size: 9.5
-  # offset:
-  #   x: 0
-  #   y: 2
-  # glyph_offset:
-  #   x: 0
-  #   y: 1
-  # normal:
-  #   family: Operator Mono Lig
-  #   style: Bold
-  # bold:
-  #   family: Operator Mono Lig
-  #   style: Bold
-  # italic:
-  #   family: Operator Mono Lig
-  #   style: Bold Italic
-  # bold_italic:
-  #   family: Operator Mono Lig
-  #   style: Bold Italic
+  size: 9.5
+  offset:
+    x: 0
+    y: 2
+  glyph_offset:
+    x: 0
+    y: 1
+  normal:
+    family: Operator Mono Lig
+    style: Bold
+  bold:
+    family: Operator Mono Lig
+    style: Bold
+  italic:
+    family: Operator Mono Lig
+    style: Bold Italic
+  bold_italic:
+    family: Operator Mono Lig
+    style: Bold Italic
 
   # size: 10
   # offset:
@@ -138,45 +138,45 @@ font:
   #   family: Roboto Mono
   #   style: Medium Italic
 
-  size: 9.5
-  offset:
-    x: 0
-    y: -1
-  glyph_offset:
-    x: 0
-    y: 0
-  normal:
-    family: VictorMono Nerd Font
-    style: Bold
-  bold:
-    family: VictorMono Nerd Font
-    style: Bold
-  italic:
-    family: VictorMono Nerd Font
-    style: Bold
-  bold_italic:
-    family: VictorMono Nerd Font
-    style: Bold
+  # size: 9.5
+  # offset:
+  #   x: 0
+  #   y: -1
+  # glyph_offset:
+  #   x: 0
+  #   y: 0
+  # normal:
+  #   family: VictorMono Nerd Font
+  #   style: Bold
+  # bold:
+  #   family: VictorMono Nerd Font
+  #   style: Bold
+  # italic:
+  #   family: VictorMono Nerd Font
+  #   style: Bold
+  # bold_italic:
+  #   family: VictorMono Nerd Font
+  #   style: Bold
 
-  size: 9
-  offset:
-    x: 0
-    y: 3
-  glyph_offset:
-    x: 0
-    y: 1
-  normal:
-    family: Cascadia Mono PL
-    style: SemiBold
-  bold:
-    family: Cascadia Mono PL
-    style: SemiBold
-  italic:
-    family: Cascadia Mono PL
-    style: SemiBold Italic
-  bold_italic:
-    family: Cascadia Mono PL
-    style: SemiBold Italic
+  # size: 9
+  # offset:
+  #   x: 0
+  #   y: 3
+  # glyph_offset:
+  #   x: 0
+  #   y: 1
+  # normal:
+  #   family: Cascadia Mono PL
+  #   style: SemiBold
+  # bold:
+  #   family: Cascadia Mono PL
+  #   style: SemiBold
+  # italic:
+  #   family: Cascadia Mono PL
+  #   style: SemiBold Italic
+  # bold_italic:
+  #   family: Cascadia Mono PL
+  #   style: SemiBold Italic
 
   # size: 11
   # offset:

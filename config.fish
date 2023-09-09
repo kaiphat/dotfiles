@@ -195,3 +195,7 @@ and not set -q TMUX
   tmux kill-session -t 0 || true
   tmux attach -t main || tmux new -s main
 end
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH

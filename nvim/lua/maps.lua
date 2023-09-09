@@ -17,6 +17,7 @@ map('v', 'y', 'ygv<esc>')
 map('v', 'p', 'pgvy=`]')
 map('v', '<', '<gv')
 map('v', '>', '>gv')
+map('n', '\'', '`')
 
 map({ 'c', 'i' }, '<C-r>', '<C-r>+', { noremap = false })
 
@@ -126,7 +127,7 @@ map('n', '<leader>lw', function()
 
   local new_line
   if ft == 'typescript' or ft == 'javascript' then
-    new_line = 'console.dir({ ' .. var .. ' }, { depth: 9 })'
+    new_line = 'console.log(\''..var ..': %o\', '.. var ..')'
   elseif ft == 'rust' then
     new_line = 'println!("\\x1b[36m' .. var .. ': {:?}\\x1b[0m", ' .. var .. ');'
   end

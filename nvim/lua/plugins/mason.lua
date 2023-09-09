@@ -11,6 +11,7 @@ M.tools = {
   'json-lsp',
   'sql-formatter',
   'emmet-language-server',
+  'stylua',
 }
 
 return {
