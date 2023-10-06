@@ -133,6 +133,8 @@
    9. ❯ sudo plymouth-set-default-theme -R bgrt
    10. reboot
 
+** picom 
+   `https://github.com/jonaburg/picom`
 
 * postgres
 ** restore from backup

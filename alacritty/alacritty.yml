@@ -7,7 +7,7 @@ window:
    y: 0
   opacity: 0.95
   dynamic_padding: false
-  startup_mode: Maximized
+  # startup_mode: Maximized
 
 scrolling:
   history: 100000
@@ -61,10 +61,10 @@ font:
   # size: 10
   # offset:
   #   x: 0
-  #   y: 2
+  #   y: 1
   # glyph_offset:
   #   x: 0
-  #   y: 1
+  #   y: 0
   # normal:
   #   family: Mononoki Nerd Font
   #   style: Regular
@@ -81,7 +81,7 @@ font:
   size: 9.5
   offset:
     x: 0
-    y: 2
+    y: 1
   glyph_offset:
     x: 0
     y: 1
@@ -167,16 +167,16 @@ font:
   #   y: 1
   # normal:
   #   family: Cascadia Mono PL
-  #   style: SemiBold
+  #   style: Medium
   # bold:
   #   family: Cascadia Mono PL
-  #   style: SemiBold
+  #   style: Medium
   # italic:
   #   family: Cascadia Mono PL
-  #   style: SemiBold Italic
+  #   style: Italic
   # bold_italic:
   #   family: Cascadia Mono PL
-  #   style: SemiBold Italic
+  #   style: Italic
 
   # size: 11
   # offset:
@@ -187,16 +187,16 @@ font:
   #   y: 1
   # normal:
   #   family: UbuntuMono Nerd Font
-  #   style: Bold
+  #   style: Regular
   # bold:
   #   family: UbuntuMono Nerd Font
-  #   style: Bold
+  #   style: Regular
   # italic:
   #   family: UbuntuMono Nerd Font
-  #   style: Bold
+  #   style: Regular
   # bold_italic:
   #   family: UbuntuMono Nerd Font
-  #   style: Bold
+  #   style: Regular
 
   # size: 9
   # offset:

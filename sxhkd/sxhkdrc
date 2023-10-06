@@ -3,6 +3,7 @@
 ## SXHKD CONFIG ##
 super + space
   {setxkbmap ru, setxkbmap us}
+  # {setxkbmap ru, setxkbmap us, setxkbmap us -variant "colemak_dh_iso"}
 
 Print
   ~/dotfiles/scripts/screenshot.sh
@@ -82,8 +83,8 @@ super + z
 super + f
   bspc node -t ~floating
 
-super + {t,shift + t,shift + @space}
-	bspc node -t {tiled,pseudo_tiled,floating}
+super + t
+	bspc node -t tiled
 
 # set the node flags
 super + ctrl + {m,x,y,z}
