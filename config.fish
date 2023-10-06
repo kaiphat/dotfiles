@@ -4,9 +4,9 @@
 
 set -gx DARK_THEME 1
 
-set -Ux PROMPT_CHAR '➜'
 set -Ux PROMPT_CHAR '❯'
 set -Ux PROMPT_CHAR '󰵈 '
+set -Ux PROMPT_CHAR '➜'
 
 set pure_symbol_prompt $PROMPT_CHAR
 
