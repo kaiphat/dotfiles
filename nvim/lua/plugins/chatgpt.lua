@@ -25,7 +25,7 @@ end
 return {
   {
     'jackmort/chatgpt.nvim',
-    enabled = true,
+    enabled = false,
     config = function()
       local chat = require 'chatgpt'
 
