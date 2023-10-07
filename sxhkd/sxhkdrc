@@ -3,7 +3,7 @@
 ## SXHKD CONFIG ##
 super + space
   {setxkbmap ru, setxkbmap us}
-  # {setxkbmap ru, setxkbmap us, setxkbmap us -variant "colemak_dh_iso"}
+  # {setxkbmap ru, setxkbmap us, setxkbmap us -variant "colemak_dh"}
 
 Print
   ~/dotfiles/scripts/screenshot.sh
@@ -12,7 +12,7 @@ shift + Print
   ~/dotfiles/scripts/current_window_screenshot.sh
 
 super + Return
-	alacritty
+	wezterm
 
 super + e
 	thunar

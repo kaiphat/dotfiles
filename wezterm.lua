@@ -109,6 +109,7 @@ local font_config = ({
 		line_height = 1.15,
 		harfbuzz_features = {
 			'cv01',
+			'cv03',
 			'cv04',
 			'ss01',
 			'ss02',

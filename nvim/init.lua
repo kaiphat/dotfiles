@@ -1,3 +1,4 @@
+require 'constants.global'
 require 'utils.global'
 require 'options'
 require 'autocommands'

@@ -16,7 +16,7 @@ set -gx EDITOR nvim
 set -gx MANPAGER 'nvim +Man! -c "set nowrap"'
 set -gx PAGER 'nvim +Man! -c "set nowrap"'
 set -gx TERMINAL wezterm
-set -gx TERM xterm-256color
+set -gx TERM wezterm
 set -gx LUA_DIR /usr/bin/lua
 set -gx LD_LIBRARY_PATH /opt/oracle/instantclient_21_8
 set -U fish_greeting
