@@ -35,15 +35,13 @@ end
 
 M.set_handlers = function()
 	vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-		-- virtual_text = false,
 		virtual_text = {
 			spacing = 8,
-			prefix = ' ',
-			-- severity = {
-			-- Specify a range of severities
-			--   min = vim.diagnostic.severity.ERROR,
-			-- },
+			source = 'if_many',
+			-- prefix = ' ',
+			prefix = '●',
 		},
+		severity_sort = true,
 		signs = false,
 		underline = true,
 		update_in_insert = false,

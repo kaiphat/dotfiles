@@ -119,6 +119,11 @@ local font_config = ({
 	}),
 }).maple
 
+wezterm.on('gui-startup', function(cmd)
+	local _, _, window = wezterm.mux.spawn_window(cmd or {})
+	window:gui_window():maximize()
+end)
+
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   THEME   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -187,19 +192,12 @@ local light_colors = {
 }
 
 local function get_colors()
-	if os.getenv 'DARK_THEME' == '1' then
+	if os.getenv 'THEME' == 'dark' then
 		return dark_colors
 	else
 		return light_colors
 	end
 end
-
-local paddings = {
-	left = 0,
-	right = 0,
-	top = 0,
-	bottom = 0,
-}
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   RESULT   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -208,14 +206,19 @@ local paddings = {
 local config = {
 	front_end = 'WebGpu',
 	colors = get_colors(),
-	window_padding = paddings,
+	window_padding = {
+		left = 0,
+		right = 0,
+		top = 0,
+		bottom = 0,
+	},
 	enable_tab_bar = false,
 	enable_scroll_bar = false,
 	scrollback_lines = 10000,
 	cursor_blink_rate = 1000,
-	max_fps = 50,
-	animation_fps = 50,
-	window_background_opacity = 0.99,
+	max_fps = 80,
+	animation_fps = 80,
+	window_background_opacity = 0.96,
 	default_cursor_style = 'BlinkingBlock',
 	warn_about_missing_glyphs = false,
 	use_cap_height_to_scale_fallback_fonts = true,

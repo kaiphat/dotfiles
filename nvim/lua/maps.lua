@@ -46,10 +46,6 @@ map('n', '<C-u>', function()
   vim.api.nvim_feedkeys('4k', 'n', true)
 end)
 
-for command in string.gmatch('ydvc', '.') do
-  map('n', command .. 'l', command .. 't')
-end
-
 map('n', 'x', function()
   if vim.fn.col '.' == 1 then
     local line = vim.fn.getline '.'
@@ -66,16 +62,16 @@ end)
 
 map('n', '<A-->', ':vertical resize -10<cr>')
 map('n', '<A-=>', ':vertical resize +10<cr>')
-
 map('n', '<A-J>', ':m .+1<cr>==')
 map('v', '<A-J>', ':m \'>+1<cr>gv=gv')
 map('v', '<A-K>', ':m \'<-2<cr>gv=gv')
 map('n', '<A-K>', ':m .-2<cr>==')
 
-map('i', 'jk', '<esc>')
-map('i', 'kj', '<esc>')
-map('i', 'Kj', '<esc>')
-map('i', 'kJ', '<esc>')
+map('i', 'ne', '<esc>')
+map('i', 'en', '<esc>')
+map('i', 'Ne', '<esc>')
+map('i', 'En', '<esc>')
+map('i', 'EN', '<esc>')
 
 map('i', '<C-l>', '<Right><c-h>')
 map('i', '<C-d>', '<Right>')

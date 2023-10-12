@@ -4,7 +4,7 @@ _G.map = function(mode, keys, cmd, opts)
 end
 
 _G.dark_theme_enabled = function()
-  return os.getenv 'DARK_THEME' == '1'
+  return os.getenv 'THEME' == 'dark'
 end
 
 _G.get_current_path = function()
