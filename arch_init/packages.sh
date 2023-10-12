@@ -52,3 +52,6 @@ for package in "${yay_packages[@]}"; do
   fi
 done
 
+# tmp
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
