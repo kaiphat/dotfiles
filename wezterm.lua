@@ -31,7 +31,7 @@ local weights = {
 }
 
 local function build_font_params(name, with_italic, weight, params)
-	local scale = 1
+	local scale = 0.8
 
 	local font = wezterm.font_with_fallback {
 		{ family = name, weight = weight },
@@ -53,15 +53,20 @@ local function build_font_params(name, with_italic, weight, params)
 end
 
 local font_config = ({
-	jet_brains = build_font_params('JetBrains Mono', true, weights.R, {
-		font_size = 9.4,
-		cell_width = 1,
-		line_height = 1.1,
+	jet_brains = build_font_params('JetBrainsMono Nerd Font', true, weights.R, {
+		font_size = 9.5,
+		cell_width = 0.9,
+		line_height = 1.05,
 	}),
 	mononoki = build_font_params('mononoki Nerd Font', true, weights.B, {
 		font_size = 10,
 		cell_width = 0.8,
 		line_height = 1.3,
+	}),
+	mononoki_liga = build_font_params('Ligamononoki Nerd Font', false, weights.R, {
+		font_size = 10,
+		cell_width = 1,
+		line_height = 1.2,
 	}),
 	agave = build_font_params('Agave Nerd Font', false, weights.R, {
 		font_size = 11,
@@ -78,13 +83,28 @@ local font_config = ({
 		cell_width = 1,
 		line_height = 1.1,
 	}),
-	iosevka_ss08 = build_font_params('Iosevka SS08', true, weights.R, {
-		font_size = 9.5,
+	iosevka_custom = build_font_params('Iosevka Custom', false, weights.M, {
+        font_size = 14,
+        cell_width = 1,
+        line_height = 1,
+	}),
+	iosevka_nerd_font = build_font_params('Iosevka Nerd Font', false, weights.SB, {
+		font_size = 13,
 		cell_width = 1,
-		line_height = 1.1,
+		line_height = 1,
+	}),
+	iosevka_ss12 = build_font_params('Iosevka SS12', false, weights.SB, {
+        font_size = 13,
+        cell_width = 1,
+        line_height = 1,
 	}),
 	caskaydia = build_font_params('Cascadia Code', true, weights.R, {
 		font_size = 8,
+		cell_width = 1,
+		line_height = 1.25,
+	}),
+	caskaydia_nerd_font = build_font_params('CaskaydiaCove Nerd Font', true, weights.R, {
+		font_size = 11,
 		cell_width = 1,
 		line_height = 1.25,
 	}),
@@ -104,9 +124,9 @@ local font_config = ({
 		line_height = 1.25,
 	}),
 	maple = build_font_params('Maple Mono NF', false, weights.R, {
-		font_size = 9.3,
+		font_size = 12,
 		cell_width = 1,
-		line_height = 1.15,
+		line_height = 1,
 		harfbuzz_features = {
 			'cv01',
 			'cv03',
@@ -117,11 +137,12 @@ local font_config = ({
 			'ss05',
 		},
 	}),
-}).maple
+}).mononoki_liga
 
 wezterm.on('gui-startup', function(cmd)
 	local _, _, window = wezterm.mux.spawn_window(cmd or {})
-	window:gui_window():maximize()
+	-- window:gui_window():maximize()
+	window:gui_window():toggle_fullscreen()
 end)
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -192,7 +213,7 @@ local light_colors = {
 }
 
 local function get_colors()
-	if os.getenv 'THEME' == 'dark' then
+	if true or os.getenv 'THEME' == 'dark' then
 		return dark_colors
 	else
 		return light_colors
@@ -216,9 +237,9 @@ local config = {
 	enable_scroll_bar = false,
 	scrollback_lines = 10000,
 	cursor_blink_rate = 1000,
-	max_fps = 80,
-	animation_fps = 80,
-	window_background_opacity = 0.96,
+	max_fps = 100,
+	animation_fps = 100,
+	window_background_opacity = 1,
 	default_cursor_style = 'BlinkingBlock',
 	warn_about_missing_glyphs = false,
 	use_cap_height_to_scale_fallback_fonts = true,

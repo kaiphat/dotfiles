@@ -70,7 +70,7 @@ M.chars = {
 
 return {
 	'lukas-reineke/indent-blankline.nvim',
-	enabled = true,
+	enabled = false,
 	main = 'ibl',
 	config = function()
 		local ibl = require 'ibl'
@@ -89,6 +89,7 @@ return {
 			scope = {
 				enabled = true,
 				show_start = false,
+				show_end = false,
 				include = {
 					node_type = { ['*'] = M.nodes },
 				},

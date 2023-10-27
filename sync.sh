@@ -1,4 +1,4 @@
-#!/bin/fish
+#!/opt/homebrew/bin/fish
 
 set dotfiles ~/dotfiles
 

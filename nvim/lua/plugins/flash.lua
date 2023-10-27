@@ -10,6 +10,7 @@ end
 
 return {
   'folke/flash.nvim',
+  enabled = false,
   config = function()
     local flash = require 'flash'
 

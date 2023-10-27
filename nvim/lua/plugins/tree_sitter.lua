@@ -29,6 +29,7 @@ M.languages = {
 	'proto',
 	'markdown_inline',
 	'nu',
+	'graphql',
 }
 
 M.add_mixins = function()

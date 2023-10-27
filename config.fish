@@ -6,12 +6,12 @@ set -gx THEME 'light'
 set -gx THEME 'dark'
 
 set -Ux PROMPT_CHAR '󰵈 '
-set -Ux PROMPT_CHAR '➜'
 set -Ux PROMPT_CHAR '❯'
+set -Ux PROMPT_CHAR '➜'
 
 set pure_symbol_prompt $PROMPT_CHAR
 
-set -gx nvm_default_version v18.16.0
+set -gx nvm_default_version v20.8.1
 set -gx ANDROID_HOME $HOME/Android/Sdk
 set -gx EDITOR nvim
 set -gx MANPAGER 'nvim +Man! -c "set nowrap"'
@@ -51,6 +51,7 @@ fish_add_path -aP $HOME/.local/share/bob/nvim-bin
 fish_add_path -aP $HOME/.local/bin/razer-cli
 fish_add_path -aP $HOME/.yarn/bin
 fish_add_path -aP $HOME/.local/bin
+fish_add_path /opt/homebrew/bin
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   ALIASES   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -98,8 +99,8 @@ alias nread "nvim -c \"set nowrap\""
 alias req "http -p mbh"
 alias mkdir "mkdir -p"
 alias less "less -MSx4 -FXR --shift 10"
-alias ls "ls -A --group-directories-first --color=auto"
-alias rm "rm -rf --verbose"
+alias ls "ls -A --color=auto"
+alias rm "rm -rfv"
 alias cp "cp -r --verbose"
 alias clip "xclip -selection c"
 alias pj "xclip -o | jq '.' | clip"
@@ -170,12 +171,6 @@ set fish_color_operator 'red'
 # set fish_color_user brgreen
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   BREW   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-# eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   TMUX   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -200,3 +195,10 @@ end
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/ilyapu/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/ilyapu/Downloads/google-cloud-sdk/path.fish.inc'; end
+
+# Setting PATH for Python 3.12
+# The original version is saved in /Users/ilyapu/.config/fish/config.fish.pysave
+set -x PATH "/Library/Frameworks/Python.framework/Versions/3.12/bin" "$PATH"

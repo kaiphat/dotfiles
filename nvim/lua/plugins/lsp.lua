@@ -93,6 +93,7 @@ M.get_servers = function()
 		emmet_language_server = {
 			filetypes = { 'rust' },
 		},
+		graphql = {},
 		pylsp = {},
 		lua_ls = {
 			settings = {
@@ -181,13 +182,10 @@ return {
 		event = 'BufReadPre',
 		config = function()
 			local ts = require 'typescript-tools'
-			local mason_registry = require 'mason-registry'
-			local tsserver_path = mason_registry.get_package('typescript-language-server'):get_install_path()
 
 			ts.setup {
 				on_attach = M.on_attach,
 				settings = {
-					tsserver_path = tsserver_path .. '/node_modules/typescript/lib/tsserver.js',
 					tsserver_file_preferences = {
 						includeInlayParameterNameHints = 'all',
 					},
@@ -198,7 +196,7 @@ return {
 			}
 
 			map('n', '<leader>ti', ':TSToolsAddMissingImports<cr>')
-			map('n', '<leader>tr', ':TypescriptRenameFile<cr>')
+			map('n', '<leader>tr', ':TSToolsRenameFile<cr>')
 			map('n', '<leader>td', ':TSToolsRemoveUnused<cr>')
 			map('n', '<leader>to', ':TSToolsOrganizeImports<cr>')
 		end,

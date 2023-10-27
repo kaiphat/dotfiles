@@ -7,10 +7,13 @@ if vim.fn.has 'nvim-0.10' == 1 then
   o.smoothscroll = true
 end
 
+local TAB_SIZE = 4
+
 o.guicursor = 'a:blinkon1,i-ci-ve:ver25-blinkon1'
 o.selection = 'old'
-o.tabstop = 2
-o.softtabstop = 2
+o.tabstop = TAB_SIZE
+o.softtabstop = TAB_SIZE
+o.shiftwidth = TAB_SIZE
 o.expandtab = true
 o.fileencoding = 'utf-8'
 o.wildmenu = true
@@ -27,7 +30,6 @@ o.cmdheight = 1
 o.scrolloff = 10
 o.sidescrolloff = 8 -- Columns of context
 o.shiftround = true -- Round indent
-o.shiftwidth = 2
 o.numberwidth = 3
 o.number = false
 o.relativenumber = false

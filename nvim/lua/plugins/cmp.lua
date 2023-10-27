@@ -99,6 +99,10 @@ M.get_mappings = function()
 			behavior = cmp.ConfirmBehavior.Insert,
 			select = true,
 		},
+		['<C-o>'] = cmp.mapping.confirm {
+			behavior = cmp.ConfirmBehavior.Insert,
+			select = true,
+		},
 		['<Tab>'] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
