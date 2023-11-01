@@ -1,6 +1,6 @@
 return {
-  'nvim-lua/plenary.nvim',
-  'nvim-lua/popup.nvim',
-  'kyazdani42/nvim-web-devicons',
-  'MunifTanjim/nui.nvim',
+    {'nvim-lua/plenary.nvim', lazy = true },
+    { 'nvim-lua/popup.nvim', lazy = true },
+	{ 'kyazdani42/nvim-web-devicons', lazy = true },
+    { 'MunifTanjim/nui.nvim' , lazy = true},
 }

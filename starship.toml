@@ -7,12 +7,11 @@ $git_state\
 $git_status\
 $cmd_duration\
 $line_break\
-$python\
 $character"""
+add_newline = false
 
 [directory]
 style = "blue"
-truncation_length = 2
 truncate_to_repo = false
 
 [character]
@@ -40,9 +39,5 @@ format = '\([$state( $progress_current/$progress_total)]($style)\) '
 style = "bright-black"
 
 [cmd_duration]
-format = "[$duration]($style) "
+format = " [$duration]($style) "
 style = "yellow"
-
-[python]
-format = "[$virtualenv]($style) "
-style = "bright-black"

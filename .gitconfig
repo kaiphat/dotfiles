@@ -1,8 +1,6 @@
 [user]
-	email = i.punko@pixelplex.io
+	email = iliyapunko@gmail.com
 	name = Ilya Punko
-	safecrlf = false
-	signingkey = F44D20890E3B31E0
 [commit]
   gpgsign = false
 [pull]

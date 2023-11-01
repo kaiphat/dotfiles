@@ -1,48 +1,45 @@
 local M = {}
 
 M.get_is_enabled = function()
-  local width = get_terminal_width()
+	local width = get_terminal_width()
 
-  if width > 250 then
-    return true
-  end
+	if width > 250 then return true end
 
-  return false
+	return false
 end
 
 return {
-  'shortcuts/no-neck-pain.nvim',
-  enabled = false,
-  config = function()
-    local nnp = require 'no-neck-pain'
+	'shortcuts/no-neck-pain.nvim',
+	enabled = false,
+	event = 'BufReadPre',
+	config = function()
+		local nnp = require 'no-neck-pain'
 
-    nnp.setup {
-      autocmds = {
-        enableOnVimEnter = M.get_is_enabled(),
-      },
+		nnp.setup {
+			autocmds = {
+				enableOnVimEnter = M.get_is_enabled(),
+			},
 
-      width = 120,
+			width = 120,
 
-      buffers = {
-        backgroundColor = nil,
+			buffers = {
+				backgroundColor = nil,
 
-        scratchPad = {
-          enabled = true,
-          location = '~/documents/',
-        },
+				scratchPad = {
+					enabled = true,
+					location = '~/documents/',
+				},
 
-        bo = {
-          filetype = 'norg',
-        },
+				bo = {
+					filetype = 'norg',
+				},
 
-        right = {
-          enabled = true,
-        }
-      },
-    }
+				right = {
+					enabled = true,
+				},
+			},
+		}
 
-    map('n', '<F10>', function()
-      nnp.toggle()
-    end)
-  end,
+		map('n', '<F10>', function() nnp.toggle() end)
+	end,
 }

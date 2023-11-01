@@ -1,5 +1,6 @@
 return {
 	'nvim-neorg/neorg',
+	ft = 'norg',
 	event = { 'BufReadPre', 'BufNew *.norg' },
 	build = ':Neorg sync-parsers',
 	config = function()

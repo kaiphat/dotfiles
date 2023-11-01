@@ -2,9 +2,6 @@
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   ENVIROMENTS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-set -gx THEME 'light'
-set -gx THEME 'dark'
-
 set -Ux PROMPT_CHAR '󰵈 '
 set -Ux PROMPT_CHAR '❯'
 set -Ux PROMPT_CHAR '➜'
@@ -31,7 +28,8 @@ bind \cw backward-kill-word
 function fish_right_prompt
 end
 
-# paths
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     paths     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
 fish_add_path -aP $snap_bin_path
 fish_add_path -aP $ANDROID_HOME/emulator
 fish_add_path -aP $ANDROID_HOME/tools
@@ -52,6 +50,8 @@ fish_add_path -aP $HOME/.local/bin/razer-cli
 fish_add_path -aP $HOME/.yarn/bin
 fish_add_path -aP $HOME/.local/bin
 fish_add_path /opt/homebrew/bin
+set -x PATH "/Library/Frameworks/Python.framework/Versions/3.12/bin" "$PATH"
+if [ -f '/Users/ilyapu/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/ilyapu/Downloads/google-cloud-sdk/path.fish.inc'; end
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   ALIASES   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -87,10 +87,9 @@ end
 
 alias g "git"
 alias k "kubectl"
-alias t "tmux"
-alias tn "t new-session -s"
-alias ta "t attach-session"
-alias td "t detach"
+alias tn "tmux new-session -s"
+alias ta "tmux attach-session"
+alias td "tmux detach"
 alias st "speedtest"
 alias y "yarn"
 alias grep "grep -i --color"
@@ -185,20 +184,10 @@ end
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 zoxide init fish | source
+starship init fish | source
 
 if status is-interactive
 and not set -q TMUX
   tmux kill-session -t 0 || true
   tmux attach -t main || tmux new -s main
 end
-
-# bun
-set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/ilyapu/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/ilyapu/Downloads/google-cloud-sdk/path.fish.inc'; end
-
-# Setting PATH for Python 3.12
-# The original version is saved in /Users/ilyapu/.config/fish/config.fish.pysave
-set -x PATH "/Library/Frameworks/Python.framework/Versions/3.12/bin" "$PATH"

@@ -11,6 +11,7 @@ M.chars = {
 return {
   {
     'echasnovski/mini.align',
+    event = 'BufReadPre',
     config = function()
       local align = require 'mini.align'
 
@@ -20,6 +21,7 @@ return {
 
   {
     'echasnovski/mini.splitjoin',
+    event = 'BufReadPre',
     config = function()
       local m = require 'mini.splitjoin'
 
@@ -29,6 +31,7 @@ return {
 
   {
     'echasnovski/mini.surround',
+    event = 'BufReadPre',
     config = function()
       local m = require 'mini.surround'
 
@@ -49,6 +52,7 @@ return {
 
   {
     'echasnovski/mini.trailspace',
+    event = 'BufReadPre',
     config = function()
       local trail = require 'mini.trailspace'
 
@@ -62,6 +66,7 @@ return {
 
   {
     'echasnovski/mini.comment',
+    event = 'BufReadPre',
     config = function()
       local comment = require 'mini.comment'
 
@@ -78,6 +83,7 @@ return {
   {
     'echasnovski/mini.indentscope',
     enabled = false,
+    event = 'BufReadPre',
     config = function()
       local indent = require 'mini.indentscope'
 

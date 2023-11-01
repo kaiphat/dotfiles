@@ -3,8 +3,10 @@ _G.map = function(mode, keys, cmd, opts)
   vim.keymap.set(mode, keys, cmd, opts)
 end
 
-_G.dark_theme_enabled = function()
-  return os.getenv 'THEME' == 'dark'
+_G.get_theme = function()
+  local theme = os.getenv '@THEME'
+    print(theme)
+    return theme
 end
 
 _G.get_current_path = function()
@@ -53,6 +55,12 @@ end
 _G.merge = function(...)
   local args = { ... }
   return vim.tbl_extend('force', {}, unpack(args))
+end
+
+_G.loop = function(list, func)
+    for k, v in pairs(list) do
+        func(k, v)
+    end
 end
 
 _G.add_to_home_path = function(path)
@@ -119,4 +127,9 @@ _G.get_terminal_width = function()
     handle:close()
     return tonumber(result)
   end
+end
+
+_G.log = function(any)
+    local log = require('plenary.log').new({}, true)
+    log.info(any)
 end

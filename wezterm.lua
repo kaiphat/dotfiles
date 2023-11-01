@@ -53,10 +53,10 @@ local function build_font_params(name, with_italic, weight, params)
 end
 
 local font_config = ({
-	jet_brains = build_font_params('JetBrainsMono Nerd Font', true, weights.R, {
-		font_size = 9.5,
+	jet_brains = build_font_params('JetBrainsMono Nerd Font', true, weights.SB, {
+		font_size = 12,
 		cell_width = 0.9,
-		line_height = 1.05,
+		line_height = 1,
 	}),
 	mononoki = build_font_params('mononoki Nerd Font', true, weights.B, {
 		font_size = 10,
@@ -64,9 +64,9 @@ local font_config = ({
 		line_height = 1.3,
 	}),
 	mononoki_liga = build_font_params('Ligamononoki Nerd Font', false, weights.R, {
-		font_size = 10,
-		cell_width = 1,
-		line_height = 1.2,
+		font_size = 13.8,
+		cell_width = 0.9,
+		line_height = 1.15,
 	}),
 	agave = build_font_params('Agave Nerd Font', false, weights.R, {
 		font_size = 11,
@@ -104,28 +104,28 @@ local font_config = ({
 		line_height = 1.25,
 	}),
 	caskaydia_nerd_font = build_font_params('CaskaydiaCove Nerd Font', true, weights.R, {
-		font_size = 11,
-		cell_width = 1,
-		line_height = 1.25,
+		font_size = 12,
+		cell_width = 0.9,
+		line_height = 1.15,
 	}),
-	fant = build_font_params('Fantasque Sans Mono', false, weights.R, {
-		font_size = 10,
+	fant = build_font_params('Fantasque Sans Mono', false, weights.B, {
+		font_size = 12,
 		cell_width = 1,
-		line_height = 1.1,
+		line_height = 1.27,
 	}),
 	roboto = build_font_params('Roboto Mono', false, weights.R, {
 		font_size = 8.7,
 		cell_width = 1,
 		line_height = 1.15,
 	}),
-	fira = build_font_params('Fira Code', false, weights.R, {
-		font_size = 8.5,
-		cell_width = 1,
+	fira = build_font_params('FiraCode Nerd Font', false, weights.M, {
+		font_size = 11.5,
+		cell_width = 0.9,
 		line_height = 1.25,
 	}),
-	maple = build_font_params('Maple Mono NF', false, weights.R, {
+	maple = build_font_params('Maple Mono NF', false, weights.B, {
 		font_size = 12,
-		cell_width = 1,
+		cell_width = 0.85,
 		line_height = 1,
 		harfbuzz_features = {
 			'cv01',
@@ -137,7 +137,7 @@ local font_config = ({
 			'ss05',
 		},
 	}),
-}).mononoki_liga
+}).fant
 
 wezterm.on('gui-startup', function(cmd)
 	local _, _, window = wezterm.mux.spawn_window(cmd or {})
@@ -149,75 +149,79 @@ end)
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   THEME   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-local dark_colors = {
-	foreground = '#787C99',
-	--background = '#202837',
-	background = '#292640',
-	cursor_bg = '#baaaff',
-	cursor_border = '#c6d0f5',
-	cursor_fg = '#404060',
-	selection_fg = '#333355',
-	selection_bg = '#787c99',
-	scrollbar_thumb = '#222222',
-	ansi = {
-		'#404060',
-		'#F7768E',
-		'#9CC4B2',
-		'#88C0D0',
-		'#6e88a6',
-		'#9398cf',
-		'#c8ae9d',
-		'#E5E9F0',
-	},
-	brights = {
-		'#9CC4B2',
-		'#F7768E',
-		'#9CC4B2',
-		'#ffcc66',
-		'#6e88a6',
-		'#9398cf',
-		'#c8ae9d',
-		'#ACB0D0',
-	},
+local THEMES = {
+    DARK = 'DARK',
+    LIGHT = 'LIGHT'
 }
 
-local light_colors = {
-	foreground = '#787C99',
-	background = '#ffffff',
-	cursor_bg = '#F7768E',
-	cursor_border = '#F7768E',
-	cursor_fg = '#404060',
-	selection_fg = '#333355',
-	selection_bg = '#787c99',
-	scrollbar_thumb = '#222222',
-	ansi = {
-		'#404060',
-		'#F7768E',
-		'#9CC4B2',
-		'#88C0D0',
-		'#6e88a6',
-		'#9398cf',
-		'#c8ae9d',
-		'#E5E9F0',
-	},
-	brights = {
-		'#9CC4B2',
-		'#F7768E',
-		'#9CC4B2',
-		'#ffcc66',
-		'#6e88a6',
-		'#9398cf',
-		'#c8ae9d',
-		'#ACB0D0',
-	},
+local CURRENT_THEME = THEMES.DARK
+
+local COLORS = {
+    [THEMES.DARK] = {
+        foreground = '#787C99',
+        --background = '#202837',
+        background = '#292640',
+        cursor_bg = '#baaaff',
+        cursor_border = '#c6d0f5',
+        cursor_fg = '#404060',
+        selection_fg = '#333355',
+        selection_bg = '#787c99',
+        scrollbar_thumb = '#222222',
+        ansi = {
+            '#404060',
+            '#F7768E',
+            '#9CC4B2',
+            '#88C0D0',
+            '#6e88a6',
+            '#9398cf',
+            '#c8ae9d',
+            '#E5E9F0',
+        },
+        brights = {
+            '#9CC4B2',
+            '#F7768E',
+            '#9CC4B2',
+            '#ffcc66',
+            '#6e88a6',
+            '#9398cf',
+            '#c8ae9d',
+            '#ACB0D0',
+        },
+    },
+    [THEMES.LIGHT] = {
+        foreground = '#787C99',
+        background = '#ffffff',
+        cursor_bg = '#F7768E',
+        cursor_border = '#F7768E',
+        cursor_fg = '#404060',
+        selection_fg = '#333355',
+        selection_bg = '#787c99',
+        scrollbar_thumb = '#222222',
+        ansi = {
+            '#404060',
+            '#F7768E',
+            '#9CC4B2',
+            '#88C0D0',
+            '#6e88a6',
+            '#9398cf',
+            '#c8ae9d',
+            '#E5E9F0',
+        },
+        brights = {
+            '#9CC4B2',
+            '#F7768E',
+            '#9CC4B2',
+            '#ffcc66',
+            '#6e88a6',
+            '#9398cf',
+            '#c8ae9d',
+            '#ACB0D0',
+        },
+    }
 }
 
 local function get_colors()
-	if true or os.getenv 'THEME' == 'dark' then
-		return dark_colors
-	else
-		return light_colors
-	end
+    return COLORS[CURRENT_THEME]
 end
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈

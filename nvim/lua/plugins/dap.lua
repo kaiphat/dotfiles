@@ -29,6 +29,7 @@ return {
 			'mfussenegger/nvim-dap',
 			'mxsdev/nvim-dap-vscode-js',
 		},
+		enabled = false,
 		config = function()
 			local dap = require 'dap'
 			local dapui = require 'dapui'
@@ -45,6 +46,7 @@ return {
 
 	{
 		'theHamsta/nvim-dap-virtual-text',
+		enabled = false,
 		config = function()
 			local d = require 'nvim-dap-virtual-text'
 

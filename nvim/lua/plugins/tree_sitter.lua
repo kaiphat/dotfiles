@@ -40,12 +40,6 @@ M.get_mappings = function()
 	local unit = require 'utils.unit'
 
 	map({ 'x', 'o' }, 'u', function() unit.select(true) end)
-	-- map('n', ']]', function()
-	--   unit.move_down()
-	-- end)
-	-- map('n', '[[', function()
-	--   unit.move_up()
-	-- end)
 end
 
 return {
@@ -56,7 +50,8 @@ return {
 
 	{
 		'nvim-treesitter/nvim-treesitter',
-		event = 'BufReadPost',
+		version = false,
+		build = ':TSUpdate',
 		config = function()
 			local install = require 'nvim-treesitter.install'
 			local config = require 'nvim-treesitter.configs'
@@ -96,7 +91,7 @@ return {
 				highlight = {
 					enable = true,
 					use_languagetree = true,
-					additional_vim_regex_highlighting = true,
+					-- additional_vim_regex_highlighting = true,
 				},
 				indent = {
 					enable = true,

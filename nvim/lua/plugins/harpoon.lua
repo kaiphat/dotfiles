@@ -1,38 +1,22 @@
-local M = {}
-
-M.add_mappings = function()
-  local ui = require 'harpoon.ui'
-  local mark = require 'harpoon.mark'
-
-  map('n', 'mm', function()
-    mark.toggle_file()
-  end)
-  map('n', '\'m', function()
-    ui.toggle_quick_menu()
-  end)
-  map('n', 'mn', function()
-    ui.nav_next()
-  end)
-  map('n', 'mp', function()
-    ui.nav_prev()
-  end)
-end
-
 return {
-  'ThePrimeagen/harpoon',
-  config = function()
-    local harpoon = require 'harpoon'
+	'ThePrimeagen/harpoon',
+	keys = {
+		{ 'mm', function() require('harpoon.mark').toggle_file() end },
+		{ '\'m', function() require('harpoon.ui').toggle_quick_menu() end },
+		{ 'mn', function() require('harpoon.ui').nav_next() end },
+		{ 'mp', function() require('harpoon.ui').nav_prev() end },
+	},
+	config = function()
+		local harpoon = require 'harpoon'
 
-    harpoon.setup {
-      menu = {
-        width = 100,
-      },
+		harpoon.setup {
+			menu = {
+				width = 100,
+			},
 
-      global_settings = {
-        mark_branch = true,
-      },
-    }
-
-    M.add_mappings()
-  end,
+			global_settings = {
+				mark_branch = true,
+			},
+		}
+	end,
 }

@@ -23,7 +23,7 @@ def ds [] {
   docker stop $containers;
 }
 def dps [name = ''] {
-  let containers = (docker ps -a | from ssv | select ID STATUS CREATED NAMES PORTS);
+  let containers = (docker ps -a | from ssv | select "CONTAINER ID" STATUS CREATED NAMES PORTS);
   if $name == '' {
     $containers
   } else {
@@ -120,7 +120,6 @@ $env.config = {
     always_trash: false # always act as if -t was given. Can be overridden with -p
   }
   cd: {
-    abbreviations: true # allows `cd s/o/f` to expand to `cd some/other/folder`
   }
   table: {
     mode: rounded # basic, compact, compact_double, light, thin, with_love, rounded, reinforced, heavy, none, other
@@ -362,4 +361,16 @@ source ~/.cache/starship/init.nu
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   SCRIPTS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-use ~/dotfiles/nushell/get_weather.nu
+# ┈┈┈┈┈     Run once for nushell syntax highlighting     ┈┈┈┈┈
+#
+#let remote = "https://raw.githubusercontent.com/nushell/tree-sitter-nu/main/queries/"
+#let local = (
+    #$env.XDG_DATA_HOME?
+    #| default ($env.HOME | path join ".local" "share")
+    #| path join "nvim" "lazy" "nvim-treesitter" "queries" "nu"
+#)
+#
+#let file = "highlights.scm"
+#
+#mkdir $local
+#http get ([$remote $file] | str join "/") | save --force ($local | path join $file)
