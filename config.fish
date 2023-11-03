@@ -2,12 +2,6 @@
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   ENVIROMENTS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-set -Ux PROMPT_CHAR '󰵈 '
-set -Ux PROMPT_CHAR '❯'
-set -Ux PROMPT_CHAR '➜'
-
-set pure_symbol_prompt $PROMPT_CHAR
-
 set -gx nvm_default_version v20.8.1
 set -gx ANDROID_HOME $HOME/Android/Sdk
 set -gx EDITOR nvim

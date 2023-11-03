@@ -2,74 +2,80 @@ local M = {}
 
 M.char = '▏'
 
-M.add_mappings = function()
-  local gs = require 'gitsigns'
-
-  map('n', '<leader>hn', function()
-    if vim.wo.diff then
-      return ']c'
-    end
-    vim.schedule(function()
-      gs.next_hunk()
-    end)
-    return '<Ignore>'
-  end, { expr = true })
-
-  map('n', '<leader>hp', function()
-    if vim.wo.diff then
-      return '[c'
-    end
-    vim.schedule(function()
-      gs.prev_hunk()
-    end)
-    return '<Ignore>'
-  end, { expr = true })
-
-  map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
-  map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>')
-  map('n', '<leader>hS', gs.stage_buffer)
-  map('n', '<leader>hu', gs.undo_stage_hunk)
-  map('n', '<leader>hR', gs.reset_buffer)
-  map('n', '<leader>hc', gs.preview_hunk)
-  map('n', '<F2>', gs.toggle_signs)
-  map('n', '<leader>hb', function()
-    gs.blame_line { full = true }
-  end)
-  map('n', '<leader>hB', gs.toggle_current_line_blame)
-  map('n', '<leader>hd', gs.diffthis)
-  map('n', '<leader>hD', function()
-    gs.diffthis '~'
-  end)
-  -- map('n', '<leader>td', gs.toggle_deleted)
-  map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
-end
+M.base_keys = '<leader>g'
 
 return {
-  'lewis6991/gitsigns.nvim',
-  event = 'BufReadPre',
-  config = function()
-    local gitsigns = require 'gitsigns'
+	'lewis6991/gitsigns.nvim',
+	event = 'BufReadPre',
+	keys = {
+		{
+			M.base_keys .. 'n',
+			function()
+				if vim.wo.diff then return ']c' end
+				vim.schedule(function() require('gitsigns').next_hunk() end)
+				return '<Ignore>'
+			end,
+		},
+		{
+			M.base_keys .. 'p',
+			function()
+				if vim.wo.diff then return '[c' end
+				vim.schedule(function() require('gitsigns').prev_hunk() end)
+				return '<Ignore>'
+			end,
+		},
+		{ M.base_keys .. 'S', function() require('gitsigns').stage_buffer() end },
+		{ M.base_keys .. 'u', function() require('gitsigns').undo_stage_hunk() end },
+		{ M.base_keys .. 'R', function() require('gitsigns').reset_buffer() end },
+		{ M.base_keys .. 'c', function() require('gitsigns').preview_hunk() end },
+		{ M.base_keys .. 'b', function() require('gitsigns').blame_line { full = true } end },
+		{ M.base_keys .. 'B', function() require('gitsigns').toggle_current_line_blame() end },
+		{ M.base_keys .. 'd', function() require('gitsigns').diffthis() end },
+		{ M.base_keys .. 'D', function() require('gitsigns').diffthis '~' end },
+		{ M.base_keys .. 's', function() require('gitsigns').stage_hunk() end, mode = { 'n', 'v' } },
+		{ M.base_keys .. 'r', function() require('gitsigns').reset_hunk() end, mode = { 'n', 'v' } },
+		{ 'ih', function() require('gitsigns').select_hunk() end, mode = { 'o', 'x' } },
+	},
+	config = function()
+		local gitsigns = require 'gitsigns'
 
-    gitsigns.setup {
-      signs = {
-        add = { hl = 'GitSignsAdd', text = M.char, numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
-        change = { hl = 'GitSignsChange', text = M.char, numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn' },
-        delete = { hl = 'GitSignsDelete', text = M.char, numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn' },
-        topdelete = { hl = 'GitSignsDelete', text = M.char, numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn' },
-        changedelete = { hl = 'GitSignsChange', text = M.char, numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn' },
-        untracked = { hl = 'GitSignsAdd', text = M.char, numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
-      },
-      signcolumn = true,
-      _signs_staged_enable = true,
-      linehl = false,
-      numhl = false,
-      current_line_blame = false,
-      sign_priority = 6,
-      update_debounce = 100,
-      status_formatter = nil,
-      on_attach = function()
-        M.add_mappings()
-      end,
-    }
-  end,
+		gitsigns.setup {
+			signs = {
+				add = { hl = 'GitSignsAdd', text = M.char, numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
+				change = {
+					hl = 'GitSignsChange',
+					text = M.char,
+					numhl = 'GitSignsChangeNr',
+					linehl = 'GitSignsChangeLn',
+				},
+				delete = {
+					hl = 'GitSignsDelete',
+					text = M.char,
+					numhl = 'GitSignsDeleteNr',
+					linehl = 'GitSignsDeleteLn',
+				},
+				topdelete = {
+					hl = 'GitSignsDelete',
+					text = M.char,
+					numhl = 'GitSignsDeleteNr',
+					linehl = 'GitSignsDeleteLn',
+				},
+				changedelete = {
+					hl = 'GitSignsChange',
+					text = M.char,
+					numhl = 'GitSignsChangeNr',
+					linehl = 'GitSignsChangeLn',
+				},
+				untracked = { hl = 'GitSignsAdd', text = M.char, numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
+			},
+			signcolumn = true,
+			_signs_staged_enable = true,
+			linehl = false,
+			numhl = false,
+			current_line_blame = false,
+			sign_priority = 6,
+			update_debounce = 100,
+			status_formatter = nil,
+		}
+	end,
 }

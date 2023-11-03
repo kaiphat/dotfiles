@@ -21,7 +21,7 @@ set config_paths                  \
     zk                            \
     alacritty                     \
     fontconfig/fonts.conf         \
-    wezterm/wezterm.lua           \
+    wezterm                       \
     helix                         \
     picom                         \
     bspwm                         \

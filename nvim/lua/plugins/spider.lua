@@ -1,11 +1,16 @@
 return {
 	'chrisgrieser/nvim-spider',
 	event = 'BufReadPre',
-	config = function()
-		local s = require 'spider'
+	keys = {
+        { 'w', function () require'spider'.motion 'w' end },
+        { 'e', function () require'spider'.motion 'e' end },
+        { 'b', function () require'spider'.motion 'b' end },
+        { 'ge', function () require'spider'.motion 'ge' end },
 
-		map({ 'n', 'o', 'x' }, 'w', function() s.motion 'w' end)
-		map({ 'n', 'o', 'x' }, 'e', function() s.motion 'e' end)
-		map({ 'n', 'o', 'x' }, 'b', function() s.motion 'b' end)
+	},
+	config = function()
+		require 'spider'.setup {
+            skipInsignificantPunctuation = false
+		}
 	end,
 }

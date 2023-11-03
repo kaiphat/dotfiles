@@ -11,28 +11,6 @@ M.set_lsp_symbols = function()
 	end
 end
 
-M.add_mappings = function()
-	map('n', 'go', function()
-		vim.cmd 'vs'
-		vim.lsp.buf.definition()
-	end)
-	map('n', 'gd', function() vim.lsp.buf.definition() end)
-	map('n', 'K', function() vim.lsp.buf.hover() end)
-	map('n', '<leader>lk', function() vim.lsp.buf.signature_help() end)
-	map('n', '<space>le', function() vim.diagnostic.open_float() end)
-	map('n', '[d', function() vim.diagnostic.goto_prev() end)
-	map('n', ']d', function() vim.diagnostic.goto_next() end)
-	map('n', '<space>lq', function() vim.diagnostic.setqflist() end)
-	map('n', '<space>ls', function() vim.diagnostic.show() end)
-	map('n', '<space>la', function() vim.lsp.buf.code_action() end)
-	map('n', '<space>lr', function() vim.lsp.buf.rename() end)
-	map('n', '<leader>lf', function()
-		vim.lsp.buf.format {
-			timeout_ms = 5000,
-		}
-	end)
-end
-
 M.set_handlers = function()
 	vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 		virtual_text = {
@@ -180,10 +158,14 @@ return {
 		'pmizio/typescript-tools.nvim',
 		enabled = true,
 		event = 'BufReadPre',
+		keys = {
+			{ '<leader>ti', ':TSToolsAddMissingImports<cr>' },
+			{ '<leader>tr', ':TSToolsRenameFile<cr>' },
+			{ '<leader>td', ':TSToolsRemoveUnused<cr>' },
+			{ '<leader>to', ':TSToolsOrganizeImports<cr>' },
+		},
 		config = function()
-			local ts = require 'typescript-tools'
-
-			ts.setup {
+			require('typescript-tools').setup {
 				on_attach = M.on_attach,
 				settings = {
 					tsserver_file_preferences = {
@@ -194,11 +176,6 @@ return {
 					},
 				},
 			}
-
-			map('n', '<leader>ti', ':TSToolsAddMissingImports<cr>')
-			map('n', '<leader>tr', ':TSToolsRenameFile<cr>')
-			map('n', '<leader>td', ':TSToolsRemoveUnused<cr>')
-			map('n', '<leader>to', ':TSToolsOrganizeImports<cr>')
 		end,
 	},
 
@@ -210,11 +187,34 @@ return {
 			'jose-elias-alvarez/null-ls.nvim',
 			'pmizio/typescript-tools.nvim',
 		},
+		keys = {
+			{ 'gd', function() vim.lsp.buf.definition() end },
+			{ 'K', function() vim.lsp.buf.hover() end },
+			{ '<leader>lk', function() vim.lsp.buf.signature_help() end },
+			{ '<space>le', function() vim.diagnostic.open_float() end },
+			{ '[d', function() vim.diagnostic.goto_prev() end },
+			{ ']d', function() vim.diagnostic.goto_next() end },
+			{ '<space>lq', function() vim.diagnostic.setqflist() end },
+			{ '<space>ls', function() vim.diagnostic.show() end },
+			{ '<space>la', function() vim.lsp.buf.code_action() end },
+			{ '<space>lr', function() vim.lsp.buf.rename() end },
+			{
+				'go',
+				function()
+					vim.cmd 'vs'
+					vim.lsp.buf.definition()
+				end,
+			},
+			{ '<leader>lf', function()
+				vim.lsp.buf.format {
+					timeout_ms = 5000,
+				}
+			end },
+		},
 		config = function()
 			local config = require 'lspconfig'
 
 			M.set_handlers()
-			M.add_mappings()
 
 			for server_name, opts in pairs(M.get_servers()) do
 				local server = opts.custom_server or config[server_name]

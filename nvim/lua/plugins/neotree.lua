@@ -132,7 +132,7 @@ return {
 				},
 				popup = {
 					size = {
-						width = 70,
+						width = 90,
 						height = '60%',
 					},
 				},
