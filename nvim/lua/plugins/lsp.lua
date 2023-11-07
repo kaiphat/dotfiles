@@ -69,7 +69,9 @@ M.get_servers = function()
 		sqlls = {},
 		html = {},
 		emmet_language_server = {
-			filetypes = { 'rust' },
+			filetypes = {
+				'html',
+			},
 		},
 		graphql = {},
 		pylsp = {},
@@ -104,25 +106,25 @@ M.get_servers = function()
 		rust_analyzer = {
 			settings = {
 				['rust-analyzer'] = {
-					assist = {
-						importGranularity = 'module',
-						importPrefix = 'self',
-					},
-					diagnostics = {
-						enable = true,
-						enableExperimental = true,
-					},
-					cargo = {
-						loadOutDirsFromCheck = true,
-					},
-					procMacro = {
-						enable = true,
-					},
-					inlayHints = {
-						chainingHints = true,
-						parameterHints = true,
-						typeHints = true,
-					},
+					-- assist = {
+					-- 	importGranularity = 'module',
+					-- 	importPrefix = 'self',
+					-- },
+					-- diagnostics = {
+					-- 	enable = true,
+					-- 	enableExperimental = true,
+					-- },
+					-- cargo = {
+					-- 	loadOutDirsFromCheck = true,
+					-- },
+					-- procMacro = {
+					-- 	enable = true,
+					-- },
+					-- inlayHints = {
+					-- 	chainingHints = true,
+					-- 	parameterHints = true,
+					-- 	typeHints = true,
+					-- },
 				},
 			},
 		},
@@ -183,7 +185,6 @@ return {
 		'neovim/nvim-lspconfig',
 		event = 'BufReadPre',
 		dependencies = {
-			'hrsh7th/cmp-nvim-lsp',
 			'jose-elias-alvarez/null-ls.nvim',
 			'pmizio/typescript-tools.nvim',
 		},
@@ -205,19 +206,15 @@ return {
 					vim.lsp.buf.definition()
 				end,
 			},
-			{ '<leader>lf', function()
-				vim.lsp.buf.format {
-					timeout_ms = 5000,
-				}
-			end },
+			{ '<leader>lf', function() vim.lsp.buf.format { timeout_ms = 5000 } end },
 		},
 		config = function()
-			local config = require 'lspconfig'
+			local lsp = require 'lspconfig'
 
 			M.set_handlers()
 
 			for server_name, opts in pairs(M.get_servers()) do
-				local server = opts.custom_server or config[server_name]
+				local server = opts.custom_server or lsp[server_name]
 				local settings = opts.custom_settings
 					or merge({
 						on_attach = M.on_attach,

@@ -1,7 +1,7 @@
 return {
 	'altermo/ultimate-autopair.nvim',
 	branch = 'v0.6',
-	event = { 'InsertEnter', 'CmdlineEnter' },
+	event = { 'InsertEnter' },
 	config = function()
 		local p = require 'ultimate-autopair'
 

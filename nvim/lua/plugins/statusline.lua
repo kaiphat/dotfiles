@@ -194,11 +194,6 @@ return {
 				bg = 'NONE',
 			},
 			disable = {
-				filetypes = {
-					'NvimTree',
-					'packer',
-					'Telescope',
-				},
 			},
 			components = {
 				active = {

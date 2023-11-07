@@ -32,17 +32,17 @@ local function build_font_params(name, with_italic, weight, params)
 end
 
 return {
-	jet_brains = build_font_params('JetBrainsMono Nerd Font', true, weights.SB, {
+	jet_brains = build_font_params('JetBrainsMono Nerd Font', false, weights.SB, {
 		font_size = 12,
 		cell_width = 0.9,
-		line_height = 1,
+		line_height = 1.2,
 	}),
 	mononoki = build_font_params('mononoki Nerd Font', true, weights.B, {
 		font_size = 10,
 		cell_width = 0.8,
 		line_height = 1.3,
 	}),
-	mononoki_liga = build_font_params('Ligamononoki Nerd Font', false, weights.R, {
+	mononoki_liga = build_font_params('Ligamononoki Nerd Font', false, weights.B, {
 		font_size = 13.8,
 		cell_width = 0.9,
 		line_height = 1.15,
@@ -51,6 +51,11 @@ return {
 		font_size = 11,
 		cell_width = 0.8,
 		line_height = 1.25,
+	}),
+	agave_code = build_font_params('Agave Code', false, weights.R, {
+		font_size = 14,
+		cell_width = 1,
+		line_height = 1.26,
 	}),
 	victor = build_font_params('VictorMono Nerd Font', false, weights.SB, {
 		font_size = 10,
@@ -82,7 +87,7 @@ return {
 		cell_width = 1,
 		line_height = 1.25,
 	}),
-	caskaydia_nerd_font = build_font_params('CaskaydiaCove Nerd Font', true, weights.R, {
+	caskaydia_nerd_font = build_font_params('CaskaydiaCove Nerd Font', false, weights.R, {
 		font_size = 12,
 		cell_width = 0.9,
 		line_height = 1.15,

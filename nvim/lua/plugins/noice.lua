@@ -1,3 +1,8 @@
+local ICONS = {
+    ARROW = '➜',
+    BRACKET = '❯',
+}
+
 return {
 	'folke/noice.nvim',
 	event = 'BufReadPre',
@@ -32,10 +37,10 @@ return {
 
 			cmdline = {
 				format = {
-                    cmdline = { pattern = '^:', icon = '➜', lang = 'vim' },
+                    cmdline = { pattern = '^:', icon = ICONS.BRACKET, lang = 'vim' },
 					search_down = { kind = 'search', pattern = '^/', icon = ' ', lang = 'regex' },
 					search_up = { kind = 'search', pattern = '^%?', icon = ' ', lang = 'regex' },
-					filter = { pattern = '^:%s*!', icon = '➜', lang = 'bash' },
+					filter = { pattern = '^:%s*!', icon = ICONS.BRACKET, lang = 'bash' },
 					lua = { pattern = '^:%s*lua%s+', icon = '', lang = 'lua' },
 					help = { pattern = '^:%s*h%s+', icon = ' ' },
 					input = {}, -- Used by input()

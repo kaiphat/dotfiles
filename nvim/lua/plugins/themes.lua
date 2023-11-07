@@ -52,6 +52,8 @@ local themes = {
 					GitSignsChange = { bg = 'NONE' },
 					GitSignsDelete = { bg = 'NONE' },
 					MiniCursorword = { underline = false, bg = 'foam', blend = 30 },
+					['@variable'] = { italic = false },
+					['@punctuation'] = { italic = true },
 				},
 			}
 

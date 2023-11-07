@@ -16,24 +16,26 @@ M.tools = {
 
 return {
 	{
+		'WhoIsSethDaniel/mason-tool-installer.nvim',
+		cmd = { 'MasonToolsInstall' },
+		config = function()
+			require('mason-tool-installer').setup {
+				auto_update = false,
+				run_on_start = false,
+				ensure_installed = M.tools,
+			}
+		end,
+	},
+
+	{
 		'williamboman/mason.nvim',
 		event = 'BufReadPre',
-		dependencies = {
-			'WhoIsSethDaniel/mason-tool-installer.nvim',
-		},
 		config = function()
-			local mason = require 'mason'
-			local tool_installer = require 'mason-tool-installer'
-
-			mason.setup {
+			require('mason').setup {
 				ui = {
 					border = 'rounded',
 					width = 0.5,
 				},
-			}
-
-			tool_installer.setup {
-				ensure_installed = M.tools,
 			}
 		end,
 	},

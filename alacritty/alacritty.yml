@@ -5,9 +5,11 @@ window:
   padding:
    x: 0
    y: 0
-  opacity: 0.95
+  opacity: 1
   dynamic_padding: false
-  # startup_mode: Maximized
+  startup_mode: SimpleFullscreen
+  option_as_alt: Both
+  decorations: Transparent
 
 scrolling:
   history: 100000
@@ -18,25 +20,45 @@ scrolling:
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 font:
-  size: 9
-  offset:
-    x: 0
-    y: 1
-  glyph_offset:
-    x: 0
-    y: 1
-  normal:
-    family: JetBrains Mono
-    style: Medium
-  bold:
-    family: JetBrains Mono
-    style: Medium
-  italic:
-    family: JetBrains Mono
-    style: Medium Italic
-  bold_italic:
-    family: JetBrains Mono
-    style: Medium Italic
+  # size: 9
+  # offset:
+  #   x: 0
+  #   y: 1
+  # glyph_offset:
+  #   x: 0
+  #   y: 1
+  # normal:
+  #   family: JetBrains Mono
+  #   style: Medium
+  # bold:
+  #   family: JetBrains Mono
+  #   style: Medium
+  # italic:
+  #   family: JetBrains Mono
+  #   style: Medium Italic
+  # bold_italic:
+  #   family: JetBrains Mono
+  #   style: Medium Italic
+
+  # size: 13
+  # offset:
+  #   x: 0
+  #   y: 1
+  # glyph_offset:
+  #   x: 0
+  #   y: 1
+  # normal:
+  #   family: JetBrainsMono Nerd Font
+  #   style: Regular
+  # bold:
+  #   family: JetBrainsMono Nerd Font
+  #   style: Regular
+  # italic:
+  #   family: JetBrainsMono Nerd Font
+  #   style: Regular
+  # bold_italic:
+  #   family: JetBrainsMono Nerd Font
+  #   style: Regular
 
   # size: 10.5
   # offset:
@@ -56,6 +78,26 @@ font:
   #   style: Regular
   # bold_italic:
   #   family: Agave Nerd Font
+  #   style: Regular
+
+  # size: 14
+  # offset:
+  #   x: 0
+  #   y: 3
+  # glyph_offset:
+  #   x: 0
+  #   y: 1
+  # normal:
+  #   family: Agave Code
+  #   style: Regular
+  # bold:
+  #   family: Agave Code
+  #   style: Regular
+  # italic:
+  #   family: Agave Code
+  #   style: Regular
+  # bold_italic:
+  #   family: Agave Code
   #   style: Regular
 
   # size: 10
@@ -78,45 +120,25 @@ font:
   #   family: Mononoki Nerd Font
   #   style: Italic
 
-  size: 9.5
+  size: 13
   offset:
     x: 0
     y: 1
   glyph_offset:
     x: 0
-    y: 1
+    y: 2
   normal:
-    family: Operator Mono Lig
-    style: Bold
+    family: OperatorMonoLig Nerd Font
+    style: Regular
   bold:
-    family: Operator Mono Lig
-    style: Bold
+    family: OperatorMonoLig Nerd Font
+    style: Regular
   italic:
-    family: Operator Mono Lig
-    style: Bold Italic
+    family: OperatorMonoLig Nerd Font
+    style: Regular
   bold_italic:
-    family: Operator Mono Lig
-    style: Bold Italic
-
-  # size: 10
-  # offset:
-  #   x: -1
-  #   y: 2
-  # glyph_offset:
-  #   x: 0
-  #   y: 1
-  # normal:
-  #   family: MonoLisa
-  #   style: Bold
-  # bold:
-  #   family: MonoLisa
-  #   style: Bold
-  # italic:
-  #   family: MonoLisa
-  #   style: Bold Italic
-  # bold_italic:
-  #   family: MonoLisa
-  #   style: Bold Italic
+    family: OperatorMonoLig Nerd Font
+    style: Regular
 
   # size: 9
   # offset:
@@ -242,42 +264,77 @@ font:
 #┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   COLORS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 #┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
+# colors:
+#   primary:
+#     #background: '#202837'
+#    background: '#292640'
+#    foreground: '#787C99'
+#   cursor:
+#    text: '#000000'
+#    # cursor: '#99d1db'
+#    # cursor: '#c6d0f5'
+#    # cursor: '#fbdf90'
+#    cursor: '#baaaff'
+#   normal:
+#     black:   '#404060'
+#     red:     '#F7768E'
+#     green:   '#9CC4B2'
+#     yellow:  '#88C0D0'
+#     blue:    '#6e88a6'
+#     magenta: '#9398cf'
+#     cyan:    '#c8ae9d'
+#     white:   '#787C99'
+#   bright:
+#     black:   '#9CC4B2'
+#     red:     '#F7768E'
+#     green:   '#9CC4B2'
+#     yellow:  '#9398cf'
+#     blue:    '#6e88a6'
+#     magenta: '#9398cf'
+#     cyan:    '#c8ae9d'
+#     white:   '#ACB0D0'
+
 colors:
   primary:
-    #background: '#202837'
-   background: '#292640'
-   foreground: '#787C99'
-
+    background: '#292640'
+    foreground: '#787C99'
   cursor:
-   text: '#000000'
-   # cursor: '#99d1db'
-   # cursor: '#c6d0f5'
-   # cursor: '#fbdf90'
-   cursor: '#baaaff'
-
+    text: "0xe0def4"
+    cursor: '#baaaff'
+  vi_mode_cursor:
+    text: "0xe0def4"
+    cursor: "0x56526e"
+  line_indicator:
+    foreground: None
+    background: None
+  selection:
+    text: "0xe0def4"
+    background: "0x44415a"
   normal:
-    black:   '#404060'
-    red:     '#F7768E'
-    green:   '#9CC4B2'
-    yellow:  '#88C0D0'
-    blue:    '#6e88a6'
-    magenta: '#9398cf'
-    cyan:    '#c8ae9d'
-    white:   '#787C99'
-
+    black: "0x393552"
+    red: "0xeb6f92"
+    green: "0x3e8fb0"
+    yellow: "0xf6c177"
+    blue: "0x9ccfd8"
+    magenta: "0xc4a7e7"
+    cyan: "0xea9a97"
+    white: "0xe0def4"
   bright:
-    black:   '#9CC4B2'
-    red:     '#F7768E'
-    green:   '#9CC4B2'
-    yellow:  '#9398cf'
-    blue:    '#6e88a6'
-    magenta: '#9398cf'
-    cyan:    '#c8ae9d'
-    white:   '#ACB0D0'
-
-shell:
-  program: /usr/bin/fish
-  # program: /home/ipunko/.cargo/bin/nu
+    black: "0x6e6a86"
+    red: "0xeb6f92"
+    green: "0x3e8fb0"
+    yellow: "0xf6c177"
+    blue: "0x9ccfd8"
+    magenta: "0xc4a7e7"
+    cyan: "0xea9a97"
+    white: "0xe0def4"
+  hints:
+    start:
+      foreground: "#908caa"
+      background: "#2a273f"
+    end:
+      foreground: "#6e6a86"
+      background: "#2a273f"
 
 mouse:
   hide_when_typing: true
@@ -288,7 +345,7 @@ bell:
 
 cursor:
   style:
-    blinking: Always
+    blinking: Never
   blink_interval: 750
   thickness: 0.3
 

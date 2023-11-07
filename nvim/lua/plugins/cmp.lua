@@ -9,7 +9,6 @@ M.source_comparator = function(item1, item2)
 	local sources = {
 		nvim_lsp = 30,
 		luasnip = 31,
-		treesitter = 30,
 		buffer = 20,
 	}
 
@@ -27,15 +26,9 @@ M.get_sources = function()
 	local cmp = require 'cmp'
 
 	return cmp.config.sources {
-		{
-			name = 'nvim_lsp',
-		},
-		{
-			name = 'luasnip',
-		},
-		{
-			name = 'path',
-		},
+		{ name = 'nvim_lsp' },
+		{ name = 'luasnip' },
+		{ name = 'path' },
 		{
 			name = 'buffer',
 			option = {
@@ -70,9 +63,7 @@ M.get_format = function()
 
 			local strings = vim.split(kind.kind, '%s', { trimempty = true })
 
-      if strings[1] == 'TypeParameter' then
-        strings[1] = 'T'
-      end
+			if strings[1] == 'TypeParameter' then strings[1] = 'T' end
 
 			kind.kind = ' ' .. strings[1] .. ' '
 			kind.menu = entry.completion_item.detail
@@ -161,12 +152,9 @@ return {
 	},
 	config = function()
 		local cmp = require 'cmp'
-		-- local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
 		local types = require 'cmp.types'
 		local luasnip = require 'luasnip'
 		local compare = require 'cmp.config.compare'
-
-		-- cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
 		compare.locality.lines_count = 300
 
@@ -221,9 +209,9 @@ return {
 			},
 			mapping = M.get_mappings(),
 			performance = {
-				debounce = 0,
-				throttle = 0,
-				fetching_timeout = 500,
+				debounce = 100,
+				throttle = 100,
+				fetching_timeout = 1000,
 			},
 			sources = M.get_sources(),
 			experimental = {

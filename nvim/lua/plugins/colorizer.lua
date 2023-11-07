@@ -1,10 +1,8 @@
 return {
 	'norcalli/nvim-colorizer.lua',
-	event = 'BufReadPre',
+	cmd = { 'ColorizerAttachToBuffer' },
 	config = function()
-		local colorizer = require 'colorizer'
-
-		colorizer.setup {
+		require('colorizer').setup {
 			'*',
 			'!Lazy',
 			'!Notify',

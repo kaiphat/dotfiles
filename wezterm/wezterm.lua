@@ -1,9 +1,9 @@
-require'lua/helpers'
+require 'lua/helpers'
 local wezterm = require 'wezterm'
-local fonts = require'lua/fonts'
-local DARK_ROSE_PINE = require'lua/themes/dark_rose_pine'
-local DARK = require'lua/themes/dark'
-local LIGHT = require'lua/themes/light'
+local fonts = require 'lua/fonts'
+local DARK_ROSE_PINE = require 'lua/themes/dark_rose_pine'
+local DARK = require 'lua/themes/dark'
+local LIGHT = require 'lua/themes/light'
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   FONTS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -16,13 +16,26 @@ wezterm.on('gui-startup', function(cmd)
 end)
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   BACKGROUND   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+local background = {
+	window_background_opacity = 1,
+    window_background_image = '/Users/ilyapu/Downloads/cristina-gottardi-CSpjU6hYo_0-unsplash.jpg',
+    window_background_image_hsb = {
+        brightness = 0.03,
+        saturation = 1.0,
+    },
+}
+
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   THEME   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 local THEMES = {
-    DARK = DARK,
-    LIGHT = LIGHT,
-    DARK_ROSE_PINE = DARK_ROSE_PINE,
+	DARK = DARK,
+	LIGHT = LIGHT,
+	DARK_ROSE_PINE = DARK_ROSE_PINE,
 }
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -44,7 +57,6 @@ local config = {
 	cursor_blink_rate = 1000,
 	max_fps = 100,
 	animation_fps = 100,
-	window_background_opacity = 1,
 	default_cursor_style = 'BlinkingBlock',
 	warn_about_missing_glyphs = false,
 	use_cap_height_to_scale_fallback_fonts = true,
@@ -75,4 +87,4 @@ local config = {
 	},
 }
 
-return merge(config, fonts.maple)
+return merge(config, fonts.agave_code, background)
