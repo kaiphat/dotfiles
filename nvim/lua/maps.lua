@@ -39,8 +39,8 @@ map('n', 'L', '$')
 
 map('n', '<C-s>', ':wa<cr>')
 
-map('n', '<C-d>', function() vim.api.nvim_feedkeys('4j', 'n', true) end)
-map('n', '<C-u>', function() vim.api.nvim_feedkeys('4k', 'n', true) end)
+map({'n', 'v'}, '<C-d>', function() vim.api.nvim_feedkeys('4j', 'n', true) end)
+map({'n', 'v'}, '<C-u>', function() vim.api.nvim_feedkeys('4k', 'n', true) end)
 
 map('n', 'x', function()
 	if vim.fn.col '.' == 1 then

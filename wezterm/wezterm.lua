@@ -21,11 +21,11 @@ end)
 
 local background = {
 	window_background_opacity = 1,
-    window_background_image = '/Users/ilyapu/Downloads/cristina-gottardi-CSpjU6hYo_0-unsplash.jpg',
-    window_background_image_hsb = {
-        brightness = 0.03,
-        saturation = 1.0,
-    },
+	-- window_background_image = '/Users/ilyapu/Downloads/jan-ciganek-RRyrWaLoAbY-unsplash.jpg',
+	-- window_background_image_hsb = {
+	--     brightness = 0.02,
+	--     saturation = 1.0,
+	-- },
 }
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -44,7 +44,7 @@ local THEMES = {
 
 local config = {
 	front_end = 'WebGpu',
-	colors = THEMES.DARK_ROSE_PINE,
+	-- freetype_load_target = 'HorizontalLcd',
 	window_padding = {
 		left = 0,
 		right = 0,
@@ -62,29 +62,23 @@ local config = {
 	use_cap_height_to_scale_fallback_fonts = true,
 	disable_default_key_bindings = true,
 	adjust_window_size_when_changing_font_size = false,
+	window_close_confirmation = 'NeverPrompt',
+	mouse_bindings = {
+		{
+			event = { Up = { streak = 1, button = 'Left' } },
+			mods = 'CTRL',
+			action = wezterm.action.OpenLinkAtMouseCursor,
+		},
+	},
 
 	keys = {
-		{
-			key = 'C',
-			mods = 'CTRL',
-			action = wezterm.action.CopyTo 'Clipboard',
-		},
-		{
-			key = 'V',
-			mods = 'CTRL',
-			action = wezterm.action.PasteFrom 'Clipboard',
-		},
-		{
-			key = '=',
-			mods = 'CTRL',
-			action = wezterm.action.IncreaseFontSize,
-		},
-		{
-			key = '-',
-			mods = 'CTRL',
-			action = wezterm.action.DecreaseFontSize,
-		},
+		{ key = 'C', mods = 'CTRL', action = wezterm.action.CopyTo 'Clipboard' },
+		{ key = 'V', mods = 'CTRL', action = wezterm.action.PasteFrom 'Clipboard' },
+		{ key = 'v', mods = 'SUPER', action = wezterm.action.PasteFrom 'Clipboard' },
+		{ key = '=', mods = 'CTRL', action = wezterm.action.IncreaseFontSize },
+		{ key = '-', mods = 'CTRL', action = wezterm.action.DecreaseFontSize },
+		{ key = 'q', mods = 'CMD', action = wezterm.action.QuitApplication },
 	},
 }
 
-return merge(config, fonts.agave_code, background)
+return merge(config, fonts.maple, { colors = THEMES.DARK_ROSE_PINE }, background)

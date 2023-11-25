@@ -1,3 +1,20 @@
+--  nc = '#1f1d30',
+--  base = '#232136',
+--  surface = '#2a273f',
+--  overlay = '#393552',
+--  muted = '#6e6a86',
+--  subtle = '#908caa',
+--  text = '#e0def4',
+--  love = '#eb6f92',
+--  gold = '#f6c177',
+--  rose = '#ea9a97',
+--  pine = '#3e8fb0',
+--  foam = '#9ccfd8',
+--  iris = '#c4a7e7',
+--  highlight_low = '#2a283e',
+--  highlight_med = '#44415a',
+--  highlight_high = '#56526e',
+
 local themes = {
 	DARK = {
 		dir = '../themes/dark_theme.lua',
@@ -35,25 +52,37 @@ local themes = {
 	ROSE_PINE_DARK = {
 		'rose-pine/neovim',
 		priority = 1000,
+		lazy = false,
 		name = 'rose-pine',
 		config = function()
-			local rp = require('rose-pine')
+			local rp = require 'rose-pine'
 
 			rp.setup {
-			    variant =  'moon',
-			    dark_variant = 'moon',
+				variant = 'moon',
+				dark_variant = 'moon',
 				dim_nc_background = false,
 				disable_background = true,
 				disable_float_background = true,
 
 				highlight_groups = {
-                    Normal = { fg = '#908caa' },
-					GitSignsAdd = { bg = 'NONE' },
-					GitSignsChange = { bg = 'NONE' },
-					GitSignsDelete = { bg = 'NONE' },
+					Normal = { fg = '#908caa' },
+                    NormalNC = { fg = '#908caa' },
+					GitSignsAdd = { bg = 'none' },
+					GitSignsChange = { bg = 'none' },
+					GitSignsDelete = { bg = 'none' },
 					MiniCursorword = { underline = false, bg = 'foam', blend = 30 },
-					['@variable'] = { italic = false },
+					HopNextKey1 = { fg = 'love' },
+					HopNextKey2 = { fg = 'pine' },
+					VertSplit = { fg = '#405879' },
+					TreesitterContext = { bg = 'subtle', blend = 20 },
+					['@variable'] = { italic = false, fg = '#c4c6e7' },
+					['@lsp.type.property'] = { italic = false },
+					['@property.typescript'] = { italic = false, fg = '#babbf1' },
 					['@punctuation'] = { italic = true },
+					['@attribute'] = { fg = 'iris' },
+					['@neorg.headings.1.title'] = { fg = 'iris' },
+					['@neorg.lists.unordered.prefix.norg'] = { fg = 'iris' },
+					['@neorg.todo_items.done.norg'] = { fg = 'foam' },
 				},
 			}
 
@@ -63,24 +92,3 @@ local themes = {
 }
 
 return { themes.ROSE_PINE_DARK }
--- moon = {
--- 		---@deprecated for backwards compatibility
--- 		_experimental_nc = '#1f1d30',
--- 		nc = '#1f1d30',
--- 		base = '#232136',
--- 		surface = '#2a273f',
--- 		overlay = '#393552',
--- 		muted = '#6e6a86',
--- 		subtle = '#908caa',
--- 		text = '#e0def4',
--- 		love = '#eb6f92',
--- 		gold = '#f6c177',
--- 		rose = '#ea9a97',
--- 		pine = '#3e8fb0',
--- 		foam = '#9ccfd8',
--- 		iris = '#c4a7e7',
--- 		highlight_low = '#2a283e',
--- 		highlight_med = '#44415a',
--- 		highlight_high = '#56526e',
--- 		none = 'NONE',
--- 	},

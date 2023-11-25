@@ -11,19 +11,22 @@ M.set_lsp_symbols = function()
 	end
 end
 
+M.publish_diagnostics_opts = {
+	virtual_text = {
+		spacing = 8,
+		source = 'if_many',
+		-- prefix = ' ',
+		prefix = '●',
+	},
+	severity_sort = true,
+	signs = false,
+	underline = true,
+	update_in_insert = false,
+}
+
 M.set_handlers = function()
-	vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-		virtual_text = {
-			spacing = 8,
-			source = 'if_many',
-			-- prefix = ' ',
-			prefix = '●',
-		},
-		severity_sort = true,
-		signs = false,
-		underline = true,
-		update_in_insert = false,
-	})
+	vim.lsp.handlers['textDocument/publishDiagnostics'] =
+		vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, M.publish_diagnostics_opts)
 
 	vim.lsp.handlers['textDocument/definition'] = function(_, result)
 		if not result or vim.tbl_isempty(result) then
@@ -87,6 +90,8 @@ M.get_servers = function()
 					diagnostics = {
 						globals = {
 							'vim',
+							'redis',
+							'awesome',
 						},
 					},
 					format = {
@@ -167,6 +172,8 @@ return {
 			{ '<leader>to', ':TSToolsOrganizeImports<cr>' },
 		},
 		config = function()
+			local api = require 'typescript-tools.api'
+
 			require('typescript-tools').setup {
 				on_attach = M.on_attach,
 				settings = {
@@ -176,6 +183,17 @@ return {
 					tsserver_format_options = {
 						allowRenameOfImportPath = true,
 					},
+				},
+				handlers = {
+					['textDocument/publishDiagnostics'] = vim.lsp.with(
+						api.filter_diagnostics {
+							80004, -- JSDoc may be converted
+							80005, -- require call may be converted to an import
+							7044, -- any type
+							7045, -- any type
+						},
+						M.publish_diagnostics_opts
+					),
 				},
 			}
 		end,
@@ -189,7 +207,11 @@ return {
 			'pmizio/typescript-tools.nvim',
 		},
 		keys = {
-			{ 'gd', function() vim.lsp.buf.definition() end },
+			{ 'gd', function()
+				vim.lsp.buf.definition {
+					reuse_win = true,
+				}
+			end },
 			{ 'K', function() vim.lsp.buf.hover() end },
 			{ '<leader>lk', function() vim.lsp.buf.signature_help() end },
 			{ '<space>le', function() vim.diagnostic.open_float() end },

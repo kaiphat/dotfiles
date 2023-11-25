@@ -63,7 +63,11 @@ function dstart
   sudo systemctl start docker.service
   ds
 end
-alias ds "d stop (d ps -q)"
+function ds
+    set containers (d ps -q)
+    if test -z "$containers"; echo 'there is not running containers'; return; end
+    d stop $containers
+end
 alias dc "docker-compose"
 alias dcr "dc restart"
 alias di "docker inspect"
@@ -99,6 +103,13 @@ alias clip "xclip -selection c"
 alias pj "xclip -o | jq '.' | clip"
 alias nvim-start "nvim --startuptime _s.log -c exit && tail -100 _s.log | bat && rm _s.log"
 alias ... "cd ../../"
+alias lg "lazygit"
+
+alias play:sql "n ~/play/sql/index.sql"
+function play:ts
+    cd ~/play/typescript
+    n index.ts
+end
 
 alias enru "trans en:ru -show-original no -show-prompt-message no -show-languages no"
 alias ruen "trans ru:en -show-original no -show-prompt-message no -show-languages no"

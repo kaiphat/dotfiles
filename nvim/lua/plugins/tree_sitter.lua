@@ -36,22 +36,22 @@ M.add_mixins = function()
 	-- vim.treesitter.language.register('fish', 'nu')
 end
 
-M.get_mappings = function()
-	local unit = require 'utils.unit'
-
-	map({ 'x', 'o' }, 'u', function() unit.select(true) end)
-end
-
 return {
 	{
 		'nvim-treesitter/nvim-treesitter-context',
-		enabled = false,
+		event = 'BufReadPre',
+		keys = {
+			{ '[c', function() require('treesitter-context').go_to_context() end },
+		},
 	},
 
 	{
 		'nvim-treesitter/nvim-treesitter',
 		version = false,
 		build = ':TSUpdate',
+		keys = {
+			{ 'u', function() require('utils.unit').select(true) end, mode = { 'x', 'o' } },
+		},
 		config = function()
 			local install = require 'nvim-treesitter.install'
 			local config = require 'nvim-treesitter.configs'
@@ -108,7 +108,6 @@ return {
 			}
 
 			M.add_mixins()
-			M.get_mappings()
 		end,
 	},
 }

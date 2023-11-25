@@ -8,6 +8,7 @@ M.always_ignore_patterns = {
 	'docker_volumes_data/',
 	'yarn.lock',
 	'Cargo.lock',
+	'coverage/'
 }
 
 M.ignore_patterns = concat({
@@ -15,7 +16,8 @@ M.ignore_patterns = concat({
 	'.data/',
 	'test/',
 	'tests/',
-	'__mocks__/',
+	'**/__tests__/*',
+	'**/__mocks__/*',
 	'package-lock.json',
 	'*.log',
 	'.gitignore',
@@ -78,6 +80,7 @@ return {
 						'fd',
 						'-t=f',
 						'-E=test/',
+						'-E=__tests__/',
 					}, map_list(M.always_ignore_patterns, function(pattern) return '-E=' .. pattern end)),
 					hidden = false,
 					no_ignore = false,
@@ -144,6 +147,18 @@ return {
 						'--hidden',
 					}, map_list(M.ignore_patterns, function(pattern) return '-g=!' .. pattern end)),
 				}
+			end,
+		},
+		{
+			'<leader>f;',
+			function()
+                require('telescope.builtin').current_buffer_fuzzy_find { }
+			end,
+		},
+		{
+			'<leader>fg',
+			function()
+                require('telescope.builtin').git_status { }
 			end,
 		},
 		{
@@ -244,7 +259,7 @@ return {
 				},
 				file_ignore_patterns = {},
 
-				prompt_prefix = '  ',
+                prompt_prefix = '  ',
 				selection_caret = ' ',
 				entry_prefix = ' ',
 
@@ -298,6 +313,8 @@ return {
 						['<C-j>'] = actions.move_selection_next,
 						['<C-k>'] = actions.move_selection_previous,
 						['<C-l>'] = actions.select_default,
+						['<C-p>'] = actions.cycle_history_prev,
+						['<C-n>'] = actions.cycle_history_next,
 					},
 				},
 			},

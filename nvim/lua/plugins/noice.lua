@@ -38,11 +38,11 @@ return {
 			cmdline = {
 				format = {
                     cmdline = { pattern = '^:', icon = ICONS.BRACKET, lang = 'vim' },
-					search_down = { kind = 'search', pattern = '^/', icon = ' ', lang = 'regex' },
-					search_up = { kind = 'search', pattern = '^%?', icon = ' ', lang = 'regex' },
+					search_down = { kind = 'search', pattern = '^/', icon = '', lang = 'regex' },
+					search_up = { kind = 'search', pattern = '^%?', icon = '', lang = 'regex' },
 					filter = { pattern = '^:%s*!', icon = ICONS.BRACKET, lang = 'bash' },
 					lua = { pattern = '^:%s*lua%s+', icon = '', lang = 'lua' },
-					help = { pattern = '^:%s*h%s+', icon = ' ' },
+                    help = { pattern = '^:%s*h%s+', icon = ' ' },
 					input = {}, -- Used by input()
 				},
 			},

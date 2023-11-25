@@ -14,7 +14,7 @@ local function build_font_params(name, with_italic, weight, params)
 
 	local font = wezterm.font_with_fallback {
 		{ family = name, weight = weight },
-		{ family = 'Agave Nerd Font', scale = scale },
+        { family = 'Ubuntu Mono Ligaturized', scale = scale },
 	}
 
 	return merge(params, {
@@ -32,18 +32,18 @@ local function build_font_params(name, with_italic, weight, params)
 end
 
 return {
-	jet_brains = build_font_params('JetBrainsMono Nerd Font', false, weights.SB, {
-		font_size = 12,
+	jet_brains = build_font_params('JetBrainsMono Nerd Font', true, weights.SB, {
+		font_size = 12.7,
 		cell_width = 0.9,
-		line_height = 1.2,
+		line_height = 1.05,
 	}),
 	mononoki = build_font_params('mononoki Nerd Font', true, weights.B, {
 		font_size = 10,
 		cell_width = 0.8,
 		line_height = 1.3,
 	}),
-	mononoki_liga = build_font_params('Ligamononoki Nerd Font', false, weights.B, {
-		font_size = 13.8,
+	mononoki_liga = build_font_params('Ligamononoki Nerd Font', false, weights.R, {
+		font_size = 13,
 		cell_width = 0.9,
 		line_height = 1.15,
 	}),
@@ -57,10 +57,15 @@ return {
 		cell_width = 1,
 		line_height = 1.26,
 	}),
-	victor = build_font_params('VictorMono Nerd Font', false, weights.SB, {
-		font_size = 10,
+	operator = build_font_params('OperatorMonoLig Nerd Font', false, weights.R, {
+		font_size = 13,
+		cell_width = 0.92,
+		line_height = 1.15,
+	}),
+	victor = build_font_params('Victor Mono', false, weights.B, {
+		font_size = 13,
 		cell_width = 1,
-		line_height = 0.9,
+		line_height = 1,
 	}),
 	iosevka = build_font_params('Iosevka Term', false, weights.R, {
 		font_size = 10,
@@ -68,7 +73,7 @@ return {
 		line_height = 1.1,
 	}),
 	iosevka_custom = build_font_params('Iosevka Custom', false, weights.M, {
-		font_size = 14,
+		font_size = 13.3,
 		cell_width = 1,
 		line_height = 1,
 	}),
@@ -93,7 +98,7 @@ return {
 		line_height = 1.15,
 	}),
 	fant = build_font_params('Fantasque Sans Mono', false, weights.B, {
-		font_size = 13,
+		font_size = 14,
 		cell_width = 1,
 		line_height = 1.3,
 	}),
@@ -107,7 +112,17 @@ return {
 		cell_width = 0.9,
 		line_height = 1.25,
 	}),
-	maple = build_font_params('Maple Mono NF', false, weights.SB, {
+	ubuntu = build_font_params('Ubuntu Mono Ligaturized', false, weights.M, {
+		font_size = 15.3,
+		cell_width = 0.85,
+		line_height = 1.15,
+	}),
+	hack = build_font_params('Hack Nerd Font JBM Ligatured', false, weights.M, {
+		font_size = 15,
+		cell_width = 0.9,
+		line_height = 1.15,
+	}),
+	maple = build_font_params('Maple Mono NF', false, weights.R, {
 		font_size = 12.4,
 		cell_width = 0.9,
 		line_height = 1.11,

@@ -346,9 +346,10 @@ H.NnnNormalNC = merge(H.NnnNormal)
 H.ChatGPTTotalTokensBorder = { fg = c.blue_darkest }
 H.ChatGPTTotalTokens = { fg = c.fg, bg = H.ChatGPTTotalTokensBorder.fg }
 
-H.FlashLabel = { bg = c.purple, fg = c.bg }
+H.FsashLabel = { bg = c.purple, fg = c.bg }
 H.FlashMatch = { bg = c.teal, fg = c.bg }
 H.FlashCurrent = { bg = c.teal, fg = c.bg }
+H.MiniCursorword = H.Visual
 
 for group, highlights in pairs(H) do
 	for key, value in pairs(highlights) do

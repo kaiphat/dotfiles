@@ -1,4 +1,5 @@
 local o = vim.opt
+local wo = vim.wo
 local g = vim.g
 
 g.mapleader = ' '
@@ -23,7 +24,7 @@ o.wildoptions = 'pum'
 o.pumblend = 0
 o.pumheight = 15
 o.mouse = 'a'
-o.wrap = false
+o.wrap = true
 o.title = true
 o.hidden = true
 o.cmdheight = 1
@@ -31,8 +32,8 @@ o.scrolloff = 10
 o.sidescrolloff = 8 -- Columns of context
 o.shiftround = true -- Round indent
 o.numberwidth = 3
-o.number = false
-o.relativenumber = false
+o.number = true
+o.relativenumber = true
 o.showcmd = false
 o.undofile = true
 o.virtualedit = 'block'
@@ -92,7 +93,8 @@ o.langmap =
 o.imsearch = 0
 o.iminsert = 0
 o.foldmethod = 'indent'
-o.foldlevel = 20
+wo.foldlevel = 99
+wo.conceallevel = 2
 o.laststatus = 3
 
 o.grepprg = 'rg --vimgrep'

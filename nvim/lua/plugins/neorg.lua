@@ -4,12 +4,14 @@ return {
 	event = { 'BufReadPre', 'BufNew *.norg' },
 	build = ':Neorg sync-parsers',
 	config = function()
-		local neorg = require 'neorg'
-
-		neorg.setup {
+		require('neorg').setup {
 			load = {
 				['core.defaults'] = {},
-				['core.concealer'] = {},
+				['core.concealer'] = {
+					config = {
+						folds = true,
+					},
+				},
 				['core.dirman'] = {
 					config = {
 						workspaces = {
@@ -24,6 +26,11 @@ return {
 							keybinds.remap_event('norg', 'n', 'gu', 'core.qol.todo_items.todo.task_undone')
 						end,
 						default_keybinds = true,
+					},
+				},
+				['core.completion'] = {
+					config = {
+						engine = 'nvim-cmp',
 					},
 				},
 			},

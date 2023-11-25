@@ -94,8 +94,6 @@ return {
 					delay = 100,
 				},
 
-				mappings = {},
-
 				options = {
 					border = 'both',
 					indent_at_cursor = true,

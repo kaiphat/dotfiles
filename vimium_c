@@ -1,0 +1,12 @@
+{
+	"name": "Vimium C",
+	"@time": "20/11/2023, 12:27:52",
+	"time": 1700479672893,
+	"environment": {
+		"extension": "1.99.994",
+		"platform": "mac",
+		"chromium": 119
+	},
+	"keyLayout": 2,
+	"vimSync": true
+}

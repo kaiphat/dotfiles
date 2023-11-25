@@ -3,8 +3,20 @@ local base_keys = '<leader>h'
 return {
 	'ThePrimeagen/harpoon',
 	keys = {
-		{ base_keys .. 'a', function() require('harpoon.mark').add_file() end },
-		{ base_keys .. 'r', function() require('harpoon.mark').rm_file() end },
+		{
+			base_keys .. 'a',
+			function()
+				require('harpoon.mark').add_file()
+				print 'added'
+			end,
+		},
+		{
+			base_keys .. 'r',
+			function()
+				require('harpoon.mark').rm_file()
+				print 'removed'
+			end,
+		},
 		{ base_keys .. 'm', function() require('harpoon.ui').toggle_quick_menu() end },
 		{ base_keys .. 'n', function() require('harpoon.ui').nav_next() end },
 		{ base_keys .. 'p', function() require('harpoon.ui').nav_prev() end },

@@ -4,6 +4,15 @@ M.servers = {
 	prettierd = {
 		prefer_local = 'node_modules/.bin',
 		extra_filetypes = {},
+		extra_args = function (args)
+		          local extra_args = {}
+
+		          if not args.options.semi then table.insert(extra_args, '--semi=false') end
+		          if not args.options.printWidth then table.insert(extra_args, '--print-width=140') end
+		          if not args.options.singleQuote then table.insert(extra_args, '--single-quote=true') end
+
+		          return extra_args
+		end,
 	},
 	stylua = {
 		extra_args = {
