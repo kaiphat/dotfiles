@@ -42,18 +42,6 @@ M.source_comparator = function(item1, item2)
 	end
 end
 
-M.get_sources = function()
-	local cmp = require 'cmp'
-
-	return cmp.config.sources {
-		{ name = 'codeium', group_index = 2 },
-		{ name = 'nvim_lsp' },
-		{ name = 'luasnip' },
-		M.buffer_source,
-		{ name = 'path' },
-	}
-end
-
 M.get_format = function()
 	return {
 		fields = { 'kind', 'abbr', 'menu' },
@@ -211,7 +199,13 @@ return {
 				async_budget = 1,
 				max_view_entries = 200,
 			},
-			sources = M.get_sources(),
+			sources = cmp.config.sources {
+				{ name = 'codeium', group_index = 2 },
+				{ name = 'nvim_lsp' },
+				{ name = 'luasnip' },
+				M.buffer_source,
+				{ name = 'path' },
+			},
 			experimental = {
 				ghost_text = {
 					hl_group = 'LspCodeLens',
