@@ -5,8 +5,28 @@ M.has_words_before = function()
 	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
 end
 
+M.buffer_source = {
+	{
+		name = 'buffer',
+		option = {
+			get_bufnrs = function()
+				local bufs = {}
+				for _, win in ipairs(vim.api.nvim_list_wins()) do
+					bufs[vim.api.nvim_win_get_buf(win)] = true
+				end
+				return vim.tbl_keys(bufs)
+			end,
+			indexing_interval = 100,
+			indexing_batch_size = 1000,
+			max_indexed_line_length = 1024 * 40,
+			keyword_pattern = [[\k\+]],
+		},
+	},
+}
+
 M.source_comparator = function(item1, item2)
 	local sources = {
+		codeium = 60,
 		nvim_lsp = 30,
 		luasnip = 31,
 		buffer = 20,
@@ -26,51 +46,26 @@ M.get_sources = function()
 	local cmp = require 'cmp'
 
 	return cmp.config.sources {
+		{ name = 'codeium', group_index = 2 },
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' },
+		M.buffer_source,
 		{ name = 'path' },
-		{
-			name = 'buffer',
-			option = {
-				get_bufnrs = function()
-					local bufs = {}
-
-					for _, win in ipairs(vim.api.nvim_list_wins()) do
-						table.insert(bufs, vim.api.nvim_win_get_buf(win))
-					end
-
-					return bufs
-				end,
-				indexing_interval = 300,
-				indexing_batch_size = 100,
-				max_indexed_line_length = 1024 * 400,
-				keyword_pattern = [[\k\+]],
-			},
-		},
-		{ name = 'neorg' }
 	}
 end
 
 M.get_format = function()
 	return {
 		fields = { 'kind', 'abbr', 'menu' },
-
-		format = function(entry, vim_item)
-			local kind = require('lspkind').cmp_format {
-				mode = 'symbol_text',
-				maxwidth = 40,
-				-- preset = 'default',
-			}(entry, vim_item)
-
-			local strings = vim.split(kind.kind, '%s', { trimempty = true })
-
-			if strings[1] == 'TypeParameter' then strings[1] = 'T' end
-
-			kind.kind = ' ' .. strings[1] .. ' '
-			kind.menu = entry.completion_item.detail
-
-			return kind
-		end,
+		format = require('lspkind').cmp_format {
+			mode = 'symbol',
+			maxwidth = 40,
+			ellipsis_char = '...',
+			symbol_map = {
+				TypeParameter = 'T',
+				Codeium = '󰇈',
+			},
+		},
 	}
 end
 
@@ -160,7 +155,6 @@ return {
 		compare.locality.lines_count = 300
 
 		cmp.setup {
-			preselect = cmp.PreselectMode.Item,
 			sorting = {
 				priority_weight = 2,
 				comparators = {
@@ -183,8 +177,8 @@ return {
 				completion = {
 					border = 'rounded',
 					winhighlight = 'NormalFloat:FloatBorder,CursorLine:Visual,Search:None',
-					col_offset = -4,
-					side_padding = 0,
+					col_offset = -3,
+					side_padding = 1,
 					scrollbar = false,
 				},
 				documentation = {
@@ -210,9 +204,12 @@ return {
 			},
 			mapping = M.get_mappings(),
 			performance = {
-				debounce = 100,
-				throttle = 100,
-				fetching_timeout = 1000,
+				debounce = 60,
+				throttle = 30,
+				fetching_timeout = 500,
+				confirm_resolve_timeout = 500,
+				async_budget = 1,
+				max_view_entries = 200,
 			},
 			sources = M.get_sources(),
 			experimental = {
@@ -221,5 +218,15 @@ return {
 				},
 			},
 		}
+
+		cmp.setup.filetype('norg', {
+			sources = cmp.config.sources {
+				{ name = 'neorg' },
+				{ name = 'codeium' },
+				{ name = 'luasnip' },
+				{ name = 'path' },
+				M.buffer_source,
+			},
+		})
 	end,
 }

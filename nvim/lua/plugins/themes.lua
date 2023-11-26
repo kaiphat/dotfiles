@@ -75,6 +75,7 @@ local themes = {
 					HopNextKey2 = { fg = 'pine' },
 					VertSplit = { fg = '#405879' },
 					TreesitterContext = { bg = 'subtle', blend = 20 },
+					CmpItemKindCodeium = { fg = 'iris' },
 					['@variable'] = { italic = false, fg = '#c4c6e7' },
 					['@lsp.type.property'] = { italic = false },
 					['@property.typescript'] = { italic = false, fg = '#babbf1' },

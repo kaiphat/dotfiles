@@ -25,6 +25,7 @@ end
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     paths     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 fish_add_path -aP $snap_bin_path
+fish_add_path /opt/homebrew/bin
 fish_add_path -aP $ANDROID_HOME/emulator
 fish_add_path -aP $ANDROID_HOME/tools
 fish_add_path -aP $ANDROID_HOME/tools/bin
@@ -34,16 +35,15 @@ fish_add_path -aP /usr/local/go/bin
 fish_add_path -aP $HOME/go/bin
 fish_add_path -aP /usr/.local/bin
 fish_add_path -aP /usr/bin/lua
+fish_add_path -aP $HOME/.cargo/bin
+fish_add_path -aP $HOME/.local/share/nvim/mason/bin/
 fish_add_path -aP /usr/bin/i3
 fish_add_path -aP /usr/bin/i3bar
-fish_add_path -aP $HOME/.cargo/bin
-fish_add_path -aP $HOME/.cargo/bin/rustc
 fish_add_path -aP $HOME/.krew/bin
 fish_add_path -aP $HOME/.local/share/bob/nvim-bin
 fish_add_path -aP $HOME/.local/bin/razer-cli
 fish_add_path -aP $HOME/.yarn/bin
 fish_add_path -aP $HOME/.local/bin
-fish_add_path /opt/homebrew/bin
 set -x PATH "/Library/Frameworks/Python.framework/Versions/3.12/bin" "$PATH"
 if [ -f '/Users/ilyapu/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/ilyapu/Downloads/google-cloud-sdk/path.fish.inc'; end
 
