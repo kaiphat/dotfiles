@@ -88,6 +88,20 @@ return {
 			end,
 		},
 		{
+			'<leader>fJ',
+			function()
+				require('telescope.builtin').find_files {
+                    cwd = require('telescope.utils').buffer_dir(),
+					find_command = {
+						'fd',
+						'-t=f',
+					},
+					hidden = true,
+					no_ignore = true,
+				}
+			end,
+		},
+		{
 			'<leader>dj',
 			function()
 				require('telescope.builtin').find_files {
@@ -146,6 +160,28 @@ return {
 						'--trim',
 						'--hidden',
 					}, map_list(M.ignore_patterns, function(pattern) return '-g=!' .. pattern end)),
+				}
+			end,
+		},
+		{
+			'<leader>fL',
+			function()
+                require('telescope.builtin').live_grep {
+                    cwd = require('telescope.utils').buffer_dir(),
+					hidden = true,
+					no_ignore = true,
+					disable_coordinates = true,
+					additional_args = {
+						'--color=never',
+						'--no-heading',
+						'--with-filename',
+						'--line-number',
+						'--column',
+						'--ignore-case',
+						'--trim',
+						'--hidden=false',
+						'--no-ignore=true',
+					}
 				}
 			end,
 		},

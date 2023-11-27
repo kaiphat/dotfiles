@@ -81,4 +81,5 @@ local config = {
 	},
 }
 
+
 return merge(config, fonts.maple, { colors = THEMES.DARK_ROSE_PINE }, background)

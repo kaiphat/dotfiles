@@ -14,7 +14,7 @@ local function build_font_params(name, with_italic, weight, params)
 
 	local font = wezterm.font_with_fallback {
 		{ family = name, weight = weight },
-        { family = 'Ubuntu Mono Ligaturized', scale = scale },
+        { family = 'Symbols Nerd Font Mono', scale = scale },
 	}
 
 	return merge(params, {
@@ -97,8 +97,8 @@ return {
 		cell_width = 0.9,
 		line_height = 1.15,
 	}),
-	fant = build_font_params('Fantasque Sans Mono', false, weights.B, {
-		font_size = 14,
+	fant = build_font_params('Fantasque Sans Mono', false, weights.R, {
+		font_size = 13.1,
 		cell_width = 1,
 		line_height = 1.3,
 	}),
@@ -107,10 +107,10 @@ return {
 		cell_width = 1,
 		line_height = 1.15,
 	}),
-	fira = build_font_params('FiraCode Nerd Font', false, weights.M, {
-		font_size = 11.5,
+	fira = build_font_params('FiraCode Nerd Font', false, weights.R, {
+		font_size = 11,
 		cell_width = 0.9,
-		line_height = 1.25,
+		line_height = 1.1,
 	}),
 	ubuntu = build_font_params('Ubuntu Mono Ligaturized', false, weights.M, {
 		font_size = 15.3,
@@ -123,7 +123,7 @@ return {
 		line_height = 1.15,
 	}),
 	maple = build_font_params('Maple Mono NF', false, weights.R, {
-		font_size = 12.4,
+		font_size = 12.3,
 		cell_width = 0.9,
 		line_height = 1.11,
 		harfbuzz_features = {

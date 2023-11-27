@@ -12,31 +12,22 @@ return {
 	{
 		'echasnovski/mini.align',
 		event = 'BufReadPre',
-		config = function()
-			local align = require 'mini.align'
-
-			align.setup {}
-		end,
+		config = function() require('mini.align').setup {} end,
 	},
 
 	{
 		'echasnovski/mini.splitjoin',
 		event = 'BufReadPre',
-		config = function()
-			local m = require 'mini.splitjoin'
-
-			m.setup {}
-		end,
+		config = function() require('mini.splitjoin').setup {} end,
 	},
 
 	{
 		'echasnovski/mini.surround',
 		event = 'BufReadPre',
 		config = function()
-			local m = require 'mini.surround'
-
 			local key = '<leader>'
-			m.setup {
+
+			require('mini.surround').setup {
 				mappings = {
 					add = key .. 'sa',
 					delete = key .. 'sd',
@@ -59,11 +50,7 @@ return {
 				function() require('mini.trailspace').trim() end,
 			},
 		},
-		config = function()
-			local trail = require 'mini.trailspace'
-
-			trail.setup {}
-		end,
+		config = function() require('mini.trailspace').setup {} end,
 	},
 
 	{
@@ -93,13 +80,18 @@ return {
 				draw = {
 					delay = 100,
 				},
+				mappings = {
+					object_scope = 'ii',
+					object_scope_with_border = 'ai',
 
+					goto_top = '[i',
+					goto_bottom = ']i',
+				},
 				options = {
 					border = 'both',
 					indent_at_cursor = true,
 					try_as_border = false,
 				},
-
 				symbol = M.chars[1],
 			}
 		end,

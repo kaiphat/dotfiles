@@ -6,21 +6,19 @@ M.has_words_before = function()
 end
 
 M.buffer_source = {
-	{
-		name = 'buffer',
-		option = {
-			get_bufnrs = function()
-				local bufs = {}
-				for _, win in ipairs(vim.api.nvim_list_wins()) do
-					bufs[vim.api.nvim_win_get_buf(win)] = true
-				end
-				return vim.tbl_keys(bufs)
-			end,
-			indexing_interval = 100,
-			indexing_batch_size = 1000,
-			max_indexed_line_length = 1024 * 40,
-			keyword_pattern = [[\k\+]],
-		},
+	name = 'buffer',
+	option = {
+		get_bufnrs = function()
+          local bufs = {}
+          for _, win in ipairs(vim.api.nvim_list_wins()) do
+            bufs[vim.api.nvim_win_get_buf(win)] = true
+          end
+          return vim.tbl_keys(bufs)
+        end,
+		indexing_interval = 100,
+		indexing_batch_size = 1000,
+		max_indexed_line_length = 1024 * 40,
+		keyword_pattern = [[\k\+]],
 	},
 }
 

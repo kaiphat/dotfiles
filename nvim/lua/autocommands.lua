@@ -29,3 +29,11 @@ vim.api.nvim_create_autocmd('FileType', {
 		vim.opt_local.relativenumber = false
 	end,
 })
+
+vim.api.nvim_create_autocmd({'InsertLeave', 'TextChanged'}, {
+	group = vim.api.nvim_create_augroup('autosave', {}),
+	pattern = '*.norg',
+	callback = function()
+	    vim.cmd 'silent! write'
+	end,
+})

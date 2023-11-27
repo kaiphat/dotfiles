@@ -1,6 +1,6 @@
 local M = {}
 
-vim.lsp.set_log_level("debug")
+-- vim.lsp.set_log_level("debug")
 
 M.set_lsp_symbols = function()
 	local char = '│'
@@ -170,7 +170,7 @@ return {
 		keys = {
 			{ '<leader>ti', ':TSToolsAddMissingImports<cr>' },
 			{ '<leader>tr', ':TSToolsRenameFile<cr>' },
-			{ '<leader>td', ':TSToolsRemoveUnused<cr>' },
+			{ '<leader>td', ':TSToolsRemoveUnusedImports<cr>' },
 			{ '<leader>to', ':TSToolsOrganizeImports<cr>' },
 		},
 		config = function()
