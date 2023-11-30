@@ -1,3 +1,4 @@
+--
 --  nc = '#1f1d30',
 --  base = '#232136',
 --  surface = '#2a273f',
@@ -20,6 +21,12 @@ local themes = {
 		dir = '../themes/dark_theme.lua',
 		priority = 1000,
 		config = function() require 'themes.dark_theme' end,
+	},
+
+	CUSTOM_ROSE_PINE_DARK = {
+		dir = '../themes/rose_pine.lua',
+		priority = 1000,
+		config = function() require 'themes.rose_pine' end,
 	},
 
 	NEW_DARK = {
@@ -66,7 +73,7 @@ local themes = {
 
 				highlight_groups = {
 					Normal = { fg = '#908caa' },
-                    NormalNC = { fg = '#908caa' },
+					NormalNC = { fg = '#908caa' },
 					GitSignsAdd = { bg = 'none' },
 					GitSignsChange = { bg = 'none' },
 					GitSignsDelete = { bg = 'none' },
@@ -74,11 +81,12 @@ local themes = {
 					HopNextKey1 = { fg = 'love' },
 					HopNextKey2 = { fg = 'pine' },
 					VertSplit = { fg = '#405879' },
-					TreesitterContext = { bg = 'subtle', blend = 20 },
+                    TreesitterContext = { bg = 'muted', blend = 15 },
+					TreesitterContextSeparator = { fg = 'rose' },
 					CmpItemKindCodeium = { fg = 'iris' },
 					['@variable'] = { italic = false, fg = '#c4c6e7' },
 					['@lsp.type.property'] = { italic = false },
-					['@property.typescript'] = { italic = false, fg = '#babbf1' },
+                    ['@property.typescript'] = { italic = false, fg = '#7a8bb1' },
 					['@punctuation'] = { italic = true },
 					['@attribute'] = { fg = 'iris' },
 					['@neorg.headings.1.title'] = { fg = 'iris' },

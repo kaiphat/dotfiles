@@ -3,11 +3,11 @@ return {
 	branch = 'v0.6',
 	event = { 'InsertEnter' },
 	config = function()
-		local p = require 'ultimate-autopair'
+		require('ultimate-autopair.utils').maxlines = math.huge
 
-		p.setup {
+		require('ultimate-autopair').setup {
 			close = {
-				multi = true,
+				multi = false,
 			},
 			extensions = {
 				suround = {
@@ -15,6 +15,21 @@ return {
 				},
 			},
 			internal_pairs = {
+				{
+					'<',
+					'>',
+					fly = true,
+					dosuround = true,
+					newline = true,
+					space = true,
+					cond = function(fn)
+						return not fn.in_node {
+							'arrow_function',
+							'binary_expression',
+							'augmented_assignment_expression',
+						}
+					end,
+				},
 				{ '[', ']', fly = true, dosuround = true, newline = true, space = true },
 				{ '(', ')', fly = true, dosuround = true, newline = true, space = true },
 				{ '{', '}', fly = true, dosuround = true, newline = true, space = true },
@@ -36,6 +51,7 @@ return {
 				{ '"""', '"""', newline = true, ft = { 'python' } },
 				{ '\'\'\'', '\'\'\'', newline = true, ft = { 'python' } },
 			},
+			config_internal_pairs = {},
 		}
 	end,
 }

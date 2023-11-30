@@ -120,25 +120,45 @@ font:
   #   family: Mononoki Nerd Font
   #   style: Italic
 
-  size: 13
+  size: 12.5
   offset:
-    x: 0
-    y: 1
+    x: -1
+    y: 3
   glyph_offset:
     x: 0
     y: 2
   normal:
-    family: OperatorMonoLig Nerd Font
-    style: Regular
+    family: Maple Mono NF
+    style: Light
   bold:
-    family: OperatorMonoLig Nerd Font
-    style: Regular
+    family: Maple Mono NF
+    style: Light
   italic:
-    family: OperatorMonoLig Nerd Font
-    style: Regular
+    family: Maple Mono NF
+    style: Light
   bold_italic:
-    family: OperatorMonoLig Nerd Font
-    style: Regular
+    family: Maple Mono NF
+    style: Light
+
+  # size: 13
+  # offset:
+  #   x: 0
+  #   y: 1
+  # glyph_offset:
+  #   x: 0
+  #   y: 2
+  # normal:
+  #   family: OperatorMonoLig Nerd Font
+  #   style: Regular
+  # bold:
+  #   family: OperatorMonoLig Nerd Font
+  #   style: Regular
+  # italic:
+  #   family: OperatorMonoLig Nerd Font
+  #   style: Regular
+  # bold_italic:
+  #   family: OperatorMonoLig Nerd Font
+  #   style: Regular
 
   # size: 9
   # offset:
@@ -352,3 +372,7 @@ cursor:
 key_bindings:
   - { key: F11, action: ToggleFullscreen }
   - { key: W, mods: Control|Shift, action: Quit }
+  - { key: Key0, mods: Control, action: ResetFontSize }
+  - { key: Equals, mods: Control, action: IncreaseFontSize }
+  - { key: Plus, mods: Control, action: IncreaseFontSize }
+  - { key: Minus, mods: Control, action: DecreaseFontSize }

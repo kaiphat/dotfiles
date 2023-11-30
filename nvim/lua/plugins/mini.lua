@@ -12,13 +12,13 @@ return {
 	{
 		'echasnovski/mini.align',
 		event = 'BufReadPre',
-		config = function() require('mini.align').setup {} end,
+        opts = {}
 	},
 
 	{
 		'echasnovski/mini.splitjoin',
 		event = 'BufReadPre',
-		config = function() require('mini.splitjoin').setup {} end,
+		opts = {}
 	},
 
 	{
@@ -37,6 +37,12 @@ return {
 					replace = key .. 'sr',
 					update_n_lines = key .. 'sn',
 				},
+				custom_surroundings = {
+					['('] = { output = { left = '(', right = ')' } },
+					['['] = { output = { left = '[', right = ']' } },
+					['{'] = { output = { left = '{', right = '}' } },
+					['<'] = { output = { left = '<', right = '>' } },
+				},
 			}
 		end,
 	},
@@ -50,7 +56,7 @@ return {
 				function() require('mini.trailspace').trim() end,
 			},
 		},
-		config = function() require('mini.trailspace').setup {} end,
+		opts = {},
 	},
 
 	{
@@ -71,7 +77,6 @@ return {
 
 	{
 		'echasnovski/mini.indentscope',
-		enabled = true,
 		event = 'BufReadPre',
 		config = function()
 			local indent = require 'mini.indentscope'

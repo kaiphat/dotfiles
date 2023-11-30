@@ -16,7 +16,6 @@ M.languages = {
 	'html',
 	'scss',
 	'dockerfile',
-	-- 'json5',
 	'fish',
 	'glimmer',
 	'scheme',
@@ -40,14 +39,19 @@ return {
 	{
 		'nvim-treesitter/nvim-treesitter-context',
 		event = 'BufReadPre',
+		enabled = true,
 		keys = {
 			{ '[c', function() require('treesitter-context').go_to_context() end },
+		},
+		opts = {
+			max_lines = 4,
 		},
 	},
 
 	{
 		'nvim-treesitter/nvim-treesitter',
 		version = false,
+		lazy = false,
 		build = ':TSUpdate',
 		keys = {
 			{ 'u', function() require('utils.unit').select(true) end, mode = { 'x', 'o' } },
@@ -70,24 +74,6 @@ return {
 
 			config.setup {
 				ensure_installed = M.languages,
-				query_linter = {
-					enable = true,
-					use_virtual_text = true,
-					lint_events = { 'BufWrite', 'CursorHold' },
-				},
-				autotag = {
-					enable = true,
-				},
-				endwise = {
-					enable = true,
-				},
-				textsubjects = {
-					enable = true,
-					keymaps = {
-						['.'] = 'textsubjects-smart',
-						[';'] = 'textsubjects-container-outer',
-					},
-				},
 				highlight = {
 					enable = true,
 					use_languagetree = true,

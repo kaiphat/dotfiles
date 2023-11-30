@@ -3,7 +3,6 @@ return {
 	dependencies = {
 		'anuvyklack/middleclass',
 	},
-	enabled = true,
 	event = 'BufReadPre',
 	config = function()
 		local windows = require 'windows'

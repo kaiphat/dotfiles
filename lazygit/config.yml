@@ -1,0 +1,15 @@
+gui:
+  nerdFontsVersion: "3"
+  sidePanelWidth: 0.25
+  commitLength:
+    show: false
+  showListFooter: false
+  showRandomTip: false
+  showBottomLine: false
+  showCommandLog: false
+  showPanelJumps: false
+  border: 'rounded'
+
+os:
+  edit: nvim --server /tmp/nvim-server-$(tmux display-message -p '#S').pipe --remote-send "<cmd>lua require('scripts.lazygit-open-file')('{{filename}}', '{{line}}')<CR>"
+  open: nvim --server /tmp/nvim-server-$(tmux display-message -p '#S').pipe --remote-send "<cmd>lua require('scripts.lazygit-open-file')('{{filename}}', '{{line}}')<CR>"

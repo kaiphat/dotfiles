@@ -34,6 +34,7 @@ set config_paths                  \
     zellij                        \
     dunst                         \
     watson                        \
+    lazygit                       \
 
 function copy -a target_dir -a paths
   for path in $$paths

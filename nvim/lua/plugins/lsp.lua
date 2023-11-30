@@ -1,7 +1,5 @@
 local M = {}
 
--- vim.lsp.set_log_level("debug")
-
 M.set_lsp_symbols = function()
 	local char = '│'
 
@@ -165,7 +163,6 @@ end
 return {
 	{
 		'pmizio/typescript-tools.nvim',
-		enabled = true,
 		event = 'BufReadPre',
 		keys = {
 			{ '<leader>ti', ':TSToolsAddMissingImports<cr>' },

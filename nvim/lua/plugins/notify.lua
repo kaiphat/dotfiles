@@ -66,8 +66,9 @@ return {
 		notify.setup {
 			minimum_width = 40,
 			fps = 30,
-			stages = M.get_stages(stages_util),
-			render = 'minimal',
+			-- stages = M.get_stages(stages_util),
+			stages = 'static',
+            render = 'wrapped-compact', -- minimal
 			background_colour = 'NormalFloat',
 		}
 
