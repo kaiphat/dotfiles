@@ -39,7 +39,7 @@ return {
 	{
 		'nvim-treesitter/nvim-treesitter-context',
 		event = 'BufReadPre',
-		enabled = true,
+		enabled = false,
 		keys = {
 			{ '[c', function() require('treesitter-context').go_to_context() end },
 		},
@@ -74,10 +74,28 @@ return {
 
 			config.setup {
 				ensure_installed = M.languages,
+				query_linter = {
+					enable = true,
+					use_virtual_text = true,
+					lint_events = { 'BufWrite', 'CursorHold' },
+				},
+				autotag = {
+					enable = true,
+				},
+				endwise = {
+					enable = true,
+				},
+				textsubjects = {
+					enable = true,
+					keymaps = {
+						['.'] = 'textsubjects-smart',
+						[';'] = 'textsubjects-container-outer',
+					},
+				},
 				highlight = {
 					enable = true,
 					use_languagetree = true,
-					-- additional_vim_regex_highlighting = true,
+					additional_vim_regex_highlighting = false,
 				},
 				indent = {
 					enable = true,

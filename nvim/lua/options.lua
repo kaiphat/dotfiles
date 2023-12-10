@@ -4,9 +4,7 @@ local g = vim.g
 
 g.mapleader = ' '
 
-if vim.fn.has 'nvim-0.10' == 1 then
-  o.smoothscroll = true
-end
+if vim.fn.has 'nvim-0.10' == 1 then o.smoothscroll = true end
 
 local TAB_SIZE = 4
 
@@ -24,7 +22,7 @@ o.wildoptions = 'pum'
 o.pumblend = 0
 o.pumheight = 15
 o.mouse = 'a'
-o.wrap = true
+o.wrap = false
 o.title = true
 o.hidden = true
 o.cmdheight = 1
@@ -32,8 +30,8 @@ o.scrolloff = 10
 o.sidescrolloff = 8 -- Columns of context
 o.shiftround = true -- Round indent
 o.numberwidth = 3
-o.number = true
-o.relativenumber = true
+o.number = false
+o.relativenumber = false
 o.showcmd = false
 o.undofile = true
 o.virtualedit = 'block'
@@ -61,6 +59,7 @@ o.cursorline = false
 o.cursorcolumn = false
 
 o.lazyredraw = false
+o.ttyfast = true
 o.splitright = true
 o.splitbelow = true
 o.breakindent = true
@@ -73,23 +72,24 @@ o.encoding = 'utf-8'
 o.listchars = 'eol:↲'
 o.inccommand = 'split'
 o.fillchars = {
-  -- horiz = "━",
-  -- horizup = "┻",
-  -- horizdown = "┳",
-  -- vert = "┃",
-  -- vertleft = "┫",
-  -- vertright = "┣",
-  -- verthoriz = "╋",
-  eob = ' ',
-  foldopen = '',
-  foldclose = '',
-  diff = '╱',
+	-- horiz = "━",
+	-- horizup = "┻",
+	-- horizdown = "┳",
+	-- vert = "┃",
+	-- vertleft = "┫",
+	-- vertright = "┣",
+	-- verthoriz = "╋",
+	eob = ' ',
+	foldopen = '',
+	foldclose = '',
+	diff = '╱',
+	lastline = ' ',
 }
 o.showbreak = '   '
 o.completeopt = 'menuone,noselect'
 o.complete = '.,w,b,u,t,U,s,k,d,i'
 o.langmap =
-  'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz'
+	'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz'
 o.imsearch = 0
 o.iminsert = 0
 o.foldmethod = 'indent'

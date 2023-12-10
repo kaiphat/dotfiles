@@ -23,6 +23,7 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
+	group = vim.api.nvim_create_augroup('set_number', {}),
 	pattern = 'norg',
 	callback = function()
 		vim.opt_local.number = false
@@ -30,10 +31,14 @@ vim.api.nvim_create_autocmd('FileType', {
 	end,
 })
 
-vim.api.nvim_create_autocmd({'InsertLeave', 'TextChanged'}, {
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = '*',
+	group = vim.api.nvim_create_augroup('set_format_options', {}),
+	callback = function() vim.opt_local.formatoptions = 'tc' end,
+})
+
+vim.api.nvim_create_autocmd({ 'InsertLeave', 'TextChanged' }, {
 	group = vim.api.nvim_create_augroup('autosave', {}),
 	pattern = '*.norg',
-	callback = function()
-	    vim.cmd 'silent! write'
-	end,
+	callback = function() vim.cmd 'silent! write' end,
 })

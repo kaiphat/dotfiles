@@ -227,7 +227,7 @@ return {
 					vim.lsp.buf.definition()
 				end,
 			},
-			{ '<leader>lf', function() vim.lsp.buf.format { timeout_ms = 5000 } end },
+			{ '<leader>lf', function() vim.lsp.buf.format { timeout_ms = 5000 } end, mode = { 'n', 'v' } },
 		},
 		config = function()
 			local lsp = require 'lspconfig'

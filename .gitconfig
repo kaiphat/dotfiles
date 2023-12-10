@@ -1,54 +1,69 @@
 [user]
-	email = iliyapunko@gmail.com
-	name = Ilya Punko
+    email = iliyapunko@gmail.com
+    name = Ilya Punko
+
 [commit]
-  gpgsign = false
+    gpgsign = false
+
 [pull]
-  rebase = false
+    rebase = false
+
 [core]
-	autocrlf = input
-	safecrlf = false
-	editor = nvim
-  # npm i -g diff-so-fancy
-  pager = "diff-so-fancy | less --tabs=4 -RFX"
-  diffFilter = "diff-so-fancy --patch"
+    autocrlf = input
+    safecrlf = false
+    editor = nvim
+    # npm i -g diff-so-fancy
+    pager = "diff-so-fancy | less --tabs=4 -RFX"
+    diffFilter = "diff-so-fancy --patch"
+    #pager = delta
+
 [diff-so-fancy]
-  markEmptyLines = false
+    markEmptyLines = false
+
+#[interactive]
+    #diffFilter = delta --color-only --features=interactive
+
+[delta]
+    side-by-side = true
+
 [alias]
-	l   = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --max-count 12
-	lm  = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --max-count 1000
-	a   = add -A
-	f   = fetch origin
-	ch  = checkout
-	chd  = checkout develop
-	chb = checkout -b
-	c   = commit -m
-	ca  = commit --amend --no-edit
-	s   = stash
-	sa  = stash apply
-	pl  = pull origin
-  plr  = !sh -c 'git pull origin $1 --rebase' --
-  plnr  = !sh -c 'git pull origin $1 --no-rebase' --
-	plh = !git pull origin $(git rev-parse --abbrev-ref HEAD)
-	p   = push origin
-  ph  = push origin HEAD
-  phf = push origin HEAD -f
-	d   = diff HEAD
-  d1  = diff HEAD~1
-	ds  = diff HEAD --shortstat
-	ds1 = diff HEAD~1 --shortstat
+    l   = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --max-count 12
+    lm  = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --max-count 1000
+    a   = add -A
+    f   = fetch origin
+    ch  = checkout
+    chd  = checkout develop
+    chb = checkout -b
+    c   = commit -m
+    ca  = commit --amend --no-edit
+    s   = stash
+    sa  = stash apply
+    pl  = pull origin
+    plr  = !sh -c 'git pull origin $1 --rebase' --
+    plnr  = !sh -c 'git pull origin $1 --no-rebase' --
+    plh = !git pull origin $(git rev-parse --abbrev-ref HEAD)
+    p   = push origin
+    ph  = push origin HEAD
+    phf = push origin HEAD -f
+    d   = diff HEAD
+    d1  = diff HEAD~1
+    ds  = diff HEAD --shortstat
+    ds1 = diff HEAD~1 --shortstat
   # list branches sorted by last modified
-  b   = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
-  bd  = branch -D
-	m   = merge
-  ce  = config --global --edit
-  rs  = !sh -c 'git reset --soft HEAD~$1' --
-  refresh  = !sh -c 'git reset --hard HEAD~100 && git plh' --
-  rc  = rebase --continue
-  ra  = rebase --abort
-  cp  = cherry-pick
+    b   = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+    bd  = branch -D
+    bdr  = push -d origin
+    m   = merge
+    ce  = config --global --edit
+    rs  = !sh -c 'git reset --soft HEAD~$1' --
+    refresh  = !sh -c 'git reset --hard HEAD~100 && git plh' --
+    rc  = rebase --continue
+    ra  = rebase --abort
+    cp  = cherry-pick
+
 [difftool]
-  prompt = true
+    prompt = true
+
 [diff]
-  tool = nvim
+    tool = nvim
 

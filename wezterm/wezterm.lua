@@ -43,7 +43,7 @@ local THEMES = {
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 local config = {
-	front_end = 'WebGpu',
+	-- front_end = 'WebGpu',
 	-- freetype_load_target = 'HorizontalLcd',
 	window_padding = {
 		left = 0,
@@ -55,8 +55,8 @@ local config = {
 	enable_scroll_bar = false,
 	scrollback_lines = 10000,
 	cursor_blink_rate = 1000,
-	max_fps = 100,
-	animation_fps = 100,
+	max_fps = 200,
+	animation_fps = 200,
 	default_cursor_style = 'BlinkingBlock',
 	warn_about_missing_glyphs = false,
 	use_cap_height_to_scale_fallback_fonts = true,
@@ -76,10 +76,10 @@ local config = {
 		{ key = 'V', mods = 'CTRL', action = wezterm.action.PasteFrom 'Clipboard' },
 		{ key = 'v', mods = 'SUPER', action = wezterm.action.PasteFrom 'Clipboard' },
 		{ key = '=', mods = 'CTRL', action = wezterm.action.IncreaseFontSize },
+		{ key = '0', mods = 'CTRL', action = wezterm.action.ResetFontSize },
 		{ key = '-', mods = 'CTRL', action = wezterm.action.DecreaseFontSize },
 		{ key = 'q', mods = 'CMD', action = wezterm.action.QuitApplication },
 	},
 }
 
-
-return merge(config, fonts.maple, { colors = THEMES.DARK_ROSE_PINE }, background)
+return merge(config, fonts.sf_mono, { colors = THEMES.DARK_ROSE_PINE }, background)

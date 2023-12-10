@@ -33,9 +33,9 @@ end
 
 return {
 	jet_brains = build_font_params('JetBrainsMono Nerd Font', true, weights.SB, {
-		font_size = 12.7,
-		cell_width = 0.9,
-		line_height = 1.05,
+		font_size = 12,
+		cell_width = 1,
+		line_height = 1.25,
 	}),
 	mononoki = build_font_params('mononoki Nerd Font', true, weights.B, {
 		font_size = 10,
@@ -43,9 +43,9 @@ return {
 		line_height = 1.3,
 	}),
 	mononoki_liga = build_font_params('Ligamononoki Nerd Font', false, weights.R, {
-		font_size = 13,
+		font_size = 13.5,
 		cell_width = 0.9,
-		line_height = 1.15,
+		line_height = 1.3,
 	}),
 	agave = build_font_params('Agave Nerd Font', false, weights.R, {
 		font_size = 11,
@@ -63,7 +63,7 @@ return {
 		line_height = 1.15,
 	}),
 	victor = build_font_params('Victor Mono', false, weights.B, {
-		font_size = 13,
+		font_size = 12.5,
 		cell_width = 1,
 		line_height = 1,
 	}),
@@ -102,10 +102,10 @@ return {
 		cell_width = 1,
 		line_height = 1.3,
 	}),
-	roboto = build_font_params('Roboto Mono', false, weights.R, {
-		font_size = 8.7,
-		cell_width = 1,
-		line_height = 1.15,
+	sf_mono = build_font_params('SFMono Nerd Font', false, weights.M, {
+		font_size = 12,
+		cell_width = 0.9,
+		line_height = 1.05,
 	}),
 	fira = build_font_params('FiraCode Nerd Font', false, weights.R, {
 		font_size = 11,

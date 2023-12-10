@@ -40,7 +40,7 @@ M.servers = {
 }
 
 return {
-	'jose-elias-alvarez/null-ls.nvim',
+    'nvimtools/none-ls.nvim',
 	event = 'BufReadPre',
 	config = function()
 		local null_ls = require 'null-ls'

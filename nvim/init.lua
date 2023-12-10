@@ -1,3 +1,4 @@
+require 'neovide'
 require 'constants.global'
 require 'utils.global'
 require 'options'

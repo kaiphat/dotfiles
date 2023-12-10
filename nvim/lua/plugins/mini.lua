@@ -12,13 +12,13 @@ return {
 	{
 		'echasnovski/mini.align',
 		event = 'BufReadPre',
-        opts = {}
+		opts = {},
 	},
 
 	{
 		'echasnovski/mini.splitjoin',
 		event = 'BufReadPre',
-		opts = {}
+		opts = {},
 	},
 
 	{
@@ -62,54 +62,48 @@ return {
 	{
 		'echasnovski/mini.comment',
 		event = 'BufReadPre',
-		config = function()
-			local comment = require 'mini.comment'
-
-			comment.setup {
-				mappings = {
-					comment = 'gc',
-					comment_line = 'gcc',
-					textobject = 'gc',
-				},
-			}
-		end,
+		opts = {
+			options = {
+				ignore_blank_line = true,
+			},
+			mappings = {
+				comment = 'gc',
+				comment_line = 'gcc',
+				textobject = 'gc',
+			},
+		},
 	},
 
 	{
 		'echasnovski/mini.indentscope',
+		enabled = false,
 		event = 'BufReadPre',
-		config = function()
-			local indent = require 'mini.indentscope'
+		opts = {
+			draw = {
+				delay = 100,
+			},
+			mappings = {
+				object_scope = 'ii',
+				object_scope_with_border = 'ai',
 
-			indent.setup {
-				draw = {
-					delay = 100,
-				},
-				mappings = {
-					object_scope = 'ii',
-					object_scope_with_border = 'ai',
-
-					goto_top = '[i',
-					goto_bottom = ']i',
-				},
-				options = {
-					border = 'both',
-					indent_at_cursor = true,
-					try_as_border = false,
-				},
-				symbol = M.chars[1],
-			}
-		end,
+				goto_top = '[i',
+				goto_bottom = ']i',
+			},
+			options = {
+				border = 'both',
+				indent_at_cursor = true,
+				try_as_border = false,
+			},
+			symbol = M.chars[1],
+		},
 	},
 
 	{
 		'echasnovski/mini.cursorword',
 		version = false,
 		event = 'BufReadPre',
-		config = function()
-			require('mini.cursorword').setup {
-				delay = 200,
-			}
-		end,
+		opts = {
+			delay = 400,
+		},
 	},
 }

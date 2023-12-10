@@ -1,0 +1,65 @@
+import = [
+    '~/dotfiles/alacritty/themes/rose_pine_dark.toml',
+    '~/dotfiles/alacritty/fonts/monaspace_radon.toml'
+]
+
+[env]
+TERM = "xterm-256color"
+
+[bell]
+animation = "EaseOutCubic"
+duration = 750
+
+[cursor]
+blink_interval = 750
+thickness = 0.3
+
+[cursor.style]
+blinking = "Never"
+
+[[keyboard.bindings]]
+action = "ToggleFullscreen"
+key = "F11"
+
+[[keyboard.bindings]]
+action = "Quit"
+key = "W"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "ResetFontSize"
+key = "Key0"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Equals"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Plus"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "Minus"
+mods = "Control"
+
+[mouse]
+hide_when_typing = true
+
+[scrolling]
+history = 1000
+multiplier = 3
+
+[window]
+decorations = "Transparent"
+dynamic_padding = true
+opacity = 1
+option_as_alt = "Both"
+startup_mode = "SimpleFullscreen"
+
+[window.padding]
+x = 0
+y = 0

@@ -1,0 +1,27 @@
+[font]
+size = 12
+
+[font.normal]
+family = "FiraCode Nerd Font"
+style = "Medium"
+
+[font.bold]
+family = "FiraCode Nerd Font"
+style = "Medium"
+
+[font.italic]
+family = "FiraCode Nerd Font"
+style = "Medium Italic"
+
+[font.bold_italic]
+family = "FiraCode Nerd Font"
+style = "Medium Italic"
+
+[font.offset]
+x = 0
+y = 0
+
+[font.glyph_offset]
+x = 0
+y = 0
+

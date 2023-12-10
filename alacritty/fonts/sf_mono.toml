@@ -1,0 +1,26 @@
+[font]
+size = 12
+
+[font.normal]
+family = "SFMono Nerd Font"
+style = "SemiBold"
+
+[font.bold]
+family = "SFMono Nerd Font"
+style = "SemiBold"
+
+[font.italic]
+family = "SFMono Nerd Font"
+style = "SemiBold"
+
+[font.bold_italic]
+family = "SFMono Nerd Font"
+style = "SemiBold"
+
+[font.offset]
+x = 0
+y = 2
+
+[font.glyph_offset]
+x = 0
+y = 1

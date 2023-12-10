@@ -2,7 +2,9 @@ local M = {}
 
 M.col = function() return vim.opt.columns:get() - 1 end
 
-M.get_stages = function(stages_util)
+M.get_stages = function()
+	local stages_util = require 'notify.stages.util'
+
 	return {
 		function(state)
 			local next_height = state.message.height + 2
@@ -61,14 +63,13 @@ return {
 	event = 'BufReadPre',
 	config = function()
 		local notify = require 'notify'
-		local stages_util = require 'notify.stages.util'
 
 		notify.setup {
 			minimum_width = 40,
 			fps = 30,
 			-- stages = M.get_stages(stages_util),
 			stages = 'static',
-            render = 'wrapped-compact', -- minimal
+			render = 'wrapped-compact', -- minimal
 			background_colour = 'NormalFloat',
 		}
 

@@ -7,14 +7,13 @@ set -gx ANDROID_HOME $HOME/Android/Sdk
 set -gx EDITOR nvim
 set -gx MANPAGER 'nvim +Man! -c "set nowrap"'
 set -gx PAGER 'nvim +Man! -c "set nowrap"'
-set -gx TERMINAL wezterm
-set -gx TERM wezterm
 set -gx LUA_DIR /usr/bin/lua
 set -gx LD_LIBRARY_PATH /opt/oracle/instantclient_21_8
 set -U fish_greeting
 set -U ignoreeof true
 set -U SXHKD_SHELL sh
 set -U XDG_CONFIG_HOME ~/.config
+set -U TERMINFO /usr/share/terminfo
 
 bind \cd delete-char
 bind \cw backward-kill-word
@@ -25,25 +24,25 @@ end
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     paths     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 fish_add_path -aP $snap_bin_path
-fish_add_path /opt/homebrew/bin
+fish_add_path -aP /opt/homebrew/bin
 fish_add_path -aP $ANDROID_HOME/emulator
 fish_add_path -aP $ANDROID_HOME/tools
 fish_add_path -aP $ANDROID_HOME/tools/bin
 fish_add_path -aP $ANDROID_HOME/platform-tools
 fish_add_path -aP /opt/ReactNativeDebugger
 fish_add_path -aP /usr/local/go/bin
-fish_add_path -aP $HOME/go/bin
 fish_add_path -aP /usr/.local/bin
 fish_add_path -aP /usr/bin/lua
-fish_add_path -aP $HOME/.cargo/bin
-fish_add_path -aP $HOME/.local/share/nvim/mason/bin/
 fish_add_path -aP /usr/bin/i3
 fish_add_path -aP /usr/bin/i3bar
+fish_add_path -aP $HOME/go/bin
+fish_add_path -aP $HOME/.cargo/bin
 fish_add_path -aP $HOME/.krew/bin
 fish_add_path -aP $HOME/.local/share/bob/nvim-bin
 fish_add_path -aP $HOME/.local/bin/razer-cli
 fish_add_path -aP $HOME/.yarn/bin
 fish_add_path -aP $HOME/.local/bin
+
 set -x PATH "/Library/Frameworks/Python.framework/Versions/3.12/bin" "$PATH"
 if [ -f '/Users/ilyapu/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/ilyapu/Downloads/google-cloud-sdk/path.fish.inc'; end
 
@@ -52,11 +51,13 @@ if [ -f '/Users/ilyapu/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/il
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     edit     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
 alias edit-aliases "nvim ~/.config/fish/conf.d/aliases.fish"
 alias todo "nvim ~/notes/deals.norg -c \"set signcolumn=no\""
 alias notes "nvim ~/notes/notes.norg -c \"set signcolumn=no\""
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     docker     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
 alias d "docker"
 alias dstop "sudo systemctl stop docker.socket"
 function dstart
@@ -73,6 +74,10 @@ alias dcr "dc restart"
 alias di "docker inspect"
 alias du "dc up --force-recreate -d -V $1"
 alias dub "dc up --force-recreate --build -d -V $1"
+function docker-patch-nerd-font 
+    docker run --rm -v ~/dotfiles/fonts/in:/in:Z -v ~/dotfiles/fonts:/out:Z nerdfonts/patcher -c --careful
+    rm -rf ~/dotfiles/fonts/in/*
+end
 
 alias w "watson"
 alias wr "w report --day"
@@ -92,6 +97,7 @@ alias st "speedtest"
 alias y "yarn"
 alias grep "grep -i --color"
 alias n "nvim --listen /tmp/nvim-server-$(tmux display-message -p '#S').pipe"
+# alias n "nvim"
 alias nread "nvim -c \"set nowrap\""
 alias req "http -p mbh"
 alias mkdir "mkdir -p"
@@ -106,6 +112,11 @@ alias ... "cd ../../"
 alias lg "lazygit"
 
 alias play:sql "n ~/play/sql/index.sql"
+function change-theme
+    set file ~/dotfiles/scripts/change_terminal_theme.fish
+    chmod +x $file
+    source $file
+end
 function play:ts
     cd ~/play/typescript
     n index.ts
@@ -153,8 +164,8 @@ set fish_color_search_match 'red' '--bold' '--background=red'
 set fish_pager_color_prefix 'red'
 set fish_color_valid_path
 set fish_color_selection 'green' '--background=brblack'
-set fish_color_param '#ceceef'
-set fish_color_keyword '#ceceef'
+set fish_color_param 'cyan'
+set fish_color_keyword 'cyan'
 set fish_color_autosuggestion '#5c6370'
 set fish_color_quote '#6e88a6'
 set fish_color_history_current '--bold'
@@ -189,7 +200,15 @@ end
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 zoxide init fish | source
+function starship_transient_prompt_func
+  starship module character
+end
 starship init fish | source
+enable_transience
+
+# if status is-interactive
+#     eval (zellij setup --generate-auto-start fish | string collect)
+# end
 
 if status is-interactive
 and not set -q TMUX
