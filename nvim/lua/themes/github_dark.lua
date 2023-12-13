@@ -13,6 +13,7 @@ return {
             },
             groups = {
                 all = {
+                    NoicePopup = { bg = 'NONE' }
                 },
             },
         }

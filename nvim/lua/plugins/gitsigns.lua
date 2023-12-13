@@ -69,13 +69,13 @@ return {
 				untracked = { hl = 'GitSignsAdd', text = M.char, numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
 			},
 			signcolumn = true,
-			_signs_staged_enable = true,
 			linehl = false,
 			numhl = false,
 			current_line_blame = false,
 			sign_priority = 6,
 			update_debounce = 100,
 			status_formatter = nil,
+            _signs_staged_enable = true,
 		}
 	end,
 }

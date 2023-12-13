@@ -32,6 +32,8 @@
     a   = add -A
     f   = fetch origin
     ch  = checkout
+    # checkout previous
+    chp  = checkout @{-1}
     chd  = checkout develop
     chb = checkout -b
     c   = commit -m
@@ -41,6 +43,10 @@
     pl  = pull origin
     plr  = !sh -c 'git pull origin $1 --rebase' --
     plnr  = !sh -c 'git pull origin $1 --no-rebase' --
+    # discard staged changes
+    dsc = !sh -c 'git add -A && git diff HEAD > my.patch && git reset --hard && patch -p1 < my.patch && rm my.patch' --
+    # fast commit
+    fc = !sh -c 'git add -A && git commit -m "draft" --no-verify' --
     plh = !git pull origin $(git rev-parse --abbrev-ref HEAD)
     p   = push origin
     ph  = push origin HEAD
@@ -49,13 +55,15 @@
     d1  = diff HEAD~1
     ds  = diff HEAD --shortstat
     ds1 = diff HEAD~1 --shortstat
-  # list branches sorted by last modified
+    # list branches sorted by last modified
     b   = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
     bd  = branch -D
+    # branch list
+    bl = for-each-ref --count 10 --sort=-committerdate refs/heads --format='%(authordate:short) %(color:red)%(objectname:short) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))'
     bdr  = push -d origin
     m   = merge
     ce  = config --global --edit
-    rs  = !sh -c 'git reset --soft HEAD~$1' --
+    rs  = !sh -c 'git reset --soft HEAD~$1 && git dsc' --
     refresh  = !sh -c 'git reset --hard HEAD~100 && git plh' --
     rc  = rebase --continue
     ra  = rebase --abort

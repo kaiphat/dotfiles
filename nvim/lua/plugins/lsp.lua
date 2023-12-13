@@ -43,10 +43,6 @@ M.set_handlers = function()
 end
 
 M.on_attach = function(client, bufnr)
-	if client.supports_method 'textDocument/semanticTokens' then
-		client.server_capabilities.semanticTokensProvider = nil
-	end
-
 	-- vim.api.nvim_create_augroup('lsp_augroup', { clear = true })
 	--
 	-- vim.api.nvim_create_autocmd('InsertEnter', {

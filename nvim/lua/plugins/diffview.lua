@@ -1,18 +1,17 @@
 return {
 	'sindrets/diffview.nvim',
-	enabled = false,
+	enabled = true,
 	cmd = {
+        'DiffviewOpen',
 		'DiffviewFileHistory',
-		'DiffviewOpen',
-		'DiffviewClose',
-		'DiffviewToggleFiles',
-		'DiffviewFocusFiles',
+	},
+	keys = {
+        { '<leader>gv', ':DiffviewOpen<cr>' },
+        { '<leader>gh', ':DiffviewFileHistory<cr>' },
 	},
 
 	config = function()
-		local diffview = require 'diffview'
-
-		diffview.setup {
+		require('diffview').setup {
 			diff_binaries = false,
 			enhanced_diff_hl = false, -- Set up hihglights in the hooks instead
 			git_cmd = { 'git' },
