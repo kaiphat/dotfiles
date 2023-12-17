@@ -25,7 +25,7 @@ local T = setmetatable({}, {
 	__newindex = function(table, group, opts)
 		local highlights = { fg = none, bg = none }
 
-		loop(opts, function(k, v)
+		for k,v in pairs(opts) do
 			if type(k) == 'number' then
                 for k2, v2 in pairs(v) do
                     highlights[k2] = v2
@@ -33,7 +33,7 @@ local T = setmetatable({}, {
 			else
 				highlights[k] = v
 			end
-		end)
+		end
 
 		rawset(table, group, highlights)
 		vim.api.nvim_set_hl(0, group, highlights)

@@ -2,34 +2,12 @@ local M = {}
 
 M.key = os.getenv 'CHATGPT_API_KEY'
 
-M.set_mappings = function()
-  local chat = require 'chatgpt'
-
-  map('n', '<leader>ac', function()
-    vim.cmd 'ChatGPT'
-  end)
-
-  map('v', '<leader>ac', function()
-    chat.run_action {
-      fargs = { 'complete_code' },
-    }
-  end)
-
-  map('v', '<leader>ao', function()
-    chat.run_action {
-      fargs = { 'optimize_code' },
-    }
-  end)
-end
-
 return {
   {
     'jackmort/chatgpt.nvim',
     enabled = false,
     config = function()
       local chat = require 'chatgpt'
-
-      M.set_mappings()
 
       chat.setup {
         api_key_cmd = 'echo ' .. M.key,

@@ -39,7 +39,5 @@ return {
 				},
 			},
 		}
-
-		map('n', '<F10>', function() nnp.toggle() end)
 	end,
 }

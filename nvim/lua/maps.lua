@@ -1,4 +1,7 @@
-local M = {}
+local map = function(mode, keys, cmd, opts)
+  opts = opts or { noremap = true, silent = true }
+  vim.keymap.set(mode, keys, cmd, opts)
+end
 
 map('n', '<F1>', ':w<cr>:e ++ff=dos<cr>:w ++ff=unix<cr>')
 map('n', '<F9>', ':LspRestart<cr>')
@@ -91,18 +94,18 @@ for char in string.gmatch([[w'"`p[<({]], '.') do
 	end
 end
 
-M.is_root = true
-M.root_path = get_current_path()
+local is_root = true
+local root_path = get_current_path()
 
 map('n', '<leader>ur', function()
-	if M.is_root then
+	if is_root then
 		vim.cmd('lcd ' .. get_current_path())
 		vim.notify 'cwd changed to current place'
-		M.is_root = false
+		is_root = false
 	else
-		vim.cmd('lcd ' .. M.root_path)
+		vim.cmd('lcd ' .. root_path)
 		vim.notify 'cwd changed to root'
-		M.is_root = true
+		is_root = true
 	end
 end)
 
@@ -129,7 +132,3 @@ map('n', '<leader>lw', function()
 	vim.api.nvim_buf_set_lines(0, row, row, true, { new_line })
 	vim.cmd.normal 'j=='
 end)
-
--- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     utils     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-map('n', '<leader>uf', function() print(vim.bo.filetype) end)

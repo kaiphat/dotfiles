@@ -1,46 +1,12 @@
-vim.cmd [[command! Squeeze %s/\v(\n\n)\n+/\1/e]]
-vim.cmd [[command! DeleteEmptyLines %s/\v(\n)\n+/\1/e]]
-vim.cmd [[command! DeleteSpaces lua require('commands').delete_spacec()]]
-vim.cmd [[command! CopyFilePath lua require('commands').copy_file_path()]]
-vim.cmd [[command! SnakeCase lua require('commands').snake()]]
-vim.cmd [[command! CamelCase lua require('commands').camel()]]
-vim.cmd [[command! -nargs=* CreateSubTitle lua require('commands').create_sub_title('<args>')]]
-vim.cmd [[command! -nargs=* CreateTitle lua require('commands').create_title('<args>')]]
-
-return {
+local helpers = {
 	copy_file_path = function()
 		vim.cmd 'silent! let @+=expand("%:p")'
 		print 'File path was yanked'
 	end,
 
-	delete_spacec = function()
+	delete_spaces = function()
 		vim.cmd [[silent! s/\S\@<=\s\+/ /g]]
 		vim.cmd [[silent! nohl]]
-	end,
-
-	split_string = function(str, delimiter)
-		local result = {}
-		for match in (str .. delimiter):gmatch('(.-)' .. delimiter) do
-			table.insert(result, match)
-		end
-		return result
-	end,
-
-	snake = function(s)
-		return s:gsub('%f[^%l]%u', '_%1')
-			:gsub('%f[^%a]%d', '_%1')
-			:gsub('%f[^%d]%a', '_%1')
-			:gsub('(%u)(%u%l)', '%1_%2')
-			:upper()
-	end,
-
-	camel = function(s)
-		s = s:lower()
-		return string.gsub(s, '_%a+', function(word)
-			local first = string.sub(word, 2, 2)
-			local rest = string.sub(word, 3)
-			return string.upper(first) .. rest
-		end)
 	end,
 
 	create_sub_title = function(char)
@@ -89,3 +55,13 @@ return {
 		if vim.trim(next_line) ~= '' then vim.api.nvim_buf_set_lines(0, row + 2, row + 2, true, { '' }) end
 	end,
 }
+
+vim.cmd [[command! Squeeze %s/\v(\n\n)\n+/\1/e]]
+vim.cmd [[command! DeleteEmptyLines %s/\v(\n)\n+/\1/e]]
+vim.cmd [[command! DeleteSpaces lua require('commands').delete_spaces()]]
+vim.cmd [[command! CopyFilePath lua require('commands').copy_file_path()]]
+vim.cmd [[command! -nargs=* CreateSubTitle lua require('commands').create_sub_title('<args>')]]
+vim.cmd [[command! -nargs=* CreateTitle lua require('commands').create_title('<args>')]]
+vim.cmd [[command! FileType lua print(vim.bo.filetype)]]
+
+return helpers
