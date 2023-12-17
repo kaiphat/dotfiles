@@ -102,9 +102,9 @@ return {
 		cell_width = 1,
 		line_height = 1.3,
 	}),
-	sf_mono = build_font_params('SFMono Nerd Font', false, weights.M, {
+	sf_mono = build_font_params('SFMono Nerd Font', false, weights.B, {
 		font_size = 12,
-		cell_width = 0.9,
+		cell_width = 1,
 		line_height = 1.05,
 	}),
 	fira = build_font_params('FiraCode Nerd Font', false, weights.R, {

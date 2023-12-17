@@ -1,23 +1,12 @@
 require 'lua/helpers'
 local wezterm = require 'wezterm'
 local fonts = require 'lua/fonts'
-local DARK_ROSE_PINE = require 'lua/themes/dark_rose_pine'
-local DARK = require 'lua/themes/dark'
-local LIGHT = require 'lua/themes/light'
-
--- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
--- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   FONTS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
--- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 wezterm.on('gui-startup', function(cmd)
 	local _, _, window = wezterm.mux.spawn_window(cmd or {})
 	-- window:gui_window():maximize()
 	window:gui_window():toggle_fullscreen()
 end)
-
--- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
--- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   BACKGROUND   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
--- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 local background = {
 	window_background_opacity = 1,
@@ -28,23 +17,18 @@ local background = {
 	-- },
 }
 
--- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
--- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   THEME   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
--- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-local THEMES = {
-	DARK = DARK,
-	LIGHT = LIGHT,
-	DARK_ROSE_PINE = DARK_ROSE_PINE,
+local keys = {
+	{ key = 'C', mods = 'CTRL', action = wezterm.action.CopyTo 'Clipboard' },
+	{ key = 'V', mods = 'CTRL', action = wezterm.action.PasteFrom 'Clipboard' },
+	{ key = 'v', mods = 'SUPER', action = wezterm.action.PasteFrom 'Clipboard' },
+	{ key = '=', mods = 'CTRL', action = wezterm.action.IncreaseFontSize },
+	{ key = '0', mods = 'CTRL', action = wezterm.action.ResetFontSize },
+	{ key = '-', mods = 'CTRL', action = wezterm.action.DecreaseFontSize },
+	{ key = 'q', mods = 'CMD', action = wezterm.action.QuitApplication },
 }
 
--- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
--- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   RESULT   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
--- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
 local config = {
-	-- front_end = 'WebGpu',
-	-- freetype_load_target = 'HorizontalLcd',
+    front_end = 'WebGpu',
 	window_padding = {
 		left = 0,
 		right = 0,
@@ -53,14 +37,15 @@ local config = {
 	},
 	enable_tab_bar = false,
 	enable_scroll_bar = false,
-	scrollback_lines = 10000,
-	cursor_blink_rate = 1000,
-	max_fps = 200,
-	animation_fps = 200,
-	default_cursor_style = 'BlinkingBlock',
-	warn_about_missing_glyphs = false,
-	use_cap_height_to_scale_fallback_fonts = true,
+	scrollback_lines = 1000,
+	cursor_blink_rate = 0,
+	max_fps = 240,
+	animation_fps = 240,
+	colors = require('lua/themes/dark'),
+	default_cursor_style = 'SteadyBlock',
 	disable_default_key_bindings = true,
+	warn_about_missing_glyphs = false,
+	use_cap_height_to_scale_fallback_fonts = false,
 	adjust_window_size_when_changing_font_size = false,
 	window_close_confirmation = 'NeverPrompt',
 	mouse_bindings = {
@@ -70,16 +55,6 @@ local config = {
 			action = wezterm.action.OpenLinkAtMouseCursor,
 		},
 	},
-
-	keys = {
-		{ key = 'C', mods = 'CTRL', action = wezterm.action.CopyTo 'Clipboard' },
-		{ key = 'V', mods = 'CTRL', action = wezterm.action.PasteFrom 'Clipboard' },
-		{ key = 'v', mods = 'SUPER', action = wezterm.action.PasteFrom 'Clipboard' },
-		{ key = '=', mods = 'CTRL', action = wezterm.action.IncreaseFontSize },
-		{ key = '0', mods = 'CTRL', action = wezterm.action.ResetFontSize },
-		{ key = '-', mods = 'CTRL', action = wezterm.action.DecreaseFontSize },
-		{ key = 'q', mods = 'CMD', action = wezterm.action.QuitApplication },
-	},
 }
 
-return merge(config, fonts.sf_mono, { colors = THEMES.DARK_ROSE_PINE }, background)
+return merge(config, fonts.sf_mono, background, { keys = keys })

@@ -157,7 +157,7 @@ return {
 				autocomplete = {
 					types.cmp.TriggerEvent.TextChanged,
 				},
-				completeopt = 'menu,menuone,noinsert',
+				-- completeopt = 'menuone,noinsert,preview',
 				keyword_length = 1,
 			},
 			matching = {

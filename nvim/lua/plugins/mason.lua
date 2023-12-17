@@ -12,6 +12,7 @@ M.tools = {
 	'sql-formatter',
 	'emmet-language-server',
 	'stylua',
+	'eslint_d',
 }
 
 return {

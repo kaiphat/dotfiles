@@ -4,6 +4,12 @@ return {
     priority = 1000,
     config = function()
         require('github-theme').setup {
+            darken = {                 -- Darken floating windows and sidebar-like windows
+                floats = false,
+                sidebars = {
+                    enabled = false,
+                },
+            },
             palletes = {
                 all = {
                 }

@@ -1,0 +1,26 @@
+[font]
+size = 12
+
+[font.normal]
+family = "RobotoMono Nerd Font"
+style = "Medium"
+
+[font.bold]
+family = "RobotoMono Nerd Font"
+style = "Medium"
+
+[font.italic]
+family = "RobotoMono Nerd Font"
+style = "Medium Italic"
+
+[font.bold_italic]
+family = "RobotoMono Nerd Font"
+style = "Medium Italic"
+
+[font.offset]
+x = 0
+y = 0
+
+[font.glyph_offset]
+x = 0
+y = 0

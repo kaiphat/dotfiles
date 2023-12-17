@@ -8,6 +8,7 @@ if vim.fn.has 'nvim-0.10' == 1 then o.smoothscroll = true end
 
 local TAB_SIZE = 4
 
+o.background = 'dark'
 o.guicursor = 'a:blinkon1,i-ci-ve:ver25-blinkon1'
 o.selection = 'old'
 o.tabstop = TAB_SIZE
@@ -86,7 +87,7 @@ o.fillchars = {
 	lastline = ' ',
 }
 o.showbreak = '   '
-o.completeopt = 'menuone,noselect'
+o.completeopt = 'menuone,preview,noselect'
 o.complete = '.,w,b,u,t,U,s,k,d,i'
 o.langmap =
 	'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz'

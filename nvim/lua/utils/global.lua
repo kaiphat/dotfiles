@@ -3,12 +3,6 @@ _G.map = function(mode, keys, cmd, opts)
   vim.keymap.set(mode, keys, cmd, opts)
 end
 
-_G.get_theme = function()
-  local theme = os.getenv '@THEME'
-    print(theme)
-    return theme
-end
-
 _G.get_current_path = function()
   return vim.fn.expand '%:p:h'
 end
@@ -70,54 +64,6 @@ end
 _G.get_row_col = function()
   local cursor = vim.api.nvim_win_get_cursor(0)
   return cursor[1], cursor[2]
-end
-
-_G.create_title = function(char)
-  local MAX_LENGTH = 60
-  local SPACE_LENGTH = 3
-  local DEFAULT_CHAR = '┈'
-
-  char = char or '#'
-
-  local row = get_row_col()
-
-  local line = vim.trim(vim.api.nvim_get_current_line():gsub(char, ''):gsub(DEFAULT_CHAR, ''))
-  local left_line_length = math.floor((MAX_LENGTH - #line - SPACE_LENGTH * 2) / 2)
-  local left = DEFAULT_CHAR:rep(left_line_length)
-  local right = DEFAULT_CHAR:rep(MAX_LENGTH - #line - SPACE_LENGTH * 2 - left_line_length)
-
-  local next_line = vim.api.nvim_buf_get_lines(0, row, row + 1, false)[1]
-  local space = (' '):rep(SPACE_LENGTH)
-  local title = char .. ' ' .. left .. space .. line .. space .. right
-
-  local border = char .. ' ' .. DEFAULT_CHAR:rep(MAX_LENGTH)
-
-  vim.api.nvim_buf_set_lines(0, row - 1, row, true, { border, title, border })
-
-  if vim.trim(next_line) ~= '' then
-    vim.api.nvim_buf_set_lines(0, row + 2, row + 2, true, { '' })
-  end
-end
-
-_G.create_sub_title = function(char)
-  local MAX_LENGTH = 60
-  local SPACE_LENGTH = 5
-  local DEFAULT_CHAR = '┈'
-
-  char = char or '#'
-
-  local row = get_row_col()
-
-  local line = vim.trim(vim.api.nvim_get_current_line():gsub(char, ''):gsub(DEFAULT_CHAR, ''))
-  local free_space = MAX_LENGTH - #line - SPACE_LENGTH * 2
-  local left_line_length = math.floor(free_space / 2)
-  local left = DEFAULT_CHAR:rep(left_line_length)
-  local right = DEFAULT_CHAR:rep(free_space - left_line_length)
-
-  local space = (' '):rep(SPACE_LENGTH)
-  local title = char .. ' ' .. left .. space .. line .. space .. right
-
-  vim.api.nvim_buf_set_lines(0, row - 1, row, true, { title })
 end
 
 _G.get_terminal_width = function()

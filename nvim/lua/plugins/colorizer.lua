@@ -1,6 +1,7 @@
 return {
 	'norcalli/nvim-colorizer.lua',
-	cmd = { 'ColorizerAttachToBuffer' },
+	-- cmd = { 'ColorizerAttachToBuffer' },
+	lazy = false,
 	config = function()
 		require('colorizer').setup {
 			'*',

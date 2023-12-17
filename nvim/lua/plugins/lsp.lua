@@ -1,7 +1,7 @@
 local M = {}
 
 M.set_lsp_symbols = function()
-	local char = '│'
+	local char = '●'
 
 	for _, hint in ipairs { 'Error', 'Information', 'Hint', 'Warning' } do
 		vim.fn.sign_define('LspDiagnosticsSign' .. hint, {
@@ -25,6 +25,14 @@ M.publish_diagnostics_opts = {
 }
 
 M.set_handlers = function()
+    vim.api.nvim_create_autocmd('LspAttach', {
+        callback = function(args)
+            local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+            client.server_capabilities.semanticTokensProvider = nil
+        end
+    })
+
 	vim.lsp.handlers['textDocument/publishDiagnostics'] =
 		vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, M.publish_diagnostics_opts)
 
@@ -42,7 +50,7 @@ M.set_handlers = function()
 	end
 end
 
-M.on_attach = function(client, bufnr)
+M.on_attach = function()
 	-- vim.api.nvim_create_augroup('lsp_augroup', { clear = true })
 	--
 	-- vim.api.nvim_create_autocmd('InsertEnter', {
@@ -243,6 +251,7 @@ return {
 
 				server.setup(settings)
 			end
+			M.set_lsp_symbols()
 		end,
 	},
 }

@@ -1,6 +1,4 @@
-local M = {}
-
-M.languages = {
+local languages = {
 	'javascript',
 	'rust',
 	'typescript',
@@ -31,7 +29,7 @@ M.languages = {
 	'graphql',
 }
 
-M.add_mixins = function()
+local add_mixins = function()
 	-- vim.treesitter.language.register('fish', 'nu')
 end
 
@@ -39,12 +37,12 @@ return {
 	{
 		'nvim-treesitter/nvim-treesitter-context',
 		event = 'BufReadPre',
-		enabled = false,
+		enabled = true,
 		keys = {
 			{ '[c', function() require('treesitter-context').go_to_context() end },
 		},
 		opts = {
-			max_lines = 4,
+			max_lines = 1,
 		},
 	},
 
@@ -53,6 +51,9 @@ return {
 		version = false,
 		lazy = false,
 		build = ':TSUpdate',
+		dependencies = {
+			'nvim-treesitter/nvim-treesitter-textobjects',
+		},
 		keys = {
 			{ 'u', function() require('utils.unit').select(true) end, mode = { 'x', 'o' } },
 		},
@@ -73,7 +74,7 @@ return {
 			}
 
 			config.setup {
-				ensure_installed = M.languages,
+				ensure_installed = languages,
 				query_linter = {
 					enable = true,
 					use_virtual_text = true,
@@ -85,11 +86,30 @@ return {
 				endwise = {
 					enable = true,
 				},
-				textsubjects = {
-					enable = true,
-					keymaps = {
-						['.'] = 'textsubjects-smart',
-						[';'] = 'textsubjects-container-outer',
+				textobjects = {
+					select = {
+						enable = true,
+						keymaps = {
+							['if'] = '@function.inner',
+						},
+					},
+					move = {
+						enable = true,
+						goto_next_start = {
+							[']]'] = '@function.outer',
+							[']s'] = { query = '@scope', query_group = 'locals', desc = 'Next scope' },
+							[']z'] = { query = '@fold', query_group = 'folds', desc = 'Next fold' },
+						},
+						goto_next_end = {
+							[']['] = '@function.outer',
+						},
+						goto_previous_start = {
+							['[['] = '@function.outer',
+							['[s'] = { query = '@scope', query_group = 'locals', desc = 'Next scope' },
+						},
+						goto_previous_end = {
+							['[]'] = '@function.outer',
+						},
 					},
 				},
 				highlight = {
@@ -111,7 +131,7 @@ return {
 				},
 			}
 
-			M.add_mixins()
+			add_mixins()
 		end,
 	},
 }

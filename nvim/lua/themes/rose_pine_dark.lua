@@ -26,7 +26,7 @@ return {
                 TreesitterContextSeparator = { fg = 'rose' },
                 CmpItemKindCodeium = { fg = 'iris' },
                 ['@variable'] = { italic = false, fg = '#c4c6e7' },
-                ['@lsp.type.property'] = { italic = false },
+                ['@lsp.type.property.typescript'] = { italic = false, fg = '#7a8bb1' },
                 ['@property.typescript'] = { italic = false, fg = '#7a8bb1' },
                 ['@punctuation'] = { italic = false },
                 ['@attribute'] = { fg = 'iris' },

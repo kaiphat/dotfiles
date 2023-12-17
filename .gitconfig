@@ -50,7 +50,7 @@
     plh = !git pull origin $(git rev-parse --abbrev-ref HEAD)
     p   = push origin
     ph  = push origin HEAD
-    phf = push origin HEAD -f
+    phforce = push origin HEAD -f
     d   = diff HEAD
     d1  = diff HEAD~1
     ds  = diff HEAD --shortstat

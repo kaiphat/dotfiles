@@ -306,34 +306,6 @@ font:
 #┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 # colors: # DARK
-#   primary:
-#     #background: '#202837'
-#    background: '#292640'
-#    foreground: '#787C99'
-#   cursor:
-#    text: '#000000'
-#    # cursor: '#99d1db'
-#    # cursor: '#c6d0f5'
-#    # cursor: '#fbdf90'
-#    cursor: '#baaaff'
-#   normal:
-#     black:   '#404060'
-#     red:     '#F7768E'
-#     green:   '#9CC4B2'
-#     yellow:  '#88C0D0'
-#     blue:    '#6e88a6'
-#     magenta: '#9398cf'
-#     cyan:    '#c8ae9d'
-#     white:   '#787C99'
-#   bright:
-#     black:   '#9CC4B2'
-#     red:     '#F7768E'
-#     green:   '#9CC4B2'
-#     yellow:  '#9398cf'
-#     blue:    '#6e88a6'
-#     magenta: '#9398cf'
-#     cyan:    '#c8ae9d'
-#     white:   '#ACB0D0'
 
 # colors: # ROSE PINE DARK
 #   primary:

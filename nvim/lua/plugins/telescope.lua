@@ -133,7 +133,6 @@ return {
 		{
 			'<leader>dk',
 			function()
-				local path = get_current_path()
 				require('telescope').extensions.file_browser.file_browser {
 					hidden = true,
 					grouped = true,

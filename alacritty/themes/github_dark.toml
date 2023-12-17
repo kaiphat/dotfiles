@@ -1,7 +1,7 @@
 # https://github.com/projekt0n/github-theme-contrib/blob/main/themes/alacritty/github_dark.yml
 
 [colors.primary]
-background = '0x30363d'
+background = '#191934'
 foreground = '0xe6edf3'
 
 [colors.cursor]

@@ -2,34 +2,55 @@ local base_keys = '<leader>h'
 
 return {
 	'ThePrimeagen/harpoon',
+	branch = 'harpoon2',
+	requires = { 'nvim-lua/plenary.nvim' },
 	keys = {
+
 		{
 			base_keys .. 'a',
 			function()
-				require('harpoon.mark').add_file()
+				local h = require 'harpoon'
+				h:list():append()
 				print 'added'
 			end,
 		},
 		{
 			base_keys .. 'r',
 			function()
-				require('harpoon.mark').rm_file()
+				local h = require 'harpoon'
+				h:list():remove()
 				print 'removed'
 			end,
 		},
-		{ base_keys .. 'm', function() require('harpoon.ui').toggle_quick_menu() end },
-		{ base_keys .. 'n', function() require('harpoon.ui').nav_next() end },
-		{ base_keys .. 'p', function() require('harpoon.ui').nav_prev() end },
+		{
+			base_keys .. 'm',
+			function()
+				local h = require 'harpoon'
+				h.ui:toggle_quick_menu(h:list())
+			end,
+		},
+		{
+			base_keys .. 'n',
+			function()
+				local h = require 'harpoon'
+				h:list():next()
+			end,
+		},
+		{
+			base_keys .. 'p',
+			function()
+				local h = require 'harpoon'
+				h:list():prev()
+			end,
+		},
+		{
+			base_keys .. 'c',
+			function()
+				local h = require 'harpoon'
+				h:list():clear()
+				print('clear')
+			end,
+		},
 	},
-	config = function()
-		require('harpoon').setup {
-			menu = {
-				width = 100,
-			},
-
-			global_settings = {
-				mark_branch = true,
-			},
-		}
-	end,
+	config = function() require('harpoon'):setup {} end,
 }

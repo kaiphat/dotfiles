@@ -1,0 +1,26 @@
+[font]
+size = 13
+
+[font.normal]
+family = 'Agave Nerd Font'
+style = 'Regular'
+
+[font.bold]
+family = 'Agave Nerd Font'
+style = 'Regular'
+
+[font.italic]
+family = 'Agave Nerd Font'
+style = 'Italic'
+
+[font.bold_italic]
+family = 'Agave Nerd Font'
+style = 'Italic'
+
+[font.offset]
+x = 0
+y = 0
+
+[font.glyph_offset]
+x = 0
+y = 0

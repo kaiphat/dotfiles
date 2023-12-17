@@ -4,16 +4,18 @@ return {
 		'anuvyklack/middleclass',
 	},
 	event = 'BufReadPre',
+	enabled = true,
 	config = function()
 		local windows = require 'windows'
 
 		windows.setup {
 			autowidth = {
 				enable = true,
-				winwidth = 50,
-				winminwidth = 10,
+				-- winwidth = 50,
+				-- winminwidth = 10,
 				filetype = {
 					help = 2,
+					oil = 1,
 				},
 			},
 

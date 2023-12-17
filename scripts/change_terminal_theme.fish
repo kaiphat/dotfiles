@@ -3,7 +3,8 @@ set themes \
     rose_pine_dark  \
     rose_pine_light \
     github_light    \
-    github_dark
+    github_dark     \
+    gruvbox_light
 
 echo "select theme:"
 for i in (seq 1 (count $themes))
@@ -23,17 +24,18 @@ end
 
 set selected_theme $themes[$theme_index]
 
-
 set dark_theme_enabled
+set theme_type
 switch $selected_theme
     case "*dark*"
         set dark_theme_enabled 1
+        set theme_type "dark"
     case "*light*"
         set dark_theme_enabled 0
+        set theme_type "light"
 end
 
-echo $dark_theme_enabled
-
+sed -i '' -E "s/background \= '[a-z]+'/background = '$theme_type'/" ~/dotfiles/nvim/lua/options.lua
 sed -i '' -E "s/dark_theme\=[01]/dark_theme=$dark_theme_enabled/" ~/dotfiles/.tmux.conf
 sed -i '' -E "s/themes\.[a-zA-Z_]+/themes.$selected_theme/" ~/dotfiles/nvim/lua/plugins/themes.lua
 sed -i '' -E "s/themes\/[a-zA-Z_]+\.toml/themes\/$selected_theme.toml/" ~/dotfiles/alacritty/alacritty.toml
