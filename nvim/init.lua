@@ -1,6 +1,5 @@
 require 'neovide'
-require 'constants.global'
-require 'utils.global'
+require 'helpers.global'
 require 'options'
 require 'autocommands'
 require 'commands'

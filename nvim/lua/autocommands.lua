@@ -28,13 +28,16 @@ vim.api.nvim_create_autocmd('FileType', {
 	callback = function()
 		vim.opt_local.number = false
 		vim.opt_local.relativenumber = false
+		vim.opt_local.wrap = true
 	end,
 })
 
 vim.api.nvim_create_autocmd('FileType', {
 	pattern = '*',
 	group = vim.api.nvim_create_augroup('set_format_options', {}),
-	callback = function() vim.opt_local.formatoptions = 'tc' end,
+	callback = function()
+		vim.opt_local.formatoptions = 'tc'
+	end,
 })
 
 vim.api.nvim_create_autocmd({ 'InsertLeave', 'TextChanged' }, {

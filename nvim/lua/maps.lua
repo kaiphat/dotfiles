@@ -1,6 +1,6 @@
 local map = function(mode, keys, cmd, opts)
-  opts = opts or { noremap = true, silent = true }
-  vim.keymap.set(mode, keys, cmd, opts)
+	opts = opts or { noremap = true, silent = true }
+	vim.keymap.set(mode, keys, cmd, opts)
 end
 
 map('n', '<F1>', ':w<cr>:e ++ff=dos<cr>:w ++ff=unix<cr>')
@@ -42,8 +42,8 @@ map('n', 'L', '$')
 
 map('n', '<C-s>', ':wa<cr>')
 
-map({'n', 'v'}, '<C-d>', function() vim.api.nvim_feedkeys('4j', 'n', true) end)
-map({'n', 'v'}, '<C-u>', function() vim.api.nvim_feedkeys('4k', 'n', true) end)
+map({ 'n', 'v' }, '<C-d>', function() vim.api.nvim_feedkeys('4j', 'n', true) end)
+map({ 'n', 'v' }, '<C-u>', function() vim.api.nvim_feedkeys('4k', 'n', true) end)
 
 map('n', 'x', function()
 	if vim.fn.col '.' == 1 then
@@ -132,3 +132,6 @@ map('n', '<leader>lw', function()
 	vim.api.nvim_buf_set_lines(0, row, row, true, { new_line })
 	vim.cmd.normal 'j=='
 end)
+
+map('n', '<leader>us', function() vim.api.nvim_input ':%s/' end)
+map('v', '<leader>us', function() vim.api.nvim_input ':s/' end)

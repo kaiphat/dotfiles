@@ -55,7 +55,7 @@ return {
 			'nvim-treesitter/nvim-treesitter-textobjects',
 		},
 		keys = {
-			{ 'u', function() require('utils.unit').select(true) end, mode = { 'x', 'o' } },
+			{ 'u', function() require('helpers.unit').select(true) end, mode = { 'x', 'o' } },
 		},
 		config = function()
 			local install = require 'nvim-treesitter.install'

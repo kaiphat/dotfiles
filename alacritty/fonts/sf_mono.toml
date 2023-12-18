@@ -3,22 +3,22 @@ size = 12
 
 [font.normal]
 family = "SFMono Nerd Font"
-style = "Regular"
+style = "SemiBold"
 
 [font.bold]
 family = "SFMono Nerd Font"
-style = "Regular"
+style = "SemiBold"
 
 [font.italic]
 family = "SFMono Nerd Font"
-style = "Regular"
+style = "SemiBold"
 
 [font.bold_italic]
 family = "SFMono Nerd Font"
-style = "Regular"
+style = "SemiBold"
 
 [font.offset]
-x = -1
+x = 0
 y = 0
 
 [font.glyph_offset]

@@ -64,7 +64,9 @@ local diagnostic_servers = {
 }
 
 return {
-	'nvimtools/none-ls.nvim',
+	-- 'nvimtools/none-ls.nvim',
+	'jose-elias-alvarez/null-ls.nvim',
+	enabled = true,
 	event = 'BufReadPre',
 	config = function()
 		local null_ls = require 'null-ls'

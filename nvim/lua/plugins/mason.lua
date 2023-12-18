@@ -3,6 +3,7 @@ local M = {}
 M.tools = {
 	'lua-language-server',
 	'prettierd',
+    'prettier',
 	'rust-analyzer',
 	'typescript-language-server',
 	'json-lsp',

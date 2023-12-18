@@ -5,10 +5,20 @@ return {
 		{ '<leader>O', function() require('oil').open(vim.loop.cwd()) end },
 	},
 	config = function()
+		vim.api.nvim_create_autocmd('FileType', {
+			group = vim.api.nvim_create_augroup('oil_file_type', {}),
+			pattern = 'oil',
+			callback = function(event)
+				vim.api.nvim_buf_set_keymap(event.buf, 'n', '<C-j>', 'j', {})
+				vim.api.nvim_buf_set_keymap(event.buf, 'n', '<C-k>', 'k', {})
+			end,
+		})
+
 		require('oil').setup {
 			skip_confirm_for_simple_edits = true,
 			prompt_save_on_select_new_entry = false,
 
+            cleanup_delay_ms = false,
 			use_default_keymaps = false,
 			keymaps = {
 				['<C-l>'] = 'actions.select',

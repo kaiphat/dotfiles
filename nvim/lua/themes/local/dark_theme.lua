@@ -1,5 +1,33 @@
 local H = {}
-local c = DARK_THEME_COLORS
+local c = {
+	bg = '#202837',
+	fg = '#c4c6e7',
+	one_bg2 = '#384155',
+	one_bg3 = '#405879',
+	one_bg4 = '#486892',
+	one_bg5 = '#253147',
+	cyan = '#a3b8ef',
+	blue_gray = '#9398cf',
+	purple = '#c2a2e3',
+	blue_nord = '#81A1C1',
+	teal = '#81c8be',
+	blue = '#8caaee',
+	lavender = '#babbf1',
+	sky = '#7a8bb1',
+	sapphire = '#85c1dc',
+	pink = '#f4b8e4',
+	blue_darkest = '#404060',
+	yellow = '#fbdf9a',
+	red = '#ef8891',
+	r1 = '#cb7f9a',
+	green_blue = '#66A0A0',
+	green_tea = '#9CC4B2',
+	brown = '#c8ae9d',
+	orange = '#fca2aa',
+	orange_dark = '#ef9f76',
+	gray = '#6e88a6',
+	gray_blue = '#788aa3',
+}
 
 -- BASE --
 H.It = { italic = true }

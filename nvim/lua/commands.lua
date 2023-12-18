@@ -63,5 +63,6 @@ vim.cmd [[command! CopyFilePath lua require('commands').copy_file_path()]]
 vim.cmd [[command! -nargs=* CreateSubTitle lua require('commands').create_sub_title('<args>')]]
 vim.cmd [[command! -nargs=* CreateTitle lua require('commands').create_title('<args>')]]
 vim.cmd [[command! FileType lua print(vim.bo.filetype)]]
+vim.cmd [[command! -range Test lua require('commands').select()]]
 
 return helpers
