@@ -13,6 +13,12 @@ return {
 						cterm_color = '231',
 						name = 'Toml',
 					},
+					['norg'] = {
+                        icon = '󱈤',
+                        color = '#a3b8ef',
+						cterm_color = '231',
+						name = 'Toml',
+					},
 				},
 			}
 		end,
