@@ -8,4 +8,4 @@ local themes = {
 	gruvbox_light = 'gruvbox_light',
 }
 
-return require('themes.' .. themes.rose_pine_dark)
+return require('themes.' .. themes.github_dark)

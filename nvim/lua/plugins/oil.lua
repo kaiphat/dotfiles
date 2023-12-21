@@ -18,7 +18,7 @@ return {
 			skip_confirm_for_simple_edits = true,
 			prompt_save_on_select_new_entry = false,
 
-            cleanup_delay_ms = false,
+            cleanup_delay_ms = 100,
 			use_default_keymaps = false,
 			keymaps = {
 				['<C-l>'] = 'actions.select',

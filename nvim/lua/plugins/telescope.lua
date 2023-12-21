@@ -32,6 +32,7 @@ return {
 		'nvim-telescope/telescope-ui-select.nvim',
 	},
 	lazy = true,
+	cmd = 'Telescope',
 	keys = {
 		{
 			'<leader>fb',
@@ -178,8 +179,8 @@ return {
 						'--column',
 						'--ignore-case',
 						'--trim',
-						'--hidden=false',
-						'--no-ignore=true',
+                        '--no-hidden',
+                        '--no-ignore',
 					}
 				}
 			end,
@@ -210,8 +211,8 @@ return {
 						'--column',
 						'--ignore-case',
 						'--trim',
-						'--hidden=false',
-						'--no-ignore=true',
+						'--no-hidden',
+						'--no-ignore',
 					}, map_list(M.always_ignore_patterns, function(pattern) return '-g=!' .. pattern end)),
 				}
 			end,
@@ -247,8 +248,8 @@ return {
 						'--column',
 						'--ignore-case',
 						'--trim',
-						'--hidden=false',
-						'--no-ignore=true',
+						'--no-hidden',
+						'--no-ignore',
 					}, map_list(M.always_ignore_patterns, function(pattern) return '-g=!' .. pattern end)),
 				}
 			end,

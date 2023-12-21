@@ -112,6 +112,7 @@ alias pj "xclip -o | jq '.' | clip"
 alias nvim-start "nvim --startuptime _s.log -c exit && tail -100 _s.log | bat && rm _s.log"
 alias ... "cd ../../"
 alias lg "lazygit"
+# alias fd "fd --no-ignore --hidden -p -c never"
 
 alias play:sql "n ~/play/sql/index.sql"
 function change-theme

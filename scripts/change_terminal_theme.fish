@@ -1,8 +1,8 @@
 set themes \
-    dark            \
     rose_pine_dark  \
-    rose_pine_light \
     github_light    \
+    dark            \
+    rose_pine_light \
     github_dark     \
     gruvbox_light
 

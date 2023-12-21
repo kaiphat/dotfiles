@@ -1,21 +1,17 @@
 local ICONS = {
-    ARROW = '➜',
-    BRACKET = '❯',
+	ARROW = '➜',
+	BRACKET = '❯',
 }
 
 return {
 	'folke/noice.nvim',
-	event = 'BufReadPre',
+	event = 'VeryLazy',
 	config = function()
 		local noice = require 'noice'
 
 		noice.setup {
 			views = {
 				cmdline_popup = {
-					-- border = {
-					--   style = 'none',
-					--   padding = { 1, 2 }
-					-- },
 					position = {
 						row = '35%',
 						col = '50%',
@@ -37,12 +33,12 @@ return {
 
 			cmdline = {
 				format = {
-                    cmdline = { pattern = '^:', icon = ICONS.BRACKET, lang = 'vim' },
+					cmdline = { pattern = '^:', icon = ICONS.BRACKET, lang = 'vim' },
 					search_down = { kind = 'search', pattern = '^/', icon = '', lang = 'regex' },
 					search_up = { kind = 'search', pattern = '^%?', icon = '', lang = 'regex' },
 					filter = { pattern = '^:%s*!', icon = ICONS.BRACKET, lang = 'bash' },
 					lua = { pattern = '^:%s*lua%s+', icon = '', lang = 'lua' },
-                    help = { pattern = '^:%s*h%s+', icon = ' ' },
+					help = { pattern = '^:%s*h%s+', icon = ' ' },
 					input = {}, -- Used by input()
 				},
 			},
@@ -74,13 +70,13 @@ return {
 			},
 
 			routes = {
-				{
-					filter = {
-						event = 'msg_show',
-						kind = 'search_count',
-					},
-					opts = { skip = true },
-				},
+				-- {
+				-- 	filter = {
+				-- 		event = 'msg_show',
+				-- 		kind = 'search_count',
+				-- 	},
+				-- 	opts = { skip = true },
+				-- },
 				{
 					filter = {
 						event = 'msg_show',

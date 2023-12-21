@@ -1,6 +1,6 @@
 import = [
-    '~/dotfiles/alacritty/themes/rose_pine_dark.toml',
-    '~/dotfiles/alacritty/fonts/roboto.toml'
+    '~/dotfiles/alacritty/themes/github_dark.toml',
+    '~/dotfiles/alacritty/fonts/input.toml'
 ]
 
 [env]
