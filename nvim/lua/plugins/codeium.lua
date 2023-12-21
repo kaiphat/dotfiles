@@ -15,7 +15,7 @@ return {
 
 	{
 		'Exafunction/codeium.vim',
-		enabled = true,
+		enabled = false,
 		event = 'InsertEnter',
 		keys = {
 			{

@@ -48,7 +48,7 @@ local keys = {
 	},
 }
 
-local marks = 'qwerasdf'
+local marks = 'qwer'
 for i = 1, #marks do
 	local mark = marks:sub(i, i)
 	table.insert(keys, {

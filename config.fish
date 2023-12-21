@@ -42,6 +42,8 @@ fish_add_path -aP $HOME/.local/share/bob/nvim-bin
 fish_add_path -aP $HOME/.local/bin/razer-cli
 fish_add_path -aP $HOME/.yarn/bin
 fish_add_path -aP $HOME/.local/bin
+fish_add_path -aP $HOME/.local/share/nvim/mason/bin/
+
 
 set -x PATH "/Library/Frameworks/Python.framework/Versions/3.12/bin" "$PATH"
 if [ -f '/Users/ilyapu/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/ilyapu/Downloads/google-cloud-sdk/path.fish.inc'; end
