@@ -1,6 +1,7 @@
 return {
 	'chrisgrieser/nvim-spider',
 	event = 'BufReadPre',
+	enabled = false,
 	keys = {
         { 'w', function () require'spider'.motion 'w' end },
         { 'e', function () require'spider'.motion 'e' end },

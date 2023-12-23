@@ -35,7 +35,7 @@ local helpers = {
 		local SPACE_LENGTH = 3
 		local DEFAULT_CHAR = '┈'
 
-		char = char or '#'
+		char = (char == '' or char == nil) and '#' or char
 
 		local row = get_row_col()
 

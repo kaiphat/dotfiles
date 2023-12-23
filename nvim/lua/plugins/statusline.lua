@@ -17,7 +17,7 @@ local path = {
 		},
 	},
 	hl = { fg = colors.fg1 },
-	right_sep = gap,
+	left_sep = gap,
 }
 
 local get_macros_component = function ()
@@ -42,7 +42,7 @@ local get_macros_component = function ()
         enabled = function() return active_macros ~= nil end,
         provider = function() return active_macros:upper() end,
         hl = { fg = colors.fg4 },
-        right_sep = gap,
+        left_sep = gap,
     }
 end
 
@@ -50,7 +50,7 @@ local git_branch = {
 	icon = ' ',
 	provider = 'git_branch',
 	hl = { fg = colors.fg2 },
-	left_sep = gap,
+	right_sep= gap,
 }
 
 local position = {
@@ -71,7 +71,7 @@ local position = {
 		return current_line .. ':' .. total_line
 	end,
 	hl = { fg = colors.fg1 },
-	left_sep = gap,
+	right_sep = gap,
 }
 
 return {
@@ -80,12 +80,16 @@ return {
 		require('feline').setup {
 			theme = {
 				bg = 'NONE',
+				fg = 'NONE',
 			},
 			disable = {},
 			components = {
 				active = {
 					{ path, get_macros_component() },
 					{ git_branch, position },
+				},
+				inactive = {
+					{ path },
 				},
 			},
 		}

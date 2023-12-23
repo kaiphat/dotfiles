@@ -68,6 +68,7 @@ return {
 	'ThePrimeagen/harpoon',
 	branch = 'harpoon2',
 	requires = { 'nvim-lua/plenary.nvim' },
+	enabled = false,
 	keys = keys,
 	config = function()
 		require('harpoon'):setup {

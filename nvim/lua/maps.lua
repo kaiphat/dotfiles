@@ -110,11 +110,10 @@ map('n', '<leader>ur', function()
 end)
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     marks     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-for letter in string.gmatch('abcdefghijkloqrstuvwxyz', '.') do
-	map('n', 'm' .. letter, 'm' .. letter:upper())
-	map('n', '\'' .. letter, '\'' .. letter:upper())
-end
+-- for letter in string.gmatch('abcdefghijkloqrstuvwxyz', '.') do
+-- 	map('n', 'm' .. letter, 'm' .. letter:upper())
+-- 	map('n', '\'' .. letter, '\'' .. letter:upper())
+-- end
 
 map('n', '<leader>lw', function()
 	local ft = vim.bo.filetype

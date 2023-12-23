@@ -3,19 +3,19 @@ size = 12
 
 [font.normal]
 family = "SFMono Nerd Font"
-style = "SemiBold"
+style = "Medium"
 
 [font.bold]
 family = "SFMono Nerd Font"
-style = "SemiBold"
+style = "Medium"
 
 [font.italic]
 family = "SFMono Nerd Font"
-style = "SemiBold"
+style = "Medium Italic"
 
 [font.bold_italic]
 family = "SFMono Nerd Font"
-style = "SemiBold"
+style = "Medium Italic"
 
 [font.offset]
 x = 0

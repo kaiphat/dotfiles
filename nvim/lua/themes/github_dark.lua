@@ -35,6 +35,8 @@ return {
 					TelescopeBorder = { fg = 'bg3' },
 					NoiceCmdlinePopupBorder = { fg = 'bg3' },
 					NoiceCmdlinePopupBorderSearch = { fg = 'bg3' },
+					StatusLine = { bg = 'NONE', fg = 'bg2' },
+					StatusLineNC = { bg = 'NONE', fg = 'bg1' },
 				},
 			},
 		}
