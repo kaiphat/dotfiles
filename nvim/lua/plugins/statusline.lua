@@ -1,8 +1,8 @@
 local colors = {
-    fg1 = '#a3b8ef',
-    fg2 = '#EBCB8B',
+	fg1 = '#a3b8ef',
+	fg2 = '#EBCB8B',
 	fg3 = '#7eca9c',
-    fg4 = '#ff75a0',
+	fg4 = '#ff75a0',
 }
 
 local gap = { str = ' ', always_visible = true }
@@ -20,37 +20,41 @@ local path = {
 	left_sep = gap,
 }
 
-local get_macros_component = function ()
-    local active_macros
+local get_macros_component = function()
+	local active_macros
 
-    local group = vim.api.nvim_create_augroup('recording_group', {})
-    vim.api.nvim_create_autocmd('RecordingEnter', {
-        group = group,
-        callback = function()
-            active_macros = vim.fn.reg_recording()
-        end,
-    })
-    vim.api.nvim_create_autocmd('RecordingLeave', {
-        group = group,
-        callback = function()
-            active_macros = nil
-        end,
-    })
+	local group = vim.api.nvim_create_augroup('recording_group', {})
+	vim.api.nvim_create_autocmd('RecordingEnter', {
+		group = group,
+		callback = function()
+			active_macros = vim.fn.reg_recording()
+		end,
+	})
+	vim.api.nvim_create_autocmd('RecordingLeave', {
+		group = group,
+		callback = function()
+			active_macros = nil
+		end,
+	})
 
-    return {
-        icon = '󰛡 ',
-        enabled = function() return active_macros ~= nil end,
-        provider = function() return active_macros:upper() end,
-        hl = { fg = colors.fg4 },
-        left_sep = gap,
-    }
+	return {
+		icon = '󰛡 ',
+		enabled = function()
+			return active_macros ~= nil
+		end,
+		provider = function()
+			return active_macros:upper()
+		end,
+		hl = { fg = colors.fg4 },
+		left_sep = gap,
+	}
 end
 
 local git_branch = {
 	icon = ' ',
 	provider = 'git_branch',
 	hl = { fg = colors.fg2 },
-	right_sep= gap,
+	right_sep = gap,
 }
 
 local position = {
@@ -74,6 +78,20 @@ local position = {
 	right_sep = gap,
 }
 
+local function get_marks_component()
+	return {
+        icon = ' ',
+		enabled = function()
+			return require('local_plugins.marks').active_mark_index ~= nil
+		end,
+		provider = function()
+			return require('local_plugins.marks').active_mark_index
+		end,
+		hl = { fg = colors.fg4 },
+		right_sep = gap,
+	}
+end
+
 return {
 	'feline-nvim/feline.nvim',
 	config = function()
@@ -86,7 +104,7 @@ return {
 			components = {
 				active = {
 					{ path, get_macros_component() },
-					{ git_branch, position },
+					{ get_marks_component(), git_branch, position },
 				},
 				inactive = {
 					{ path },

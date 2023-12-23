@@ -2,7 +2,6 @@ return {
 	dir = './',
 	event = 'BufReadPre',
 	config = function()
-		local marks = require 'local_plugins.marks'
-		marks.setup {}
+		require('local_plugins.marks'):setup()
 	end,
 }

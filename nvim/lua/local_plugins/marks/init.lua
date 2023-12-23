@@ -1,5 +1,3 @@
-local marks = require 'local_plugins.marks.marks'
+local manager = require 'local_plugins.marks.manager'
 
-return {
-	setup = function() marks.setup() end,
-}
+return manager

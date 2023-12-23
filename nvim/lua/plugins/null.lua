@@ -23,8 +23,6 @@ local formatting_servers = {
 			'4',
 			'--indent-type',
 			'Tabs',
-			'--collapse-simple-statement',
-			'Always',
 		},
 	},
 	sql_formatter = {
