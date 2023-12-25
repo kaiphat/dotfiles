@@ -69,7 +69,7 @@ return {
 			fps = 30,
 			-- stages = M.get_stages(stages_util),
 			stages = 'static',
-			render = 'wrapped-compact', -- minimal
+			render = 'minimal', -- wrapped-compact, minimal
 			background_colour = 'NormalFloat',
 		}
 

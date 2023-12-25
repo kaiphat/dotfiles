@@ -62,7 +62,7 @@ function Manager:clear_mark(index)
 end
 
 function Manager:add_mark(new_index)
-	local row, col = get_row_col()
+	local row, col = utils.get_row_col()
 	local current_path = utils.get_current_path()
 
 	for index, mark in pairs(self.marks) do
@@ -105,6 +105,15 @@ function Manager:add_keymaps()
 	-- cycle
 	map('\'n', function()
 		self:next_mark()
+	end)
+
+    -- open all
+    -- TODO: don't repeat already opened
+	map('\'A', function()
+        for _, mark in pairs(self.marks) do
+            vim.cmd 'vs'
+            self:load_buffer(mark)
+        end
 	end)
 
 	-- show

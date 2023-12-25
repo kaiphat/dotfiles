@@ -1,0 +1,26 @@
+[font]
+size = 13
+
+[font.normal]
+family = "Maple Mono NF"
+style = "Light"
+
+[font.bold]
+family = "Maple Mono NF"
+style = "Regular"
+
+[font.italic]
+family = "Maple Mono NF"
+style = "Light Italic"
+
+[font.bold_italic]
+family = "Maple Mono NF"
+style = "Italic"
+
+[font.offset]
+x = -1
+y = -1
+
+[font.glyph_offset]
+x = 0
+y = 0

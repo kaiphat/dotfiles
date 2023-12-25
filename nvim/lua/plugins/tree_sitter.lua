@@ -37,7 +37,7 @@ return {
 	{
 		'nvim-treesitter/nvim-treesitter-context',
 		event = 'BufReadPre',
-		enabled = true,
+		enabled = false,
 		keys = {
 			{ '[c', function() require('treesitter-context').go_to_context() end },
 		},
@@ -49,14 +49,11 @@ return {
 	{
 		'nvim-treesitter/nvim-treesitter',
 		version = false,
-		lazy = false,
+        event = 'VeryLazy',
 		build = ':TSUpdate',
-		dependencies = {
-			'nvim-treesitter/nvim-treesitter-textobjects',
-		},
-		keys = {
-			{ 'u', function() require('helpers.unit').select(true) end, mode = { 'x', 'o' } },
-		},
+		-- dependencies = {
+		-- 	'nvim-treesitter/nvim-treesitter-textobjects',
+		-- },
 		config = function()
 			local install = require 'nvim-treesitter.install'
 			local config = require 'nvim-treesitter.configs'

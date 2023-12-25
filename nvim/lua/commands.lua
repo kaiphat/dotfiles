@@ -1,4 +1,4 @@
-local helpers = {
+local commands = {
 	copy_file_path = function()
 		vim.cmd 'silent! let @+=expand("%:p")'
 		print 'File path was yanked'
@@ -65,4 +65,4 @@ vim.cmd [[command! -nargs=* CreateTitle lua require('commands').create_title('<a
 vim.cmd [[command! FileType lua print(vim.bo.filetype)]]
 vim.cmd [[command! -range Test lua require('commands').select()]]
 
-return helpers
+return commands

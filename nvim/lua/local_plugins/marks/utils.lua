@@ -28,4 +28,9 @@ function utils.get_current_path()
 	return utils.get_buffer_path(vim.api.nvim_get_current_buf())
 end
 
+function utils.get_row_col()
+    local cursor = vim.api.nvim_win_get_cursor(0)
+    return cursor[1], cursor[2]
+end
+
 return utils
