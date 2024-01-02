@@ -1,6 +1,6 @@
 return {
 	dir = '../local_plugins/marks',
-	event = 'BufReadPre',
+	event = 'VeryLazy',
 	config = function()
 		require('local_plugins.marks'):setup()
 	end,

@@ -31,6 +31,12 @@ return {
 					IncSearch = { bg = 'sel2' },
 					MiniTrailspace = { bg = 'bg2' },
 					Pmenu = { bg = 'bg2' },
+					IndentBlanklineChar = { fg = '#dfdfdf' },
+					IndentBlanklineContextChar = { fg = '#dddddd' },
+					StatusLine = { bg = 'NONE', fg = 'bg2' },
+					StatusLineNC = { bg = 'NONE', fg = 'bg1' },
+                    HopNextKey1 = { link = 'HopNextKey' },
+                    HopNextKey2 = { link = 'HopNextKey' },
 				},
 			},
 		}

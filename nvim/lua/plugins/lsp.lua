@@ -30,6 +30,8 @@ M.set_handlers = function()
 			focusable = true,
 			header = false,
 			border = 'rounded',
+			style = 'minimal',
+			prefix = ''
 		},
 	}
 

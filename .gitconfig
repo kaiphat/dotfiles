@@ -46,7 +46,7 @@
     # discard staged changes
     dsc = !sh -c 'git add -A && git diff HEAD > my.patch && git reset --hard && patch -p1 < my.patch && rm my.patch' --
     # fast commit
-    fc = !sh -c 'git add -A && git commit -m "draft" --no-verify' --
+    fc = !sh -c 'git add -A && git commit -m "DRAFT" --no-verify' --
     plh = !git pull origin $(git rev-parse --abbrev-ref HEAD)
     p   = push origin
     ph  = push origin HEAD

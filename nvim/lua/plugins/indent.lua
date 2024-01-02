@@ -1,8 +1,7 @@
-local M = {}
+local char_highlight_group = '@IndentBlanklineChar'
+local context_char_highlight_group = '@IndentBlanklineContextChar'
 
-M.char_highlight_group = 'CHAR'
-M.context_char_highlight_group = 'CONTEXT_CHAR'
-M.excluded_filetypes = {
+local excluded_filetypes = {
 	'help',
 	'terminal',
 	'dashboard',
@@ -18,7 +17,7 @@ M.excluded_filetypes = {
 	'noice',
 }
 
-M.nodes = {
+local nodes = {
 	'argument_list',
 	'arguments',
 	'assignment_statement',
@@ -60,14 +59,6 @@ M.nodes = {
 	'with',
 }
 
-M.chars = {
-	'▏',
-	'│',
-	'⏐',
-	'┊',
-	'¦',
-}
-
 return {
 	'lukas-reineke/indent-blankline.nvim',
 	enabled = false,
@@ -78,29 +69,29 @@ return {
 		local hooks = require 'ibl.hooks'
 
 		hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-			vim.api.nvim_set_hl(0, M.char_highlight_group, { fg = DARK_THEME_COLORS.blue_darkest })
-			vim.api.nvim_set_hl(0, M.context_char_highlight_group, { fg = DARK_THEME_COLORS.one_bg3 })
+			vim.api.nvim_set_hl(0, char_highlight_group, { link = 'IndentBlanklineChar' })
+			vim.api.nvim_set_hl(0, context_char_highlight_group, { link = 'IndentBlanklineContextChar' })
 		end)
 
 		ibl.setup {
 			indent = {
-				char = M.chars[1],
-				highlight = M.char_highlight_group,
+                char = ICONS.CIRCLE_MEDIUM,
+                highlight = char_highlight_group,
 			},
 			scope = {
-				enabled = true,
+				enabled = false,
 				show_start = false,
 				show_end = false,
 				include = {
-					node_type = { ['*'] = M.nodes },
+					node_type = { ['*'] = nodes },
 				},
-				highlight = M.context_char_highlight_group,
+				highlight = context_char_highlight_group,
 			},
 			exclude = {
 				buftypes = {
 					'terminal',
 				},
-				filetypes = M.excluded_filetypes,
+				filetypes = excluded_filetypes,
 			},
 		}
 	end,

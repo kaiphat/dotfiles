@@ -21,7 +21,7 @@ end
 
 function Path_builder:build()
 	local file_name = self:build_file_name()
-
+	file_name = string.gsub(file_name, '/', '_')
 	return string.format('%s/%s', self.data_path, file_name)
 end
 

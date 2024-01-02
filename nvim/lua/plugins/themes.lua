@@ -6,6 +6,7 @@ local themes = {
 	rose_pine_dark = 'rose_pine_dark',
 	rose_pine_light = 'rose_pine_light',
 	gruvbox_light = 'gruvbox_light',
+	kanagawa_dark = 'kanagawa_dark'
 }
 
-return require('themes.' .. themes.github_dark)
+return require('themes.' .. themes.rose_pine_dark)

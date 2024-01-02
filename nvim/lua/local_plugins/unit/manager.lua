@@ -20,7 +20,10 @@ function Manager:get_line_text(bufnr, line)
 	return vim.api.nvim_buf_get_lines(bufnr, line - 1, line, false)[1]
 end
 
-function Manager:get_node(row, col)
+function Manager:get_node(coords)
+	local row = coords.row
+	local col = coords.col
+
 	local root = ts.get_root_for_position(row - 1, col)
 
 	if not root then
@@ -30,8 +33,8 @@ function Manager:get_node(row, col)
 	return root:named_descendant_for_range(row - 1, col, row - 1, col)
 end
 
-function Manager:get_main_node(row, col)
-	local node = self:get_node(row, col)
+function Manager:get_main_node(position)
+	local node = self:get_node(position)
 
 	if node == nil then
 		return
@@ -85,7 +88,7 @@ function Manager:get_selection_range(outer)
 		cursor.col = self:move_col_while_empty(bufnr, cursor.row)
 	end
 
-	local node = self:get_main_node(cursor.row, cursor.col)
+	local node = self:get_main_node(cursor)
 
 	if node == nil then
 		return
@@ -131,25 +134,32 @@ function Manager:select(outer)
 	self:select_range(bufnr, range.start_row, range.start_col, range.end_row, range.end_col)
 end
 
-function Manager:get_nearest_char_position_up(row)
-	local bufnr = vim.api.nvim_get_current_buf()
+function Manager:get_nearest_char_position_up(coords)
+	local row = coords.row
+	local text, col
 
-	local text
 	while true do
 		if row == 0 then
-			return 1, 1
+			return {
+				row = 1,
+				col = 1,
+			}
 		end
 
-		text = self:get_line_text(bufnr, row)
+		text = self:get_line_text(0, row)
+		col = string.find(text, '[a-zA-Z]')
 
-		if text and vim.trim(text) ~= '' then
+		if col then
 			break
 		end
 
 		row = row - 1
 	end
 
-	return row, string.find(text, '[a-zA-Z]')
+	return {
+		row = row,
+		col = col,
+	}
 end
 
 function Manager:jump_to_parent_unit(is_fallback)
@@ -159,9 +169,9 @@ function Manager:jump_to_parent_unit(is_fallback)
 		return
 	end
 
-	local row, col = self:get_nearest_char_position_up(cursor.row)
+	local char_coords = self:get_nearest_char_position_up(cursor)
 
-	local node = self:get_node(row, col)
+	local node = self:get_node(char_coords)
 
 	if not node then
 		return
@@ -179,19 +189,16 @@ function Manager:jump_to_parent_unit(is_fallback)
 
 	local parent_row, parent_col = parent_node:range()
 
-	local new_row, new_col = self:get_nearest_char_position_up(parent_row)
+	char_coords = self:get_nearest_char_position_up { row = parent_row }
 
 	vim.api.nvim_win_set_cursor(0, { math.max(1, parent_row), math.max(1, parent_col) - 1 })
 
-	if parent_row ~= new_row or parent_col ~= new_col then
+	if parent_row ~= char_coords.row or parent_col ~= char_coords.col then
 		self:jump_to_parent_unit(true)
-		return
 	end
 end
 
-function Manager:jump_to_neighbor_unit(opts)
-	local direction = opts.direction
-end
+function Manager:jump_to_neighbor_unit(opts) end
 
 function Manager:setup() end
 

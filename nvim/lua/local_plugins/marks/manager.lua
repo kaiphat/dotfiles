@@ -81,7 +81,7 @@ function Manager:add_mark(new_index)
 end
 
 function Manager:add_keymaps()
-	local indexes = '1234qwer'
+	local indexes = '1234qwerasdf'
 
 	for i = 1, #indexes do
 		local index = indexes:sub(i, i)
@@ -107,26 +107,38 @@ function Manager:add_keymaps()
 		self:next_mark()
 	end)
 
-    -- open all
-    -- TODO: don't repeat already opened
+	-- open all
+	-- TODO: don't repeat already opened
 	map('\'A', function()
-        for _, mark in pairs(self.marks) do
-            vim.cmd 'vs'
-            self:load_buffer(mark)
-        end
+		local is_first = true
+
+		for _, mark in pairs(self.marks) do
+			if is_first then
+				self:load_buffer(mark)
+				is_first = false
+			else
+				vim.cmd 'vs'
+				self:load_buffer(mark)
+			end
+		end
 	end)
 
-	-- show
-	-- TODO: add multiple lines support
+	-- show marks
 	map('\'s', function()
 		local message = ''
+
 		for index, mark in pairs(self.marks) do
-			message = message .. index .. ' -> ' .. mark.path .. ' '
+			if message ~= '' then
+				message = message .. '\n'
+			end
+			message = message .. index:upper() .. ' ' .. mark.path .. ' '
 		end
+
 		if message == '' then
 			message = 'No marks'
 		end
-		print(message)
+
+		require 'notify'(message)
 	end)
 end
 

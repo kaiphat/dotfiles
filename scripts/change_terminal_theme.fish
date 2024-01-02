@@ -4,7 +4,8 @@ set themes \
     dark            \
     rose_pine_light \
     github_dark     \
-    gruvbox_light
+    gruvbox_light   \
+    kanagawa_dark
 
 echo "select theme:"
 for i in (seq 1 (count $themes))

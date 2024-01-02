@@ -26,6 +26,8 @@ return {
 				TreesitterContext = { bg = 'muted', blend = 15 },
 				TreesitterContextSeparator = { fg = 'rose' },
 				CmpItemKindCodeium = { fg = 'iris' },
+				IndentBlanklineChar = { fg = '#333366' },
+                IndentBlanklineContextChar = { fg = '#333366' },
 				['@variable'] = { italic = false, fg = '#c4c6e7' },
 				['@lsp.type.property.typescript'] = { italic = false, fg = '#7a8bb1' },
 				['@property.typescript'] = { italic = false, fg = '#7a8bb1' },

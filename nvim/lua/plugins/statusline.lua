@@ -85,7 +85,7 @@ local function get_marks_component()
 			return require('local_plugins.marks').active_mark_index ~= nil
 		end,
 		provider = function()
-			return require('local_plugins.marks').active_mark_index
+			return require('local_plugins.marks').active_mark_index:upper()
 		end,
 		hl = { fg = colors.fg4 },
 		right_sep = gap,
