@@ -1,5 +1,6 @@
 return {
-	dir = './',
+    name = 'unit',
+	dir = '../local_plugins/unit',
 	keys = {
 		{
 			'u',
@@ -11,7 +12,7 @@ return {
         {
             '[c',
             function()
-                require('local_plugins.unit'):jump_to_parent_unit()
+                require('local_plugins.unit'):jump_to_parent_indent()
             end
         },
         {

@@ -165,7 +165,7 @@ end
 function Manager:jump_to_parent_unit(is_fallback)
 	local cursor = self:get_row_col()
 
-	if cursor.row == 1 then -- first line
+	if cursor.row == 1 then
 		return
 	end
 
@@ -196,6 +196,52 @@ function Manager:jump_to_parent_unit(is_fallback)
 	if parent_row ~= char_coords.row or parent_col ~= char_coords.col then
 		self:jump_to_parent_unit(true)
 	end
+end
+
+function Manager:jump_to_parent_indent()
+    print('fsadfdasf')
+	local cursor = self:get_row_col()
+
+	local nearest_non_empty_text
+
+	while true do
+        if cursor.row == 1 then
+            return
+        end
+
+        nearest_non_empty_text = vim.trim(self:get_line_text(0, cursor.row))
+
+        if nearest_non_empty_text ~= '' then
+            break
+        end
+
+        cursor.row = cursor.row - 1
+    end
+
+    local current_indent = string.find(nearest_non_empty_text, '[^%s]')
+
+    vim.cmd 'normal! m\''
+
+    while true do
+        if cursor.row == 1 then
+            return
+        end
+
+        local text = self:get_line_text(0, cursor.row)
+
+        if vim.trim(text) == '' then
+            cursor.row = cursor.row - 1
+        else
+            local indent = string.find(self:get_line_text(0, cursor.row), '[^%s]')
+
+            if indent < current_indent then
+                vim.api.nvim_win_set_cursor(0, { math.max(1, cursor.row), math.max(1, indent) - 1 })
+                return
+            end
+
+            cursor.row = cursor.row - 1
+        end
+    end
 end
 
 function Manager:jump_to_neighbor_unit(opts) end

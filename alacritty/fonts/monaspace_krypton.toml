@@ -1,5 +1,5 @@
 [font]
-size = 13
+size = 12.5
 
 [font.normal]
 family = "MonaspaceKrypton Nerd Font"
@@ -18,7 +18,7 @@ family = "MonaspaceKrypton Nerd Font"
 style = "Regular"
 
 [font.offset]
-x = 0
+x = -1
 y = 0
 
 [font.glyph_offset]

@@ -3,19 +3,19 @@ size = 12
 
 [font.normal]
 family = 'BlexMono Nerd Font'
-style = 'Italic'
+style = 'Medium Italic'
 
 [font.bold]
 family = 'BlexMono Nerd Font'
-style = 'Italic'
+style = 'Medium Italic'
 
 [font.italic]
 family = 'BlexMono Nerd Font'
-style = 'Italic'
+style = 'Medium Italic'
 
 [font.bold_italic]
 family = 'BlexMono Nerd Font'
-style = 'Italic'
+style = 'Medium Italic'
 
 [font.offset]
 x = 0

@@ -11,12 +11,13 @@ function Path_builder:new()
 end
 
 function Path_builder:build_file_name()
-	local base_name = 'marks'
+	local prefix = 'MARKS'
 	local postfix = '.json'
 
+    local root_dir = utils.get_root_dir()
 	local git_branch = utils.get_git_branch()
 
-	return base_name .. '_' .. git_branch .. postfix
+	return prefix .. ':' .. (git_branch or root_dir) .. postfix
 end
 
 function Path_builder:build()

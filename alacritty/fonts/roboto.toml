@@ -3,15 +3,15 @@ size = 12
 
 [font.normal]
 family = "RobotoMono Nerd Font"
-style = "Regular"
+style = "Medium Italic"
 
 [font.bold]
 family = "RobotoMono Nerd Font"
-style = "Medium"
+style = "Medium Italic"
 
 [font.italic]
 family = "RobotoMono Nerd Font"
-style = "Italic"
+style = "Medium Italic"
 
 [font.bold_italic]
 family = "RobotoMono Nerd Font"

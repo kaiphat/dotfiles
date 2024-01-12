@@ -1,5 +1,5 @@
 [font]
-size = 12
+size = 11.9
 
 [font.normal]
 family = 'InputMono Nerd Font'
@@ -11,14 +11,18 @@ style = 'Medium'
 
 [font.italic]
 family = 'InputMonoNarrow Nerd Font'
-style = 'Italic'
+style = 'Narrow'
 
 [font.bold_italic]
-family = 'InputMonoNarrowIta Nerd Font'
+family = 'InputMonoNarrow Nerd Font'
 style = 'Medium'
 
+# [font.bold_italic]
+# family = 'InputMonoNarrowIta Nerd Font'
+# style = 'Medium'
+
 [font.offset]
-x = 0
+x = 1
 y = 0
 
 [font.glyph_offset]

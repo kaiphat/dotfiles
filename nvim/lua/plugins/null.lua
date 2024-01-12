@@ -57,6 +57,7 @@ local diagnostic_servers = {
 		end,
 		diagnostic_config = {
 			signs = false,
+            update_in_insert = false,
 		},
 	},
 }

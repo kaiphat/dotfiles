@@ -55,6 +55,7 @@ if [ -f '/Users/ilyapu/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/il
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     edit     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 alias edit-aliases "nvim ~/.config/fish/conf.d/aliases.fish"
+alias edit-secrets "nvim ~/.local/share/secrets/secrets.norg"
 alias todo "nvim ~/notes/deals.norg -c \"set signcolumn=no\""
 alias notes "nvim ~/notes/notes.norg -c \"set signcolumn=no\""
 
@@ -115,6 +116,7 @@ alias lg "lazygit"
 # alias fd "fd --no-ignore --hidden -p -c never"
 
 alias play:sql "n ~/play/sql/index.sql"
+alias play:json "n ~/play/json/test.json"
 function change-theme
     set file ~/dotfiles/scripts/change_terminal_theme.fish
     chmod +x $file
