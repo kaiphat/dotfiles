@@ -28,10 +28,8 @@ return {
 	'nvim-telescope/telescope.nvim',
 	dependencies = {
 		{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-		'nvim-telescope/telescope-file-browser.nvim',
 		'nvim-telescope/telescope-ui-select.nvim',
 	},
-	lazy = true,
 	cmd = 'Telescope',
 	keys = {
 		{
@@ -286,8 +284,6 @@ return {
 		local themes = require 'telescope.themes'
 		local actions = require 'telescope.actions'
 
-		local fb_actions = telescope.extensions.file_browser.actions
-
 		telescope.setup {
 			defaults = {
 				vimgrep_arguments = {
@@ -329,8 +325,9 @@ return {
 						},
 					},
 				},
-				-- file_sorter = sorters.fuzzy_with_index_bias,
-				-- generic_sorter = sorters.get_generic_fuzzy_sorter,
+				-- has problem with oldfiles sort
+                -- file_sorter = sorters.get_fzy_sorter,
+                -- generic_sorter = sorters.get_fzy_sorter,
 				path_display = { 'truncate' },
 				winblend = 0,
 				border = {},
@@ -356,14 +353,6 @@ return {
 			},
 
 			extensions = {
-				file_browser = {
-					mappings = {
-						['i'] = {
-							['<C-h>'] = fb_actions.goto_parent_dir,
-						},
-					},
-				},
-
 				['ui-select'] = {
 					themes.get_cursor(),
 				},
@@ -378,7 +367,6 @@ return {
 		}
 
 		telescope.load_extension 'fzf'
-		telescope.load_extension 'file_browser'
 		telescope.load_extension 'ui-select'
 	end,
 }

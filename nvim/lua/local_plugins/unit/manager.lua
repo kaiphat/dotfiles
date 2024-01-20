@@ -198,50 +198,57 @@ function Manager:jump_to_parent_unit(is_fallback)
 	end
 end
 
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     INDENT     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
 function Manager:jump_to_parent_indent()
-    print('fsadfdasf')
 	local cursor = self:get_row_col()
 
-	local nearest_non_empty_text
+    local current_text = vim.trim(self:get_line_text(0, cursor.row))
 
-	while true do
-        if cursor.row == 1 then
-            return
-        end
 
-        nearest_non_empty_text = vim.trim(self:get_line_text(0, cursor.row))
 
-        if nearest_non_empty_text ~= '' then
-            break
-        end
 
-        cursor.row = cursor.row - 1
-    end
+	-- local nearest_non_empty_text
 
-    local current_indent = string.find(nearest_non_empty_text, '[^%s]')
+	-- while true do
+	--        if cursor.row == 1 then
+	--            return
+	--        end
 
-    vim.cmd 'normal! m\''
+	--        nearest_non_empty_text = vim.trim(self:get_line_text(0, cursor.row))
 
-    while true do
-        if cursor.row == 1 then
-            return
-        end
+	--        if nearest_non_empty_text ~= '' then
+	--            break
+	--        end
 
-        local text = self:get_line_text(0, cursor.row)
+	--        cursor.row = cursor.row - 1
+	--    end
 
-        if vim.trim(text) == '' then
-            cursor.row = cursor.row - 1
-        else
-            local indent = string.find(self:get_line_text(0, cursor.row), '[^%s]')
+	--    local current_indent = string.find(nearest_non_empty_text, '[^%s]')
+	--    print(nearest_non_empty_text)
 
-            if indent < current_indent then
-                vim.api.nvim_win_set_cursor(0, { math.max(1, cursor.row), math.max(1, indent) - 1 })
-                return
-            end
+	--    vim.cmd 'normal! m\''
 
-            cursor.row = cursor.row - 1
-        end
-    end
+	--    while true do
+	--        if cursor.row == 1 then
+	--            return
+	--        end
+
+	--        local text = self:get_line_text(0, cursor.row)
+
+	--        if vim.trim(text) == '' then
+	--            cursor.row = cursor.row - 1
+	--        else
+	--            local indent = string.find(self:get_line_text(0, cursor.row), '[^%s]')
+
+	--            if indent < current_indent then
+	--                vim.api.nvim_win_set_cursor(0, { math.max(1, cursor.row), math.max(1, indent) - 1 })
+	--                return
+	--            end
+
+	--            cursor.row = cursor.row - 1
+	--        end
+	--    end
 end
 
 function Manager:jump_to_neighbor_unit(opts) end

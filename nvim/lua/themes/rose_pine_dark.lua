@@ -5,8 +5,6 @@ return {
 	name = 'rose-pine',
 	config = function()
 		require('rose-pine').setup {
-			variant = 'moon',
-			dark_variant = 'moon',
 			dim_nc_background = false,
 			disable_background = true,
 			disable_float_background = true,
@@ -39,6 +37,6 @@ return {
 			},
 		}
 
-		vim.cmd 'colorscheme rose-pine-moon'
+		vim.cmd 'colorscheme rose-pine'
 	end,
 }
