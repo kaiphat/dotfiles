@@ -26,6 +26,7 @@ return {
 				CmpItemKindCodeium = { fg = 'iris' },
 				IndentBlanklineChar = { fg = '#333366' },
                 IndentBlanklineContextChar = { fg = '#333366' },
+                NoiceCmdlinePopupBorder = { link = 'NormalFloat' },
 				['@variable'] = { italic = false, fg = '#c4c6e7' },
 				['@lsp.type.property.typescript'] = { italic = false, fg = '#7a8bb1' },
 				['@property.typescript'] = { italic = false, fg = '#7a8bb1' },

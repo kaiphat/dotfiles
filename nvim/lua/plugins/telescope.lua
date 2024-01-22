@@ -115,34 +115,6 @@ return {
 			end,
 		},
 		{
-			'<leader>fk',
-			function()
-				local path = get_current_path()
-				require('telescope').extensions.file_browser.file_browser {
-					cwd = path,
-					hidden = true,
-					grouped = true,
-					hide_parent_dir = true,
-					git_status = false,
-					respect_gitignore = false,
-					select_buffer = true,
-				}
-			end,
-		},
-		{
-			'<leader>dk',
-			function()
-				require('telescope').extensions.file_browser.file_browser {
-					hidden = true,
-					grouped = true,
-					hide_parent_dir = true,
-					git_status = false,
-					respect_gitignore = false,
-					select_buffer = true,
-				}
-			end,
-		},
-		{
 			'<leader>fl',
 			function()
 				require('telescope.builtin').live_grep {
@@ -270,10 +242,15 @@ return {
 		{
 			'<leader>en',
 			function()
-				require('telescope').extensions.file_browser.file_browser {
+                require('telescope.builtin').find_files  {
 					cwd = '~/notes',
-					grouped = true,
-					select_buffer = true,
+                    hidden = true,
+                    find_command = {
+                        'fd',
+                        '-t',
+                        'f',
+                        '-E=.git/',
+                    },
 				}
 			end,
 		},

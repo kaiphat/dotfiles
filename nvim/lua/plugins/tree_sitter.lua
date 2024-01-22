@@ -85,13 +85,13 @@ return {
 				},
 				textobjects = {
 					select = {
-						enable = true,
+						enable = false,
 						keymaps = {
 							['if'] = '@function.inner',
 						},
 					},
 					move = {
-						enable = true,
+						enable = false,
 						goto_next_start = {
 							[']]'] = '@function.outer',
 							[']s'] = { query = '@scope', query_group = 'locals', desc = 'Next scope' },
