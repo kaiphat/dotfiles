@@ -1,5 +1,5 @@
 [font]
-size = 12
+size = 11
 
 [font.normal]
 family = "SFMono Nerd Font"
@@ -19,8 +19,8 @@ style = "Medium Italic"
 
 [font.offset]
 x = 0
-y = 0
+y = 5
 
 [font.glyph_offset]
 x = 0
-y = 0
+y = 2

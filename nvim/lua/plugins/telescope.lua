@@ -79,6 +79,7 @@ return {
 						'fd',
 						'-t=f',
 						'-E=test/',
+						'-E=tests/',
 						'-E=__tests__/',
 					}, map_list(M.always_ignore_patterns, function(pattern) return '-E=' .. pattern end)),
 					hidden = false,

@@ -30,18 +30,18 @@ local keys = {
 local config = {
     front_end = 'WebGpu',
 	window_padding = {
-		left = 0,
-		right = 0,
-		top = 0,
-		bottom = 0,
+		left = 10,
+        right = 10,
+        top = 10,
+        bottom = 10,
 	},
 	enable_tab_bar = false,
 	enable_scroll_bar = false,
 	scrollback_lines = 1000,
-	cursor_blink_rate = 0,
+	cursor_blink_rate = 1000,
 	max_fps = 240,
 	animation_fps = 240,
-	colors = require 'lua/themes/light',
+	colors = require 'lua/themes/dark_rose_pine',
 	default_cursor_style = 'SteadyBlock',
 	disable_default_key_bindings = true,
 	warn_about_missing_glyphs = false,
@@ -57,4 +57,4 @@ local config = {
 	},
 }
 
-return merge(config, fonts.sf_mono, background, { keys = keys })
+return merge(config, fonts.maple, background, { keys = keys })

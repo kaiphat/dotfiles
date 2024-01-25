@@ -7,7 +7,9 @@ local themes = {
 	rose_pine_light = 'rose_pine_light',
 	gruvbox_light = 'gruvbox_light',
 	kanagawa_dark = 'kanagawa_dark',
-	everforest = 'everforest'
+	everforest = 'everforest',
+	poimandres = 'poimandres',
+    tokyonight = 'tokyonight'
 }
 
 return require('themes.' .. themes.rose_pine_dark)

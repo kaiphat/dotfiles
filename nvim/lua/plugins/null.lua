@@ -1,17 +1,14 @@
 local formatting_servers = {
-	prettierd = {
+	prettier = {
 		prefer_local = 'node_modules/.bin',
 		extra_filetypes = {},
-		extra_args = function(args)
-			local extra_args = {}
-
-			if not args.options.semi then table.insert(extra_args, '--semi=false') end
-			if not args.options.printWidth then table.insert(extra_args, '--print-width=140') end
-			if not args.options.singleQuote then table.insert(extra_args, '--single-quote=true') end
-			if not args.options.tabWidth then table.insert(extra_args, '--tab-width=' .. vim.o.tabstop) end
-
-			return extra_args
-		end,
+		extra_args = {
+			'--config-precedence=prefer-file',
+			'--semi=false',
+			'--print-width=140',
+			'--single-quote=true',
+			'--tab-width=' .. vim.o.tabstop,
+		},
 	},
 	stylua = {
 		extra_args = {
@@ -40,31 +37,39 @@ local action_servers = {
 	eslint_d = {},
 }
 
-local diagnostic_servers = {
-	eslint_d = {
-		filter = function(diagnostic)
-			for _, code in ipairs {
-				'no-multiple-empty-lines',
-				'comma-dangle',
-				'semi',
-				'object-curly-spacing',
-				'space-before-function-paren',
-			} do
-				if diagnostic.code == code then return false end
-			end
+local function get_diagnostic_servers(null_ls)
+	return {
+		eslint_d = {
+			condition = function(utils)
+				return utils.root_has_file { '.eslintrc.json', '.eslintrc.js', '.eslintrc' }
+			end,
+			method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+			filter = function(diagnostic)
+				for _, code in ipairs {
+					'no-multiple-empty-lines',
+					'comma-dangle',
+					'semi',
+					'object-curly-spacing',
+					'space-before-function-paren',
+				} do
+					if diagnostic.code == code then
+						return false
+					end
+				end
 
-			return true
-		end,
-		diagnostic_config = {
-			signs = false,
-            update_in_insert = false,
+				return true
+			end,
+			diagnostic_config = {
+				signs = false,
+				update_in_insert = false,
+			},
 		},
-	},
-}
+	}
+end
 
 return {
-	-- 'nvimtools/none-ls.nvim',
-	'jose-elias-alvarez/null-ls.nvim',
+	'nvimtools/none-ls.nvim',
+	-- 'jose-elias-alvarez/null-ls.nvim',
 	enabled = true,
 	event = 'BufReadPre',
 	config = function()
@@ -84,12 +89,12 @@ return {
 			table.insert(sources, code_actions[name].with(config))
 		end
 
-		for name, config in pairs(diagnostic_servers) do
+		for name, config in pairs(get_diagnostic_servers(null_ls)) do
 			table.insert(sources, diagnostics[name].with(config))
 		end
 
 		null_ls.setup {
-			debounce = 10,
+			debounce = 100,
 			sources = sources,
 		}
 	end,

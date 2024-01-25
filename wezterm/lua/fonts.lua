@@ -123,9 +123,9 @@ return {
 		line_height = 1.15,
 	}),
 	maple = build_font_params('Maple Mono NF', false, weights.R, {
-		font_size = 12.3,
-		cell_width = 0.9,
-		line_height = 1.11,
+		font_size = 11.5,
+		cell_width = 1,
+		line_height = 1,
 		harfbuzz_features = {
 			'cv01',
 			'cv03',

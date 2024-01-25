@@ -1,26 +1,26 @@
 [font]
-size = 12
+size = 11.5
 
 [font.normal]
 family = 'BlexMono Nerd Font'
-style = 'Medium Italic'
+style = 'Medium'
 
 [font.bold]
 family = 'BlexMono Nerd Font'
-style = 'Medium Italic'
+style = 'Medium'
 
 [font.italic]
 family = 'BlexMono Nerd Font'
-style = 'Medium Italic'
+style = 'Medium'
 
 [font.bold_italic]
 family = 'BlexMono Nerd Font'
-style = 'Medium Italic'
+style = 'Medium'
 
 [font.offset]
 x = 0
-y = 0
+y = 2
 
 [font.glyph_offset]
 x = 0
-y = 0
+y = 2

@@ -23,5 +23,35 @@ return function(M)
 
             }}
 		]], i(1)),
+
+		dea = fmt([[
+            describe('{}', () => {{
+
+            }})
+		]], i(1)),
+
+		def = fmt([[
+            describe('{}', function () {{
+
+            }})
+		]], i(1)),
+
+		ita = fmt([[
+            it('{}', () => {{
+
+            }})
+		]], i(1)),
+
+		itf = fmt([[
+            it('{}', function () {{
+
+            }})
+		]], i(1)),
+
+		af = fmt([[
+            () => {{
+                {}
+            }}
+		]], i(1)),
     }
 end

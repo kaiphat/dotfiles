@@ -1,5 +1,5 @@
 [font]
-size = 12
+size = 10.5
 
 [font.normal]
 family = "FiraCode Nerd Font"
@@ -11,17 +11,17 @@ style = "Medium"
 
 [font.italic]
 family = "FiraCode Nerd Font"
-style = "Medium Italic"
+style = "Medium"
 
 [font.bold_italic]
 family = "FiraCode Nerd Font"
-style = "Medium Italic"
+style = "Medium"
 
 [font.offset]
 x = 0
-y = 0
+y = 4
 
 [font.glyph_offset]
 x = 0
-y = 0
+y = 2
 

@@ -2,24 +2,24 @@
 size = 11.5
 
 [font.normal]
-family = 'SpaceMono Nerd Font'
+family = 'Rec Mono Custom'
 style = 'Regular'
 
 [font.bold]
-family = 'SpaceMono Nerd Font'
+family = 'Rec Mono Custom'
 style = 'Regular'
 
 [font.italic]
-family = 'SpaceMono Nerd Font'
+family = 'Rec Mono Custom'
 style = 'Regular'
 
 [font.bold_italic]
-family = 'SpaceMono Nerd Font'
+family = 'Rec Mono Custom'
 style = 'Regular'
 
 [font.offset]
-x = 0
-y = -3
+x = 1
+y = 0
 
 [font.glyph_offset]
 x = 0

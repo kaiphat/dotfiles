@@ -1,3 +1,21 @@
+-- _nc = "#16141f",
+-- base = "#191724",
+-- surface = "#1f1d2e",
+-- overlay = "#26233a",
+-- muted = "#6e6a86",
+-- subtle = "#908caa",
+-- text = "#e0def4",
+-- love = "#eb6f92",
+-- gold = "#f6c177",
+-- rose = "#ebbcba",
+-- pine = "#31748f",
+-- foam = "#9ccfd8",
+-- iris = "#c4a7e7",
+-- highlight_low = "#21202e",
+-- highlight_med = "#403d52",
+-- highlight_high = "#524f67",
+-- none = "NONE",
+
 return {
 	'rose-pine/neovim',
 	priority = 1000,
@@ -25,8 +43,8 @@ return {
 				TreesitterContextSeparator = { fg = 'rose' },
 				CmpItemKindCodeium = { fg = 'iris' },
 				IndentBlanklineChar = { fg = '#333366' },
-                IndentBlanklineContextChar = { fg = '#333366' },
-                NoiceCmdlinePopupBorder = { link = 'NormalFloat' },
+				IndentBlanklineContextChar = { fg = '#333366' },
+				NoiceCmdlinePopupBorder = { link = 'NormalFloat' },
 				['@variable'] = { italic = false, fg = '#c4c6e7' },
 				['@lsp.type.property.typescript'] = { italic = false, fg = '#7a8bb1' },
 				['@property.typescript'] = { italic = false, fg = '#7a8bb1' },
@@ -36,6 +54,18 @@ return {
 				['@neorg.lists.unordered.prefix.norg'] = { fg = 'iris' },
 				['@neorg.todo_items.done.norg'] = { fg = 'foam' },
 			},
+
+			before_highlight = function(group, highlight, palette)
+				if highlight.fg == palette.pine then
+					highlight.fg = '#91B4D5'
+				end
+				if highlight.fg == palette.gold then
+					highlight.fg = '#9398cf'
+				end
+				if highlight.bg == palette.gold then
+					highlight.bg = '#9398cf'
+				end
+			end,
 		}
 
 		vim.cmd 'colorscheme rose-pine'

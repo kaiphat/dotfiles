@@ -14,7 +14,7 @@ local palette = {
 
 return {
 	foreground = palette.text,
-    background = '#292640',
+    background = '#191934',
 	cursor_bg = '#baaaff',
 	cursor_border = '#baaaff',
 	cursor_fg = palette.text,

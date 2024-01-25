@@ -1,5 +1,5 @@
 [font]
-size = 12
+size = 11.5
 
 [font.normal]
 family = 'VictorMono Nerd Font'
@@ -19,7 +19,7 @@ style = 'Bold'
 
 [font.offset]
 x = 1
-y = -2
+y = 0
 
 [font.glyph_offset]
 x = 0
