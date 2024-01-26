@@ -1,56 +1,54 @@
 #!/opt/homebrew/bin/fish
 
-set dotfiles ~/dotfiles
+set paths \
+    ~/.gitconfig \
+    ~/.psqlrc \
+    ~/.less \
+    ~/.zshrc \
+    ~/.tmux.conf \
+    ~/.rndebuggerrc \
+    ~/.config/kitty \
+    ~/.config/awesome \
+    ~/.config/pgcli \
+    ~/.config/litecli \
+    ~/.config/starship.toml \
+    ~/.config/fish/config.fish \
+    ~/.config/zk \
+    ~/.config/nvim \
+    ~/.config/alacritty \
+    ~/.config/fontconfig/fonts.conf \
+    ~/.config/wezterm \
+    ~/.config/helix \
+    ~/.config/picom \
+    ~/.config/bspwm \
+    ~/.config/sxhkd \
+    ~/.config/rofi \
+    ~/.config/polybar \
+    ~/.config/nushell \
+    ~/.config/zathura \
+    ~/.config/i3 \
+    ~/.config/zellij \
+    ~/.config/dunst \
+    ~/.config/watson \
+    ~/.config/lazygit
 
-set home_paths                    \
-    .psqlrc                       \
-    .less                         \
-    .zshrc                        \
-    .tmux.conf                    \
-    .gitconfig                    \
-    .rndebuggerrc                 \
+for path in $paths
+    echo "----------------------------------"
+    set item (basename $path)
 
-set config_paths                  \
-    nvim                          \
-    kitty                         \
-    awesome                       \
-    pgcli                         \
-    litecli                       \
-    starship.toml                 \
-    fish/config.fish              \
-    zk                            \
-    alacritty                     \
-    fontconfig/fonts.conf         \
-    wezterm                       \
-    helix                         \
-    picom                         \
-    bspwm                         \
-    sxhkd                         \
-    rofi                          \
-    polybar                       \
-    nushell                       \
-    zathura                       \
-    i3                            \
-    zellij                        \
-    dunst                         \
-    watson                        \
-    lazygit                       \
-
-function copy -a target_dir -a paths
-  for path in $$paths
-    set fullpath $target_dir/$path
-    set item (basename $fullpath)
-
-    if test -e $dotfiles/$item
-      rm -rf $fullpath
+    if test ! -e ~/dotfiles/$item
+        echo "$item not found in dotfiles"
+        exit 1
     end
 
-    if test ! -e $fullpath
-      mkdir -p (dirname $fullpath)
-      ln -s $dotfiles/$item $fullpath
+    if test -e ~/dotfiles/$item
+        echo "rm $path"
+        rm -rf $path
     end
-  end
+
+    if test ! -e $path
+        mkdir -p (dirname $path)
+        echo "link ~/dotfiles/$item $path"
+        ln -s ~/dotfiles/$item $path
+    end
 end
-
-copy ~ home_paths
-copy ~/.config config_paths
