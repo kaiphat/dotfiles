@@ -1,0 +1,26 @@
+[font]
+size = 13
+
+[font.normal]
+family = 'Hurmit Nerd Font Mono'
+style = 'Regular'
+
+[font.bold]
+family = 'Hurmit Nerd Font Mono'
+style = 'Regular'
+
+[font.italic]
+family = 'Hurmit Nerd Font Mono'
+style = 'Regular'
+
+[font.bold_italic]
+family = 'Hurmit Nerd Font Mono'
+style = 'Regular'
+
+[font.offset]
+x = -1
+y = -5
+
+[font.glyph_offset]
+x = 0
+y = -4
