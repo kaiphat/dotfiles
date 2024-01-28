@@ -7,6 +7,8 @@ local formatting_servers = {
 			'--semi=false',
 			'--print-width=140',
 			'--single-quote=true',
+			'--no-bracket-spacing',
+			'--arrow-parens=avoid',
 			'--tab-width=' .. vim.o.tabstop,
 		},
 	},
@@ -51,6 +53,7 @@ local function get_diagnostic_servers(null_ls)
 					'semi',
 					'object-curly-spacing',
 					'space-before-function-paren',
+					'eol',
 				} do
 					if diagnostic.code == code then
 						return false
