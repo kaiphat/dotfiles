@@ -8,7 +8,7 @@ if vim.fn.has 'nvim-0.10' == 1 then o.smoothscroll = true end
 
 local TAB_SIZE = 4
 
-o.background = 'dark'
+o.background = 'light'
 o.guicursor = 'a:blinkon1,i-ci-ve:ver25-blinkon1'
 o.selection = 'old'
 o.tabstop = TAB_SIZE
@@ -96,10 +96,10 @@ o.langmap =
 	'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz'
 o.imsearch = 0
 o.iminsert = 0
-wo.foldmethod = 'expr'
 wo.foldcolumn = '0'
+wo.foldmethod = 'expr'
 wo.foldexpr = 'nvim_treesitter#foldexpr()'
-wo.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) ]]
+-- wo.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) ]]
 wo.foldminlines = 1
 wo.foldlevel = 99
 wo.conceallevel = 2

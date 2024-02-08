@@ -14,6 +14,7 @@ M.tools = {
 	'emmet-language-server',
 	'stylua',
 	'eslint_d',
+	'python-lsp-server',
 }
 
 return {

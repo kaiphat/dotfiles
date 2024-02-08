@@ -1,5 +1,17 @@
+local eslint_condition = function(utils)
+	return utils.has_file { '.eslintrc.json', '.eslintrc.js', '.eslintrc' }
+end
+
+local prettier_condition = function(utils)
+	return utils.has_file { '.prettierrc.toml' }
+end
+
 local formatting_servers = {
+	eslint_d = {
+		condition = eslint_condition,
+	},
 	prettier = {
+		condition = prettier_condition,
 		prefer_local = 'node_modules/.bin',
 		extra_filetypes = {},
 		extra_args = {
@@ -42,9 +54,7 @@ local action_servers = {
 local function get_diagnostic_servers(null_ls)
 	return {
 		eslint_d = {
-			condition = function(utils)
-				return utils.root_has_file { '.eslintrc.json', '.eslintrc.js', '.eslintrc' }
-			end,
+			condition = eslint_condition,
 			method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
 			filter = function(diagnostic)
 				for _, code in ipairs {
@@ -53,7 +63,7 @@ local function get_diagnostic_servers(null_ls)
 					'semi',
 					'object-curly-spacing',
 					'space-before-function-paren',
-					'eol',
+					'eol-last',
 				} do
 					if diagnostic.code == code then
 						return false

@@ -19,7 +19,7 @@ style = 'Italic'
 
 [font.offset]
 x = -1
-y = 1
+y = 2
 
 [font.glyph_offset]
 x = 0

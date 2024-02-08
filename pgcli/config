@@ -53,7 +53,7 @@ casing_file = default
 
 # If generate_casing_file is set to True and there is no file in the above
 # location, one will be generated based on usage in SQL/PLPGSQL functions.
-generate_casing_file = False
+generate_casing_file = True
 
 # Casing of column headers based on the casing_file described above
 case_column_headers = True
@@ -132,7 +132,7 @@ prompt = "❯ "
 multiline_continuation_char = " "
 
 # Number of lines to reserve for the suggestion menu
-min_num_menu_lines = 2
+min_num_menu_lines = 10
 
 # The string used in place of a null value.
 null_string = <null>

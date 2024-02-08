@@ -4,9 +4,6 @@
 \x off
 \pset null '[null]'
 \set HISTFILE ~/.psql_history- :DBNAME
-\set VERBOSITY verbose
-\set HISTCONTROL ignoredups
 \set HISTSIZE 1000
 \pset pager always
-\timing
 \unset QUIET

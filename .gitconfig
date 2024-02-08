@@ -44,7 +44,7 @@
     plr  = !sh -c 'git pull origin $1 --rebase' --
     plnr  = !sh -c 'git pull origin $1 --no-rebase' --
     # discard staged changes
-    dsc = !sh -c 'git add -A && git diff HEAD > my.patch && git reset --hard && patch -p1 < my.patch && rm my.patch' --
+    dsc = !sh -c 'git add -A && git stash && git sa' --
     # fast commit
     fc = !sh -c 'git add -A && git commit -m "DRAFT" --no-verify' --
     plh = !git pull origin $(git rev-parse --abbrev-ref HEAD)

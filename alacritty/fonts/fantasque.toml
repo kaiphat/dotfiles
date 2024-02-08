@@ -1,5 +1,5 @@
 [font]
-size = 14
+size = 12.5
 
 [font.normal]
 family = "FantasqueSansM Nerd Font"
@@ -18,8 +18,8 @@ family = "FantasqueSansM Nerd Font"
 style = "Regular"
 
 [font.offset]
-x = 0
-y = 2
+x = 2
+y = 3
 
 [font.glyph_offset]
 x = 0

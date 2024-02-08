@@ -2,7 +2,7 @@
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   ENVIROMENTS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-set -gx nvm_default_version v20.8.1
+set -gx nvm_default_version v18.17.0
 set -gx ANDROID_HOME $HOME/Android/Sdk
 set -gx EDITOR nvim
 set -gx MANPAGER 'nvim +Man! -c "set nowrap"'

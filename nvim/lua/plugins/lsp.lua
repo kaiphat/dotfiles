@@ -31,7 +31,7 @@ M.set_handlers = function()
 			header = false,
 			border = 'rounded',
 			style = 'minimal',
-			prefix = ''
+			prefix = '',
 		},
 	}
 
@@ -219,21 +219,76 @@ return {
 			'jose-elias-alvarez/null-ls.nvim',
 			'pmizio/typescript-tools.nvim',
 		},
+		init_options = {
+			userLanguages = {
+				eelixir = 'html-eex',
+				eruby = 'erb',
+				rust = 'html',
+			},
+		},
 		keys = {
-			{ 'gd', function()
-				vim.lsp.buf.definition {
-					reuse_win = true,
-				}
-			end },
-			{ 'K', function() vim.lsp.buf.hover() end },
-			{ '<leader>lk', function() vim.lsp.buf.signature_help() end },
-			{ '<space>le', function() vim.diagnostic.open_float() end },
-			{ '[d', function() vim.diagnostic.goto_prev() end },
-			{ ']d', function() vim.diagnostic.goto_next() end },
-			{ '<space>lq', function() vim.diagnostic.setqflist() end },
-			{ '<space>ls', function() vim.diagnostic.show() end },
-			{ '<space>la', function() vim.lsp.buf.code_action() end },
-			{ '<space>lr', function() vim.lsp.buf.rename() end },
+			{
+				'gd',
+				function()
+					vim.lsp.buf.definition {
+						reuse_win = true,
+					}
+				end,
+			},
+			{
+				'K',
+				function()
+					vim.lsp.buf.hover()
+				end,
+			},
+			{
+				'<leader>lk',
+				function()
+					vim.lsp.buf.signature_help()
+				end,
+			},
+			{
+				'<space>le',
+				function()
+					vim.diagnostic.open_float()
+				end,
+			},
+			{
+				'[d',
+				function()
+					vim.diagnostic.goto_prev()
+				end,
+			},
+			{
+				']d',
+				function()
+					vim.diagnostic.goto_next()
+				end,
+			},
+			{
+				'<space>lq',
+				function()
+					vim.diagnostic.setqflist()
+				end,
+			},
+			{
+				'<space>ls',
+				function()
+					vim.diagnostic.show()
+				end,
+			},
+			{
+				'<space>la',
+				function()
+					vim.lsp.buf.code_action()
+				end,
+			},
+			{
+				'<space>lr',
+				function()
+					vim.lsp.buf.rename()
+				end,
+			},
 			{
 				'go',
 				function()
@@ -241,7 +296,13 @@ return {
 					vim.lsp.buf.definition()
 				end,
 			},
-			{ '<leader>lf', function() vim.lsp.buf.format { timeout_ms = 5000 } end, mode = { 'n', 'v' } },
+			{
+				'<leader>lf',
+				function()
+					vim.lsp.buf.format { timeout_ms = 5000 }
+				end,
+				mode = { 'n', 'v' },
+			},
 		},
 		config = function()
 			local lsp = require 'lspconfig'

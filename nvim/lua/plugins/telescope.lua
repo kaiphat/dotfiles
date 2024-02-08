@@ -287,7 +287,7 @@ return {
 					vertical = {
 						preview_height = 0.6,
 						width = function(_, max_columns)
-							local max = 130
+							local max = 160
 							local percentage = 0.7
 							return math.min(math.floor(percentage * max_columns), max)
 						end,
