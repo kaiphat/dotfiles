@@ -26,6 +26,7 @@ M.ignore_patterns = concat({
 
 return {
 	'nvim-telescope/telescope.nvim',
+	enabled = false,
 	dependencies = {
 		{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 		'nvim-telescope/telescope-ui-select.nvim',

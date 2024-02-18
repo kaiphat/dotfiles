@@ -122,6 +122,11 @@ return {
 		cell_width = 0.9,
 		line_height = 1.15,
 	}),
+	hermit = build_font_params('Hurmit Nerd Font Mono', false, weights.M, {
+		font_size = 12,
+		cell_width = 1,
+		line_height = 0.85,
+	}),
 	maple = build_font_params('Maple Mono NF', false, weights.R, {
 		font_size = 11.5,
 		cell_width = 1,

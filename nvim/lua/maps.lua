@@ -95,11 +95,11 @@ for char in string.gmatch([[w'"`p[<({]], '.') do
 end
 
 local is_root = true
-local root_path = get_current_path()
+local root_path = get_current_dir()
 
 map('n', '<leader>ur', function()
 	if is_root then
-		vim.cmd('lcd ' .. get_current_path())
+		vim.cmd('lcd ' .. get_current_dir())
 		vim.notify 'cwd changed to current place'
 		is_root = false
 	else

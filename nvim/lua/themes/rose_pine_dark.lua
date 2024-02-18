@@ -53,6 +53,9 @@ return {
 				['@neorg.headings.1.title'] = { fg = 'iris' },
 				['@neorg.lists.unordered.prefix.norg'] = { fg = 'iris' },
 				['@neorg.todo_items.done.norg'] = { fg = 'foam' },
+                ['@markup.raw.markdown_inline'] = { fg = 'rose' },
+                FzfLuaColorsBgSel = { fg = 'rose' },
+
 			},
 
 			before_highlight = function(group, highlight, palette)

@@ -55,9 +55,9 @@ if [ -f '/Users/ilyapu/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/il
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     edit     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 alias edit-aliases "nvim ~/.config/fish/conf.d/aliases.fish"
-alias edit-secrets "nvim ~/.local/share/secrets/secrets.norg"
-alias todo "nvim ~/notes/deals.norg -c \"set signcolumn=no\""
-alias notes "nvim ~/notes/notes.norg -c \"set signcolumn=no\""
+alias edit-secrets "nvim ~/.local/share/secrets/secrets.md"
+alias todo "nvim ~/notes/deals.md -c \"set signcolumn=no\""
+alias notes "nvim ~/notes/notes.md -c \"set signcolumn=no\""
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     docker     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -221,7 +221,7 @@ function starship_transient_prompt_func
   starship module character
 end
 starship init fish | source
-enable_transience
+# enable_transience
 
 # if status is-interactive
 #     eval (zellij setup --generate-auto-start fish | string collect)

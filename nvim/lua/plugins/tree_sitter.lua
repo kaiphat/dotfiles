@@ -21,7 +21,7 @@ local languages = {
 	'python',
 	'bash',
 	'regex',
-	'norg',
+	-- 'norg',
 	'kdl',
 	'proto',
 	'markdown_inline',
@@ -39,7 +39,12 @@ return {
 		event = 'BufReadPre',
 		enabled = false,
 		keys = {
-			{ '[c', function() require('treesitter-context').go_to_context() end },
+			{
+				'[c',
+				function()
+					require('treesitter-context').go_to_context()
+				end,
+			},
 		},
 		opts = {
 			max_lines = 1,
@@ -49,11 +54,8 @@ return {
 	{
 		'nvim-treesitter/nvim-treesitter',
 		version = false,
-        event = 'VeryLazy',
+		event = 'VeryLazy',
 		build = ':TSUpdate',
-		-- dependencies = {
-		-- 	'nvim-treesitter/nvim-treesitter-textobjects',
-		-- },
 		config = function()
 			local install = require 'nvim-treesitter.install'
 			local config = require 'nvim-treesitter.configs'

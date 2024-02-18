@@ -2,7 +2,7 @@ local M = {}
 
 vim.g.neo_tree_remove_legacy_commands = 1
 
-M.root_path = get_current_path()
+M.root_path = get_current_dir()
 
 M.get_mappings = function()
 	local fs_cmds = require 'neo-tree.sources.filesystem.commands'

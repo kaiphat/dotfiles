@@ -1,4 +1,4 @@
-_G.get_current_path = function()
+_G.get_current_dir = function()
   return vim.fn.expand '%:p:h'
 end
 

@@ -28,12 +28,12 @@ local keys = {
 }
 
 local config = {
-    front_end = 'WebGpu',
+	-- front_end = 'WebGpu',
 	window_padding = {
 		left = 10,
-        right = 10,
-        top = 10,
-        bottom = 10,
+		right = 10,
+		top = 10,
+		bottom = 10,
 	},
 	enable_tab_bar = false,
 	enable_scroll_bar = false,
@@ -48,6 +48,7 @@ local config = {
 	use_cap_height_to_scale_fallback_fonts = false,
 	adjust_window_size_when_changing_font_size = false,
 	window_close_confirmation = 'NeverPrompt',
+	keys = keys,
 	mouse_bindings = {
 		{
 			event = { Up = { streak = 1, button = 'Left' } },
@@ -57,4 +58,4 @@ local config = {
 	},
 }
 
-return merge(config, fonts.maple, background, { keys = keys })
+return merge(config, fonts.hermit, background)

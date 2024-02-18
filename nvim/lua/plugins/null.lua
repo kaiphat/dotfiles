@@ -3,7 +3,23 @@ local eslint_condition = function(utils)
 end
 
 local prettier_condition = function(utils)
-	return utils.has_file { '.prettierrc.toml' }
+	if utils.has_file { '.prettierrc.toml' } then
+		return true
+	end
+
+	local allowed_fts = {
+		'json',
+		'yaml',
+		'markdown',
+		'toml',
+	}
+
+	local ft = vim.bo.filetype
+	for _, allowed_ft in ipairs(allowed_fts) do
+		if ft == allowed_ft then
+			return true
+		end
+	end
 end
 
 local formatting_servers = {
