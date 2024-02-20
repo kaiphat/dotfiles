@@ -148,6 +148,44 @@ return {
 			update_debounce = 100,
 			status_formatter = nil,
 			_signs_staged_enable = true,
+            _signs_staged = {
+				add = {
+					hl = 'GitSignsAdd',
+					text = ICONS.VERTICAL_LINE_1,
+					numhl = 'GitSignsAddNr',
+					linehl = 'GitSignsAddLn',
+				},
+				change = {
+					hl = 'GitSignsChange',
+					text = ICONS.VERTICAL_LINE_1,
+					numhl = 'GitSignsChangeNr',
+					linehl = 'GitSignsChangeLn',
+				},
+				delete = {
+					hl = 'GitSignsDelete',
+					text = ICONS.VERTICAL_LINE_1,
+					numhl = 'GitSignsDeleteNr',
+					linehl = 'GitSignsDeleteLn',
+				},
+				topdelete = {
+					hl = 'GitSignsDelete',
+					text = ICONS.VERTICAL_LINE_1,
+					numhl = 'GitSignsDeleteNr',
+					linehl = 'GitSignsDeleteLn',
+				},
+				changedelete = {
+					hl = 'GitSignsChange',
+					text = ICONS.VERTICAL_LINE_1,
+					numhl = 'GitSignsChangeNr',
+					linehl = 'GitSignsChangeLn',
+				},
+				untracked = {
+					hl = 'GitSignsAdd',
+					text = ICONS.VERTICAL_LINE_1,
+					numhl = 'GitSignsAddNr',
+					linehl = 'GitSignsAddLn',
+				},
+			},
 		}
 	end,
 }

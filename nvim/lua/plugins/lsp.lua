@@ -280,7 +280,7 @@ return {
 			{
 				'<space>la',
 				function()
-					vim.lsp.buf.code_action()
+					require('fzf-lua').lsp_code_actions { }
 				end,
 			},
 			{

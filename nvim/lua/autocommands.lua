@@ -41,6 +41,6 @@ vim.api.nvim_create_autocmd({ 'BufEnter' }, {
 	pattern = '*.md',
 	group = vim.api.nvim_create_augroup('custom:markdown_wrap_option', {}),
 	callback = function()
-	    vim.opt_local.wrap = true
+		vim.opt_local.wrap = true
 	end,
 })

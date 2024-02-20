@@ -120,6 +120,8 @@ alias less "less -MSx4 -FXR --shift 10"
 alias ls "ls -A --color=auto"
 alias rm "rm -rfv"
 alias cp "cp -r -v"
+alias htop "btop -p 1"
+alias btop "btop -p 1"
 alias clip "xclip -selection c"
 alias pj "xclip -o | jq '.' | clip"
 alias nvim-start "nvim --startuptime _s.log -c exit && tail -100 _s.log | bat && rm _s.log"
@@ -221,7 +223,7 @@ function starship_transient_prompt_func
   starship module character
 end
 starship init fish | source
-# enable_transience
+enable_transience
 
 # if status is-interactive
 #     eval (zellij setup --generate-auto-start fish | string collect)

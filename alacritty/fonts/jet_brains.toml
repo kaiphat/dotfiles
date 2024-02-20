@@ -1,5 +1,5 @@
 [font]
-size = 11.5
+size = 12
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"
@@ -19,7 +19,7 @@ style = "Regular"
 
 [font.offset]
 x = 0
-y = 0
+y = 4
 
 [font.glyph_offset]
 x = 0

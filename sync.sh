@@ -30,7 +30,8 @@ set paths \
     ~/.config/zellij \
     ~/.config/dunst \
     ~/.config/watson \
-    ~/.config/lazygit
+    ~/.config/lazygit \
+    ~/.config/btop
 
 for path in $paths
     echo "----------------------------------"

@@ -28,7 +28,7 @@ local ignore_patterns = concat({
 }, always_ignore_patterns)
 
 local function build_fzf_args()
-	return '--info=inline-right --color=gutter:-1'
+	return ''
 end
 
 local function build_find_cmd()
@@ -40,7 +40,9 @@ local function build_find_cmd()
 end
 
 local function build_find_cmd_with_no_ignore(opts)
-	local base = 'fd --no-ignore --type f'
+	opts = opts or {}
+
+	local base = 'fd --hidden --no-ignore --type f'
 
 	if not opts.skip_always_ignore then
 		for _, pattern in ipairs(always_ignore_patterns) do
@@ -60,6 +62,8 @@ local function build_rg_cmd()
 end
 
 local function build_rg_cmd_with_no_ignore(opts)
+	opts = opts or {}
+
 	local base = 'rg --column --no-heading --color=always --smart-case --max-columns=4096 --trim --no-ignore'
 
 	if not opts.skip_always_ignore then
@@ -177,6 +181,7 @@ return {
 			function()
 				require('fzf-lua').files {
 					fzf_args = build_fzf_args(),
+                    cmd = build_find_cmd_with_no_ignore { skip_always_ignore = true },
 					cwd = '~/notes',
 				}
 			end,
@@ -186,7 +191,24 @@ return {
 			function()
 				require('fzf-lua').files {
 					fzf_args = build_fzf_args(),
+					cmd = build_find_cmd_with_no_ignore { skip_always_ignore = true },
 					cwd = '~/dotfiles',
+				}
+			end,
+		},
+		{
+			'<leader>fe',
+			function()
+				require('fzf-lua').lines {
+					fzf_args = build_fzf_args(),
+				}
+			end,
+		},
+		{
+			'<leader>fg',
+			function()
+				require('fzf-lua').git_status {
+					fzf_args = build_fzf_args(),
 				}
 			end,
 		},
@@ -281,7 +303,7 @@ return {
 				fzf = {
 					-- fzf '--bind=' options
 					['ctrl-z'] = 'abort',
-					['ctrl-u'] = false,
+					-- ['ctrl-u'] = false,
 					['ctrl-f'] = 'half-page-down',
 					['ctrl-b'] = 'half-page-up',
 					['ctrl-a'] = 'beginning-of-line',
@@ -290,6 +312,8 @@ return {
 					-- Only valid with fzf previewers (bat/cat/git/etc)
 					['f3'] = 'toggle-preview-wrap',
 					['f4'] = 'toggle-preview',
+					['ctrl-d'] = 'preview-page-down',
+					['ctrl-u'] = 'preview-page-up',
 				},
 			},
 			actions = {
@@ -323,20 +347,6 @@ return {
 				},
 			},
 			fzf_opts = {
-				-- options are sent as `<left>=<right>`
-				-- set to `false` to remove a flag
-				-- set to '' for a non-value flag
-				-- for raw args use `fzf_args` instead
-				['--ansi'] = '',
-				['--height'] = '100%',
-				['--layout'] = 'reverse',
-				['--border'] = 'none',
-				['--prompt'] = '❯',
-				['--pointer'] = '❯',
-				['--marker'] = '❯',
-				['--no-scrollbar'] = '',
-				['--no-separator'] = '',
-				['--header'] = ' ',
 			},
 			-- Only used when fzf_bin = "fzf-tmux", by default opens as a
 			-- popup 80% width, 80% height (note `-p` requires tmux > 3.2)
@@ -361,12 +371,13 @@ return {
             -- }, ]]
 			fzf_colors = {
 				['fg'] = { 'fg', 'Comment' },
-                ['fg+'] = { 'fg', 'Comment' },
+				['fg+'] = { 'fg', 'Comment' },
 				['pointer'] = { 'fg', 'Character' },
 				['info'] = { 'fg', 'Character' },
 				['bg+'] = { 'bg', 'Visual' },
 				['hl'] = { 'fg', 'Character' },
 				['hl+'] = { 'fg', 'Character' },
+				['gutter'] = { nil, nil, -1 },
 			},
 			previewers = {
 				cat = {
@@ -457,6 +468,20 @@ return {
 				no_header_i = true, -- hide interactive header?
 				multiprocess = true,
 				prompt = build_space(5),
+                trim_entry = true,
+				fzf_opts = {
+					['--info'] = 'inline-right',
+					['--ansi'] = '',
+					['--height'] = '100%',
+					['--layout'] = 'reverse',
+					['--border'] = 'none',
+					['--prompt'] = '❯',
+					['--pointer'] = '❯',
+					['--marker'] = '❯',
+					['--no-scrollbar'] = '',
+					['--no-separator'] = '',
+					['--header'] = ' ',
+				},
 			},
 			files = {
 				-- previewer      = "bat",          -- uncomment to override previewer
@@ -500,7 +525,6 @@ return {
 			},
 			git = {
 				files = {
-					prompt = 'GitFiles❯ ',
 					cmd = 'git ls-files --exclude-standard',
 					multiprocess = true, -- run command in a separate process
 					git_icons = true, -- show git icons?
@@ -511,7 +535,6 @@ return {
 					-- cwd_header = true
 				},
 				status = {
-					prompt = 'GitStatus❯ ',
 					cmd = 'git -c color.status=false status -su',
 					multiprocess = true, -- run command in a separate process
 					file_icons = true,
@@ -519,7 +542,7 @@ return {
 					color_icons = true,
 					previewer = 'git_diff',
 					-- git-delta is automatically detected as pager, uncomment to disable
-					-- preview_pager = false,
+					preview_pager = false,
 					actions = {
 						-- actions inherit from 'actions.files' and merge
 						['right'] = { fn = actions.git_unstage, reload = true },
@@ -536,7 +559,6 @@ return {
 					-- },
 				},
 				commits = {
-					prompt = 'Commits❯ ',
 					cmd = 'git log --color --pretty=format:\'%C(yellow)%h%Creset %Cgreen(%><(12)%cr%><|(12))%Creset %s %C(blue)<%an>%Creset\'',
 					preview = 'git show --color {1}',
 					-- git-delta is automatically detected as pager, uncomment to disable
@@ -548,7 +570,7 @@ return {
 					},
 				},
 				bcommits = {
-					prompt = 'BCommits❯ ',
+					prompt = build_space(5),
 					-- default preview shows a git diff vs the previous commit
 					-- if you prefer to see the entire commit you can use:
 					--   git show --color {1} --rotate-to={file}
@@ -557,7 +579,7 @@ return {
 					cmd = 'git log --color --pretty=format:\'%C(yellow)%h%Creset %Cgreen(%><(12)%cr%><|(12))%Creset %s %C(blue)<%an>%Creset\' {file}',
 					preview = 'git show --color {1} -- {file}',
 					-- git-delta is automatically detected as pager, uncomment to disable
-					-- preview_pager = false,
+					preview_pager = false,
 					actions = {
 						['default'] = actions.git_buf_edit,
 						['ctrl-s'] = actions.git_buf_split,
@@ -567,7 +589,6 @@ return {
 					},
 				},
 				branches = {
-					prompt = 'Branches❯ ',
 					cmd = 'git branch --all --color',
 					preview = 'git log --graph --pretty=oneline --abbrev-commit --color {1}',
 					actions = {
@@ -575,7 +596,6 @@ return {
 					},
 				},
 				tags = {
-					prompt = 'Tags> ',
 					cmd = 'git for-each-ref --color --sort=-taggerdate --format '
 						.. '\'%(color:yellow)%(refname:short)%(color:reset) '
 						.. '%(color:green)(%(taggerdate:relative))%(color:reset)'
@@ -586,7 +606,6 @@ return {
 					actions = { ['default'] = actions.git_checkout },
 				},
 				stash = {
-					prompt = 'Stash> ',
 					cmd = 'git --no-pager stash list',
 					preview = 'git --no-pager stash show --patch --color {1}',
 					actions = {
@@ -680,15 +699,14 @@ return {
 			},
 			lines = {
 				previewer = 'builtin', -- set to 'false' to disable
-				prompt = 'Lines❯ ',
 				show_unloaded = true, -- show unloaded buffers
 				show_unlisted = false, -- exclude 'help' buffers
 				no_term_buffers = true, -- exclude 'term' buffers
 				fzf_opts = {
 					-- do not include bufnr in fuzzy matching
 					-- tiebreak by line no.
-					['--delimiter'] = '\'[\\]:]\'',
-					['--nth'] = '2..',
+					-- ['--delimiter'] = '\'[\\]:]\'',
+					-- ['--nth'] = '2..',
 					['--tiebreak'] = 'index',
 					['--tabstop'] = '1',
 				},
@@ -730,6 +748,7 @@ return {
 			lsp = {
 				prompt_postfix = '❯ ', -- will be appended to the LSP label
 				-- to override use 'prompt' instead
+                prompt = build_space(5),
 				cwd_only = false, -- LSP/diagnostics for cwd only?
 				async_or_timeout = 5000, -- timeout(ms) or 'true' for async calls
 				file_icons = true,
@@ -792,7 +811,6 @@ return {
 					},
 				},
 				code_actions = {
-					prompt = 'Code Actions> ',
 					async_or_timeout = 5000,
 					-- when git-delta is installed use "codeaction_native" for beautiful diffs
 					-- try it out with `:FzfLua lsp_code_actions previewer=codeaction_native`
@@ -800,7 +818,6 @@ return {
 					previewer = 'codeaction',
 				},
 				finder = {
-					prompt = 'LSP Finder> ',
 					file_icons = true,
 					color_icons = true,
 					git_icons = false,
@@ -822,7 +839,6 @@ return {
 				},
 			},
 			diagnostics = {
-				prompt = 'Diagnostics❯ ',
 				cwd_only = false,
 				file_icons = true,
 				git_icons = false,
