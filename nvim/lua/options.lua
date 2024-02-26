@@ -8,7 +8,7 @@ if vim.fn.has 'nvim-0.10' == 1 then o.smoothscroll = true end
 
 local TAB_SIZE = 4
 
-o.background = 'dark'
+o.background = ''
 o.guicursor = 'a:blinkon1,i-ci-ve:ver25-blinkon1'
 o.selection = 'old'
 o.tabstop = TAB_SIZE
@@ -23,7 +23,7 @@ o.wildoptions = 'pum'
 o.pumblend = 0
 o.pumheight = 15
 o.mouse = 'a'
-o.wrap = false
+o.wrap = true
 o.title = true
 o.hidden = true
 o.cmdheight = 1
@@ -55,10 +55,8 @@ o.autoindent = true
 o.smartindent = true
 o.copyindent = true
 o.ignorecase = true
-
 o.cursorline = false
 o.cursorcolumn = false
-
 o.lazyredraw = false
 o.ttyfast = true
 o.splitright = true
@@ -70,16 +68,20 @@ o.splitkeep = 'screen'
 o.signcolumn = 'yes'
 o.colorcolumn = '99999'
 o.encoding = 'utf-8'
-o.listchars = 'eol:↲'
-o.inccommand = 'split'
+o.list = false
+o.listchars:append {
+    -- eol ='↲',
+    trail = '·',
+    nbsp = '␣',
+}
 o.fillchars = {
-	horiz = "━",
-	horizup = "┻",
-	horizdown = "┳",
-	vert = '┃',
-	vertleft = "┫",
-	vertright = "┣",
-	verthoriz = "╋",
+	-- horiz = "━",
+	-- horizup = "┻",
+	-- horizdown = "┳",
+	-- vert = '┃',
+	-- vertleft = "┫",
+	-- vertright = "┣",
+	-- verthoriz = "╋",
 	eob = ' ',
 	fold = ' ',
 	foldopen = '',
@@ -89,6 +91,7 @@ o.fillchars = {
     stl = ' ',
     stlnc = ' ',
 }
+o.inccommand = 'split'
 o.showbreak = '  ↳ '
 o.completeopt = 'menuone,preview,noselect'
 o.complete = '.,w,b,u,t,U,s,k,d,i'
@@ -96,6 +99,16 @@ o.langmap =
 	'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz'
 o.imsearch = 0
 o.iminsert = 0
+o.laststatus = 2
+o.grepprg = 'rg --vimgrep'
+o.fileformat = 'unix'
+o.fileformats = { 'unix', 'dos' }
+o.binary = false
+o.joinspaces = false -- No double spaces with join after a dot
+o.clipboard:prepend { 'unnamedplus' }
+o.shortmess:append 'sI'
+o.whichwrap:append '<>hl'
+
 wo.foldcolumn = '0'
 wo.foldmethod = 'expr'
 wo.foldexpr = 'nvim_treesitter#foldexpr()'
@@ -103,14 +116,3 @@ wo.foldexpr = 'nvim_treesitter#foldexpr()'
 wo.foldminlines = 1
 wo.foldlevel = 99
 wo.conceallevel = 2
-o.laststatus = 2
-
-o.grepprg = 'rg --vimgrep'
-o.fileformat = 'unix'
-o.fileformats = { 'unix', 'dos' }
-o.binary = false
-o.joinspaces = false -- No double spaces with join after a dot
-
-o.clipboard:prepend { 'unnamedplus' }
-o.shortmess:append 'sI'
-o.whichwrap:append '<>hl'

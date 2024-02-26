@@ -8,4 +8,8 @@ _G.ICONS = {
 	VERTICAL_LINE_3 = '⏐',
 	VERTICAL_LINE_4 = '┊',
 	VERTICAL_LINE_5 = '¦',
+
+	ARROW = '➜',
+	BRACKET = '❯',
+    SEARCH = '',
 }

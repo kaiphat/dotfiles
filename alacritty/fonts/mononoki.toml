@@ -1,5 +1,5 @@
 [font]
-size = 13
+size = 12.5
 
 [font.normal]
 family = 'Mononoki'
@@ -19,8 +19,8 @@ style = 'Regular'
 
 [font.offset]
 x = 0
-y = 1
+y = 6
 
 [font.glyph_offset]
 x = 0
-y = 0
+y = 3

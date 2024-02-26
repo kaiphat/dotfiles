@@ -5,8 +5,8 @@
 set -gx nvm_default_version v18.17.0
 set -gx ANDROID_HOME $HOME/Android/Sdk
 set -gx EDITOR nvim
-set -gx MANPAGER 'nvim +Man! -c "set nowrap"'
-set -gx PAGER 'nvim +Man! -c "set nowrap"'
+set -gx MANPAGER 'nvim +Man! -c "set nowrap" -c "set modifiable" -c "set noreadonly" -c "set buftype=nofile"'
+set -gx PAGER 'nvim +Man! -c "set nowrap" -c "set modifiable" -c "set noreadonly" -c "set buftype=nofile"'
 set -gx LUA_DIR /usr/bin/lua
 set -gx LD_LIBRARY_PATH /opt/oracle/instantclient_21_8
 set -U fish_greeting
@@ -113,7 +113,8 @@ alias y "yarn"
 alias grep "grep -i --color"
 # alias n "nvim --listen /tmp/nvim-server-$(tmux display-message -p '#S').pipe"
 alias n "nvim"
-alias nread "nvim -c \"set nowrap\""
+alias nman 'nvim +Man! -c "set nowrap" -c "set modifiable" -c "set noreadonly" -c "set buftype=nofile"'
+alias nread 'nvim -c "set nowrap" -c "set modifiable" -c "set noreadonly" -c "set buftype=nofile"'
 alias req "http -p mbh"
 alias mkdir "mkdir -p"
 alias less "less -MSx4 -FXR --shift 10"
@@ -122,12 +123,27 @@ alias rm "rm -rfv"
 alias cp "cp -r -v"
 alias htop "btop -p 1"
 alias btop "btop -p 1"
-alias clip "xclip -selection c"
-alias pj "xclip -o | jq '.' | clip"
 alias nvim-start "nvim --startuptime _s.log -c exit && tail -100 _s.log | bat && rm _s.log"
 alias ... "cd ../../"
 alias lg "lazygit"
+alias fzf "fzf --color=gutter:-1 --no-separator --info=inline-right --no-scrollbar --pointer=' ' --prompt='❯ '"
 # alias fd "fd --no-ignore --hidden -p -c never"
+function gs
+    set result (git log --branches --source --oneline | fzf)
+    echo $result | nread
+end
+# git reflog search
+function grs
+    git reflog show --all | fzf
+end
+function gd
+    set -l index $argv[1]
+    if test -z $index
+        set index 0
+    end
+    g a
+    git diff HEAD~$index | nread
+end
 
 alias play:sql "n ~/play/sql/index.sql"
 alias play:json "n ~/play/json/test.json"

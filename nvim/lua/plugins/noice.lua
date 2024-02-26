@@ -1,8 +1,3 @@
-local ICONS = {
-	ARROW = '➜',
-	BRACKET = '❯',
-}
-
 return {
 	'folke/noice.nvim',
 	event = 'VeryLazy',
@@ -28,20 +23,30 @@ return {
 					win_options = {
 						winblend = 0,
 					},
+					border = {
+					    -- style = 'rounded',
+					},
+					position = {
+					    row = -2
+					}
 				},
 			},
 
 			cmdline = {
 				format = {
 					cmdline = { pattern = '^:', icon = ICONS.BRACKET, lang = 'vim' },
-					search_down = { kind = 'search', pattern = '^/', icon = '', lang = 'regex' },
-					search_up = { kind = 'search', pattern = '^%?', icon = '', lang = 'regex' },
+					search_down = { kind = 'search', pattern = '^/', icon = ICONS.SEARCH, lang = 'regex' },
+                    search_up = { kind = 'search', pattern = '^%?', icon = ICONS.SEARCH, lang = 'regex' },
 					filter = { pattern = '^:%s*!', icon = ICONS.BRACKET, lang = 'bash' },
 					lua = { pattern = '^:%s*lua%s+', icon = '', lang = 'lua' },
-					help = { pattern = '^:%s*h%s+', icon = ' ' },
+                    help = { pattern = '^:%s*h%s+', icon = ICONS.SEARCH },
 					input = {}, -- Used by input()
 				},
 			},
+
+            notify = {
+                view = 'mini',
+            },
 
 			lsp = {
 				progress = {
@@ -70,13 +75,6 @@ return {
 			},
 
 			routes = {
-				-- {
-				-- 	filter = {
-				-- 		event = 'msg_show',
-				-- 		kind = 'search_count',
-				-- 	},
-				-- 	opts = { skip = true },
-				-- },
 				{
 					filter = {
 						event = 'msg_show',

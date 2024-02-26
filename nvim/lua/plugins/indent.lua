@@ -61,7 +61,7 @@ local nodes = {
 
 return {
 	'lukas-reineke/indent-blankline.nvim',
-	enabled = false,
+	enabled = true,
 	main = 'ibl',
 	event = 'BufReadPre',
 	config = function()
@@ -75,8 +75,8 @@ return {
 
 		ibl.setup {
 			indent = {
-                char = ICONS.CIRCLE_MEDIUM,
-                highlight = char_highlight_group,
+                char = ICONS.VERTICAL_LINE_1,
+				highlight = char_highlight_group,
 			},
 			scope = {
 				enabled = false,

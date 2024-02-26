@@ -42,8 +42,8 @@ return {
 				TreesitterContext = { bg = 'muted', blend = 15 },
 				TreesitterContextSeparator = { fg = 'rose' },
 				CmpItemKindCodeium = { fg = 'iris' },
-				IndentBlanklineChar = { fg = '#333366' },
-				IndentBlanklineContextChar = { fg = '#333366' },
+				IndentBlanklineChar = { fg = 'overlay' },
+				IndentBlanklineContextChar = { fg = 'overlay' },
 				NoiceCmdlinePopupBorder = { link = 'NormalFloat' },
 				['@variable'] = { italic = false, fg = '#c4c6e7' },
 				['@lsp.type.property.typescript'] = { italic = false, fg = '#7a8bb1' },
@@ -55,7 +55,7 @@ return {
 				['@neorg.todo_items.done.norg'] = { fg = 'foam' },
                 ['@markup.raw.markdown_inline'] = { fg = 'rose' },
                 FzfLuaColorsBgSel = { fg = 'rose' },
-
+                FzfLuaTitle = { bg = 'foam', fg = 'base', bold = false },
 			},
 
 			before_highlight = function(group, highlight, palette)
@@ -67,6 +67,18 @@ return {
 				end
 				if highlight.bg == palette.gold then
 					highlight.bg = '#9398cf'
+				end
+                if highlight.fg == palette.foam then
+                    highlight.fg = '#81c8be'
+				end
+				if highlight.bg == palette.foam then
+                    highlight.bg = '#81c8be'
+				end
+                if highlight.fg == palette.rose then
+                    highlight.fg = '#ef8891'
+				end
+				if highlight.bg == palette.rose then
+                    highlight.bg = '#ef8891'
 				end
 			end,
 		}

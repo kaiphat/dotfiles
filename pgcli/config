@@ -80,7 +80,7 @@ qualify_columns = always
 search_path_filter = False
 
 # Default pager.
-pager = 'nvim +Man! -c "set nowrap"'
+pager = 'nvim +Man! -c "set nowrap" -c "set modifiable" -c "set noreadonly" -c "set buftype=nofile"'
 
 # Timing of sql statments and table rendering.
 timing = True

@@ -1,8 +1,18 @@
 return {
 	'stevearc/oil.nvim',
 	keys = {
-		{ '<leader>o', function() require('oil').open() end },
-		{ '<leader>O', function() require('oil').open(vim.loop.cwd()) end },
+		{
+			'<leader>o',
+			function()
+				require('oil').open()
+			end,
+		},
+		{
+			'<leader>O',
+			function()
+				require('oil').open(vim.loop.cwd())
+			end,
+		},
 	},
 	config = function()
 		vim.api.nvim_create_autocmd('FileType', {
@@ -17,8 +27,9 @@ return {
 		require('oil').setup {
 			skip_confirm_for_simple_edits = true,
 			prompt_save_on_select_new_entry = false,
+			lsp_rename_autosave = false,
 
-            cleanup_delay_ms = false,
+			cleanup_delay_ms = false,
 			use_default_keymaps = false,
 			keymaps = {
 				['<C-l>'] = 'actions.select',
@@ -40,6 +51,9 @@ return {
 			},
 			view_options = {
 				show_hidden = true,
+				is_always_hidden = function(name)
+					return name == '..'
+				end,
 			},
 		}
 	end,

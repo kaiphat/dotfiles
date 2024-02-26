@@ -42,8 +42,12 @@ map('n', 'L', '$')
 
 map('n', '<C-s>', ':wa<cr>')
 
-map({ 'n', 'v' }, '<C-d>', function() vim.api.nvim_feedkeys('4j', 'n', true) end)
-map({ 'n', 'v' }, '<C-u>', function() vim.api.nvim_feedkeys('4k', 'n', true) end)
+map({ 'n', 'v' }, '<C-d>', function()
+	vim.api.nvim_feedkeys('4j', 'n', true)
+end)
+map({ 'n', 'v' }, '<C-u>', function()
+	vim.api.nvim_feedkeys('4k', 'n', true)
+end)
 
 map('n', 'x', function()
 	if vim.fn.col '.' == 1 then
@@ -132,5 +136,36 @@ map('n', '<leader>lw', function()
 	vim.cmd.normal 'j=='
 end)
 
-map('n', '<leader>us', function() vim.api.nvim_input ':%s/' end)
-map('v', '<leader>us', function() vim.api.nvim_input ':s/' end)
+map('n', '<leader>us', function()
+	vim.api.nvim_input ':%s/'
+end)
+map('v', '<leader>us', function()
+	vim.api.nvim_input ':s/'
+end)
+
+-- todo: create mapping for markdown
+-- local function convert_to_checkbox()
+--     -- Get the current line content
+--     local line_content = vim.api.nvim_get_current_line()
+
+--     -- Check if the line is already a checkbox item
+--     if string.match(line_content, "^%s*%-%s*%[[%s%x]+%]%s*.+") then
+--         -- Toggle the checkbox status
+--         local new_content = line_content:gsub("%[([%s%x])%]", function(c)
+--             if c == "x" then
+--                 return " "
+--             else
+--                 return "x"
+--             end
+--         end)
+
+--         -- Set the new line content
+--         vim.api.nvim_set_current_line(new_content)
+--     else
+--         -- Convert the line to a checkbox item
+--         local new_content = "- [ ] " .. line_content:gsub("^%s*", "")
+
+--         -- Set the new line content
+--         vim.api.nvim_set_current_line(new_content)
+--     end
+-- end

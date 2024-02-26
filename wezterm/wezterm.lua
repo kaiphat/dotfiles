@@ -28,12 +28,12 @@ local keys = {
 }
 
 local config = {
-	-- front_end = 'WebGpu',
+	front_end = 'WebGpu',
 	window_padding = {
-		left = 10,
-		right = 10,
-		top = 10,
-		bottom = 10,
+		left = 20,
+		right = 20,
+		top = 20,
+		bottom = 6,
 	},
 	enable_tab_bar = false,
 	enable_scroll_bar = false,
@@ -42,7 +42,7 @@ local config = {
 	max_fps = 240,
 	animation_fps = 240,
 	colors = require 'lua/themes/dark_rose_pine',
-	default_cursor_style = 'SteadyBlock',
+    default_cursor_style = 'BlinkingBar',
 	disable_default_key_bindings = true,
 	warn_about_missing_glyphs = false,
 	use_cap_height_to_scale_fallback_fonts = false,

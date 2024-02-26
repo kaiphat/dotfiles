@@ -2,6 +2,7 @@
 -- todo: filter grep files
 -- todo: check lsp workspace symbols
 -- todo: prettify highlights
+-- todo: lsp_workspace
 
 local always_ignore_patterns = {
 	'.git/',
@@ -26,10 +27,6 @@ local ignore_patterns = concat({
 	'.gitignore',
 	'*.md',
 }, always_ignore_patterns)
-
-local function build_fzf_args()
-	return ''
-end
 
 local function build_find_cmd()
 	local base = 'fd --type f'
@@ -75,14 +72,8 @@ local function build_rg_cmd_with_no_ignore(opts)
 	return base .. ' -e'
 end
 
-local function build_space(size)
-	local result = ''
-	for i = 1, size do
-		result = result .. ' '
-		if size - i <= 3 then
-			return result .. '↳ '
-		end
-	end
+local function build_prompt()
+    return '  ❯ '
 end
 
 return {
@@ -94,7 +85,6 @@ return {
 			'<leader>fj',
 			function()
 				require('fzf-lua').files {
-					fzf_args = build_fzf_args(),
 					cmd = build_find_cmd(),
 				}
 			end,
@@ -103,7 +93,6 @@ return {
 			'<leader>fJ',
 			function()
 				require('fzf-lua').files {
-					fzf_args = build_fzf_args(),
 					cmd = build_find_cmd_with_no_ignore { skip_always_ignore = true },
 					cwd = get_current_dir(),
 				}
@@ -113,7 +102,6 @@ return {
 			'<leader>dj',
 			function()
 				require('fzf-lua').files {
-					fzf_args = build_fzf_args(),
 					cmd = build_find_cmd_with_no_ignore(),
 				}
 			end,
@@ -122,7 +110,6 @@ return {
 			'<leader>fl',
 			function()
 				require('fzf-lua').live_grep {
-					fzf_args = build_fzf_args(),
 					cmd = build_rg_cmd(),
 				}
 			end,
@@ -131,8 +118,16 @@ return {
 			'<leader>dl',
 			function()
 				require('fzf-lua').live_grep {
-					fzf_args = build_fzf_args(),
 					cmd = build_rg_cmd_with_no_ignore(),
+				}
+			end,
+		},
+		{
+			'<leader>fL',
+			function()
+				require('fzf-lua').live_grep {
+					cwd = get_current_dir(),
+					cmd = build_rg_cmd_with_no_ignore { skip_always_ignore = true }
 				}
 			end,
 		},
@@ -140,9 +135,23 @@ return {
 			'<leader>dL',
 			function()
 				require('fzf-lua').live_grep {
-					prompt = ' Rg :: ',
-					fzf_args = build_fzf_args(),
 					cmd = build_rg_cmd_with_no_ignore { skip_always_ignore = true },
+				}
+			end,
+		},
+		{
+			'<leader>fh',
+			function()
+				require('fzf-lua').grep_cword {
+					cmd = build_rg_cmd(),
+				}
+			end,
+		},
+		{
+			'<leader>dh',
+			function()
+				require('fzf-lua').grep_cword {
+					cmd = build_rg_cmd_with_no_ignore(),
 				}
 			end,
 		},
@@ -155,33 +164,34 @@ return {
 		{
 			'<leader>fo',
 			function()
-				require('fzf-lua').oldfiles {
-					fzf_args = build_fzf_args(),
-				}
+				require('fzf-lua').oldfiles {}
 			end,
 		},
 		{
 			'<leader>fi',
 			function()
 				require('fzf-lua').lsp_references {
-					fzf_args = build_fzf_args(),
+                    file_ignore_patterns = ignore_patterns,
 				}
+			end,
+		},
+		{
+			'<leader>di',
+			function()
+				require('fzf-lua').lsp_references { }
 			end,
 		},
 		{
 			'<leader>fb',
 			function()
-				require('fzf-lua').buffers {
-					fzf_args = build_fzf_args(),
-				}
+				require('fzf-lua').buffers {}
 			end,
 		},
 		{
 			'<leader>en',
 			function()
 				require('fzf-lua').files {
-					fzf_args = build_fzf_args(),
-                    cmd = build_find_cmd_with_no_ignore { skip_always_ignore = true },
+					cmd = build_find_cmd_with_no_ignore(),
 					cwd = '~/notes',
 				}
 			end,
@@ -190,8 +200,7 @@ return {
 			'<leader>es',
 			function()
 				require('fzf-lua').files {
-					fzf_args = build_fzf_args(),
-					cmd = build_find_cmd_with_no_ignore { skip_always_ignore = true },
+					cmd = build_find_cmd_with_no_ignore(),
 					cwd = '~/dotfiles',
 				}
 			end,
@@ -199,17 +208,25 @@ return {
 		{
 			'<leader>fe',
 			function()
-				require('fzf-lua').lines {
-					fzf_args = build_fzf_args(),
-				}
+				require('fzf-lua').blines {}
+			end,
+		},
+		{
+			'<leader>de',
+			function()
+				require('fzf-lua').lines {}
 			end,
 		},
 		{
 			'<leader>fg',
 			function()
-				require('fzf-lua').git_status {
-					fzf_args = build_fzf_args(),
-				}
+				require('fzf-lua').git_status {}
+			end,
+		},
+		{
+			'<leader>fc',
+			function()
+				require('fzf-lua').git_bcommits {}
 			end,
 		},
 	},
@@ -334,7 +351,7 @@ return {
 					['ctrl-s'] = actions.file_split,
 					['ctrl-v'] = actions.file_vsplit,
 					['ctrl-t'] = actions.file_tabedit,
-					['alt-q'] = actions.file_sel_to_qf,
+					['ctrl-q'] = actions.file_sel_to_qf,
 					['alt-l'] = actions.file_sel_to_ll,
 				},
 				buffers = {
@@ -346,8 +363,7 @@ return {
 					['ctrl-t'] = actions.buf_tabedit,
 				},
 			},
-			fzf_opts = {
-			},
+			fzf_opts = {},
 			-- Only used when fzf_bin = "fzf-tmux", by default opens as a
 			-- popup 80% width, 80% height (note `-p` requires tmux > 3.2)
 			-- and removes the sides margin added by `fzf-tmux` (fzf#3162)
@@ -372,11 +388,11 @@ return {
 			fzf_colors = {
 				['fg'] = { 'fg', 'Comment' },
 				['fg+'] = { 'fg', 'Comment' },
-				['pointer'] = { 'fg', 'Character' },
-				['info'] = { 'fg', 'Character' },
+				['pointer'] = { 'fg', '@label' },
+				['info'] = { 'fg', '@label' },
 				['bg+'] = { 'bg', 'Visual' },
-				['hl'] = { 'fg', 'Character' },
-				['hl+'] = { 'fg', 'Character' },
+				['hl'] = { 'fg', '@label' },
+				['hl+'] = { 'fg', '@label' },
 				['gutter'] = { nil, nil, -1 },
 			},
 			previewers = {
@@ -467,8 +483,9 @@ return {
 				no_header = false, -- hide grep|cwd header?
 				no_header_i = true, -- hide interactive header?
 				multiprocess = true,
-				prompt = build_space(5),
-                trim_entry = true,
+				prompt = build_prompt(),
+                live_ast_prefix = false,
+				trim_entry = true,
 				fzf_opts = {
 					['--info'] = 'inline-right',
 					['--ansi'] = '',
@@ -476,11 +493,12 @@ return {
 					['--layout'] = 'reverse',
 					['--border'] = 'none',
 					['--prompt'] = '❯',
-					['--pointer'] = '❯',
+					['--pointer'] = ' ',
 					['--marker'] = '❯',
 					['--no-scrollbar'] = '',
 					['--no-separator'] = '',
 					['--header'] = ' ',
+					['--cycle'] = '',
 				},
 			},
 			files = {
@@ -570,7 +588,7 @@ return {
 					},
 				},
 				bcommits = {
-					prompt = build_space(5),
+					prompt = build_prompt(),
 					-- default preview shows a git diff vs the previous commit
 					-- if you prefer to see the entire commit you can use:
 					--   git show --color {1} --rotate-to={file}
@@ -632,8 +650,6 @@ return {
 				},
 			},
 			grep = {
-				prompt = build_space(1),
-				input_prompt = build_space(1),
 				multiprocess = true, -- run command in a separate process
 				git_icons = false, -- show git icons?
 				file_icons = true, -- show file icons?
@@ -719,7 +735,6 @@ return {
 			},
 			blines = {
 				previewer = 'builtin', -- set to 'false' to disable
-				prompt = 'BLines❯ ',
 				show_unlisted = true, -- include 'help' buffers
 				no_term_buffers = false, -- include 'term' buffers
 				-- start          = "cursor"      -- start display from cursor?
@@ -748,7 +763,7 @@ return {
 			lsp = {
 				prompt_postfix = '❯ ', -- will be appended to the LSP label
 				-- to override use 'prompt' instead
-                prompt = build_space(5),
+				prompt = build_prompt(),
 				cwd_only = false, -- LSP/diagnostics for cwd only?
 				async_or_timeout = 5000, -- timeout(ms) or 'true' for async calls
 				file_icons = true,
@@ -824,7 +839,7 @@ return {
 					async = true, -- async by default
 					silent = true, -- suppress "not found"
 					separator = '| ', -- separator after provider prefix, `false` to disable
-					includeDeclaration = true, -- include current declaration in LSP context
+					includeDeclaration = false, -- include current declaration in LSP context
 					-- by default display all LSP locations
 					-- to customize, duplicate table and delete unwanted providers
 					providers = {

@@ -7,7 +7,8 @@ style = 'Narrow'
 
 [font.bold]
 family = 'InputMonoNarrow Nerd Font'
-style = 'Medium'
+style = 'Narrow'
+# style = 'Medium'
 
 [font.italic]
 family = 'InputMonoNarrow Nerd Font'
@@ -15,7 +16,8 @@ style = 'Narrow'
 
 [font.bold_italic]
 family = 'InputMonoNarrow Nerd Font'
-style = 'Medium'
+style = 'Narrow'
+# style = 'Medium'
 
 # [font.bold_italic]
 # family = 'InputMonoNarrowIta Nerd Font'
@@ -23,8 +25,8 @@ style = 'Medium'
 
 [font.offset]
 x = 0
-y = 1
+y = 6
 
 [font.glyph_offset]
 x = 0
-y = 0
+y = 3
