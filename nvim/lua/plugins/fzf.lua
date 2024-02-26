@@ -172,13 +172,16 @@ return {
 			function()
 				require('fzf-lua').lsp_references {
                     file_ignore_patterns = ignore_patterns,
+                    ignore_current_line = true
 				}
 			end,
 		},
 		{
 			'<leader>di',
 			function()
-				require('fzf-lua').lsp_references { }
+				require('fzf-lua').lsp_references {
+                    ignore_current_line = true
+				}
 			end,
 		},
 		{
@@ -227,6 +230,22 @@ return {
 			'<leader>fc',
 			function()
 				require('fzf-lua').git_bcommits {}
+			end,
+		},
+		{
+			'<leader>fw',
+			function()
+				require('fzf-lua').lsp_live_workspace_symbols {
+                    file_ignore_patterns = ignore_patterns,
+				}
+			end,
+		},
+		{
+			'<leader>dw',
+			function()
+				require('fzf-lua').lsp_live_workspace_symbols {
+                    file_ignore_patterns = always_ignore_patterns,
+				}
 			end,
 		},
 	},
@@ -664,7 +683,7 @@ return {
 				-- search strings will be split using the 'glob_separator' and translated
 				-- to '--iglob=' arguments, requires 'rg'
 				-- can still be used when 'false' by calling 'live_grep_glob' directly
-				rg_glob = false, -- default to glob parsing?
+				rg_glob = true, -- default to glob parsing?
 				glob_flag = '--iglob', -- for case sensitive globs use '--glob'
 				glob_separator = '%s%-%-', -- query separator pattern (lua): ' --'
 				-- advanced usage: for custom argument parsing define
@@ -773,6 +792,7 @@ return {
 				includeDeclaration = false, -- include current declaration in LSP context
 				-- settings for 'lsp_{document|workspace|lsp_live_workspace}_symbols'
 				symbols = {
+                    prompt = build_prompt(),
 					async_or_timeout = true, -- symbols are async by default
 					symbol_style = 1, -- style for document/workspace symbols
 					-- false: disable,    1: icon+kind

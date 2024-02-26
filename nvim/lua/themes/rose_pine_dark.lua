@@ -62,23 +62,36 @@ return {
 				if highlight.fg == palette.pine then
 					highlight.fg = '#91B4D5'
 				end
+				if highlight.bg == palette.pine then
+                    highlight.bg = '#91B4D5'
+				end
+
 				if highlight.fg == palette.gold then
 					highlight.fg = '#9398cf'
 				end
 				if highlight.bg == palette.gold then
 					highlight.bg = '#9398cf'
 				end
+
                 if highlight.fg == palette.foam then
                     highlight.fg = '#81c8be'
 				end
 				if highlight.bg == palette.foam then
                     highlight.bg = '#81c8be'
 				end
+
                 if highlight.fg == palette.rose then
-                    highlight.fg = '#ef8891'
+                    highlight.fg = '#6e88a6'
 				end
 				if highlight.bg == palette.rose then
-                    highlight.bg = '#ef8891'
+                    highlight.bg = '#6e88a6'
+				end
+
+                if highlight.fg == palette.iris then
+                    highlight.fg = '#babbf1'
+				end
+				if highlight.bg == palette.iris then
+                    highlight.bg = '#babbf1'
 				end
 			end,
 		}
