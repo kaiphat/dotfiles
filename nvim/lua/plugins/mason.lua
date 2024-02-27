@@ -1,22 +1,3 @@
-local M = {}
-
-M.tools = {
-	'lua-language-server',
-	'prettierd',
-    'prettier',
-	'rust-analyzer',
-	'typescript-language-server',
-	'json-lsp',
-	'css-lsp',
-	'html-lsp',
-	'json-lsp',
-	'sql-formatter',
-	'emmet-language-server',
-	'stylua',
-	'eslint_d',
-	'python-lsp-server',
-}
-
 return {
 	{
 		'WhoIsSethDaniel/mason-tool-installer.nvim',
@@ -25,7 +6,23 @@ return {
 			require('mason-tool-installer').setup {
 				auto_update = false,
 				run_on_start = false,
-				ensure_installed = M.tools,
+				ensure_installed = {
+					'lua-language-server',
+					'prettierd',
+					'prettier',
+					'rust-analyzer',
+					'typescript-language-server',
+					'json-lsp',
+					'css-lsp',
+					'html-lsp',
+					'json-lsp',
+					'sql-formatter',
+					'emmet-language-server',
+					'stylua',
+					'python-lsp-server',
+					'eslint-lsp',
+					'marksman',
+				},
 			}
 		end,
 	},
@@ -37,7 +34,7 @@ return {
 			require('mason').setup {
 				ui = {
 					border = 'rounded',
-					width = 0.5,
+					width = 0.7,
 				},
 			}
 		end,

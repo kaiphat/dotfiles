@@ -60,7 +60,17 @@ M.set_handlers = function()
 	end
 end
 
-M.on_attach = function()
+M.on_attach = function(client, bufnr)
+	if client.name == 'eslint' then
+		vim.api.nvim_create_autocmd('BufWritePre', {
+			group = vim.api.nvim_create_augroup('custom:eslint', {}),
+			buffer = bufnr,
+			callback = function()
+				vim.cmd 'EslintFixAll'
+			end,
+		})
+	end
+
 	-- vim.api.nvim_create_augroup('lsp_augroup', { clear = true })
 	--
 	-- vim.api.nvim_create_autocmd('InsertEnter', {
@@ -147,6 +157,10 @@ M.get_servers = function()
 				},
 			},
 		},
+		eslint = {
+			format = true,
+		},
+		marksman = {},
 	}
 end
 
@@ -280,7 +294,7 @@ return {
 			{
 				'<space>la',
 				function()
-					require('fzf-lua').lsp_code_actions { }
+					require('fzf-lua').lsp_code_actions {}
 				end,
 			},
 			{
