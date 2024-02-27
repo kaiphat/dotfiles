@@ -505,6 +505,7 @@ return {
 				prompt = build_prompt(),
                 live_ast_prefix = false,
 				trim_entry = true,
+				fzf_args = '--bind=change:first',
 				fzf_opts = {
 					['--info'] = 'inline-right',
 					['--ansi'] = '',
