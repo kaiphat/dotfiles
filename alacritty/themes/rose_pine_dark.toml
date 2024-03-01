@@ -2,7 +2,8 @@
 foreground = "#e0def4"
 # background = "#232136"
 # background = '#292640'
-background = '#191934'
+# background = '#191934'
+background = '#10141f'
 dim_foreground = "#908caa"
 bright_foreground = "#e0def4"
 

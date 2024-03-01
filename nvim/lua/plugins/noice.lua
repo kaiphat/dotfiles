@@ -1,3 +1,4 @@
+-- TODO: change notification or remove noice at all
 return {
 	'folke/noice.nvim',
 	event = 'VeryLazy',

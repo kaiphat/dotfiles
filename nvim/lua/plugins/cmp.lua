@@ -1,103 +1,32 @@
-local M = {}
-
-M.has_words_before = function()
-	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
+local function has_words_before()
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local line = vim.api.nvim_buf_get_lines(0, row - 1, row, true)
+	return col ~= 0 and line[1]:sub(col, col):match '%s' == nil
 end
 
-M.buffer_source = {
-	name = 'buffer',
-	option = {
-		get_bufnrs = function()
-          local bufs = {}
-          for _, win in ipairs(vim.api.nvim_list_wins()) do
-            bufs[vim.api.nvim_win_get_buf(win)] = true
-          end
-          return vim.tbl_keys(bufs)
-        end,
-		indexing_interval = 100,
-		indexing_batch_size = 1000,
-		max_indexed_line_length = 1024 * 40,
-		keyword_pattern = [[\k\+]],
-	},
-}
-
-M.source_comparator = function(item1, item2)
-	local sources = {
-		codeium = 60,
-		nvim_lsp = 30,
-		luasnip = 31,
-		buffer = 20,
-	}
-
-	local a = sources[item1.source.name] or 0
-	local b = sources[item2.source.name] or 0
-
-	if a == b then
-		return nil
-	else
-		return a > b
-	end
-end
-
-M.get_format = function()
+local function get_mappings(cmp, luasnip)
 	return {
-		fields = { 'kind', 'abbr', 'menu' },
-		format = require('lspkind').cmp_format {
-			mode = 'symbol',
-			maxwidth = 40,
-			ellipsis_char = '...',
-			symbol_map = {
-				TypeParameter = 'T',
-				Codeium = '󰇈',
-			},
-		},
-	}
-end
-
-M.get_mappings = function()
-	local cmp = require 'cmp'
-	local luasnip = require 'luasnip'
-
-	return {
-		['<C-p>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
-		['<C-k>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
-		['<C-n>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
-		['<C-j>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
+		['<C-j>'] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item { behavior = cmp.SelectBehavior.Insert }
+			else
+				cmp.complete()
+			end
+		end, { 'i', 's' }),
+		['<C-k>'] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item { behavior = cmp.SelectBehavior.Insert }
+			else
+				cmp.complete()
+			end
+		end, { 'i', 's' }),
 		['<C-d>'] = cmp.mapping.scroll_docs(-4),
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
-		['<C-e>'] = cmp.mapping.complete(),
 		-- ['<C-e>'] = cmp.mapping.close(),
-		['<CR>'] = cmp.mapping.confirm {
-			behavior = cmp.ConfirmBehavior.Insert,
-			select = true,
-		},
 		['<C-o>'] = cmp.mapping.confirm {
 			behavior = cmp.ConfirmBehavior.Insert,
 			select = true,
 		},
-		['<Tab>'] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item { behavior = cmp.SelectBehavior.Select }
-			elseif luasnip.expandable() then
-				luasnip.expand()
-			elseif luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
-			elseif M.has_words_before() then
-				cmp.complete()
-			else
-				fallback()
-			end
-		end, { 'i', 's' }),
-		['<S-Tab>'] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			elseif require('luasnip').jumpable(-1) then
-				vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
-			else
-				fallback()
-			end
-		end, { 'i', 's' }),
 	}
 end
 
@@ -136,7 +65,9 @@ return {
 				},
 			},
 			snippet = {
-				expand = function(args) luasnip.lsp_expand(args.body) end,
+				expand = function(args)
+					luasnip.lsp_expand(args.body)
+				end,
 			},
 			window = {
 				completion = {
@@ -152,12 +83,25 @@ return {
 					winhighlight = 'NormalFloat:FloatBorder,CursorLine:Visual,Search:None',
 				},
 			},
-			formatting = M.get_format(),
+			formatting = {
+				fields = { 'kind', 'abbr', 'menu' },
+				format = require('lspkind').cmp_format {
+					mode = 'symbol',
+					maxwidth = 40,
+					ellipsis_char = '...',
+					symbol_map = {
+						TypeParameter = 'T',
+						Codeium = '󰇈',
+						Copilot = '󰇈',
+					},
+				},
+			},
 			completion = {
 				autocomplete = {
 					types.cmp.TriggerEvent.TextChanged,
+					-- types.cmp.TriggerEvent.InsertEnter,
 				},
-				-- completeopt = 'menuone,noinsert,preview',
+				completeopt = 'menuone,noinsert,preview',
 				keyword_length = 1,
 			},
 			matching = {
@@ -167,7 +111,7 @@ return {
 				disallow_partial_matching = false,
 				disallow_prefix_unmatching = true,
 			},
-			mapping = M.get_mappings(),
+			mapping = get_mappings(cmp, luasnip),
 			performance = {
 				debounce = 60,
 				throttle = 30,
@@ -177,11 +121,26 @@ return {
 				max_view_entries = 200,
 			},
 			sources = cmp.config.sources {
-				{ name = 'codeium', group_index = 2 },
-				{ name = 'nvim_lsp' },
-				{ name = 'luasnip' },
-				M.buffer_source,
-				{ name = 'path' },
+				{ name = 'nvim_lsp', keyword_length = 1 },
+				{ name = 'luasnip', keyword_length = 2 },
+				{
+					name = 'buffer',
+					option = {
+						get_bufnrs = function()
+							local bufs = {}
+							for _, win in ipairs(vim.api.nvim_list_wins()) do
+								bufs[vim.api.nvim_win_get_buf(win)] = true
+							end
+							return vim.tbl_keys(bufs)
+						end,
+						indexing_interval = 100,
+						indexing_batch_size = 1000,
+						max_indexed_line_length = 1024 * 40,
+						keyword_pattern = [[\k\+]],
+					},
+					keyword_length = 1,
+				},
+				{ name = 'path', keyword_length = 0 },
 			},
 			experimental = {
 				ghost_text = {
@@ -189,15 +148,5 @@ return {
 				},
 			},
 		}
-
-		cmp.setup.filetype('norg', {
-			sources = cmp.config.sources {
-				{ name = 'neorg' },
-				{ name = 'codeium' },
-				{ name = 'luasnip' },
-				{ name = 'path' },
-				M.buffer_source,
-			},
-		})
 	end,
 }

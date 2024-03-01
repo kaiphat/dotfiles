@@ -6,7 +6,14 @@ return {
 		enabled = true,
 		config = function()
 			require('copilot').setup {
+				panel = {
+				    enabled = false,
+				    keymap = {
+				        -- open = "<C-e>"
+				    }
+				},
 				suggestion = {
+					enabled = true,
 					auto_trigger = true,
 					debounce = 75,
 					keymap = {
@@ -18,6 +25,9 @@ return {
 						dismiss = '<C-]>',
 					},
 				},
+				filetypes = {
+				    markdown = true,
+				}
 			}
 		end,
 	},

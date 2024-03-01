@@ -43,12 +43,13 @@ end
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     setup handlers     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 local diagnostic_opts = {
-	virtual_text = {
-		spacing = 8,
-		source = 'if_many',
-		-- prefix = ' ',
-		prefix = '●',
-	},
+	-- virtual_text = {
+	-- 	spacing = 8,
+	-- 	source = 'if_many',
+	-- 	-- prefix = ' ',
+	-- 	prefix = '●',
+	-- },
+	virtual_text = false,
 	severity_sort = true,
 	signs = false,
 	underline = true,
