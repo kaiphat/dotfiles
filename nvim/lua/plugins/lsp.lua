@@ -1,17 +1,48 @@
-local M = {}
+local luals = require 'lsp.luals'
+local eslint = require 'lsp.eslint'
+local rust = require 'lsp.rust'
+local cssls = require 'lsp.cssls'
+local sqlls = require 'lsp.sqlls'
+local html = require 'lsp.html'
+local emmet = require 'lsp.emmet'
+local graphql = require 'lsp.graphql'
+local pylsp = require 'lsp.pylsp'
+local marksman = require 'lsp.marksman'
 
-M.set_lsp_symbols = function()
-	local char = '●'
+local servers = {
+	luals,
+	eslint,
+	rust,
+	cssls,
+	sqlls,
+	html,
+	emmet,
+	graphql,
+	pylsp,
+	marksman,
+}
 
-	for _, hint in ipairs { 'Error', 'Information', 'Hint', 'Warning' } do
-		vim.fn.sign_define('LspDiagnosticsSign' .. hint, {
-			text = char,
-			numhl = 'LspDiagnosticsSign' .. hint,
-		})
-	end
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     diagnostic     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+vim.diagnostic.config {
+	float = {
+		focusable = true,
+		header = false,
+		border = 'rounded',
+		style = 'minimal',
+		prefix = '',
+	},
+}
+
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     lsp symbols     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+for _, hint in ipairs { 'Error', 'Information', 'Hint', 'Warning' } do
+	vim.fn.sign_define('LspDiagnosticsSign' .. hint, {
+		text = ICONS.CIRCLE_SMALL,
+		numhl = 'LspDiagnosticsSign' .. hint,
+	})
 end
 
-M.publish_diagnostics_opts = {
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     setup handlers     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+local diagnostic_opts = {
 	virtual_text = {
 		spacing = 8,
 		source = 'if_many',
@@ -24,169 +55,82 @@ M.publish_diagnostics_opts = {
 	update_in_insert = false,
 }
 
-M.set_handlers = function()
-	vim.diagnostic.config {
-		float = {
-			focusable = true,
-			header = false,
-			border = 'rounded',
-			style = 'minimal',
-			prefix = '',
-		},
-	}
+vim.lsp.handlers['textDocument/publishDiagnostics'] =
+	vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, diagnostic_opts)
 
-	vim.api.nvim_create_autocmd('LspAttach', {
-		callback = function(args)
-			local client = vim.lsp.get_client_by_id(args.data.client_id)
+vim.lsp.handlers['textDocument/definition'] = function(_, result)
+	if not result or vim.tbl_isempty(result) then
+		print '[LSP] Could not find definition'
+		return
+	end
 
-			client.server_capabilities.semanticTokensProvider = nil
-		end,
-	})
-
-	vim.lsp.handlers['textDocument/publishDiagnostics'] =
-		vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, M.publish_diagnostics_opts)
-
-	vim.lsp.handlers['textDocument/definition'] = function(_, result)
-		if not result or vim.tbl_isempty(result) then
-			print '[LSP] Could not find definition'
-			return
-		end
-
-		if vim.tbl_islist(result) then
-			vim.lsp.util.jump_to_location(result[1], 'utf-8')
-		else
-			vim.lsp.util.jump_to_location(result, 'utf-8')
-		end
+	if vim.tbl_islist(result) then
+		vim.lsp.util.jump_to_location(result[1], 'utf-8')
+	else
+		vim.lsp.util.jump_to_location(result, 'utf-8')
 	end
 end
 
-M.on_attach = function(client, bufnr)
-	if client.name == 'eslint' then
-		vim.api.nvim_create_autocmd('BufWritePre', {
-			group = vim.api.nvim_create_augroup('custom:eslint', {}),
-			buffer = bufnr,
-			callback = function()
-				vim.cmd 'EslintFixAll'
-			end,
-		})
-	end
+-- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     keymaps     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+vim.api.nvim_create_autocmd('LspAttach', {
+    group = create_augroup('lsp_attach'),
+	callback = function(event)
+		local map = function(mode, keys, cmd)
+			vim.keymap.set(mode, keys, cmd, { buffer = event.buf })
+		end
 
-	-- vim.api.nvim_create_augroup('lsp_augroup', { clear = true })
-	--
-	-- vim.api.nvim_create_autocmd('InsertEnter', {
-	--   buffer = bufnr,
-	--   callback = function()
-	--     vim.lsp.inlay_hint(bufnr, true)
-	--   end,
-	--   group = 'lsp_augroup',
-	-- })
-	--
-	-- vim.api.nvim_create_autocmd('InsertLeave', {
-	--   buffer = bufnr,
-	--   callback = function()
-	--     vim.lsp.inlay_hint(bufnr, false)
-	--   end,
-	--   group = 'lsp_augroup',
-	-- })
-end
+		map('n', 'gd', function()
+			vim.lsp.buf.definition {
+				reuse_win = true,
+			}
+		end)
 
-M.get_servers = function()
-	return {
-		cssls = {},
-		sqlls = {},
-		html = {},
-		emmet_language_server = {
-			filetypes = {
-				'html',
-			},
-		},
-		graphql = {},
-		pylsp = {},
-		lua_ls = {
-			settings = {
-				Lua = {
-					workspace = {
-						checkThirdParty = false,
-					},
-					runtime = {
-						version = 'LuaJIT',
-					},
-					diagnostics = {
-						globals = {
-							'vim',
-							'redis',
-							'awesome',
-						},
-					},
-					format = {
-						enable = false,
-						defaultConfig = {
-							indent_style = 'space',
-							indent_size = '4',
-							quoteStyle = 'signle',
-						},
-					},
-					hint = {
-						enable = false,
-					},
-				},
-			},
-		},
-		rust_analyzer = {
-			settings = {
-				['rust-analyzer'] = {
-					assist = {
-						importGranularity = 'module',
-						importPrefix = 'self',
-					},
-					diagnostics = {
-						enable = true,
-						enableExperimental = true,
-					},
-					cargo = {
-						loadOutDirsFromCheck = true,
-					},
-					procMacro = {
-						enable = true,
-					},
-					inlayHints = {
-						chainingHints = true,
-						parameterHints = true,
-						typeHints = true,
-					},
-				},
-			},
-		},
-		eslint = {
-			format = true,
-		},
-		marksman = {},
-	}
-end
+		map('n', 'K', function()
+			vim.lsp.buf.hover()
+		end)
 
-M.get_capabilities = function()
-	local capabilities = vim.lsp.protocol.make_client_capabilities()
+		map('n', '<leader>lk', function()
+			vim.lsp.buf.signature_help()
+		end)
 
-	capabilities.textDocument.completion.completionItem = {
-		documentationFormat = { 'markdown', 'plaintext' },
-		snippetSupport = true,
-		preselectSupport = true,
-		insertReplaceSupport = true,
-		labelDetailsSupport = true,
-		deprecatedSupport = true,
-		commitCharactersSupport = true,
-		tagSupport = { valueSet = { 1 } },
-		resolveSupport = {
-			properties = {
-				'documentation',
-				'detail',
-				'additionalTextEdits',
-			},
-		},
-	}
+		map('n', '<space>le', function()
+			vim.diagnostic.open_float()
+		end)
 
-	return capabilities
-end
+		map('n', '[d', function()
+			vim.diagnostic.goto_prev()
+		end)
+
+		map('n', ']d', function()
+			vim.diagnostic.goto_next()
+		end)
+
+		map('n', '<space>lq', function()
+			vim.diagnostic.setqflist()
+		end)
+
+		map('n', '<space>ls', function()
+			vim.diagnostic.show()
+		end)
+
+		map({ 'n', 'v' }, '<space>la', function()
+			require('fzf-lua').lsp_code_actions {}
+		end)
+
+		map('n', '<space>lr', function()
+			vim.lsp.buf.rename()
+		end)
+
+		map('n', 'go', function()
+			vim.cmd 'vs'
+			vim.lsp.buf.definition()
+		end)
+
+		map({ 'n', 'v' }, '<leader>lf', function()
+			vim.lsp.buf.format { timeout_ms = 5000 }
+		end)
+	end,
+})
 
 return {
 	{
@@ -202,7 +146,6 @@ return {
 			local api = require 'typescript-tools.api'
 
 			require('typescript-tools').setup {
-				on_attach = M.on_attach,
 				settings = {
 					tsserver_file_preferences = {
 						includeInlayParameterNameHints = 'all',
@@ -219,7 +162,7 @@ return {
 							7044, -- any type
 							7045, -- any type
 						},
-						M.publish_diagnostics_opts
+						diagnostic_opts
 					),
 				},
 			}
@@ -240,103 +183,23 @@ return {
 				rust = 'html',
 			},
 		},
-		keys = {
-			{
-				'gd',
-				function()
-					vim.lsp.buf.definition {
-						reuse_win = true,
-					}
-				end,
-			},
-			{
-				'K',
-				function()
-					vim.lsp.buf.hover()
-				end,
-			},
-			{
-				'<leader>lk',
-				function()
-					vim.lsp.buf.signature_help()
-				end,
-			},
-			{
-				'<space>le',
-				function()
-					vim.diagnostic.open_float()
-				end,
-			},
-			{
-				'[d',
-				function()
-					vim.diagnostic.goto_prev()
-				end,
-			},
-			{
-				']d',
-				function()
-					vim.diagnostic.goto_next()
-				end,
-			},
-			{
-				'<space>lq',
-				function()
-					vim.diagnostic.setqflist()
-				end,
-			},
-			{
-				'<space>ls',
-				function()
-					vim.diagnostic.show()
-				end,
-			},
-			{
-				'<space>la',
-				function()
-					require('fzf-lua').lsp_code_actions {}
-				end,
-			},
-			{
-				'<space>lr',
-				function()
-					vim.lsp.buf.rename()
-				end,
-			},
-			{
-				'go',
-				function()
-					vim.cmd 'vs'
-					vim.lsp.buf.definition()
-				end,
-			},
-			{
-				'<leader>lf',
-				function()
-					vim.lsp.buf.format { timeout_ms = 5000 }
-				end,
-				mode = { 'n', 'v' },
-			},
-		},
 		config = function()
 			local lsp = require 'lspconfig'
 
-			M.set_handlers()
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
-			for server_name, opts in pairs(M.get_servers()) do
-				local server = opts.custom_server or lsp[server_name]
-				local settings = opts.custom_settings
-					or merge({
-						on_attach = M.on_attach,
-						capabilities = M.get_capabilities(),
-						flags = {
-							debounce_text_changes = 150,
-						},
-					}, opts)
+			local default_opts = {
+				on_attach = function() end,
+				capabilities = capabilities,
+				flags = {
+					debounce_text_changes = 150,
+				},
+			}
 
-				server.setup(settings)
+			for _, server in ipairs(servers) do
+				server.init(lsp, default_opts)
 			end
-			M.set_lsp_symbols()
 		end,
 	},
 }

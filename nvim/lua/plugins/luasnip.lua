@@ -32,8 +32,8 @@ return {
 	event = { 'InsertEnter' },
 	config = function()
 		local ls = require 'luasnip'
-		local rust_snippets = require 'plugins.snippets.rust'
-		local javascript_snippets = require 'plugins.snippets.javascript'
+		local rust_snippets = require 'snippets.rust'
+		local javascript_snippets = require 'snippets.javascript'
 
 		ls.config.set_config {
 			history = true,

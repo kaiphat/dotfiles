@@ -48,3 +48,7 @@ _G.log = function(any)
     local log = require('plenary.log').new({}, true)
     log.info(any)
 end
+
+_G.create_augroup = function(name)
+    return vim.api.nvim_create_augroup('kaiphat:'..name, {})
+end

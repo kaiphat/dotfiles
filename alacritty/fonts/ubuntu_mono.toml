@@ -1,5 +1,5 @@
 [font]
-size = 13
+size = 14
 
 [font.normal]
 family = 'UbuntuMonoLigaturized Nerd Font'
@@ -18,10 +18,10 @@ family = 'UbuntuMonoLigaturized Nerd Font'
 style = 'Regular'
 
 [font.offset]
-x = 0
-y = 3
+x = 1
+y = 9
 
 [font.glyph_offset]
 x = 0
-y = 1
+y = 5
 

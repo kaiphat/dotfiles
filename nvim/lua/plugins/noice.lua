@@ -24,7 +24,7 @@ return {
 						winblend = 0,
 					},
 					border = {
-					    -- style = 'rounded',
+					    style = 'rounded',
 					},
 					position = {
 					    row = -2
