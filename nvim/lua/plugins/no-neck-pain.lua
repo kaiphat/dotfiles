@@ -10,14 +10,14 @@ end
 
 return {
 	'shortcuts/no-neck-pain.nvim',
-	enabled = false,
+	enabled = true,
 	event = 'BufReadPre',
 	config = function()
 		local nnp = require 'no-neck-pain'
 
 		nnp.setup {
 			autocmds = {
-				enableOnVimEnter = M.get_is_enabled(),
+				enableOnVimEnter = true
 			},
 
 			width = 120,
@@ -31,7 +31,7 @@ return {
 				},
 
 				bo = {
-					filetype = 'norg',
+					filetype = 'md',
 				},
 
 				right = {

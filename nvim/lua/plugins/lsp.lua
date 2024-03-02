@@ -199,7 +199,7 @@ return {
 			}
 
 			for _, server in ipairs(servers) do
-				server.init(lsp, default_opts)
+				server.init(lsp, vim.tbl_extend('force', {}, default_opts))
 			end
 		end,
 	},

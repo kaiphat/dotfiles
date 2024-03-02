@@ -24,6 +24,6 @@ return {
 			},
 		}
 
-        lsp.rust_analyzer.setup(opts)
+		lsp.rust_analyzer.setup(opts)
 	end,
 }
