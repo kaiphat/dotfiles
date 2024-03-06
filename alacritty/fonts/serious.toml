@@ -2,24 +2,24 @@
 size = 11
 
 [font.normal]
-family = "Maple Mono NF"
+family = "Serious Sans Nerd Font Mono"
 style = "Regular"
 
 [font.bold]
-family = "Maple Mono NF"
+family = "Serious Sans Nerd Font Mono"
 style = "Regular"
 
 [font.italic]
-family = "Maple Mono NF"
+family = "Serious Sans Nerd Font Mono"
 style = "Regular"
 
 [font.bold_italic]
-family = "Maple Mono NF"
+family = "Serious Sans Nerd Font Mono"
 style = "Regular"
 
 [font.offset]
-x = 0
-y = 6
+x = 2
+y = 7
 
 [font.glyph_offset]
 x = 0

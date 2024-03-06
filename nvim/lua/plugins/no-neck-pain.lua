@@ -10,7 +10,7 @@ end
 
 return {
 	'shortcuts/no-neck-pain.nvim',
-	enabled = true,
+	enabled = false,
 	event = 'BufReadPre',
 	config = function()
 		local nnp = require 'no-neck-pain'
@@ -20,14 +20,14 @@ return {
 				enableOnVimEnter = true
 			},
 
-			width = 120,
+			width = 100,
 
 			buffers = {
 				backgroundColor = nil,
 
 				scratchPad = {
 					enabled = true,
-					location = '~/documents/',
+					location = '~/notes/',
 				},
 
 				bo = {

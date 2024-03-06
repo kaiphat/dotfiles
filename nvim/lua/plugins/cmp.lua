@@ -1,9 +1,3 @@
-local function has_words_before()
-	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	local line = vim.api.nvim_buf_get_lines(0, row - 1, row, true)
-	return col ~= 0 and line[1]:sub(col, col):match '%s' == nil
-end
-
 local function get_mappings(cmp, luasnip)
 	return {
 		['<C-j>'] = cmp.mapping(function(fallback)
@@ -22,7 +16,6 @@ local function get_mappings(cmp, luasnip)
 		end, { 'i', 's' }),
 		['<C-d>'] = cmp.mapping.scroll_docs(-4),
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
-		-- ['<C-e>'] = cmp.mapping.close(),
 		['<C-o>'] = cmp.mapping.confirm {
 			behavior = cmp.ConfirmBehavior.Insert,
 			select = true,
@@ -121,8 +114,8 @@ return {
 				max_view_entries = 200,
 			},
 			sources = cmp.config.sources {
-				{ name = 'nvim_lsp', keyword_length = 1 },
-				{ name = 'luasnip', keyword_length = 2 },
+				{ name = 'nvim_lsp', keyword_length = 1, priority = 100 },
+				{ name = 'luasnip', keyword_length = 2, priority = 101 },
 				{
 					name = 'buffer',
 					option = {
@@ -139,8 +132,9 @@ return {
 						keyword_pattern = [[\k\+]],
 					},
 					keyword_length = 1,
+					priority = 90,
 				},
-				{ name = 'path', keyword_length = 0 },
+				{ name = 'path', keyword_length = 0, priority = 110 },
 			},
 			experimental = {
 				ghost_text = {

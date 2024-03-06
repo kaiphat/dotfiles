@@ -2,11 +2,15 @@ return {
 	'anuvyklack/windows.nvim',
 	dependencies = {
 		'anuvyklack/middleclass',
+		'anuvyklack/animation.nvim',
 	},
 	event = 'BufReadPre',
-	enabled = false,
+	enabled = true,
 	config = function()
 		local windows = require 'windows'
+		vim.o.winwidth = 10
+		vim.o.winminwidth = 10
+		vim.o.equalalways = false
 
 		windows.setup {
 			autowidth = {
@@ -25,7 +29,8 @@ return {
 			},
 
 			animation = {
-				enable = false,
+				enable = true,
+                duration = 150,
 			},
 		}
 	end,

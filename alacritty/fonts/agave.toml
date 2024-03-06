@@ -1,5 +1,5 @@
 [font]
-size = 13
+size = 12.5
 
 [font.normal]
 family = 'Agave Nerd Font'
@@ -18,9 +18,9 @@ family = 'Agave Nerd Font'
 style = 'Italic'
 
 [font.offset]
-x = 0
-y = 0
+x = 2
+y = 8
 
 [font.glyph_offset]
-x = 0
-y = 0
+x = 1
+y = 2

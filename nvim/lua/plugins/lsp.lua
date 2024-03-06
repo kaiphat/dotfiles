@@ -125,6 +125,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		map('n', 'go', function()
 			vim.cmd 'vs'
 			vim.lsp.buf.definition()
+            vim.defer_fn(function()
+                vim.api.nvim_input 'zz'
+            end, 50)
 		end)
 
 		map({ 'n', 'v' }, '<leader>lf', function()

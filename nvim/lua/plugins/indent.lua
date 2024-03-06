@@ -75,7 +75,7 @@ return {
 
 		ibl.setup {
 			indent = {
-                char = ICONS.VERTICAL_LINE_1,
+				char = ICONS.VERTICAL_LINE_1,
 				highlight = char_highlight_group,
 			},
 			scope = {

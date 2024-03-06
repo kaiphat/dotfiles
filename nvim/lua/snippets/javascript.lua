@@ -1,57 +1,66 @@
-local ls = require 'luasnip'
-local fmt = require('luasnip.extras.fmt').fmt
+local try = [[
+    try {{
+        {}
+    }} catch(e) {{
 
-local t = ls.text_node
-local c = ls.choice_node
-local i = ls.insert_node
+    }}
+]]
 
-return function(M)
-	return {
-		co = fmt('console.log(\'%o\', {})', {
-			i(1),
-		}),
+local console = [[
+    console.log('%o', {})
+]]
 
-		im = fmt([[ import {{ {} }} from '{}' ]], {
-			i(2, 'from'),
-			i(1, 'name'),
-		}),
+local describe = [[
+    describe('{}', function() {{
+        {}
+    }})
+]]
 
-		try = fmt([[
-            try {{
-                {}
-            }} catch(e) {{
+local async_describe = [[
+    describe('{}', async function() {{
+        {}
+    }})
+]]
 
-            }}
-		]], i(1)),
+local default_import = [[
+    import {} from '{}'
+]]
 
-		dea = fmt([[
-            describe('{}', () => {{
+local import = [[
+    import {{{}}} from '{}'
+]]
 
-            }})
-		]], i(1)),
+return {
+	init = function()
+		local ls = require 'luasnip'
+		local fmt = require('luasnip.extras.fmt').fmt
 
-		def = fmt([[
-            describe('{}', function () {{
+		local s = ls.snippet
+		local i = ls.insert_node
+		local c = ls.choice_node
+		local t = ls.text_node
+		local r = ls.restore_node
+		local sn = ls.snippet_node
+		local rep = require('luasnip.extras').rep
 
-            }})
-		]], i(1)),
+		ls.add_snippets('javascript', {
+			s('co', fmt(console, i(1))),
 
-		ita = fmt([[
-            it('{}', () => {{
+			s('try', fmt(try, i(1))),
 
-            }})
-		]], i(1)),
+			s('im', {
+				c(1, {
+                    fmt(default_import, { rep(1), i(1) }),
+					fmt(import, { i(2), i(1) }),
+				}),
+			}),
 
-		itf = fmt([[
-            it('{}', function () {{
-
-            }})
-		]], i(1)),
-
-		af = fmt([[
-            () => {{
-                {}
-            }}
-		]], i(1)),
-    }
-end
+			s('sde', {
+				c(1, {
+					fmt(describe, { i(1, 'description'), i(2) }),
+					fmt(async_describe, { i(1, 'description'), i(2) }),
+				}),
+			}),
+		})
+	end,
+}

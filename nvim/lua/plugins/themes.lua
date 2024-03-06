@@ -12,4 +12,4 @@ local themes = {
     tokyonight = 'tokyonight'
 }
 
-return require('themes.' .. themes.rose_pine_dark)
+return require('themes.' .. themes.github_light)

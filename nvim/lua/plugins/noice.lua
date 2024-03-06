@@ -21,15 +21,15 @@ return {
 				},
 
 				mini = {
+					timeout = 7000,
+					align = 'right',
 					win_options = {
 						winblend = 0,
 					},
-					border = {
-					    style = 'rounded',
-					},
 					position = {
-					    row = -2
-					}
+						row = -2,
+						col = -1,
+					},
 				},
 			},
 
@@ -37,17 +37,17 @@ return {
 				format = {
 					cmdline = { pattern = '^:', icon = ICONS.BRACKET, lang = 'vim' },
 					search_down = { kind = 'search', pattern = '^/', icon = ICONS.SEARCH, lang = 'regex' },
-                    search_up = { kind = 'search', pattern = '^%?', icon = ICONS.SEARCH, lang = 'regex' },
+					search_up = { kind = 'search', pattern = '^%?', icon = ICONS.SEARCH, lang = 'regex' },
 					filter = { pattern = '^:%s*!', icon = ICONS.BRACKET, lang = 'bash' },
 					lua = { pattern = '^:%s*lua%s+', icon = '', lang = 'lua' },
-                    help = { pattern = '^:%s*h%s+', icon = ICONS.SEARCH },
+					help = { pattern = '^:%s*h%s+', icon = ICONS.SEARCH },
 					input = {}, -- Used by input()
 				},
 			},
 
-            notify = {
-                view = 'mini',
-            },
+			notify = {
+				view = 'mini',
+			},
 
 			lsp = {
 				progress = {
