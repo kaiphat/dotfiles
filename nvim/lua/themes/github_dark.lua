@@ -26,12 +26,13 @@ return {
 					TreesitterContext = { bg = 'sel0' },
 					NoicePopupmenuSelected = { bg = 'sel0' },
 					TelescopeSelection = { bg = 'sel0' },
-					NormalFloat = { bg = 'NONE', fg = 'fg1' },
+					NormalFloat = { bg = 'NONE', fg = 'bg3' },
+					-- Normal = { fg = 'bg3' },
 					MatchParen = { bg = 'sel2' },
 					IncSearch = { bg = 'sel2' },
 					MiniTrailspace = { bg = 'bg2' },
 					Pmenu = { bg = 'bg2' },
-					FloatBorder = { fg = 'bg3' },
+					FloatBorder = { fg = 'bg3', bg = 'NONE' },
 					TelescopeBorder = { fg = 'bg3' },
 					NoiceCmdlinePopupBorder = { fg = 'bg3' },
 					NoiceCmdlinePopupBorderSearch = { fg = 'bg3' },
@@ -41,6 +42,6 @@ return {
 			},
 		}
 
-        vim.cmd 'colorscheme github_dark_tritanopia'
+        vim.cmd 'colorscheme github_dark'
 	end,
 }

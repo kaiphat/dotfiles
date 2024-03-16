@@ -32,16 +32,16 @@ local config = {
 	window_padding = {
 		left = 20,
 		right = 20,
-		top = 20,
-		bottom = 6,
+		top = 14,
+		bottom = 8,
 	},
 	enable_tab_bar = false,
 	enable_scroll_bar = false,
 	scrollback_lines = 1000,
 	cursor_blink_rate = 0,
-	max_fps = 120,
-	animation_fps = 120,
-	colors = require 'lua/themes/light',
+	max_fps = 240,
+	animation_fps = 240,
+	colors = require 'lua/themes/dark_rose_pine',
     default_cursor_style = 'BlinkingBar',
 	disable_default_key_bindings = true,
 	warn_about_missing_glyphs = false,
@@ -58,4 +58,4 @@ local config = {
 	},
 }
 
-return merge(config, fonts.hermit, background)
+return merge(config, fonts.jet_brains, background)

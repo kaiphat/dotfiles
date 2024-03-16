@@ -32,10 +32,10 @@ local function build_font_params(name, with_italic, weight, params)
 end
 
 return {
-	jet_brains = build_font_params('JetBrainsMono Nerd Font', true, weights.SB, {
-		font_size = 12,
+	jet_brains = build_font_params('JetBrainsMono Nerd Font', true, weights.B, {
+		font_size = 10.8,
 		cell_width = 1,
-		line_height = 1.25,
+		line_height = 1.15,
 	}),
 	mononoki = build_font_params('mononoki Nerd Font', true, weights.B, {
 		font_size = 10,

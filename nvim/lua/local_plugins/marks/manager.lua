@@ -27,7 +27,7 @@ function Manager:on_exit() end
 
 function Manager:load_buffer(mark)
 	if mark == nil then
-		print 'Mark not found'
+		vim.notify 'Mark not found'
 		return
 	end
 
@@ -81,35 +81,36 @@ function Manager:add_mark(new_index)
 end
 
 function Manager:add_keymaps()
-	local indexes = '1234qwerasdf'
+    local all_leters = 'abcdefghijklmnopqrstuvwxyz'
+	local indexes = '1234567890,.;\'[]'..all_leters
 
 	for i = 1, #indexes do
 		local index = indexes:sub(i, i)
 		map('m' .. index, function()
 			self:add_mark(index)
-			print('Marked as ' .. index)
+			vim.notify('Marked as ' .. index)
 		end)
 
-		map('\'' .. index, function()
+		map([[']].. index, function()
 			local mark = self.marks[index]
 			self:load_buffer(mark)
 		end)
 	end
 
 	-- clear
-	map('mc', function()
+	map('<leader>mC', function()
 		self:clear_all_marks()
-		print 'Cleared marks'
+		vim.notify 'Cleared marks'
 	end)
 
-	-- cycle
-	map('\'n', function()
+	-- loop
+	map('<leader>ml', function()
 		self:next_mark()
 	end)
 
 	-- open all
 	-- TODO: don't repeat already opened
-	map('\'A', function()
+	map('<leader>mo', function()
 		local is_first = true
 
 		for _, mark in pairs(self.marks) do
@@ -124,7 +125,7 @@ function Manager:add_keymaps()
 	end)
 
 	-- show marks
-	map('\'s', function()
+	map('<leader>ms', function()
 		local message = ''
 
 		for index, mark in pairs(self.marks) do
@@ -136,9 +137,11 @@ function Manager:add_keymaps()
 
 		if message == '' then
 			message = 'No marks'
-		end
+        else
+            message = 'Marks:\n' .. message
+        end
 
-		require 'notify'(message)
+		vim.notify(message)
 	end)
 end
 

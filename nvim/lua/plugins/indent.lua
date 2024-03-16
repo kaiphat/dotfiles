@@ -73,6 +73,9 @@ return {
 			vim.api.nvim_set_hl(0, context_char_highlight_group, { link = 'IndentBlanklineContextChar' })
 		end)
 
+		hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
+		hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_tab_indent_level)
+
 		ibl.setup {
 			indent = {
 				char = ICONS.VERTICAL_LINE_1,

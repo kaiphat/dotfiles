@@ -12,8 +12,13 @@ for i in (seq 1 (count $themes))
     echo "    $i - $themes[$i]"
 end
 
+set theme_index ""
 read -P "number: " theme_index
 
+if test -z "$theme_index"
+    echo "invalid index"
+    exit 0
+end
 if test $theme_index -lt 1
     echo "invalid index"
     exit 0

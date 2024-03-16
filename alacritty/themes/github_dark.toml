@@ -1,32 +1,35 @@
 # https://github.com/projekt0n/github-theme-contrib/blob/main/themes/alacritty/github_dark.yml
 
 [colors.primary]
-background = '#191934'
-foreground = '#c9d1d9'
-
-# Cursor colors
-[colors.cursor]
-text = '#0d1117'
-cursor = '#c9d1d9'
+background = '#24292e'
+foreground = '#d1d5da'
 
 # Normal colors
 [colors.normal]
-black = '#484f58'
-red = '#ff7b72'
-green = '#58a6ff'
-yellow = '#fbdf9a'
-blue = '#58a6ff'
-magenta = '#bc8cff'
-cyan = '#39c5cf'
-white = '#b1bac4'
+black   = '#586069'
+red     = '#ea4a5a'
+green   = '#34d058'
+yellow  = '#ffea7f'
+blue    = '#2188ff'
+magenta = '#b392f0'
+cyan    = '#39c5cf'
+white   = '#d1d5da'
 
 # Bright colors
 [colors.bright]
-black = '#6e7681'
-red = '#ffa198'
-green = '#79c0ff'
-yellow = '#fbdf9a'
-blue = '#79c0ff'
-magenta = '#bc8cff'
-cyan = '#39c5cf'
-white = '#b1bac4'
+black   = '#959da5'
+red     = '#f97583'
+green   = '#85e89d'
+yellow  = '#ffea7f'
+blue    = '#79b8ff'
+magenta = '#b392f0'
+cyan    = '#56d4dd'
+white   = '#fafbfc'
+
+[[colors.indexed_colors]]
+index = 16
+color = '#d18616'
+
+[[colors.indexed_colors]]
+index = 17
+color = '#f97583'

@@ -30,6 +30,7 @@ return {
 	{
 		'williamboman/mason.nvim',
 		event = 'BufReadPre',
+		cmd = { 'Mason' },
 		config = function()
 			require('mason').setup {
 				ui = {

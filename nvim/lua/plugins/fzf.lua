@@ -1,9 +1,3 @@
--- todo: filter find files
--- todo: filter grep files
--- todo: check lsp workspace symbols
--- todo: prettify highlights
--- todo: lsp_workspace
-
 local always_ignore_patterns = {
 	'.git/',
 	'dist/',
@@ -383,27 +377,7 @@ return {
 				},
 			},
 			fzf_opts = {},
-			-- Only used when fzf_bin = "fzf-tmux", by default opens as a
-			-- popup 80% width, 80% height (note `-p` requires tmux > 3.2)
-			-- and removes the sides margin added by `fzf-tmux` (fzf#3162)
-			-- for more options run `fzf-tmux --help`
 			fzf_tmux_opts = { ['-p'] = '80%,80%', ['--margin'] = '0,0' },
-			-- fzf '--color=' options (optional)
-			--[[ fzf_colors = {
-            --     ["fg"]          = { "fg", "CursorLine" },
-            --     ["bg"]          = { "bg", "Normal" },
-            --     ["hl"]          = { "fg", "Comment" },
-            --     ["fg+"]         = { "fg", "Normal" },
-            --     ["bg+"]         = { "bg", "CursorLine" },
-            --     ["hl+"]         = { "fg", "Statement" },
-            --     ["info"]        = { "fg", "PreProc" },
-            --     ["prompt"]      = { "fg", "Conditional" },
-            --     ["pointer"]     = { "fg", "Exception" },
-            --     ["marker"]      = { "fg", "Keyword" },
-            --     ["spinner"]     = { "fg", "Label" },
-            --     ["header"]      = { "fg", "Comment" },
-            --     ["gutter"]      = { "bg", "Normal" },
-            -- }, ]]
 			fzf_colors = {
 				['fg'] = { 'fg', 'Comment' },
 				['fg+'] = { 'fg', 'Comment' },
@@ -412,7 +386,7 @@ return {
 				['bg+'] = { 'bg', 'Visual' },
 				['hl'] = { 'fg', '@label' },
 				['hl+'] = { 'fg', '@label' },
-				['gutter'] = { nil, nil, -1 },
+				['gutter'] = '-1'
 			},
 			previewers = {
 				cat = {

@@ -4,7 +4,7 @@ return {
 	lazy = false,
 	keys = {
 		{
-			'[c',
+			'[p',
 			function()
 				require('local_plugins.stages'):jump_to_parent()
 			end,

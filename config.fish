@@ -54,8 +54,9 @@ if [ -f '/Users/ilyapu/Downloads/google-cloud-sdk/path.fish.inc' ]; . '/Users/il
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     edit     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-alias edit-aliases "nvim ~/.config/fish/conf.d/aliases.fish"
-alias edit-secrets "nvim ~/.local/share/secrets/secrets.md"
+# ln {this_file} ~/.config/fish/conf.d/
+alias edit-aliases "nvim ~/notes/work_fish_aliases.fish"
+alias edit-secrets "nvim ~/notes/work_secrets.md"
 alias todo "nvim ~/notes/deals.md -c \"set signcolumn=no\""
 alias notes "nvim ~/notes/notes.md -c \"set signcolumn=no\""
 

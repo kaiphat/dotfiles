@@ -37,7 +37,7 @@ return {
 	{
 		'nvim-treesitter/nvim-treesitter-context',
 		event = 'BufReadPre',
-		enabled = false,
+		enabled = true,
 		keys = {
 			{
 				'[c',

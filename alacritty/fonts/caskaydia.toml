@@ -1,26 +1,26 @@
 [font]
-size = 12
+size = 11
 
 [font.normal]
-family = "CaskaydiaCove Nerd Font"
+family = "CaskaydiaCove Nerd Font Mono"
 style = "SemiLight"
 
 [font.bold]
-family = "CaskaydiaCove Nerd Font"
+family = "CaskaydiaCove Nerd Font Mono"
 style = "SemiLight"
 
 [font.italic]
-family = "CaskaydiaCove Nerd Font"
+family = "CaskaydiaCove Nerd Font Mono"
 style = "SemiLight"
 
 [font.bold_italic]
-family = "CaskaydiaCove Nerd Font"
+family = "CaskaydiaCove Nerd Font Mono"
 style = "SemiLight"
 
 [font.offset]
-x = 1
-y = 4
+x = 0
+y = 10
 
 [font.glyph_offset]
 x = 0
-y = 2
+y = 5

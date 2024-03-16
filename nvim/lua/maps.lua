@@ -40,7 +40,10 @@ end, { expr = true })
 map('n', 'H', '^')
 map('n', 'L', '$')
 
-map('n', '<C-s>', ':wa<cr>')
+map('n', '<C-s>', function()
+	vim.cmd 'wa'
+	vim.notify 'All files saved'
+end)
 
 map({ 'n', 'v' }, '<C-d>', function()
 	vim.api.nvim_feedkeys('4j', 'n', true)

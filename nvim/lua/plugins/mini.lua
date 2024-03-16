@@ -1,13 +1,3 @@
-local M = {}
-
-M.chars = {
-	'▏',
-	'│',
-	'⏐',
-	'┊',
-	'¦',
-}
-
 return {
 	{
 		'echasnovski/mini.align',
@@ -94,7 +84,7 @@ return {
 				indent_at_cursor = true,
 				try_as_border = false,
 			},
-			symbol = M.chars[1],
+			symbol = ICONS.VERTICAL_LINE_1
 		},
 	},
 

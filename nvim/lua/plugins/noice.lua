@@ -1,6 +1,6 @@
--- TODO: change notification or remove noice at all
 return {
 	'folke/noice.nvim',
+	enabled = true,
 	event = 'VeryLazy',
 	config = function()
 		local noice = require 'noice'
@@ -9,7 +9,7 @@ return {
 			views = {
 				cmdline_popup = {
 					position = {
-						row = '35%',
+						row = '20%',
 						col = '50%',
 					},
 					win_options = {

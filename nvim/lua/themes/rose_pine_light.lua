@@ -18,6 +18,8 @@ return {
                 GitSignsAdd = { bg = 'none' },
                 GitSignsChange = { bg = 'none' },
                 GitSignsDelete = { bg = 'none' },
+				IndentBlanklineChar = { fg = 'overlay' },
+				IndentBlanklineContextChar = { fg = 'overlay' },
                 ['@variable'] = { italic = false },
                 ['@lsp.type.property'] = { italic = false },
                 ['@property.typescript'] = { italic = false },
