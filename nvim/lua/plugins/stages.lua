@@ -2,6 +2,7 @@ return {
 	name = 'stages',
 	dir = '../local_plugins/stages',
 	lazy = false,
+    enabled = false,
 	keys = {
 		{
 			'[p',

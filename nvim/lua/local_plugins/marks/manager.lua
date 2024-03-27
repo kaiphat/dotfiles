@@ -10,9 +10,10 @@ local Manager = {}
 
 Manager.__index = Manager
 
-function Manager:new()
+function Manager:new(opts)
 	return setmetatable({
 		marks = {},
+        opts = opts,
 		active_mark_index = nil,
 		fs = Fs:new(Path_builder:new():build()),
 		group = vim.api.nvim_create_augroup('marks_plugin_group', {}),
@@ -46,10 +47,12 @@ function Manager:load_buffer(mark)
 
 	vim.api.nvim_set_current_buf(bufnr)
 
-	vim.api.nvim_win_set_cursor(0, {
-		mark.row or 1,
-		mark.col or 0,
-	})
+    if self.opts.save_position then
+        vim.api.nvim_win_set_cursor(0, {
+            mark.row or 1,
+            mark.col or 0,
+        })
+    end
 end
 
 function Manager:clear_all_marks()
@@ -182,7 +185,7 @@ function Manager:get_active_buffer_mark()
 	end
 end
 
-function Manager:setup()
+function Manager:setup(opts)
 	self:on_start()
 
 	vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
@@ -216,4 +219,4 @@ function Manager:setup()
 	self:add_keymaps()
 end
 
-return Manager:new()
+return Manager

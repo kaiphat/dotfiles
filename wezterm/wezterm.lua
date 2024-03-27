@@ -58,4 +58,4 @@ local config = {
 	},
 }
 
-return merge(config, fonts.jet_brains, background)
+return merge(config, fonts.victor, background)

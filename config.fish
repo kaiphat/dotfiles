@@ -9,6 +9,7 @@ set -gx MANPAGER 'nvim +Man! -c "set nowrap" -c "set modifiable" -c "set noreado
 set -gx PAGER 'nvim +Man! -c "set nowrap" -c "set modifiable" -c "set noreadonly" -c "set buftype=nofile"'
 set -gx LUA_DIR /usr/bin/lua
 set -gx LD_LIBRARY_PATH /opt/oracle/instantclient_21_8
+
 set -U fish_greeting
 set -U ignoreeof true
 set -U SXHKD_SHELL sh
@@ -146,13 +147,13 @@ function gd
     git diff HEAD~$index | nread
 end
 
-alias play:sql "n ~/play/sql/index.sql"
-alias play:json "n ~/play/json/test.json"
 function change-theme
     set file ~/dotfiles/scripts/change_terminal_theme.fish
     chmod +x $file
     source $file
 end
+alias play:sql "n ~/play/sql/index.sql"
+alias play:json "n ~/play/json/test.json"
 function play:ts
     cd ~/play/typescript
     n index.ts

@@ -82,10 +82,11 @@ local function get_marks_component()
 	return {
         icon = ' ',
 		enabled = function()
-			return require('local_plugins.marks').manager.active_mark_index ~= nil
+			local manager = require('local_plugins.marks').get_manager_instance()
+            return manager ~= nil and manager.active_mark_index ~= nil
 		end,
 		provider = function()
-			return require('local_plugins.marks').manager.active_mark_index:upper()
+            return require('local_plugins.marks').get_manager_instance().active_mark_index:upper()
 		end,
 		hl = { fg = colors.fg4 },
 		right_sep = gap,

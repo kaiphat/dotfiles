@@ -1,10 +1,12 @@
-set themes \
-    rose_pine_dark  \
-    github_light    \
-    dark            \
-    rose_pine_light \
-    github_dark     \
-    gruvbox_light   \
+set themes            \
+    rose_pine_dark    \
+    rose_pine_light   \
+    catppuccin_dark   \
+    catppuccin_light  \
+    github_light      \
+    dark              \
+    github_dark       \
+    gruvbox_light     \
     kanagawa_dark
 
 echo "select theme:"

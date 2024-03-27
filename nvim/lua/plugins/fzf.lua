@@ -55,7 +55,7 @@ end
 local function build_rg_cmd_with_no_ignore(opts)
 	opts = opts or {}
 
-	local base = 'rg --column --no-heading --color=always --smart-case --max-columns=4096 --trim --no-ignore'
+	local base = 'rg --column --no-heading --color=always --smart-case --max-columns=4096 --trim --no-ignore --hidden'
 
 	if not opts.skip_always_ignore then
 		for _, pattern in ipairs(always_ignore_patterns) do
@@ -247,6 +247,7 @@ return {
 		local actions = require 'fzf-lua.actions'
 
 		require('fzf-lua').setup {
+            debug_tracelog = "~/fzf-lua-trace.log",
 			winopts = {
 				-- split         = "belowright new",-- open in a split instead?
 				-- "belowright new"  : split below
@@ -361,6 +362,7 @@ return {
 					-- to open all files whether single or multiple
 					-- ["default"]     = actions.file_edit,
 					['default'] = actions.file_edit_or_qf,
+                    ['ctrl-o'] = actions.file_edit_or_qf,
 					['ctrl-s'] = actions.file_split,
 					['ctrl-v'] = actions.file_vsplit,
 					['ctrl-t'] = actions.file_tabedit,
@@ -372,6 +374,7 @@ return {
 					--   buffers, tabs, lines, blines
 					['default'] = actions.buf_edit,
 					['ctrl-s'] = actions.buf_split,
+					['ctrl-o'] = actions.buf_edit,
 					['ctrl-v'] = actions.buf_vsplit,
 					['ctrl-t'] = actions.buf_tabedit,
 				},
@@ -383,10 +386,11 @@ return {
 				['fg+'] = { 'fg', 'Comment' },
 				['pointer'] = { 'fg', '@label' },
 				['info'] = { 'fg', '@label' },
+				['query'] = { 'fg', '@label' },
 				['bg+'] = { 'bg', 'Visual' },
 				['hl'] = { 'fg', '@label' },
 				['hl+'] = { 'fg', '@label' },
-				['gutter'] = '-1'
+				['gutter'] = '-1',
 			},
 			previewers = {
 				cat = {
@@ -482,7 +486,7 @@ return {
 				fzf_args = '--bind=change:first',
 				fzf_opts = {
 					['--info'] = 'inline-right',
-					['--ansi'] = '',
+					['--ansi'] = true,
 					['--height'] = '100%',
 					['--layout'] = 'reverse',
 					['--border'] = 'none',

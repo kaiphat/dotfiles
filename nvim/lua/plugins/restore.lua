@@ -1,6 +1,7 @@
 return {
 	name = 'restore',
 	dir = '../local_plugins/restore',
+    enabled = true,
 	keys = {
 		{
 			'<leader>ur',

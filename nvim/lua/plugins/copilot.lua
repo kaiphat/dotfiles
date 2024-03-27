@@ -38,7 +38,7 @@ return {
 			{
 				'<leader>cc',
 				function()
-					vim.api.nvim_input ':CopilotChatVisual '
+					vim.api.nvim_input ':CopilotChat '
 				end,
 			},
 		},

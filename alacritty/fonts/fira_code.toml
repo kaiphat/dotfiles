@@ -3,25 +3,25 @@ size = 10.5
 
 [font.normal]
 family = "FiraCode Nerd Font"
-style = "Medium"
+style = "Regular"
 
 [font.bold]
 family = "FiraCode Nerd Font"
-style = "Medium"
+style = "Regular"
 
 [font.italic]
 family = "FiraCode Nerd Font"
-style = "Medium"
+style = "Regular"
 
 [font.bold_italic]
 family = "FiraCode Nerd Font"
-style = "Medium"
+style = "Regular"
 
 [font.offset]
 x = 1
-y = 4
+y = 8
 
 [font.glyph_offset]
 x = 0
-y = 0
+y = 3
 

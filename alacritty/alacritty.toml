@@ -1,6 +1,6 @@
 import = [
-    '~/dotfiles/alacritty/themes/rose_pine_dark.toml',
-    '~/dotfiles/alacritty/fonts/ibm_plex.toml'
+    '~/dotfiles/alacritty/themes/catppuccin_dark.toml',
+    '~/dotfiles/alacritty/fonts/maple.toml'
 ]
 
 [env]
@@ -16,6 +16,26 @@ thickness = 0.3
 
 [cursor.style]
 blinking = "Never"
+
+[mouse]
+hide_when_typing = true
+
+[scrolling]
+history = 1000
+multiplier = 3
+
+[window]
+decorations = "Transparent"
+dynamic_padding = true
+opacity = 1
+option_as_alt = "Both"
+startup_mode = "SimpleFullscreen"
+
+[window.padding]
+x = 12
+y = 12
+
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     keymaps     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 [[keyboard.bindings]]
 action = "ToggleFullscreen"
@@ -45,21 +65,3 @@ mods = "Control"
 action = "DecreaseFontSize"
 key = "Minus"
 mods = "Control"
-
-[mouse]
-hide_when_typing = true
-
-[scrolling]
-history = 1000
-multiplier = 3
-
-[window]
-decorations = "Transparent"
-dynamic_padding = true
-opacity = 1
-option_as_alt = "Both"
-startup_mode = "SimpleFullscreen"
-
-[window.padding]
-x = 12
-y = 12

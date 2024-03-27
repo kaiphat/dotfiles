@@ -63,9 +63,9 @@ return {
 		line_height = 1.15,
 	}),
 	victor = build_font_params('Victor Mono', false, weights.B, {
-		font_size = 12.5,
-		cell_width = 1,
-		line_height = 1,
+		font_size = 10.5,
+		cell_width = 1.1,
+		line_height = 1.2,
 	}),
 	iosevka = build_font_params('Iosevka Term', false, weights.R, {
 		font_size = 10,

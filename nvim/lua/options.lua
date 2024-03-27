@@ -34,11 +34,12 @@ o.numberwidth = 3
 o.number = false
 o.relativenumber = false
 o.showcmd = false
+o.showmode = false
 o.undofile = true
-o.virtualedit = 'block'
+o.virtualedit = 'insert'
 o.writebackup = false
+o.backup = false
 o.history = 1000
-o.undodir = os.getenv 'HOME' .. '/.local/share/nvimundodir/'
 o.autoread = true
 o.autowrite = true
 o.infercase = true
@@ -53,8 +54,9 @@ o.undolevels = 5000
 o.modifiable = true
 o.autoindent = true
 o.smartindent = true
-o.copyindent = true
+o.copyindent = false
 o.ignorecase = true
+o.ruler = false
 o.cursorline = false
 o.cursorcolumn = false
 o.lazyredraw = false
@@ -96,7 +98,8 @@ o.showbreak = '  ↳ '
 o.completeopt = 'menuone,preview,noselect'
 o.complete = '.,w,b,u,t,U,s,k,d,i'
 o.langmap =
-	'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz'
+	'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,'..
+    'фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz'
 o.imsearch = 0
 o.iminsert = 0
 o.laststatus = 2

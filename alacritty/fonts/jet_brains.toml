@@ -1,21 +1,21 @@
 [font]
-size = 10.5
+size = 10
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"
-style = "Medium"
+style = "SemiBold"
 
 [font.bold]
 family = "JetBrainsMono Nerd Font"
-style = "Medium"
+style = "SemiBold"
 
 [font.italic]
 family = "JetBrainsMono Nerd Font"
-style = "Medium Italic"
+style = "SemiBold Italic"
 
 [font.bold_italic]
 family = "JetBrainsMono Nerd Font"
-style = "Medium Italic"
+style = "SemiBold Italic"
 
 [font.offset]
 x = 1

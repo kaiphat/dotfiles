@@ -25,12 +25,15 @@ return {
 		})
 
 		require('oil').setup {
+			columns = {
+				'icon',
+			},
 			skip_confirm_for_simple_edits = true,
 			prompt_save_on_select_new_entry = false,
 
-            lsp_file_methods = {
-                autosave_changes = true,
-            },
+			lsp_file_methods = {
+				autosave_changes = true,
+			},
 
 			cleanup_delay_ms = false,
 			use_default_keymaps = false,

@@ -27,7 +27,6 @@ return {
 					NoicePopupmenuSelected = { bg = 'sel0' },
 					TelescopeSelection = { bg = 'sel0' },
 					NormalFloat = { bg = 'NONE', fg = 'bg3' },
-					-- Normal = { fg = 'bg3' },
 					MatchParen = { bg = 'sel2' },
 					IncSearch = { bg = 'sel2' },
 					MiniTrailspace = { bg = 'bg2' },
@@ -38,10 +37,11 @@ return {
 					NoiceCmdlinePopupBorderSearch = { fg = 'bg3' },
 					StatusLine = { bg = 'NONE', fg = 'bg2' },
 					StatusLineNC = { bg = 'NONE', fg = 'bg1' },
+					Visual = { bg = 'sel2' },
 				},
 			},
 		}
 
-        vim.cmd 'colorscheme github_dark'
+        vim.cmd.colorscheme 'github_dark'
 	end,
 }
