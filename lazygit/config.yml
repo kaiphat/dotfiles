@@ -9,6 +9,7 @@ gui:
   showCommandLog: false
   showPanelJumps: false
   border: 'rounded'
+  filterMode: 'fuzzy'
 
 git:
   paging:
@@ -17,3 +18,11 @@ git:
 # os:
 #   edit: nvim --server /tmp/nvim-server-$(tmux display-message -p '#S').pipe --remote-send "<cmd>lua require('scripts.lazygit-open-file')('{{filename}}', '{{line}}')<CR>"
 #   open: nvim --server /tmp/nvim-server-$(tmux display-message -p '#S').pipe --remote-send "<cmd>lua require('scripts.lazygit-open-file')('{{filename}}', '{{line}}')<CR>"
+
+
+customCommands:
+  - key: 'D'
+    command: 'fish -c "git diff origin/master...{{.SelectedLocalBranch.Name}} | nread"'
+    context: 'localBranches'
+    description: 'Diff with master'
+    subprocess: true

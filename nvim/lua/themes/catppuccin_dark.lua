@@ -36,9 +36,9 @@ return {
 			styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
 				comments = { 'italic' }, -- Change the style of comments
 				conditionals = { 'italic' },
-				loops = {},
+				loops = { 'italic' },
 				functions = {},
-				keywords = {},
+				keywords = { 'italic' },
 				strings = {},
 				variables = {},
 				numbers = {},
@@ -49,25 +49,33 @@ return {
 			},
 			color_overrides = {
 				all = {
-					green = '#81c8be',
-                    -- mauve = '#c4a7e7',
-                    -- yellow = '#f6c177',
-                    red = '#eb6f92',
-                    blue = '#a3b8ef',
+					-- green = '#81c8be',
+					-- red = '#eb6f92',
+					-- blue = '#a3b8ef',
+
+					-- mauve = '#ADD7FF',
+					-- yellow = '#A6ACCD',
+					-- maroon = '#9398cf',
+					-- peach = '#ebbcba',
+					-- overlay2 = '#89DDFF'
 				},
 			},
 			custom_highlights = function(colors)
 				return {
-                    ['@text'] = { fg = colors.surface0 },
+					['@text'] = { fg = colors.surface0 },
+					['@punctuation.bracket'] = { italic = true },
 					MiniCursorword = { underline = false, link = 'Visual' },
 					MiniCursorwordCurrent = { link = 'MiniCursorword' },
-					FloatBorder = { fg = colors.base },
+					NormalFloat = { bg = 'NONE' },
+					FloatBorder = { fg = colors.surface0, bg = 'NONE' },
+					FzfLuaNormal = { link = 'NormalFloat' },
 					FzfLuaBorder = { link = 'FloatBorder' },
-                    NoiceCmdlinePopupBorder = { link = 'FloatBorder' },
-                    IndentBlanklineChar = { fg = colors.base },
+					NoiceCmdlinePopupBorder = { link = 'FloatBorder' },
+					IndentBlanklineChar = { fg = colors.surface0 },
 					FzfLuaTitle = { bg = colors.green, fg = colors.base, bold = false },
 					FzfLuaHeaderText = { fg = colors.sky },
-                    TreeSitterContextBottom = { underline = false, bg = colors.crust },
+					TreeSitterContext = { underline = false, bg = colors.surface0 },
+					TreeSitterContextBottom = { underline = false, bg = colors.surface0 },
 				}
 			end,
 			integrations = {

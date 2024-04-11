@@ -99,3 +99,4 @@ alias gcn="cd ~/.config/nvim"
 
 # nvm
 # source ~/.nvm/nvm.sh
+export NODE_EXTRA_CA_CERTS="/Library/Application Support/Playtika Corp. IT/Certs/Playtika-SCA.pem"

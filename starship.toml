@@ -5,6 +5,7 @@ $directory\
 $git_branch\
 $git_state\
 $git_status\
+$custom\
 $cmd_duration\
 $line_break\
 $character"""
@@ -24,7 +25,7 @@ vimcmd_symbol = "[❮](green)"
 
 [git_branch]
 format = "[$branch]($style)"
-style = "bright-black"
+style = "bright-cyan"
 
 [git_status]
 format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
@@ -44,3 +45,7 @@ style = "bright-black"
 [cmd_duration]
 format = " [$duration]($style) "
 style = "yellow"
+
+[custom.draft]
+format = ' [DRAFT](red)'
+when = 'git log -1 --pretty=%B | grep -q DRAFT'

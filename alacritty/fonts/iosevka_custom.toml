@@ -1,26 +1,26 @@
 [font]
-size = 12.5
+size = 10.5
 
 [font.normal]
-family = 'Iosevka Custom'
-style = 'Medium'
+family = 'IosevkaCustom Nerd Font Mono'
+style = 'Light'
 
 [font.bold]
-family = 'Iosevka Custom'
-style = 'Medium'
+family = 'IosevkaCustom Nerd Font Mono'
+style = 'Light'
 
 [font.italic]
-family = 'Iosevka Custom'
-style = 'Medium'
+family = 'IosevkaCustom Nerd Font Mono'
+style = 'Light'
 
 [font.bold_italic]
-family = 'Iosevka Custom'
-style = 'Medium'
+family = 'IosevkaCustom Nerd Font Mono'
+style = 'Light'
 
 [font.offset]
-x = 1
-y = 6
+x = 0
+y = 2
 
 [font.glyph_offset]
 x = 0
-y = 4
+y = 1

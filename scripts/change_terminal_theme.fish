@@ -3,6 +3,7 @@ set themes            \
     rose_pine_light   \
     catppuccin_dark   \
     catppuccin_light  \
+    tokyo_dark        \
     github_light      \
     dark              \
     github_dark       \

@@ -1,24 +1,24 @@
 [font]
-size = 11.5
+size = 10.5
 
 [font.normal]
 family = 'OperatorMonoLig Nerd Font'
-style = 'Medium'
+style = 'Regular'
 
 [font.bold]
 family = 'OperatorMonoLig Nerd Font'
-style = 'Medium'
+style = 'Regular'
 
 [font.italic]
 family = 'OperatorMonoLig Nerd Font'
-style = 'Medium'
+style = 'Regular'
 
 [font.bold_italic]
 family = 'OperatorMonoLig Nerd Font'
-style = 'Medium'
+style = 'Regular'
 
 [font.offset]
-x = 1
+x = 2
 y = 6
 
 [font.glyph_offset]

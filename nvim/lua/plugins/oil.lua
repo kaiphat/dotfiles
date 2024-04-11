@@ -48,7 +48,7 @@ return {
 				-- ['g?'] = 'actions.show_help',
 				-- ['<C-h>'] = 'actions.select_split',
 				-- ['<C-t>'] = 'actions.select_tab',
-				-- ['<C-l>'] = 'actions.refresh',
+				['<C-r>'] = 'actions.refresh',
 				-- ['_'] = 'actions.open_cwd',
 				-- ['`'] = 'actions.cd',
 				-- ['~'] = 'actions.tcd',

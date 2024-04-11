@@ -3,19 +3,19 @@ size = 10.5
 
 [font.normal]
 family = "CaskaydiaCove Nerd Font Mono"
-style = "Regular"
+style = "SemiLight"
 
 [font.bold]
 family = "CaskaydiaCove Nerd Font Mono"
-style = "Regular"
+style = "SemiLight"
 
 [font.italic]
 family = "CaskaydiaCove Nerd Font Mono"
-style = "Regular"
+style = "SemiLight"
 
 [font.bold_italic]
 family = "CaskaydiaCove Nerd Font Mono"
-style = "Regular"
+style = "SemiLight"
 
 [font.offset]
 x = 1

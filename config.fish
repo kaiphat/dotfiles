@@ -128,7 +128,7 @@ alias btop "btop -p 1"
 alias nvim-start "nvim --startuptime _s.log -c exit && tail -100 _s.log | bat && rm _s.log"
 alias ... "cd ../../"
 alias lg "lazygit"
-alias fzf "fzf --color=gutter:-1 --no-separator --info=inline-right --no-scrollbar --pointer=' ' --prompt='❯ '"
+alias fzf "fzf --color=gutter:-1 --no-separator --info=inline-right --no-scrollbar --pointer=' ' --prompt='❯ ' --layout=reverse"
 # alias fd "fd --no-ignore --hidden -p -c never"
 function gs
     set result (git log --branches --source --oneline | fzf)
@@ -159,8 +159,9 @@ function play:ts
     n index.ts
 end
 
+# brew install translate-shell
 alias enru "trans en:ru -show-original no -show-prompt-message no -show-languages no"
-alias ruen "trans ru:en -show-original no -show-prompt-message no -show-languages no"
+alias ruen "trans ru:en -show-original no -show-prompt-message no -show-languages no -b"
 
 function dl
   d logs $argv -f -n 99

@@ -2,24 +2,24 @@
 size = 10.5
 
 [font.normal]
-family = "Serious Sans Nerd Font Mono"
-style = "Regular"
+family = "SeriousSans Nerd Font Mono"
+style = "Light"
 
 [font.bold]
-family = "Serious Sans Nerd Font Mono"
-style = "Regular"
+family = "SeriousSans Nerd Font Mono"
+style = "Light"
 
 [font.italic]
-family = "Serious Sans Nerd Font Mono"
-style = "Regular"
+family = "SeriousSans Nerd Font Mono"
+style = "Light"
 
 [font.bold_italic]
-family = "Serious Sans Nerd Font Mono"
-style = "Regular"
+family = "SeriousSans Nerd Font Mono"
+style = "Light"
 
 [font.offset]
 x = 2
-y = 9
+y = 8
 
 [font.glyph_offset]
 x = 1

@@ -47,7 +47,7 @@ return {
 			},
 		},
 		opts = {
-			max_lines = 1,
+			max_lines = 2,
 		},
 	},
 

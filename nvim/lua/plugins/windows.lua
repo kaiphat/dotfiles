@@ -19,7 +19,7 @@ return {
 				winminwidth = 10,
 				filetype = {
 					help = 2,
-					oil = 1,
+					-- oil = 1,
 				},
 			},
 

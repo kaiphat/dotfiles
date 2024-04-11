@@ -3,24 +3,24 @@ size = 10.5
 
 [font.normal]
 family = "MonaspaceRadon Nerd Font"
-style = "Regular"
+style = "ExtraLight"
 
 [font.bold]
 family = "MonaspaceRadon Nerd Font"
-style = "Regular"
+style = "ExtraLight"
 
 [font.italic]
 family = "MonaspaceRadon Nerd Font"
-style = "Regular"
+style = "ExtraLight"
 
 [font.bold_italic]
 family = "MonaspaceRadon Nerd Font"
-style = "Regular"
+style = "ExtraLight"
 
 [font.offset]
-x = 0
-y = 8
+x = 1
+y = 3
 
 [font.glyph_offset]
 x = 0
-y = 3
+y = 1

@@ -9,9 +9,9 @@ local themes = {
 	kanagawa_dark = 'kanagawa_dark',
 	everforest = 'everforest',
 	poimandres = 'poimandres',
-    tokyonight = 'tokyonight',
     catppuccin_dark = 'catppuccin_dark',
-    catppuccin_light = 'catppuccin_light'
+    catppuccin_light = 'catppuccin_light',
+    tokyo_dark = 'tokyo_dark'
 }
 
-return require('themes.' .. themes.catppuccin_dark)
+return require('themes.' .. themes.rose_pine_light)

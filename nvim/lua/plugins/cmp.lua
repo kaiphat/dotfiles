@@ -64,14 +64,16 @@ return {
 			},
 			window = {
 				completion = {
-					border = 'rounded',
+					-- border = 'rounded',
+					border = false,
 					winhighlight = 'NormalFloat:FloatBorder,CursorLine:Visual,Search:None',
-					col_offset = -3,
+					col_offset = -2,
 					side_padding = 1,
 					scrollbar = false,
 				},
 				documentation = {
-					border = 'rounded',
+					-- border = 'rounded',
+					border = false,
 					scrollbar = false,
 					winhighlight = 'NormalFloat:FloatBorder,CursorLine:Visual,Search:None',
 				},

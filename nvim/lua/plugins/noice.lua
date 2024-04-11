@@ -9,7 +9,7 @@ return {
 			views = {
 				cmdline_popup = {
 					position = {
-						row = '20%',
+						row = '40%',
 						col = '50%',
 					},
 					win_options = {
@@ -22,7 +22,7 @@ return {
 
 				mini = {
 					timeout = 7000,
-					align = 'right',
+					align = 'message-right',
 					win_options = {
 						winblend = 0,
 					},
@@ -35,9 +35,9 @@ return {
 
 			cmdline = {
 				format = {
-					cmdline = { pattern = '^:', icon = ICONS.BRACKET, lang = 'vim' },
-					search_down = { kind = 'search', pattern = '^/', icon = ICONS.SEARCH, lang = 'regex' },
-					search_up = { kind = 'search', pattern = '^%?', icon = ICONS.SEARCH, lang = 'regex' },
+					cmdline = { title = '', pattern = '^:', icon = ICONS.BRACKET, lang = 'vim' },
+					search_down = { title = '', kind = 'search', pattern = '^/', icon = ICONS.SEARCH, lang = 'regex' },
+					search_up = { title = '', kind = 'search', pattern = '^%?', icon = ICONS.SEARCH, lang = 'regex' },
 					filter = { pattern = '^:%s*!', icon = ICONS.BRACKET, lang = 'bash' },
 					lua = { pattern = '^:%s*lua%s+', icon = '', lang = 'lua' },
 					help = { pattern = '^:%s*h%s+', icon = ICONS.SEARCH },

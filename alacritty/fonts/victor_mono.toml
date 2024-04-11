@@ -1,26 +1,26 @@
 [font]
-size = 10
+size = 10.5
 
 [font.normal]
 family = 'VictorMono Nerd Font'
-style = 'Bold'
+style = 'SemiBold'
 
 [font.bold]
 family = 'VictorMono Nerd Font'
-style = 'Bold'
+style = 'SemiBold'
 
 [font.italic]
 family = 'VictorMono Nerd Font'
-style = 'Bold'
+style = 'SemiBold'
 
 [font.bold_italic]
 family = 'VictorMono Nerd Font'
-style = 'Bold'
+style = 'SemiBold'
 
 [font.offset]
-x = 3
-y = 6
+x = 1
+y = 2
 
 [font.glyph_offset]
-x = 1
-y = 4
+x = 0
+y = 1

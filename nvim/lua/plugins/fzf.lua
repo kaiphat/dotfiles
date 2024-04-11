@@ -247,7 +247,7 @@ return {
 		local actions = require 'fzf-lua.actions'
 
 		require('fzf-lua').setup {
-            debug_tracelog = "~/fzf-lua-trace.log",
+            -- debug_tracelog = "~/fzf-lua-trace.log",
 			winopts = {
 				-- split         = "belowright new",-- open in a split instead?
 				-- "belowright new"  : split below

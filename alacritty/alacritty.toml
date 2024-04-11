@@ -1,6 +1,6 @@
 import = [
-    '~/dotfiles/alacritty/themes/catppuccin_dark.toml',
-    '~/dotfiles/alacritty/fonts/maple.toml'
+    '~/dotfiles/alacritty/themes/rose_pine_light.toml',
+    '~/dotfiles/alacritty/fonts/iosevka_custom.toml'
 ]
 
 [env]
@@ -32,8 +32,8 @@ option_as_alt = "Both"
 startup_mode = "SimpleFullscreen"
 
 [window.padding]
-x = 12
-y = 12
+x = 6
+y = 6
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     keymaps     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
