@@ -37,6 +37,7 @@ return {
 					StatusLineNC = { bg = 'NONE', fg = 'bg1' },
                     HopNextKey1 = { link = 'HopNextKey' },
                     HopNextKey2 = { link = 'HopNextKey' },
+                    ['@punctuation'] = { fg = '#666666' }
 				},
 			},
 		}

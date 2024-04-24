@@ -247,7 +247,6 @@ return {
 		local actions = require 'fzf-lua.actions'
 
 		require('fzf-lua').setup {
-            -- debug_tracelog = "~/fzf-lua-trace.log",
 			winopts = {
 				-- split         = "belowright new",-- open in a split instead?
 				-- "belowright new"  : split below
@@ -332,13 +331,12 @@ return {
 					['<C-u>'] = 'preview-page-up',
 				},
 				fzf = {
-					-- fzf '--bind=' options
-					['ctrl-z'] = 'abort',
 					-- ['ctrl-u'] = false,
+                    -- ["ctrl-u"] = "unix-line-discard",
 					['ctrl-f'] = 'half-page-down',
 					['ctrl-b'] = 'half-page-up',
 					['ctrl-a'] = 'beginning-of-line',
-					['ctrl-e'] = 'end-of-line',
+					['ctrl-e'] = 'abort',
 					['alt-a'] = 'toggle-all',
 					-- Only valid with fzf previewers (bat/cat/git/etc)
 					['f3'] = 'toggle-preview-wrap',

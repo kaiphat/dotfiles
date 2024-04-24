@@ -41,7 +41,7 @@ return {
 				['<C-l>'] = 'actions.select',
 				['<CR>'] = 'actions.select_vsplit',
 				['<C-p>'] = 'actions.preview',
-				['<C-c>'] = 'actions.close',
+				['<C-e>'] = 'actions.close',
 				['<C-h>'] = 'actions.parent',
 				-- ['g.'] = 'actions.toggle_hidden',
 				-- ['g\\'] = 'actions.toggle_trash',

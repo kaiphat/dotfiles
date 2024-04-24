@@ -11,7 +11,9 @@ local themes = {
 	poimandres = 'poimandres',
     catppuccin_dark = 'catppuccin_dark',
     catppuccin_light = 'catppuccin_light',
-    tokyo_dark = 'tokyo_dark'
+    tokyo_dark = 'tokyo_dark',
+    ayu_dark = 'ayu_dark',
+    ayu_light = 'ayu_light',
 }
 
-return require('themes.' .. themes.rose_pine_light)
+return require('themes.' .. themes.rose_pine_dark)

@@ -1,5 +1,5 @@
 _G.ICONS = {
-	CIRCLE_SMALL = '󰧟',
+    CIRCLE_SMALL = '•',
 	CIRCLE_MEDIUM = '󰧞',
 	CIRCLE_LARGE = '',
 

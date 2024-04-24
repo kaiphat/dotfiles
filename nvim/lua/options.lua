@@ -115,7 +115,7 @@ o.whichwrap:append '<>hl'
 wo.foldcolumn = '0'
 wo.foldmethod = 'expr'
 wo.foldexpr = 'nvim_treesitter#foldexpr()'
--- wo.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) ]]
+wo.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) ]]
 wo.foldminlines = 1
 wo.foldlevel = 99
 wo.conceallevel = 2

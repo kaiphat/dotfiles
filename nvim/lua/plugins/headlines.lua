@@ -1,9 +1,8 @@
 return {
 	{
-
 		'lukas-reineke/headlines.nvim',
 		dependencies = 'nvim-treesitter/nvim-treesitter',
-        enabled = false,
+		enabled = false,
 		ft = 'markdown',
 		opts = {
 			markdown = {
@@ -18,12 +17,15 @@ return {
 	},
 
 	{
-        'MeanderingProgrammer/markdown.nvim',
+		'MeanderingProgrammer/markdown.nvim',
 		ft = 'markdown', -- or 'event = "VeryLazy"'
-        name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
-        dependencies = { 'nvim-treesitter/nvim-treesitter' },
-        config = function()
-            require('render-markdown').setup({})
-        end,
+		name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
+		dependencies = { 'nvim-treesitter/nvim-treesitter' },
+		config = function()
+			require('render-markdown').setup {
+                headings = { '◇ ', '◇ ', '󰲥 ', '󰲧 ', '󰲩 ', '󰲫 ' },
+                bullets = { '•', '◦', '■', '◇ ' },
+			}
+		end,
 	},
 }

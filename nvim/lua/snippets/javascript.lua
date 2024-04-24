@@ -22,6 +22,24 @@ local async_describe = [[
     }})
 ]]
 
+local it = [[
+    it('{}', function() {{
+        {}
+    }})
+]]
+
+local async_it = [[
+    it('{}', async function() {{
+        {}
+    }})
+]]
+
+local before = [[
+    before(async function() {{
+        {}
+    }})
+]]
+
 local default_import = [[
     import {} from '{}'
 ]]
@@ -61,6 +79,15 @@ return {
 					fmt(async_describe, { i(1, 'description'), i(2) }),
 				}),
 			}),
+
+			s('sit', {
+				c(1, {
+					fmt(async_it, { i(1, 'description'), i(2) }),
+					fmt(it, { i(1, 'description'), i(2) }),
+				}),
+			}),
+
+			s('sbe', fmt(before, i(1))),
 		})
 	end,
 }

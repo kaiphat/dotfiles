@@ -16,12 +16,12 @@ style = "blue"
 truncate_to_repo = false
 
 [character]
-# success_symbol = "[➜](purple)"
-# error_symbol = "[➜](red)"
-# vimcmd_symbol = "[➜](green)"
-success_symbol = "[❯](purple)"
-error_symbol = "[❯](red)"
-vimcmd_symbol = "[❮](green)"
+success_symbol = "[➜](purple)"
+error_symbol = "[➜](red)"
+vimcmd_symbol = "[➜](green)"
+# success_symbol = "[❯](purple)"
+# error_symbol = "[❯](red)"
+# vimcmd_symbol = "[❮](green)"
 
 [git_branch]
 format = "[$branch]($style)"

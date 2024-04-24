@@ -28,17 +28,17 @@ return {
 					},
 					position = {
 						row = -2,
-						col = -1,
+						col = 0,
 					},
 				},
 			},
 
 			cmdline = {
 				format = {
-					cmdline = { title = '', pattern = '^:', icon = ICONS.BRACKET, lang = 'vim' },
+					cmdline = { title = '', pattern = '^:', icon = ICONS.ARROW, lang = 'vim' },
 					search_down = { title = '', kind = 'search', pattern = '^/', icon = ICONS.SEARCH, lang = 'regex' },
 					search_up = { title = '', kind = 'search', pattern = '^%?', icon = ICONS.SEARCH, lang = 'regex' },
-					filter = { pattern = '^:%s*!', icon = ICONS.BRACKET, lang = 'bash' },
+					filter = { pattern = '^:%s*!', icon = ICONS.ARROW, lang = 'bash' },
 					lua = { pattern = '^:%s*lua%s+', icon = '', lang = 'lua' },
 					help = { pattern = '^:%s*h%s+', icon = ICONS.SEARCH },
 					input = {}, -- Used by input()

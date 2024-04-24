@@ -44,3 +44,11 @@ vim.api.nvim_create_autocmd({ 'BufEnter' }, {
 		vim.opt_local.wrap = true
 	end,
 })
+
+vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
+	pattern = '*',
+	group = vim.api.nvim_create_augroup('custom:autosave', {}),
+	callback = function()
+		vim.cmd [[silent! wa]]
+	end,
+})

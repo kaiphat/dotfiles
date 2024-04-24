@@ -3,6 +3,8 @@ set themes            \
     rose_pine_light   \
     catppuccin_dark   \
     catppuccin_light  \
+    ayu_dark   \
+    ayu_light  \
     tokyo_dark        \
     github_light      \
     dark              \
@@ -48,5 +50,6 @@ sed -i '' -E "s/background \= '[a-z]+'/background = '$theme_type'/" ~/dotfiles/n
 sed -i '' -E "s/dark_theme\=[01]/dark_theme=$dark_theme_enabled/" ~/dotfiles/.tmux.conf
 sed -i '' -E "s/themes\.[a-zA-Z_]+/themes.$selected_theme/" ~/dotfiles/nvim/lua/plugins/themes.lua
 sed -i '' -E "s/themes\/[a-zA-Z_]+\.toml/themes\/$selected_theme.toml/" ~/dotfiles/alacritty/alacritty.toml
+sed -i '' -E "s/themes\/[a-zA-Z_]+/themes\/$selected_theme/" ~/dotfiles/wezterm/wezterm.lua
 
 tmux source-file ~/dotfiles/.tmux.conf
