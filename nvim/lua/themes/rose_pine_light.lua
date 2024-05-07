@@ -21,9 +21,11 @@ return {
                 IndentBlanklineChar = { fg = '#cccccc' },
                 IndentBlanklineContextChar = { fg = '#cccccc' },
                 Folded = { bg = 'overlay' },
+                Keyword = { italic = true },
                 ['@variable'] = { italic = false },
                 ['@lsp.type.property'] = { italic = false },
                 ['@property.typescript'] = { italic = false },
+                FzfLuaDirPart = { fg = 'muted' }
             },
         }
 

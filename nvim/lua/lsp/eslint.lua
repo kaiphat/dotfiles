@@ -10,7 +10,7 @@ return {
 		opts.on_attach = function(client, bufnr)
 			original_on_attach(client, bufnr)
 
-			vim.api.nvim_create_autocmd('BufWritePre', {
+			vim.api.nvim_create_autocmd('BufWriteCmd', {
 			    group = group,
 				buffer = bufnr,
                 command = "EslintFixAll",

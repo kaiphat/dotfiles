@@ -36,7 +36,7 @@
     chp  = checkout @{-1}
     chd  = checkout develop
     chb = checkout -b
-    c   = commit -m
+    c   = commit -am
     ca  = commit --amend --no-edit
     s   = stash
     sa  = stash apply

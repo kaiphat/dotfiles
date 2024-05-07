@@ -2,7 +2,7 @@ require 'lua/utils'
 
 local wezterm = require 'wezterm'
 local fonts = require 'lua/fonts'
-local theme = require 'lua/themes/rose_pine_dark'
+local theme = require 'lua/themes/catppuccin_dark'
 
 wezterm.on('gui-startup', function(cmd)
 	local _, _, window = wezterm.mux.spawn_window(cmd or {})
@@ -19,7 +19,7 @@ local background = {
 }
 
 local keys = {
-	{ key = 'C', mods = 'CTRL', action = wezterm.action.CopyTo 'Clipboard' },
+	-- { key = 'C', mods = 'CTRL', action = wezterm.action.CopyTo 'Clipboard' },
 	{ key = 'V', mods = 'CTRL', action = wezterm.action.PasteFrom 'Clipboard' },
 	{ key = 'v', mods = 'SUPER', action = wezterm.action.PasteFrom 'Clipboard' },
 	{ key = '=', mods = 'CTRL', action = wezterm.action.IncreaseFontSize },
@@ -45,7 +45,7 @@ return merge( --
 		cursor_blink_rate = 1400,
 		max_fps = 240,
 		animation_fps = 240,
-		default_cursor_style = 'BlinkingBar',
+        default_cursor_style = 'BlinkingBar',
 		disable_default_key_bindings = true,
 		warn_about_missing_glyphs = false,
 		window_close_confirmation = 'NeverPrompt',

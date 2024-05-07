@@ -96,13 +96,12 @@ o.fillchars = {
 o.inccommand = 'split'
 o.showbreak = '  ↳ '
 o.completeopt = 'menuone,preview,noselect'
-o.complete = '.,w,b,u,t,U,s,k,d,i'
 o.langmap =
 	'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,'..
     'фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz'
 o.imsearch = 0
 o.iminsert = 0
-o.laststatus = 2
+o.laststatus = 3
 o.grepprg = 'rg --vimgrep'
 o.fileformat = 'unix'
 o.fileformats = { 'unix', 'dos' }

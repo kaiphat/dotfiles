@@ -45,10 +45,18 @@ vim.api.nvim_create_autocmd({ 'BufEnter' }, {
 	end,
 })
 
-vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost' }, {
+vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'VimLeavePre' }, {
 	pattern = '*',
 	group = vim.api.nvim_create_augroup('custom:autosave', {}),
 	callback = function()
-		vim.cmd [[silent! wa]]
+		vim.cmd [[silent! w]]
+	end,
+})
+
+vim.api.nvim_create_autocmd('VimResized', {
+	pattern = '*',
+	group = vim.api.nvim_create_augroup('custom:resize_pane', {}),
+	callback = function()
+        vim.cmd "wincmd ="
 	end,
 })

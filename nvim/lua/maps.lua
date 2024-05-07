@@ -41,8 +41,7 @@ map('n', 'H', '^')
 map('n', 'L', '$')
 
 map('n', '<C-s>', function()
-	vim.cmd 'wa'
-	vim.notify 'All files saved'
+	vim.cmd 'w'
 end)
 
 map({ 'n', 'v' }, '<C-d>', function()
@@ -63,7 +62,7 @@ map('n', 'x', function()
 		end
 	else
 		vim.api.nvim_feedkeys('"_x', 'n', false)
-	end
+    end
 end)
 
 map('n', '<A-->', ':vertical resize -10<cr>')
@@ -93,7 +92,7 @@ map('n', 'J', 'Jzz')
 map('n', ',,', '^')
 map('n', ',s', ':split<cr>')
 map('n', ',v', ':vsplit<cr>')
-map('n', ',x', ':q<cr>')
+map('n', ',x', function() vim.cmd 'silent! q!' end)
 
 for char in string.gmatch([[w'"`p[<({]], '.') do
 	for command in string.gmatch('ydvc', '.') do
@@ -115,12 +114,6 @@ map('n', '<leader>ur', function()
 		is_root = true
 	end
 end)
-
--- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     marks     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
--- for letter in string.gmatch('abcdefghijkloqrstuvwxyz', '.') do
--- 	map('n', 'm' .. letter, 'm' .. letter:upper())
--- 	map('n', '\'' .. letter, '\'' .. letter:upper())
--- end
 
 map('n', '<leader>lw', function()
 	local ft = vim.bo.filetype

@@ -100,42 +100,43 @@ return {
 	},
 	config = function()
 		local gitsigns = require 'gitsigns'
+        local icon = ICONS.VERTICAL_LINE_SHORT_1
 
 		gitsigns.setup {
 			signs = {
 				add = {
 					hl = 'GitSignsAdd',
-					text = ICONS.VERTICAL_LINE_1,
+					text = icon,
 					numhl = 'GitSignsAddNr',
 					linehl = 'GitSignsAddLn',
 				},
 				change = {
 					hl = 'GitSignsChange',
-					text = ICONS.VERTICAL_LINE_1,
+					text = icon,
 					numhl = 'GitSignsChangeNr',
 					linehl = 'GitSignsChangeLn',
 				},
 				delete = {
 					hl = 'GitSignsDelete',
-					text = ICONS.VERTICAL_LINE_1,
+					text = icon,
 					numhl = 'GitSignsDeleteNr',
 					linehl = 'GitSignsDeleteLn',
 				},
 				topdelete = {
 					hl = 'GitSignsDelete',
-					text = ICONS.VERTICAL_LINE_1,
+					text = icon,
 					numhl = 'GitSignsDeleteNr',
 					linehl = 'GitSignsDeleteLn',
 				},
 				changedelete = {
 					hl = 'GitSignsChange',
-					text = ICONS.VERTICAL_LINE_1,
+					text = icon,
 					numhl = 'GitSignsChangeNr',
 					linehl = 'GitSignsChangeLn',
 				},
 				untracked = {
 					hl = 'GitSignsAdd',
-					text = ICONS.VERTICAL_LINE_1,
+					text = icon,
 					numhl = 'GitSignsAddNr',
 					linehl = 'GitSignsAddLn',
 				},
@@ -151,37 +152,37 @@ return {
             _signs_staged = {
 				add = {
 					hl = 'GitSignsAdd',
-					text = ICONS.VERTICAL_LINE_1,
+					text = icon,
 					numhl = 'GitSignsAddNr',
 					linehl = 'GitSignsAddLn',
 				},
 				change = {
 					hl = 'GitSignsChange',
-					text = ICONS.VERTICAL_LINE_1,
+					text = icon,
 					numhl = 'GitSignsChangeNr',
 					linehl = 'GitSignsChangeLn',
 				},
 				delete = {
 					hl = 'GitSignsDelete',
-					text = ICONS.VERTICAL_LINE_1,
+					text = icon,
 					numhl = 'GitSignsDeleteNr',
 					linehl = 'GitSignsDeleteLn',
 				},
 				topdelete = {
 					hl = 'GitSignsDelete',
-					text = ICONS.VERTICAL_LINE_1,
+					text = icon,
 					numhl = 'GitSignsDeleteNr',
 					linehl = 'GitSignsDeleteLn',
 				},
 				changedelete = {
 					hl = 'GitSignsChange',
-					text = ICONS.VERTICAL_LINE_1,
+					text = icon,
 					numhl = 'GitSignsChangeNr',
 					linehl = 'GitSignsChangeLn',
 				},
 				untracked = {
 					hl = 'GitSignsAdd',
-					text = ICONS.VERTICAL_LINE_1,
+					text = icon,
 					numhl = 'GitSignsAddNr',
 					linehl = 'GitSignsAddLn',
 				},

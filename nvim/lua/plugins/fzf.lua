@@ -67,7 +67,7 @@ local function build_rg_cmd_with_no_ignore(opts)
 end
 
 local function build_prompt()
-    return '  ❯ '
+	return '  ❯ '
 end
 
 return {
@@ -121,7 +121,7 @@ return {
 			function()
 				require('fzf-lua').live_grep {
 					cwd = get_current_dir(),
-					cmd = build_rg_cmd_with_no_ignore { skip_always_ignore = true }
+					cmd = build_rg_cmd_with_no_ignore { skip_always_ignore = true },
 				}
 			end,
 		},
@@ -165,8 +165,8 @@ return {
 			'<leader>fi',
 			function()
 				require('fzf-lua').lsp_references {
-                    file_ignore_patterns = ignore_patterns,
-                    ignore_current_line = true
+					file_ignore_patterns = ignore_patterns,
+					ignore_current_line = true,
 				}
 			end,
 		},
@@ -174,7 +174,7 @@ return {
 			'<leader>di',
 			function()
 				require('fzf-lua').lsp_references {
-                    ignore_current_line = true
+					ignore_current_line = true,
 				}
 			end,
 		},
@@ -230,7 +230,7 @@ return {
 			'<leader>fw',
 			function()
 				require('fzf-lua').lsp_live_workspace_symbols {
-                    file_ignore_patterns = ignore_patterns,
+					file_ignore_patterns = ignore_patterns,
 				}
 			end,
 		},
@@ -238,7 +238,7 @@ return {
 			'<leader>dw',
 			function()
 				require('fzf-lua').lsp_live_workspace_symbols {
-                    file_ignore_patterns = always_ignore_patterns,
+					file_ignore_patterns = always_ignore_patterns,
 				}
 			end,
 		},
@@ -264,6 +264,7 @@ return {
 				-- window, can be set to 'false' to remove all borders or to
 				-- 'none', 'single', 'double', 'thicc' (+cc) or 'rounded' (default)
 				-- border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+				border = 'single',
 				-- requires neovim > v0.9.0, passed as is to `nvim_open_win`
 				-- can be sent individually to any provider to set the win title
 				-- title         = "Title",
@@ -332,7 +333,7 @@ return {
 				},
 				fzf = {
 					-- ['ctrl-u'] = false,
-                    -- ["ctrl-u"] = "unix-line-discard",
+					-- ["ctrl-u"] = "unix-line-discard",
 					['ctrl-f'] = 'half-page-down',
 					['ctrl-b'] = 'half-page-up',
 					['ctrl-a'] = 'beginning-of-line',
@@ -360,7 +361,7 @@ return {
 					-- to open all files whether single or multiple
 					-- ["default"]     = actions.file_edit,
 					['default'] = actions.file_edit_or_qf,
-                    ['ctrl-o'] = actions.file_edit_or_qf,
+					['ctrl-o'] = actions.file_edit_or_qf,
 					['ctrl-s'] = actions.file_split,
 					['ctrl-v'] = actions.file_vsplit,
 					['ctrl-t'] = actions.file_tabedit,
@@ -479,8 +480,9 @@ return {
 				no_header_i = true, -- hide interactive header?
 				multiprocess = true,
 				prompt = build_prompt(),
-                live_ast_prefix = false,
+				live_ast_prefix = false,
 				trim_entry = true,
+				formatter = 'path.filename_first',
 				fzf_args = '--bind=change:first',
 				fzf_opts = {
 					['--info'] = 'inline-right',
@@ -523,16 +525,7 @@ return {
 				cwd_prompt_shorten_len = 32, -- shorten prompt beyond this length
 				cwd_prompt_shorten_val = 1, -- shortened path parts length
 				toggle_ignore_flag = '--no-ignore', -- flag toggled in `actions.toggle_ignore`
-				actions = {
-					-- inherits from 'actions.files', here we can override
-					-- or set bind to 'false' to disable a default action
-					-- action to toggle `--no-ignore`, requires fd or rg installed
-					['ctrl-g'] = { actions.toggle_ignore },
-					-- uncomment to override `actions.file_edit_or_qf`
-					--   ["default"]   = actions.file_edit,
-					-- custom actions are available too
-					--   ["ctrl-y"]    = function(selected) print(selected[1]) end,
-				},
+				actions = {},
 				fzf_opts = {
 					['--history'] = vim.fn.stdpath 'data' .. '/fzf-lua-files-history',
 				},
@@ -671,13 +664,7 @@ return {
 				--   ...
 				--   return new_query, flags
 				-- end,
-				actions = {
-					-- actions inherit from 'actions.files' and merge
-					-- this action toggles between 'grep' and 'live_grep'
-					['ctrl-g'] = { actions.grep_lgrep },
-					-- uncomment to enable '.gitignore' toggle for grep
-					-- ["ctrl-r"]   = { actions.toggle_ignore }
-				},
+				actions = {},
 				fzf_opts = {
 					['--history'] = vim.fn.stdpath 'data' .. '/fzf-lua-grep-history',
 				},
@@ -769,7 +756,7 @@ return {
 				includeDeclaration = false, -- include current declaration in LSP context
 				-- settings for 'lsp_{document|workspace|lsp_live_workspace}_symbols'
 				symbols = {
-                    prompt = build_prompt(),
+					prompt = build_prompt(),
 					async_or_timeout = true, -- symbols are async by default
 					symbol_style = 1, -- style for document/workspace symbols
 					-- false: disable,    1: icon+kind

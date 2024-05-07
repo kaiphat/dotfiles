@@ -1,42 +1,13 @@
-set themes            \
-    rose_pine_dark    \
-    rose_pine_light   \
-    catppuccin_dark   \
-    catppuccin_light  \
-    ayu_dark   \
-    ayu_light  \
-    tokyo_dark        \
-    github_light      \
-    dark              \
-    github_dark       \
-    gruvbox_light     \
-    kanagawa_dark
+set selected_theme (cat ~/dotfiles/scripts/themes.txt | tr '\|' '\t' | fzf -d '\t' --with-nth 1)
 
-echo "select theme:"
-for i in (seq 1 (count $themes))
-    echo "    $i - $themes[$i]"
-end
-
-set theme_index ""
-read -P "number: " theme_index
-
-if test -z "$theme_index"
-    echo "invalid index"
+if test -z "$selected_theme"
+    echo "not choosed"
     exit 0
 end
-if test $theme_index -lt 1
-    echo "invalid index"
-    exit 0
-end
-if test $theme_index -gt (count $themes)
-    echo "invalid index"
-    exit 0
-end
-
-set selected_theme $themes[$theme_index]
 
 set dark_theme_enabled
 set theme_type
+
 switch $selected_theme
     case "*dark*"
         set dark_theme_enabled 1

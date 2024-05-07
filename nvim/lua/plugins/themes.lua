@@ -14,6 +14,7 @@ local themes = {
     tokyo_dark = 'tokyo_dark',
     ayu_dark = 'ayu_dark',
     ayu_light = 'ayu_light',
+    zenbones_dark = 'zenbones_dark',
 }
 
-return require('themes.' .. themes.rose_pine_dark)
+return require('themes.' .. themes.catppuccin_dark)

@@ -22,13 +22,12 @@ return {
 
 				mini = {
 					timeout = 7000,
-					align = 'message-right',
 					win_options = {
 						winblend = 0,
 					},
 					position = {
 						row = -2,
-						col = 0,
+						col = '100%'
 					},
 				},
 			},

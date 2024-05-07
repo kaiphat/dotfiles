@@ -1,5 +1,5 @@
 import = [
-    '~/dotfiles/alacritty/themes/rose_pine_dark.toml',
+    '~/dotfiles/alacritty/themes/.toml',
     '~/dotfiles/alacritty/fonts/zed.toml'
 ]
 
