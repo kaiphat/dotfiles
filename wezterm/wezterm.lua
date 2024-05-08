@@ -2,7 +2,7 @@ require 'lua/utils'
 
 local wezterm = require 'wezterm'
 local fonts = require 'lua/fonts'
-local theme = require 'lua/themes/catppuccin_dark'
+local theme = require 'lua/themes/rose_pine_dark'
 
 wezterm.on('gui-startup', function(cmd)
 	local _, _, window = wezterm.mux.spawn_window(cmd or {})
@@ -29,7 +29,7 @@ local keys = {
 }
 
 return merge( --
-	fonts.zed,
+	fonts.radon,
 	background,
 	theme,
 	{
@@ -45,7 +45,7 @@ return merge( --
 		cursor_blink_rate = 1400,
 		max_fps = 240,
 		animation_fps = 240,
-        default_cursor_style = 'BlinkingBar',
+		default_cursor_style = 'BlinkingBar',
 		disable_default_key_bindings = true,
 		warn_about_missing_glyphs = false,
 		window_close_confirmation = 'NeverPrompt',

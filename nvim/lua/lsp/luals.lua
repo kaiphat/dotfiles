@@ -29,6 +29,18 @@ return {
 			},
 		}
 
+		local group = vim.api.nvim_create_augroup('custom:lsp_formatting', {})
+
+		opts.expand_on_attach(function(client, bufnr)
+			vim.api.nvim_create_autocmd('BufWritePre', {
+				group = group,
+				buffer = bufnr,
+				callback = function()
+					vim.lsp.buf.format { timeout_ms = 5000 }
+				end,
+			})
+		end)
+
 		lsp.lua_ls.setup(opts)
 	end,
 }

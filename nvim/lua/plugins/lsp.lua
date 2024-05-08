@@ -74,7 +74,7 @@ end
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     keymaps     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 vim.api.nvim_create_autocmd('LspAttach', {
-    group = create_augroup('lsp_attach'),
+	group = create_augroup 'lsp_attach',
 	callback = function(event)
 		local map = function(mode, keys, cmd)
 			vim.keymap.set(mode, keys, cmd, { buffer = event.buf })
@@ -125,9 +125,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		map('n', 'go', function()
 			vim.cmd 'vs'
 			vim.lsp.buf.definition()
-            vim.defer_fn(function()
-                vim.api.nvim_input 'zz'
-            end, 50)
+			vim.defer_fn(function()
+				vim.api.nvim_input 'zz'
+			end, 50)
 		end)
 
 		map({ 'n', 'v' }, '<leader>lf', function()
@@ -194,7 +194,7 @@ return {
 			capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
 			local default_opts = {
-				on_attach = function() end,
+                on_attach = function(client, bufnr) end,
 				capabilities = capabilities,
 				flags = {
 					debounce_text_changes = 150,
@@ -202,7 +202,18 @@ return {
 			}
 
 			for _, server in ipairs(servers) do
-				server.init(lsp, vim.tbl_extend('force', {}, default_opts))
+				local opts = vim.tbl_extend('force', {}, default_opts)
+
+                local original_on_attach = opts.on_attach
+
+				opts.expand_on_attach = function(hook)
+					opts.on_attach = function(client, bufnr)
+                        original_on_attach(client, bufnr)
+						hook(client, bufnr)
+					end
+				end
+
+				server.init(lsp, opts)
 			end
 		end,
 	},

@@ -48,8 +48,15 @@ vim.api.nvim_create_autocmd({ 'BufEnter' }, {
 vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'VimLeavePre' }, {
 	pattern = '*',
 	group = vim.api.nvim_create_augroup('custom:autosave', {}),
-	callback = function()
-		vim.cmd [[silent! w]]
+	callback = function(event)
+		if event.buftype or event.file == '' then
+			return
+		end
+		vim.api.nvim_buf_call(event.buf, function()
+			vim.schedule(function()
+				vim.cmd 'silent! write'
+			end)
+		end)
 	end,
 })
 
@@ -57,6 +64,6 @@ vim.api.nvim_create_autocmd('VimResized', {
 	pattern = '*',
 	group = vim.api.nvim_create_augroup('custom:resize_pane', {}),
 	callback = function()
-        vim.cmd "wincmd ="
+		vim.cmd 'wincmd ='
 	end,
 })

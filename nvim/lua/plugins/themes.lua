@@ -17,4 +17,4 @@ local themes = {
     zenbones_dark = 'zenbones_dark',
 }
 
-return require('themes.' .. themes.catppuccin_dark)
+return require('themes.' .. themes.rose_pine_dark)

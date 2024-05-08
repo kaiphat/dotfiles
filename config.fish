@@ -66,8 +66,8 @@ alias notes "nvim ~/notes/notes.md -c \"set signcolumn=no\""
 alias d "docker"
 alias dstop "sudo systemctl stop docker.socket"
 function dstart
-  sudo systemctl start docker.service
-  ds
+    sudo systemctl start docker.service
+    ds
 end
 function ds
     set containers (d ps -q)
@@ -101,8 +101,8 @@ alias wr "w report --day"
 alias wstart "watson start"
 alias wst "watson stop"
 function wry
-  set yesterday (date +%Y-%m-%d --date='yesterday')
-  w report --from $yesterday --to $yesterday
+    set yesterday (date +%Y-%m-%d --date='yesterday')
+    w report --from $yesterday --to $yesterday
 end
 
 alias g "git"
@@ -164,32 +164,44 @@ alias enru "trans en:ru -show-original no -show-prompt-message no -show-language
 alias ruen "trans ru:en -show-original no -show-prompt-message no -show-languages no -b"
 
 function dl
-  d logs $argv -f -n 99
+    d logs $argv -f -n 99
 end
 
 function dps
-  d ps -a --format "table {{.ID}}\t{{.Names}}" | \
-  grep $argv
+    d ps -a --format "table {{.ID}}\t{{.Names}}" | \
+    grep $argv
 end
 
 function git-recreate-from -a root_branch
-  if test -z "$root_branch"; echo 'error: need a root_branch argument'; return; end
+    if test -z "$root_branch"; echo 'error: need a root_branch argument'; return; end
 
-  set branch (git branch --show-current)
-  git ch $root_branch
-  git bd $branch
-  git plh
-  git chb $branch
+    set branch (git branch --show-current)
+    git ch $root_branch
+    git bd $branch
+    git plh
+    git chb $branch
+end
+
+function gc -a message
+    if test -z "$message"; echo '{message} is not implemented'
+        return
+    end
+
+    set branch (git rev-parse --abbrev-ref HEAD)
+    set ticket (echo $branch | awk -F/ '{print $NF}')
+
+    git add -A
+    git commit -m "$ticket: $message"
 end
 
 function gp -a message
-  if test -z "$message"; echo '{message} is not implemented'; return; end
+    if test -z "$message"; echo '{message} is not implemented'; return; end
 
-  set branch (git branch --show-current)
+    set branch (git branch --show-current)
 
-  git add -A
-  git commit -m "$message"
-  git push origin $branch
+    git add -A
+    git commit -m "$message"
+    git push origin $branch
 end
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -228,9 +240,9 @@ set fish_color_operator 'red'
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 function refresh_tmux_vars --on-event="fish_preexec"
-  if set -q TMUX
-    tmux showenv -s | string replace -rf '^((?:SSH|DISPLAY).*?)=(".*?"); export.*' 'set -gx $1 $2' | source
-  end
+    if set -q TMUX
+        tmux showenv -s | string replace -rf '^((?:SSH|DISPLAY).*?)=(".*?"); export.*' 'set -gx $1 $2' | source
+    end
 end
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -239,7 +251,7 @@ end
 
 zoxide init fish | source
 function starship_transient_prompt_func
-  starship module character
+    starship module character
 end
 starship init fish | source
 enable_transience
@@ -249,7 +261,7 @@ enable_transience
 # end
 
 if status is-interactive
-and not set -q TMUX
-  tmux kill-session -t 0 || true
-  tmux attach -t main || tmux new -s main
+    and not set -q TMUX
+    tmux kill-session -t 0 || true
+    tmux attach -t main || tmux new -s main
 end

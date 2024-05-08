@@ -5,15 +5,17 @@ return {
 		}
 
 		local original_on_attach = opts.on_attach
-        local group = vim.api.nvim_create_augroup('custom:eslint', {})
+		local group = vim.api.nvim_create_augroup('custom:eslint', {})
 
 		opts.on_attach = function(client, bufnr)
 			original_on_attach(client, bufnr)
 
-			vim.api.nvim_create_autocmd('BufWriteCmd', {
-			    group = group,
+			vim.api.nvim_create_autocmd('BufWritePre', {
+				group = group,
 				buffer = bufnr,
-                command = "EslintFixAll",
+				callback = function()
+					vim.cmd 'EslintFixAll'
+				end,
 			})
 		end
 
