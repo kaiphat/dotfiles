@@ -129,6 +129,9 @@ function Opts:new(capabilities)
 			if obj.on_attach_hook then
 				obj.on_attach_hook(client, bufnr)
 			end
+			if vim.lsp.handlers['textDocument/inlayHint'] then
+				vim.lsp.inlay_hint.enable()
+			end
 		end,
 		capabilities = capabilities,
 		flags = {
