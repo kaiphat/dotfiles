@@ -1,24 +1,21 @@
 return {
 	init = function(lsp, opts)
-		opts.settings = {
-			format = true,
+		opts:expand {
+			settings = {
+				format = true,
+			},
 		}
 
-		local original_on_attach = opts.on_attach
-		local group = vim.api.nvim_create_augroup('custom:eslint', {})
-
-		opts.on_attach = function(client, bufnr)
-			original_on_attach(client, bufnr)
-
+		opts:add_on_attach_hook(function(client, bufnr)
 			vim.api.nvim_create_autocmd('BufWritePre', {
-				group = group,
+				group = create_augroup 'eslint',
 				buffer = bufnr,
 				callback = function()
 					vim.cmd 'EslintFixAll'
 				end,
 			})
-		end
+		end)
 
-		lsp.eslint.setup(opts)
+		lsp.eslint.setup(opts:to_server_opts())
 	end,
 }

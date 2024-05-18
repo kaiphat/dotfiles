@@ -2,18 +2,18 @@ return {
 	{
 		'zbirenbaum/copilot.lua',
 		cmd = 'Copilot',
-		event = 'InsertEnter',
+		event = 'BufEnter',
 		enabled = true,
 		config = function()
 			require('copilot').setup {
 				panel = {
-				    enabled = false,
-				    keymap = {
-				        -- open = "<C-e>"
-				    }
+					enabled = false,
+					keymap = {
+						-- open = "<C-e>"
+					},
 				},
 				suggestion = {
-					enabled = true,
+					enabled = false,
 					auto_trigger = true,
 					debounce = 75,
 					keymap = {
@@ -26,8 +26,8 @@ return {
 					},
 				},
 				filetypes = {
-				    markdown = true,
-				}
+					markdown = true,
+				},
 			}
 		end,
 	},

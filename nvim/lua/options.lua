@@ -4,10 +4,9 @@ local g = vim.g
 
 g.mapleader = ' '
 
-if vim.fn.has 'nvim-0.10' == 1 then o.smoothscroll = true end
-
 local TAB_SIZE = 4
 
+o.smoothscroll = true
 o.background = ''
 o.guicursor = 'a:blinkon1,i-ci-ve:ver25-blinkon1'
 o.selection = 'old'
@@ -72,9 +71,9 @@ o.colorcolumn = '99999'
 o.encoding = 'utf-8'
 o.list = false
 o.listchars:append {
-    -- eol ='↲',
-    trail = '·',
-    nbsp = '␣',
+	-- eol ='↲',
+	trail = '·',
+	nbsp = '␣',
 }
 o.fillchars = {
 	-- horiz = "━",
@@ -90,15 +89,14 @@ o.fillchars = {
 	foldclose = '',
 	diff = '╱',
 	lastline = ' ',
-    stl = ' ',
-    stlnc = ' ',
+	stl = ' ',
+	stlnc = ' ',
 }
 o.inccommand = 'split'
 o.showbreak = '  ↳ '
 o.completeopt = 'menuone,preview,noselect'
-o.langmap =
-	'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,'..
-    'фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz'
+o.langmap = 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,'
+	.. 'фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz'
 o.imsearch = 0
 o.iminsert = 0
 o.laststatus = 3

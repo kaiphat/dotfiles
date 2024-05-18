@@ -1,37 +1,33 @@
-local luals = require 'lsp.luals'
-local eslint = require 'lsp.eslint'
-local rust = require 'lsp.rust'
-local cssls = require 'lsp.cssls'
-local sqlls = require 'lsp.sqlls'
-local html = require 'lsp.html'
-local emmet = require 'lsp.emmet'
-local graphql = require 'lsp.graphql'
-local pylsp = require 'lsp.pylsp'
-local marksman = require 'lsp.marksman'
-
 local servers = {
-	luals,
-	eslint,
-	rust,
-	cssls,
-	sqlls,
-	html,
-	emmet,
-	graphql,
-	pylsp,
-	marksman,
+	'luals',
+	'eslint',
+	'rust',
+	'cssls',
+	'sqlls',
+	'html',
+	'emmet',
+	'graphql',
+	'pylsp',
+	'marksman',
 }
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     diagnostic     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-vim.diagnostic.config {
+local diagnostic_opts = {
 	float = {
 		focusable = true,
 		header = false,
 		border = 'rounded',
 		style = 'minimal',
 		prefix = '',
+		source = 'always',
 	},
+	virtual_text = false,
+	severity_sort = true,
+	signs = false,
+	underline = true,
+	update_in_insert = false,
 }
+vim.diagnostic.config(diagnostic_opts)
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     lsp symbols     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 for _, hint in ipairs { 'Error', 'Information', 'Hint', 'Warning' } do
@@ -42,23 +38,6 @@ for _, hint in ipairs { 'Error', 'Information', 'Hint', 'Warning' } do
 end
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     setup handlers     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-local diagnostic_opts = {
-	-- virtual_text = {
-	-- 	spacing = 8,
-	-- 	source = 'if_many',
-	-- 	-- prefix = ' ',
-	-- 	prefix = '●',
-	-- },
-	virtual_text = false,
-	severity_sort = true,
-	signs = false,
-	underline = true,
-	update_in_insert = false,
-}
-
-vim.lsp.handlers['textDocument/publishDiagnostics'] =
-	vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, diagnostic_opts)
-
 vim.lsp.handlers['textDocument/definition'] = function(_, result)
 	if not result or vim.tbl_isempty(result) then
 		print '[LSP] Could not find definition'
@@ -136,6 +115,42 @@ vim.api.nvim_create_autocmd('LspAttach', {
 	end,
 })
 
+local Opts = {}
+
+Opts.__index = Opts
+
+function Opts:new(capabilities)
+	local obj = setmetatable({
+		on_attach_hook = nil,
+	}, self)
+
+	obj.default = {
+		on_attach = function(client, bufnr)
+			if obj.on_attach_hook then
+				obj.on_attach_hook(client, bufnr)
+			end
+		end,
+		capabilities = capabilities,
+		flags = {
+			debounce_text_changes = 150,
+		},
+	}
+
+	return obj
+end
+
+function Opts:add_on_attach_hook(hook)
+	self.on_attach_hook = hook
+end
+
+function Opts:expand(table)
+	self.default = vim.tbl_extend('force', self.default, table)
+end
+
+function Opts:to_server_opts()
+	return self.default
+end
+
 return {
 	{
 		'pmizio/typescript-tools.nvim',
@@ -150,6 +165,9 @@ return {
 			local api = require 'typescript-tools.api'
 
 			require('typescript-tools').setup {
+				on_attach = function(client)
+					vim.lsp.inlay_hint.enable()
+				end,
 				settings = {
 					tsserver_file_preferences = {
 						includeInlayParameterNameHints = 'all',
@@ -157,6 +175,8 @@ return {
 					tsserver_format_options = {
 						allowRenameOfImportPath = true,
 					},
+					-- code_lens = 'all',
+					complete_function_calls = false,
 				},
 				handlers = {
 					['textDocument/publishDiagnostics'] = vim.lsp.with(
@@ -189,31 +209,13 @@ return {
 		},
 		config = function()
 			local lsp = require 'lspconfig'
+			local cmp = require 'cmp_nvim_lsp'
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
-
-			local default_opts = {
-                on_attach = function(client, bufnr) end,
-				capabilities = capabilities,
-				flags = {
-					debounce_text_changes = 150,
-				},
-			}
+			capabilities = vim.tbl_deep_extend('force', capabilities, cmp.default_capabilities())
 
 			for _, server in ipairs(servers) do
-				local opts = vim.tbl_extend('force', {}, default_opts)
-
-                local original_on_attach = opts.on_attach
-
-				opts.expand_on_attach = function(hook)
-					opts.on_attach = function(client, bufnr)
-                        original_on_attach(client, bufnr)
-						hook(client, bufnr)
-					end
-				end
-
-				server.init(lsp, opts)
+				require('lsp.' .. server).init(lsp, Opts:new(capabilities))
 			end
 		end,
 	},

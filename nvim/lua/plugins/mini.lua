@@ -43,25 +43,12 @@ return {
 		keys = {
 			{
 				'<leader>ut',
-				function() require('mini.trailspace').trim() end,
+				function()
+					require('mini.trailspace').trim()
+				end,
 			},
 		},
 		opts = {},
-	},
-
-	{
-		'echasnovski/mini.comment',
-		event = 'BufReadPre',
-		opts = {
-			options = {
-				ignore_blank_line = true,
-			},
-			mappings = {
-				comment = 'gc',
-				comment_line = 'gcc',
-				textobject = 'gc',
-			},
-		},
 	},
 
 	{
@@ -84,7 +71,7 @@ return {
 				indent_at_cursor = true,
 				try_as_border = false,
 			},
-			symbol = ICONS.VERTICAL_LINE_1
+			symbol = ICONS.VERTICAL_LINE_1,
 		},
 	},
 

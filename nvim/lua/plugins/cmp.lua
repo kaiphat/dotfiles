@@ -119,39 +119,43 @@ return {
 				async_budget = 1,
 				max_view_entries = 50,
 			},
-			sources = cmp.config.sources(
+			sources = cmp.config.sources({
+				-- { name = 'copilot', keyword_length = 1, priority = 200 },
+				{ name = 'luasnip', keyword_length = 2, priority = 101 },
+				{ name = 'nvim_lsp', keyword_length = 1, priority = 100 },
+				{ name = 'path', keyword_length = 0, priority = 110 },
+			}, {
 				{
-					-- { name = 'copilot', keyword_length = 1, priority = 200 },
-					{ name = 'luasnip', keyword_length = 2, priority = 101 },
-					{ name = 'nvim_lsp', keyword_length = 1, priority = 100 },
-					{ name = 'path', keyword_length = 0, priority = 110 },
-				},
-				{
-					{
-						name = 'buffer',
-						option = {
-							get_bufnrs = function()
-								local bufs = {}
-								for _, win in ipairs(vim.api.nvim_list_wins()) do
-									bufs[vim.api.nvim_win_get_buf(win)] = true
-								end
-								return vim.tbl_keys(bufs)
-							end,
-							indexing_interval = 100,
-							indexing_batch_size = 1000,
-							max_indexed_line_length = 1024 * 40,
-							keyword_pattern = [[\k\+]],
-						},
-						keyword_length = 1,
-						priority = 90,
+					name = 'buffer',
+					option = {
+						get_bufnrs = function()
+							local bufs = {}
+							for _, win in ipairs(vim.api.nvim_list_wins()) do
+								bufs[vim.api.nvim_win_get_buf(win)] = true
+							end
+							return vim.tbl_keys(bufs)
+						end,
+						indexing_interval = 100,
+						indexing_batch_size = 1000,
+						max_indexed_line_length = 1024 * 40,
+						keyword_pattern = [[\k\+]],
 					},
-				}
-			),
+					keyword_length = 1,
+					priority = 90,
+				},
+			}),
 			experimental = {
 				ghost_text = {
 					hl_group = 'LspCodeLens',
 				},
 			},
 		}
+
+		cmp.setup.filetype('sql', {
+			sources = {
+				{ name = 'vim-dadbod-completion' },
+				{ name = 'buffer' },
+			},
+		})
 	end,
 }

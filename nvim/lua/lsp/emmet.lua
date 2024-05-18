@@ -1,9 +1,11 @@
 return {
 	init = function(lsp, opts)
-		opts.filetypes = {
-			'html',
+		opts:expand {
+			filetypes = {
+				'html',
+			},
 		}
 
-        lsp.emmet_language_server.setup(opts)
+		lsp.emmet_language_server.setup(opts:to_server_opts())
 	end,
 }

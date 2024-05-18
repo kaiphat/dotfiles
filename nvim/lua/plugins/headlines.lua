@@ -23,8 +23,8 @@ return {
 		dependencies = { 'nvim-treesitter/nvim-treesitter' },
 		config = function()
 			require('render-markdown').setup {
-                headings = { '◇ ', '◇ ', '󰲥 ', '󰲧 ', '󰲩 ', '󰲫 ' },
-                bullets = { '•', '◦', '■', '◇ ' },
+				headings = { '◇ ', '○ ', '✿ ', '◇ ', '◇ ', '◇ ' },
+				bullets = { '•', '◦', '■', '◇ ' },
 			}
 		end,
 	},

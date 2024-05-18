@@ -28,7 +28,7 @@ local function build_font(name, params)
 			{
 				italic = true,
 				font = wezterm.font(name, {
-					italic = params.italic or false,
+					italic = params.italic or params.full_italic or false,
 					weight = weight,
 				}),
 			},
@@ -41,21 +41,32 @@ end
 
 return {
 	jet_brains = build_font('JetBrainsMono Nerd Font', {
-		weight = weights.B,
+		weight = weights.SB,
 		font_size = 11,
 		cell_width = 1,
-		line_height = 1.1,
+		line_height = 1.15,
 	}),
 	victor = build_font('VictorMono Nerd Font', {
 		weight = weights.EB,
-		font_size = 11.5,
+		font_size = 11,
 		cell_width = 1.05,
-		line_height = 1.1,
+		line_height = 1,
 	}),
-	caskaydia = build_font('Cascadia Code', {
-		font_size = 8,
+	caskaydia = build_font('CaskaydiaCove Nerd Font', {
+		font_size = 13,
 		cell_width = 1,
-		line_height = 1.25,
+		line_height = 1,
+	}),
+	input = build_font('Input', {
+		weight = weights.R,
+		font_size = 12,
+		cell_width = 0.9,
+		line_height = 1.15,
+	}),
+	serious = build_font('Serious Sans', {
+		font_size = 11.5,
+		cell_width = 1,
+		line_height = 1.1,
 	}),
 	fant = build_font('Fantasque Sans Mono', {
 		weight = weights.M,
@@ -64,9 +75,10 @@ return {
 		line_height = 1.15,
 	}),
 	sf_mono = build_font('SFMono Nerd Font', {
+		weight = weights.M,
 		font_size = 12,
-		cell_width = 0.85,
-		line_height = 1.05,
+		cell_width = 0.9,
+		line_height = 1.1,
 	}),
 	fira = build_font('FiraCode Nerd Font', {
 		font_size = 11,
@@ -79,9 +91,10 @@ return {
 		line_height = 1.15,
 	}),
 	hermit = build_font('Hurmit Nerd Font Mono', {
-		font_size = 12,
+		weight = weights.M,
+		font_size = 11.5,
 		cell_width = 1,
-		line_height = 0.85,
+		line_height = 1,
 	}),
 	maple_mac = build_font('Maple Mono NF', {
 		font_size = 11.5,
@@ -113,6 +126,13 @@ return {
 		cell_width = 0.9,
 		line_height = 1.15,
 	}),
+	blex = build_font('BlexMono Nerd Font', {
+		full_italic = true,
+		weight = weights.M,
+		font_size = 11,
+		cell_width = 1,
+		line_height = 1,
+	}),
 	iosevka = build_font('Iosevka Nerd Font Mono', {
 		weight = weights.M,
 		font_size = 13,
@@ -120,9 +140,9 @@ return {
 		line_height = 1.1,
 	}),
 	radon = build_font('Monaspace Radon', {
-		weight = weights.M,
-		font_size = 11,
-		cell_width = 0.85,
+		weight = weights.R,
+		font_size = 11.5,
+		cell_width = 0.8,
 		line_height = 1.15,
 		harfbuzz_features = {
 			'calt',

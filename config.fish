@@ -128,7 +128,7 @@ alias btop "btop -p 1"
 alias nvim-start "nvim --startuptime _s.log -c exit && tail -100 _s.log | bat && rm _s.log"
 alias ... "cd ../../"
 alias lg "lazygit"
-alias fzf "fzf --color=gutter:-1,bg+:#949cbb --no-separator --info=inline-right --no-scrollbar --pointer=' ' --prompt='❯ ' --layout=reverse"
+alias fzf "fzf --color=gutter:-1,bg+:#949cbb --no-separator --info=inline-right --no-scrollbar --pointer=' ' --prompt='❯ ' --layout=reverse --bind ctrl-e:close"
 # alias fd "fd --no-ignore --hidden -p -c never"
 function gs
     set result (git log --branches --source --oneline | fzf)
@@ -202,6 +202,10 @@ function gp -a message
     git add -A
     git commit -m "$message"
     git push origin $branch
+end
+
+function notify:apple
+    osascript -e 'display notification "Finished" sound name "Blow"'
 end
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈

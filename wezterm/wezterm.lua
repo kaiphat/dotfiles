@@ -29,7 +29,7 @@ local keys = {
 }
 
 return merge( --
-	fonts.radon,
+	fonts.zed,
 	background,
 	theme,
 	{
@@ -37,7 +37,7 @@ return merge( --
 			left = 20,
 			right = 20,
 			top = 15,
-			bottom = 12,
+			bottom = 1,
 		},
 		enable_tab_bar = false,
 		enable_scroll_bar = false,

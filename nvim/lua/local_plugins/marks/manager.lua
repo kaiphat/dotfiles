@@ -13,7 +13,7 @@ Manager.__index = Manager
 function Manager:new(opts)
 	return setmetatable({
 		marks = {},
-        opts = opts,
+		opts = opts,
 		active_mark_index = nil,
 		fs = Fs:new(Path_builder:new():build()),
 		group = vim.api.nvim_create_augroup('marks_plugin_group', {}),
@@ -47,12 +47,12 @@ function Manager:load_buffer(mark)
 
 	vim.api.nvim_set_current_buf(bufnr)
 
-    if self.opts.save_position then
-        vim.api.nvim_win_set_cursor(0, {
-            mark.row or 1,
-            mark.col or 0,
-        })
-    end
+	if self.opts.save_position then
+		vim.api.nvim_win_set_cursor(0, {
+			mark.row or 1,
+			mark.col or 0,
+		})
+	end
 end
 
 function Manager:clear_all_marks()
@@ -84,8 +84,8 @@ function Manager:add_mark(new_index)
 end
 
 function Manager:add_keymaps()
-    local all_leters = 'abcdefghijklmnopqrstuvwxyz'
-	local indexes = '1234567890,.;\'[]'..all_leters
+	local all_leters = 'abcdefghijklmnopqrstuvwxyz'
+	local indexes = '1234567890,.;\'[]' .. all_leters
 
 	for i = 1, #indexes do
 		local index = indexes:sub(i, i)
@@ -94,7 +94,7 @@ function Manager:add_keymaps()
 			vim.notify('Marked as ' .. index)
 		end)
 
-		map([[']].. index, function()
+		map([[']] .. index, function()
 			local mark = self.marks[index]
 			self:load_buffer(mark)
 		end)
@@ -140,9 +140,9 @@ function Manager:add_keymaps()
 
 		if message == '' then
 			message = 'No marks'
-        else
-            message = 'Marks:\n' .. message
-        end
+		else
+			message = 'Marks:\n' .. message
+		end
 
 		vim.notify(message)
 	end)
