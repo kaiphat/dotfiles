@@ -67,7 +67,7 @@ local function build_rg_cmd_with_no_ignore(opts)
 end
 
 local function build_prompt()
-	return '  ❯ '
+	return '  ' .. ICONS.TRIANGLE
 end
 
 return {
@@ -264,7 +264,7 @@ return {
 				-- window, can be set to 'false' to remove all borders or to
 				-- 'none', 'single', 'double', 'thicc' (+cc) or 'rounded' (default)
 				-- border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-				border = 'single',
+				border = 'rounded',
 				-- requires neovim > v0.9.0, passed as is to `nvim_open_win`
 				-- can be sent individually to any provider to set the win title
 				-- title         = "Title",
@@ -491,7 +491,7 @@ return {
 					['--layout'] = 'reverse',
 					['--border'] = 'none',
 					['--prompt'] = '❯',
-					['--pointer'] = ' ',
+					['--pointer'] = ICONS.CARET,
 					['--marker'] = '❯',
 					['--no-scrollbar'] = '',
 					['--no-separator'] = '',

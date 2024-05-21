@@ -2,12 +2,12 @@ return {
 	'sindrets/diffview.nvim',
 	enabled = true,
 	cmd = {
-        'DiffviewOpen',
+		'DiffviewOpen',
 		'DiffviewFileHistory',
 	},
 	keys = {
-        { '<leader>gv', ':DiffviewOpen<cr>' },
-        { '<leader>gh', ':DiffviewFileHistory<cr>' },
+		{ '<leader>gv', ':DiffviewOpen<cr>' },
+		{ '<leader>gh', ':DiffviewFileHistory<cr>' },
 	},
 
 	config = function()

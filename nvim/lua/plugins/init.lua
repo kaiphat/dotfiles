@@ -8,14 +8,14 @@ return {
 			require('nvim-web-devicons').setup {
 				override = {
 					['toml'] = {
-                        icon = '󱈤',
-                        color = '#a3b8ef',
+						icon = '󱈤',
+						color = '#a3b8ef',
 						cterm_color = '231',
 						name = 'Toml',
 					},
 					['norg'] = {
-                        icon = '󱈤',
-                        color = '#a3b8ef',
+						icon = '󱈤',
+						color = '#a3b8ef',
 						cterm_color = '231',
 						name = 'Toml',
 					},

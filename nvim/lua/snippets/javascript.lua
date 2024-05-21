@@ -68,7 +68,7 @@ return {
 
 			s('im', {
 				c(1, {
-                    fmt(default_import, { rep(1), i(1) }),
+					fmt(default_import, { rep(1), i(1) }),
 					fmt(import, { i(2), i(1) }),
 				}),
 			}),

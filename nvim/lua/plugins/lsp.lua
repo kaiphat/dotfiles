@@ -1,16 +1,3 @@
-local servers = {
-	'luals',
-	'eslint',
-	'rust',
-	'cssls',
-	'sqlls',
-	'html',
-	'emmet',
-	'graphql',
-	'pylsp',
-	'marksman',
-}
-
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     diagnostic     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 local diagnostic_opts = {
 	float = {
@@ -38,19 +25,19 @@ for _, hint in ipairs { 'Error', 'Information', 'Hint', 'Warning' } do
 end
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     setup handlers     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-vim.lsp.handlers['textDocument/definition'] = function(_, result)
-	if not result or vim.tbl_isempty(result) then
-		print '[LSP] Could not find definition'
-		return
-	end
-
-	if vim.tbl_islist(result) then
-		vim.lsp.util.jump_to_location(result[1], 'utf-8')
-	else
-		vim.lsp.util.jump_to_location(result, 'utf-8')
-	end
-end
-
+-- vim.lsp.handlers['textDocument/definition'] = function(_, result)
+-- 	if not result or vim.tbl_isempty(result) then
+-- 		print '[LSP] Could not find definition'
+-- 		return
+-- 	end
+--
+-- 	if vim.tbl_islist(result) then
+-- 		vim.lsp.util.jump_to_location(result[1], 'utf-8')
+-- 	else
+-- 		vim.lsp.util.jump_to_location(result, 'utf-8')
+-- 	end
+-- end
+--
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     keymaps     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 vim.api.nvim_create_autocmd('LspAttach', {
 	group = create_augroup 'lsp_attach',
@@ -129,9 +116,9 @@ function Opts:new(capabilities)
 			if obj.on_attach_hook then
 				obj.on_attach_hook(client, bufnr)
 			end
-			if vim.lsp.handlers['textDocument/inlayHint'] then
-				vim.lsp.inlay_hint.enable()
-			end
+			-- if vim.lsp.handlers['textDocument/inlayHint'] then
+			-- 	vim.lsp.inlay_hint.enable()
+			-- end
 		end,
 		capabilities = capabilities,
 		flags = {
@@ -169,7 +156,7 @@ return {
 
 			require('typescript-tools').setup {
 				on_attach = function(client)
-					vim.lsp.inlay_hint.enable()
+					-- vim.lsp.inlay_hint.enable()
 				end,
 				settings = {
 					tsserver_file_preferences = {
@@ -217,8 +204,20 @@ return {
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend('force', capabilities, cmp.default_capabilities())
 
-			for _, server in ipairs(servers) do
-				require('lsp.' .. server).init(lsp, Opts:new(capabilities))
+			for _, server in ipairs {
+				'luals',
+				'eslint',
+				'rust',
+				'cssls',
+				'sqlls',
+				'html',
+				'emmet',
+				'graphql',
+				'pylsp',
+				'marksman',
+				-- 'vtsls',
+			} do
+				require('lsp.' .. server)(lsp, Opts:new(capabilities))
 			end
 		end,
 	},

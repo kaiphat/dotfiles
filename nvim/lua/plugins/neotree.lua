@@ -24,7 +24,9 @@ M.get_mappings = function()
 
 				local pn = state.tree:get_node(state.tree:get_node():get_parent_id())
 
-				if not pn:is_expanded() then fs_cmds.navigate_up(state) end
+				if not pn:is_expanded() then
+					fs_cmds.navigate_up(state)
+				end
 			end
 		end,
 		['l'] = function(state)
@@ -41,9 +43,15 @@ M.get_mappings = function()
 				fs_cmds.open(state)
 			end
 		end,
-		['L'] = function(state) fs_cmds.navigate_down(state) end,
-		['u'] = function(state) fs_cmds.navigate_up(state) end,
-		['i'] = function(state) fs_cmds.set_root(state) end,
+		['L'] = function(state)
+			fs_cmds.navigate_down(state)
+		end,
+		['u'] = function(state)
+			fs_cmds.navigate_up(state)
+		end,
+		['i'] = function(state)
+			fs_cmds.set_root(state)
+		end,
 		['P'] = { 'toggle_preview', config = { use_float = true } },
 		['t'] = 'open_tabnew',
 		['C'] = 'close_node',

@@ -100,7 +100,7 @@ return {
 	},
 	config = function()
 		local gitsigns = require 'gitsigns'
-        local icon = ICONS.VERTICAL_LINE_SHORT_1
+		local icon = ICONS.VERTICAL_LINE_SHORT_1
 
 		gitsigns.setup {
 			signs = {
@@ -149,7 +149,7 @@ return {
 			update_debounce = 100,
 			status_formatter = nil,
 			_signs_staged_enable = true,
-            _signs_staged = {
+			_signs_staged = {
 				add = {
 					hl = 'GitSignsAdd',
 					text = icon,

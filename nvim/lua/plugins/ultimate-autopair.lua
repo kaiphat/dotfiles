@@ -39,7 +39,9 @@ return {
 					'\'',
 					'\'',
 					suround = true,
-					cond = function(fn) return not fn.in_lisp() or fn.in_string() end,
+					cond = function(fn)
+						return not fn.in_lisp() or fn.in_string()
+					end,
 					alpha = true,
 					nft = { 'tex', 'latex' },
 					multiline = false,

@@ -1,6 +1,8 @@
 local M = {}
 
-M.col = function() return vim.opt.columns:get() - 1 end
+M.col = function()
+	return vim.opt.columns:get() - 1
+end
 
 M.get_stages = function()
 	local stages_util = require 'notify.stages.util'
@@ -10,8 +12,12 @@ M.get_stages = function()
 			local next_height = state.message.height + 2
 			local next_row = stages_util.available_slot(state.open_windows, next_height, stages_util.DIRECTION.TOP_DOWN)
 
-			if not next_row then return nil end
-			if next_row == 0 then next_row = 1 end
+			if not next_row then
+				return nil
+			end
+			if next_row == 0 then
+				next_row = 1
+			end
 			return {
 				relative = 'editor',
 				anchor = 'NE',
@@ -33,13 +39,17 @@ M.get_stages = function()
 		function(state, win)
 			local slot = stages_util.slot_after_previous(win, state.open_windows, stages_util.DIRECTION.TOP_DOWN)
 
-			if slot == 0 then slot = 1 end
+			if slot == 0 then
+				slot = 1
+			end
 
 			return {
 				row = {
 					slot,
 					frequency = 30,
-					complete = function() return true end,
+					complete = function()
+						return true
+					end,
 				},
 				col = { M.col() },
 				time = true,
@@ -50,7 +60,9 @@ M.get_stages = function()
 				opacity = {
 					0,
 					frequency = 2,
-					complete = function(cur_opacity) return cur_opacity <= 4 end,
+					complete = function(cur_opacity)
+						return cur_opacity <= 4
+					end,
 				},
 				col = { M.col() },
 			}

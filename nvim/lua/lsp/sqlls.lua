@@ -1,5 +1,3 @@
-return {
-	init = function(lsp, opts)
-		lsp.sqlls.setup(opts:to_server_opts())
-	end,
-}
+return function(lsp, opts)
+	lsp.sqlls.setup(opts:to_server_opts())
+end

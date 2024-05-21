@@ -1,5 +1,5 @@
 _G.ICONS = {
-    CIRCLE_SMALL = '•',
+	CIRCLE_SMALL = '•',
 	CIRCLE_MEDIUM = '󰧞',
 	CIRCLE_LARGE = '',
 
@@ -9,9 +9,12 @@ _G.ICONS = {
 	VERTICAL_LINE_4 = '┊',
 	VERTICAL_LINE_5 = '¦',
 
-    VERTICAL_LINE_SHORT_1 = '⏽',
+	VERTICAL_LINE_SHORT_1 = '⏽',
 
+	CARET = '󱞩',
 	ARROW = '➜',
 	BRACKET = '❯',
-    SEARCH = '',
+	SEARCH = '',
+	BIG_SEARCH = ' ',
+	TRIANGLE = '󰼛 ',
 }

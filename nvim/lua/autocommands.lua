@@ -1,5 +1,5 @@
 vim.api.nvim_create_autocmd({ 'BufReadPost' }, {
-	group = vim.api.nvim_create_augroup('last_position', {}),
+	group = create_augroup 'last_position',
 	callback = function()
 		local test_line_data = vim.api.nvim_buf_get_mark(0, '"')
 		local test_line = test_line_data[1]
@@ -39,7 +39,7 @@ vim.api.nvim_create_autocmd('FileType', {
 
 vim.api.nvim_create_autocmd({ 'BufEnter' }, {
 	pattern = '*.md',
-	group = vim.api.nvim_create_augroup('custom:markdown_wrap_option', {}),
+	group = create_augroup 'markdown_wrap_option',
 	callback = function()
 		vim.opt_local.wrap = true
 	end,
@@ -47,7 +47,7 @@ vim.api.nvim_create_autocmd({ 'BufEnter' }, {
 
 vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'VimLeavePre' }, {
 	pattern = '*',
-	group = vim.api.nvim_create_augroup('custom:autosave', {}),
+	group = create_augroup 'autosave',
 	callback = function(event)
 		if event.buftype or event.file == '' then
 			return
@@ -62,7 +62,7 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'VimLeavePre' }, {
 
 vim.api.nvim_create_autocmd('VimResized', {
 	pattern = '*',
-	group = vim.api.nvim_create_augroup('custom:resize_pane', {}),
+	group = create_augroup 'resize_pane',
 	callback = function()
 		vim.cmd 'wincmd ='
 	end,

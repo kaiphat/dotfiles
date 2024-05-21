@@ -27,7 +27,7 @@ return {
 					},
 					position = {
 						row = -2,
-						col = '100%'
+						col = '100%',
 					},
 				},
 			},

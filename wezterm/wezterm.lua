@@ -2,7 +2,7 @@ require 'lua/utils'
 
 local wezterm = require 'wezterm'
 local fonts = require 'lua/fonts'
-local theme = require 'lua/themes/rose_pine_dark'
+local theme = require 'lua/themes/github_light'
 
 wezterm.on('gui-startup', function(cmd)
 	local _, _, window = wezterm.mux.spawn_window(cmd or {})
@@ -29,7 +29,7 @@ local keys = {
 }
 
 return merge( --
-	fonts.zed,
+	fonts.input,
 	background,
 	theme,
 	{

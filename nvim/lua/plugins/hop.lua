@@ -5,7 +5,9 @@ return {
 	keys = {
 		{
 			's',
-			function() require('hop').hint_char1 {} end,
+			function()
+				require('hop').hint_char1 {}
+			end,
 		},
 	},
 	config = function()

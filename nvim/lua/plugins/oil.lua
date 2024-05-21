@@ -25,7 +25,7 @@ return {
 		})
 
 		require('oil').setup {
-            delete_to_trash = true,
+			delete_to_trash = true,
 			columns = {
 				'icon',
 			},
