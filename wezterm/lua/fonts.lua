@@ -42,7 +42,7 @@ end
 return {
 	jet_brains = build_font('JetBrainsMono Nerd Font', {
 		weight = weights.SB,
-		font_size = 11,
+		font_size = 11.5,
 		cell_width = 1,
 		line_height = 1.15,
 	}),
@@ -52,25 +52,26 @@ return {
 		cell_width = 1.05,
 		line_height = 1,
 	}),
-	caskaydia = build_font('CaskaydiaCove Nerd Font', {
-		font_size = 13,
+	caskaydia = build_font('Cascadia Code', {
+		weight = weights.R,
+		font_size = 12,
 		cell_width = 1,
-		line_height = 1,
+		line_height = 1.1,
 	}),
 	input = build_font('Input', {
 		weight = weights.R,
-		font_size = 12,
+		font_size = 11.5,
 		cell_width = 0.9,
 		line_height = 1.15,
 	}),
 	serious = build_font('Serious Sans', {
-		font_size = 11.5,
+		font_size = 12,
 		cell_width = 1,
-		line_height = 1.1,
+		line_height = 1.15,
 	}),
 	fant = build_font('Fantasque Sans Mono', {
 		weight = weights.M,
-		font_size = 14,
+		font_size = 13,
 		cell_width = 1,
 		line_height = 1.15,
 	}),
@@ -80,9 +81,10 @@ return {
 		cell_width = 0.9,
 		line_height = 1.1,
 	}),
-	fira = build_font('FiraCode Nerd Font', {
+	fira = build_font('Fira Code', {
+		weight = weights.M,
 		font_size = 11,
-		cell_width = 0.9,
+		cell_width = 0.8,
 		line_height = 1.1,
 	}),
 	hack = build_font('Hack Nerd Font JBM Ligatured', {
@@ -90,9 +92,15 @@ return {
 		cell_width = 0.9,
 		line_height = 1.15,
 	}),
-	hermit = build_font('Hurmit Nerd Font Mono', {
-		weight = weights.M,
-		font_size = 11.5,
+	hermit = build_font('Hermit', {
+		weight = weights.R,
+		font_size = 12,
+		cell_width = 1,
+		line_height = 1,
+	}),
+	space_mono = build_font('Space Mono', {
+		weight = weights.R,
+		font_size = 12,
 		cell_width = 1,
 		line_height = 1,
 	}),
@@ -109,14 +117,14 @@ return {
 		},
 	}),
 	maple_aoc = build_font('Maple Mono NF', {
-		font_size = 10,
+		font_size = 12,
 		cell_width = 1,
-		line_height = 1.15,
+		line_height = 1,
 		weight = weights.SB,
 		harfbuzz_features = {
 			'cv01', -- @
 			'cv02', -- a
-			'cv03', -- i
+			-- 'cv03', -- i
 			'cv04', -- l
 		},
 	}),
@@ -124,10 +132,10 @@ return {
 		italic = false,
 		font_size = 12,
 		cell_width = 0.9,
-		line_height = 1.15,
+		line_height = 1,
 	}),
 	blex = build_font('BlexMono Nerd Font', {
-		full_italic = true,
+		full_italic = false,
 		weight = weights.M,
 		font_size = 11,
 		cell_width = 1,

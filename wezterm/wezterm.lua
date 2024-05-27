@@ -2,7 +2,7 @@ require 'lua/utils'
 
 local wezterm = require 'wezterm'
 local fonts = require 'lua/fonts'
-local theme = require 'lua/themes/github_light'
+local theme = require 'lua/themes/rose_pine_dark'
 
 wezterm.on('gui-startup', function(cmd)
 	local _, _, window = wezterm.mux.spawn_window(cmd or {})
@@ -28,34 +28,29 @@ local keys = {
 	{ key = 'q', mods = 'CMD', action = wezterm.action.QuitApplication },
 }
 
-return merge( --
-	fonts.input,
-	background,
-	theme,
-	{
-		window_padding = {
-			left = 20,
-			right = 20,
-			top = 15,
-			bottom = 1,
+return merge(fonts.zed, background, theme, {
+	window_padding = {
+		left = 20,
+		right = 20,
+		top = 15,
+		bottom = 1,
+	},
+	enable_tab_bar = false,
+	enable_scroll_bar = false,
+	scrollback_lines = 1000,
+	cursor_blink_rate = 1400,
+	max_fps = 240,
+	animation_fps = 240,
+	default_cursor_style = 'BlinkingBar',
+	disable_default_key_bindings = true,
+	warn_about_missing_glyphs = false,
+	window_close_confirmation = 'NeverPrompt',
+	keys = keys,
+	mouse_bindings = {
+		{
+			event = { Up = { streak = 1, button = 'Left' } },
+			mods = 'CTRL',
+			action = wezterm.action.OpenLinkAtMouseCursor,
 		},
-		enable_tab_bar = false,
-		enable_scroll_bar = false,
-		scrollback_lines = 1000,
-		cursor_blink_rate = 1400,
-		max_fps = 240,
-		animation_fps = 240,
-		default_cursor_style = 'BlinkingBar',
-		disable_default_key_bindings = true,
-		warn_about_missing_glyphs = false,
-		window_close_confirmation = 'NeverPrompt',
-		keys = keys,
-		mouse_bindings = {
-			{
-				event = { Up = { streak = 1, button = 'Left' } },
-				mods = 'CTRL',
-				action = wezterm.action.OpenLinkAtMouseCursor,
-			},
-		},
-	}
-)
+	},
+})

@@ -55,8 +55,8 @@ return {
 				c.border = c.comment
 				c.comment = c.dark5
 				c.yellow = '#f6c177'
-                c.orange = '#6e88a6'
-                c.blue1 = '#f4b8e4'
+				c.orange = '#6e88a6'
+				c.blue1 = '#f4b8e4'
 			end,
 
 			on_highlights = function(hl, c)

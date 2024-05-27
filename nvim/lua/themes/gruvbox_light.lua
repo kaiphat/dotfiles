@@ -6,11 +6,11 @@ return {
 			underline = false,
 			transparent_mode = true,
 			overrides = {
-                MiniCursorword = { underline = false, bg = '#ccccdd' }
-			}
+				MiniCursorword = { underline = false, bg = '#ccccdd' },
+			},
 		}
 
-        vim.o.background = "light" -- or "light" for light mode
+		vim.o.background = 'light' -- or "light" for light mode
 		vim.cmd 'colorscheme gruvbox'
 	end,
 }

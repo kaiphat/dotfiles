@@ -1,68 +1,73 @@
-local commands = {
-	copy_file_path = function()
-		vim.cmd 'silent! let @+=expand("%:p")'
-		print 'File path was yanked'
-	end,
+vim.api.nvim_create_user_command('Squeeze', function()
+	vim.cmd 'silent! %s/\\v(\\n\\n)\\n+/\\1/e'
+end, {})
 
-	delete_spaces = function()
-		vim.cmd [[silent! s/\S\@<=\s\+/ /g]]
-		vim.cmd [[silent! nohl]]
-	end,
+vim.api.nvim_create_user_command('DeleteEmptyLines', function()
+	vim.cmd 'silent! %s/\\v(\\n)\\n+/\\1/e'
+end, {})
 
-	create_sub_title = function(char)
-		local MAX_LENGTH = 60
-		local SPACE_LENGTH = 5
-		local DEFAULT_CHAR = '┈'
+vim.api.nvim_create_user_command('DeleteSpaces', function()
+	vim.cmd 'silent! s/S@<=s+/ /g'
+	vim.cmd 'silent! nohl'
+end, {})
 
-		char = (char == '' or char == nil) and '#' or char
+vim.api.nvim_create_user_command('CopyFilePath', function()
+	vim.cmd 'silent! let @+=expand("%:p")'
+	print 'File path was yanked'
+end, {})
 
-		local row = get_row_col()
+vim.api.nvim_create_user_command('CreateSubTitle', function(opts)
+	local char = opts.fargs[1]
 
-		local line = vim.trim(vim.api.nvim_get_current_line():gsub(char, ''):gsub(DEFAULT_CHAR, ''))
-		local free_space = MAX_LENGTH - #line - SPACE_LENGTH * 2
-		local left_line_length = math.floor(free_space / 2)
-		local left = DEFAULT_CHAR:rep(left_line_length)
-		local right = DEFAULT_CHAR:rep(free_space - left_line_length)
+	local MAX_LENGTH = 60
+	local SPACE_LENGTH = 5
+	local DEFAULT_CHAR = '┈'
 
-		local space = (' '):rep(SPACE_LENGTH)
-		local title = char .. ' ' .. left .. space .. line .. space .. right
+	char = (char == '' or char == nil) and '#' or char
 
-		vim.api.nvim_buf_set_lines(0, row - 1, row, true, { title })
-	end,
+	local row = get_row_col()
 
-	create_title = function(char)
-		local MAX_LENGTH = 60
-		local SPACE_LENGTH = 3
-		local DEFAULT_CHAR = '┈'
+	local line = vim.trim(vim.api.nvim_get_current_line():gsub(char, ''):gsub(DEFAULT_CHAR, ''))
+	local free_space = MAX_LENGTH - #line - SPACE_LENGTH * 2
+	local left_line_length = math.floor(free_space / 2)
+	local left = DEFAULT_CHAR:rep(left_line_length)
+	local right = DEFAULT_CHAR:rep(free_space - left_line_length)
 
-		char = (char == '' or char == nil) and '#' or char
+	local space = (' '):rep(SPACE_LENGTH)
+	local title = char .. ' ' .. left .. space .. line .. space .. right
 
-		local row = get_row_col()
+	vim.api.nvim_buf_set_lines(0, row - 1, row, true, { title })
+end, { nargs = '*' })
 
-		local line = vim.trim(vim.api.nvim_get_current_line():gsub(char, ''):gsub(DEFAULT_CHAR, ''))
-		local left_line_length = math.floor((MAX_LENGTH - #line - SPACE_LENGTH * 2) / 2)
-		local left = DEFAULT_CHAR:rep(left_line_length)
-		local right = DEFAULT_CHAR:rep(MAX_LENGTH - #line - SPACE_LENGTH * 2 - left_line_length)
+vim.api.nvim_create_user_command('CreateTitle', function(opts)
+	local char = opts.fargs[1]
 
-		local next_line = vim.api.nvim_buf_get_lines(0, row, row + 1, false)[1]
-		local space = (' '):rep(SPACE_LENGTH)
-		local title = char .. ' ' .. left .. space .. line .. space .. right
+	local MAX_LENGTH = 60
+	local SPACE_LENGTH = 3
+	local DEFAULT_CHAR = '┈'
 
-		local border = char .. ' ' .. DEFAULT_CHAR:rep(MAX_LENGTH)
+	char = (char == '' or char == nil) and '#' or char
 
-		vim.api.nvim_buf_set_lines(0, row - 1, row, true, { border, title, border })
+	local row = get_row_col()
 
-		if vim.trim(next_line) ~= '' then vim.api.nvim_buf_set_lines(0, row + 2, row + 2, true, { '' }) end
-	end,
-}
+	local line = vim.trim(vim.api.nvim_get_current_line():gsub(char, ''):gsub(DEFAULT_CHAR, ''))
+	local left_line_length = math.floor((MAX_LENGTH - #line - SPACE_LENGTH * 2) / 2)
+	local left = DEFAULT_CHAR:rep(left_line_length)
+	local right = DEFAULT_CHAR:rep(MAX_LENGTH - #line - SPACE_LENGTH * 2 - left_line_length)
 
-vim.cmd [[command! Squeeze %s/\v(\n\n)\n+/\1/e]]
-vim.cmd [[command! DeleteEmptyLines %s/\v(\n)\n+/\1/e]]
-vim.cmd [[command! DeleteSpaces lua require('commands').delete_spaces()]]
-vim.cmd [[command! CopyFilePath lua require('commands').copy_file_path()]]
-vim.cmd [[command! -nargs=* CreateSubTitle lua require('commands').create_sub_title('<args>')]]
-vim.cmd [[command! -nargs=* CreateTitle lua require('commands').create_title('<args>')]]
-vim.cmd [[command! FileType lua print(vim.bo.filetype)]]
-vim.cmd [[command! -range Test lua require('commands').select()]]
+	local next_line = vim.api.nvim_buf_get_lines(0, row, row + 1, false)[1]
+	local space = (' '):rep(SPACE_LENGTH)
+	local title = char .. ' ' .. left .. space .. line .. space .. right
 
-return commands
+	local border = char .. ' ' .. DEFAULT_CHAR:rep(MAX_LENGTH)
+
+	vim.api.nvim_buf_set_lines(0, row - 1, row, true, { border, title, border })
+
+	if vim.trim(next_line) ~= '' then
+		vim.api.nvim_buf_set_lines(0, row + 2, row + 2, true, { '' })
+	end
+end, { nargs = '*' })
+
+vim.api.nvim_create_user_command('FileType', function()
+	print(vim.bo.filetype)
+end, {})

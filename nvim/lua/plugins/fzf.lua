@@ -67,7 +67,7 @@ local function build_rg_cmd_with_no_ignore(opts)
 end
 
 local function build_prompt()
-	return '  ' .. ICONS.TRIANGLE
+	return '  ' .. ICONS.TRIANGLE .. ' '
 end
 
 return {
@@ -167,6 +167,7 @@ return {
 				require('fzf-lua').lsp_references {
 					file_ignore_patterns = ignore_patterns,
 					ignore_current_line = true,
+					fzf_opts = { ['--query'] = '!import' },
 				}
 			end,
 		},

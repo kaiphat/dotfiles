@@ -16,9 +16,12 @@ style = "blue"
 truncate_to_repo = false
 
 [character]
-success_symbol = "[➜](purple)"
-error_symbol = "[➜](red)"
-vimcmd_symbol = "[➜](green)"
+# success_symbol = "[➜](purple)"
+# error_symbol = "[➜](red)"
+# vimcmd_symbol = "[➜](green)"
+success_symbol = "[󰼛](purple)"
+error_symbol = "[󰼛](red)"
+vimcmd_symbol = "[󰼛](green)"
 # success_symbol = "[❯](purple)"
 # error_symbol = "[❯](red)"
 # vimcmd_symbol = "[❮](green)"
@@ -49,3 +52,5 @@ style = "yellow"
 [custom.draft]
 format = ' [DRAFT](red)'
 when = 'git log -1 --pretty=%B | grep -q DRAFT'
+require_repo = true
+ignore_timeout = true

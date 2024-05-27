@@ -15,6 +15,8 @@ set -U ignoreeof true
 set -U SXHKD_SHELL sh
 set -U XDG_CONFIG_HOME ~/.config
 set -U TERMINFO /usr/share/terminfo
+set -gx CPPFLAGS "-I/opt/homebrew/opt/openjdk@17/include"
+set -x JAVA_HOME (/usr/libexec/java_home -v 1.7)
 
 bind \cd delete-char
 bind \cw backward-kill-word
@@ -44,6 +46,7 @@ fish_add_path -aP $HOME/.local/bin/razer-cli
 fish_add_path -aP $HOME/.yarn/bin
 fish_add_path -aP $HOME/.local/bin
 fish_add_path -aP $HOME/.local/share/nvim/mason/bin/
+fish_add_path -aP /opt/homebrew/opt/openjdk@17/bin
 
 
 set -x PATH "/Library/Frameworks/Python.framework/Versions/3.12/bin" "$PATH"
@@ -128,8 +131,8 @@ alias btop "btop -p 1"
 alias nvim-start "nvim --startuptime _s.log -c exit && tail -100 _s.log | bat && rm _s.log"
 alias ... "cd ../../"
 alias lg "lazygit"
-alias fzf "fzf --color=gutter:-1,bg+:#949cbb --no-separator --info=inline-right --no-scrollbar --pointer=' ' --prompt='❯ ' --layout=reverse --bind ctrl-e:close"
-# alias fd "fd --no-ignore --hidden -p -c never"
+alias fzf "fzf --color=gutter:-1,bg+:-1,fg+:#244566,pointer:#365987 --margin=0,2 --no-separator --info=inline-right --no-scrollbar --pointer='󱞩' --prompt='󰼛 ' --layout=reverse --bind ctrl-e:close"
+
 function gs
     set result (git log --branches --source --oneline | fzf)
     echo $result | nread

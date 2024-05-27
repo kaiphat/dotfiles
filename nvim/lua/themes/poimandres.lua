@@ -16,7 +16,7 @@ local palette = {
 	background1 = '#303340',
 	background2 = '#1B1E28',
 	background3 = '#171922',
-    background4 = '#384155',
+	background4 = '#384155',
 	text = '#E4F0FB',
 	white = '#FFFFFF',
 	none = 'NONE',
@@ -29,12 +29,12 @@ return {
 	config = function()
 		require('poimandres').setup {
 			disable_background = true,
-			disable_float_background = true
+			disable_float_background = true,
 		}
 
 		vim.cmd 'colorscheme poimandres'
 
-        vim.api.nvim_set_hl(0, 'VertSplit', { fg = palette.blueGray3 })
-        vim.api.nvim_set_hl(0, 'MiniCursorword', { bg = palette.background4, underline = false })
+		vim.api.nvim_set_hl(0, 'VertSplit', { fg = palette.blueGray3 })
+		vim.api.nvim_set_hl(0, 'MiniCursorword', { bg = palette.background4, underline = false })
 	end,
 }

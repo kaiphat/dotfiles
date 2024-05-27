@@ -21,6 +21,7 @@ map('v', 'p', 'pgvy=`]')
 map('v', '<', '<gv')
 map('v', '>', '>gv')
 map('n', '\'', '`')
+map('n', '<C-Q>', ':wqa<cr>')
 
 map({ 'c', 'i' }, '<C-r>', '<C-r>+', { noremap = false })
 
@@ -62,7 +63,7 @@ map('n', 'x', function()
 		end
 	else
 		vim.api.nvim_feedkeys('"_x', 'n', false)
-    end
+	end
 end)
 
 map('n', '<A-->', ':vertical resize -10<cr>')
@@ -92,7 +93,9 @@ map('n', 'J', 'Jzz')
 map('n', ',,', '^')
 map('n', ',s', ':split<cr>')
 map('n', ',v', ':vsplit<cr>')
-map('n', ',x', function() vim.cmd 'silent! q!' end)
+map('n', ',x', function()
+	vim.cmd 'silent! q!'
+end)
 
 for char in string.gmatch([[w'"`p[<({]], '.') do
 	for command in string.gmatch('ydvc', '.') do

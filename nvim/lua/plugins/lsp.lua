@@ -25,19 +25,19 @@ for _, hint in ipairs { 'Error', 'Information', 'Hint', 'Warning' } do
 end
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     setup handlers     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
--- vim.lsp.handlers['textDocument/definition'] = function(_, result)
--- 	if not result or vim.tbl_isempty(result) then
--- 		print '[LSP] Could not find definition'
--- 		return
--- 	end
---
--- 	if vim.tbl_islist(result) then
--- 		vim.lsp.util.jump_to_location(result[1], 'utf-8')
--- 	else
--- 		vim.lsp.util.jump_to_location(result, 'utf-8')
--- 	end
--- end
---
+vim.lsp.handlers['textDocument/definition'] = function(_, result)
+	if not result or vim.tbl_isempty(result) then
+		print '[LSP] Could not find definition'
+		return
+	end
+
+	if vim.tbl_islist(result) then
+		vim.lsp.util.jump_to_location(result[1], 'utf-8')
+	else
+		vim.lsp.util.jump_to_location(result, 'utf-8')
+	end
+end
+
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     keymaps     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 vim.api.nvim_create_autocmd('LspAttach', {
 	group = create_augroup 'lsp_attach',
@@ -81,6 +81,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		end)
 
 		map({ 'n', 'v' }, '<space>la', function()
+			-- vim.lsp.buf.signature_help()
+			--
 			require('fzf-lua').lsp_code_actions {}
 		end)
 
@@ -164,8 +166,12 @@ return {
 					},
 					tsserver_format_options = {
 						allowRenameOfImportPath = true,
+						insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
+						insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = false,
+						insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
+						quotePreference = 'single',
 					},
-					-- code_lens = 'all',
+					code_lens = 'off',
 					complete_function_calls = false,
 				},
 				handlers = {

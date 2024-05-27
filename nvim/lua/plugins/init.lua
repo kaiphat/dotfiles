@@ -1,9 +1,15 @@
 return {
-	{ 'nvim-lua/plenary.nvim', lazy = true },
-	{ 'nvim-lua/popup.nvim', lazy = true },
+	{
+		'nvim-lua/plenary.nvim',
+		event = 'VeryLazy',
+	},
+	{
+		'nvim-lua/popup.nvim',
+		event = 'VeryLazy',
+	},
 	{
 		'kyazdani42/nvim-web-devicons',
-		lazy = true,
+		event = 'VeryLazy',
 		config = function()
 			require('nvim-web-devicons').setup {
 				override = {
@@ -23,5 +29,4 @@ return {
 			}
 		end,
 	},
-	{ 'MunifTanjim/nui.nvim', lazy = true },
 }

@@ -2,6 +2,9 @@ return {
 	'folke/noice.nvim',
 	enabled = true,
 	event = 'VeryLazy',
+	dependencies = {
+		'MunifTanjim/nui.nvim',
+	},
 	config = function()
 		local noice = require 'noice'
 
@@ -34,10 +37,10 @@ return {
 
 			cmdline = {
 				format = {
-					cmdline = { title = '', pattern = '^:', icon = ICONS.ARROW, lang = 'vim' },
+					cmdline = { title = '', pattern = '^:', icon = ICONS.TRIANGLE, lang = 'vim' },
 					search_down = { title = '', kind = 'search', pattern = '^/', icon = ICONS.SEARCH, lang = 'regex' },
 					search_up = { title = '', kind = 'search', pattern = '^%?', icon = ICONS.SEARCH, lang = 'regex' },
-					filter = { pattern = '^:%s*!', icon = ICONS.ARROW, lang = 'bash' },
+					filter = { pattern = '^:%s*!', icon = ICONS.TRIANGLE, lang = 'bash' },
 					lua = { pattern = '^:%s*lua%s+', icon = '', lang = 'lua' },
 					help = { pattern = '^:%s*h%s+', icon = ICONS.SEARCH },
 					input = {}, -- Used by input()

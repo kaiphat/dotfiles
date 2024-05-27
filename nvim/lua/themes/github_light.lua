@@ -13,7 +13,7 @@ return {
 
 				styles = {
 					comments = 'italic',
-					keywords = 'italic,bold'
+					keywords = 'italic,bold',
 				},
 			},
 
@@ -35,9 +35,9 @@ return {
 					IndentBlanklineContextChar = { fg = '#dddddd' },
 					StatusLine = { bg = 'NONE', fg = 'bg2' },
 					StatusLineNC = { bg = 'NONE', fg = 'bg1' },
-                    HopNextKey1 = { link = 'HopNextKey' },
-                    HopNextKey2 = { link = 'HopNextKey' },
-                    ['@punctuation'] = { fg = '#666666' }
+					HopNextKey1 = { link = 'HopNextKey' },
+					HopNextKey2 = { link = 'HopNextKey' },
+					['@punctuation'] = { fg = '#666666' },
 				},
 			},
 		}

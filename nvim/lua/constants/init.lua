@@ -16,5 +16,5 @@ _G.ICONS = {
 	BRACKET = '❯',
 	SEARCH = '',
 	BIG_SEARCH = ' ',
-	TRIANGLE = '󰼛 ',
+	TRIANGLE = '󰼛',
 }
