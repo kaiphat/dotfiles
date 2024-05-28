@@ -18,4 +18,4 @@ local themes = {
 	neomodern_dark = 'neomodern_dark',
 }
 
-return require('themes.' .. themes.rose_pine_dark)
+return require('themes.' .. themes.rose_pine_light)

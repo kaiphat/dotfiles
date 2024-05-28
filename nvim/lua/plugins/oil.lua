@@ -16,19 +16,30 @@ return {
 	},
 	config = function()
 		vim.api.nvim_create_autocmd('FileType', {
-			group = vim.api.nvim_create_augroup('oil_file_type', {}),
+			group = create_augroup 'oil',
 			pattern = 'oil',
 			callback = function(event)
 				vim.api.nvim_buf_set_keymap(event.buf, 'n', '<C-j>', 'j', {})
 				vim.api.nvim_buf_set_keymap(event.buf, 'n', '<C-k>', 'k', {})
+				vim.keymap.set('n', '<C-y>', function()
+					local oil = require 'oil'
+					local entry = oil.get_cursor_entry()
+					local dir = oil.get_current_dir()
+					if not entry or not dir then
+						return
+					end
+					local relpath = vim.fn.fnamemodify(dir .. entry.name, ':.')
+
+					vim.fn.setreg('+', relpath)
+
+					print('Path yanked: ' .. relpath)
+				end, { buffer = event.buf })
 			end,
 		})
 
 		require('oil').setup {
 			delete_to_trash = true,
-			columns = {
-				'icon',
-			},
+			columns = { 'icon' },
 			skip_confirm_for_simple_edits = true,
 			prompt_save_on_select_new_entry = true,
 
@@ -44,12 +55,12 @@ return {
 				['<C-p>'] = 'actions.preview',
 				['<C-e>'] = 'actions.close',
 				['<C-h>'] = 'actions.parent',
+				['<C-r>'] = 'actions.refresh',
 				-- ['g.'] = 'actions.toggle_hidden',
 				-- ['g\\'] = 'actions.toggle_trash',
 				-- ['g?'] = 'actions.show_help',
 				-- ['<C-h>'] = 'actions.select_split',
 				-- ['<C-t>'] = 'actions.select_tab',
-				['<C-r>'] = 'actions.refresh',
 				-- ['_'] = 'actions.open_cwd',
 				-- ['`'] = 'actions.cd',
 				-- ['~'] = 'actions.tcd',

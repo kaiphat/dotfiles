@@ -167,7 +167,7 @@ return {
 				require('fzf-lua').lsp_references {
 					file_ignore_patterns = ignore_patterns,
 					ignore_current_line = true,
-					fzf_opts = { ['--query'] = '!import' },
+					regex_filter = { 'import.*from', exclude = true },
 				}
 			end,
 		},

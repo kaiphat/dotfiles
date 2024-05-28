@@ -12,14 +12,14 @@ vim.api.nvim_create_autocmd({ 'BufReadPost' }, {
 })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
-	group = vim.api.nvim_create_augroup('text_yank_post', {}),
+	group = create_augroup 'text_yank_post',
 	callback = function()
 		vim.highlight.on_yank { timeout = 700 }
 	end,
 })
 
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-	group = vim.api.nvim_create_augroup('auto_create_dir', {}),
+	group = create_augroup 'auto_create_dir',
 	callback = function(event)
 		if event.match:match '^%w%w+://' then
 			return
@@ -30,8 +30,7 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-	pattern = '*',
-	group = vim.api.nvim_create_augroup('set_format_options', {}),
+	group = create_augroup 'set_format_options',
 	callback = function()
 		vim.opt_local.formatoptions = 'tc'
 	end,
@@ -46,7 +45,6 @@ vim.api.nvim_create_autocmd({ 'BufEnter' }, {
 })
 
 vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'VimLeavePre' }, {
-	pattern = '*',
 	group = create_augroup 'autosave',
 	callback = function(event)
 		if event.buftype or event.file == '' then
@@ -61,7 +59,6 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'VimLeavePre' }, {
 })
 
 vim.api.nvim_create_autocmd('VimResized', {
-	pattern = '*',
 	group = create_augroup 'resize_pane',
 	callback = function()
 		vim.cmd 'wincmd ='
