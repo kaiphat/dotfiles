@@ -1,4 +1,5 @@
 local themes = {
+	default_light = 'default_light',
 	dark = 'dark',
 	new_dark = 'new_dark',
 	github_light = 'github_light',
@@ -18,4 +19,4 @@ local themes = {
 	neomodern_dark = 'neomodern_dark',
 }
 
-return require('themes.' .. themes.rose_pine_light)
+return require('themes.' .. themes.rose_pine_dark)

@@ -81,9 +81,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		end)
 
 		map({ 'n', 'v' }, '<space>la', function()
-			-- vim.lsp.buf.signature_help()
-			--
-			require('fzf-lua').lsp_code_actions {}
+			vim.lsp.buf.code_action()
+
+			-- require('fzf-lua').lsp_code_actions {}
 		end)
 
 		map('n', '<space>lr', function()
@@ -147,6 +147,7 @@ return {
 	{
 		'pmizio/typescript-tools.nvim',
 		event = 'BufReadPre',
+		enabled = true,
 		keys = {
 			{ '<leader>ti', ':TSToolsAddMissingImports<cr>' },
 			{ '<leader>tr', ':TSToolsRenameFile<cr>' },
@@ -195,6 +196,7 @@ return {
 		dependencies = {
 			'jose-elias-alvarez/null-ls.nvim',
 			'pmizio/typescript-tools.nvim',
+			'yioneko/nvim-vtsls',
 		},
 		init_options = {
 			userLanguages = {

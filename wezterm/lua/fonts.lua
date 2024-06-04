@@ -47,7 +47,6 @@ return {
 	configs = {
 		jet_brains = {
 			name = 'JetBrainsMono Nerd Font',
-			full_italic = true,
 			weight = weights.SB,
 			font_size = 11.5,
 			cell_width = 1,
@@ -55,6 +54,7 @@ return {
 		},
 		victor = {
 			name = 'VictorMono Nerd Font',
+			italic = true,
 			weight = weights.EB,
 			font_size = 11,
 			cell_width = 1.05,
@@ -120,6 +120,9 @@ return {
 			font_size = 12,
 			cell_width = 1,
 			line_height = 1,
+			harfbuzz_features = {
+				'liga=off',
+			},
 		},
 		maple_mac = {
 			name = 'Maple Mono NF',
@@ -149,10 +152,24 @@ return {
 		},
 		zed = {
 			name = 'ZedMono Nerd Font Mono SemiBold Extended',
-			italic = false,
-			font_size = 12,
+			font_size = 11.5,
 			cell_width = 0.9,
-			line_height = 1,
+			line_height = 1.15,
+		},
+		pt_mono = {
+			name = 'PT Mono',
+			font_size = 12,
+			cell_width = 1,
+			line_height = 1.1,
+		},
+		mononoki_aoc = {
+			name = 'mononoki',
+			italic = true,
+			weight = weights.B,
+			font_size = 11.5,
+			cell_width = 1,
+			line_height = 1.15,
+			scale = 0.8,
 		},
 		blex = {
 			name = 'BlexMono Nerd Font',
@@ -173,7 +190,7 @@ return {
 			name = 'Monaspace Radon',
 			weight = weights.R,
 			font_size = 11.5,
-			cell_width = 0.8,
+			cell_width = 1,
 			line_height = 1.15,
 			harfbuzz_features = {
 				'calt',

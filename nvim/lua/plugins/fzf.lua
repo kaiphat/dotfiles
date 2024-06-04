@@ -236,6 +236,12 @@ return {
 			end,
 		},
 		{
+			'<leader>fq',
+			function()
+				require('fzf-lua').lsp_document_symbols {}
+			end,
+		},
+		{
 			'<leader>dw',
 			function()
 				require('fzf-lua').lsp_live_workspace_symbols {
@@ -246,6 +252,8 @@ return {
 	},
 	config = function()
 		local actions = require 'fzf-lua.actions'
+
+		require('fzf-lua').register_ui_select()
 
 		require('fzf-lua').setup {
 			winopts = {
@@ -622,7 +630,6 @@ return {
 					},
 					fzf_opts = {
 						['--no-multi'] = '',
-						['--delimiter'] = '\'[:]\'',
 					},
 				},
 				icons = {
@@ -811,11 +818,12 @@ return {
 					},
 				},
 				code_actions = {
+					prompt = build_prompt(),
 					async_or_timeout = 5000,
 					-- when git-delta is installed use "codeaction_native" for beautiful diffs
 					-- try it out with `:FzfLua lsp_code_actions previewer=codeaction_native`
 					-- scroll up to `previewers.codeaction{_native}` for more previewer options
-					previewer = 'codeaction',
+					previewer = false,
 				},
 				finder = {
 					file_icons = true,

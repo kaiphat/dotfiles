@@ -113,7 +113,14 @@ o.whichwrap:append '<>hl'
 wo.foldcolumn = '0'
 wo.foldmethod = 'expr'
 wo.foldexpr = 'nvim_treesitter#foldexpr()'
-wo.foldtext = [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) ]]
+wo.foldtext = 'v:lua.FoldText()'
 wo.foldminlines = 1
 wo.foldlevel = 99
 wo.conceallevel = 2
+
+FoldText = function()
+	local first_line = table.concat(vim.fn.getbufline(vim.api.nvim_get_current_buf(), vim.v.foldstart))
+	local space_before_text = first_line:match '%s*'
+
+	return space_before_text .. ' ' .. vim.trim(first_line)
+end

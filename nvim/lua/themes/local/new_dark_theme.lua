@@ -1,13 +1,13 @@
 local none = 'NONE'
 local P = {
-    text = '#f2f1f0',
-    float = '#2c4875',
-    visual = '#003f5c',
-    delete = '#ff6361',
-    add = '#bc5090',
-    keyword = '#ffd380',
-    field = '#ff8531',
-    punctuation = '#2c4875',
+	text = '#f2f1f0',
+	float = '#2c4875',
+	visual = '#003f5c',
+	delete = '#ff6361',
+	add = '#bc5090',
+	keyword = '#ffd380',
+	field = '#ff8531',
+	punctuation = '#2c4875',
 }
 
 --   #00202e
@@ -25,11 +25,11 @@ local T = setmetatable({}, {
 	__newindex = function(table, group, opts)
 		local highlights = { fg = none, bg = none }
 
-		for k,v in pairs(opts) do
+		for k, v in pairs(opts) do
 			if type(k) == 'number' then
-                for k2, v2 in pairs(v) do
-                    highlights[k2] = v2
-                end
+				for k2, v2 in pairs(v) do
+					highlights[k2] = v2
+				end
 			else
 				highlights[k] = v
 			end
@@ -144,4 +144,3 @@ T.NoiceCmdlinePopupBorder = { T.FloatBorder }
 T['@keyword'] = { T.fg_keyword }
 T['@field'] = { T.fg_field }
 T['@punctuation'] = { T.fg_punctuation }
-

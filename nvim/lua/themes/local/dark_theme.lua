@@ -381,7 +381,9 @@ H.MiniCursorword = H.Visual
 
 for group, highlights in pairs(H) do
 	for key, value in pairs(highlights) do
-		if not value then highlights[key] = 'NONE' end
+		if not value then
+			highlights[key] = 'NONE'
+		end
 	end
 
 	vim.api.nvim_set_hl(0, group, highlights)

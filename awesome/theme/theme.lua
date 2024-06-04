@@ -18,23 +18,24 @@ theme.border_radius = 12
 
 theme.font = 'Mononoki Nerd Font 12'
 
-rnotification.connect_signal(
-	'request::rules',
-	function()
-		rnotification.append_rule {
-			rule = { urgency = 'critical' },
-			properties = { bg = '#ff0000', fg = '#ffffff' },
-		}
-	end
-)
+rnotification.connect_signal('request::rules', function()
+	rnotification.append_rule {
+		rule = { urgency = 'critical' },
+		properties = { bg = '#ff0000', fg = '#ffffff' },
+	}
+end)
 
 local function rrect(radius)
-	return function(cr, width, height) gshape.rounded_rect(cr, width, height, radius) end
+	return function(cr, width, height)
+		gshape.rounded_rect(cr, width, height, radius)
+	end
 end
 
 if beautiful.border_radius and beautiful.border_radius > 0 then
 	client.connect_signal('manage', function(c, startup)
-		if not c.fullscreen and not c.maximized then c.shape = rrect(beautiful.border_radius) end
+		if not c.fullscreen and not c.maximized then
+			c.shape = rrect(beautiful.border_radius)
+		end
 	end)
 
 	--- Fullscreen and maximized clients should not have rounded corners

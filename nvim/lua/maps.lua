@@ -22,6 +22,7 @@ map('v', '<', '<gv')
 map('v', '>', '>gv')
 map('n', '\'', '`')
 map('n', '<C-Q>', ':wqa<cr>')
+map('n', 'J', 'Jx')
 
 map({ 'c', 'i' }, '<C-r>', '<C-r>+', { noremap = false })
 
@@ -87,8 +88,6 @@ map('i', '<C-d>', '<Right>')
 map('n', '<esc>', ':nohl<cr>')
 
 map('n', 'Y', 'y$')
-
-map('n', 'J', 'Jzz')
 
 map('n', ',,', '^')
 map('n', ',s', ':split<cr>')

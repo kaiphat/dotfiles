@@ -192,6 +192,7 @@ function gc -a message
 
     set branch (git rev-parse --abbrev-ref HEAD)
     set ticket (echo $branch | awk -F/ '{print $NF}')
+    set message (echo $message | awk '{print toupper(substr($0, 1, 1)) substr($0, 2)}')
 
     git add -A
     git commit -m "$ticket: $message"
