@@ -2,6 +2,7 @@ local wezterm = require 'wezterm'
 
 local weights = {
 	L = 'Light',
+	SL = 'DemiLight',
 	R = 'Regular',
 	M = 'Medium',
 	SB = 'DemiBold',
@@ -20,7 +21,7 @@ local function build_font(params)
 			},
 			{
 				family = 'Symbols Nerd Font Mono',
-				scale = params.scale or 0.8,
+				scale = params.scale or 0.75,
 			},
 		}
 	end
@@ -47,7 +48,8 @@ return {
 	configs = {
 		jet_brains = {
 			name = 'JetBrainsMono Nerd Font',
-			weight = weights.SB,
+			weight = weights.M,
+			italic = false,
 			font_size = 11.5,
 			cell_width = 1,
 			line_height = 1,
@@ -55,24 +57,33 @@ return {
 		victor = {
 			name = 'VictorMono Nerd Font',
 			italic = true,
-			weight = weights.EB,
+			weight = weights.M,
 			font_size = 11,
-			cell_width = 1.05,
+			cell_width = 1,
+			line_height = 1,
+		},
+		plex = {
+			name = 'IBMPlexMono',
+			italic = false,
+			full_italic = false,
+			weight = weights.B,
+			font_size = 10,
+			cell_width = 1,
 			line_height = 1,
 		},
 		caskaydia = {
 			name = 'Cascadia Code',
-			weight = weights.R,
+			weight = weights.M,
 			font_size = 12,
 			cell_width = 1,
-			line_height = 1.1,
+			line_height = 1.25,
 		},
 		input = {
-			name = 'Input',
+			name = 'Input Mono Condensed',
 			weight = weights.R,
 			font_size = 11.5,
-			cell_width = 0.9,
-			line_height = 1.15,
+			cell_width = 1,
+			line_height = 1.1,
 		},
 		serious = {
 			name = 'Serious Sans',
@@ -80,39 +91,52 @@ return {
 			cell_width = 1,
 			line_height = 1.15,
 		},
-		fant = {
-			name = 'Fantasque Sans Mono',
-			weight = weights.M,
-			font_size = 13,
+		agave = {
+			name = 'Agave Nerd Font',
+			font_size = 12.5,
 			cell_width = 1,
 			line_height = 1.15,
 		},
-		sf_mono = {
-			name = 'SFMono Nerd Font',
+		fant = {
+			name = 'Fantasque Sans Mono',
 			weight = weights.M,
-			font_size = 12,
-			cell_width = 0.9,
-			line_height = 1.1,
+			font_size = 12.5,
+			cell_width = 1.1,
+			line_height = 1.15,
+			scale = 0.6,
+		},
+		sf_mono = {
+			name = 'SF Mono',
+			italic = false,
+			weight = weights.B,
+			font_size = 10,
+			cell_width = 1,
+			line_height = 1.3,
+		},
+		share = {
+			name = 'Share Tech Mono',
+			weight = weights.R,
+			font_size = 12.4,
+			line_height = 1.2,
 		},
 		fira = {
-			name = 'Fira Code',
+			name = 'FiraCode Nerd Font Mono',
 			weight = weights.M,
 			font_size = 11,
-			cell_width = 0.8,
-			line_height = 1.1,
+			line_height = 1,
 		},
 		hack = {
-			name = 'Hack Nerd Font JBM Ligatured',
-			font_size = 15,
-			cell_width = 0.9,
-			line_height = 1.15,
+			name = 'Hack',
+			font_size = 12,
+			cell_width = 1,
+			line_height = 1,
 		},
 		hermit = {
 			name = 'Hermit',
 			weight = weights.R,
-			font_size = 12,
+			font_size = 11.1,
 			cell_width = 1,
-			line_height = 1,
+			line_height = 0.9,
 		},
 		space_mono = {
 			name = 'Space Mono',
@@ -128,21 +152,22 @@ return {
 			name = 'Maple Mono NF',
 			font_size = 11.5,
 			cell_width = 0.9,
-			line_height = 1.1,
-			weight = weights.M,
+			line_height = 1,
+			weight = weights.R,
 			harfbuzz_features = {
 				'cv01', -- @
-				'cv02', -- a
-				'cv03', -- i
+				-- 'cv02', -- a
+				-- 'cv03', -- i
 				'cv04', -- l
 			},
 		},
 		maple_aoc = {
 			name = 'Maple Mono NF',
-			font_size = 12,
+			italic = true,
+			font_size = 10.8,
 			cell_width = 1,
-			line_height = 1,
-			weight = weights.SB,
+			line_height = 1.15,
+			weight = weights.M,
 			harfbuzz_features = {
 				'cv01', -- @
 				'cv02', -- a
@@ -151,9 +176,9 @@ return {
 			},
 		},
 		zed = {
-			name = 'ZedMono Nerd Font Mono SemiBold Extended',
+			name = 'Zed Mono SemiBold Extended',
 			font_size = 11.5,
-			cell_width = 0.9,
+			cell_width = 1,
 			line_height = 1.15,
 		},
 		pt_mono = {
@@ -164,12 +189,32 @@ return {
 		},
 		mononoki_aoc = {
 			name = 'mononoki',
-			italic = true,
+			italic = false,
 			weight = weights.B,
-			font_size = 11.5,
+			font_size = 11.9,
 			cell_width = 1,
-			line_height = 1.15,
+			line_height = 1,
 			scale = 0.8,
+		},
+		inconsolata = {
+			name = 'Inconsolata',
+			italic = false,
+			weight = weights.B,
+			font_size = 14,
+			cell_width = 1,
+			line_height = 1.2,
+			scale = 0.6,
+			harfbuzz_features = {
+				'liga',
+				'dlig',
+			},
+		},
+		recursive = {
+			name = 'Rec Mono Casual',
+			weight = weights.R,
+			font_size = 11.5,
+			line_height = 1,
+			scale = 0.7,
 		},
 		blex = {
 			name = 'BlexMono Nerd Font',
@@ -181,17 +226,31 @@ return {
 		},
 		iosevka = {
 			name = 'Iosevka Nerd Font Mono',
-			weight = weights.M,
+			weight = weights.SB,
 			font_size = 13,
 			cell_width = 1,
 			line_height = 1.1,
 		},
+		roboto = {
+			name = 'Roboto Mono',
+			italic = true,
+			weight = weights.B,
+			font_size = 10,
+			cell_width = 1,
+			line_height = 1.3,
+		},
+		test = {
+			name = 'Ubuntu Mono',
+			weight = weights.M,
+			font_size = 14,
+			line_height = 1.25,
+		},
 		radon = {
 			name = 'Monaspace Radon',
-			weight = weights.R,
-			font_size = 11.5,
+			weight = weights.M,
+			font_size = 10.1,
 			cell_width = 1,
-			line_height = 1.15,
+			line_height = 1.2,
 			harfbuzz_features = {
 				'calt',
 				'liga',

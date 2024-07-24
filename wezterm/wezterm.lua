@@ -1,22 +1,24 @@
 local wezterm = require 'wezterm'
 local Config = require 'lua/Config'
 local fonts = require 'lua/fonts'
-local theme = require 'lua/themes/rose_pine_dark'
+local theme = require 'lua/themes/rose_pine_light'
 
 local config = Config:new()
 
-config:add(fonts.build_font(fonts.configs.mononoki_aoc))
+config:add(fonts.build_font(fonts.configs.fira))
 
 config:add(theme)
 
 config:add {
+	-- front_end = 'OpenGL',
+	-- freetype_load_target = 'HorizontalLcd',
 	enable_tab_bar = false,
 	enable_scroll_bar = false,
 	scrollback_lines = 1000,
-	cursor_blink_rate = 1400,
 	max_fps = 240,
 	animation_fps = 240,
-	default_cursor_style = 'BlinkingBar',
+	cursor_blink_rate = 0,
+	default_cursor_style = 'SteadyBlock',
 	disable_default_key_bindings = true,
 	warn_about_missing_glyphs = false,
 	window_close_confirmation = 'NeverPrompt',

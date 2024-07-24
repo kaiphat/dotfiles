@@ -1,6 +1,6 @@
 import = [
-    '~/dotfiles/alacritty/themes/rose_pine_dark.toml',
-    '~/dotfiles/alacritty/fonts/input.toml'
+    '~/dotfiles/alacritty/themes/rose_pine_light.toml',
+    '~/dotfiles/alacritty/fonts/fira_code.toml'
 ]
 
 [env]
@@ -32,8 +32,8 @@ option_as_alt = "Both"
 startup_mode = "SimpleFullscreen"
 
 [window.padding]
-x = 6
-y = 2
+x = 8
+y = 4
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     keymaps     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 

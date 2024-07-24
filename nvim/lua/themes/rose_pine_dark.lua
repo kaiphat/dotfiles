@@ -34,6 +34,7 @@ return {
 				GitSignsChange = { bg = 'none' },
 				GitSignsDelete = { bg = 'none' },
 				MiniCursorword = { underline = false, bg = 'foam', blend = 30 },
+				MiniCursorwordCurrent = { underline = false, bg = 'NONE' },
 				LocalHighlight = { underline = false, bg = 'foam', blend = 30 },
 				HopNextKey1 = { fg = 'love' },
 				HopNextKey2 = { fg = 'pine' },

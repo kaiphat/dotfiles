@@ -1,26 +1,26 @@
 [font]
-size = 11
+size = 11.5
 
 [font.normal]
 family = 'ZedMono Nerd Font Mono'
-style = 'Light'
+style = 'Extended'
 
 [font.bold]
 family = 'ZedMono Nerd Font Mono'
-style = 'Light'
+style = 'Extended'
 
 [font.italic]
 family = 'ZedMono Nerd Font Mono'
-style = 'Light'
+style = 'Extended'
 
 [font.bold_italic]
 family = 'ZedMono Nerd Font Mono'
-style = 'Light'
+style = 'Extended'
 
 [font.offset]
-x = 2
+x = 0
 y = 2
 
 [font.glyph_offset]
-x = 1
-y = 1
+x = 0
+y = 0

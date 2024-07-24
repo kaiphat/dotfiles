@@ -43,7 +43,7 @@ return {
 	priority = 1000,
 	config = function()
 		require('tokyonight').setup {
-			style = 'storm',
+			style = 'moon',
 			transparent = true,
 
 			styles = {
@@ -54,17 +54,17 @@ return {
 			on_colors = function(c)
 				c.border = c.comment
 				c.comment = c.dark5
-				c.yellow = '#f6c177'
-				c.orange = '#6e88a6'
-				c.blue1 = '#f4b8e4'
+				-- c.yellow = '#f6c177'
+				-- c.orange = '#6e88a6'
+				-- c.blue1 = '#f4b8e4'
 			end,
 
 			on_highlights = function(hl, c)
-				hl.FzfLuaBorder = { fg = c.terminal_black }
-				hl.FzfLuaTitle = { bg = c.blue1, fg = c.terminal_black, bold = false }
+				-- hl.FzfLuaBorder = { fg = c.terminal_black }
+				-- hl.FzfLuaTitle = { bg = c.blue1, fg = c.terminal_black, bold = false }
+				-- hl.FzfLuaHeaderText = { fg = c.green2 }
 				hl.StatusLine = { bg = 'NONE', fg = c.comment }
 				hl.StatusLineNC = { bg = 'NONE', fg = c.comment }
-				hl.FzfLuaHeaderText = { fg = c.green2 }
 				hl.ColorColumn = { bg = c.fg_gutter }
 			end,
 		}

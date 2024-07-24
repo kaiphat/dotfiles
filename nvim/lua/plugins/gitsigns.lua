@@ -105,40 +105,22 @@ return {
 		gitsigns.setup {
 			signs = {
 				add = {
-					hl = 'GitSignsAdd',
 					text = icon,
-					numhl = 'GitSignsAddNr',
-					linehl = 'GitSignsAddLn',
 				},
 				change = {
-					hl = 'GitSignsChange',
 					text = icon,
-					numhl = 'GitSignsChangeNr',
-					linehl = 'GitSignsChangeLn',
 				},
 				delete = {
-					hl = 'GitSignsDelete',
 					text = icon,
-					numhl = 'GitSignsDeleteNr',
-					linehl = 'GitSignsDeleteLn',
 				},
 				topdelete = {
-					hl = 'GitSignsDelete',
 					text = icon,
-					numhl = 'GitSignsDeleteNr',
-					linehl = 'GitSignsDeleteLn',
 				},
 				changedelete = {
-					hl = 'GitSignsChange',
 					text = icon,
-					numhl = 'GitSignsChangeNr',
-					linehl = 'GitSignsChangeLn',
 				},
 				untracked = {
-					hl = 'GitSignsAdd',
 					text = icon,
-					numhl = 'GitSignsAddNr',
-					linehl = 'GitSignsAddLn',
 				},
 			},
 			signcolumn = true,
@@ -148,43 +130,25 @@ return {
 			sign_priority = 6,
 			update_debounce = 100,
 			status_formatter = nil,
-			_signs_staged_enable = true,
-			_signs_staged = {
+			signs_staged_enable = true,
+			signs_staged = {
 				add = {
-					hl = 'GitSignsAdd',
 					text = icon,
-					numhl = 'GitSignsAddNr',
-					linehl = 'GitSignsAddLn',
 				},
 				change = {
-					hl = 'GitSignsChange',
 					text = icon,
-					numhl = 'GitSignsChangeNr',
-					linehl = 'GitSignsChangeLn',
 				},
 				delete = {
-					hl = 'GitSignsDelete',
 					text = icon,
-					numhl = 'GitSignsDeleteNr',
-					linehl = 'GitSignsDeleteLn',
 				},
 				topdelete = {
-					hl = 'GitSignsDelete',
 					text = icon,
-					numhl = 'GitSignsDeleteNr',
-					linehl = 'GitSignsDeleteLn',
 				},
 				changedelete = {
-					hl = 'GitSignsChange',
 					text = icon,
-					numhl = 'GitSignsChangeNr',
-					linehl = 'GitSignsChangeLn',
 				},
 				untracked = {
-					hl = 'GitSignsAdd',
 					text = icon,
-					numhl = 'GitSignsAddNr',
-					linehl = 'GitSignsAddLn',
 				},
 			},
 		}

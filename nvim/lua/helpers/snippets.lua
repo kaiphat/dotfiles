@@ -10,7 +10,9 @@ end
 _.buf_vtext = function()
 	local a_orig = vim.fn.getreg 'a'
 	local mode = vim.fn.mode()
-	if mode ~= 'v' and mode ~= 'V' then vim.cmd [[normal! gv]] end
+	if mode ~= 'v' and mode ~= 'V' then
+		vim.cmd [[normal! gv]]
+	end
 	vim.cmd [[silent! normal! "aygv]]
 	local text = vim.fn.getreg 'a'
 	vim.fn.setreg('a', a_orig)
@@ -25,6 +27,16 @@ _.buf_text = function()
 		text = text .. line .. '\n'
 	end
 	return text
+end
+
+_.exec_autocmd = function()
+	local bufnr = vim.api.nvim_get_current_buf()
+
+	vim.api.nvim_buf_call(bufnr, function()
+		vim.api.nvim_exec_autocmds('User', {
+			pattern = EVENT.BUF_PRE_CLOSE,
+		})
+	end)
 end
 
 return _

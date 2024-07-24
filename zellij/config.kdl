@@ -6,7 +6,7 @@ on_force_close     "quit"
 simplified_ui      true
 default_shell      "fish"
 pane_frames        false
-default_layout     "compact"
+#default_layout     "compact"
 mouse_mode         true
 scroll_buffer_size 40000
 copy_on_select     true

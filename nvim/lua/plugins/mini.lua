@@ -83,4 +83,11 @@ return {
 			delay = 400,
 		},
 	},
+
+	{
+		'echasnovski/mini.icons',
+		event = 'VeryLazy',
+		version = false,
+		opts = {},
+	},
 }

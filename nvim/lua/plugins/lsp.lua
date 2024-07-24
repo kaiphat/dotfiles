@@ -31,10 +31,8 @@ vim.lsp.handlers['textDocument/definition'] = function(_, result)
 		return
 	end
 
-	if vim.tbl_islist(result) then
+	if result then
 		vim.lsp.util.jump_to_location(result[1], 'utf-8')
-	else
-		vim.lsp.util.jump_to_location(result, 'utf-8')
 	end
 end
 
@@ -82,12 +80,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 		map({ 'n', 'v' }, '<space>la', function()
 			vim.lsp.buf.code_action()
-
-			-- require('fzf-lua').lsp_code_actions {}
 		end)
 
 		map('n', '<space>lr', function()
 			vim.lsp.buf.rename()
+		end)
+
+		map('n', '<space>lih', function()
+			local is_enabled = vim.lsp.inlay_hint.is_enabled()
+			vim.lsp.inlay_hint.enable(not is_enabled)
 		end)
 
 		map('n', 'go', function()
@@ -164,6 +165,11 @@ return {
 				settings = {
 					tsserver_file_preferences = {
 						includeInlayParameterNameHints = 'all',
+						includeInlayVariableTypeHints = true,
+						includeInlayEnumMemberValueHints = true,
+						includeInlayFunctionLikeReturnTypeHints = true,
+						includeInlayFunctionParameterTypeHints = true,
+						includeInlayPropertyDeclarationTypeHints = true,
 					},
 					tsserver_format_options = {
 						allowRenameOfImportPath = true,

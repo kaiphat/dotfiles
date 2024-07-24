@@ -1,25 +1,25 @@
 [font]
-size = 10.5
+size = 11
 
 [font.normal]
-family = "FiraCode Nerd Font"
-style = "Regular"
+family = "FiraCode Nerd Font Mono"
+style = "Retina"
 
 [font.bold]
-family = "FiraCode Nerd Font"
-style = "Regular"
+family = "FiraCode Nerd Font Mono"
+style = "Retina"
 
 [font.italic]
-family = "FiraCode Nerd Font"
-style = "Regular"
+family = "FiraCode Nerd Font Mono"
+style = "Retina"
 
 [font.bold_italic]
-family = "FiraCode Nerd Font"
-style = "Regular"
+family = "FiraCode Nerd Font Mono"
+style = "Retina"
 
 [font.offset]
-x = 1
-y = 8
+x = 0
+y = 5
 
 [font.glyph_offset]
 x = 0

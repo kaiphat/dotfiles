@@ -47,6 +47,10 @@ vim.api.nvim_create_autocmd({ 'BufEnter' }, {
 vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'VimLeavePre' }, {
 	group = create_augroup 'autosave',
 	callback = function(event)
+		if vim.bo.filetype == 'oil' then
+			return
+		end
+
 		if vim.api.nvim_buf_get_option(event.buf, 'modified') then
 			vim.schedule(function()
 				vim.api.nvim_buf_call(event.buf, function()

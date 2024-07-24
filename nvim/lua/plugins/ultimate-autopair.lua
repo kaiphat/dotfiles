@@ -9,11 +9,7 @@ return {
 			close = {
 				multi = false,
 			},
-			extensions = {
-				suround = {
-					p = 100,
-				},
-			},
+			extensions = {},
 			internal_pairs = {
 				{
 					'<',
@@ -46,7 +42,7 @@ return {
 					nft = { 'tex', 'latex' },
 					multiline = false,
 				},
-				{ '`', '`', nft = { 'tex', 'latex' }, multiline = false },
+				{ '`', '`', nft = { 'tex', 'latex' }, multiline = true },
 				{ '``', '\'\'', ft = { 'tex', 'latex' } },
 				{ '```', '```', newline = true, ft = { 'markdown' } },
 				{ '<!--', '-->', ft = { 'markdown', 'html' } },

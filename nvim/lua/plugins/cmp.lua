@@ -31,7 +31,6 @@ return {
 		'hrsh7th/cmp-nvim-lsp',
 		'saadparwaiz1/cmp_luasnip',
 		'hrsh7th/cmp-buffer',
-		'onsails/lspkind.nvim',
 		-- 'zbirenbaum/copilot-cmp',
 		-- 'zbirenbaum/copilot.lua',
 	},
@@ -48,20 +47,20 @@ return {
 		cmp.setup {
 			sorting = {
 				priority_weight = 2,
-				comparators = {
-					-- require('copilot_cmp.comparators').prioritize,
-
-					compare.offset,
-					compare.exact,
-					-- compare.scopes,
-					compare.score,
-					compare.recently_used,
-					compare.locality,
-					compare.kind,
-					-- compare.sort_text,
-					compare.length,
-					compare.order,
-				},
+				-- comparators = {
+				-- 	-- require('copilot_cmp.comparators').prioritize,
+				--
+				-- 	compare.offset,
+				-- 	compare.exact,
+				-- 	-- compare.scopes,
+				-- 	compare.score,
+				-- 	compare.recently_used,
+				-- 	compare.locality,
+				-- 	compare.kind,
+				-- 	-- compare.sort_text,
+				-- 	compare.length,
+				-- 	compare.order,
+				-- },
 			},
 			snippet = {
 				expand = function(args)
@@ -84,16 +83,14 @@ return {
 			},
 			formatting = {
 				fields = { 'kind', 'abbr', 'menu' },
-				format = require('lspkind').cmp_format {
-					mode = 'symbol',
-					maxwidth = 40,
-					ellipsis_char = '...',
-					symbol_map = {
-						TypeParameter = '󰗴',
-						Codeium = '󰇈',
-						Copilot = '󰇈',
-					},
-				},
+				format = function(entry, vim_item)
+					-- replace kind with mini lsp icon
+					local icon, _ = require('mini.icons').get('lsp', vim_item.kind)
+					if icon ~= nil then
+						vim_item.kind = icon
+					end
+					return vim_item
+				end,
 			},
 			completion = {
 				autocomplete = {
@@ -121,7 +118,7 @@ return {
 			},
 			sources = cmp.config.sources({
 				-- { name = 'copilot', keyword_length = 1, priority = 200 },
-				{ name = 'luasnip', keyword_length = 2, priority = 101 },
+				{ name = 'luasnip', keyword_length = 2, priority = 100 },
 				{ name = 'nvim_lsp', keyword_length = 1, priority = 100 },
 				{ name = 'path', keyword_length = 0, priority = 110 },
 			}, {
@@ -141,7 +138,7 @@ return {
 						keyword_pattern = [[\k\+]],
 					},
 					keyword_length = 1,
-					priority = 90,
+					priority = 99,
 				},
 			}),
 			experimental = {

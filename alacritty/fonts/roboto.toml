@@ -1,5 +1,5 @@
 [font]
-size = 10
+size = 11
 
 [font.normal]
 family = "RobotoMono Nerd Font"
@@ -11,16 +11,16 @@ style = "Regular"
 
 [font.italic]
 family = "RobotoMono Nerd Font"
-style = "Italic"
+style = "Regular"
 
 [font.bold_italic]
 family = "RobotoMono Nerd Font"
-style = "Italic"
+style = "Regular"
 
 [font.offset]
 x = 0
-y = 6
+y = 2
 
 [font.glyph_offset]
 x = 0
-y = 3
+y = 1

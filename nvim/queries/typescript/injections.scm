@@ -1,6 +1,13 @@
 ; typescript
 (
- (template_string) @sql
- (#match? @sql "^.*FROM|ALTER|SELECT|CREATE|UPDATE|DELETE|INSERT|WITH.*$")
- (#offset! @sql 0 1 0 -1)
+ (template_string (string_fragment) @injection.content)
+ (#match? @injection.content "^.*FROM|ALTER|SELECT|CREATE|UPDATE|DELETE|INSERT|WITH.*$")
+ (#set! injection.language "sql")
  )
+
+(
+ (template_string (string_fragment) @injection.content)
+ (#match? @injection.content "local|redis")
+ (#set! injection.language "lua")
+)
+

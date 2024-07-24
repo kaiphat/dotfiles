@@ -22,10 +22,21 @@ map('v', '<', '<gv')
 map('v', '>', '>gv')
 map('n', '\'', '`')
 map('n', '<C-Q>', ':wqa<cr>')
-map('n', 'J', 'Jx')
+map('n', 'J', function()
+	vim.api.nvim_feedkeys('J', 'n', false)
+
+	vim.schedule(function()
+		local col = vim.fn.col '.'
+		local line = vim.fn.getline '.'
+		local char = string.sub(line, col, col)
+
+		if char == ' ' then
+			vim.api.nvim_feedkeys('x', 'n', false)
+		end
+	end)
+end)
 
 map({ 'c', 'i' }, '<C-r>', '<C-r>+', { noremap = false })
-
 map('n', '<C-h>', ':wincmd h<cr>')
 map('n', '<C-j>', ':wincmd j<cr>')
 map('n', '<C-k>', ':wincmd k<cr>')
@@ -93,7 +104,7 @@ map('n', ',,', '^')
 map('n', ',s', ':split<cr>')
 map('n', ',v', ':vsplit<cr>')
 map('n', ',x', function()
-	vim.cmd 'silent! q!'
+	vim.cmd 'silent! wq'
 end)
 
 for char in string.gmatch([[w'"`p[<({]], '.') do

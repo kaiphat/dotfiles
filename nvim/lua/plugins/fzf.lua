@@ -23,7 +23,7 @@ local ignore_patterns = concat({
 }, always_ignore_patterns)
 
 local function build_find_cmd()
-	local base = 'fd --type f'
+	local base = 'fd --type f -i'
 	for _, pattern in ipairs(ignore_patterns) do
 		base = base .. ' --exclude=' .. pattern
 	end
@@ -33,7 +33,7 @@ end
 local function build_find_cmd_with_no_ignore(opts)
 	opts = opts or {}
 
-	local base = 'fd --hidden --no-ignore --type f'
+	local base = 'fd --hidden --no-ignore --type f -i'
 
 	if not opts.skip_always_ignore then
 		for _, pattern in ipairs(always_ignore_patterns) do
@@ -45,7 +45,7 @@ local function build_find_cmd_with_no_ignore(opts)
 end
 
 local function build_rg_cmd()
-	local base = 'rg --column --no-heading --color=always --smart-case --max-columns=4096 --trim'
+	local base = 'rg --column --no-heading --color=always --max-columns=4096 --trim -i'
 	for _, pattern in ipairs(ignore_patterns) do
 		base = base .. ' -g=!' .. pattern
 	end
@@ -55,7 +55,7 @@ end
 local function build_rg_cmd_with_no_ignore(opts)
 	opts = opts or {}
 
-	local base = 'rg --column --no-heading --color=always --smart-case --max-columns=4096 --trim --no-ignore --hidden'
+	local base = 'rg --column --no-heading --color=always --max-columns=4096 --trim --no-ignore --hidden -i'
 
 	if not opts.skip_always_ignore then
 		for _, pattern in ipairs(always_ignore_patterns) do
@@ -176,6 +176,7 @@ return {
 			function()
 				require('fzf-lua').lsp_references {
 					ignore_current_line = true,
+					regex_filter = { 'import.*from', exclude = true },
 				}
 			end,
 		},
@@ -494,6 +495,7 @@ return {
 				formatter = 'path.filename_first',
 				fzf_args = '--bind=change:first',
 				fzf_opts = {
+					['-i'] = true,
 					['--info'] = 'inline-right',
 					['--ansi'] = true,
 					['--height'] = '100%',
@@ -656,7 +658,7 @@ return {
 				-- default options are controlled by 'rg|grep_opts'
 				-- cmd            = "rg --vimgrep",
 				grep_opts = '--binary-files=without-match --line-number --recursive --color=auto --perl-regexp -e',
-				rg_opts = '--column --line-number --no-heading --color=always --smart-case --max-columns=4096 -e',
+				rg_opts = '--column --line-number --no-heading --color=always --ignore-case --max-columns=4096 -e',
 				-- set to 'true' to always parse globs in both 'grep' and 'live_grep'
 				-- search strings will be split using the 'glob_separator' and translated
 				-- to '--iglob=' arguments, requires 'rg'

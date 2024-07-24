@@ -3,7 +3,7 @@ return {
 		'zbirenbaum/copilot.lua',
 		cmd = 'Copilot',
 		event = 'BufEnter',
-		enabled = true,
+		enabled = false,
 		config = function()
 			require('copilot').setup {
 				panel = {
@@ -13,7 +13,7 @@ return {
 					},
 				},
 				suggestion = {
-					enabled = false,
+					enabled = true,
 					auto_trigger = true,
 					debounce = 75,
 					keymap = {

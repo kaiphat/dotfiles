@@ -25,6 +25,7 @@ local inactive_tab = {
 local colors = {
 	foreground = palette.text,
 	background = '#e3e3e3',
+	background = '#f1f0ff',
 	cursor_bg = palette.muted,
 	cursor_border = palette.muted,
 	cursor_fg = palette.text,
