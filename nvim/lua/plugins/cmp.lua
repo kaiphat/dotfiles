@@ -98,7 +98,7 @@ return {
 					types.cmp.TriggerEvent.InsertEnter,
 				},
 				completeopt = 'menuone,noinsert,preview',
-				keyword_length = 0,
+				keyword_length = 1,
 			},
 			matching = {
 				disallow_fuzzy_matching = true,

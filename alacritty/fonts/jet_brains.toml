@@ -1,21 +1,21 @@
 [font]
-size = 12
+size = 11.5
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"
-style = "Regular"
+style = "ExtraLight"
 
 [font.bold]
 family = "JetBrainsMono Nerd Font"
-style = "Regular"
+style = "ExtraLight"
 
 [font.italic]
 family = "JetBrainsMono Nerd Font"
-style = "Regular"
+style = "ExtraLight"
 
 [font.bold_italic]
 family = "JetBrainsMono Nerd Font"
-style = "Regular"
+style = "ExtraLight"
 
 [font.offset]
 x = 0

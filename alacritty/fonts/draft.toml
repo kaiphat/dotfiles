@@ -1,20 +1,20 @@
 [font]
-size = 12
+size = 10.5
 
 [font.normal]
-family = 'RecMonoCasual Nerd Font Mono'
+family = 'MartianMono Nerd Font Mono'
 style = 'Regular'
 
 [font.bold]
-family = 'RecMonoCasual Nerd Font Mono'
+family = 'MartianMono Nerd Font Mono'
 style = 'Regular'
 
 [font.italic]
-family = 'RecMonoCasual Nerd Font Mono'
+family = 'MartianMono Nerd Font Mono'
 style = 'Regular'
 
 [font.bold_italic]
-family = 'RecMonoCasual Nerd Font Mono'
+family = 'MartianMono Nerd Font Mono'
 style = 'Regular'
 
 [font.offset]

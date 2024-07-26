@@ -18,7 +18,7 @@ return {
 
 	{
 		'Exafunction/codeium.vim',
-		enabled = true,
+		enabled = false,
 		event = 'BufEnter',
 		keys = {
 			{

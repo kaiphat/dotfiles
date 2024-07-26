@@ -84,7 +84,7 @@ alias du "dc up --force-recreate -d -V $1"
 alias dub "dc up --force-recreate --build -d -V $1"
 function docker-patch-nerd-font -a name
     if test -z $name
-        docker run --rm -v ~/dotfiles/fonts/in:/in:Z -v ~/dotfiles/fonts:/out:Z nerdfonts/patcher:latest -c --careful -s
+        docker run --rm -v ~/dotfiles/fonts/in:/in:Z -v ~/dotfiles/fonts:/out:Z nerdfonts/patcher:latest -c --careful
     else
         set count (count ~/dotfiles/fonts/in/*)
 

@@ -120,7 +120,7 @@ return {
 			line_height = 1.2,
 		},
 		fira = {
-			name = 'FiraCode Nerd Font Mono',
+			name = 'FiraCode Nerd Font',
 			weight = weights.M,
 			font_size = 11,
 			line_height = 1,

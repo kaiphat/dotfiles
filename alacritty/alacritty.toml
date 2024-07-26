@@ -1,6 +1,6 @@
 import = [
     '~/dotfiles/alacritty/themes/rose_pine_light.toml',
-    '~/dotfiles/alacritty/fonts/fira_code.toml'
+    '~/dotfiles/alacritty/fonts/mononoki.toml'
 ]
 
 [env]

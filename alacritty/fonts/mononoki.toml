@@ -1,26 +1,26 @@
 [font]
-size = 12.5
+size = 11
 
 [font.normal]
-family = 'Mononoki Nerd Font Mono'
-style = 'Regular'
+family = 'Mononoki Nerd Font'
+style = 'Bold'
 
 [font.bold]
-family = 'Mononoki Nerd Font Mono'
-style = 'Regular'
+family = 'Mononoki Nerd Font'
+style = 'Bold'
 
 [font.italic]
-family = 'Mononoki Nerd Font Mono'
-style = 'Italic'
+family = 'Mononoki Nerd Font'
+style = 'Bold Italic'
 
 [font.bold_italic]
-family = 'Mononoki Nerd Font Mono'
-style = 'Italic'
+family = 'Mononoki Nerd Font'
+style = 'Bold Italic'
 
 [font.offset]
 x = 0
-y = 0
+y = 3
 
 [font.glyph_offset]
 x = 0
-y = 0
+y = 1

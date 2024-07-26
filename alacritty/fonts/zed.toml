@@ -2,19 +2,19 @@
 size = 11.5
 
 [font.normal]
-family = 'ZedMono Nerd Font Mono'
+family = 'ZedMono Nerd Font'
 style = 'Extended'
 
 [font.bold]
-family = 'ZedMono Nerd Font Mono'
+family = 'ZedMono Nerd Font'
 style = 'Extended'
 
 [font.italic]
-family = 'ZedMono Nerd Font Mono'
+family = 'ZedMono Nerd Font'
 style = 'Extended'
 
 [font.bold_italic]
-family = 'ZedMono Nerd Font Mono'
+family = 'ZedMono Nerd Font'
 style = 'Extended'
 
 [font.offset]

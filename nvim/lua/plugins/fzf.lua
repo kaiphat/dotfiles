@@ -516,7 +516,7 @@ return {
 				-- set to 'false' to disable
 				multiprocess = true, -- run command in a separate process
 				git_icons = false, -- show git icons?
-				file_icons = true, -- show file icons?
+				file_icons = "mini", -- show file icons?
 				color_icons = true, -- colorize file|git icons
 				-- path_shorten   = 1,              -- 'true' or number, shorten path?
 				-- executed command priority is 'cmd' (if exists)
