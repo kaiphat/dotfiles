@@ -20,4 +20,4 @@ local themes = {
 	nord_dark = 'nord_dark',
 }
 
-return require('themes.' .. themes.rose_pine_light)
+return require('themes.' .. themes.catppuccin_dark)

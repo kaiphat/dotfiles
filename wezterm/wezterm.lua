@@ -1,7 +1,7 @@
 local wezterm = require 'wezterm'
 local Config = require 'lua/Config'
 local fonts = require 'lua/fonts'
-local theme = require 'lua/themes/rose_pine_light'
+local theme = require 'lua/themes/catppuccin_dark'
 
 local config = Config:new()
 

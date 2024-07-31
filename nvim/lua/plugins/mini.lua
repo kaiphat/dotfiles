@@ -88,7 +88,11 @@ return {
 		'echasnovski/mini.icons',
 		event = 'VeryLazy',
 		version = false,
-		opts = {},
+		opts = {
+			lsp = {
+				snippet = { glyph = '', hl = 'MiniIconsGreen' },
+			},
+		},
 	},
 
 	{

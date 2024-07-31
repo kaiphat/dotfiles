@@ -7,6 +7,7 @@ local always_ignore_patterns = {
 	'yarn.lock',
 	'Cargo.lock',
 	'coverage/',
+	'package-lock.json',
 }
 
 local ignore_patterns = concat({
@@ -16,51 +17,52 @@ local ignore_patterns = concat({
 	'tests/',
 	'**/__tests__/*',
 	'**/__mocks__/*',
-	'package-lock.json',
 	'*.log',
 	'.gitignore',
 	'*.md',
 }, always_ignore_patterns)
 
-local function build_find_cmd()
+local IGNORE_LEVEL = {
+	FULL = 0,
+	TEST = 1,
+	WITHOUT = 2,
+}
+
+local function build_find_cmd(ignore_level)
 	local base = 'fd --type f -i'
-	for _, pattern in ipairs(ignore_patterns) do
+	local patterns = {}
+
+	if ignore_level == IGNORE_LEVEL.FULL then
+		patterns = ignore_patterns
+	elseif ignore_level == IGNORE_LEVEL.TEST then
+		patterns = always_ignore_patterns
+		base = base .. ' --no-ignore --hidden'
+	else
+		base = base .. ' --no-ignore --hidden'
+	end
+
+	for _, pattern in ipairs(patterns) do
 		base = base .. ' --exclude=' .. pattern
 	end
+
 	return base
 end
 
-local function build_find_cmd_with_no_ignore(opts)
-	opts = opts or {}
+local function build_rg_cmd(ignore_level)
+	local base = 'rg --column --no-heading --color=never --max-columns=4096 --trim -i --sort=path'
+	local patterns = {}
 
-	local base = 'fd --hidden --no-ignore --type f -i'
-
-	if not opts.skip_always_ignore then
-		for _, pattern in ipairs(always_ignore_patterns) do
-			base = base .. ' --exclude ' .. pattern
-		end
+	if ignore_level == IGNORE_LEVEL.FULL then
+		patterns = ignore_patterns
+	elseif ignore_level == IGNORE_LEVEL.TEST then
+		patterns = always_ignore_patterns
+		base = base .. ' --no-ignore --hidden'
+	else
+		base = base .. ' --no-ignore --hidden'
 	end
 
-	return base
-end
-
-local function build_rg_cmd()
-	local base = 'rg --column --no-heading --color=always --max-columns=4096 --trim -i'
-	for _, pattern in ipairs(ignore_patterns) do
+	for _, pattern in ipairs(patterns) do
 		base = base .. ' -g=!' .. pattern
-	end
-	return base .. ' -e'
-end
-
-local function build_rg_cmd_with_no_ignore(opts)
-	opts = opts or {}
-
-	local base = 'rg --column --no-heading --color=always --max-columns=4096 --trim --no-ignore --hidden -i'
-
-	if not opts.skip_always_ignore then
-		for _, pattern in ipairs(always_ignore_patterns) do
-			base = base .. ' -g=!' .. pattern
-		end
 	end
 
 	return base .. ' -e'
@@ -79,7 +81,7 @@ return {
 			'<leader>fj',
 			function()
 				require('fzf-lua').files {
-					cmd = build_find_cmd(),
+					cmd = build_find_cmd(IGNORE_LEVEL.FULL),
 				}
 			end,
 		},
@@ -87,7 +89,7 @@ return {
 			'<leader>fJ',
 			function()
 				require('fzf-lua').files {
-					cmd = build_find_cmd_with_no_ignore { skip_always_ignore = true },
+					cmd = build_find_cmd(IGNORE_LEVEL.WITHOUT),
 					cwd = get_current_dir(),
 				}
 			end,
@@ -96,7 +98,15 @@ return {
 			'<leader>dj',
 			function()
 				require('fzf-lua').files {
-					cmd = build_find_cmd_with_no_ignore(),
+					cmd = build_find_cmd(IGNORE_LEVEL.TEST),
+				}
+			end,
+		},
+		{
+			'<leader>dJ',
+			function()
+				require('fzf-lua').files {
+					cmd = build_find_cmd(IGNORE_LEVEL.WITHOUT),
 				}
 			end,
 		},
@@ -104,7 +114,7 @@ return {
 			'<leader>fl',
 			function()
 				require('fzf-lua').live_grep {
-					cmd = build_rg_cmd(),
+					cmd = build_rg_cmd(IGNORE_LEVEL.FULL),
 				}
 			end,
 		},
@@ -112,7 +122,7 @@ return {
 			'<leader>dl',
 			function()
 				require('fzf-lua').live_grep {
-					cmd = build_rg_cmd_with_no_ignore(),
+					cmd = build_rg_cmd(IGNORE_LEVEL.TEST),
 				}
 			end,
 		},
@@ -121,7 +131,7 @@ return {
 			function()
 				require('fzf-lua').live_grep {
 					cwd = get_current_dir(),
-					cmd = build_rg_cmd_with_no_ignore { skip_always_ignore = true },
+					cmd = build_rg_cmd(IGNORE_LEVEL.WITHOUT),
 				}
 			end,
 		},
@@ -129,7 +139,7 @@ return {
 			'<leader>dL',
 			function()
 				require('fzf-lua').live_grep {
-					cmd = build_rg_cmd_with_no_ignore { skip_always_ignore = true },
+					cmd = build_rg_cmd(IGNORE_LEVEL.WITHOUT),
 				}
 			end,
 		},
@@ -137,7 +147,8 @@ return {
 			'<leader>fh',
 			function()
 				require('fzf-lua').grep_cword {
-					cmd = build_rg_cmd(),
+					ignore_current_line = true,
+					cmd = build_rg_cmd(IGNORE_LEVEL.FULL),
 				}
 			end,
 		},
@@ -145,7 +156,8 @@ return {
 			'<leader>dh',
 			function()
 				require('fzf-lua').grep_cword {
-					cmd = build_rg_cmd_with_no_ignore(),
+					ignore_current_line = true,
+					cmd = build_rg_cmd(IGNORE_LEVEL.TEST),
 				}
 			end,
 		},
@@ -190,7 +202,9 @@ return {
 			'<leader>en',
 			function()
 				require('fzf-lua').files {
-					cmd = build_find_cmd_with_no_ignore(),
+					cmd = build_find_cmd {
+						no_ignore = true,
+					},
 					cwd = '~/notes',
 				}
 			end,
@@ -199,7 +213,9 @@ return {
 			'<leader>es',
 			function()
 				require('fzf-lua').files {
-					cmd = build_find_cmd_with_no_ignore(),
+					cmd = build_find_cmd {
+						no_ignore = true,
+					},
 					cwd = '~/dotfiles',
 				}
 			end,
@@ -490,6 +506,7 @@ return {
 				no_header_i = true, -- hide interactive header?
 				multiprocess = true,
 				prompt = build_prompt(),
+				file_icons = 'mini',
 				live_ast_prefix = false,
 				trim_entry = true,
 				formatter = 'path.filename_first',
@@ -516,7 +533,6 @@ return {
 				-- set to 'false' to disable
 				multiprocess = true, -- run command in a separate process
 				git_icons = false, -- show git icons?
-				file_icons = "mini", -- show file icons?
 				color_icons = true, -- colorize file|git icons
 				-- path_shorten   = 1,              -- 'true' or number, shorten path?
 				-- executed command priority is 'cmd' (if exists)
@@ -525,8 +541,8 @@ return {
 				-- NOTE: 'find -printf' requires GNU find
 				-- cmd            = "find . -type f -printf '%P\n'",
 				find_opts = [[-type f -not -path '*/\.git/*' -printf '%P\n']],
-				rg_opts = '--color=never --files --hidden --follow -g \'!.git\'',
-				fd_opts = '--color=never --type f --hidden --follow --exclude .git',
+				rg_opts = '--color=never --files --hidden --follow -g \'!.git\' -i',
+				fd_opts = '--color=never --type f --hidden --follow --exclude .git -i',
 				-- by default, cwd appears in the header only if {opts} contain a cwd
 				-- parameter to a different folder than the current working directory
 				-- uncomment if you wish to force display of the cwd as part of the

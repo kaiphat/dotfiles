@@ -36,7 +36,6 @@ o.relativenumber = false
 o.showcmd = false
 o.showmode = false
 o.undofile = true
-o.virtualedit = 'insert'
 o.writebackup = false
 o.backup = false
 o.history = 1000

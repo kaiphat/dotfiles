@@ -1,26 +1,26 @@
 [font]
-size = 10.5
+size = 9.5
 
 [font.normal]
-family = 'MartianMono Nerd Font Mono'
-style = 'Regular'
+family = 'Monoid Nerd Font'
+style = 'Retina'
 
 [font.bold]
-family = 'MartianMono Nerd Font Mono'
-style = 'Regular'
+family = 'Monoid Nerd Font'
+style = 'Retina'
 
 [font.italic]
-family = 'MartianMono Nerd Font Mono'
-style = 'Regular'
+family = 'Monoid Nerd Font'
+style = 'Retina'
 
 [font.bold_italic]
-family = 'MartianMono Nerd Font Mono'
-style = 'Regular'
+family = 'Monoid Nerd Font'
+style = 'Retina'
 
 [font.offset]
 x = 0
-y = 0
+y = 3
 
 [font.glyph_offset]
 x = 0
-y = 0
+y = 1
