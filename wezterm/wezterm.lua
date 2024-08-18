@@ -1,17 +1,15 @@
 local wezterm = require 'wezterm'
 local Config = require 'lua/Config'
 local fonts = require 'lua/fonts'
-local theme = require 'lua/themes/catppuccin_dark'
+local theme = require 'lua/themes/rose_pine_dark'
 
 local config = Config:new()
 
-config:add(fonts.build_font(fonts.configs.fira))
+config:add(fonts.build_font(fonts.configs.serious))
 
 config:add(theme)
 
 config:add {
-	-- front_end = 'OpenGL',
-	-- freetype_load_target = 'HorizontalLcd',
 	enable_tab_bar = false,
 	enable_scroll_bar = false,
 	scrollback_lines = 1000,
@@ -25,10 +23,10 @@ config:add {
 }
 
 config:set_window_paddings {
-	left = 20,
-	right = 20,
-	top = 15,
-	bottom = 1,
+	left = '2cell',
+	right = '2cell',
+	top = '0.5cell',
+	bottom = '0.5cell',
 }
 
 config:set_mouse_bindings {

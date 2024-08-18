@@ -48,9 +48,10 @@ return {
 	configs = {
 		jet_brains = {
 			name = 'JetBrainsMono Nerd Font',
-			weight = weights.M,
-			italic = false,
-			font_size = 11.5,
+			weight = weights.SB,
+			italic = true,
+			--font_size = 11.2,
+			font_size = 12,
 			cell_width = 1,
 			line_height = 1,
 		},
@@ -86,8 +87,9 @@ return {
 			line_height = 1.1,
 		},
 		serious = {
-			name = 'Serious Sans',
-			font_size = 12,
+			name = 'SeriousShanns Nerd Font',
+			italic = true,
+			font_size = 12.5,
 			cell_width = 1,
 			line_height = 1.15,
 		},
@@ -113,12 +115,6 @@ return {
 			cell_width = 1,
 			line_height = 1.3,
 		},
-		share = {
-			name = 'Share Tech Mono',
-			weight = weights.R,
-			font_size = 12.4,
-			line_height = 1.2,
-		},
 		fira = {
 			name = 'FiraCode Nerd Font',
 			weight = weights.M,
@@ -134,7 +130,7 @@ return {
 		hermit = {
 			name = 'Hermit',
 			weight = weights.R,
-			font_size = 11.1,
+			font_size = 12,
 			cell_width = 1,
 			line_height = 0.9,
 		},
@@ -150,13 +146,15 @@ return {
 		},
 		maple_mac = {
 			name = 'Maple Mono NF',
-			font_size = 11.5,
-			cell_width = 0.9,
-			line_height = 1,
-			weight = weights.R,
+			italic = true,
+			font_size = 12,
+			cell_width = 1,
+			line_height = 1.05,
+			weight = weights.SB,
+			scale = 1,
 			harfbuzz_features = {
 				'cv01', -- @
-				-- 'cv02', -- a
+				'cv02', -- a
 				-- 'cv03', -- i
 				'cv04', -- l
 			},
@@ -164,10 +162,11 @@ return {
 		maple_aoc = {
 			name = 'Maple Mono NF',
 			italic = true,
-			font_size = 10.8,
+			font_size = 12,
 			cell_width = 1,
-			line_height = 1.15,
-			weight = weights.M,
+			line_height = 1,
+			weight = weights.R,
+			scale = 1,
 			harfbuzz_features = {
 				'cv01', -- @
 				'cv02', -- a
@@ -225,11 +224,11 @@ return {
 			line_height = 1,
 		},
 		iosevka = {
-			name = 'Iosevka Nerd Font Mono',
+			name = 'Iosevka',
 			weight = weights.SB,
-			font_size = 13,
+			font_size = 12.5,
 			cell_width = 1,
-			line_height = 1.1,
+			line_height = 1,
 		},
 		roboto = {
 			name = 'Roboto Mono',

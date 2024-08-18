@@ -1,5 +1,5 @@
 [font]
-size = 12
+size = 11
 
 [font.normal]
 family = "SeriousShanns Nerd Font"
@@ -18,7 +18,7 @@ family = "SeriousShanns Nerd Font"
 style = "Light Italic"
 
 [font.offset]
-x = 1
+x = 0
 y = 4
 
 [font.glyph_offset]

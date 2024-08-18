@@ -46,4 +46,7 @@ local colors = {
 	},
 }
 
-return { colors = colors }
+-- return { colors = colors }
+return {
+	color_scheme = 'rose-pine-moon',
+}

@@ -3,6 +3,7 @@ local wo = vim.wo
 local g = vim.g
 
 g.mapleader = ' '
+g.markdown_folding = 1
 
 local TAB_SIZE = 4
 

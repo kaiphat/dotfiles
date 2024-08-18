@@ -3,9 +3,6 @@ local map = function(mode, keys, cmd, opts)
 	vim.keymap.set(mode, keys, cmd, opts)
 end
 
-map('n', '<F1>', ':w<cr>:e ++ff=dos<cr>:w ++ff=unix<cr>')
-map('n', '<F9>', ':LspRestart<cr>')
-
 local is_wrapped = false
 map('n', '<F4>', function()
 	if is_wrapped then
@@ -152,29 +149,8 @@ map('v', '<leader>us', function()
 	vim.api.nvim_input ':s/'
 end)
 
--- todo: create mapping for markdown
--- local function convert_to_checkbox()
---     -- Get the current line content
---     local line_content = vim.api.nvim_get_current_line()
-
---     -- Check if the line is already a checkbox item
---     if string.match(line_content, "^%s*%-%s*%[[%s%x]+%]%s*.+") then
---         -- Toggle the checkbox status
---         local new_content = line_content:gsub("%[([%s%x])%]", function(c)
---             if c == "x" then
---                 return " "
---             else
---                 return "x"
---             end
---         end)
-
---         -- Set the new line content
---         vim.api.nvim_set_current_line(new_content)
---     else
---         -- Convert the line to a checkbox item
---         local new_content = "- [ ] " .. line_content:gsub("^%s*", "")
-
---         -- Set the new line content
---         vim.api.nvim_set_current_line(new_content)
---     end
--- end
+map('n', 'zf', function()
+	vim.cmd.normal 'zM'
+	vim.cmd.normal 'zr'
+end)
+map('n', 'zo', 'zO')

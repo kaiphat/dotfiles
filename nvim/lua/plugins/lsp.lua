@@ -99,6 +99,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
 			end, 50)
 		end)
 
+		map('n', 'gs', function()
+			-- todo: save position before splitting
+			vim.cmd 'split'
+			vim.lsp.buf.definition()
+			vim.defer_fn(function()
+				vim.api.nvim_input 'zz'
+			end, 50)
+		end)
+
 		map({ 'n', 'v' }, '<leader>lf', function()
 			vim.lsp.buf.format { timeout_ms = 5000 }
 		end)
@@ -160,7 +169,7 @@ return {
 
 			require('typescript-tools').setup {
 				on_attach = function(client)
-					-- vim.lsp.inlay_hint.enable()
+					client.server_capabilities.semanticTokensProvider = nil
 				end,
 				settings = {
 					tsserver_file_preferences = {

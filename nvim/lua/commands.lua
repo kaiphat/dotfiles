@@ -71,3 +71,17 @@ end, { nargs = '*' })
 vim.api.nvim_create_user_command('FileType', function()
 	print(vim.bo.filetype)
 end, {})
+
+vim.api.nvim_create_user_command('RunTest', function()
+	local path = vim.api.nvim_buf_get_name(0)
+	local relative_path = vim.fn.fnamemodify(path, ':~:.')
+	local tmux_socket = vim.fn.split(vim.env.TMUX, ',')[1]
+
+	vim.fn.system(string.format(
+		[[
+            tmux -S %s select-pane -L \; respawn-pane -k 'SPEC=%s make test-watch'
+        ]],
+		tmux_socket,
+		relative_path
+	))
+end, {})

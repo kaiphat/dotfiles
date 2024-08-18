@@ -3,19 +3,19 @@ size = 10.5
 
 [font.normal]
 family = "MonaspiceRn Nerd Font"
-style = "Light"
+style = "Light Italic"
 
 [font.bold]
 family = "MonaspiceRn Nerd Font"
-style = "Light"
+style = "Light Italic"
 
 [font.italic]
 family = "MonaspiceRn Nerd Font"
-style = "Light"
+style = "Light Italic"
 
 [font.bold_italic]
 family = "MonaspiceRn Nerd Font"
-style = "Light"
+style = "Light Italic"
 
 [font.offset]
 x = 0

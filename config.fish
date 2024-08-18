@@ -2,7 +2,7 @@
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   ENVIROMENTS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-set -gx nvm_default_version v18.17.0
+set -U nvm_default_version v20.16.0
 set -gx ANDROID_HOME $HOME/Android/Sdk
 set -gx EDITOR nvim
 set -gx MANPAGER 'nvim +Man! -c "set nowrap" -c "set modifiable" -c "set noreadonly" -c "set buftype=nofile"'
@@ -128,7 +128,7 @@ alias rm "rm -rfv"
 alias cp "cp -r -v"
 alias htop "btop -p 1"
 alias btop "btop -p 1"
-alias nvim-start "nvim --startuptime _s.log -c exit && tail -100 _s.log | bat && rm _s.log"
+alias nvim-start "nvim --startuptime _s.log -c 'q' && tail -100 _s.log | bat && rm _s.log"
 alias ... "cd ../../"
 alias lg "lazygit"
 alias fzf "fzf --color=gutter:-1,bg+:-1,fg+:#244566,pointer:#365987 --margin=0,2 --no-separator --info=inline-right --no-scrollbar --pointer='󱞩' --prompt='󰼛 ' --layout=reverse --bind ctrl-e:close"
@@ -272,4 +272,11 @@ if status is-interactive
     and not set -q TMUX
     tmux kill-session -t 0 || true
     tmux attach -t main || tmux new -s main
+end
+
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     utils     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+function util:extract_repository_name
+    set url (git config --get remote.origin.url)
+    echo $url | awk -F/ '{print $NF}' | awk -F. '{print $1}'
 end

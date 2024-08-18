@@ -26,6 +26,7 @@ local IGNORE_LEVEL = {
 	FULL = 0,
 	TEST = 1,
 	WITHOUT = 2,
+	DIRECTION = 1,
 }
 
 local function build_find_cmd(ignore_level)
@@ -34,7 +35,7 @@ local function build_find_cmd(ignore_level)
 
 	if ignore_level == IGNORE_LEVEL.FULL then
 		patterns = ignore_patterns
-	elseif ignore_level == IGNORE_LEVEL.TEST then
+	elseif ignore_level == IGNORE_LEVEL.TEST or ignore_level == IGNORE_LEVEL.DIRECTION then
 		patterns = always_ignore_patterns
 		base = base .. ' --no-ignore --hidden'
 	else
@@ -54,7 +55,7 @@ local function build_rg_cmd(ignore_level)
 
 	if ignore_level == IGNORE_LEVEL.FULL then
 		patterns = ignore_patterns
-	elseif ignore_level == IGNORE_LEVEL.TEST then
+	elseif ignore_level == IGNORE_LEVEL.TEST or ignore_level == IGNORE_LEVEL.DIRECTION then
 		patterns = always_ignore_patterns
 		base = base .. ' --no-ignore --hidden'
 	else
@@ -147,7 +148,6 @@ return {
 			'<leader>fh',
 			function()
 				require('fzf-lua').grep_cword {
-					ignore_current_line = true,
 					cmd = build_rg_cmd(IGNORE_LEVEL.FULL),
 				}
 			end,
@@ -156,7 +156,6 @@ return {
 			'<leader>dh',
 			function()
 				require('fzf-lua').grep_cword {
-					ignore_current_line = true,
 					cmd = build_rg_cmd(IGNORE_LEVEL.TEST),
 				}
 			end,
@@ -202,9 +201,7 @@ return {
 			'<leader>en',
 			function()
 				require('fzf-lua').files {
-					cmd = build_find_cmd {
-						no_ignore = true,
-					},
+					cmd = build_find_cmd(IGNORE_LEVEL.DIRECTION),
 					cwd = '~/notes',
 				}
 			end,
@@ -213,9 +210,7 @@ return {
 			'<leader>es',
 			function()
 				require('fzf-lua').files {
-					cmd = build_find_cmd {
-						no_ignore = true,
-					},
+					cmd = build_find_cmd(IGNORE_LEVEL.DIRECTION),
 					cwd = '~/dotfiles',
 				}
 			end,
@@ -245,17 +240,17 @@ return {
 			end,
 		},
 		{
+			'<leader>fq',
+			function()
+				require('fzf-lua').lsp_document_symbols {}
+			end,
+		},
+		{
 			'<leader>fw',
 			function()
 				require('fzf-lua').lsp_live_workspace_symbols {
 					file_ignore_patterns = ignore_patterns,
 				}
-			end,
-		},
-		{
-			'<leader>fq',
-			function()
-				require('fzf-lua').lsp_document_symbols {}
 			end,
 		},
 		{
@@ -273,6 +268,11 @@ return {
 		require('fzf-lua').register_ui_select()
 
 		require('fzf-lua').setup {
+			winopts_fn = function()
+				return {
+					width = vim.o.columns > 140 and 0.5 or 0.7,
+				}
+			end,
 			winopts = {
 				-- split         = "belowright new",-- open in a split instead?
 				-- "belowright new"  : split below
@@ -282,7 +282,7 @@ return {
 				-- Only valid when using a float window
 				-- (i.e. when 'split' is not defined, default)
 				height = 0.85, -- window height
-				width = 0.80, -- window width
+				width = 0.65, -- window width
 				row = 0.35, -- window row position (0=top, 1=bottom)
 				col = 0.50, -- window col position (0=left, 1=right)
 				-- border argument passthrough to nvim_open_win(), also used

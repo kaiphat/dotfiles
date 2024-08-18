@@ -18,6 +18,9 @@ local themes = {
 	zenbones_dark = 'zenbones_dark',
 	neomodern_dark = 'neomodern_dark',
 	nord_dark = 'nord_dark',
+	darkvoid_dark = 'darkvoid_dark',
+	solarized_dark = 'solarized_dark',
+	solarized_light = 'solarized_light',
 }
 
-return require('themes.' .. themes.catppuccin_dark)
+return require('themes.' .. themes.rose_pine_dark)

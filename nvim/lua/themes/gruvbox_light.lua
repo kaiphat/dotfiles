@@ -7,6 +7,7 @@ return {
 			transparent_mode = true,
 			overrides = {
 				MiniCursorword = { underline = false, bg = '#ccccdd' },
+				MiniCursorwordCurrent = { underline = false, bg = '#ccccdd' },
 			},
 		}
 

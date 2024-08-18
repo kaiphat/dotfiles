@@ -4,8 +4,9 @@ foreground = "#e0def4"
 # background = '#292640'
 # background = '#191934'
 # background = '#1b172e'
-#background = '#1b172e'
-background = "#132136"
+background = '#1b172e'
+#background = "#132136"
+#background = '#282c34'
 dim_foreground = "#908caa"
 bright_foreground = "#e0def4"
 
