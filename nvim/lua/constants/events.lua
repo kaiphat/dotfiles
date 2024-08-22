@@ -1,3 +1,0 @@
-_G.EVENT = {
-	BUF_PRE_CLOSE = 'BUF_PRE_CLOSE',
-}

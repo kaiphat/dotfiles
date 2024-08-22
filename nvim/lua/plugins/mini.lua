@@ -1,3 +1,6 @@
+local constants = require 'constants'
+local icons = constants.icons
+
 return {
 	{
 		'echasnovski/mini.align',
@@ -71,7 +74,7 @@ return {
 				indent_at_cursor = true,
 				try_as_border = false,
 			},
-			symbol = ICONS.VERTICAL_LINE_1,
+			symbol = icons.VERTICAL_LINE_1,
 		},
 	},
 

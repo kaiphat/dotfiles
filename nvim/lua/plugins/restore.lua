@@ -6,7 +6,7 @@ return {
 		{
 			'<leader>ur',
 			function()
-				require('local_plugins.restore'):restore()
+				require('local_plugins.restore').restore()
 			end,
 		},
 	},

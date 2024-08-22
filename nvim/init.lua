@@ -1,4 +1,3 @@
-require 'constants'
 require 'options'
 require 'autocommands'
 require 'commands'

@@ -1,3 +1,6 @@
+local constants = require 'constants'
+local icons = constants.icons
+
 return {
 	'folke/noice.nvim',
 	enabled = true,
@@ -37,12 +40,12 @@ return {
 
 			cmdline = {
 				format = {
-					cmdline = { title = '', pattern = '^:', icon = ICONS.TRIANGLE, lang = 'vim' },
-					search_down = { title = '', kind = 'search', pattern = '^/', icon = ICONS.SEARCH, lang = 'regex' },
-					search_up = { title = '', kind = 'search', pattern = '^%?', icon = ICONS.SEARCH, lang = 'regex' },
-					filter = { pattern = '^:%s*!', icon = ICONS.TRIANGLE, lang = 'bash' },
+					cmdline = { title = '', pattern = '^:', icon = icons.TRIANGLE, lang = 'vim' },
+					search_down = { title = '', kind = 'search', pattern = '^/', icon = icons.SEARCH, lang = 'regex' },
+					search_up = { title = '', kind = 'search', pattern = '^%?', icon = icons.SEARCH, lang = 'regex' },
+					filter = { pattern = '^:%s*!', icon = icons.TRIANGLE, lang = 'bash' },
 					lua = { pattern = '^:%s*lua%s+', icon = '', lang = 'lua' },
-					help = { pattern = '^:%s*h%s+', icon = ICONS.SEARCH },
+					help = { pattern = '^:%s*h%s+', icon = icons.SEARCH },
 					input = {}, -- Used by input()
 				},
 			},

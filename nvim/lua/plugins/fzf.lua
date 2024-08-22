@@ -1,4 +1,5 @@
 local u = require 'utils'
+local constants = require 'constants'
 
 local always_ignore_patterns = {
 	'.git/',
@@ -72,7 +73,7 @@ local function build_rg_cmd(ignore_level)
 end
 
 local function build_prompt()
-	return '  ' .. ICONS.TRIANGLE .. ' '
+	return '  ' .. constants.icons.TRIANGLE .. ' '
 end
 
 return {
@@ -521,7 +522,7 @@ return {
 					['--layout'] = 'reverse',
 					['--border'] = 'none',
 					['--prompt'] = '❯',
-					['--pointer'] = ICONS.CARET,
+					['--pointer'] = constants.icons.CARET,
 					['--marker'] = '❯',
 					['--no-scrollbar'] = '',
 					['--no-separator'] = '',

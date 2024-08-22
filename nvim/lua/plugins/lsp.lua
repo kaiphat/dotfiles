@@ -1,3 +1,5 @@
+local constants = require 'constants'
+local icons = constants.icons
 local u = require 'utils'
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     diagnostic     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -21,7 +23,7 @@ vim.diagnostic.config(diagnostic_opts)
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     lsp symbols     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 for _, hint in ipairs { 'Error', 'Information', 'Hint', 'Warning' } do
 	vim.fn.sign_define('LspDiagnosticsSign' .. hint, {
-		text = ICONS.CIRCLE_SMALL,
+		text = icons.CIRCLE_SMALL,
 		numhl = 'LspDiagnosticsSign' .. hint,
 	})
 end

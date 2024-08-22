@@ -1,3 +1,4 @@
+local icons = require('constants').icons
 local base_keys = '<leader>h'
 
 return {
@@ -100,7 +101,7 @@ return {
 	},
 	config = function()
 		local gitsigns = require 'gitsigns'
-		local icon = ICONS.VERTICAL_LINE_SHORT_1
+		local icon = icons.VERTICAL_LINE_SHORT_1
 
 		gitsigns.setup {
 			signs = {

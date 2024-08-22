@@ -26,7 +26,7 @@ function module.add_to_home_path(path)
 end
 
 function module.get_row_col()
-	local cursor = vim.api.nvim_winMet_cursor(0)
+	local cursor = vim.api.nvim_win_get_cursor(0)
 	return cursor[1], cursor[2]
 end
 

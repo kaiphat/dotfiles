@@ -5,7 +5,7 @@ return {
 		{
 			'u',
 			function()
-				require('local_plugins.unit'):select(true)
+				require('local_plugins.unit').select(true)
 			end,
 			mode = { 'x', 'o' },
 		},
@@ -14,6 +14,6 @@ return {
 		'nvim-treesitter/nvim-treesitter',
 	},
 	config = function()
-		require('local_plugins.unit'):setup()
+		require('local_plugins.unit').setup()
 	end,
 }

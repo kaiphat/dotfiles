@@ -1,4 +1,6 @@
-_G.ICONS = {
+local module = {}
+
+module.icons = {
 	CIRCLE_SMALL = '•',
 	CIRCLE_MEDIUM = '󰧞',
 	CIRCLE_LARGE = '',
@@ -18,3 +20,5 @@ _G.ICONS = {
 	BIG_SEARCH = ' ',
 	TRIANGLE = '󰼛',
 }
+
+return module
