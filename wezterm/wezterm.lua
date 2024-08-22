@@ -5,7 +5,7 @@ local theme = require 'lua/themes/rose_pine_dark'
 
 local config = Config:new()
 
-config:add(fonts.build_font(fonts.configs.serious))
+config:add(fonts.build_font(fonts.configs.maple_mac))
 
 config:add(theme)
 

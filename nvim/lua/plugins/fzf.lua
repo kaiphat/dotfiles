@@ -1,3 +1,5 @@
+local u = require 'utils'
+
 local always_ignore_patterns = {
 	'.git/',
 	'dist/',
@@ -10,7 +12,7 @@ local always_ignore_patterns = {
 	'package-lock.json',
 }
 
-local ignore_patterns = concat({
+local ignore_patterns = u.concat({
 	'data/',
 	'.data/',
 	'test/',
@@ -91,7 +93,7 @@ return {
 			function()
 				require('fzf-lua').files {
 					cmd = build_find_cmd(IGNORE_LEVEL.WITHOUT),
-					cwd = get_current_dir(),
+					cwd = u.get_current_dir(),
 				}
 			end,
 		},
@@ -131,7 +133,7 @@ return {
 			'<leader>fL',
 			function()
 				require('fzf-lua').live_grep {
-					cwd = get_current_dir(),
+					cwd = u.get_current_dir(),
 					cmd = build_rg_cmd(IGNORE_LEVEL.WITHOUT),
 				}
 			end,

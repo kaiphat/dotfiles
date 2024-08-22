@@ -1,7 +1,0 @@
-require(... .. '.layout')
-require(... .. '.autostart')
-require(... .. '.desktop')
-require(... .. '.maps')
-require(... .. '.rules')
-require(... .. '.notifications')
-require(... .. '.tags')

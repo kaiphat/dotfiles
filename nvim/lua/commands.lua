@@ -1,22 +1,32 @@
-vim.api.nvim_create_user_command('Squeeze', function()
+local u = require 'utils'
+
+local cmd = function(name, fn, opts)
+	opts = opts or {}
+	vim.api.nvim_create_user_command(name, fn, opts)
+end
+
+cmd('Squeeze', function()
+	-- make from several \n only one
 	vim.cmd 'silent! %s/\\v(\\n\\n)\\n+/\\1/e'
-end, {})
+end)
 
-vim.api.nvim_create_user_command('DeleteEmptyLines', function()
+cmd('DeleteEmptyLines', function()
+	-- remove all empty lines
 	vim.cmd 'silent! %s/\\v(\\n)\\n+/\\1/e'
-end, {})
+end)
 
-vim.api.nvim_create_user_command('DeleteSpaces', function()
-	vim.cmd 'silent! s/S@<=s+/ /g'
+cmd('DeleteSpaces', function()
+	-- make from many \s in one line only one
+	vim.cmd 'silent! s/\\S\\@<=\\s\\+/ /g'
 	vim.cmd 'silent! nohl'
-end, {})
+end)
 
-vim.api.nvim_create_user_command('CopyFilePath', function()
+cmd('CopyFilePath', function()
 	vim.cmd 'silent! let @+=expand("%:p")'
 	print 'File path was yanked'
-end, {})
+end)
 
-vim.api.nvim_create_user_command('CreateSubTitle', function(opts)
+cmd('CreateSubTitle', function(opts)
 	local char = opts.fargs[1]
 
 	local MAX_LENGTH = 60
@@ -25,7 +35,7 @@ vim.api.nvim_create_user_command('CreateSubTitle', function(opts)
 
 	char = (char == '' or char == nil) and '#' or char
 
-	local row = get_row_col()
+	local row = u.get_row_col()
 
 	local line = vim.trim(vim.api.nvim_get_current_line():gsub(char, ''):gsub(DEFAULT_CHAR, ''))
 	local free_space = MAX_LENGTH - #line - SPACE_LENGTH * 2
@@ -39,7 +49,7 @@ vim.api.nvim_create_user_command('CreateSubTitle', function(opts)
 	vim.api.nvim_buf_set_lines(0, row - 1, row, true, { title })
 end, { nargs = '*' })
 
-vim.api.nvim_create_user_command('CreateTitle', function(opts)
+cmd('CreateTitle', function(opts)
 	local char = opts.fargs[1]
 
 	local MAX_LENGTH = 60
@@ -48,7 +58,7 @@ vim.api.nvim_create_user_command('CreateTitle', function(opts)
 
 	char = (char == '' or char == nil) and '#' or char
 
-	local row = get_row_col()
+	local row = u.get_row_col()
 
 	local line = vim.trim(vim.api.nvim_get_current_line():gsub(char, ''):gsub(DEFAULT_CHAR, ''))
 	local left_line_length = math.floor((MAX_LENGTH - #line - SPACE_LENGTH * 2) / 2)
@@ -68,20 +78,28 @@ vim.api.nvim_create_user_command('CreateTitle', function(opts)
 	end
 end, { nargs = '*' })
 
-vim.api.nvim_create_user_command('FileType', function()
+cmd('FileType', function()
 	print(vim.bo.filetype)
-end, {})
+end)
 
-vim.api.nvim_create_user_command('RunTest', function()
-	local path = vim.api.nvim_buf_get_name(0)
-	local relative_path = vim.fn.fnamemodify(path, ':~:.')
+cmd('RunTest', function()
+	local relative_path = u.get_relative_path()
 	local tmux_socket = vim.fn.split(vim.env.TMUX, ',')[1]
 
-	vim.fn.system(string.format(
-		[[
-            tmux -S %s select-pane -L \; respawn-pane -k 'SPEC=%s make test-watch'
-        ]],
-		tmux_socket,
-		relative_path
-	))
-end, {})
+	vim.fn.system(
+		string.format(
+			'tmux -S %s select-pane -L \\; respawn-pane -k \'SPEC=%s make test-watch\'',
+			tmux_socket,
+			relative_path
+		)
+	)
+end)
+
+cmd('CopyGitHubFileLink', function()
+	local branch = vim.trim(vim.fn.system 'git rev-parse --abbrev-ref HEAD')
+	local remote_root = vim.trim(vim.fn.system 'util:get_git_remote_root')
+	local relative_path = u.get_relative_path()
+	local row_index = vim.api.nvim_win_get_cursor(0)[1]
+	local url = string.format('https://github.com/%s/blob/%s/%s#L%d', remote_root, branch, relative_path, row_index)
+	vim.fn.setreg('+', url)
+end)

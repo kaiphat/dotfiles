@@ -1,3 +1,5 @@
+local u = require 'utils'
+
 local eslint_condition = function(utils)
 	return utils.has_file { '.eslintrc.json', '.eslintrc.js', '.eslintrc' }
 end
@@ -64,7 +66,7 @@ return {
 					'-l',
 					'postgresql',
 					'-c',
-					add_to_home_path 'dotfiles/sql_formatter.json',
+					u.add_to_home_path 'dotfiles/sql_formatter.json',
 				},
 			},
 		}

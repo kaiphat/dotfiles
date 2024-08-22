@@ -62,13 +62,13 @@ return {
 				FzfLuaTitle = { bg = 'foam', fg = 'base', bold = false },
 			},
 
-			before_highlight = function(group, highlight, palette)
-				-- if highlight.fg == palette.pine then
-				-- 	highlight.fg = '#91B4D5'
-				-- end
-				-- if highlight.bg == palette.pine then
-				-- 	highlight.bg = '#91B4D5'
-				-- end
+			before_highlight = function(group, h, p)
+				if h.fg == p.pine then
+					h.fg = '#6e88a6'
+				end
+				if h.bg == p.pine then
+					h.bg = '#6e88a6'
+				end
 
 				-- if highlight.fg == palette.gold then
 				-- 	highlight.fg = '#9398cf'

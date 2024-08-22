@@ -264,10 +264,6 @@ end
 starship init fish | source
 enable_transience
 
-# if status is-interactive
-#     eval (zellij setup --generate-auto-start fish | string collect)
-# end
-
 if status is-interactive
     and not set -q TMUX
     tmux kill-session -t 0 || true
@@ -276,7 +272,26 @@ end
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     utils     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-function util:extract_repository_name
-    set url (git config --get remote.origin.url)
+function util:get_git_remote_root
+    set url (git remote get-url origin)
+    set repository (echo $url | awk -F/ '{print $NF}' | awk -F. '{print $1}')
+    set namespace (echo $url | awk -F: '{print $2}' | awk -F/ '{print $1}')
+    echo "$namespace/$repository"
+end
+
+function util:get_repository_name
+    set url (git remote get-url origin)
     echo $url | awk -F/ '{print $NF}' | awk -F. '{print $1}'
 end
+
+function open:github:current
+    set ticket (util:get_ticket_name)
+    set root (util:get_git_remote_root)
+    echo "https://github.com/$root/pulls?q=is%3Apr+$ticket"
+end
+
+function open:github:my_prs
+    set root (util:get_git_remote_root)
+    echo "https://github.com/$root/pulls/@me"
+end
+

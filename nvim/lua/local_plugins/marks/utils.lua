@@ -13,8 +13,8 @@ end
 function utils.get_git_branch()
 	local git_branch = vim.fn.systemlist('git branch --show-current')[1]
 	if string.find(git_branch, 'fatal') then
-        return nil
-    end
+		return nil
+	end
 	return git_branch
 end
 
@@ -32,8 +32,8 @@ function utils.get_current_path()
 end
 
 function utils.get_row_col()
-    local cursor = vim.api.nvim_win_get_cursor(0)
-    return cursor[1], cursor[2]
+	local cursor = vim.api.nvim_win_get_cursor(0)
+	return cursor[1], cursor[2]
 end
 
 return utils

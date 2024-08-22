@@ -1,3 +1,4 @@
+local u = require 'utils'
 local H = {}
 local c = {
 	bg = '#202837',
@@ -37,16 +38,16 @@ H.Uc = { undercurl = true }
 
 -- GENERAL --
 H.Normal = { fg = c.fg, bg = nil }
-H.NormalNC = merge(H.Normal)
+H.NormalNC = u.merge(H.Normal)
 H.SignColumn = { fg = c.fg, bg = nil }
-H.Underlined = merge(H.Uc)
-H.Bold = merge(H.Bold)
-H.Italic = merge(H.It)
+H.Underlined = u.merge(H.Uc)
+H.Bold = u.merge(H.Bold)
+H.Italic = u.merge(H.It)
 H.Error = { fg = c.blue_gray }
-H.ErrorMsg = merge(H.Error)
+H.ErrorMsg = u.merge(H.Error)
 H.WarningMsg = { fg = c.red }
-H.Comment = merge(H.It, { fg = c.gray_blue })
-H.Conceal = merge(H.Bold, { fg = c.red })
+H.Comment = u.merge(H.It, { fg = c.gray_blue })
+H.Conceal = u.merge(H.Bold, { fg = c.red })
 H.Cursor = { fg = nil, bg = c.one_bg3 }
 H.CursorLine = { fg = nil, bg = c.one_bg3 }
 H.CursorColumn = H.CursorLine
@@ -56,21 +57,21 @@ H.DiffChange = { bg = c.red }
 H.DiffDelete = { bg = c.blue_gray }
 H.DiffText = { bg = c.red, fg = c.fg }
 H.LineNr = { fg = c.gray_blue, bg = nil }
-H.SignColumn = merge(H.LineNr)
-H.FoldColumn = merge(H.LineNr, H.Bold)
+H.SignColumn = u.merge(H.LineNr)
+H.FoldColumn = u.merge(H.LineNr, H.Bold)
 H.Folded = { fg = c.gray }
-H.CursorLineNr = merge(H.LineNr, H.Bold, { fg = c.fg })
+H.CursorLineNr = u.merge(H.LineNr, H.Bold, { fg = c.fg })
 H.MoreMsg = { fg = c.green_blue }
 H.Float = { bg = nil, fg = c.cyan }
 H.NormalFloat = { fg = c.cyan, bg = nil }
-H.FloatBorder = merge(H.NormalFloat, H.Bold, { fg = c.sky })
+H.FloatBorder = u.merge(H.NormalFloat, H.Bold, { fg = c.sky })
 H.FloatShadow = { bg = nil }
 H.FloatShadowThrough = { bg = nil }
 H.Visual = { fg = c.fg, bg = c.one_bg3 }
-H.Pmenu = merge(H.NormalFloat)
-H.PmenuSel = merge(H.Visual)
+H.Pmenu = u.merge(H.NormalFloat)
+H.PmenuSel = u.merge(H.Visual)
 H.PmenuSbar = { bg = c.bg } -- scroll
-H.PmenuThumb = merge(H.Visual, { fg = nil })
+H.PmenuThumb = u.merge(H.Visual, { fg = nil })
 H.Search = { fg = c.one_bg2, bg = c.teal }
 H.IncSearch = { fg = c.one_bg2, bg = c.teal }
 H.MatchParen = { fg = c.red, bg = nil }
@@ -81,59 +82,59 @@ H.TabLineSel = { fg = c.blue_darkest, bg = c.cyan }
 H.TabLineFill = { fg = c.cyan, bg = nil }
 H.VertSplit = { fg = c.blue_darkest, bg = nil }
 H.NonText = { fg = c.one_bg3 }
-H.SpecialKey = merge(H.NonText, H.It)
-H.Whitespace = merge(H.NonText)
-H.EndOfBuffer = merge(H.NonText)
+H.SpecialKey = u.merge(H.NonText, H.It)
+H.Whitespace = u.merge(H.NonText)
+H.EndOfBuffer = u.merge(H.NonText)
 H.WildMenu = { bg = c.yellow, fg = c.bg }
 H.Directory = { fg = c.fg, gui = nil }
-H.Question = merge(H.MoreMsg)
-H.Title = merge(H.Bold, { fg = c.fg })
-H.Constant = merge(H.It, { fg = c.red })
+H.Question = u.merge(H.MoreMsg)
+H.Title = u.merge(H.Bold, { fg = c.fg })
+H.Constant = u.merge(H.It, { fg = c.red })
 H.String = { fg = c.green_tea, gui = nil }
 H.Number = { fg = c.red }
-H.Boolean = merge(H.Number)
+H.Boolean = u.merge(H.Number)
 H.Identifier = { fg = c.fg }
 H.Function = { fg = c.fg }
-H.Statement = merge(H.Bold, { fg = c.blue_nord })
-H.PreProc = merge(H.Statement)
-H.Special = merge(H.Bold, { fg = c.green_blue })
+H.Statement = u.merge(H.Bold, { fg = c.blue_nord })
+H.PreProc = u.merge(H.Statement)
+H.Special = u.merge(H.Bold, { fg = c.green_blue })
 H.Delimiter = { fg = c.gray_blue }
-H.SpecialComment = merge(H.Comment, { gui = nil })
+H.SpecialComment = u.merge(H.Comment, { gui = nil })
 
 -- HARPOON --
-H.HarpoonBorder = merge(H.FloatBorder)
+H.HarpoonBorder = u.merge(H.FloatBorder)
 
 -- LSP --
-H.LspReferenceText = merge(H.Visual, { fg = nil })
-H.LspReferenceRead = merge(H.LspReferenceText)
-H.LspReferenceWrite = merge(H.LspReferenceText)
-H.LspCodeLens = merge(H.LineNr)
+H.LspReferenceText = u.merge(H.Visual, { fg = nil })
+H.LspReferenceRead = u.merge(H.LspReferenceText)
+H.LspReferenceWrite = u.merge(H.LspReferenceText)
+H.LspCodeLens = u.merge(H.LineNr)
 
-H.DiagnosticError = merge(H.WarningMsg)
-H.DiagnosticWarn = merge(H.WarningMsg)
+H.DiagnosticError = u.merge(H.WarningMsg)
+H.DiagnosticWarn = u.merge(H.WarningMsg)
 H.DiagnosticInfo = { fg = c.red }
 H.DiagnosticHint = { fg = c.yellow }
 
-H.DiagnosticSignError = merge(H.SignColumn, H.DiagnosticError)
-H.DiagnosticSignWarn = merge(H.SignColumn, H.DiagnosticWarn)
-H.DiagnosticSignInfo = merge(H.SignColumn, H.DiagnosticInfo)
-H.DiagnosticSignHint = merge(H.SignColumn, H.DiagnosticHint)
+H.DiagnosticSignError = u.merge(H.SignColumn, H.DiagnosticError)
+H.DiagnosticSignWarn = u.merge(H.SignColumn, H.DiagnosticWarn)
+H.DiagnosticSignInfo = u.merge(H.SignColumn, H.DiagnosticInfo)
+H.DiagnosticSignHint = u.merge(H.SignColumn, H.DiagnosticHint)
 
-H.DiagnosticVirtualTextError = merge(H.DiagnosticError, { bg = nil })
-H.DiagnosticVirtualTextWarn = merge(H.DiagnosticVirtualTextError)
-H.DiagnosticVirtualTextInfo = merge(H.DiagnosticVirtualTextError)
-H.DiagnosticVirtualTextHint = merge(H.DiagnosticVirtualTextError)
+H.DiagnosticVirtualTextError = u.merge(H.DiagnosticError, { bg = nil })
+H.DiagnosticVirtualTextWarn = u.merge(H.DiagnosticVirtualTextError)
+H.DiagnosticVirtualTextInfo = u.merge(H.DiagnosticVirtualTextError)
+H.DiagnosticVirtualTextHint = u.merge(H.DiagnosticVirtualTextError)
 
-H.DiagnosticUnderlineWarn = merge(H.Uc, { sp = c.blue_gray })
+H.DiagnosticUnderlineWarn = u.merge(H.Uc, { sp = c.blue_gray })
 H.DiagnosticUnderlineInfo = H.DiagnosticUnderlineWarn
 H.DiagnosticUnderlineHint = H.DiagnosticUnderlineWarn
 H.DiagnosticUnderlineError = H.DiagnosticUnderlineWarn
 
 -- NOICE --
 H.NoiceCmdlineIcon = { fg = c.blue_gray }
-H.NoiceCmdlinePopupBorder = merge(H.FloatBorder)
+H.NoiceCmdlinePopupBorder = u.merge(H.FloatBorder)
 H.NoiceCmdlinePopupTitle = { fg = c.blue_gray }
-H.NoiceCmdlinePopupBorderSearch = merge(H.NoiceCmdlinePopupBorder)
+H.NoiceCmdlinePopupBorderSearch = u.merge(H.NoiceCmdlinePopupBorder)
 H.NoiceCmdlineIconSearch = { fg = c.blue_gray }
 H.NoiceLspProgressTitle = { fg = c.blue_gray }
 H.NoiceLspProgressClient = { fg = c.blue_gray }
@@ -155,29 +156,29 @@ H['@string'] = { fg = c.green_tea }
 -- hl["@spell"] = { underline = nil, undercurl = nil }
 H['@text.uri'] = { fg = c.red, underline = nil }
 H['@constant'] = { fg = c.lavender }
-H['@const.builtin'] = merge(H.Number)
-H['@const.macro'] = merge(H.Number)
-H['@method'] = merge(H.Bold, { fg = c.blue_gray })
-H['@function'] = merge(H['@method'])
+H['@const.builtin'] = u.merge(H.Number)
+H['@const.macro'] = u.merge(H.Number)
+H['@method'] = u.merge(H.Bold, { fg = c.blue_gray })
+H['@function'] = u.merge(H['@method'])
 H['@parameter'] = { fg = c.r1 }
-H['@namespace'] = merge(H.Special)
-H['@punctuation'] = merge(H.It, { fg = c.one_bg4, bg = nil })
-H['@punct.bracket'] = merge(H.It, { fg = c.one_bg4, bg = nil })
-H['@punct.delimiter'] = merge(H['@punct.bracket'])
-H['@punct.special'] = merge(H['@punct.bracket'])
+H['@namespace'] = u.merge(H.Special)
+H['@punctuation'] = u.merge(H.It, { fg = c.one_bg4, bg = nil })
+H['@punct.bracket'] = u.merge(H.It, { fg = c.one_bg4, bg = nil })
+H['@punct.delimiter'] = u.merge(H['@punct.bracket'])
+H['@punct.special'] = u.merge(H['@punct.bracket'])
 H['@string.escape'] = { fg = c.red, bg = nil }
-H['@variable'] = merge(H.Identifier, H.Bold)
-H['@variable.builtin'] = merge(H.Number)
-H['@tag'] = merge(H.Special)
-H['@tag.delimiter'] = merge(H.It, { fg = c.one_bg4, bg = nil })
+H['@variable'] = u.merge(H.Identifier, H.Bold)
+H['@variable.builtin'] = u.merge(H.Number)
+H['@tag'] = u.merge(H.Special)
+H['@tag.delimiter'] = u.merge(H.It, { fg = c.one_bg4, bg = nil })
 H['@tag.attribute'] = { fg = c.blue }
-H['@emphasis'] = merge(H.Italic)
-H['@underline'] = merge(H.Underlined)
-H['@strong'] = merge(H.Bold)
+H['@emphasis'] = u.merge(H.Italic)
+H['@underline'] = u.merge(H.Underlined)
+H['@strong'] = u.merge(H.Bold)
 H['@literal'] = { fg = c.red }
-H['@note'] = merge(H.DiagnosticInfo)
-H['@warning'] = merge(H.WarningMsg)
-H['@danger'] = merge(H.Error)
+H['@note'] = u.merge(H.DiagnosticInfo)
+H['@warning'] = u.merge(H.WarningMsg)
+H['@danger'] = u.merge(H.Error)
 H['@number'] = { fg = c.red }
 H['@boolean'] = { fg = c.orange_dark }
 H['@structure'] = { fg = c.orange_dark }
@@ -198,15 +199,15 @@ H['@type.definition'] = { fg = c.orange_dark }
 
 H.Type = H['@type']
 -- HTML --
-H.htmlLink = merge(H['@text.uri'])
+H.htmlLink = u.merge(H['@text.uri'])
 
 -- NEO TREE --
-H.NeoTreeNormal = merge(H.NormalFloat)
+H.NeoTreeNormal = u.merge(H.NormalFloat)
 H.NeoTreeDimText = { fg = c.one_bg4 }
-H.NeoTreeDotfile = merge(H.NeoTreeDimText)
-H.NeoTreeMessage = merge(H.NeoTreeDimText)
-H.NeoTreeTitleBar = merge(H.NeoTreeDimText)
-H.NeoTreeFloatBorder = merge(H.FloatBorder)
+H.NeoTreeDotfile = u.merge(H.NeoTreeDimText)
+H.NeoTreeMessage = u.merge(H.NeoTreeDimText)
+H.NeoTreeTitleBar = u.merge(H.NeoTreeDimText)
+H.NeoTreeFloatBorder = u.merge(H.FloatBorder)
 H.NeoTreeGitAdded = { fg = c.green_tea }
 H.NeoTreeGitStaged = H.NeoTreeGitAdded
 H.NeoTreeGitUnstaged = H.NeoTreeGitAdded
@@ -218,7 +219,7 @@ H.NeoTreeGitUntracked = H.NeoTreeGitUnstaged
 H['@neorg.headings.1.title'] = { fg = c.purple }
 
 -- TREESITTER CONTEXT --
-H.TreesitterContext = merge(H.Visual)
+H.TreesitterContext = u.merge(H.Visual)
 
 -- h.diffAdded = { fg = c.green_blue }
 -- h.diffRemoved = { fg = c.blue_gray }
@@ -233,17 +234,17 @@ H.TreesitterContext = merge(H.Visual)
 
 -- MARKDOWN --
 H.markdownH1 = { gui = nil }
-H.markdownTSPunctSpecial = merge(H.Special)
-H.markdownTSStringEscape = merge(H.SpecialKey)
-H.markdownTSTextReference = merge(H.Identifier, H.Ul)
-H.markdownTSEmphasis = merge(H.Italic)
-H.markdownTSTitle = merge(H.Statement)
+H.markdownTSPunctSpecial = u.merge(H.Special)
+H.markdownTSStringEscape = u.merge(H.SpecialKey)
+H.markdownTSTextReference = u.merge(H.Identifier, H.Ul)
+H.markdownTSEmphasis = u.merge(H.Italic)
+H.markdownTSTitle = u.merge(H.Statement)
 H.markdownTSLiteral = H.Statement
-H.markdownTSURI = merge(H.SpecialComment)
-H.markdownUrl = merge(H.markdownTSURI)
-H.markdownCode = merge(H.markdownTSLiteral)
-H.markdownLinkText = merge(H.markdownTSTextReference)
-H.markdownLinkTextDelimiter = merge(H.Delimiter)
+H.markdownTSURI = u.merge(H.SpecialComment)
+H.markdownUrl = u.merge(H.markdownTSURI)
+H.markdownCode = u.merge(H.markdownTSLiteral)
+H.markdownLinkText = u.merge(H.markdownTSTextReference)
+H.markdownLinkTextDelimiter = u.merge(H.Delimiter)
 
 -- h.helpHyperTextEntry = { h.Special }
 -- h.helpHyperTextJump = { h.Constant }
@@ -258,34 +259,34 @@ H.GitSignsAdd = { fg = c.green_blue }
 H.GitSignsChange = { fg = c.cyan }
 H.GitSignsDelete = { fg = c.cyan }
 
-H.GitSignsAddLn = merge(H.GitSignsAdd)
-H.GitSignsChangeLn = merge(H.GitSignsChange)
-H.GitSignsDeleteLn = merge(H.GitSignsDelete)
+H.GitSignsAddLn = u.merge(H.GitSignsAdd)
+H.GitSignsChangeLn = u.merge(H.GitSignsChange)
+H.GitSignsDeleteLn = u.merge(H.GitSignsDelete)
 
 H.GitSignsAddPreview = { bg = add }
 H.GitSignsChangePreview = { bg = delete }
 H.GitSignsDeletePreview = { bg = delete }
 
-H.GitGutterAdd = merge(H.GitSignsAdd)
+H.GitGutterAdd = u.merge(H.GitSignsAdd)
 H.GitGutterChange = { fg = c.pink }
 H.GitGutterDelete = { fg = c.pink }
 
 H.DiffAdd = { bg = '#223233' }
 H.DiffChange = { bg = '#223233' }
-H.DiffText = merge(H.Visual, { fg = nil, underline = nil })
+H.DiffText = u.merge(H.Visual, { fg = nil, underline = nil })
 H.DiffDelete = { bg = '#321911' }
 
 -- NOTIFY --
-H.NotifyINFOBody = merge(H.NormalFloat)
-H.NotifyWARNBody = merge(H.NormalFloat)
-H.NotifyERRORBody = merge(H.NormalFloat)
-H.NotifyDEBUGBody = merge(H.NormalFloat)
-H.NotifyTRACEBody = merge(H.NormalFloat)
+H.NotifyINFOBody = u.merge(H.NormalFloat)
+H.NotifyWARNBody = u.merge(H.NormalFloat)
+H.NotifyERRORBody = u.merge(H.NormalFloat)
+H.NotifyDEBUGBody = u.merge(H.NormalFloat)
+H.NotifyTRACEBody = u.merge(H.NormalFloat)
 
 H.NotifyINFOTitle = { fg = c.green_tea }
-H.NotifyINFOIcon = merge(H.NotifyINFOTitle)
+H.NotifyINFOIcon = u.merge(H.NotifyINFOTitle)
 H.NotifyErrorTitle = { fg = c.red }
-H.NotifyErrorIcon = merge(H.NotifyErrorTitle)
+H.NotifyErrorIcon = u.merge(H.NotifyErrorTitle)
 
 -- hl.NotifyDEBUGTitle = { fg = c.red }
 -- hl.NotifyINFOTitle29 = { fg = c.red }
@@ -308,40 +309,40 @@ H.MiniTrailspace = { bg = c.one_bg3 }
 -- CMP --
 H.CmpItemAbbr = { fg = c.fg }
 H.CmpItemAbbrDeprecated = { fg = c.orange }
-H.CmpItemAbbrMatch = merge(H.Bold, { fg = c.teal })
-H.CmpItemAbbrMatchFuzzy = merge(H.Bold, { fg = c.teal })
+H.CmpItemAbbrMatch = u.merge(H.Bold, { fg = c.teal })
+H.CmpItemAbbrMatchFuzzy = u.merge(H.Bold, { fg = c.teal })
 H.CmpItemKind = { fg = c.gray }
 H.CmpItemMenu = { fg = c.gray }
-H.CmpItemMenuDefault = merge(H.NormalFloat)
+H.CmpItemMenuDefault = u.merge(H.NormalFloat)
 
 -- TELESCOPE --
 H.TelescopeNormal = { fg = c.fg, bg = nil }
-H.TelescopeSelection = merge(H.Visual, { fg = nil })
+H.TelescopeSelection = u.merge(H.Visual, { fg = nil })
 H.TelescopeMatching = { fg = H.CmpItemAbbrMatch.fg }
-H.TelescopeBorder = merge(H.FloatBorder)
+H.TelescopeBorder = u.merge(H.FloatBorder)
 
-H.TelescopeSelectionCaret = merge(H.TelescopeSelection, { fg = c.red })
-H.TelescopeTitle = merge(H.TelescopeNormal)
+H.TelescopeSelectionCaret = u.merge(H.TelescopeSelection, { fg = c.red })
+H.TelescopeTitle = u.merge(H.TelescopeNormal)
 H.TelescopePromptPrefix = H.TelescopeTitle
 H.TelescopePromptCounter = H.TelescopeTitle
 H.TelescopePromptTitle = H.TelescopeTitle
 H.TelescopePromptNormal = { bg = nil }
-H.TelescopePromptBorder = merge(H.TelescopeBorder, { bg = nil })
+H.TelescopePromptBorder = u.merge(H.TelescopeBorder, { bg = nil })
 
 -- SNEAK --
-H.Sneak = merge(H.Search)
-H.SneakLabel = merge(H.WildMenu)
+H.Sneak = u.merge(H.Search)
+H.SneakLabel = u.merge(H.WildMenu)
 H.SneakLabelMask = { bg = c.yellow, fg = c.yellow }
 
 -- LIGHTSPEED --
-H.LightspeedLabelOverlapped = merge(H.Ul, { fg = c.yellow })
-H.LightspeedLabelDistantOverlapped = merge(H.Ul, { fg = c.orange })
-H.LightspeedOneCharMatch = merge(H.SneakLabel, H.Bold)
-H.LightspeedMaskedChar = merge(H.Conceal)
-H.LightspeedUnlabeledMatch = merge(H.Bold)
-H.LightspeedPendingOpArea = merge(H.SneakLabel)
+H.LightspeedLabelOverlapped = u.merge(H.Ul, { fg = c.yellow })
+H.LightspeedLabelDistantOverlapped = u.merge(H.Ul, { fg = c.orange })
+H.LightspeedOneCharMatch = u.merge(H.SneakLabel, H.Bold)
+H.LightspeedMaskedChar = u.merge(H.Conceal)
+H.LightspeedUnlabeledMatch = u.merge(H.Bold)
+H.LightspeedPendingOpArea = u.merge(H.SneakLabel)
 H.LightspeedPendingChangeOpArea = { fg = c.yellow }
-H.LightspeedGreyWash = merge(H.Comment)
+H.LightspeedGreyWash = u.merge(H.Comment)
 
 -- HOP --
 H.HopNextKey = { fg = c.purple }
@@ -353,23 +354,23 @@ H.HopUnmatched = { fg = '#445577' }
 
 H.FidgetTitle = H.FidgetTask
 
-H.BufferCurrent = merge(H.TabLineSel)
-H.BufferVisible = merge(H.StatusLineNC)
-H.BufferVisibleSign = merge(H.StatusLineNC)
-H.BufferVisibleIndex = merge(H.StatusLineNC)
+H.BufferCurrent = u.merge(H.TabLineSel)
+H.BufferVisible = u.merge(H.StatusLineNC)
+H.BufferVisibleSign = u.merge(H.StatusLineNC)
+H.BufferVisibleIndex = u.merge(H.StatusLineNC)
 
 -- NVIM TREE --
 H.NvimTreeNormal = { fg = nil, bg = nil }
 H.NvimTreeVertSplit = { fg = nil }
-H.NvimTreeCursorLine = merge(H.CursorLine)
-H.NvimTreeCursorColumn = merge(H.NvimTreeCursorLine)
-H.NvimTreeRootFolder = merge(H.Bold, { fg = c.red })
+H.NvimTreeCursorLine = u.merge(H.CursorLine)
+H.NvimTreeCursorColumn = u.merge(H.NvimTreeCursorLine)
+H.NvimTreeRootFolder = u.merge(H.Bold, { fg = c.red })
 H.NvimTreeSymlink = { fg = c.red }
 H.NvimTreeExecFile = { fg = c.fg }
 H.NvimTreeSpecialFile = { fg = c.fg, gui = nil }
 
-H.NnnNormal = merge(H.NvimTreeNormal)
-H.NnnNormalNC = merge(H.NnnNormal)
+H.NnnNormal = u.merge(H.NvimTreeNormal)
+H.NnnNormalNC = u.merge(H.NnnNormal)
 
 H.ChatGPTTotalTokensBorder = { fg = c.blue_darkest }
 H.ChatGPTTotalTokens = { fg = c.fg, bg = H.ChatGPTTotalTokensBorder.fg }

@@ -1,5 +1,7 @@
+local u = require 'utils'
+
 vim.api.nvim_create_autocmd({ 'BufReadPost' }, {
-	group = create_augroup 'last_position',
+	group = u.create_augroup 'last_position',
 	callback = function()
 		local test_line_data = vim.api.nvim_buf_get_mark(0, '"')
 		local test_line = test_line_data[1]
@@ -12,14 +14,14 @@ vim.api.nvim_create_autocmd({ 'BufReadPost' }, {
 })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
-	group = create_augroup 'text_yank_post',
+	group = u.create_augroup 'text_yank_post',
 	callback = function()
 		vim.highlight.on_yank { timeout = 700 }
 	end,
 })
 
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-	group = create_augroup 'auto_create_dir',
+	group = u.create_augroup 'auto_create_dir',
 	callback = function(event)
 		if event.match:match '^%w%w+://' then
 			return
@@ -30,7 +32,7 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-	group = create_augroup 'set_format_options',
+	group = u.create_augroup 'set_format_options',
 	callback = function()
 		vim.opt_local.formatoptions = 'tc'
 	end,
@@ -38,14 +40,14 @@ vim.api.nvim_create_autocmd('FileType', {
 
 vim.api.nvim_create_autocmd({ 'BufEnter' }, {
 	pattern = '*.md',
-	group = create_augroup 'markdown_wrap_option',
+	group = u.create_augroup 'markdown_wrap_option',
 	callback = function()
 		vim.opt_local.wrap = true
 	end,
 })
 
 vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'VimLeavePre' }, {
-	group = create_augroup 'autosave',
+	group = u.create_augroup 'autosave',
 	callback = function(event)
 		if vim.bo.filetype == 'oil' then
 			return
@@ -62,7 +64,7 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'VimLeavePre' }, {
 })
 
 vim.api.nvim_create_autocmd('VimResized', {
-	group = create_augroup 'resize_pane',
+	group = u.create_augroup 'resize_pane',
 	callback = function()
 		vim.cmd 'wincmd ='
 	end,

@@ -1,5 +1,4 @@
 require 'constants'
-require 'helpers.global'
 require 'options'
 require 'autocommands'
 require 'commands'

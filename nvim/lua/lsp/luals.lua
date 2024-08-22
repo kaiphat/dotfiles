@@ -1,4 +1,5 @@
-local group = create_augroup 'lua_format'
+local u = require 'utils'
+local group = u.create_augroup 'lua_format'
 
 return function(lsp, opts)
 	opts:expand {
@@ -6,9 +7,13 @@ return function(lsp, opts)
 			Lua = {
 				workspace = {
 					checkThirdParty = false,
+					library = {
+						vim.env.VIMRUNTIME,
+					},
 				},
 				runtime = {
 					version = 'LuaJIT',
+					path = { 'lua/?.lua', '?/init.lua', '?/?.lua' },
 				},
 				diagnostics = {
 					globals = {
@@ -26,6 +31,9 @@ return function(lsp, opts)
 					},
 				},
 				hint = {
+					enable = false,
+				},
+				telemetry = {
 					enable = false,
 				},
 			},

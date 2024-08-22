@@ -1,3 +1,5 @@
+local u = require 'utils'
+
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     diagnostic     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 local diagnostic_opts = {
 	float = {
@@ -38,7 +40,7 @@ end
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     keymaps     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 vim.api.nvim_create_autocmd('LspAttach', {
-	group = create_augroup 'lsp_attach',
+	group = u.create_augroup 'lsp_attach',
 	callback = function(event)
 		local map = function(mode, keys, cmd)
 			vim.keymap.set(mode, keys, cmd, { buffer = event.buf })
@@ -94,18 +96,19 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		map('n', 'go', function()
 			vim.cmd 'vs'
 			vim.lsp.buf.definition()
-			vim.defer_fn(function()
+			vim.schedule(function()
 				vim.api.nvim_input 'zz'
-			end, 50)
+			end)
 		end)
 
 		map('n', 'gs', function()
-			-- todo: save position before splitting
+			local row = vim.api.nvim_win_get_cursor(0)[1]
 			vim.cmd 'split'
-			vim.lsp.buf.definition()
-			vim.defer_fn(function()
+			vim.schedule(function()
+				vim.cmd.normal(row .. 'gg')
+				vim.lsp.buf.definition()
 				vim.api.nvim_input 'zz'
-			end, 50)
+			end)
 		end)
 
 		map({ 'n', 'v' }, '<leader>lf', function()

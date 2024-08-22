@@ -1,3 +1,5 @@
+local u = require 'utils'
+
 local map = function(mode, keys, cmd, opts)
 	opts = opts or { noremap = true, silent = true }
 	vim.keymap.set(mode, keys, cmd, opts)
@@ -18,14 +20,14 @@ map('v', 'p', 'pgvy=`]')
 map('v', '<', '<gv')
 map('v', '>', '>gv')
 map('n', '\'', '`')
-map('n', '<C-Q>', ':wqa<cr>')
+map('n', '<C-Q>', '<cmd>wqa<cr>')
 map('n', 'J', function()
 	vim.api.nvim_feedkeys('J', 'n', false)
 
 	vim.schedule(function()
 		local col = vim.fn.col '.'
-		local line = vim.fn.getline '.'
-		local char = string.sub(line, col, col)
+		local row = vim.fn.getline '.'
+		local char = string.sub(row, col, col)
 
 		if char == ' ' then
 			vim.api.nvim_feedkeys('x', 'n', false)
@@ -34,10 +36,10 @@ map('n', 'J', function()
 end)
 
 map({ 'c', 'i' }, '<C-r>', '<C-r>+', { noremap = false })
-map('n', '<C-h>', ':wincmd h<cr>')
-map('n', '<C-j>', ':wincmd j<cr>')
-map('n', '<C-k>', ':wincmd k<cr>')
-map('n', '<C-l>', ':wincmd l<cr>')
+map('n', '<C-h>', '<cmd>wincmd h<cr>')
+map('n', '<C-j>', '<cmd>wincmd j<cr>')
+map('n', '<C-k>', '<cmd>wincmd k<cr>')
+map('n', '<C-l>', '<cmd>wincmd l<cr>')
 
 map('n', 'i', function()
 	if #vim.fn.getline '.' == 0 then
@@ -54,12 +56,8 @@ map('n', '<C-s>', function()
 	vim.cmd 'w'
 end)
 
-map({ 'n', 'v' }, '<C-d>', function()
-	vim.api.nvim_feedkeys('4j', 'n', true)
-end)
-map({ 'n', 'v' }, '<C-u>', function()
-	vim.api.nvim_feedkeys('4k', 'n', true)
-end)
+map({ 'n', 'v' }, '<C-d>', '2j')
+map({ 'n', 'v' }, '<C-u>', '2k')
 
 map('n', 'x', function()
 	if vim.fn.col '.' == 1 then
@@ -98,8 +96,8 @@ map('n', '<esc>', ':nohl<cr>')
 map('n', 'Y', 'y$')
 
 map('n', ',,', '^')
-map('n', ',s', ':split<cr>')
-map('n', ',v', ':vsplit<cr>')
+map('n', ',s', '<cmd>split<cr>')
+map('n', ',v', '<cmd>vsplit<cr>')
 map('n', ',x', function()
 	vim.cmd 'silent! wq'
 end)
@@ -111,13 +109,14 @@ for char in string.gmatch([[w'"`p[<({]], '.') do
 end
 
 local is_root = true
-local root_path = get_current_dir()
+local root_path
 
 map('n', '<leader>ur', function()
 	if is_root then
-		vim.cmd('lcd ' .. get_current_dir())
+		vim.cmd('lcd ' .. u.get_current_dir())
 		vim.notify 'cwd changed to current place'
 		is_root = false
+		root_path = u.get_current_dir()
 	else
 		vim.cmd('lcd ' .. root_path)
 		vim.notify 'cwd changed to root'
@@ -129,7 +128,7 @@ map('n', '<leader>lw', function()
 	local ft = vim.bo.filetype
 
 	local var = vim.fn.expand '<cword>'
-	local row = get_row_col()
+	local row = u.get_row_col()
 
 	local new_line
 	if ft == 'typescript' or ft == 'javascript' then

@@ -1,4 +1,5 @@
-local group = create_augroup 'eslint'
+local u = require 'utils'
+local group = u.create_augroup 'eslint'
 
 return function(lsp, opts)
 	opts:expand {
