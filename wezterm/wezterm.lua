@@ -1,15 +1,12 @@
 local wezterm = require 'wezterm'
-local Config = require 'lua/Config'
-local fonts = require 'lua/fonts'
-local theme = require 'lua/themes/rose_pine_dark'
+local font_config = require 'wezterm.fonts'
+local theme = require 'wezterm.themes.github_light'
+local config = require 'wezterm.config'
 
-local config = Config:new()
-
-config:add(fonts.build_font(fonts.configs.maple_mac))
-
-config:add(theme)
-
-config:add {
+config.set(font_config.build_font(font_config.fonts.maple_mac))
+config.set(theme)
+config.set {
+	automatically_reload_config = true,
 	enable_tab_bar = false,
 	enable_scroll_bar = false,
 	scrollback_lines = 1000,
@@ -20,30 +17,27 @@ config:add {
 	disable_default_key_bindings = true,
 	warn_about_missing_glyphs = false,
 	window_close_confirmation = 'NeverPrompt',
-}
-
-config:set_window_paddings {
-	left = '2cell',
-	right = '2cell',
-	top = '0.5cell',
-	bottom = '0.5cell',
-}
-
-config:set_mouse_bindings {
-	{
-		event = { Up = { streak = 1, button = 'Left' } },
-		mods = 'CTRL',
-		action = wezterm.action.OpenLinkAtMouseCursor,
+	window_padding = {
+		left = '2cell',
+		right = '2cell',
+		top = '0.5cell',
+		bottom = '0.5cell',
 	},
-}
-
-config:set_keys {
-	{ key = 'V', mods = 'CTRL', action = wezterm.action.PasteFrom 'Clipboard' },
-	{ key = 'v', mods = 'SUPER', action = wezterm.action.PasteFrom 'Clipboard' },
-	{ key = '=', mods = 'CTRL', action = wezterm.action.IncreaseFontSize },
-	{ key = '0', mods = 'CTRL', action = wezterm.action.ResetFontSize },
-	{ key = '-', mods = 'CTRL', action = wezterm.action.DecreaseFontSize },
-	{ key = 'q', mods = 'CMD', action = wezterm.action.QuitApplication },
+	mouse_bindings = {
+		{
+			event = { Up = { streak = 1, button = 'Left' } },
+			mods = 'CTRL',
+			action = wezterm.action.OpenLinkAtMouseCursor,
+		},
+	},
+	keys = {
+		{ key = 'V', mods = 'CTRL', action = wezterm.action.PasteFrom 'Clipboard' },
+		{ key = 'v', mods = 'SUPER', action = wezterm.action.PasteFrom 'Clipboard' },
+		{ key = '=', mods = 'CTRL', action = wezterm.action.IncreaseFontSize },
+		{ key = '0', mods = 'CTRL', action = wezterm.action.ResetFontSize },
+		{ key = '-', mods = 'CTRL', action = wezterm.action.DecreaseFontSize },
+		{ key = 'q', mods = 'CMD', action = wezterm.action.QuitApplication },
+	},
 }
 
 wezterm.on('gui-startup', function(cmd)
@@ -51,4 +45,4 @@ wezterm.on('gui-startup', function(cmd)
 	window:gui_window():toggle_fullscreen() -- toggle_fullscreen or maximize
 end)
 
-return config:to_wezterm_config()
+return config.get()

@@ -45,14 +45,13 @@ end
 
 return {
 	build_font = build_font,
-	configs = {
+	fonts = {
 		jet_brains = {
 			name = 'JetBrainsMono Nerd Font',
-			weight = weights.M,
+			weight = weights.SB,
 			italic = true,
-			--font_size = 11.2,
 			font_size = 11,
-			cell_width = 0.85,
+			cell_width = 1,
 			line_height = 1,
 		},
 		victor = {
@@ -150,8 +149,8 @@ return {
 			italic = true,
 			font_size = 12,
 			cell_width = 1,
-			line_height = 1.05,
-			weight = weights.SB,
+			line_height = 1,
+			weight = weights.M,
 			scale = 1,
 			harfbuzz_features = {
 				'zero',

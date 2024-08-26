@@ -13,7 +13,7 @@ return function(lsp, opts)
 				},
 				runtime = {
 					version = 'LuaJIT',
-					path = { 'lua/?.lua', '?/init.lua', '?/?.lua' },
+					path = { 'lua/?.lua', '?/init.lua', '?/?.lua', '?.lua' },
 				},
 				diagnostics = {
 					globals = {

@@ -149,7 +149,8 @@ map('v', '<leader>us', function()
 end)
 
 map('n', 'zf', function()
-	vim.cmd.normal 'zM'
-	vim.cmd.normal 'zr'
+	vim.cmd.normal 'zMzr'
 end)
-map('n', 'zo', 'zO')
+map('n', 'zo', function()
+	vim.cmd.normal 'zO'
+end)

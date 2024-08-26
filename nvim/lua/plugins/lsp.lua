@@ -174,7 +174,7 @@ return {
 
 			require('typescript-tools').setup {
 				on_attach = function(client)
-					client.server_capabilities.semanticTokensProvider = nil
+					-- client.server_capabilities.semanticTokensProvider = nil
 				end,
 				settings = {
 					tsserver_file_preferences = {

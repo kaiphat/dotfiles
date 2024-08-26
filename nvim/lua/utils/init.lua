@@ -1,7 +1,7 @@
 local module = {}
 
 function module.get_relative_path()
-	local full_path = vim.api.nvim_bufMet_name(0)
+	local full_path = vim.api.nvim_buf_get_name(0)
 	return vim.fn.fnamemodify(full_path, ':~:.')
 end
 
