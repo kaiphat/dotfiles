@@ -23,4 +23,4 @@ local themes = {
 	solarized_light = 'solarized_light',
 }
 
-return require('themes.' .. themes.github_light)
+return require('themes.' .. themes.solarized_light)

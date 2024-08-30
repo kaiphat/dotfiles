@@ -3,10 +3,17 @@ return {
 	lazy = false,
 	priority = 1000,
 	config = function()
-		vim.o.background = 'light' -- or 'light'
+		vim.o.background = 'light'
 
 		require('solarized').setup {
-			transparent = true,
+			palette = 'solarized',
+			transparent = {
+				enabled = true,
+			},
+			styles = {
+				keywords = { italic = true },
+				functions = { italic = true },
+			},
 		}
 
 		vim.cmd.colorscheme 'solarized'

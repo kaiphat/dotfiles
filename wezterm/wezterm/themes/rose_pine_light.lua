@@ -66,5 +66,5 @@ local colors = {
 }
 
 return {
-	colors = colors,
+	color_scheme = 'rose-pine-dawn',
 }

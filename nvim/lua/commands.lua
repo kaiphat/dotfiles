@@ -85,14 +85,17 @@ end)
 cmd('RunTest', function()
 	local relative_path = u.get_relative_path()
 	local tmux_socket = vim.fn.split(vim.env.TMUX, ',')[1]
-
-	vim.fn.system(
-		string.format(
-			'tmux -S %s select-pane -L \\; respawn-pane -k \'SPEC=%s make test-watch\'',
-			tmux_socket,
-			relative_path
-		)
+	local cmd_string = string.format(
+		[[
+            tmux -S %s select-pane -L \;\
+            send-keys C-c \;\
+            run-shell "tmux respawn-pane -k 'SPEC=%s make test-watch; exec fish'"
+        ]],
+		tmux_socket,
+		relative_path
 	)
+
+	vim.fn.system(cmd_string)
 end)
 
 cmd('CopyGitHubFileLink', function()

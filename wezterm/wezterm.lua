@@ -1,9 +1,9 @@
 local wezterm = require 'wezterm'
 local font_config = require 'wezterm.fonts'
-local theme = require 'wezterm.themes.github_light'
+local theme = require 'wezterm.themes.solarized_light'
 local config = require 'wezterm.config'
 
-config.set(font_config.build_font(font_config.fonts.maple_mac))
+config.set(font_config.build_font(font_config.fonts.jet_brains))
 config.set(theme)
 config.set {
 	automatically_reload_config = true,

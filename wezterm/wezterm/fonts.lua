@@ -48,17 +48,17 @@ return {
 	fonts = {
 		jet_brains = {
 			name = 'JetBrainsMono Nerd Font',
-			weight = weights.SB,
+			weight = weights.M,
 			italic = true,
-			font_size = 11,
+			font_size = 12,
 			cell_width = 1,
 			line_height = 1,
 		},
 		victor = {
 			name = 'VictorMono Nerd Font',
 			italic = true,
-			weight = weights.M,
-			font_size = 11,
+			weight = weights.B,
+			font_size = 12,
 			cell_width = 1,
 			line_height = 1,
 		},
@@ -72,11 +72,15 @@ return {
 			line_height = 1,
 		},
 		caskaydia = {
+			italic = true,
 			name = 'Cascadia Code',
-			weight = weights.M,
+			weight = weights.SL,
+			cell_width = 0.91,
 			font_size = 12,
-			cell_width = 1,
-			line_height = 1.25,
+			line_height = 1,
+			harfbuzz_features = {
+				'ss01',
+			},
 		},
 		input = {
 			name = 'Input Mono Condensed',
@@ -117,8 +121,8 @@ return {
 		},
 		fira = {
 			name = 'FiraCode Nerd Font',
-			weight = weights.M,
-			font_size = 11,
+			weight = weights.R,
+			font_size = 11.5,
 			line_height = 1,
 		},
 		hack = {
@@ -147,7 +151,7 @@ return {
 		maple_mac = {
 			name = 'Maple Mono NF',
 			italic = true,
-			font_size = 12,
+			font_size = 11.3,
 			cell_width = 1,
 			line_height = 1,
 			weight = weights.M,

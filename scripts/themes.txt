@@ -7,3 +7,5 @@ tokyo_dark
 github_light
 dark
 github_dark
+solarized_light
+solarized_dark

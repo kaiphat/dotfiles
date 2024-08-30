@@ -109,11 +109,11 @@ return {
 			},
 			mapping = get_mappings(cmp),
 			performance = {
-				debounce = 60,
-				throttle = 30,
+				debounce = 0,
+				throttle = 0,
 				fetching_timeout = 500,
 				confirm_resolve_timeout = 500,
-				async_budget = 1,
+				async_budget = 10,
 				max_view_entries = 50,
 			},
 			sources = cmp.config.sources({

@@ -6,7 +6,13 @@ return {
 		vim.o.background = 'dark' -- or 'light'
 
 		require('solarized').setup {
-			transparent = true,
+			transparent = {
+				enabled = true,
+			},
+			styles = {
+				keywords = { italic = true },
+				functions = { italic = true },
+			},
 		}
 
 		vim.cmd.colorscheme 'solarized'
