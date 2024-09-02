@@ -273,7 +273,7 @@ return {
 		require('fzf-lua').setup {
 			winopts_fn = function()
 				return {
-					width = vim.o.columns > 140 and 0.5 or 0.7,
+					width = vim.o.columns > 190 and 0.5 or 0.8,
 				}
 			end,
 			winopts = {

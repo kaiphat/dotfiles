@@ -151,10 +151,10 @@ return {
 		maple_mac = {
 			name = 'Maple Mono NF',
 			italic = true,
-			font_size = 11.3,
+			font_size = 11.5,
 			cell_width = 1,
-			line_height = 1,
-			weight = weights.M,
+			line_height = 0.9,
+			weight = weights.R,
 			scale = 1,
 			harfbuzz_features = {
 				'zero',
