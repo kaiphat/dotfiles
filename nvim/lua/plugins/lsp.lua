@@ -1,16 +1,14 @@
 local constants = require 'constants'
-local icons = constants.icons
 local u = require 'utils'
+local icons = constants.icons
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     diagnostic     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-local diagnostic_opts = {
+vim.diagnostic.config {
 	float = {
 		focusable = true,
-		header = false,
 		border = 'rounded',
 		style = 'minimal',
 		prefix = '',
-		source = 'always',
 	},
 	virtual_text = false,
 	severity_sort = true,
@@ -18,14 +16,13 @@ local diagnostic_opts = {
 	underline = true,
 	update_in_insert = false,
 }
-vim.diagnostic.config(diagnostic_opts)
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     lsp symbols     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 for _, hint in ipairs { 'Error', 'Information', 'Hint', 'Warning' } do
-	vim.fn.sign_define('LspDiagnosticsSign' .. hint, {
-		text = icons.CIRCLE_SMALL,
-		numhl = 'LspDiagnosticsSign' .. hint,
-	})
+	vim.fn.sign_define(
+		'LspDiagnosticsSign' .. hint,
+		{ text = icons.CIRCLE_SMALL, numhl = 'LspDiagnosticsSign' .. hint }
+	)
 end
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     setup handlers     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -48,6 +45,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 			vim.keymap.set(mode, keys, cmd, { buffer = event.buf })
 		end
 
+		local function open_float()
+			vim.defer_fn(function()
+				vim.diagnostic.open_float()
+			end, 300)
+		end
+
 		map('n', 'gd', function()
 			vim.lsp.buf.definition {
 				reuse_win = true,
@@ -68,10 +71,41 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 		map('n', '[d', function()
 			vim.diagnostic.goto_prev()
+			-- vim.diagnostic.get_next {
+			-- 	count = -1,
+			-- }
+			open_float()
+		end)
+
+		map('n', '[D', function()
+			vim.diagnostic.goto_prev {
+				severity = vim.diagnostic.severity.ERROR,
+			}
+			-- vim.diagnostic.get_prev {
+			-- 	count = -1,
+			-- 	severity = vim.diagnostic.severity.ERROR,
+			-- }
+			open_float()
 		end)
 
 		map('n', ']d', function()
 			vim.diagnostic.goto_next()
+			-- vim.diagnostic.jump {
+			-- 	count = 1,
+			-- }
+			open_float()
+		end)
+
+		map('n', ']D', function()
+			vim.diagnostic.goto_next {
+				severity = vim.diagnostic.severity.ERROR,
+			}
+
+			-- vim.diagnostic.jump {
+			-- 	count = 1,
+			-- 	severity = vim.diagnostic.severity.ERROR,
+			-- }
+			open_float()
 		end)
 
 		map('n', '<space>lq', function()
@@ -160,63 +194,12 @@ end
 
 return {
 	{
-		'pmizio/typescript-tools.nvim',
-		event = 'BufReadPre',
-		enabled = true,
-		keys = {
-			{ '<leader>ti', ':TSToolsAddMissingImports<cr>' },
-			{ '<leader>tr', ':TSToolsRenameFile<cr>' },
-			{ '<leader>td', ':TSToolsRemoveUnusedImports<cr>' },
-			{ '<leader>to', ':TSToolsOrganizeImports<cr>' },
-		},
-		config = function()
-			local api = require 'typescript-tools.api'
-
-			require('typescript-tools').setup {
-				on_attach = function(client)
-					-- client.server_capabilities.semanticTokensProvider = nil
-				end,
-				settings = {
-					tsserver_file_preferences = {
-						includeInlayParameterNameHints = 'all',
-						includeInlayVariableTypeHints = true,
-						includeInlayEnumMemberValueHints = true,
-						includeInlayFunctionLikeReturnTypeHints = true,
-						includeInlayFunctionParameterTypeHints = true,
-						includeInlayPropertyDeclarationTypeHints = true,
-					},
-					tsserver_format_options = {
-						allowRenameOfImportPath = true,
-						insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
-						insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = false,
-						insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
-						quotePreference = 'single',
-					},
-					code_lens = 'off',
-					complete_function_calls = false,
-				},
-				handlers = {
-					['textDocument/publishDiagnostics'] = vim.lsp.with(
-						api.filter_diagnostics {
-							80004, -- JSDoc may be converted
-							80005, -- require call may be converted to an import
-							7044, -- any type
-							7045, -- any type
-						},
-						diagnostic_opts
-					),
-				},
-			}
-		end,
-	},
-
-	{
 		'neovim/nvim-lspconfig',
 		event = 'BufReadPre',
 		dependencies = {
 			'jose-elias-alvarez/null-ls.nvim',
-			'pmizio/typescript-tools.nvim',
 			'yioneko/nvim-vtsls',
+			'ibhagwan/fzf-lua',
 		},
 		init_options = {
 			userLanguages = {
@@ -227,10 +210,10 @@ return {
 		},
 		config = function()
 			local lsp = require 'lspconfig'
-			local cmp = require 'cmp_nvim_lsp'
+			-- local cmp = require 'cmp_nvim_lsp'
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = vim.tbl_deep_extend('force', capabilities, cmp.default_capabilities())
+			-- capabilities = vim.tbl_deep_extend('force', capabilities, cmp.default_capabilities())
 
 			for _, server in ipairs {
 				'luals',
@@ -243,7 +226,7 @@ return {
 				'graphql',
 				'pylsp',
 				'marksman',
-				-- 'vtsls',
+				'vtsls',
 			} do
 				require('lsp.' .. server)(lsp, Opts:new(capabilities))
 			end

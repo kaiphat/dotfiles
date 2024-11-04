@@ -1,5 +1,6 @@
 local char_highlight_group = '@IndentBlanklineChar'
 local context_char_highlight_group = '@IndentBlanklineContextChar'
+local constants = require 'constants'
 
 local excluded_filetypes = {
 	'help',
@@ -61,7 +62,7 @@ local nodes = {
 
 return {
 	'lukas-reineke/indent-blankline.nvim',
-	enabled = false,
+	enabled = true,
 	main = 'ibl',
 	event = 'BufReadPre',
 	config = function()
@@ -78,7 +79,7 @@ return {
 
 		ibl.setup {
 			indent = {
-				char = ICONS.VERTICAL_LINE_1,
+				char = constants.icons.VERTICAL_LINE_1,
 				highlight = char_highlight_group,
 			},
 			scope = {

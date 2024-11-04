@@ -40,6 +40,7 @@ return {
 		})
 
 		require('oil').setup {
+			watch_for_changes = true,
 			delete_to_trash = true,
 			columns = { 'icon' },
 			skip_confirm_for_simple_edits = true,

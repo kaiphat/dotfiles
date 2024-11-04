@@ -12,19 +12,12 @@
     autocrlf = input
     safecrlf = false
     editor = nvim
-    # npm i -g diff-so-fancy
+    ; npm i -g diff-so-fancy
     pager = "diff-so-fancy | less --tabs=4 -RFX"
     diffFilter = "diff-so-fancy --patch"
-    #pager = delta
 
 [diff-so-fancy]
     markEmptyLines = false
-
-#[interactive]
-    #diffFilter = delta --color-only --features=interactive
-
-[delta]
-    side-by-side = true
 
 [alias]
     l   = log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --max-count 12
@@ -68,10 +61,7 @@
     rc  = rebase --continue
     ra  = rebase --abort
     cp  = cherry-pick
+    create-pr = !sh -c 'gh pr create --fill-first -w'
 
 [difftool]
     prompt = true
-
-[diff]
-    tool = nvim
-

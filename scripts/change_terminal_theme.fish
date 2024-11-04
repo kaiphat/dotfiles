@@ -21,6 +21,7 @@ sed -i '' -E "s/background \= '[a-z]+'/background = '$theme_type'/" ~/dotfiles/n
 sed -i '' -E "s/dark_theme\=[01]/dark_theme=$dark_theme_enabled/" ~/dotfiles/.tmux.conf
 sed -i '' -E "s/themes\.[a-zA-Z_]+/themes.$selected_theme/" ~/dotfiles/nvim/lua/plugins/themes.lua
 sed -i '' -E "s/themes\/[a-zA-Z_]+\.toml/themes\/$selected_theme.toml/" ~/dotfiles/alacritty/alacritty.toml
+sed -i '' -E "s/themes\/[a-zA-Z_]+\.conf/themes\/$selected_theme.conf/" ~/dotfiles/kitty/kitty.conf
 sed -i '' -E "s/wezterm\.themes\.[a-zA-Z_]+/wezterm\.themes\.$selected_theme/" ~/dotfiles/wezterm/wezterm.lua
 
 tmux source-file ~/dotfiles/.tmux.conf

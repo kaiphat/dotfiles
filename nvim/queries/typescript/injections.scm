@@ -10,4 +10,3 @@
  (#match? @injection.content "local|redis")
  (#set! injection.language "lua")
 )
-

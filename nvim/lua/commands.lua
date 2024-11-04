@@ -87,7 +87,7 @@ cmd('RunTest', function()
 	local tmux_socket = vim.fn.split(vim.env.TMUX, ',')[1]
 	local cmd_string = string.format(
 		[[
-            tmux -S %s select-pane -L \;\
+            tmux -S %s select-pane -t 1 \;\
             send-keys C-c \;\
             run-shell "tmux respawn-pane -k 'SPEC=%s make test-watch; exec fish'"
         ]],

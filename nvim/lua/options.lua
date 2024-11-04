@@ -1,5 +1,4 @@
 local o = vim.opt
-local wo = vim.wo
 local g = vim.g
 
 g.mapleader = ' '
@@ -109,18 +108,23 @@ o.joinspaces = false -- No double spaces with join after a dot
 o.clipboard:prepend { 'unnamedplus' }
 o.shortmess:append 'sI'
 o.whichwrap:append '<>hl'
+o.conceallevel = 2
 
-wo.foldcolumn = '0'
-wo.foldmethod = 'expr'
-wo.foldexpr = 'nvim_treesitter#foldexpr()'
-wo.foldtext = 'v:lua.FoldText()'
-wo.foldminlines = 1
-wo.foldlevel = 99
-wo.conceallevel = 2
+o.foldmethod = 'expr'
+o.foldexpr = 'nvim_treesitter#foldexpr()'
+o.foldtext = 'v:lua.get_foldtext()'
+o.foldcolumn = '0'
+o.foldminlines = 3
+o.foldnestmax = 5
+o.foldlevel = 99
+o.foldlevelstart = 99
+o.foldopen = 'hor,mark,percent,quickfix,search,tag,undo'
 
-FoldText = function()
+_G.get_foldtext = function()
+	local last_line = table.concat(vim.fn.getbufline(vim.api.nvim_get_current_buf(), vim.v.foldend))
 	local first_line = table.concat(vim.fn.getbufline(vim.api.nvim_get_current_buf(), vim.v.foldstart))
+	-- https://github.com/kevinhwang91/nvim-ufo/blob/5525f422d48f570262611ae2b6aa562c1c428bc5/lua/ufo/provider/indent.lua#L13
 	local space_before_text = first_line:match '%s*'
 
-	return space_before_text .. ' ' .. vim.trim(first_line)
+	return space_before_text .. ' ' .. vim.trim(first_line) .. ' ... ' .. vim.trim(last_line)
 end

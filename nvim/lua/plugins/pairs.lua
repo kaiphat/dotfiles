@@ -3,7 +3,7 @@ return {
 		'altermo/ultimate-autopair.nvim',
 		branch = 'v0.6',
 		event = { 'InsertEnter' },
-		enabled = false,
+		enabled = true,
 		config = function()
 			require('ultimate-autopair.utils').maxlines = math.huge
 
@@ -114,6 +114,7 @@ return {
 	{
 		'windwp/nvim-autopairs',
 		event = 'InsertEnter',
+		enabled = false,
 		config = function()
 			require('nvim-autopairs').setup {
 				check_ts = true,

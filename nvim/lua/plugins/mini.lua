@@ -42,6 +42,7 @@ return {
 
 	{
 		'echasnovski/mini.trailspace',
+		enabled = false,
 		event = 'BufReadPre',
 		keys = {
 			{

@@ -172,7 +172,9 @@ return {
 		{
 			'<leader>fo',
 			function()
-				require('fzf-lua').oldfiles {}
+				require('fzf-lua').oldfiles {
+					include_current_session = true,
+				}
 			end,
 		},
 		{
@@ -790,41 +792,6 @@ return {
 					symbol_style = 1, -- style for document/workspace symbols
 					-- false: disable,    1: icon+kind
 					--     2: icon only,  3: kind only
-					-- NOTE: icons are extracted from
-					-- vim.lsp.protocol.CompletionItemKind
-					-- icons for symbol kind
-					-- see https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#symbolKind
-					-- see https://github.com/neovim/neovim/blob/829d92eca3d72a701adc6e6aa17ccd9fe2082479/runtime/lua/vim/lsp/protocol.lua#L117
-					symbol_icons = {
-						File = '󰈙',
-						Module = '',
-						Namespace = '󰦮',
-						Package = '',
-						Class = '󰆧',
-						Method = '󰊕',
-						Property = '',
-						Field = '',
-						Constructor = '',
-						Enum = '',
-						Interface = '',
-						Function = '󰊕',
-						Variable = '󰀫',
-						Constant = '󰏿',
-						String = '',
-						Number = '󰎠',
-						Boolean = '󰨙',
-						Array = '󱡠',
-						Object = '',
-						Key = '󰌋',
-						Null = '󰟢',
-						EnumMember = '',
-						Struct = '󰆼',
-						Event = '',
-						Operator = '󰆕',
-						TypeParameter = '󰗴',
-					},
-					-- colorize using Treesitter '@' highlight groups ("@function", etc).
-					-- or 'false' to disable highlighting
 					symbol_hl = function(s)
 						return '@' .. s:lower()
 					end,

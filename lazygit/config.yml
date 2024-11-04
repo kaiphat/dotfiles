@@ -8,21 +8,27 @@ gui:
   showBottomLine: false
   showCommandLog: false
   showPanelJumps: false
-  border: 'rounded'
+  # border: 'rounded'
+  border: 'hidden'
   filterMode: 'fuzzy'
 
 git:
   paging:
+    colorArg: always
     pager: diff-so-fancy
+    # externalDiffCommand: difft --color=always --display=side-by-side-show-both --syntax-highlight=on
+    # pager: delta --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
 
-# os:
-#   edit: nvim --server /tmp/nvim-server-$(tmux display-message -p '#S').pipe --remote-send "<cmd>lua require('scripts.lazygit-open-file')('{{filename}}', '{{line}}')<CR>"
-#   open: nvim --server /tmp/nvim-server-$(tmux display-message -p '#S').pipe --remote-send "<cmd>lua require('scripts.lazygit-open-file')('{{filename}}', '{{line}}')<CR>"
-
+os:
+  edit: nvim --server /tmp/nvim-$(tmux display-message -p '#S').pipe --remote-send "<cmd>lua require('scripts.lazygit-open-file')('{{filename}}', '{{line}}')<CR>"
+  editAtLine: nvim --server /tmp/nvim-$(tmux display-message -p '#S').pipe --remote-send "<cmd>lua require('scripts.lazygit-open-file')('{{filename}}', '{{line}}')<CR>"
+  open: nvim --server /tmp/nvim-$(tmux display-message -p '#S').pipe --remote-send "<cmd>lua require('scripts.lazygit-open-file')('{{filename}}', '{{line}}')<CR>"
 
 customCommands:
   - key: 'D'
-    command: 'fish -c "git diff origin/master...{{.SelectedLocalBranch.Name}} | nread"'
-    context: 'localBranches'
+    # command: 'fish -c "git diff origin/master...{{.SelectedLocalBranch.Name}} | difft"'
+    command: "git difftool -y {{.SelectedLocalCommit.Sha}} -- {{.SelectedCommitFile.Name}}"
+    # context: 'localBranches'
+    context: 'commitFiles'
     description: 'Diff with master'
-    subprocess: true
+    # subprocess: true

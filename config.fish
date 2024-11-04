@@ -5,15 +5,18 @@
 set -U nvm_default_version v20.16.0
 set -gx ANDROID_HOME $HOME/Android/Sdk
 set -gx EDITOR nvim
-set -gx MANPAGER 'nvim +Man! -c "set nowrap" -c "set modifiable" -c "set noreadonly" -c "set buftype=nofile"'
-set -gx PAGER 'nvim +Man! -c "set nowrap" -c "set modifiable" -c "set noreadonly" -c "set buftype=nofile"'
+set -gx MANPAGER 'nvim +Man! -c "set nowrap modifiable noreadonly buftype=nofile"'
+#set -gx MANPAGER 'man'
+# set -gx PAGER 'nvim +Man! -c "set nowrap modifiable noreadonly buftype=nofile"'
+set -gx PAGER 'less'
+set -gx BAT_PAGER 'less'
 set -gx LUA_DIR /usr/bin/lua
 set -gx LD_LIBRARY_PATH /opt/oracle/instantclient_21_8
+set -gx XDG_CONFIG_HOME ~/.config
 
 set -U fish_greeting
 set -U ignoreeof true
 set -U SXHKD_SHELL sh
-set -U XDG_CONFIG_HOME ~/.config
 set -U TERMINFO /usr/share/terminfo
 set -gx CPPFLAGS "-I/opt/homebrew/opt/openjdk@17/include"
 set -x JAVA_HOME (/usr/libexec/java_home -v 1.7)
@@ -109,15 +112,12 @@ function wry
 end
 
 alias g "git"
-alias k "kubectl"
 alias tn "tmux new-session -s"
 alias ta "tmux attach-session"
 alias td "tmux detach"
-alias st "speedtest"
 alias y "yarn"
 alias grep "grep -i --color"
-# alias n "nvim --listen /tmp/nvim-server-$(tmux display-message -p '#S').pipe"
-alias n "nvim"
+alias n "nvim --listen /tmp/nvim-$(tmux display-message -p '#S').pipe"
 alias nman 'nvim +Man! -c "set nowrap" -c "set modifiable" -c "set noreadonly" -c "set buftype=nofile"'
 alias nread 'nvim -c "set nowrap" -c "set modifiable" -c "set noreadonly" -c "set buftype=nofile"'
 alias req "http -p mbh"
@@ -287,11 +287,11 @@ end
 function open:github:current
     set ticket (util:get_ticket_name)
     set root (util:get_git_remote_root)
-    echo "https://github.com/$root/pulls?q=is%3Apr+$ticket"
+    open "https://github.com/$root/pulls?q=is%3Apr+$ticket"
 end
 
 function open:github:my_prs
     set root (util:get_git_remote_root)
-    echo "https://github.com/$root/pulls/@me"
+    open "https://github.com/$root/pulls/@me"
 end
 

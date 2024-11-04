@@ -33,6 +33,22 @@ local add_mixins = function()
 	-- vim.treesitter.language.register('fish', 'nu')
 end
 
+local add_folds = function()
+	local treesitter_parsers = require 'nvim-treesitter.parsers'
+
+	if treesitter_parsers.has_parser 'typescript' then
+		-- require('vim.treesitter.query').set(
+		-- 	'typescript',
+		-- 	'folds',
+		-- 	[[
+		--               [
+		--                   (statement_block)
+		--               ] @fold
+		--           ]]
+		-- )
+	end
+end
+
 return {
 	{
 		'nvim-treesitter/nvim-treesitter-context',
@@ -56,23 +72,21 @@ return {
 		version = false,
 		event = 'VeryLazy',
 		build = ':TSUpdate',
+		dependencies = {
+			{ 'nushell/tree-sitter-nu', build = ':TSUpdate nu' },
+		},
 		config = function()
 			local install = require 'nvim-treesitter.install'
 			local config = require 'nvim-treesitter.configs'
-			local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+
+			add_folds()
 
 			install.compilers = { 'gcc' }
 
-			parser_config.nu = {
-				install_info = {
-					url = 'https://github.com/nushell/tree-sitter-nu',
-					files = { 'src/parser.c' },
-					branch = 'main',
-				},
-				filetype = 'nu',
-			}
-
 			config.setup {
+				fold = {
+					enabled = true,
+				},
 				ensure_installed = languages,
 				query_linter = {
 					enable = true,

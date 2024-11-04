@@ -1,0 +1,40 @@
+include ./fonts/zed.conf
+include ./themes/rose_pine_dark.conf
+
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     general     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+remember_window_size         yes
+window_padding_width         6 10 6 10
+window_margin_width          0
+select_by_word_characters    @-./_~?&=%+#
+term                         xterm-kitty
+bell_on_tab                  no
+enable_audio_bell            no
+dim_opacity                  1
+scrollback_lines             10000
+background_opacity           1
+background_tint              1
+dynamic_background_opacity   yes
+confirm_os_window_close      0
+clipboard_control            write-clipboard write-primary read-clipboard read-primary
+macos_option_as_alt          yes
+macos_traditional_fullscreen yes
+
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     performance     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+repaint_delay 2
+sync_to_monitor no
+input_delay 2
+
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     cursor     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+cursor_shape          block
+cursor_blink_interval 0
+cursor_trail          16
+cursor_trail_decay    0.09 0.35
+mouse_hide_wait       0.5
+
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     keymaps     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+map f11 toggle_fullscreen
+map f5 load_config_file

@@ -11,11 +11,11 @@ style = "Regular"
 
 [font.italic]
 family = "SFMono Nerd Font"
-style = "Italic"
+style = "Regular"
 
 [font.bold_italic]
 family = "SFMono Nerd Font"
-style = "Italic"
+style = "Regular"
 
 [font.offset]
 x = 0

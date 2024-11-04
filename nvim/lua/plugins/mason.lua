@@ -11,7 +11,7 @@ return {
 					'prettierd',
 					'prettier',
 					'rust-analyzer',
-					'typescript-language-server',
+					-- 'typescript-language-server',
 					'json-lsp',
 					'css-lsp',
 					'html-lsp',
@@ -22,6 +22,7 @@ return {
 					'python-lsp-server',
 					'eslint-lsp',
 					'marksman',
+					'vtsls',
 				},
 			}
 		end,

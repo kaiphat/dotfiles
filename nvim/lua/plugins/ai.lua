@@ -7,7 +7,7 @@ return {
 		'zbirenbaum/copilot.lua',
 		cmd = 'Copilot',
 		event = 'BufEnter',
-		enabled = true,
+		enabled = false,
 		config = function()
 			require('copilot').setup {
 				panel = {
@@ -99,21 +99,20 @@ return {
 	},
 
 	{
-		'codota/tabnine-nvim',
-		build = './dl_binaries.sh',
-		enabled = false,
+		'monkoose/neocodeium',
+		event = 'BufEnter',
+		enabled = true,
 		config = function()
-			require('tabnine').setup {
-				disable_auto_comment = true,
-				accept_keymap = '<C-g>',
-				dismiss_keymap = '<C-]>',
-				debounce_ms = 300,
-				codelens_enabled = true,
-				suggestion_color = { gui = '#808080', cterm = 244 },
-				exclude_filetypes = { 'TelescopePrompt', 'NvimTree' },
-				log_file_path = nil, -- absolute path to Tabnine log file
-				ignore_certificate_errors = false,
+			local neocodeium = require 'neocodeium'
+
+			neocodeium.setup {
+				show_label = false,
+				silent = true,
+				max_lines = -1,
 			}
+
+			vim.keymap.set('i', '<C-g>', neocodeium.accept)
+			vim.keymap.set('i', '<C-q>', neocodeium.cycle_or_complete)
 		end,
 	},
 }

@@ -3,19 +3,19 @@ size = 12
 
 [font.normal]
 family = 'KodeMono Nerd Font Mono'
-style = 'Medium'
+style = 'Regular'
 
 [font.bold]
 family = 'KodeMono Nerd Font Mono'
-style = 'Medium'
+style = 'Regular'
 
 [font.italic]
 family = 'KodeMono Nerd Font Mono'
-style = 'Medium'
+style = 'Regular'
 
 [font.bold_italic]
 family = 'KodeMono Nerd Font Mono'
-style = 'Medium'
+style = 'Regular'
 
 [font.offset]
 x = 0

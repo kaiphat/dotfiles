@@ -26,18 +26,15 @@ end
 return {
 	'hrsh7th/nvim-cmp',
 	event = 'InsertEnter',
+	enabled = false,
 	dependencies = {
 		'hrsh7th/cmp-path',
 		'hrsh7th/cmp-nvim-lsp',
-		'saadparwaiz1/cmp_luasnip',
 		'hrsh7th/cmp-buffer',
-		-- 'zbirenbaum/copilot-cmp',
-		-- 'zbirenbaum/copilot.lua',
 	},
 	config = function()
 		local cmp = require 'cmp'
 		local types = require 'cmp.types'
-		local luasnip = require 'luasnip'
 		local compare = require 'cmp.config.compare'
 
 		-- require('copilot_cmp').setup()
@@ -64,7 +61,7 @@ return {
 			},
 			snippet = {
 				expand = function(args)
-					luasnip.lsp_expand(args.body)
+					vim.snippet.expand(args.body)
 				end,
 			},
 			window = {
@@ -117,8 +114,6 @@ return {
 				max_view_entries = 50,
 			},
 			sources = cmp.config.sources({
-				-- { name = 'copilot', keyword_length = 1, priority = 200 },
-				{ name = 'luasnip', keyword_length = 2, priority = 100 },
 				{ name = 'nvim_lsp', keyword_length = 1, priority = 100 },
 				{ name = 'path', keyword_length = 0, priority = 110 },
 			}, {

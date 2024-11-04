@@ -63,9 +63,9 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'VimLeavePre' }, {
 	end,
 })
 
-vim.api.nvim_create_autocmd('VimResized', {
-	group = u.create_augroup 'resize_pane',
-	callback = function()
-		vim.cmd 'wincmd ='
-	end,
-})
+-- vim.api.nvim_create_autocmd('VimResized', {
+-- 	group = u.create_augroup 'resize_pane',
+-- 	callback = function()
+-- 		vim.cmd 'wincmd ='
+-- 	end,
+-- })

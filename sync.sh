@@ -8,7 +8,6 @@ set paths \
     ~/.tmux.conf \
     ~/.rndebuggerrc \
     ~/.config/kitty \
-    ~/.config/awesome \
     ~/.config/pgcli \
     ~/.config/litecli \
     ~/.config/starship.toml \
@@ -25,6 +24,7 @@ set paths \
     ~/.config/rofi \
     ~/.config/polybar \
     ~/.config/nushell \
+    "$HOME/Library/Application Support/nushell" \
     ~/.config/zathura \
     ~/.config/i3 \
     ~/.config/zellij \

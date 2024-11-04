@@ -1,10 +1,3 @@
--- local colors = {
--- 	fg1 = '#a3b8ef',
--- 	fg2 = '#EBCB8B',
--- 	fg3 = '#7eca9c',
--- 	fg4 = '#ff75a0',
--- }
-
 local function get_colors()
 	return {
 		fg1 = vim.g.terminal_color_5,
@@ -103,6 +96,18 @@ local function get_components(c)
 			end,
 			hl = { fg = c.fg1 },
 		},
+		lsp_errors = {
+			icon = ' ',
+			enabled = function()
+				return #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR }) ~= 0
+			end,
+			provider = function()
+				return tostring(#vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR }))
+			end,
+
+			hl = { fg = c.fg2 },
+			left_sep = gap,
+		},
 	}
 end
 
@@ -110,7 +115,7 @@ return {
 	'feline-nvim/feline.nvim',
 	priority = 900,
 	config = function()
-        local colors = get_colors()
+		local colors = get_colors()
 		local components = get_components(colors)
 
 		require('feline').setup {
@@ -118,7 +123,7 @@ return {
 			disable = {},
 			components = {
 				active = {
-					{ components.path, components.macros },
+					{ components.path, components.macros, components.lsp_errors },
 					{ components.marks, components.git_branch, components.position },
 				},
 				inactive = {

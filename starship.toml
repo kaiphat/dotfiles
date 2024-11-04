@@ -10,6 +10,7 @@ $cmd_duration\
 $line_break\
 $character"""
 add_newline = false
+command_timeout = 5000
 
 [directory]
 style = "blue"

@@ -1,21 +1,21 @@
 [font]
-size = 11.5
+size = 11
 
 [font.normal]
 family = 'VictorMono Nerd Font'
-style = 'Medium'
+style = 'Regular'
 
 [font.bold]
 family = 'VictorMono Nerd Font'
-style = 'Medium'
+style = 'Regular'
 
 [font.italic]
 family = 'VictorMono Nerd Font'
-style = 'Medium'
+style = 'Regular'
 
 [font.bold_italic]
 family = 'VictorMono Nerd Font'
-style = 'Medium'
+style = 'Regular'
 
 [font.offset]
 x = 1

@@ -1,0 +1,40 @@
+{
+    "console": {
+        "prefix": "co",
+        "body": [
+            "console.log('%o', $0)"
+        ]
+    },
+    "before": {
+        "prefix": "be",
+        "body": [
+            "before('${1:desc}', async function() {",
+            "",
+            "})"
+        ]
+    },
+    "it": {
+        "prefix": "it",
+        "body": [
+            "it('${1:desc}', async function() {",
+            "",
+            "})"
+        ]
+    },
+    "it_sync": {
+        "prefix": "itsy",
+        "body": [
+            "it('${1:desc}', function() {",
+            "",
+            "})"
+        ]
+    },
+    "describe": {
+        "prefix": "de",
+        "body": [
+            "describe('${1:desc}', function() {",
+            "",
+            "})"
+        ]
+    }
+}
