@@ -230,7 +230,7 @@ $env.config.keybindings = [
     {
         name: move_down
         modifier: control
-        keycode: char_n
+        keycode: char_j
         mode: [emacs, vi_normal, vi_insert]
         event: {
             until: [
@@ -242,7 +242,7 @@ $env.config.keybindings = [
     {
         name: move_up
         modifier: control
-        keycode: char_p
+        keycode: char_k
         mode: [emacs, vi_normal, vi_insert]
         event: {
             until: [
