@@ -34,13 +34,18 @@ def git [] {
         (^git diff --cached --quiet | complete).exit_code == 1
     }
     let upstream = {
-        ^git --no-optional-locks status --porcelain=2 --branch 
+        let stat = ^git --no-optional-locks status --porcelain=2 --branch 
             | lines
             | where ($it | str starts-with '# branch.ab')
             | split column ' ' col1 col2 ahead behind
-            | get behind
-            | first
-            | into int
+
+        let behind = $stat | get behind | first | into int
+        let ahead = $stat | get ahead | first | into int
+
+        {
+            behind: $behind
+            ahead: $ahead
+        }
     }
 
     let result = ([
@@ -50,9 +55,10 @@ def git [] {
     ] | par-each {|it| do $it})
 
     let changes = if ($result.0 or $result.1) { char hamburger }
-    let upstream_exists = if $result.2 < 0 { char branch_behind }
+    let before = if $result.2.behind < 0 { char branch_behind }
+    let after = if $result.2.ahead > 0 { char branch_ahead }
 
-    $'(ansi red)($changes)($upstream_exists)(ansi reset)'
+    $'(ansi red)($changes)($before)($after)(ansi reset)'
 }
 
 def git_branch [] {
