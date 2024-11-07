@@ -1,5 +1,5 @@
 def left [] {
-    $'(current_dir_style) (git_branch) (git) (prompt)'
+    $'(current_dir_style) (git) (prompt)'
 }
 
 def prompt [] {
@@ -13,7 +13,7 @@ def current_dir_style [] {
         '~'
     } else {
         let current_dir_relative_to_home = (
-            do --ignore-errors { $current_dir | path relative-to $nu.home-path } | str join
+            do -i { $current_dir | path relative-to $nu.home-path } | str join
         )
 
         if ($current_dir_relative_to_home | is-empty) == false {
@@ -27,48 +27,39 @@ def current_dir_style [] {
 }
 
 def git [] {
-    let unstaged = {
-        (^git diff --quiet | complete).exit_code == 1
+    let git_exists = ^git rev-parse --abbrev-ref HEAD | complete
+    let branch = $git_exists.stdout | str trim
+
+    if $branch == '' {
+        return ''
     }
-    let staged = {
-        (^git diff --cached --quiet | complete).exit_code == 1
-    }
-    let upstream = {
-        let stat = ^git --no-optional-locks status --porcelain=2 --branch 
+
+    let upstream = do {
+        let stats = ^git --no-optional-locks status --porcelain=2 --branch 
             | lines
             | where ($it | str starts-with '# branch.ab')
             | split column ' ' col1 col2 ahead behind
 
-        let behind = $stat | get behind | first | into int
-        let ahead = $stat | get ahead | first | into int
+        if ($stats | length) == 0 {
+            return ''
+        }
 
-        {
-            behind: $behind
-            ahead: $ahead
+        let behind = $stats | get behind | first | into int | if $in < 0 { char branch_behind }
+        let ahead = $stats | get ahead | first | into int | if $in > 0 { char branch_ahead }
+        $'(ansi red)($behind)($ahead)(ansi reset)'
+    }
+    let changes = do {
+        let unstaged = (^git diff --quiet | complete ).exit_code == 1
+        if $unstaged {
+            return $'(ansi red)(char hamburger)(ansi reset)'
+        }
+        let staged = (^git diff --cached --quiet | complete).exit_code == 1
+        if $staged {
+            return $'(ansi red)(char hamburger)(ansi reset)'
         }
     }
 
-    let result = ([
-        $staged
-        $unstaged 
-        $upstream 
-    ] | par-each {|it| do $it})
-
-    let changes = if ($result.0 or $result.1) { char hamburger }
-    let before = if $result.2.behind < 0 { char branch_behind }
-    let after = if $result.2.ahead > 0 { char branch_ahead }
-
-    $'(ansi red)($changes)($before)($after)(ansi reset)'
-}
-
-def git_branch [] {
-    do -i {
-        let branch = do -i { ^git rev-parse --abbrev-ref HEAD } | str trim
-        if ($branch | str length) > 0 {
-            return $'(ansi yellow)($branch)(ansi reset)'
-        }
-        return ''
-    }
+    $'(ansi yellow)($branch)(ansi reset) ($changes)($upstream)'
 }
 
 export-env { 

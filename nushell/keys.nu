@@ -204,7 +204,7 @@ $env.config.keybindings = [
     {
         name: move_to_line_end_or_take_history_hint
         modifier: control
-        keycode: char_e
+        keycode: char_g
         mode: [emacs, vi_normal, vi_insert]
         event: {
             until: [

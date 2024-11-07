@@ -1,4 +1,4 @@
-include ./fonts/zed.conf
+include ./fonts/jet_brains.conf
 include ./themes/rose_pine_dark.conf
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     general     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -23,16 +23,17 @@ macos_traditional_fullscreen yes
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     performance     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 repaint_delay 2
-sync_to_monitor no
+sync_to_monitor yes
 input_delay 2
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     cursor     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-cursor_shape          block
-cursor_blink_interval 0
-cursor_trail          16
-cursor_trail_decay    0.09 0.35
-mouse_hide_wait       0.5
+cursor_shape                 block
+cursor_blink_interval        0
+cursor_trail                 10
+cursor_trail_decay           0.09 0.42
+cursor_trail_start_threshold 2
+mouse_hide_wait              0.5
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     keymaps     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
