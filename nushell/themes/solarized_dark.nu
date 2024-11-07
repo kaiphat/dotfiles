@@ -84,7 +84,7 @@ export def main [] {
         shape_variable: '#6c71c4'
 
         foreground: '#93a1a1'
-        background: '#002b36'
+        # background: '#002b36'
         cursor: '#93a1a1'
 
         empty: '#268bd2'
@@ -113,7 +113,6 @@ export def "update terminal" [] {
         
     $"
     (ansi -o $osc_screen_foreground_color)($theme.foreground)(char bel)
-    (ansi -o $osc_screen_background_color)($theme.background)(char bel)
     (ansi -o $osc_cursor_color)($theme.cursor)(char bel)
     "
     # Line breaks above are just for source readability

@@ -1,4 +1,5 @@
 alias g = git
+alias lg = lazygit
 alias t = tmux
 alias n = nvim
 alias d = docker
@@ -26,4 +27,21 @@ def dps [name = ''] {
   } else {
     $containers | where NAMES =~ $name
   }
+}
+
+def trans [...words] {
+    let text = $words | str join ' ' | str trim
+    let first_letter = $words.0 | split chars | $in.0
+
+    mut lan = 'en:ru'
+    if ($words.0 | parse --regex '[а-яА-Я]' | length) > 0 {
+        $lan = 'ru:en'
+    }
+
+    if ($words | length) == 1 {
+        ^trans $lan -show-original no -show-prompt-message no -show-languages no $text;
+        return
+    }
+
+    ^trans $lan -show-original no -show-prompt-message no -show-languages no $text;
 }

@@ -1,6 +1,4 @@
 format = """
-$username\
-$hostname\
 $directory\
 $git_branch\
 $git_state\
@@ -10,7 +8,6 @@ $cmd_duration\
 $line_break\
 $character"""
 add_newline = false
-command_timeout = 5000
 
 [directory]
 style = "blue"
@@ -54,4 +51,3 @@ style = "yellow"
 format = ' [DRAFT](red)'
 when = 'git log -1 --pretty=%B | grep -q DRAFT'
 require_repo = true
-ignore_timeout = true
