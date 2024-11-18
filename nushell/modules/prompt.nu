@@ -1,5 +1,5 @@
 def left [] {
-    $'(current_dir_style) (git) (prompt)'
+    $'(current_dir_style) (git_async) (prompt)'
 }
 
 def prompt [] {
@@ -26,7 +26,60 @@ def current_dir_style [] {
     $'(ansi light_blue)($current_dir_abbreviated)(ansi reset)'
 }
 
-def git [] {
+def git_before [branch] {
+    {
+        let commits = ^git log --oneline --max-count=1 $'($branch)..origin/($branch)' | complete
+
+        if ($commits.stdout | str length) > 0 {
+            return $'(ansi red)(char branch_behind)(ansi reset)'
+        }
+
+        ''
+    }
+}
+
+def git_after [branch] {
+    {
+        let commits = ^git log --oneline --max-count=1 $'origin/($branch)..($branch)' | complete
+
+        if ($commits.stdout | str length) > 0 {
+            return $'(ansi red)(char branch_ahead)(ansi reset)'
+        }
+
+        ''
+    }
+}
+
+def git_draft [] {
+    {
+        let commit = ^git log --oneline --max-count=1
+
+        if ($commit | str contains 'DRAFT') {
+            return $'(ansi red)D(ansi reset)'
+        }
+
+        ''
+    }
+}
+
+
+def git_changes [] {
+    {
+        let result = $'(ansi red)(char hamburger)(ansi reset)'
+        let unstaged = (^git diff --quiet | complete ).exit_code == 1
+        if $unstaged {
+            return $result
+        }
+        let staged = (^git diff --cached --quiet | complete).exit_code == 1
+        if $staged {
+            return $result
+        }
+
+        ''
+    }
+}
+
+def git_async [] {
     let git_exists = ^git rev-parse --abbrev-ref HEAD | complete
     let branch = $git_exists.stdout | str trim
 
@@ -34,33 +87,16 @@ def git [] {
         return ''
     }
 
-    let upstream = do {
-        let stats = ^git --no-optional-locks status --porcelain=2 --branch 
-            | lines
-            | where ($it | str starts-with '# branch.ab')
-            | split column ' ' col1 col2 ahead behind
+    let parts = [(git_changes) (git_before $branch) (git_after $branch) (git_draft)] 
+        | enumerate
+        | par-each {|s| update item (do $s.item) } 
+        | sort-by item 
+        | get item
+        | str join ''
 
-        if ($stats | length) == 0 {
-            return ''
-        }
-
-        let behind = $stats | get behind | first | into int | if $in < 0 { char branch_behind }
-        let ahead = $stats | get ahead | first | into int | if $in > 0 { char branch_ahead }
-        $'(ansi red)($behind)($ahead)(ansi reset)'
-    }
-    let changes = do {
-        let unstaged = (^git diff --quiet | complete ).exit_code == 1
-        if $unstaged {
-            return $'(ansi red)(char hamburger)(ansi reset)'
-        }
-        let staged = (^git diff --cached --quiet | complete).exit_code == 1
-        if $staged {
-            return $'(ansi red)(char hamburger)(ansi reset)'
-        }
-    }
-
-    $'(ansi yellow)($branch)(ansi reset) ($changes)($upstream)'
+    $'(ansi yellow)($branch)(ansi reset) ($parts)'
 }
+
 
 export-env { 
     $env.PROMPT_INDICATOR_VI_INSERT = {|| "" }

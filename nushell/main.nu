@@ -69,8 +69,7 @@ $env.config = {
         sort: "smart" # "smart" (alphabetical for prefix matching, fuzzy score for fuzzy matching) or "alphabetical"
         external: {
             enable: true # set to false to prevent nushell looking into $env.PATH to find more suggestions, `false` recommended for WSL users as this look up may be very slow
-            max_results: 100 # setting it lower can improve completion performance at the cost of omitting some options
-            completer: null # check 'carapace_completer' above as an example
+            max_results: 50 # setting it lower can improve completion performance at the cost of omitting some options
         }
         use_ls_colors: true # set this to true to enable file/path/directory completions using LS_COLORS
     }
@@ -100,7 +99,7 @@ $env.config = {
         # osc8 is also implemented as the deprecated setting ls.show_clickable_links, it shows clickable links in ls output if your terminal supports it. show_clickable_links is deprecated in favor of osc8
         osc8: true
         # osc9_9 is from ConEmu and is starting to get wider support. It's similar to osc7 in that it communicates the path to the terminal
-        osc9_9: false
+        osc9_9: true
         # osc133 is several escapes invented by Final Term which include the supported ones below.
         # 133;A - Mark prompt start
         # 133;B - Mark prompt end

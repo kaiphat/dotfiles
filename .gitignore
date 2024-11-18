@@ -3,4 +3,4 @@ history.txt
 
 watson/*
 !watson/config
-nushell/history.sqlite*
+nushell/history*

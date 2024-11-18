@@ -264,12 +264,12 @@ end
 starship init fish | source
 enable_transience
 
-if status is-interactive
-    and not set -q TMUX
-    tmux kill-session -t 0 || true
-    tmux attach -t main || tmux new -s main
-end
-
+#if status is-interactive
+#    and not set -q TMUX
+#    tmux kill-session -t 0 || true
+#    tmux attach -t main || tmux new -s main
+#end
+#
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     utils     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 function util:get_git_remote_root

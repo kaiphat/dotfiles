@@ -1,5 +1,5 @@
 export-env { 
-    fnm env --shell bash
+    ^fnm env --shell bash
         | lines
         | str replace 'export ' ''
         | str replace -a '"' ''

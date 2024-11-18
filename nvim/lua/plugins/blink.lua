@@ -6,7 +6,7 @@ return {
 	opts = {
 		accept = {
 			auto_brackets = {
-				enabled = true,
+				enabled = false,
 				semantic_token_resolution = {
 					enabled = true,
 					blocked_filetypes = {},
@@ -32,7 +32,6 @@ return {
 		windows = {
 			autocomplete = {
 				border = 'rounded',
-				draw = 'simple', -- simple | reversed | minimal
 				-- selection = 'auto_insert',
 			},
 			documentation = {

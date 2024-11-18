@@ -227,6 +227,7 @@ return {
 				'pylsp',
 				'marksman',
 				'vtsls',
+				'nu',
 			} do
 				require('lsp.' .. server)(lsp, Opts:new(capabilities))
 			end

@@ -1,21 +1,4 @@
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   PATHS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-$env.PATH | prepend '$snap_bin_path'
-$env.PATH | prepend '$ANDROID_HOME/emulator'
-$env.PATH | prepend '$ANDROID_HOME/tools'
-$env.PATH | prepend '$ANDROID_HOME/tools/bin'
-$env.PATH | prepend '$ANDROID_HOME/platform-tools'
-$env.PATH | prepend '/opt/ReactNativeDebugger'
-$env.PATH | prepend '/usr/local/go/bin'
-$env.PATH | prepend '/usr/.local/bin'
-$env.PATH | prepend "/home/kaiphat/.config/carapace/bin"
-$env.PATH | prepend '$HOME/go/bin'
-$env.PATH | prepend '$HOME/.cargo/bin'
-$env.PATH | prepend '$HOME/.krew/bin'
-
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   ENVS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -35,6 +18,7 @@ $env.PAGER = 'nvim -c "set nowrap" -R'
 $env.TERMINAL = 'wezterm'
 $env.NODE_OPTIONS = '--max-old-space-size=4096'
 $env.SXHKD_SHELL = 'nu'
+$env.SHELL = 'nu'
 $env.ENV_CONVERSIONS = {
     "PATH": {
         from_string: { |s| $s | split row (char esep) | path expand --no-symlink }
@@ -46,6 +30,22 @@ $env.ENV_CONVERSIONS = {
     }
 }
 $env.MANPAGER = 'nvim +Man! -c "set nowrap modifiable noreadonly buftype=nofile"'
+
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   PATHS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+$env.PATH = (
+    $env.PATH | split row (char esep) 
+    | append '/opt/homebrew/bin'
+    | append '/usr/local/go/bin'
+    | append '/usr/.local/bin'
+    | append '/usr/local/bin'
+    | append $'($env.HOME)/.config/carapace/bin'
+    | append $'($env.HOME)/go/bin'
+    | append $'($env.HOME)/.cargo/bin'
+    | append $'($env.HOME)/.krew/bin'
+)
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   PLUGINS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈

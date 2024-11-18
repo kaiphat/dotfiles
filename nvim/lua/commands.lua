@@ -88,7 +88,7 @@ cmd('RunTest', function()
 		[[
             tmux send-keys -t 1 C-c;
             tmux respawn-pane -t 1 -k;
-            tmux run-shell -d 1 "tmux send-keys -t 1 'SPEC=%s make test-watch' Enter";
+            tmux run-shell -d 0.5 "tmux send-keys -t 1 'SPEC=%s make test-watch' Enter";
         ]],
 		relative_path
 	)
@@ -97,10 +97,9 @@ cmd('RunTest', function()
 end)
 
 cmd('CopyGitHubFileLink', function()
-	local branch = vim.trim(vim.fn.system 'git rev-parse --abbrev-ref HEAD')
-	local remote_root = vim.trim(vim.fn.system 'nu ~/dotfiles/nvim/lua/scripts/get_remote_root.nu')
-	local relative_path = u.get_relative_path()
+	local path = vim.api.nvim_buf_get_name(0)
 	local row_index = vim.api.nvim_win_get_cursor(0)[1]
-	local url = string.format('https://github.com/%s/blob/%s/%s#L%d', remote_root, branch, relative_path, row_index)
-	vim.fn.setreg('+', url)
+	local command = string.format('nu -l ~/dotfiles/nvim/lua/scripts/copy_git_hub_link.nu %s %d', path, row_index)
+
+	vim.fn.system(command)
 end)
