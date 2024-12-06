@@ -5,7 +5,6 @@ source ./completer.nu
 source ./keys.nu
 source ~/.zoxide.nu
 
-use prompt.nu
 use utils.nu
 use commands.nu *
 use git_commands.nu *
@@ -14,3 +13,4 @@ use private.nu *
 use open_links.nu
 use fnm.nu
 use tmux.nu *
+use prompt.nu

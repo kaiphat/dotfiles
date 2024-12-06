@@ -23,6 +23,7 @@ return {
 					'eslint-lsp',
 					'marksman',
 					'vtsls',
+					'llm-ls',
 				},
 			}
 		end,

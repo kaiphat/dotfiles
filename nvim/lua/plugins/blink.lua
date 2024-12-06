@@ -4,18 +4,6 @@ return {
 	lazy = false,
 	build = 'cargo build --release',
 	opts = {
-		accept = {
-			auto_brackets = {
-				enabled = false,
-				semantic_token_resolution = {
-					enabled = true,
-					blocked_filetypes = {},
-					-- How long to wait for semantic tokens to return before assuming no brackets should be added
-					timeout_ms = 400,
-				},
-			},
-		},
-
 		highlight = {
 			use_nvim_cmp_as_default = true,
 		},
@@ -27,25 +15,43 @@ return {
 			['<C-k>'] = { 'select_prev', 'fallback' },
 			['<C-x>'] = { 'hide' },
 			['<C-o>'] = { 'select_and_accept' },
-		},
-
-		windows = {
-			autocomplete = {
-				border = 'rounded',
-				-- selection = 'auto_insert',
-			},
-			documentation = {
-				auto_show = true,
-				border = 'rounded',
-			},
+			['<C-e>'] = {},
 		},
 
 		fuzzy = {
 			use_typo_resistance = true,
-			use_frecency = true,
+			use_frecency = false,
 			use_proximity = true,
-			max_items = 50,
+			max_items = 200,
 			sorts = { 'label', 'kind', 'score' },
+		},
+
+		completion = {
+			documentation = {
+				window = {
+					border = 'rounded',
+				},
+			},
+
+			menu = {
+				border = 'rounded',
+			},
+
+			accept = {
+				auto_brackets = {
+					enabled = false,
+					semantic_token_resolution = {
+						enabled = true,
+						blocked_filetypes = {},
+						-- How long to wait for semantic tokens to return before assuming no brackets should be added
+						timeout_ms = 400,
+					},
+				},
+			},
+
+			ghost_text = {
+				enabled = false,
+			},
 		},
 
 		sources = {
@@ -78,7 +84,7 @@ return {
 				snippets = {
 					name = 'Snippets',
 					module = 'blink.cmp.sources.snippets',
-					score_offset = -1,
+					score_offset = -5,
 					opts = {
 						friendly_snippets = false,
 						search_paths = { vim.fn.stdpath 'config' .. '/snippets' },
@@ -90,7 +96,22 @@ return {
 				buffer = {
 					name = 'Buffer',
 					module = 'blink.cmp.sources.buffer',
-					fallback_for = { 'lsp' },
+					score_offset = -5,
+					-- fallback_for = { 'lsp' },
+					fallback_for = {},
+					opts = {
+						get_bufnrs = function()
+							local allOpenBuffers = vim.fn.getbufinfo { buflisted = 1, bufloaded = 1 }
+							return vim.iter(allOpenBuffers)
+								:filter(function(buf)
+									return vim.bo[buf.bufnr].buftype == ''
+								end)
+								:map(function(buf)
+									return buf.bufnr
+								end)
+								:totable()
+						end,
+					},
 				},
 			},
 		},

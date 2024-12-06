@@ -21,6 +21,7 @@ $env.config.completions.external.completer = {|spans|
 
     match $spans.0 {
         nu => $fish_completer
+        npm => $fish_completer
         git => $fish_completer
         _ => $carapace_completer
     } | do $in $spans

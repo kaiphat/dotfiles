@@ -84,14 +84,7 @@ end)
 
 cmd('RunTest', function()
 	local relative_path = u.get_relative_path()
-	local cmd_string = string.format(
-		[[
-            tmux send-keys -t 1 C-c;
-            tmux respawn-pane -t 1 -k;
-            tmux run-shell -d 0.5 "tmux send-keys -t 1 'SPEC=%s make test-watch' Enter";
-        ]],
-		relative_path
-	)
+	local cmd_string = string.format('nu ~/dotfiles/nvim/lua/scripts/run_test.nu %s', relative_path)
 
 	vim.fn.system(cmd_string)
 end)

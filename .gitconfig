@@ -16,6 +16,9 @@
     pager = "diff-so-fancy | less --tabs=4 -RFX"
     diffFilter = "diff-so-fancy --patch"
 
+[color]
+    ui = auto
+
 [diff-so-fancy]
     markEmptyLines = false
 
@@ -52,7 +55,7 @@
     b   = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
     bd  = branch -D
     # branch list
-    bl = for-each-ref --count 10 --sort=-committerdate refs/heads --format='%(authordate:short) %(color:red)%(objectname:short) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset))'
+    bl = for-each-ref --count 10 --sort=-committerdate --format='%(color:yellow)%(refname:short)%(color:reset) %(color:green)%(committerdate:relative) %(color:red)%(contents:subject)%(color:reset)' --color refs/heads
     bdr  = push -d origin
     m   = merge
     ce  = config --global --edit

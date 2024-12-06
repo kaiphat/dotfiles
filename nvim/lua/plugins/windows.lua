@@ -2,7 +2,7 @@ return {
 	'anuvyklack/windows.nvim',
 	dependencies = {
 		'anuvyklack/middleclass',
-		'anuvyklack/animation.nvim',
+		-- 'anuvyklack/animation.nvim',
 	},
 	event = 'BufReadPre',
 	enabled = true,
@@ -26,7 +26,7 @@ return {
 			},
 
 			animation = {
-				enable = true,
+				enable = false,
 				duration = 100,
 			},
 		}

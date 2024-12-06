@@ -7,7 +7,7 @@ return {
 		'zbirenbaum/copilot.lua',
 		cmd = 'Copilot',
 		event = 'BufEnter',
-		enabled = false,
+		enabled = true,
 		config = function()
 			require('copilot').setup {
 				panel = {
@@ -21,7 +21,7 @@ return {
 					auto_trigger = true,
 					debounce = 75,
 					keymap = {
-						accept = '<C-g>',
+						accept = '<C-e>',
 						accept_word = false,
 						accept_line = false,
 						next = '<C-q>',
@@ -48,6 +48,7 @@ return {
 
 	{
 		'CopilotC-Nvim/CopilotChat.nvim',
+		enabled = true,
 		keys = {
 			{
 				'<leader>cc',
@@ -101,7 +102,7 @@ return {
 	{
 		'monkoose/neocodeium',
 		event = 'BufEnter',
-		enabled = true,
+		enabled = false,
 		config = function()
 			local neocodeium = require 'neocodeium'
 

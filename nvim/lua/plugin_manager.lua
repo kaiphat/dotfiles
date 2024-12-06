@@ -12,7 +12,10 @@ end
 
 vim.opt.runtimepath:prepend(lazypath)
 
-require('lazy').setup('plugins', {
+require('lazy').setup {
+	spec = {
+		{ import = 'plugins' },
+	},
 	defaults = {
 		lazy = false,
 	},
@@ -53,4 +56,4 @@ require('lazy').setup('plugins', {
 			},
 		},
 	},
-})
+}

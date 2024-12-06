@@ -101,7 +101,7 @@ def git_async [] {
 export-env { 
     $env.PROMPT_INDICATOR_VI_INSERT = {|| "" }
     $env.PROMPT_INDICATOR_VI_NORMAL = {|| "" }
-    $env.PROMPT_MULTILINE_INDICATOR = {|| "::: " }
+    $env.PROMPT_MULTILINE_INDICATOR = {|| "" }
     $env.PROMPT_INDICATOR = {|| '' }
     $env.PROMPT_COMMAND = {|| left }
     $env.PROMPT_COMMAND_RIGHT = {|| ''}

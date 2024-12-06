@@ -1,7 +1,9 @@
-include ./fonts/jet_brains.conf
+include ./fonts/comic.conf
 include ./themes/rose_pine_dark.conf
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     general     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+shell /opt/homebrew/bin/nu -l -e run_tmux
 
 remember_window_size         yes
 window_padding_width         6 10 6 10
@@ -17,6 +19,7 @@ background_tint              1
 dynamic_background_opacity   yes
 confirm_os_window_close      0
 clipboard_control            write-clipboard write-primary read-clipboard read-primary
+paste_actions                filter
 macos_option_as_alt          yes
 macos_traditional_fullscreen yes
 
@@ -39,3 +42,4 @@ mouse_hide_wait              0.5
 
 map f11 toggle_fullscreen
 map f5 load_config_file
+map cmd+enter load_config_file

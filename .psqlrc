@@ -1,6 +1,8 @@
 \set PROMPT1 '\x1b[34m  \x1b[0m'
 \set PROMPT2 '\x1b[34m  \x1b[0m'
 \set PROMPT3 '\x1b[34m  \x1b[0m'
+\set VERBOSITY verbose
+\set ECHO all
 \x off
 \pset null '[null]'
 \set HISTFILE ~/.psql_history- :DBNAME
