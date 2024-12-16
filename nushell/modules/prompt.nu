@@ -3,7 +3,8 @@ def left [] {
 }
 
 def prompt [] {
-    $"\r\n(ansi red)󰼛 "
+    $"\r\n(ansi magenta); "
+    # $"\r\n(ansi red)󰼛 "
 }
 
 def current_dir_style [] {

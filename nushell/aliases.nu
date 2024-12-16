@@ -63,7 +63,13 @@ def "g ch" [to_branch?] {
         ^git ch $to_branch | return
     }
 
-    let branch = (^git bl | fzf --ansi | complete)
+    let current_branch = ^git branch --show-current | str trim
+    let branch = ^git bl 
+        | split row (char newline)
+        | filter { $in | str contains $current_branch | not $in }
+        | str join (char newline)
+        | fzf --ansi 
+        | complete
 
     if ($branch.stdout | str length) > 0 {
         $branch.stdout | split row ' ' | first | ^git ch $in

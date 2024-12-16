@@ -73,7 +73,7 @@ local function build_rg_cmd(ignore_level)
 end
 
 local function build_prompt()
-	return '  ' .. constants.icons.TRIANGLE .. ' '
+	return '  ' .. constants.icons.SEMICOLON .. ' '
 end
 
 return {
@@ -154,6 +154,7 @@ return {
 					cmd = build_rg_cmd(IGNORE_LEVEL.FULL),
 				}
 			end,
+			mode = { 'n', 'v' },
 		},
 		{
 			'<leader>dh',
@@ -162,6 +163,7 @@ return {
 					cmd = build_rg_cmd(IGNORE_LEVEL.TEST),
 				}
 			end,
+			mode = { 'n', 'v' },
 		},
 		{
 			'<leader>fp',

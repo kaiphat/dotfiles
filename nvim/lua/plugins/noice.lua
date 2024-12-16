@@ -40,7 +40,7 @@ return {
 
 			cmdline = {
 				format = {
-					cmdline = { title = '', pattern = '^:', icon = icons.TRIANGLE, lang = 'vim' },
+					cmdline = { title = '', pattern = '^:', icon = icons.SEMICOLON, lang = 'vim' },
 					search_down = { title = '', kind = 'search', pattern = '^/', icon = icons.SEARCH, lang = 'regex' },
 					search_up = { title = '', kind = 'search', pattern = '^%?', icon = icons.SEARCH, lang = 'regex' },
 					filter = { pattern = '^:%s*!', icon = icons.TRIANGLE, lang = 'bash' },

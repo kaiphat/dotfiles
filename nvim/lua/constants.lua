@@ -19,6 +19,7 @@ module.icons = {
 	SEARCH = '',
 	BIG_SEARCH = ' ',
 	TRIANGLE = '󰼛',
+	SEMICOLON = ';',
 }
 
 return module

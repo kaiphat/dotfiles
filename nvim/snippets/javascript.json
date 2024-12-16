@@ -36,5 +36,13 @@
             "",
             "})"
         ]
+    },
+    "promise all": {
+        "prefix": "pall",
+        "body": [
+            "await Promise.all([",
+            "       ${1}",
+            "])"
+        ]
     }
 }

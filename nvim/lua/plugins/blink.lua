@@ -4,12 +4,6 @@ return {
 	lazy = false,
 	build = 'cargo build --release',
 	opts = {
-		highlight = {
-			use_nvim_cmp_as_default = true,
-		},
-
-		nerd_font_variant = 'normal',
-
 		keymap = {
 			['<C-j>'] = { 'show', 'select_next', 'fallback' },
 			['<C-k>'] = { 'select_prev', 'fallback' },
@@ -19,11 +13,9 @@ return {
 		},
 
 		fuzzy = {
-			use_typo_resistance = true,
+			use_typo_resistance = false,
 			use_frecency = false,
 			use_proximity = true,
-			max_items = 200,
-			sorts = { 'label', 'kind', 'score' },
 		},
 
 		completion = {
@@ -55,6 +47,7 @@ return {
 		},
 
 		sources = {
+			default = { 'lsp', 'path', 'snippets', 'buffer' },
 			providers = {
 				lsp = {
 					name = 'LSP',
@@ -64,9 +57,10 @@ return {
 					should_show_items = true, -- whether or not to show the items
 					max_items = nil, -- maximum number of items to return
 					min_keyword_length = 0, -- minimum number of characters to trigger the provider
-					fallback_for = {}, -- if any of these providers return 0 items, it will fallback to this provider
+					fallbacks = {}, -- if any of these providers return 0 items, it will fallback to this provider
 					score_offset = 0, -- boost/penalize the score of the items
 					override = nil, -- override the source's functions
+					async = false,
 				},
 				path = {
 					name = 'Path',
@@ -78,13 +72,13 @@ return {
 						get_cwd = function(context)
 							return vim.fn.expand(('#%d:p:h'):format(context.bufnr))
 						end,
-						show_hidden_files_by_default = false,
+						show_hidden_files_by_default = true,
 					},
 				},
 				snippets = {
 					name = 'Snippets',
 					module = 'blink.cmp.sources.snippets',
-					score_offset = -5,
+					score_offset = 1,
 					opts = {
 						friendly_snippets = false,
 						search_paths = { vim.fn.stdpath 'config' .. '/snippets' },
@@ -93,12 +87,14 @@ return {
 						ignored_filetypes = {},
 					},
 				},
+				luasnip = {
+					enabled = false,
+				},
 				buffer = {
 					name = 'Buffer',
 					module = 'blink.cmp.sources.buffer',
 					score_offset = -5,
-					-- fallback_for = { 'lsp' },
-					fallback_for = {},
+					max_items = 10,
 					opts = {
 						get_bufnrs = function()
 							local allOpenBuffers = vim.fn.getbufinfo { buflisted = 1, bufloaded = 1 }
@@ -113,46 +109,10 @@ return {
 						end,
 					},
 				},
+				cmdline = {
+					enabled = true,
+				},
 			},
-		},
-
-		trigger = {
-			completion = {
-				show_in_snippet = true,
-			},
-		},
-
-		kind_icons = {
-			Text = '󰉿',
-			Method = '',
-			Function = '󰊕',
-			Constructor = '󰒓',
-
-			Field = '󰜢',
-			Variable = '󰆦',
-			Property = '󰖷',
-
-			Class = '',
-			Interface = '󱡠',
-			Struct = '󱡠',
-			Module = '󰅩',
-
-			Unit = '󰪚',
-			Value = '󰦨',
-			Enum = '󰦨',
-			EnumMember = '󰦨',
-
-			Keyword = '󰻾',
-			Constant = '󰏿',
-
-			Snippet = '󱄽',
-			Color = '󰏘',
-			File = '󰈔',
-			Reference = '󰬲',
-			Folder = '󰉋',
-			Event = '󱐋',
-			Operator = '󰪚',
-			TypeParameter = '󰬛',
 		},
 	},
 }
