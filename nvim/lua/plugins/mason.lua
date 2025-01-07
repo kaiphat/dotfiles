@@ -24,6 +24,7 @@ return {
 					'marksman',
 					'vtsls',
 					'llm-ls',
+					'jdtls',
 				},
 			}
 		end,

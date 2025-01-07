@@ -10,6 +10,9 @@ let carapace_completer = {|spans: list<string>|
     | if ($in | default [] | where value =~ '^-.*ERR$' | is-empty) { $in } else { null }
 }
 
+$env.config.completions.algorithm = 'fuzzy'
+$env.config.completions.external.enable = true
+$env.config.completions.external.max_results = 50
 $env.config.completions.external.completer = {|spans|
     let expanded_alias = (scope aliases | where name == $spans.0 | get -i 0 | get -i expansion)
 

@@ -1,25 +1,25 @@
 [font]
-size = 12
+size = 11
 
 [font.normal]
 family = "Maple Mono NF"
-style = "ExtraLight"
+style = "Regular"
 
 [font.bold]
 family = "Maple Mono NF"
-style = "ExtraLight"
+style = "Regular"
 
 [font.italic]
 family = "Maple Mono NF"
-style = "ExtraLight"
+style = "Regular"
 
 [font.bold_italic]
 family = "Maple Mono NF"
-style = "ExtraLight"
+style = "Regular"
 
 [font.offset]
-x = 0
-y = 0
+x = 1
+y = 1
 
 [font.glyph_offset]
 x = 0

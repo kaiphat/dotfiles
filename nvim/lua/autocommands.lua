@@ -33,7 +33,7 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
 
 vim.api.nvim_create_autocmd('FileType', {
 	group = u.create_augroup 'set_format_options',
-	callback = function()
+	callback = function(file)
 		vim.opt_local.formatoptions = 'tc'
 	end,
 })

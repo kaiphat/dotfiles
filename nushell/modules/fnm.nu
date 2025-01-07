@@ -9,8 +9,5 @@ export-env {
         | reduce -f {} {|it, acc| $acc | upsert $it.name $it.value }
         | load-env
 
-    $env.PATH = ($env.PATH
-        | split row (char esep)
-        | prepend $"($env.FNM_MULTISHELL_PATH)/bin"
-    )
+    $env.PATH ++= [$"($env.FNM_MULTISHELL_PATH)/bin"]
 }

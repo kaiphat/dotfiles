@@ -73,7 +73,7 @@ local function build_rg_cmd(ignore_level)
 end
 
 local function build_prompt()
-	return '  ' .. constants.icons.SEMICOLON .. ' '
+	return '  ' .. constants.icons.BRACKET .. ' '
 end
 
 return {
@@ -275,11 +275,11 @@ return {
 		require('fzf-lua').register_ui_select()
 
 		require('fzf-lua').setup {
-			winopts_fn = function()
-				return {
-					width = vim.o.columns > 190 and 0.5 or 0.8,
-				}
-			end,
+			-- winopts_fn = function()
+			-- 	return {
+			-- 		width = vim.o.columns > 190 and 0.5 or 0.8,
+			-- 	}
+			-- end,
 			winopts = {
 				-- split         = "belowright new",-- open in a split instead?
 				-- "belowright new"  : split below
@@ -296,7 +296,6 @@ return {
 				-- to manually draw the border characters around the preview
 				-- window, can be set to 'false' to remove all borders or to
 				-- 'none', 'single', 'double', 'thicc' (+cc) or 'rounded' (default)
-				-- border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
 				border = 'rounded',
 				-- requires neovim > v0.9.0, passed as is to `nvim_open_win`
 				-- can be sent individually to any provider to set the win title
@@ -305,7 +304,7 @@ return {
 				fullscreen = false, -- start fullscreen?
 				preview = {
 					default = 'builtin', -- override the default previewer?
-					border = 'noborder', -- border|noborder, applies only to
+					border = 'rounded', -- border|noborder, applies only to
 					wrap = 'nowrap', -- wrap|nowrap
 					hidden = 'nohidden', -- hidden|nohidden
 					vertical = 'down:60%', -- up|down:size
@@ -322,7 +321,7 @@ return {
 					-- applies only when scrollbar = 'float'
 					scrollchars = { '█', '' }, -- scrollbar chars ({ <full>, <empty> }
 					-- applies only when scrollbar = 'border'
-					delay = 100, -- delay(ms) displaying the preview
+					delay = 10, -- delay(ms) displaying the preview
 					-- prevents lag on fast scrolling
 					winopts = { -- builtin previewer window options
 						number = false,
@@ -456,13 +455,12 @@ return {
 				builtin = {
 					syntax = true, -- preview syntax highlight?
 					syntax_limit_l = 0, -- syntax limit (lines), 0=nolimit
-					syntax_limit_b = 1024 * 1024, -- syntax limit (bytes), 0=nolimit
+					syntax_limit_b = 1024 * 100, -- syntax limit (bytes), 0=nolimit
 					limit_b = 1024 * 1024 * 10, -- preview limit (bytes), 0=nolimit
 					-- previewer treesitter options:
 					-- enable specific filetypes with: `{ enable = { "lua" } }
 					-- exclude specific filetypes with: `{ disable = { "lua" } }
 					-- disable fully with: `{ enable = false }`
-					treesitter = { enable = true, disable = {} },
 					-- By default, the main window dimensions are calculated as if the
 					-- preview is visible, when hidden the main window will extend to
 					-- full size. Set the below to "extend" to prevent the main window
@@ -879,7 +877,13 @@ return {
 				-- actions inherit from 'actions.files' and merge
 				actions = { ['default'] = actions.complete },
 				-- previewer hidden by default
-				winopts = { preview = { hidden = 'hidden' } },
+
+				winopts = {
+					preview = {
+						hidden = 'hidden',
+						delay = 10,
+					},
+				},
 			},
 			-- uncomment to use fzf native previewers
 			-- (instead of using a neovim floating window)

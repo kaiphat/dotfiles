@@ -1,9 +1,9 @@
 local wezterm = require 'wezterm'
 local font_config = require 'wezterm.fonts'
-local theme = require 'wezterm.themes.rose_pine_dark'
+local theme = require 'wezterm.themes.rose_pine_light'
 local config = require 'wezterm.config'
 
-config.set(font_config.build_font(font_config.fonts.radon))
+config.set(font_config.build_font(font_config.fonts.input))
 config.set(theme)
 config.set {
 	automatically_reload_config = true,
@@ -21,7 +21,7 @@ config.set {
 		left = '2cell',
 		right = '2cell',
 		top = '0.5cell',
-		bottom = '0.5cell',
+		bottom = '0cell',
 	},
 	mouse_bindings = {
 		{

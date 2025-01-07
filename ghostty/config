@@ -1,0 +1,31 @@
+font-size = 12
+font-thicken = true
+
+font-family = Iosevka
+font-style = Extended
+
+font-family-bold = Iosevka
+font-style-bold = Extended
+
+font-family-italic = Iosevka
+font-style-italic = Extended
+
+font-family-bold-italic = Iosevka
+font-style-bold-italic = Extended
+
+theme = rose-pine-moon
+fullscreen = true
+macos-non-native-fullscreen = true
+macos-option-as-alt = true
+
+cursor-style = block
+cursor-style-blink = false
+
+window-padding-x = 10,10
+window-padding-y = 10,2
+
+confirm-close-surface = false
+mouse-hide-while-typing = true
+shell-integration = none
+
+keybind = cmd+shift+,=reload_config

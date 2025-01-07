@@ -33,9 +33,10 @@ def trans [...words] {
     let text = $words | str join ' ' | str trim
     let first_letter = $words.0 | split chars | $in.0
 
-    mut lan = 'en:ru'
-    if ($words.0 | parse --regex '[а-яА-Я]' | length) > 0 {
-        $lan = 'ru:en'
+    let lan = if ($text =~ '[а-яА-Я]') {
+        'ru:en'
+    } else {
+        'en:ru'
     }
 
     if ($words | length) == 1 {
@@ -74,4 +75,11 @@ def "g ch" [to_branch?] {
     if ($branch.stdout | str length) > 0 {
         $branch.stdout | split row ' ' | first | ^git ch $in
     }
+}
+
+def docker-patch-nerd-fonts [] {
+    # docker image rm nerdfonts/patcher
+    # docker pull nerdfonts/patcher:latest
+    docker run --rm -v ~/dotfiles/fonts/in:/in:Z -v ~/dotfiles/fonts:/out:Z -e "PN=4" nerdfonts/patcher:latest -c --careful
+    rm -rf ~/dotfiles/fonts/in/*
 }

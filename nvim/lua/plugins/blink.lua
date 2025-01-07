@@ -2,6 +2,7 @@ return {
 	'saghen/blink.cmp',
 	enabled = true,
 	lazy = false,
+	-- version = '0.8.2',
 	build = 'cargo build --release',
 	opts = {
 		keymap = {
@@ -10,6 +11,7 @@ return {
 			['<C-x>'] = { 'hide' },
 			['<C-o>'] = { 'select_and_accept' },
 			['<C-e>'] = {},
+			['<Tab>'] = {},
 		},
 
 		fuzzy = {
@@ -31,7 +33,7 @@ return {
 
 			accept = {
 				auto_brackets = {
-					enabled = false,
+					enabled = true,
 					semantic_token_resolution = {
 						enabled = true,
 						blocked_filetypes = {},
@@ -56,7 +58,7 @@ return {
 					transform_items = nil, -- function to transform the items before they're returned
 					should_show_items = true, -- whether or not to show the items
 					max_items = nil, -- maximum number of items to return
-					min_keyword_length = 0, -- minimum number of characters to trigger the provider
+					min_keyword_length = 0,
 					fallbacks = {}, -- if any of these providers return 0 items, it will fallback to this provider
 					score_offset = 0, -- boost/penalize the score of the items
 					override = nil, -- override the source's functions
@@ -65,7 +67,7 @@ return {
 				path = {
 					name = 'Path',
 					module = 'blink.cmp.sources.path',
-					score_offset = 3,
+					score_offset = 0,
 					opts = {
 						trailing_slash = false,
 						label_trailing_slash = true,
@@ -79,6 +81,7 @@ return {
 					name = 'Snippets',
 					module = 'blink.cmp.sources.snippets',
 					score_offset = 1,
+					min_keyword_length = 1,
 					opts = {
 						friendly_snippets = false,
 						search_paths = { vim.fn.stdpath 'config' .. '/snippets' },
@@ -95,6 +98,7 @@ return {
 					module = 'blink.cmp.sources.buffer',
 					score_offset = -5,
 					max_items = 10,
+					min_keyword_length = 0,
 					opts = {
 						get_bufnrs = function()
 							local allOpenBuffers = vim.fn.getbufinfo { buflisted = 1, bufloaded = 1 }
@@ -110,7 +114,7 @@ return {
 					},
 				},
 				cmdline = {
-					enabled = true,
+					enabled = false,
 				},
 			},
 		},

@@ -31,7 +31,8 @@ set paths \
     ~/.config/dunst \
     ~/.config/watson \
     ~/.config/lazygit \
-    ~/.config/btop
+    ~/.config/btop \
+    ~/.config/ghostty
 
 for path in $paths
     echo "----------------------------------"

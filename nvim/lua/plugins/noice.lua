@@ -40,10 +40,10 @@ return {
 
 			cmdline = {
 				format = {
-					cmdline = { title = '', pattern = '^:', icon = icons.SEMICOLON, lang = 'vim' },
+					cmdline = { title = '', pattern = '^:', icon = icons.BRACKET, lang = 'vim' },
 					search_down = { title = '', kind = 'search', pattern = '^/', icon = icons.SEARCH, lang = 'regex' },
 					search_up = { title = '', kind = 'search', pattern = '^%?', icon = icons.SEARCH, lang = 'regex' },
-					filter = { pattern = '^:%s*!', icon = icons.TRIANGLE, lang = 'bash' },
+					filter = { pattern = '^:%s*!', icon = icons.BRACKET, lang = 'bash' },
 					lua = { pattern = '^:%s*lua%s+', icon = '', lang = 'lua' },
 					help = { pattern = '^:%s*h%s+', icon = icons.SEARCH },
 					input = {}, -- Used by input()

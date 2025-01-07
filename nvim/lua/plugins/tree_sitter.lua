@@ -30,7 +30,7 @@ local languages = {
 }
 
 local add_mixins = function()
-	-- vim.treesitter.language.register('fish', 'nu')
+	-- vim.treesitter.language.register('fish', 'noext')
 end
 
 local add_folds = function()

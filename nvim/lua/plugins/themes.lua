@@ -23,4 +23,4 @@ local themes = {
 	solarized_light = 'solarized_light',
 }
 
-return require('themes.' .. themes.rose_pine_dark)
+return require('themes.' .. themes.rose_pine_light)

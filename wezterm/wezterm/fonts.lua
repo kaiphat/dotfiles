@@ -48,7 +48,7 @@ return {
 	fonts = {
 		jet_brains = {
 			name = 'JetBrains Mono',
-			weight = weights.M,
+			weight = weights.SB,
 			italic = false,
 			font_size = 11.5,
 			cell_width = 1,
@@ -103,9 +103,9 @@ return {
 			},
 		},
 		input = {
-			name = 'Input Mono Condensed',
-			weight = weights.R,
-			font_size = 12,
+			name = 'Input Mono',
+			weight = weights.B,
+			font_size = 11,
 			cell_width = 1,
 			line_height = 1,
 		},
@@ -215,17 +215,18 @@ return {
 		maple_aoc = {
 			name = 'Maple Mono NF',
 			full_italic = false,
-			italic = true,
-			font_size = 10.8,
+			italic = false,
+			font_size = 11.5,
 			cell_width = 1,
 			line_height = 1,
-			weight = weights.R,
+			weight = weights.SB,
 			scale = 1,
 			harfbuzz_features = {
 				'cv01', -- @
 				'cv02', -- a
 				-- 'cv03', -- i
 				'cv04', -- l
+				'cv35',
 			},
 		},
 		zed = {
@@ -278,9 +279,9 @@ return {
 			line_height = 1,
 		},
 		iosevka = {
-			name = 'Iosevka',
-			weight = weights.M,
-			font_size = 12.5,
+			name = 'Iosevka Extended',
+			weight = weights.B,
+			font_size = 12,
 			cell_width = 1,
 			line_height = 1,
 			harfbuzz_features = {

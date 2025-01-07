@@ -2,20 +2,20 @@
 size = 11.5
 
 [font.normal]
-family = 'InputMono Nerd Font Mono'
-style = 'Condensed'
+family = 'InputMono Nerd Font'
+style = 'Light'
 
 [font.bold]
-family = 'InputMono Nerd Font Mono'
-style = 'Condensed'
+family = 'InputMono Nerd Font'
+style = 'Light'
 
 [font.italic]
-family = 'InputMono Nerd Font Mono'
-style = 'Condensed'
+family = 'InputMono Nerd Font'
+style = 'Light'
 
 [font.bold_italic]
-family = 'InputMono Nerd Font Mono'
-style = 'Condensed'
+family = 'InputMono Nerd Font'
+style = 'Light'
 
 [font.offset]
 x = 0

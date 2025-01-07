@@ -19,33 +19,24 @@ $env.TERMINAL = 'wezterm'
 $env.NODE_OPTIONS = '--max-old-space-size=4096'
 $env.SXHKD_SHELL = 'nu'
 $env.SHELL = 'nu'
-$env.ENV_CONVERSIONS = {
-    "PATH": {
-        from_string: { |s| $s | split row (char esep) | path expand --no-symlink }
-        to_string: { |v| $v | path expand --no-symlink | str join (char esep) }
-    }
-    "Path": {
-        from_string: { |s| $s | split row (char esep) | path expand --no-symlink }
-        to_string: { |v| $v | path expand --no-symlink | str join (char esep) }
-    }
-}
+$env.JAVA_HOME = (/usr/libexec/java_home -v 1.7)
 $env.MANPAGER = 'nvim +Man! -c "set nowrap modifiable noreadonly buftype=nofile"'
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   PATHS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-$env.PATH = (
-    $env.PATH | split row (char esep) 
-    | append '/opt/homebrew/bin'
-    | append '/usr/local/go/bin'
-    | append '/usr/.local/bin'
-    | append '/usr/local/bin'
-    | append $'($env.HOME)/.config/carapace/bin'
-    | append $'($env.HOME)/go/bin'
-    | append $'($env.HOME)/.cargo/bin'
-    | append $'($env.HOME)/.krew/bin'
-)
+let HOME = $env.HOME
+$env.PATH ++= [
+    '/opt/homebrew/bin'
+    '/usr/local/go/bin'
+    '/usr/.local/bin'
+    '/usr/local/bin'
+    $'($HOME)/.config/carapace/bin'
+    $'($HOME)/go/bin'
+    $'($HOME)/.cargo/bin'
+    $'($HOME)/.krew/bin'
+]
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   PLUGINS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈

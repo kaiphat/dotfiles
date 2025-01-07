@@ -3,19 +3,19 @@ size = 11
 
 [font.normal]
 family = 'VictorMono Nerd Font'
-style = 'Regular'
+style = 'Medium'
 
 [font.bold]
 family = 'VictorMono Nerd Font'
-style = 'Regular'
+style = 'Medium'
 
 [font.italic]
 family = 'VictorMono Nerd Font'
-style = 'Regular'
+style = 'Medium Italic'
 
 [font.bold_italic]
 family = 'VictorMono Nerd Font'
-style = 'Regular'
+style = 'Medium Italic'
 
 [font.offset]
 x = 1
