@@ -5,16 +5,6 @@ local map = function(mode, keys, cmd, opts)
 	vim.keymap.set(mode, keys, cmd, opts)
 end
 
-local is_wrapped = false
-map('n', '<F4>', function()
-	if is_wrapped then
-		vim.cmd 'set nowrap'
-	else
-		vim.cmd 'set wrap'
-	end
-	is_wrapped = not is_wrapped
-end)
-
 map('v', 'y', 'ygv<esc>')
 map('v', 'p', 'pgvy=`]')
 map('v', '<', '<gv')
@@ -147,6 +137,54 @@ end)
 map('v', '<leader>us', function()
 	vim.api.nvim_input ':s/'
 end)
+local function substitute()
+	local start_pos = vim.fn.getpos 'v'
+	local end_pos = vim.fn.getpos '.'
+
+	local line = vim.fn.getline(start_pos[2])
+	local word = vim.trim(string.sub(line, start_pos[3], end_pos[3]))
+
+	local bufnr = vim.api.nvim_create_buf(false, true)
+	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { word })
+
+	local width = vim.api.nvim_win_get_width(0)
+	local height = vim.api.nvim_win_get_height(0)
+
+	vim.keymap.set('n', 'q', function()
+		vim.cmd 'q'
+	end, { buffer = bufnr })
+
+	vim.api.nvim_create_autocmd({ 'BufWinLeave' }, {
+		buffer = bufnr,
+		callback = function()
+			local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+			local new_word = vim.trim(lines[1])
+			vim.schedule(function()
+				vim.cmd('%s/' .. word .. '/' .. new_word .. '/gc')
+			end)
+		end,
+	})
+
+	vim.api.nvim_open_win(bufnr, true, {
+		relative = 'editor',
+		width = 30,
+		height = 1,
+		col = math.ceil((width - 30) / 2),
+		row = math.ceil((height - 1) / 2),
+		style = 'minimal',
+		border = 'rounded',
+	})
+end
+map('n', '<leader>uw', function()
+	vim.api.nvim_input 'viw'
+	vim.schedule(function()
+		substitute()
+	end)
+end)
+map('v', '<leader>uw', function()
+	substitute()
+end)
+map('v', 'C', 'y<cmd>let @/=@"<cr>cgn')
 
 map('n', 'zf', function()
 	vim.cmd.normal 'zMzr'

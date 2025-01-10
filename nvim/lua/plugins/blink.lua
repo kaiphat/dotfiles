@@ -15,8 +15,8 @@ return {
 		},
 
 		fuzzy = {
-			use_typo_resistance = false,
-			use_frecency = false,
+			use_typo_resistance = true,
+			use_frecency = true,
 			use_proximity = true,
 		},
 
@@ -89,9 +89,6 @@ return {
 						extended_filetypes = {},
 						ignored_filetypes = {},
 					},
-				},
-				luasnip = {
-					enabled = false,
 				},
 				buffer = {
 					name = 'Buffer',

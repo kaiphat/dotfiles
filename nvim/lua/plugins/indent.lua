@@ -62,7 +62,7 @@ local nodes = {
 
 return {
 	'lukas-reineke/indent-blankline.nvim',
-	enabled = false,
+	enabled = true,
 	main = 'ibl',
 	event = 'BufReadPre',
 	config = function()
