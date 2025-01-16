@@ -1,5 +1,3 @@
-local u = require 'utils'
-
 local cmd = function(name, fn, opts)
 	opts = opts or {}
 	vim.api.nvim_create_user_command(name, fn, opts)
@@ -35,7 +33,7 @@ cmd('CreateSubTitle', function(opts)
 
 	char = (char == '' or char == nil) and '#' or char
 
-	local row = u.get_row_col()
+	local row = kaiphat.utils.get_row_col()
 
 	local line = vim.trim(vim.api.nvim_get_current_line():gsub(char, ''):gsub(DEFAULT_CHAR, ''))
 	local free_space = MAX_LENGTH - #line - SPACE_LENGTH * 2
@@ -58,7 +56,7 @@ cmd('CreateTitle', function(opts)
 
 	char = (char == '' or char == nil) and '#' or char
 
-	local row = u.get_row_col()
+	local row = kaiphat.utils.get_row_col()
 
 	local line = vim.trim(vim.api.nvim_get_current_line():gsub(char, ''):gsub(DEFAULT_CHAR, ''))
 	local left_line_length = math.floor((MAX_LENGTH - #line - SPACE_LENGTH * 2) / 2)
@@ -83,7 +81,7 @@ cmd('FileType', function()
 end)
 
 cmd('RunTest', function()
-	local relative_path = u.get_relative_path()
+	local relative_path = kaiphat.utils.get_relative_path()
 	local cmd_string = string.format('nu ~/dotfiles/nvim/lua/scripts/run_test.nu %s', relative_path)
 
 	vim.fn.system(cmd_string)

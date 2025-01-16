@@ -1,4 +1,4 @@
-local icons = require('constants').icons
+local icons = kaiphat.constants.icons
 local base_keys = '<leader>h'
 
 return {

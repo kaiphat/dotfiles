@@ -1,14 +1,13 @@
-local u = require 'utils'
-local group = u.create_augroup 'eslint'
+local group = kaiphat.utils.create_augroup 'eslint'
 
-return function(lsp, opts)
-	opts:expand {
+kaiphat.setup_lsp_server {
+	name = 'eslint',
+	opts = {
 		settings = {
 			format = true,
 		},
-	}
-
-	opts:set_on_attach_hook(function(client, bufnr)
+	},
+	on_attach_hook = function(client, bufnr)
 		vim.api.nvim_create_autocmd('BufWritePre', {
 			group = group,
 			buffer = bufnr,
@@ -18,7 +17,5 @@ return function(lsp, opts)
 				end)
 			end,
 		})
-	end)
-
-	lsp.eslint.setup(opts:to_server_opts())
-end
+	end,
+}

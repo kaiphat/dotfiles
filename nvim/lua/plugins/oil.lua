@@ -1,5 +1,3 @@
-local u = require 'utils'
-
 return {
 	'stevearc/oil.nvim',
 	keys = {
@@ -18,7 +16,7 @@ return {
 	},
 	config = function()
 		vim.api.nvim_create_autocmd('FileType', {
-			group = u.create_augroup 'oil',
+			group = kaiphat.utils.create_augroup 'oil',
 			pattern = 'oil',
 			callback = function(event)
 				vim.api.nvim_buf_set_keymap(event.buf, 'n', '<C-j>', 'j', {})

@@ -1,6 +1,3 @@
-local u = require 'utils'
-local constants = require 'constants'
-
 local always_ignore_patterns = {
 	'.git/',
 	'dist/',
@@ -13,7 +10,7 @@ local always_ignore_patterns = {
 	'package-lock.json',
 }
 
-local ignore_patterns = u.concat({
+local ignore_patterns = kaiphat.utils.concat({
 	'data/',
 	'.data/',
 	'test/',
@@ -73,7 +70,7 @@ local function build_rg_cmd(ignore_level)
 end
 
 local function build_prompt()
-	return '  ' .. constants.icons.BRACKET .. ' '
+	return '  ' .. kaiphat.constants.icons.BRACKET .. ' '
 end
 
 return {
@@ -94,7 +91,7 @@ return {
 			function()
 				require('fzf-lua').files {
 					cmd = build_find_cmd(IGNORE_LEVEL.WITHOUT),
-					cwd = u.get_current_dir(),
+					cwd = kaiphat.utils.get_current_dir(),
 				}
 			end,
 		},
@@ -134,7 +131,7 @@ return {
 			'<leader>fL',
 			function()
 				require('fzf-lua').live_grep {
-					cwd = u.get_current_dir(),
+					cwd = kaiphat.utils.get_current_dir(),
 					cmd = build_rg_cmd(IGNORE_LEVEL.WITHOUT),
 				}
 			end,
@@ -524,7 +521,7 @@ return {
 					['--layout'] = 'reverse',
 					['--border'] = 'none',
 					['--prompt'] = '❯',
-					['--pointer'] = constants.icons.CARET,
+					['--pointer'] = kaiphat.constants.icons.CARET,
 					['--marker'] = '❯',
 					['--no-scrollbar'] = '',
 					['--no-separator'] = '',

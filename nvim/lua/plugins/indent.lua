@@ -1,6 +1,6 @@
 local char_highlight_group = '@IndentBlanklineChar'
 local context_char_highlight_group = '@IndentBlanklineContextChar'
-local constants = require 'constants'
+local constants = kaiphat.constants
 
 local excluded_filetypes = {
 	'help',

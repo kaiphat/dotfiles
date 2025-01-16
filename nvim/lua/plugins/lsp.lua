@@ -1,7 +1,3 @@
-local constants = require 'constants'
-local u = require 'utils'
-local icons = constants.icons
-
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     diagnostic     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 vim.diagnostic.config {
 	float = {
@@ -21,7 +17,7 @@ vim.diagnostic.config {
 for _, hint in ipairs { 'Error', 'Information', 'Hint', 'Warning' } do
 	vim.fn.sign_define(
 		'LspDiagnosticsSign' .. hint,
-		{ text = icons.CIRCLE_SMALL, numhl = 'LspDiagnosticsSign' .. hint }
+		{ text = kaiphat.constants.icons.CIRCLE_SMALL, numhl = 'LspDiagnosticsSign' .. hint }
 	)
 end
 
@@ -39,7 +35,7 @@ end
 
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     keymaps     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 vim.api.nvim_create_autocmd('LspAttach', {
-	group = u.create_augroup 'lsp_attach',
+	group = kaiphat.utils.create_augroup 'lsp_attach',
 	callback = function(event)
 		local map = function(mode, keys, cmd)
 			vim.keymap.set(mode, keys, cmd, { buffer = event.buf })
@@ -153,43 +149,30 @@ vim.api.nvim_create_autocmd('LspAttach', {
 	end,
 })
 
-local Opts = {}
+kaiphat.setup_lsp_server = function(table)
+	local lsp = require 'lspconfig'
+	local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-Opts.__index = Opts
-
-function Opts:new(capabilities)
-	local obj = setmetatable({
-		on_attach_hook = nil,
-	}, self)
-
-	obj.default = {
+	local opts = {
+		capabilities = capabilities,
+		flags = {
+			debounce_text_changes = 150,
+		},
 		on_attach = function(client, bufnr)
-			if obj.on_attach_hook then
-				obj.on_attach_hook(client, bufnr)
+			if table.on_attach_hook then
+				table.on_attach_hook(client, bufnr)
 			end
 			-- if vim.lsp.handlers['textDocument/inlayHint'] then
 			-- 	vim.lsp.inlay_hint.enable()
 			-- end
 		end,
-		capabilities = capabilities,
-		flags = {
-			debounce_text_changes = 150,
-		},
 	}
 
-	return obj
-end
+	if table.opts then
+		opts = vim.tbl_extend('force', opts, table.opts)
+	end
 
-function Opts:set_on_attach_hook(hook)
-	self.on_attach_hook = hook
-end
-
-function Opts:expand(table)
-	self.default = vim.tbl_extend('force', self.default, table)
-end
-
-function Opts:to_server_opts()
-	return self.default
+	lsp[table.name].setup(opts)
 end
 
 return {
@@ -210,24 +193,8 @@ return {
 			},
 		},
 		config = function()
-			local lsp = require 'lspconfig'
-			local capabilities = require('blink.cmp').get_lsp_capabilities()
-
-			for _, server in ipairs {
-				'luals',
-				'eslint',
-				'rust',
-				'cssls',
-				'sqlls',
-				'html',
-				'emmet',
-				'graphql',
-				'pylsp',
-				'marksman',
-				'vtsls',
-				'nu',
-			} do
-				require('lsp.' .. server)(lsp, Opts:new(capabilities))
+			for _, file in ipairs(vim.fn.readdir(vim.fn.stdpath 'config' .. '/lua/lsp')) do
+				require('lsp.' .. file:gsub('%.lua$', ''))
 			end
 		end,
 	},
@@ -235,6 +202,7 @@ return {
 	{
 		'mfussenegger/nvim-jdtls',
 		ft = { 'java' },
+		enabled = false,
 		config = function()
 			local mason_path = vim.fn.stdpath 'data' .. '/mason'
 			local jdtls_path = mason_path .. '/packages/jdtls'

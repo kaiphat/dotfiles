@@ -1,3 +1,3 @@
-return function(lsp, opts)
-	lsp.cssls.setup(opts:to_server_opts())
-end
+kaiphat.setup_lsp_server {
+	name = 'cssls',
+}

@@ -1,9 +1,8 @@
-return function(lsp, opts)
-	opts:expand {
+kaiphat.setup_lsp_server {
+	name = 'emmet_language_server',
+	opts = {
 		filetypes = {
 			'html',
 		},
-	}
-
-	lsp.emmet_language_server.setup(opts:to_server_opts())
-end
+	},
+}

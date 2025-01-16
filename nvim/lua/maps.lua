@@ -1,5 +1,3 @@
-local u = require 'utils'
-
 local map = function(mode, keys, cmd, opts)
 	opts = opts or { noremap = true, silent = true }
 	vim.keymap.set(mode, keys, cmd, opts)
@@ -103,10 +101,10 @@ local root_path
 
 map('n', '<leader>ur', function()
 	if is_root then
-		vim.cmd('lcd ' .. u.get_current_dir())
+		vim.cmd('lcd ' .. kaiphat.utils.get_current_dir())
 		vim.notify 'cwd changed to current place'
 		is_root = false
-		root_path = u.get_current_dir()
+		root_path = kaiphat.utils.get_current_dir()
 	else
 		vim.cmd('lcd ' .. root_path)
 		vim.notify 'cwd changed to root'
@@ -118,7 +116,7 @@ map('n', '<leader>lw', function()
 	local ft = vim.bo.filetype
 
 	local var = vim.fn.expand '<cword>'
-	local row = u.get_row_col()
+	local row = kaiphat.utils.get_row_col()
 
 	local new_line
 	if ft == 'typescript' or ft == 'javascript' then
@@ -169,7 +167,6 @@ local function substitute()
 			local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
 			local new_word = vim.trim(lines[1])
 			vim.schedule(function()
-				-- vim.cmd('%s/' .. word .. '/' .. new_word .. '/gc')
 				vim.cmd('let @/="' .. word .. '"') -- path to register to call witn n or p
 				vim.cmd('let @+="' .. new_word .. '"')
 				vim.api.nvim_feedkeys(
@@ -203,7 +200,6 @@ end)
 map('v', '<leader>uw', function()
 	substitute()
 end)
-map('v', 'C', 'y<cmd>let @/=@"<cr>cgn')
 
 map('n', 'zf', function()
 	vim.cmd.normal 'zMzr'

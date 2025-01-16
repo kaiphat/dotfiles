@@ -1,5 +1,4 @@
-local constants = require 'constants'
-local icons = constants.icons
+local icons = kaiphat.constants.icons
 
 return {
 	{

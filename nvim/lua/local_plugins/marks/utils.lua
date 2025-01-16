@@ -7,6 +7,7 @@ function utils.get_root_dir()
 end
 
 function utils.normalize_path(buf_name, root)
+	-- remove plenary dependency
 	return Path:new(buf_name):make_relative(root)
 end
 

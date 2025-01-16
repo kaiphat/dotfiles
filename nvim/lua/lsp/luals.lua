@@ -1,8 +1,8 @@
-local u = require 'utils'
-local group = u.create_augroup 'lua_format'
+local group = kaiphat.utils.create_augroup 'lua_format'
 
-return function(lsp, opts)
-	opts:expand {
+kaiphat.setup_lsp_server {
+	name = 'lua_ls',
+	opts = {
 		settings = {
 			Lua = {
 				workspace = {
@@ -39,9 +39,8 @@ return function(lsp, opts)
 				},
 			},
 		},
-	}
-
-	opts:set_on_attach_hook(function(client, bufnr)
+	},
+	on_attach_hook = function(client, bufnr)
 		vim.api.nvim_create_autocmd('BufWritePre', {
 			group = group,
 			buffer = bufnr,
@@ -51,7 +50,5 @@ return function(lsp, opts)
 				end)
 			end,
 		})
-	end)
-
-	lsp.lua_ls.setup(opts:to_server_opts())
-end
+	end,
+}

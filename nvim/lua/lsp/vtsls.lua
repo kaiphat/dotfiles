@@ -3,8 +3,22 @@ local function on_reject(msg)
 	print('Vtsls error: ' .. msg)
 end
 
-return function(lsp, opts)
-	opts:set_on_attach_hook(function(client, bufnr)
+kaiphat.setup_lsp_server {
+	name = 'vtsls',
+	opts = {
+		settings = {
+			typescript = {
+				format = {
+					allowRenameOfImportPath = true,
+					insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
+					insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = false,
+					insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
+					quotePreference = 'single',
+				},
+			},
+		},
+	},
+	on_attach_hook = function(client, bufnr)
 		vim.keymap.set('n', '<leader>ti', function()
 			require('vtsls').commands.add_missing_imports(0, on_resolve, on_reject)
 		end)
@@ -17,21 +31,5 @@ return function(lsp, opts)
 		vim.keymap.set('n', '<leader>to', function()
 			require('vtsls').commands.organize_imports(0, on_resolve, on_reject)
 		end)
-	end)
-
-	opts:expand {
-		settings = {
-			typescript = {
-				format = {
-					allowRenameOfImportPath = true,
-					insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
-					insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = false,
-					insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
-					quotePreference = 'single',
-				},
-			},
-		},
-	}
-
-	lsp.vtsls.setup(opts:to_server_opts())
-end
+	end,
+}

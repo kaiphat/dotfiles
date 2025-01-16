@@ -22,4 +22,4 @@ module.icons = {
 	SEMICOLON = ';',
 }
 
-return module
+kaiphat.constants = module

@@ -1,5 +1,6 @@
-return function(lsp, opts)
-	opts:expand {
+kaiphat.setup_lsp_server {
+	name = 'rust_analyzer',
+	opts = {
 		settings = {
 			['rust-analyzer'] = {
 				assist = {
@@ -23,7 +24,5 @@ return function(lsp, opts)
 				},
 			},
 		},
-	}
-
-	lsp.rust_analyzer.setup(opts:to_server_opts())
-end
+	},
+}

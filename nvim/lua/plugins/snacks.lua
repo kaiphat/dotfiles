@@ -1,6 +1,6 @@
 return {
 	'folke/snacks.nvim',
-	enabled = false,
+	enabled = true,
 	keys = {
 		{
 			'<leader>lg',
