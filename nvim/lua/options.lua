@@ -19,7 +19,8 @@ o.expandtab = true
 o.fileencoding = 'utf-8'
 o.wildmenu = true
 o.wildignorecase = true
-o.wildmode = 'longest,full'
+o.wildmode = 'longest:full,full'
+o.winminwidth = 5
 o.wildoptions = 'pum'
 o.pumblend = 0
 o.pumheight = 15
@@ -104,10 +105,12 @@ o.laststatus = 3
 o.grepprg = 'rg --vimgrep'
 o.fileformat = 'unix'
 o.fileformats = { 'unix', 'dos' }
+o.formatoptions = 'jcroqlnt'
 o.binary = false
 o.joinspaces = false -- No double spaces with join after a dot
 o.clipboard:prepend { 'unnamedplus' }
-o.shortmess:append 'sI'
+o.spelllang = { 'en' }
+o.shortmess:append 'sIWcC'
 o.whichwrap:append '<>hl'
 o.conceallevel = 2
 
@@ -124,8 +127,6 @@ o.foldopen = 'hor,mark,percent,quickfix,search,tag,undo'
 _G.get_foldtext = function()
 	local last_line = table.concat(vim.fn.getbufline(vim.api.nvim_get_current_buf(), vim.v.foldend))
 	local first_line = table.concat(vim.fn.getbufline(vim.api.nvim_get_current_buf(), vim.v.foldstart))
-	-- https://github.com/kevinhwang91/nvim-ufo/blob/5525f422d48f570262611ae2b6aa562c1c428bc5/lua/ufo/provider/indent.lua#L13
 	local space_before_text = first_line:match '%s*'
-
 	return space_before_text .. ' ' .. vim.trim(first_line) .. ' ... ' .. vim.trim(last_line)
 end

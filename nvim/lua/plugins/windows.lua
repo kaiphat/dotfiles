@@ -5,7 +5,7 @@ return {
 		-- 'anuvyklack/animation.nvim',
 	},
 	event = 'BufReadPre',
-	enabled = false,
+	enabled = true,
 	config = function()
 		local windows = require 'windows'
 

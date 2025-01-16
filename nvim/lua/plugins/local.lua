@@ -7,6 +7,9 @@ return {
 		event = 'VeryLazy',
 		name = 'marks',
 		enabled = true,
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+        },
 		config = function()
 			require('local_plugins.marks').setup {
 				save_position = false,

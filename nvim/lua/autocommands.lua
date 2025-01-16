@@ -31,13 +31,13 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
 	end,
 })
 
-vim.api.nvim_create_autocmd('FileType', {
-	group = u.create_augroup 'set_format_options',
-	callback = function(file)
-		vim.opt_local.formatoptions = 'tc'
-	end,
-})
-
+-- vim.api.nvim_create_autocmd('FileType', {
+-- 	group = u.create_augroup 'set_format_options',
+-- 	callback = function(file)
+-- 		vim.opt_local.formatoptions = 'tc'
+-- 	end,
+-- })
+--
 -- vim.api.nvim_create_autocmd({ 'BufEnter' }, {
 -- 	pattern = '*.md',
 -- 	group = u.create_augroup 'markdown_wrap_option',
@@ -76,25 +76,3 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'VimLeavePre' }, {
 -- 		vim.cmd 'horizontal resize +10'
 -- 	end,
 -- })
---
--- TODO noice plugin call WinResized a lot of time
-vim.api.nvim_create_autocmd({ 'WinResized' }, {
-	group = u.create_augroup 'aa',
-	callback = function(event)
-		print('===' .. vim.bo.filetype .. '===')
-		if not vim.bo.filetype then
-			return
-		end
-		for k, v in pairs(event) do
-			print(k, v)
-		end
-		if event.file == '' then
-			return
-		end
-		print(event.buf)
-		local cursor_position = vim.api.nvim_win_get_cursor(0)
-		for k, v in pairs(cursor_position) do
-			print(k, v)
-		end
-	end,
-})
