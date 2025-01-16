@@ -1,7 +1,9 @@
 alias g = git
 alias lg = lazygit
 alias t = tmux
-alias n = nvim
+# alias n = nvim
+# alias n = nvim --listen $"/tmp/nvim-(tmux display-message -p '#S').pipe"
+alias n = nvim --listen "/tmp/nvim.pipe"
 alias d = docker
 alias y = yarn
 alias dc = docker-compose

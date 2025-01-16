@@ -8,7 +8,7 @@ return function(lsp, opts)
 		},
 	}
 
-	opts:add_on_attach_hook(function(client, bufnr)
+	opts:set_on_attach_hook(function(client, bufnr)
 		vim.api.nvim_create_autocmd('BufWritePre', {
 			group = group,
 			buffer = bufnr,

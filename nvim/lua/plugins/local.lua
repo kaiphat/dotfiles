@@ -9,7 +9,7 @@ return {
 		enabled = true,
 		config = function()
 			require('local_plugins.marks').setup {
-				save_position = true,
+				save_position = false,
 			}
 		end,
 	},

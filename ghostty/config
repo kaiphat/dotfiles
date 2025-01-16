@@ -1,17 +1,17 @@
-font-size = 12
-font-thicken = true
+font-size = 11.5
+font-thicken = false
 
-font-family = Iosevka
-font-style = Extended
+font-family = JetBrainsMono Nerd Font
+font-style = Bold
 
-font-family-bold = Iosevka
-font-style-bold = Extended
+font-family-bold = JetBrainsMono Nerd Font
+font-style-bold = Bold
 
-font-family-italic = Iosevka
-font-style-italic = Extended
+font-family-italic = JetBrainsMono Nerd Font
+font-style-italic = Bold
 
-font-family-bold-italic = Iosevka
-font-style-bold-italic = Extended
+font-family-bold-italic = JetBrainsMono Nerd Font
+font-style-bold-italic = Bold
 
 theme = rose-pine-moon
 fullscreen = true

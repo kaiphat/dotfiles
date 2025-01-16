@@ -148,9 +148,9 @@ return {
 				changedelete = {
 					text = icon,
 				},
-				untracked = {
-					text = icon,
-				},
+			},
+			preview_config = {
+				border = 'rounded',
 			},
 		}
 	end,

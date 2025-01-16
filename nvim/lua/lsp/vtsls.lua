@@ -4,7 +4,7 @@ local function on_reject(msg)
 end
 
 return function(lsp, opts)
-	opts:add_on_attach_hook(function(client, bufnr)
+	opts:set_on_attach_hook(function(client, bufnr)
 		vim.keymap.set('n', '<leader>ti', function()
 			require('vtsls').commands.add_missing_imports(0, on_resolve, on_reject)
 		end)

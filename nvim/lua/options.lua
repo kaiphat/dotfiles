@@ -2,6 +2,7 @@ local o = vim.opt
 local g = vim.g
 
 g.mapleader = ' '
+g.maplocalleader = ','
 g.markdown_folding = 1
 
 local TAB_SIZE = 4

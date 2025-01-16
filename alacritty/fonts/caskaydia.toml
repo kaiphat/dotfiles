@@ -3,19 +3,19 @@ size = 11.5
 
 [font.normal]
 family = "Cascadia Code NF"
-style = "ExtraLight"
+style = "SemiLight"
 
 [font.bold]
 family = "Cascadia Code NF"
-style = "ExtraLight"
+style = "SemiLight"
 
 [font.italic]
 family = "Cascadia Code NF"
-style = "ExtraLight"
+style = "SemiLight Italic"
 
 [font.bold_italic]
 family = "Cascadia Code NF"
-style = "ExtraLight"
+style = "SemiLight Italic"
 
 [font.offset]
 x = 1

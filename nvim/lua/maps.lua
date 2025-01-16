@@ -154,25 +154,44 @@ local function substitute()
 		vim.cmd 'q'
 	end, { buffer = bufnr })
 
+	local clear_enter = false
+	vim.keymap.set('n', '<esc>', function()
+		clear_enter = true
+		vim.cmd 'q'
+	end, { buffer = bufnr })
+
 	vim.api.nvim_create_autocmd({ 'BufWinLeave' }, {
 		buffer = bufnr,
 		callback = function()
+			if clear_enter then
+				return
+			end
 			local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
 			local new_word = vim.trim(lines[1])
 			vim.schedule(function()
-				vim.cmd('%s/' .. word .. '/' .. new_word .. '/gc')
+				-- vim.cmd('%s/' .. word .. '/' .. new_word .. '/gc')
+				vim.cmd('let @/="' .. word .. '"') -- path to register to call witn n or p
+				vim.cmd('let @+="' .. new_word .. '"')
+				vim.api.nvim_feedkeys(
+					vim.api.nvim_replace_termcodes('cgn' .. new_word .. '<esc>', true, false, true),
+					'',
+					true
+				)
 			end)
 		end,
 	})
 
+	local word_width = math.max(#word, 20)
 	vim.api.nvim_open_win(bufnr, true, {
 		relative = 'editor',
-		width = 30,
+		width = word_width,
 		height = 1,
-		col = math.ceil((width - 30) / 2),
-		row = math.ceil((height - 1) / 2),
+		col = math.ceil((width - word_width) / 2),
+		row = math.ceil(height / 2),
 		style = 'minimal',
 		border = 'rounded',
+		title = 'Replace',
+		title_pos = 'center',
 	})
 end
 map('n', '<leader>uw', function()

@@ -20,9 +20,9 @@ git:
     # pager: delta --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
 
 os:
-  edit: nvim --server /tmp/nvim-$(tmux display-message -p '#S').pipe --remote-send "<cmd>lua require('scripts.lazygit-open-file')('{{filename}}', '{{line}}')<CR>"
-  editAtLine: nvim --server /tmp/nvim-$(tmux display-message -p '#S').pipe --remote-send "<cmd>lua require('scripts.lazygit-open-file')('{{filename}}', '{{line}}')<CR>"
-  open: nvim --server /tmp/nvim-$(tmux display-message -p '#S').pipe --remote-send "<cmd>lua require('scripts.lazygit-open-file')('{{filename}}', '{{line}}')<CR>"
+  edit: nvim --server /tmp/nvim.pipe --remote-send "<cmd>lua require('scripts.lazygit-open-file')('{{filename}}', '{{line}}')<CR>"
+  editAtLine: nvim --server /tmp/nvim.pipe --remote-send "<cmd>lua require('scripts.lazygit-open-file')('{{filename}}', '{{line}}')<CR>"
+  open: nvim --server /tmp/nvim.pipe --remote-send "<cmd>lua require('scripts.lazygit-open-file')('{{filename}}', '{{line}}')<CR>"
 
 customCommands:
   - key: 'D'

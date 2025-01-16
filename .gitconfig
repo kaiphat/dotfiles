@@ -34,7 +34,7 @@
     chb = checkout -b
     c   = commit -am
     ca  = commit --amend --no-edit
-    s   = stash
+    s   = !sh -c 'git add -A && git stash'
     sa  = stash apply
     pl  = pull origin
     plr  = !sh -c 'git pull origin $1 --rebase' --

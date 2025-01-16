@@ -1,5 +1,6 @@
 return {
 	'aaronik/treewalker.nvim',
+	enabled = false,
 	event = 'VeryLazy',
 	keys = {
 		{

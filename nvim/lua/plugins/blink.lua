@@ -33,7 +33,7 @@ return {
 
 			accept = {
 				auto_brackets = {
-					enabled = true,
+					enabled = false,
 					semantic_token_resolution = {
 						enabled = true,
 						blocked_filetypes = {},

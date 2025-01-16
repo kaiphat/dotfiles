@@ -7,6 +7,8 @@ return {
 				auto_update = false,
 				run_on_start = false,
 				ensure_installed = {
+
+					-- ls
 					'lua-language-server',
 					'prettierd',
 					'prettier',
@@ -25,6 +27,9 @@ return {
 					'vtsls',
 					'llm-ls',
 					'jdtls',
+
+					-- dap
+					'js-debug-adapter',
 				},
 			}
 		end,

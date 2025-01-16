@@ -3,19 +3,19 @@ size = 12
 
 [font.normal]
 family = "FiraCode Nerd Font"
-style = "Light"
+style = "Regular"
 
 [font.bold]
 family = "FiraCode Nerd Font"
-style = "Light"
+style = "Regular"
 
 [font.italic]
 family = "FiraCode Nerd Font"
-style = "Light"
+style = "Regular"
 
 [font.bold_italic]
 family = "FiraCode Nerd Font"
-style = "Light"
+style = "Regular"
 
 [font.offset]
 x = 0

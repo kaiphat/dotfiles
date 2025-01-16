@@ -180,7 +180,7 @@ function Opts:new(capabilities)
 	return obj
 end
 
-function Opts:add_on_attach_hook(hook)
+function Opts:set_on_attach_hook(hook)
 	self.on_attach_hook = hook
 end
 

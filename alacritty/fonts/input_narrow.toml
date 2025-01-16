@@ -11,11 +11,11 @@ style = 'Narrow'
 
 [font.italic]
 family = 'InputMonoNarrow Nerd Font'
-style = 'Italic'
+style = 'Narrow'
 
 [font.bold_italic]
 family = 'InputMonoNarrow Nerd Font'
-style = 'Italic'
+style = 'Narrow'
 
 [font.offset]
 x = 0

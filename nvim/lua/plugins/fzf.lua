@@ -53,7 +53,7 @@ local function build_find_cmd(ignore_level)
 end
 
 local function build_rg_cmd(ignore_level)
-	local base = 'rg --column --no-heading --color=never --max-columns=4096 --trim -i --sort=path'
+	local base = 'rg --column --no-heading --color=never --max-columns=4096 --trim -i --sort=path -n'
 	local patterns = {}
 
 	if ignore_level == IGNORE_LEVEL.FULL then
@@ -296,7 +296,7 @@ return {
 				-- to manually draw the border characters around the preview
 				-- window, can be set to 'false' to remove all borders or to
 				-- 'none', 'single', 'double', 'thicc' (+cc) or 'rounded' (default)
-				border = 'rounded',
+				border = 'noborder',
 				-- requires neovim > v0.9.0, passed as is to `nvim_open_win`
 				-- can be sent individually to any provider to set the win title
 				-- title         = "Title",
@@ -304,7 +304,7 @@ return {
 				fullscreen = false, -- start fullscreen?
 				preview = {
 					default = 'builtin', -- override the default previewer?
-					border = 'rounded', -- border|noborder, applies only to
+					border = 'single', -- border|noborder, applies only to
 					wrap = 'nowrap', -- wrap|nowrap
 					hidden = 'nohidden', -- hidden|nohidden
 					vertical = 'down:60%', -- up|down:size

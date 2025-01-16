@@ -3,7 +3,7 @@ local font_config = require 'wezterm.fonts'
 local theme = require 'wezterm.themes.rose_pine_dark'
 local config = require 'wezterm.config'
 
-config.set(font_config.build_font(font_config.fonts.input))
+config.set(font_config.build_font(font_config.fonts.jet_brains))
 config.set(theme)
 config.set {
 	automatically_reload_config = true,

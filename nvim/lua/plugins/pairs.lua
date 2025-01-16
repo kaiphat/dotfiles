@@ -3,7 +3,7 @@ return {
 		'altermo/ultimate-autopair.nvim',
 		branch = 'v0.6',
 		event = { 'InsertEnter' },
-		enabled = true,
+		enabled = false,
 		config = function()
 			require('ultimate-autopair.utils').maxlines = math.huge
 

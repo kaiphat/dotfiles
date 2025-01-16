@@ -38,13 +38,13 @@ vim.api.nvim_create_autocmd('FileType', {
 	end,
 })
 
-vim.api.nvim_create_autocmd({ 'BufEnter' }, {
-	pattern = '*.md',
-	group = u.create_augroup 'markdown_wrap_option',
-	callback = function()
-		vim.opt_local.wrap = true
-	end,
-})
+-- vim.api.nvim_create_autocmd({ 'BufEnter' }, {
+-- 	pattern = '*.md',
+-- 	group = u.create_augroup 'markdown_wrap_option',
+-- 	callback = function()
+-- 		vim.opt_local.wrap = true
+-- 	end,
+-- })
 
 vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'VimLeavePre' }, {
 	group = u.create_augroup 'autosave',
@@ -53,9 +53,14 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'VimLeavePre' }, {
 			return
 		end
 
-		if vim.api.nvim_buf_get_option(event.buf, 'modified') then
+		if event.file == '' then
+			return
+		end
+
+		local buf = event.buf
+		if vim.api.nvim_get_option_value('modified', { buf = buf }) then
 			vim.schedule(function()
-				vim.api.nvim_buf_call(event.buf, function()
+				vim.api.nvim_buf_call(buf, function()
 					vim.cmd 'silent! write'
 				end)
 			end)
@@ -63,9 +68,33 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'VimLeavePre' }, {
 	end,
 })
 
--- vim.api.nvim_create_autocmd('VimResized', {
+-- vim.api.nvim_create_autocmd({ 'VimResized', 'WinEnter' }, {
 -- 	group = u.create_augroup 'resize_pane',
--- 	callback = function()
+-- 	callback = function(event)
 -- 		vim.cmd 'wincmd ='
+-- 		vim.cmd 'vertical resize +20'
+-- 		vim.cmd 'horizontal resize +10'
 -- 	end,
 -- })
+--
+-- TODO noice plugin call WinResized a lot of time
+vim.api.nvim_create_autocmd({ 'WinResized' }, {
+	group = u.create_augroup 'aa',
+	callback = function(event)
+		print('===' .. vim.bo.filetype .. '===')
+		if not vim.bo.filetype then
+			return
+		end
+		for k, v in pairs(event) do
+			print(k, v)
+		end
+		if event.file == '' then
+			return
+		end
+		print(event.buf)
+		local cursor_position = vim.api.nvim_win_get_cursor(0)
+		for k, v in pairs(cursor_position) do
+			print(k, v)
+		end
+	end,
+})

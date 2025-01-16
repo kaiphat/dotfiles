@@ -2,20 +2,20 @@
 size = 12
 
 [font.normal]
-family = 'Iosevka'
-style = 'Extended'
+family = 'Iosevka Nerd Font'
+style = 'SemiBold'
 
 [font.bold]
-family = 'Iosevka'
-style = 'Extended'
+family = 'Iosevka Nerd Font'
+style = 'SemiBold'
 
 [font.italic]
-family = 'Iosevka'
-style = 'Extended'
+family = 'Iosevka Nerd Font'
+style = 'SemiBold'
 
 [font.bold_italic]
-family = 'Iosevka'
-style = 'Extended'
+family = 'Iosevka Nerd Font'
+style = 'SemiBold'
 
 [font.offset]
 x = 0

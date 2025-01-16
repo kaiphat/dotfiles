@@ -48,9 +48,9 @@ return {
 	fonts = {
 		jet_brains = {
 			name = 'JetBrains Mono',
-			weight = weights.SB,
+			weight = weights.B,
 			italic = false,
-			font_size = 11.5,
+			font_size = 11.2,
 			cell_width = 1,
 			line_height = 1,
 		},
