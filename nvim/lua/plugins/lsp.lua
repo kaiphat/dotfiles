@@ -162,9 +162,9 @@ kaiphat.setup_lsp_server = function(table)
 			if table.on_attach_hook then
 				table.on_attach_hook(client, bufnr)
 			end
-			-- if vim.lsp.handlers['textDocument/inlayHint'] then
-			-- 	vim.lsp.inlay_hint.enable()
-			-- end
+			if vim.lsp.handlers['textDocument/inlayHint'] then
+				vim.lsp.inlay_hint.enable()
+			end
 		end,
 	}
 
