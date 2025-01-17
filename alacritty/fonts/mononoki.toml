@@ -1,5 +1,5 @@
 [font]
-size = 13
+size = 12.5
 
 [font.normal]
 family = 'Mononoki Nerd Font'
@@ -11,11 +11,11 @@ style = 'Regular'
 
 [font.italic]
 family = 'Mononoki Nerd Font'
-style = 'Italic'
+style = 'Regular'
 
 [font.bold_italic]
 family = 'Mononoki Nerd Font'
-style = 'Italic'
+style = 'Regular'
 
 [font.offset]
 x = 0

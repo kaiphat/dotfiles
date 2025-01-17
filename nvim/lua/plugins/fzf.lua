@@ -75,7 +75,7 @@ end
 
 return {
 	'ibhagwan/fzf-lua',
-	enabled = true,
+	enabled = false,
 	cmd = 'FzfLua',
 	keys = {
 		{
