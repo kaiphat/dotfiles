@@ -82,6 +82,7 @@ return {
 		'echasnovski/mini.cursorword',
 		version = false,
 		event = 'BufReadPre',
+		enabled = false,
 		opts = {
 			delay = 400,
 		},

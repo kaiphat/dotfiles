@@ -44,8 +44,8 @@ map('n', '<C-s>', function()
 	vim.cmd 'w'
 end)
 
-map({ 'n', 'v' }, '<C-d>', '2j')
-map({ 'n', 'v' }, '<C-u>', '2k')
+map({ 'n', 'v' }, '<C-d>', '3j')
+map({ 'n', 'v' }, '<C-u>', '3k')
 
 map('n', 'x', function()
 	if vim.fn.col '.' == 1 then

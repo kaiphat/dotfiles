@@ -9,7 +9,7 @@ local TAB_SIZE = 4
 
 o.jumpoptions = 'stack'
 o.smoothscroll = true
-o.background = ''
+-- o.background = ''
 -- o.guicursor = 'a:blinkon1,i-ci-ve:ver25-blinkon1'
 o.selection = 'old'
 o.tabstop = TAB_SIZE

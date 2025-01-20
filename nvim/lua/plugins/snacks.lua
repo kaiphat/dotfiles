@@ -117,6 +117,45 @@ return {
 				Snacks.picker.git_status {}
 			end,
 		},
+		{
+			'<leader>fh',
+			function()
+				Snacks.picker.grep_word {
+					exclude = {
+						'/test',
+					},
+				}
+			end,
+		},
+		{
+			'<leader>dh',
+			function()
+				Snacks.picker.grep_word {}
+			end,
+		},
+		{
+			'<leader>fi',
+			function()
+				Snacks.picker.lsp_references {
+					include_declaration = false,
+					pattern = '!import !test/ ',
+				}
+			end,
+		},
+		{
+			'<leader>di',
+			function()
+				Snacks.picker.lsp_references {
+					include_declaration = false,
+				}
+			end,
+		},
+		{
+			'<leader>fw',
+			function()
+				Snacks.picker.lsp_workspace_symbols {}
+			end,
+		},
 	},
 	opts = {
 		lazygit = {
@@ -137,17 +176,21 @@ return {
 				},
 			},
 			layout = {
-				preview = true,
 				layout = {
-					backdrop = false,
-					width = 0.4,
-					min_width = 80,
-					height = 0.8,
-					border = 'none',
 					box = 'vertical',
-					{ win = 'input', height = 1, border = 'rounded', title = '{source} {live}', title_pos = 'center' },
-					{ win = 'list', border = 'hpad', height = 6 },
-					{ win = 'preview', border = 'rounded' },
+					backdrop = false,
+					row = -1,
+					width = 0,
+					height = 0.4,
+					border = 'top',
+					title = ' {source} {live} {flags}',
+					title_pos = 'left',
+					{ win = 'input', height = 1, border = 'bottom' },
+					{
+						box = 'horizontal',
+						{ win = 'list', border = 'none' },
+						{ win = 'preview', title = '{preview}', width = 0.6, border = 'left' },
+					},
 				},
 			},
 			win = {
@@ -158,6 +201,7 @@ return {
 						['<c-u>'] = { 'preview_scroll_up', mode = { 'i', 'n' } },
 					},
 				},
+				preview = {},
 			},
 			previewers = {
 				git = {
@@ -178,6 +222,10 @@ return {
 			scope = {
 				enabled = false,
 			},
+		},
+
+		words = {
+			enabled = true,
 		},
 	},
 }

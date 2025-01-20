@@ -182,7 +182,6 @@ return {
 		dependencies = {
 			'jose-elias-alvarez/null-ls.nvim',
 			'yioneko/nvim-vtsls',
-			'ibhagwan/fzf-lua',
 			'saghen/blink.cmp',
 		},
 		init_options = {

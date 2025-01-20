@@ -35,6 +35,7 @@ return {
 			},
 
 			cmdline = {
+				view = 'cmdline',
 				format = {
 					cmdline = { title = '', pattern = '^:', icon = icons.BRACKET, lang = 'vim' },
 					search_down = { title = '', kind = 'search', pattern = '^/', icon = icons.SEARCH, lang = 'regex' },
@@ -61,19 +62,18 @@ return {
 				override = {
 					['vim.lsp.util.convert_input_to_markdown_lines'] = true,
 					['vim.lsp.util.stylize_markdown'] = true,
-					['cmp.entry.get_documentation'] = true,
+					['cmp.entry.get_documentation'] = false,
 				},
 			},
 
 			format = {},
 
 			presets = {
-				bottom_search = false,
-				cmdline_output_to_split = false,
-
-				inc_rename = true,
+				bottom_search = true,
 				long_message_to_split = true,
 				lsp_doc_border = true,
+				command_palette = false,
+				inc_rename = false,
 			},
 
 			routes = {
@@ -92,6 +92,10 @@ return {
 						find = '%d+L, %d+B',
 					},
 				},
+			},
+
+			health = {
+				checker = false,
 			},
 		}
 	end,
