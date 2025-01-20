@@ -43,7 +43,7 @@ return {
 					filter = { pattern = '^:%s*!', icon = icons.BRACKET, lang = 'bash' },
 					lua = { pattern = '^:%s*lua%s+', icon = '', lang = 'lua' },
 					help = { pattern = '^:%s*h%s+', icon = icons.SEARCH },
-					input = {}, -- Used by input()
+					input = { view = 'cmdline' },
 				},
 			},
 

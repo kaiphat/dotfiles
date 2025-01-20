@@ -9,13 +9,6 @@ function M.get_current_dir()
 	return vim.fn.expand '%:p:h'
 end
 
-function M.concat(a, b)
-	for _, value in ipairs(b) do
-		table.insert(a, value)
-	end
-	return a
-end
-
 function M.merge(...)
 	local args = { ... }
 	return vim.tbl_extend('force', {}, unpack(args))

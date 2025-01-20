@@ -10,7 +10,7 @@ local always_ignore_patterns = {
 	'package-lock.json',
 }
 
-local ignore_patterns = kaiphat.utils.concat({
+local ignore_patterns = kaiphat.utils.merge({
 	'data/',
 	'.data/',
 	'test/',

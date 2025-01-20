@@ -1,3 +1,28 @@
+local grep_always_excludes = {
+	'.git/',
+	'dist/',
+	'node_modules/',
+	'build/',
+	'docker_volumes_data/',
+	'yarn.lock',
+	'Cargo.lock',
+	'coverage/',
+	'package-lock.json',
+}
+
+local grep_exclude = kaiphat.utils.merge(grep_always_excludes, {
+	'data/',
+	'.data/',
+	'test/',
+	'tests/',
+	'**/__tests__/*',
+	'**/__mocks__/*',
+	'*.log',
+	'.gitignore',
+	'*.md',
+	'*.json',
+})
+
 return {
 	'folke/snacks.nvim',
 	priority = 1000,
@@ -67,16 +92,16 @@ return {
 			'<leader>fl',
 			function()
 				Snacks.picker.grep {
-					exclude = {
-						'/test',
-					},
+					exclude = grep_exclude,
 				}
 			end,
 		},
 		{
 			'<leader>dl',
 			function()
-				Snacks.picker.grep {}
+				Snacks.picker.grep {
+					exclude = grep_always_excludes,
+				}
 			end,
 		},
 		{
@@ -121,16 +146,16 @@ return {
 			'<leader>fh',
 			function()
 				Snacks.picker.grep_word {
-					exclude = {
-						'/test',
-					},
+					exclude = grep_exclude,
 				}
 			end,
 		},
 		{
 			'<leader>dh',
 			function()
-				Snacks.picker.grep_word {}
+				Snacks.picker.grep_word {
+					exclude = grep_always_excludes,
+				}
 			end,
 		},
 		{
@@ -201,7 +226,6 @@ return {
 						['<c-u>'] = { 'preview_scroll_up', mode = { 'i', 'n' } },
 					},
 				},
-				preview = {},
 			},
 			previewers = {
 				git = {
