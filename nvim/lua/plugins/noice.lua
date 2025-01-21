@@ -1,11 +1,11 @@
-local icons = kaiphat.constants.icons
-
 return {
 	'folke/noice.nvim',
 	enabled = true,
 	event = 'VeryLazy',
 	config = function()
 		local noice = require 'noice'
+
+		local icon = ' ' .. kaiphat.constants.icons.ARROW
 
 		noice.setup {
 			views = {
@@ -37,12 +37,18 @@ return {
 			cmdline = {
 				view = 'cmdline',
 				format = {
-					cmdline = { title = '', pattern = '^:', icon = icons.BRACKET, lang = 'vim' },
-					search_down = { title = '', kind = 'search', pattern = '^/', icon = icons.SEARCH, lang = 'regex' },
-					search_up = { title = '', kind = 'search', pattern = '^%?', icon = icons.SEARCH, lang = 'regex' },
-					filter = { pattern = '^:%s*!', icon = icons.BRACKET, lang = 'bash' },
+					cmdline = { title = '', pattern = '^:', icon = icon, lang = 'vim' },
+					search_down = {
+						title = '',
+						kind = 'search',
+						pattern = '^/',
+						icon = icon,
+						lang = 'regex',
+					},
+					search_up = { title = '', kind = 'search', pattern = '^%?', icon = icon, lang = 'regex' },
+					filter = { pattern = '^:%s*!', icon = icon, lang = 'bash' },
 					lua = { pattern = '^:%s*lua%s+', icon = '', lang = 'lua' },
-					help = { pattern = '^:%s*h%s+', icon = icons.SEARCH },
+					help = { pattern = '^:%s*h%s+', icon = icon },
 					input = { view = 'cmdline' },
 				},
 			},

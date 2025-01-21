@@ -12,6 +12,6 @@ export def get_repository_name [] {
 
 export def open:github:my_prs [] {
     let root = (get_git_remote_root)
-    ^open $"https://github.com/($root)/pulls/@me"
+    browser-work $"https://github.com/($root)/pulls/@me"
 }
 

@@ -68,7 +68,19 @@ return {
 			'<leader>es',
 			function()
 				Snacks.picker.files {
+					ignored = true,
+					hidden = true,
 					cwd = '~/dotfiles',
+				}
+			end,
+		},
+		{
+			'<leader>en',
+			function()
+				Snacks.picker.files {
+					ignored = true,
+					hidden = true,
+					cwd = '~/notes',
 				}
 			end,
 		},
@@ -115,13 +127,13 @@ return {
 		{
 			'<leader>dL',
 			function()
-				Snacks.picker.grep {}
+				Snacks.picker.grep()
 			end,
 		},
 		{
 			'<leader>fp',
 			function()
-				Snacks.picker.resume {}
+				Snacks.picker.resume()
 			end,
 		},
 		{
@@ -181,6 +193,12 @@ return {
 				Snacks.picker.lsp_workspace_symbols {}
 			end,
 		},
+		{
+			'<leader>fm',
+			function()
+				Snacks.picker.help()
+			end,
+		},
 	},
 	opts = {
 		lazygit = {
@@ -193,7 +211,7 @@ return {
 		},
 
 		picker = {
-			prompt = kaiphat.constants.icons.BRACKET .. ' ',
+			prompt = ' ' .. kaiphat.constants.icons.BRACKET .. ' ',
 			ui_select = true,
 			formatters = {
 				file = {
@@ -202,20 +220,25 @@ return {
 			},
 			layout = {
 				layout = {
-					box = 'vertical',
 					backdrop = false,
-					row = -1,
-					width = 0,
-					height = 0.4,
-					border = 'top',
-					title = ' {source} {live} {flags}',
-					title_pos = 'left',
-					{ win = 'input', height = 1, border = 'bottom' },
-					{
-						box = 'horizontal',
-						{ win = 'list', border = 'none' },
-						{ win = 'preview', title = '{preview}', width = 0.6, border = 'left' },
-					},
+					width = function()
+						local c = vim.o.columns
+						if c > 160 then
+							return 0.7
+						else
+							return 0.9
+						end
+					end,
+					min_width = 80,
+					height = 0.8,
+					min_height = 30,
+					box = 'vertical',
+					border = 'rounded',
+					title = '{title} {live} {flags}',
+					title_pos = 'center',
+					{ win = 'input', height = 2, border = 'none' },
+					{ win = 'list', height = 15, border = 'none' },
+					{ win = 'preview', border = 'top' },
 				},
 			},
 			win = {
@@ -226,10 +249,19 @@ return {
 						['<c-u>'] = { 'preview_scroll_up', mode = { 'i', 'n' } },
 					},
 				},
+				preview = {
+					wo = {
+						number = false,
+						relativenumber = false,
+						signcolumn = 'no',
+						foldcolumn = '1',
+						foldenable = false,
+					},
+				},
 			},
 			previewers = {
 				git = {
-					native = true, -- use native (terminal) or Neovim for previewing git diffs and commits
+					native = false, -- use native (terminal) or Neovim for previewing git diffs and commits
 				},
 			},
 		},
@@ -239,6 +271,7 @@ return {
 				enabled = true,
 				char = kaiphat.constants.icons.VERTICAL_LINE_1,
 			},
+
 			animate = {
 				enabled = false,
 			},

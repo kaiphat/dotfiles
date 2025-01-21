@@ -66,6 +66,7 @@ return {
 
 		sources = {
 			default = { 'lsp', 'path', 'snippets', 'buffer' },
+			cmdline = {},
 			providers = {
 				lsp = {
 					name = 'LSP',

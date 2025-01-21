@@ -21,7 +21,6 @@ local languages = {
 	'python',
 	'bash',
 	'regex',
-	-- 'norg',
 	'kdl',
 	'proto',
 	'markdown_inline',
@@ -74,6 +73,7 @@ return {
 		build = ':TSUpdate',
 		dependencies = {
 			{ 'nushell/tree-sitter-nu', build = ':TSUpdate nu' },
+			'nvim-treesitter/nvim-treesitter-textobjects',
 		},
 		config = function()
 			local install = require 'nvim-treesitter.install'
@@ -107,21 +107,12 @@ return {
 						},
 					},
 					move = {
-						enable = false,
+						enable = true,
 						goto_next_start = {
-							[']]'] = '@function.outer',
-							[']s'] = { query = '@scope', query_group = 'locals', desc = 'Next scope' },
-							[']z'] = { query = '@fold', query_group = 'folds', desc = 'Next fold' },
-						},
-						goto_next_end = {
-							[']['] = '@function.outer',
+							[']f'] = '@function.outer',
 						},
 						goto_previous_start = {
-							['[['] = '@function.outer',
-							['[s'] = { query = '@scope', query_group = 'locals', desc = 'Next scope' },
-						},
-						goto_previous_end = {
-							['[]'] = '@function.outer',
+							['[f'] = '@function.outer',
 						},
 					},
 				},
@@ -135,10 +126,10 @@ return {
 					disable = {},
 				},
 				incremental_selection = {
-					enable = false,
+					enable = true,
 					keymaps = {
-						init_selection = '<Enter>',
-						node_incremental = '<Enter>',
+						init_selection = '<C-space>',
+						node_incremental = '<C-space>',
 						node_decremental = '<BS>',
 					},
 				},
