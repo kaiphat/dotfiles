@@ -139,7 +139,11 @@ return {
 		{
 			'<leader>fo',
 			function()
-				Snacks.picker.recent {}
+				Snacks.picker.recent {
+					sort = {
+						fields = { 'idx' },
+					},
+				}
 			end,
 		},
 		{
@@ -282,7 +286,11 @@ return {
 		},
 
 		words = {
-			enabled = true,
+			enabled = false,
+			debounce = 400,
 		},
+
+		quickfile = {},
+		bigfile = {},
 	},
 }

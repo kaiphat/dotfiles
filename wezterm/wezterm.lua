@@ -1,9 +1,9 @@
 local wezterm = require 'wezterm'
 local font_config = require 'wezterm.fonts'
-local theme = require 'wezterm.themes.rose_pine_light'
+local theme = require 'wezterm.themes.rose_pine_dark'
 local config = require 'wezterm.config'
 
-config.set(font_config.build_font(font_config.fonts.jet_brains))
+config.set(font_config.build_font(font_config.fonts.mononoki_aoc))
 config.set(theme)
 config.set {
 	automatically_reload_config = true,
@@ -14,6 +14,9 @@ config.set {
 	animation_fps = 240,
 	cursor_blink_rate = 0,
 	default_cursor_style = 'SteadyBlock',
+	freetype_load_target = 'Light',
+	freetype_render_target = 'HorizontalLcd',
+	freetype_load_flags = 'NO_HINTING',
 	disable_default_key_bindings = true,
 	warn_about_missing_glyphs = false,
 	window_close_confirmation = 'NeverPrompt',

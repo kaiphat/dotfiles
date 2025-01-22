@@ -178,7 +178,7 @@ local function substitute()
 		end,
 	})
 
-	local word_width = math.max(#word, 20)
+	local word_width = math.max(#word, 40)
 	vim.api.nvim_open_win(bufnr, true, {
 		relative = 'editor',
 		width = word_width,

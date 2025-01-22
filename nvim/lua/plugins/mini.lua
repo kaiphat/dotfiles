@@ -22,7 +22,7 @@ return {
 
 			require('mini.surround').setup {
 				mappings = {
-					add = 'sa',
+					add = key .. 'sa',
 					delete = key .. 'sd',
 					find = key .. 'sf',
 					find_left = key .. 'sF',
@@ -81,11 +81,10 @@ return {
 
 	{
 		'echasnovski/mini.cursorword',
-		version = false,
-		event = 'BufReadPre',
-		enabled = false,
+		event = 'VeryLazy',
+		enabled = true,
 		opts = {
-			delay = 400,
+			delay = 150,
 		},
 	},
 
@@ -102,7 +101,7 @@ return {
 
 	{
 		'echasnovski/mini.pairs',
-		enabled = true,
+		enabled = false,
 		event = 'VeryLazy',
 		config = function()
 			require('mini.pairs').setup {
@@ -173,6 +172,15 @@ return {
 					U = ai.gen_spec.function_call { name_pattern = '[%w_]' }, -- without dot in function name
 				},
 			}
+		end,
+	},
+
+	{
+		'echasnovski/mini.bracketed',
+		enabled = false,
+		event = 'VeryLazy',
+		config = function()
+			require('mini.bracketed').setup {}
 		end,
 	},
 }

@@ -15,8 +15,8 @@ local palette = {
 local colors = {
 	foreground = palette.text,
 	-- background = '#191934',
-	-- background = '#1b172e',
-	background = '#202a44',
+	background = '#1b172e',
+	-- background = '#202a44',
 	cursor_bg = '#baaaff',
 	cursor_border = '#baaaff',
 	cursor_fg = palette.text,
@@ -51,6 +51,7 @@ return {
 		cursor_bg = '#d6e9ff',
 		cursor_border = '#d6e9ff',
 		cursor_fg = '#232136',
+		background = '#1b172e',
 	},
 	color_scheme = 'rose-pine-moon',
 }

@@ -15,7 +15,10 @@ alias di = d inspect
 alias nvm = fnm
 alias todo = n ~/notes/notes/deals.md -c "set signcolumn=no"
 alias notes = n ~/notes/notes/notes.md -c "set signcolumn=no"
-alias fzf = ^fzf --color="gutter:0,bg+:-1,fg+:#244566,pointer:#365987,current-bg:#797999,current-fg:#000022" --margin=0,2 --no-separator --info=inline-right --no-scrollbar --pointer='󱞩' --prompt='󰼛 ' --layout=reverse --bind ctrl-e:close
+alias fzf = fzf --color="gutter:0,bg+:-1,fg+:#244566,pointer:#365987,current-bg:#797999,current-fg:#000022" --margin=0,2 --no-separator --info=inline-right --no-scrollbar --pointer='󱞩' --prompt='󰼛 ' --layout=reverse --bind ctrl-e:close
+
+# there is bug with -l (login) flag, so i should use such hack
+alias run-nu-script = nu --config ~/dotfiles/nushell/config.nu --env-config ~/dotfiles/nushell/env.nu
 
 def browser [link] {
     firefox $link

@@ -242,13 +242,13 @@ return {
 			line_height = 1,
 		},
 		mononoki_aoc = {
-			name = 'mononoki',
+			name = 'mononoki Nerd Font',
 			italic = false,
-			weight = weights.R,
-			font_size = 12.5,
+			weight = weights.B,
+			font_size = 11.9,
 			cell_width = 1,
-			line_height = 1,
-			scale = 0.8,
+			line_height = 1.15,
+			scale = 0.7,
 		},
 		inconsolata = {
 			name = 'Inconsolata',

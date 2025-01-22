@@ -2,16 +2,8 @@ return {
 	{
 		'phaazon/hop.nvim',
 		branch = 'v2',
-		lazy = true,
+		event = 'VeryLazy',
 		enabled = false,
-		keys = {
-			{
-				's',
-				function()
-					require('plugins.move').hint_char1 {}
-				end,
-			},
-		},
 		config = function()
 			local hop = require 'plugins.move'
 
@@ -25,24 +17,36 @@ return {
 	{
 		'folke/flash.nvim',
 		event = 'VeryLazy',
-		opts = {},
-		keys = {
-			{
-				's',
-				mode = { 'n', 'x', 'o' },
-				function()
-					require('flash').jump()
-				end,
-				desc = 'Flash',
+		opts = {
+			search = {
+				multi_window = false,
+				-- * exact: exact match -- default
+				-- * search: regular search
+				-- * fuzzy: fuzzy search
+				mode = 'exact',
+				-- incremental = true,
 			},
-			{
-				'S',
-				mode = { 'n', 'x', 'o' },
-				function()
-					require('flash').treesitter()
-				end,
-				desc = 'Flash Treesitter',
+			modes = {
+				search = {
+					bled = true,
+					-- search = {
+					-- incremental = true,
+					-- },
+				},
+				char = {
+					enabled = true,
+				},
 			},
 		},
+		-- keys = {
+		-- 	{
+		-- 		'S',
+		-- 		mode = { 'n', 'x', 'o' },
+		-- 		function()
+		-- 			require('flash').treesitter()
+		-- 		end,
+		-- 		desc = 'Flash Treesitter',
+		-- 	},
+		-- },
 	},
 }
