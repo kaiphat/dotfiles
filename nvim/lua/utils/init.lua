@@ -36,4 +36,8 @@ function M.create_augroup(name)
 	return vim.api.nvim_create_augroup('kaiphat:' .. name, {})
 end
 
+function M.exec_nu(...)
+	return vim.fn.system(string.format('nu -c "%s"', string.format(...)))
+end
+
 kaiphat.utils = M

@@ -127,7 +127,9 @@ return {
 		{
 			'<leader>dL',
 			function()
-				Snacks.picker.grep()
+				Snacks.picker.grep {
+					args = { '-U' },
+				}
 			end,
 		},
 		{
@@ -165,6 +167,7 @@ return {
 					exclude = grep_exclude,
 				}
 			end,
+			mode = { 'n', 'v' },
 		},
 		{
 			'<leader>dh',
@@ -173,6 +176,7 @@ return {
 					exclude = grep_always_excludes,
 				}
 			end,
+			mode = { 'n', 'v' },
 		},
 		{
 			'<leader>fi',
@@ -201,6 +205,33 @@ return {
 			'<leader>fm',
 			function()
 				Snacks.picker.help()
+			end,
+		},
+		{
+			'<leader>fc',
+			function()
+				Snacks.picker.git_log_file {
+					confirm = function(picker, item)
+						local file = kaiphat.utils.exec_nu(
+							[[
+                                cd %s;
+                                let file = ('%s' | path basename);
+                                let new_file = $'/tmp/kaiphat_commit_file_%s_($file)';
+                                git show $'%s:./($file)' | save -f $new_file;
+                                $new_file
+                            ]],
+							item.cwd,
+							item.file,
+							item.commit,
+							item.commit
+						)
+						picker:close()
+						vim.cmd 'vs'
+						vim.schedule(function()
+							vim.cmd('e ' .. file)
+						end)
+					end,
+				}
 			end,
 		},
 	},

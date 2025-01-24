@@ -15,9 +15,9 @@ return {
 		},
 
 		fuzzy = {
-			use_typo_resistance = true,
-			use_frecency = true,
-			use_proximity = true,
+			-- use_typo_resistance = true,
+			-- use_frecency = true,
+			-- use_proximity = true,
 		},
 
 		completion = {

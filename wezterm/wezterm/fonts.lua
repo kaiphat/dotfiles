@@ -247,7 +247,7 @@ return {
 			weight = weights.B,
 			font_size = 11.9,
 			cell_width = 1,
-			line_height = 1.15,
+			line_height = 1,
 			scale = 0.7,
 		},
 		inconsolata = {
