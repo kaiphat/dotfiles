@@ -7,10 +7,10 @@ g.markdown_folding = 1
 
 local TAB_SIZE = 4
 
+-- o.winborder = 'rounded'
 o.jumpoptions = 'stack'
 o.smoothscroll = true
--- o.background = ''
--- o.guicursor = 'a:blinkon1,i-ci-ve:ver25-blinkon1'
+o.guicursor = 'a:blinkon1,i-ci-ve:ver25-blinkon1'
 o.selection = 'old'
 o.tabstop = TAB_SIZE
 o.softtabstop = TAB_SIZE
@@ -28,7 +28,7 @@ o.mouse = 'a'
 o.wrap = true
 o.title = true
 o.hidden = true
-o.cmdheight = 1
+o.cmdheight = 0
 o.scrolloff = 10
 o.sidescrolloff = 8 -- Columns of context
 o.shiftround = true -- Round indent

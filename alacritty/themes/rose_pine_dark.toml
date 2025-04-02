@@ -1,10 +1,11 @@
 [colors.primary]
 foreground = "#e0def4"
 # background = "#232136"
-# background = '#292640'
+background = '#292640'
 # background = '#191934'
 # background = '#1b172e'
-background = '#1b172e'
+# background = '#1b172e'
+# background = '#202a44'
 #background = "#132136"
 #background = '#282c34'
 dim_foreground = "#908caa"

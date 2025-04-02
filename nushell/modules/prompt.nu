@@ -9,13 +9,13 @@ def prompt [] {
 }
 
 def current_dir_style [] {
-    let current_dir = ($env.PWD)
+    let current_dir = (pwd)
 
     let current_dir_abbreviated = if $current_dir == $nu.home-path {
         '~'
     } else {
         let current_dir_relative_to_home = (
-            do -i { $current_dir | path relative-to $nu.home-path } | str join
+            do -i { $current_dir | path relative-to $nu.home-path }
         )
 
         if ($current_dir_relative_to_home | is-empty) == false {

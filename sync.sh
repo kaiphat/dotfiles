@@ -32,7 +32,9 @@ set paths \
     ~/.config/watson \
     ~/.config/lazygit \
     ~/.config/btop \
-    ~/.config/ghostty
+    ~/.config/ghostty \
+    ~/.config/yazi \
+    "$HOME/Library/Application Support/usql"
 
 for path in $paths
     echo "----------------------------------"

@@ -14,6 +14,17 @@ function M.merge(...)
 	return vim.tbl_extend('force', {}, unpack(args))
 end
 
+function M.concat(...)
+	local result = {}
+	local args = { ... }
+	for _, i in ipairs(args) do
+		for _, j in ipairs(i) do
+			table.insert(result, j)
+		end
+	end
+	return result
+end
+
 function M.add_to_home_path(path)
 	return os.getenv 'HOME' .. '/' .. path
 end

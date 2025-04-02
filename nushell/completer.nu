@@ -1,7 +1,10 @@
 let fish_completer = {|spans|
     fish --command $'complete "--do-complete=($spans | str join " ")"'
-    | $"value(char tab)description(char newline)" + $in
-    | from tsv --flexible --no-infer
+    | from tsv --flexible --noheaders --no-infer
+    | rename value description
+    | update value {
+        if ($in | path exists) {$'"($in | str replace "\"" "\\\"" )"'} else {$in}
+    }
 }
 
 let carapace_completer = {|spans: list<string>|
@@ -14,18 +17,21 @@ $env.config.completions.algorithm = 'fuzzy'
 $env.config.completions.external.enable = true
 $env.config.completions.external.max_results = 50
 $env.config.completions.external.completer = {|spans|
-    let expanded_alias = (scope aliases | where name == $spans.0 | get -i 0 | get -i expansion)
+    let expanded_alias = scope aliases
+    | where name == $spans.0
+    | get -i 0.expansion
 
     let spans = if $expanded_alias != null {
-        $spans | skip 1 | prepend ($expanded_alias | split row " " | take 1)
+        $spans
+        | skip 1
+        | prepend ($expanded_alias | split row ' ' | take 1)
     } else {
         $spans
     }
 
-    match $spans.0 {
-        nu => $fish_completer
-        npm => $fish_completer
-        git => $fish_completer
-        _ => $carapace_completer
-    } | do $in $spans
+    # match $spans.0 {
+    #     _ => $carapace_completer
+    # } | do $in $spans
+
+    do $carapace_completer $spans
 }

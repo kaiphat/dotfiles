@@ -7,7 +7,7 @@ return {
 		'zbirenbaum/copilot.lua',
 		cmd = 'Copilot',
 		event = 'BufEnter',
-		enabled = true,
+		enabled = false,
 		config = function()
 			require('copilot').setup {
 				panel = {

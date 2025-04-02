@@ -76,7 +76,7 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'VimLeavePre' }, {
 -- 		vim.opt_local.formatoptions = 'tc'
 -- 	end,
 -- })
---
+
 -- vim.api.nvim_create_autocmd({ 'BufEnter' }, {
 -- 	pattern = '*.md',
 -- 	group = kaiphat.utils.create_augroup 'markdown_wrap_option',

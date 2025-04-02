@@ -82,15 +82,13 @@ end)
 
 cmd('RunTest', function()
 	local relative_path = kaiphat.utils.get_relative_path()
-	local cmd_string = string.format('nu ~/dotfiles/nvim/lua/scripts/run_test.nu %s', relative_path)
 
-	vim.fn.system(cmd_string)
+	kaiphat.utils.exec_nu('nu ~/dotfiles/nvim/lua/scripts/run_test.nu %s', relative_path)
 end)
 
 cmd('CopyGitHubFileLink', function()
 	local path = vim.api.nvim_buf_get_name(0)
 	local row_index = vim.api.nvim_win_get_cursor(0)[1]
-	local command = string.format('nu -l ~/dotfiles/nvim/lua/scripts/copy_git_hub_link.nu %s %d', path, row_index)
 
-	vim.fn.system(command)
+	kaiphat.utils.exec_nu('nu -l ~/dotfiles/nvim/lua/scripts/copy_git_hub_link.nu %s %d', path, row_index)
 end)

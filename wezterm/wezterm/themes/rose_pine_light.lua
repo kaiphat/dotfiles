@@ -66,5 +66,8 @@ local colors = {
 }
 
 return {
+	colors = {
+		background = '#f0ecf3',
+	},
 	color_scheme = 'rose-pine-dawn',
 }

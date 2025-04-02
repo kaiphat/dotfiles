@@ -51,7 +51,7 @@ return {
 		cursor_bg = '#d6e9ff',
 		cursor_border = '#d6e9ff',
 		cursor_fg = '#232136',
-		background = '#1b172e',
+		-- background = '#202a44',
 	},
 	color_scheme = 'rose-pine-moon',
 }

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+nvim +Man! -c "set nowrap modifiable noreadonly buftype=nofile" $@

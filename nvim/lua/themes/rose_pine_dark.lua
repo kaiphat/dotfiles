@@ -40,10 +40,15 @@ return {
 				HopNextKey2 = { fg = 'pine' },
 				Keyword = { bold = true, italic = true },
 				VertSplit = { fg = '#405879' },
-				TreesitterContext = { bg = 'muted', blend = 15 },
+				TreesitterContext = { link = 'Visual' },
 				TreesitterContextSeparator = { fg = 'rose' },
 				CmpItemKindCodeium = { fg = 'iris' },
 				IndentBlanklineChar = { fg = 'overlay' },
+				SnacksIndent = { fg = '#333344' },
+				Visual = { bg = '#394660', blend = 100 },
+				Search = { bg = '#424970', blend = 100 },
+				-- for blink selection highlight
+				PmenuSel = { bg = '#384561', blend = 100 },
 				IndentBlanklineContextChar = { fg = 'overlay' },
 				NoiceCmdlinePopupBorder = { link = 'NormalFloat' },
 				['@variable'] = { italic = false, fg = '#c4c6e7' },
@@ -69,34 +74,6 @@ return {
 				if h.bg == p.pine then
 					h.bg = '#6e88a6'
 				end
-
-				-- if highlight.fg == palette.gold then
-				-- 	highlight.fg = '#9398cf'
-				-- end
-				-- if highlight.bg == palette.gold then
-				-- 	highlight.bg = '#9398cf'
-				-- end
-
-				-- if highlight.fg == palette.foam then
-				-- 	highlight.fg = '#81c8be'
-				-- end
-				-- if highlight.bg == palette.foam then
-				-- 	highlight.bg = '#81c8be'
-				-- end
-
-				-- if highlight.fg == palette.rose then
-				-- 	highlight.fg = '#6e88a6'
-				-- end
-				-- if highlight.bg == palette.rose then
-				-- 	highlight.bg = '#6e88a6'
-				-- end
-
-				-- if highlight.fg == palette.iris then
-				-- 	highlight.fg = '#babbf1'
-				-- end
-				-- if highlight.bg == palette.iris then
-				-- 	highlight.bg = '#babbf1'
-				-- end
 			end,
 		}
 

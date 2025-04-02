@@ -19,10 +19,14 @@ git:
     # externalDiffCommand: difft --color=always --display=side-by-side-show-both --syntax-highlight=on
     # pager: delta --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
 
+promptToReturnFromSubprocess: false
+
 os:
-  edit: nvim --server /tmp/nvim.pipe --remote-send "<cmd>lua require('scripts.lazygit-open-file')('{{filename}}', '{{line}}')<CR>"
-  editAtLine: nvim --server /tmp/nvim.pipe --remote-send "<cmd>lua require('scripts.lazygit-open-file')('{{filename}}', '{{line}}')<CR>"
-  open: nvim --server /tmp/nvim.pipe --remote-send "<cmd>lua require('scripts.lazygit-open-file')('{{filename}}', '{{line}}')<CR>"
+  editPreset: nvim
+  edit: nu ~/dotfiles/scripts/open-lazygit-in-neovim.nu {{filename}}
+  editAtLine: nu ~/dotfiles/scripts/open-lazygit-in-neovim.nu {{filename}} {{line}}
+  # open isn't working for nvim, idk why, so just to use edit command in any case
+  # open: nu ~/dotfiles/scripts/open-lazygit-in-neovim.nu {{filename}}
 
 customCommands:
   - key: 'D'

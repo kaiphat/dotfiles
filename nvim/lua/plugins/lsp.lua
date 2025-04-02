@@ -21,18 +21,6 @@ for _, hint in ipairs { 'Error', 'Information', 'Hint', 'Warning' } do
 	)
 end
 
--- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     setup handlers     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-vim.lsp.handlers['textDocument/definition'] = function(_, result)
-	if not result or vim.tbl_isempty(result) then
-		print '[LSP] Could not find definition'
-		return
-	end
-
-	if result then
-		vim.lsp.util.jump_to_location(result[1], 'utf-8')
-	end
-end
-
 -- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     keymaps     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 vim.api.nvim_create_autocmd('LspAttach', {
 	group = kaiphat.utils.create_augroup 'lsp_attach',
@@ -41,16 +29,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 			vim.keymap.set(mode, keys, cmd, { buffer = event.buf })
 		end
 
-		local function open_float()
-			vim.defer_fn(function()
-				vim.diagnostic.open_float()
-			end, 300)
-		end
-
 		map('n', 'gd', function()
-			vim.lsp.buf.definition {
-				reuse_win = true,
-			}
+			Snacks.picker.lsp_definitions()
 		end)
 
 		map('n', 'K', function()
@@ -66,42 +46,27 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		end)
 
 		map('n', '[d', function()
-			vim.diagnostic.goto_prev()
-			-- vim.diagnostic.get_next {
-			-- 	count = -1,
-			-- }
-			open_float()
+			vim.diagnostic.jump { count = -1, float = true }
 		end)
 
 		map('n', '[D', function()
-			vim.diagnostic.goto_prev {
+			vim.diagnostic.jump {
+				count = -1,
+				float = true,
 				severity = vim.diagnostic.severity.ERROR,
 			}
-			-- vim.diagnostic.get_prev {
-			-- 	count = -1,
-			-- 	severity = vim.diagnostic.severity.ERROR,
-			-- }
-			open_float()
 		end)
 
 		map('n', ']d', function()
-			vim.diagnostic.goto_next()
-			-- vim.diagnostic.jump {
-			-- 	count = 1,
-			-- }
-			open_float()
+			vim.diagnostic.jump { count = 1, float = true }
 		end)
 
 		map('n', ']D', function()
-			vim.diagnostic.goto_next {
+			vim.diagnostic.jump {
+				count = 1,
+				float = true,
 				severity = vim.diagnostic.severity.ERROR,
 			}
-
-			-- vim.diagnostic.jump {
-			-- 	count = 1,
-			-- 	severity = vim.diagnostic.severity.ERROR,
-			-- }
-			open_float()
 		end)
 
 		map('n', '<space>lq', function()
@@ -125,9 +90,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
 			vim.lsp.inlay_hint.enable(not is_enabled)
 		end)
 
+		map('n', '<space>lcl', function()
+			vim.lsp.codelens.refresh()
+		end)
+
 		map('n', 'go', function()
 			vim.cmd 'vs'
-			vim.lsp.buf.definition()
+			vim.lsp.buf.definition {
+				reuse_win = false,
+			}
 			vim.schedule(function()
 				vim.api.nvim_input 'zz'
 			end)
@@ -159,11 +130,11 @@ kaiphat.setup_lsp_server = function(table)
 			debounce_text_changes = 150,
 		},
 		on_attach = function(client, bufnr)
+			-- if vim.lsp.handlers['textDocument/inlayHint'] then
+			-- 	vim.lsp.inlay_hint.enable(true)
+			-- end
 			if table.on_attach_hook then
 				table.on_attach_hook(client, bufnr)
-			end
-			if vim.lsp.handlers['textDocument/inlayHint'] then
-				vim.lsp.inlay_hint.enable()
 			end
 		end,
 	}
@@ -180,7 +151,7 @@ return {
 		'neovim/nvim-lspconfig',
 		event = 'BufReadPre',
 		dependencies = {
-			'jose-elias-alvarez/null-ls.nvim',
+			'nvimtools/none-ls.nvim',
 			'yioneko/nvim-vtsls',
 			'saghen/blink.cmp',
 		},

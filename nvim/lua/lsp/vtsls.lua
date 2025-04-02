@@ -15,10 +15,29 @@ kaiphat.setup_lsp_server {
 					insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
 					quotePreference = 'single',
 				},
+				inlayHints = {
+					parameterNames = { enabled = 'literals' },
+					parameterTypes = { enabled = true },
+					variableTypes = { enabled = true },
+					propertyDeclarationTypes = { enabled = true },
+					functionLikeReturnTypes = { enabled = true },
+					enumMemberValues = { enabled = true },
+				},
+				referencesCodeLens = {
+					enabled = true,
+					showOnAllFunctions = true,
+				},
+				implementationsCodeLens = {
+					enabled = true,
+					showOnInterfaceMethods = true,
+				},
+				implicitProjectConfig = {
+					experimentalDecorators = true,
+				},
 			},
 		},
 	},
-	on_attach_hook = function(client, bufnr)
+	on_attach_hook = function()
 		vim.keymap.set('n', '<leader>ti', function()
 			require('vtsls').commands.add_missing_imports(0, on_resolve, on_reject)
 		end)

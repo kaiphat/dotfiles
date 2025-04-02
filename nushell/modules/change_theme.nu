@@ -12,6 +12,10 @@ const themes = [
     "solarized_dark"
 ]
 
+def replace [file closure] {
+    open ($file | path relative-to '') | lines | each $closure | save -f $file
+}
+
 export def main [] {
     let theme = $themes | to text | fzf
 
@@ -27,14 +31,22 @@ export def main [] {
         $dark_theme_enabled = 0
     }
 
-    sed -i '' -E $"s/background \\= '[a-z]+'/background = '($theme_type)'/" ~/dotfiles/nvim/lua/options.lua
-    sed -i '' -E $"s/dark_theme\\=[01]/dark_theme=($dark_theme_enabled)/" ~/dotfiles/.tmux.conf
-    sed -i '' -E $"s/themes\\.[a-zA-Z_]+/themes.($theme)/" ~/dotfiles/nvim/lua/plugins/themes.lua
+    let theme_type = $theme_type
+    let dark_theme_enabled = $dark_theme_enabled
 
     sd "themes/[a-zA-Z_]+.nu" $"themes/($theme).nu" ~/dotfiles/nushell/config.nu
     sd "themes/[a-zA-Z_]+.conf" $"themes/($theme).conf" ~/dotfiles/kitty/kitty.conf
     sd "themes/[a-zA-Z_]+.toml" $"themes/($theme).toml" ~/dotfiles/alacritty/alacritty.toml
     sd "wezterm.themes.[a-zA-Z_]+" $"wezterm.themes.($theme)" ~/dotfiles/wezterm/wezterm.lua
+
+    replace ~/dotfiles/nvim/lua/plugins/themes.lua { |$it|
+        $it 
+            | str replace -r "(vim.o.background\\s*=\\s*')(.*)(')" $"${1}($theme_type)${3}"
+            | str replace -r "(return require\\('themes.'\\s*..\\s*themes.)(\\w+)" $"${1}($theme)"
+    }
+    replace ~/dotfiles/.tmux.conf { |$it|
+        $it | str replace -r "(dark_theme=)[01]" $"${1}($dark_theme_enabled)"
+    }
 
     tmux source-file ~/dotfiles/.tmux.conf
 }

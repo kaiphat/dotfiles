@@ -77,7 +77,9 @@ map('i', escape_chars[2]:upper() .. escape_chars[1], '<esc>')
 map('i', escape_chars[1]:upper() .. escape_chars[2]:upper(), '<esc>')
 
 map('i', '<C-l>', '<Right><c-h>')
-map('i', '<C-d>', '<Right>')
+-- move left after (), or {}
+map('i', '<C-d>', '<Left>')
+map('i', '<C-f>', '<Right>')
 
 map('n', '<esc>', ':nohl<cr>')
 
@@ -202,7 +204,10 @@ map('v', '<leader>uw', function()
 end)
 
 map('n', 'zf', function()
-	vim.cmd.normal 'zMzr'
+	vim.cmd.normal 'zx'
+	vim.schedule(function()
+		vim.cmd.normal 'zMzr'
+	end)
 end)
 map('n', 'zo', function()
 	vim.cmd.normal 'zO'

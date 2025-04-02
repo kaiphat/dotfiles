@@ -114,6 +114,7 @@ end
 return {
 	'feline-nvim/feline.nvim',
 	priority = 900,
+	enabled = true,
 	config = function()
 		local colors = get_colors()
 		local components = get_components(colors)

@@ -2,8 +2,7 @@ return {
 	'saghen/blink.cmp',
 	enabled = true,
 	lazy = false,
-	-- version = '0.8.2',
-	build = 'cargo build --release',
+	version = '*',
 	opts = {
 		keymap = {
 			['<C-j>'] = { 'show', 'select_next', 'fallback' },
@@ -15,9 +14,13 @@ return {
 		},
 
 		fuzzy = {
-			-- use_typo_resistance = true,
-			-- use_frecency = true,
-			-- use_proximity = true,
+			implementation = 'rust',
+			-- max_typos = function(keyword) return math.floor(#keyword / 4) end,
+			max_typos = function()
+				return 0
+			end,
+			use_frecency = true,
+			use_proximity = true,
 		},
 
 		completion = {
@@ -29,22 +32,6 @@ return {
 
 			menu = {
 				border = 'rounded',
-				draw = {
-					components = {
-						kind_icon = {
-							ellipsis = false,
-							text = function(ctx)
-								local kind_icon, _, _ = require('mini.icons').get('lsp', ctx.kind)
-								return kind_icon
-							end,
-							-- Optionally, you may also use the highlights from mini.icons
-							highlight = function(ctx)
-								local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
-								return hl
-							end,
-						},
-					},
-				},
 			},
 
 			accept = {
@@ -64,9 +51,12 @@ return {
 			},
 		},
 
+		cmdline = {
+			enabled = false,
+		},
+
 		sources = {
 			default = { 'lsp', 'path', 'snippets', 'buffer' },
-			cmdline = {},
 			providers = {
 				lsp = {
 					name = 'LSP',
@@ -74,7 +64,7 @@ return {
 					enabled = true, -- whether or not to enable the provider
 					transform_items = nil, -- function to transform the items before they're returned
 					should_show_items = true, -- whether or not to show the items
-					max_items = nil, -- maximum number of items to return
+					max_items = 100, -- maximum number of items to return
 					min_keyword_length = 0,
 					fallbacks = {}, -- if any of these providers return 0 items, it will fallback to this provider
 					score_offset = 0, -- boost/penalize the score of the items
@@ -106,29 +96,19 @@ return {
 						extended_filetypes = {},
 						ignored_filetypes = {},
 					},
+					should_show_items = function(ctx)
+						return ctx.trigger.initial_kind ~= 'trigger_character'
+					end,
 				},
 				buffer = {
 					name = 'Buffer',
 					module = 'blink.cmp.sources.buffer',
 					score_offset = -5,
-					max_items = 10,
+					max_items = 20,
 					min_keyword_length = 0,
 					opts = {
-						get_bufnrs = function()
-							local allOpenBuffers = vim.fn.getbufinfo { buflisted = 1, bufloaded = 1 }
-							return vim.iter(allOpenBuffers)
-								:filter(function(buf)
-									return vim.bo[buf.bufnr].buftype == ''
-								end)
-								:map(function(buf)
-									return buf.bufnr
-								end)
-								:totable()
-						end,
+						get_bufnrs = vim.api.nvim_list_bufs,
 					},
-				},
-				cmdline = {
-					enabled = false,
 				},
 			},
 		},

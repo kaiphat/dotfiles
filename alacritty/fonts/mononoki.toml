@@ -18,9 +18,9 @@ family = 'Mononoki Nerd Font'
 style = 'Regular'
 
 [font.offset]
-x = 0
-y = 2
+x = 1
+y = 1
 
 [font.glyph_offset]
 x = 0
-y = 1
+y = 0

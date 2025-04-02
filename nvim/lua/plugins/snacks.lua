@@ -10,7 +10,7 @@ local grep_always_excludes = {
 	'package-lock.json',
 }
 
-local grep_exclude = kaiphat.utils.merge(grep_always_excludes, {
+local grep_exclude = kaiphat.utils.concat(grep_always_excludes, {
 	'data/',
 	'.data/',
 	'test/',
@@ -145,6 +145,14 @@ return {
 					sort = {
 						fields = { 'idx' },
 					},
+					matcher = {
+						fuzzy = false,
+						filename_bonus = false,
+						file_pos = false,
+						cwd_bonus = false,
+						frecency = false,
+						history_bonus = true,
+					},
 				}
 			end,
 		},
@@ -184,6 +192,15 @@ return {
 				Snacks.picker.lsp_references {
 					include_declaration = false,
 					pattern = '!import !test/ ',
+					jump = { tagstack = true, reuse_win = false },
+				}
+			end,
+		},
+		{
+			'<leader>fI',
+			function()
+				Snacks.picker.lsp_implementations {
+					jump = { tagstack = true, reuse_win = false },
 				}
 			end,
 		},
@@ -192,13 +209,44 @@ return {
 			function()
 				Snacks.picker.lsp_references {
 					include_declaration = false,
+					jump = { tagstack = true, reuse_win = false },
 				}
 			end,
 		},
 		{
 			'<leader>fw',
 			function()
-				Snacks.picker.lsp_workspace_symbols {}
+				Snacks.picker.lsp_workspace_symbols {
+					filter = {
+						default = true,
+					},
+				}
+			end,
+		},
+		{
+			'<leader>fe',
+			function()
+				Snacks.picker.lsp_symbols {
+					tree = false,
+					filter = {
+						default = {
+							'Variable',
+							'Class',
+							'Constructor',
+							'Enum',
+							'Field',
+							'Function',
+							'Interface',
+							'Method',
+							'Module',
+							'Namespace',
+							'Package',
+							'Property',
+							'Struct',
+							'Trait',
+						},
+					},
+				}
 			end,
 		},
 		{
@@ -213,18 +261,17 @@ return {
 				Snacks.picker.git_log_file {
 					confirm = function(picker, item)
 						local file = kaiphat.utils.exec_nu(
-							[[
-                                cd %s;
-                                let file = ('%s' | path basename);
-                                let new_file = $'/tmp/kaiphat_commit_file_%s_($file)';
-                                git show $'%s:./($file)' | save -f $new_file;
-                                $new_file
-                            ]],
+							'nu -l ~/dotfiles/nvim/lua/scripts/open_commit.nu %s %s %s',
 							item.cwd,
 							item.file,
-							item.commit,
 							item.commit
 						)
+
+						if vim.trim(file) == '' then
+							print 'File not found in the commit'
+							return
+						end
+
 						picker:close()
 						vim.cmd 'vs'
 						vim.schedule(function()
@@ -237,6 +284,7 @@ return {
 	},
 	opts = {
 		lazygit = {
+			configure = false,
 			win = {
 				style = 'lazygit',
 			},
@@ -251,7 +299,18 @@ return {
 			formatters = {
 				file = {
 					filename_first = true, -- display filename before the file path
+					truncate = 100,
 				},
+			},
+			matcher = {
+				smartcase = false,
+				ignorecase = true,
+				filename_bonus = true,
+				file_pos = false,
+
+				cwd_bonus = false,
+				frecency = true,
+				history_bonus = true,
 			},
 			layout = {
 				layout = {
@@ -268,12 +327,16 @@ return {
 					height = 0.8,
 					min_height = 30,
 					box = 'vertical',
-					border = 'rounded',
+					border = 'none',
 					title = '{title} {live} {flags}',
 					title_pos = 'center',
-					{ win = 'input', height = 2, border = 'none' },
+					{
+						win = 'input',
+						height = 1,
+						border = 'rounded',
+					},
 					{ win = 'list', height = 15, border = 'none' },
-					{ win = 'preview', border = 'top' },
+					{ win = 'preview', border = 'rounded' },
 				},
 			},
 			win = {
@@ -282,6 +345,8 @@ return {
 						['<c-e>'] = { 'close', mode = 'i' },
 						['<c-d>'] = { 'preview_scroll_down', mode = { 'i', 'n' } },
 						['<c-u>'] = { 'preview_scroll_up', mode = { 'i', 'n' } },
+						['<c-n>'] = { 'history_forward', mode = { 'i', 'n' } },
+						['<c-p>'] = { 'history_back', mode = { 'i', 'n' } },
 					},
 				},
 				preview = {
@@ -302,6 +367,7 @@ return {
 		},
 
 		indent = {
+			enabled = false,
 			indent = {
 				enabled = true,
 				char = kaiphat.constants.icons.VERTICAL_LINE_1,
@@ -321,7 +387,12 @@ return {
 			debounce = 400,
 		},
 
-		quickfile = {},
-		bigfile = {},
+		quickfile = {
+			enabled = true,
+		},
+
+		bigfile = {
+			enabled = true,
+		},
 	},
 }

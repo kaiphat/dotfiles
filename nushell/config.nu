@@ -3,7 +3,7 @@ source ./aliases.nu
 source ./main.nu
 source ./completer.nu
 source ./keys.nu
-source ~/.zoxide.nu
+source ./zoxide.nu
 source ./run_tmux.nu
 
 use utils.nu

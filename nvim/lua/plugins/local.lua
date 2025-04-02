@@ -7,9 +7,9 @@ return {
 		event = 'VeryLazy',
 		name = 'marks',
 		enabled = true,
-        dependencies = {
-            'nvim-lua/plenary.nvim',
-        },
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+		},
 		config = function()
 			require('local_plugins.marks').setup {
 				save_position = false,
@@ -52,6 +52,17 @@ return {
 		event = 'VeryLazy',
 		config = function()
 			require('local_plugins.restore').setup()
+		end,
+	},
+
+	{
+		name = 'statusline',
+		dir = path_to_local_plugins .. 'statusline',
+		-- event = 'VeryLazy',
+		enabled = false,
+		priority = 900,
+		config = function()
+			require('local_plugins.statusline').setup()
 		end,
 	},
 }

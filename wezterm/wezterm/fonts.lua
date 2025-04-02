@@ -48,7 +48,7 @@ return {
 	fonts = {
 		jet_brains = {
 			name = 'JetBrains Mono',
-			weight = weights.B,
+			weight = weights.M,
 			italic = false,
 			font_size = 11.2,
 			cell_width = 1,
@@ -104,7 +104,7 @@ return {
 		},
 		input = {
 			name = 'Input Mono',
-			weight = weights.B,
+			weight = weights.R,
 			font_size = 11,
 			cell_width = 1,
 			line_height = 1,
@@ -173,7 +173,8 @@ return {
 		},
 		hack = {
 			name = 'Hack',
-			italic = true,
+			weight = weights.B,
+			italic = false,
 			font_size = 11.5,
 			cell_width = 1,
 			line_height = 1.15,
@@ -216,7 +217,7 @@ return {
 			name = 'Maple Mono NF',
 			full_italic = false,
 			italic = false,
-			font_size = 11.5,
+			font_size = 11,
 			cell_width = 1,
 			line_height = 1,
 			weight = weights.SB,
@@ -242,21 +243,21 @@ return {
 			line_height = 1,
 		},
 		mononoki_aoc = {
-			name = 'mononoki Nerd Font',
+			name = 'Mononoki Nerd Font',
 			italic = false,
 			weight = weights.B,
-			font_size = 11.9,
+			font_size = 12,
 			cell_width = 1,
-			line_height = 1,
+			line_height = 1.15,
 			scale = 0.7,
 		},
 		inconsolata = {
 			name = 'Inconsolata',
 			italic = false,
 			weight = weights.B,
-			font_size = 14,
+			font_size = 12,
 			cell_width = 1,
-			line_height = 1.2,
+			line_height = 1,
 			scale = 0.6,
 			harfbuzz_features = {
 				'liga',
@@ -307,6 +308,12 @@ return {
 			name = 'Ubuntu Mono',
 			weight = weights.R,
 			font_size = 14,
+			line_height = 1,
+		},
+		proto = {
+			name = '0xProto Nerd Font',
+			weight = weights.R,
+			font_size = 11.5,
 			line_height = 1,
 		},
 		radon = {

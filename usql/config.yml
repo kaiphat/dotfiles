@@ -1,0 +1,3 @@
+init: |
+  \set PROMPT1 '>> '
+  \set PAGER /Users/ilyapu/dotfiles/scripts/nvim_pager

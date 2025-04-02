@@ -1,4 +1,6 @@
-return function(filename, line_number)
+kaiphat.scripts = {}
+
+kaiphat.scripts.lazygit_open_file = function(filename, line_number)
 	line_number = tonumber(line_number) or 1
 
 	vim.api.nvim_feedkeys('q', 'n', true)

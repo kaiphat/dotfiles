@@ -11,3 +11,38 @@ $env.config.history = {
     file_format: "sqlite" # "sqlite" or "plaintext"
     isolation: true # only available with sqlite file_format. true enables history isolation, false disables it. true will allow the history to be isolated to the current session using up/down arrows. false will allow the history to be shared across all sessions.
 }
+
+$env.config.menus ++= [
+    {
+        name: completion_menu
+        only_buffer_difference: false
+        marker: "",
+        type: {
+            layout: columnar
+            columns: 4
+            col_width: 20
+            col_padding: 2
+        }
+        style: {
+            text: green
+            # selected_text: { attr: r }
+            # description_text: yellow
+            match_text: { attr: n, bg: red, fg: black }
+            selected_match_text: { attr: n, bg: red, fg: black }
+        }
+    }
+    {
+        name: history_menu
+        only_buffer_difference: true 
+        marker: ""                 
+        type: {
+            layout: list             
+            page_size: 10            
+        }
+        style: {
+            text: cyan                   
+            selected_text: { attr: r }  
+            description_text: yellow      
+        }
+    }
+]

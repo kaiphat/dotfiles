@@ -2,8 +2,7 @@ alias g = git
 alias lg = lazygit
 alias t = tmux
 # alias n = nvim
-# alias n = nvim --server $"/tmp/nvim-(tmux display-message -p '#S').pipe"
-alias n = nvim --listen "/tmp/nvim.pipe"
+alias n = nvim --listen $"/tmp/nvim-(tmux display-message -p '#S-#I-#{pane_pid}')"
 alias d = docker
 alias y = yarn
 alias dc = docker-compose
@@ -13,19 +12,26 @@ alias td  = t detach
 alias dcr = dc restart
 alias di = d inspect
 alias nvm = fnm
-alias todo = n ~/notes/notes/deals.md -c "set signcolumn=no"
-alias notes = n ~/notes/notes/notes.md -c "set signcolumn=no"
+alias yz = yazi
+alias tasks = nvim ~/notes/notes/tasks.md -c "set signcolumn=no"
+alias notes = nvim ~/notes/notes/notes.md -c "set signcolumn=no"
+alias nvim-pager = nvim +Man! -c "set nowrap modifiable noreadonly buftype=nofile"
 alias fzf = fzf --color="gutter:0,bg+:-1,fg+:#244566,pointer:#365987,current-bg:#797999,current-fg:#000022" --margin=0,2 --no-separator --info=inline-right --no-scrollbar --pointer='󱞩' --prompt='󰼛 ' --layout=reverse --bind ctrl-e:close
 
 # there is bug with -l (login) flag, so i should use such hack
 alias run-nu-script = nu --config ~/dotfiles/nushell/config.nu --env-config ~/dotfiles/nushell/env.nu
+alias chrome = `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`
 
 def browser [link] {
-    firefox $link
+    # firefox $link
+    # check profiles in directory ~/Library/Application\ Support/Google/Chrome
+    chrome --profile-directory="Default" $link
 }
 
 def browser-work [link] {
-    firefox $'ext+container:name=Work&url=($link)'
+    # firefox $'ext+container:name=Work&url=($link)'
+    # check profiles in directory ~/Library/Application\ Support/Google/Chrome
+    chrome --profile-directory="Profile 1" $link
 }
 
 def ds [] {
@@ -95,4 +101,12 @@ def docker-patch-nerd-fonts [] {
     # docker pull nerdfonts/patcher:latest
     docker run --rm -v ~/dotfiles/fonts/in:/in:Z -v ~/dotfiles/fonts:/out:Z -e "PN=4" nerdfonts/patcher:latest -c --careful
     rm -rf ~/dotfiles/fonts/in/*
+}
+
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     watson     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+alias w = watson
+def ws [...args] {
+    w stop | complete
+    w start ...$args
 }
