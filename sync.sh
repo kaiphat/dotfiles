@@ -34,6 +34,7 @@ set paths \
     ~/.config/btop \
     ~/.config/ghostty \
     ~/.config/yazi \
+    ~/.config/gh-dash \
     "$HOME/Library/Application Support/usql"
 
 for path in $paths

@@ -38,7 +38,11 @@ def --env --wrapped __zoxide_z [...rest: string] {
         '-' => {'-'}
         $arg if ($arg | path type) == 'dir' => {$arg}
         _ => {
-            zoxide query --exclude $env.PWD -- ...$path | str trim -r -c "\n"
+            if ($path | path exists | first) {
+                zoxide query --exclude $env.PWD -- ...$path | str trim -r -c "\n"
+            } else {
+                zoxide query --exclude $env.PWD -- ...$rest | str trim -r -c "\n"
+            }
         }
     }
 

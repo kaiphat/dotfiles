@@ -1,0 +1,18 @@
+prSections:
+- filters: is:open author:@me
+  title: My Issues
+- filters: is:open assignee:@me
+  title: Assigned
+- filters: is:open involves:@me -author:@me
+  title: Involved
+- filters: is:open
+  title: All
+  limit: 10
+- filters: is:closed
+  title: Closed
+  limit: 10
+
+keybindings:
+  prs:
+    - command: nu /Users/ilyapu/dotfiles/scripts/code_review.nu
+      key: I
