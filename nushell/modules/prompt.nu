@@ -5,7 +5,7 @@ def left [] {
 def prompt [] {
     # $"\r\n(ansi magenta); "
     # $"\r\n(ansi magenta)󰼛 "
-    $"\r\n(ansi magenta)❯ "
+    $"\r\n(ansi light_cyan)❯ "
 }
 
 def current_dir_style [] {
@@ -54,9 +54,9 @@ def git_after [branch] {
 
 def git_draft [] {
     {
-        let commit = ^git log --oneline --max-count=1
+        let commit = ^git log --oneline --max-count=1 | complete
 
-        if ($commit | str contains 'DRAFT') {
+        if ($commit.stdout | str contains 'DRAFT') {
             return $'(ansi red)D(ansi reset)'
         }
 
