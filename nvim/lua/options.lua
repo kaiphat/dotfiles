@@ -8,6 +8,9 @@ g.markdown_folding = 1
 local TAB_SIZE = 4
 
 -- o.winborder = 'rounded'
+
+-- has problem with nushell. Doesn't support < operator
+o.shell = 'fish'
 o.jumpoptions = 'stack'
 o.smoothscroll = true
 o.guicursor = 'a:blinkon1,i-ci-ve:ver25-blinkon1'
@@ -93,6 +96,15 @@ o.fillchars = {
 	lastline = ' ',
 	stl = ' ',
 	stlnc = ' ',
+}
+o.diffopt = {
+	'internal',
+	'filler',
+	'closeoff',
+	'context:12',
+	'algorithm:histogram',
+	'linematch:200',
+	'indent-heuristic',
 }
 o.inccommand = 'split'
 o.showbreak = '  ↳ '

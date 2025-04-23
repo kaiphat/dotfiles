@@ -1,5 +1,9 @@
 local M = {}
 
+function M.get_full_path(buf)
+	return vim.api.nvim_buf_get_name(buf or 0)
+end
+
 function M.get_relative_path()
 	local full_path = vim.api.nvim_buf_get_name(0)
 	return vim.fn.fnamemodify(full_path, ':~:.')
@@ -49,6 +53,18 @@ end
 
 function M.exec_nu(...)
 	return vim.fn.system(string.format('nu -c "%s"', string.format(...)))
+end
+
+function M.get_git_branch()
+	local git_branch = vim.fn.systemlist('git branch --show-current')[1]
+	if string.find(git_branch, 'fatal') then
+		return nil
+	end
+	return git_branch
+end
+
+function M.get_root_dir()
+	return vim.loop.cwd()
 end
 
 kaiphat.utils = M

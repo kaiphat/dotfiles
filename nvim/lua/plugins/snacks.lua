@@ -27,6 +27,7 @@ return {
 	'folke/snacks.nvim',
 	priority = 1000,
 	lazy = false,
+	event = 'VeryLazy',
 	enabled = true,
 	keys = {
 		-- lazygit
@@ -228,6 +229,7 @@ return {
 			function()
 				Snacks.picker.lsp_symbols {
 					tree = false,
+					workspace = true,
 					filter = {
 						default = {
 							'Variable',

@@ -1,6 +1,6 @@
 local wezterm = require 'wezterm'
 local font_config = require 'wezterm.fonts'
-local theme = require 'wezterm.themes.rose_pine_dark'
+local theme = require 'wezterm.themes.rose_pine_light'
 local config = require 'wezterm.config'
 
 config.set(font_config.build_font(font_config.fonts.jet_brains))

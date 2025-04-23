@@ -3,19 +3,19 @@ size = 11.1
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"
-style = "ExtraLight"
+style = "Regular"
 
 [font.bold]
 family = "JetBrainsMono Nerd Font"
-style = "ExtraLight"
+style = "Regular"
 
 [font.italic]
 family = "JetBrainsMono Nerd Font"
-style = "ExtraLight"
+style = "Regular"
 
 [font.bold_italic]
 family = "JetBrainsMono Nerd Font"
-style = "ExtraLight"
+style = "Regular"
 
 [font.offset]
 x = 1

@@ -1,25 +1,26 @@
 local nvim_config_path = vim.fn.stdpath 'config'
-local path_to_local_plugins = nvim_config_path .. '/lua/local_plugins/'
+local function get_dir(name)
+	return nvim_config_path .. '/lua/local_plugins/' .. name
+end
 
 return {
 	{
-		dir = path_to_local_plugins .. 'marks',
+		dir = get_dir 'anchor',
 		event = 'VeryLazy',
-		name = 'marks',
+		name = 'anchor',
 		enabled = true,
 		dependencies = {
 			'nvim-lua/plenary.nvim',
+			'folke/snacks.nvim',
 		},
 		config = function()
-			require('local_plugins.marks').setup {
-				save_position = false,
-			}
+			require('local_plugins.anchor').setup {}
 		end,
 	},
 
 	{
 		name = 'unit',
-		dir = path_to_local_plugins .. 'unit',
+		dir = get_dir 'unit',
 		keys = {
 			{
 				'u',
@@ -39,7 +40,7 @@ return {
 
 	{
 		name = 'restore',
-		dir = path_to_local_plugins .. 'restore',
+		dir = get_dir 'restore',
 		enabled = true,
 		keys = {
 			{
@@ -57,7 +58,7 @@ return {
 
 	{
 		name = 'statusline',
-		dir = path_to_local_plugins .. 'statusline',
+		dir = get_dir 'statusline',
 		-- event = 'VeryLazy',
 		enabled = false,
 		priority = 900,

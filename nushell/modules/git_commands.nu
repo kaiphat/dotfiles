@@ -8,7 +8,7 @@ export def gc [message] {
 }
 
 export def nvim-review [] {
-    let branch = gh pr list -s open --limit 30 --json title,headRefName,author
+    let branch = gh pr list -s open --limit 15 --json title,headRefName,author
     | from json
     | each { $"($in.headRefName) (ansi green)($in.author.login) (ansi green)($in.title)" }
     | str join (char newline) 
@@ -18,12 +18,13 @@ export def nvim-review [] {
 
     git fetch origin $branch
     git ch $branch
+    git plh
 
-    nvim -c "DiffviewOpen origin/master...HEAD"
+    nvim -c "Octo review"
 }
 
 export def open-pr [] {
-    let url = gh pr list -s open --limit 30 --json title,url,author
+    let url = gh pr list -s open --limit 20 --json title,url,author
     | from json
     | each { $"($in.url) (ansi green)($in.author.login) (ansi red)($in.title)" }
     | str join (char newline) 
@@ -32,4 +33,22 @@ export def open-pr [] {
     | first
 
     browser-work $url
+}
+
+export def "g ch" [to_branch?] {
+    if ($to_branch | is-not-empty) {
+        ^git ch $to_branch | return
+    }
+
+    let current_branch = ^git branch --show-current | str trim
+    let branch = ^git bl 
+        | split row (char newline)
+        | filter { $in | str contains $current_branch | not $in }
+        | str join (char newline)
+        | fzf --ansi 
+        | complete
+
+    if ($branch.stdout | str length) > 0 {
+        $branch.stdout | split row ' ' | first | ^git ch $in
+    }
 }

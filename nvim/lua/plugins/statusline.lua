@@ -41,11 +41,11 @@ local function get_marks_component(c, gap)
 	return {
 		icon = ' ',
 		enabled = function()
-			local manager = require('local_plugins.marks').get_manager_instance()
-			return manager ~= nil and manager.active_mark_index ~= nil
+			local index = require('local_plugins.anchor').get_anchor_index()
+			return index ~= nil
 		end,
 		provider = function()
-			return require('local_plugins.marks').get_manager_instance().active_mark_index:upper()
+			return require('local_plugins.anchor').get_anchor_index():upper()
 		end,
 		hl = { fg = c.fg4 },
 		right_sep = gap,

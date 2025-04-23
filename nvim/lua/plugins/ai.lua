@@ -7,9 +7,11 @@ return {
 		'zbirenbaum/copilot.lua',
 		cmd = 'Copilot',
 		event = 'BufEnter',
-		enabled = false,
+		enabled = true,
 		config = function()
 			require('copilot').setup {
+				copilot_node_command = vim.fn.expand '$HOME'
+					.. '/.local/state/fnm_multishells/88464_1745309764095/bin/node', -- Node.js version must be > 20
 				panel = {
 					enabled = false,
 					keymap = {
@@ -115,6 +117,18 @@ return {
 
 			vim.keymap.set('i', '<C-g>', neocodeium.accept)
 			vim.keymap.set('i', '<C-q>', neocodeium.cycle_or_complete)
+		end,
+	},
+
+	{
+		'copilotlsp-nvim/copilot-lsp',
+		enabled = false,
+		init = function()
+			vim.g.copilot_nes_debounce = 500
+			vim.lsp.enable 'copilot'
+			vim.keymap.set('n', '<tab>', function()
+				require('copilot-lsp.nes').apply_pending_nes()
+			end)
 		end,
 	},
 }
