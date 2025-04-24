@@ -283,6 +283,16 @@ return {
 				}
 			end,
 		},
+		{
+			'<leader>e',
+			function()
+				Snacks.picker.explorer {
+					cwd = kaiphat.utils.get_current_dir(),
+					follow_file = true,
+					matcher = {},
+				}
+			end,
+		},
 	},
 	opts = {
 		lazygit = {
@@ -314,32 +324,37 @@ return {
 				frecency = true,
 				history_bonus = true,
 			},
-			layout = {
-				layout = {
-					backdrop = false,
-					width = function()
-						local c = vim.o.columns
-						if c > 160 then
-							return 0.7
-						else
-							return 0.9
-						end
-					end,
-					min_width = 80,
-					height = 0.8,
-					min_height = 30,
-					box = 'vertical',
-					border = 'none',
-					title = '{title} {live} {flags}',
-					title_pos = 'center',
-					{
-						win = 'input',
-						height = 1,
-						border = 'rounded',
+			layouts = {
+				custom = {
+					layout = {
+						backdrop = false,
+						width = function()
+							local c = vim.o.columns
+							if c > 160 then
+								return 0.7
+							else
+								return 0.9
+							end
+						end,
+						min_width = 80,
+						height = 0.8,
+						min_height = 30,
+						box = 'vertical',
+						border = 'none',
+						title = '{title} {live} {flags}',
+						title_pos = 'center',
+						{
+							win = 'input',
+							height = 1,
+							border = 'rounded',
+						},
+						{ win = 'list', height = 15, border = 'none' },
+						{ win = 'preview', border = 'rounded' },
 					},
-					{ win = 'list', height = 15, border = 'none' },
-					{ win = 'preview', border = 'rounded' },
 				},
+			},
+			layout = {
+				preset = 'custom',
 			},
 			win = {
 				input = {
@@ -364,6 +379,13 @@ return {
 			previewers = {
 				git = {
 					native = false, -- use native (terminal) or Neovim for previewing git diffs and commits
+				},
+			},
+			sources = {
+				explorer = {
+					layout = {
+						preset = 'sidebar',
+					},
 				},
 			},
 		},
@@ -395,6 +417,11 @@ return {
 
 		bigfile = {
 			enabled = true,
+		},
+
+		explorer = {
+			enabled = true,
+			replace_netrw = true,
 		},
 	},
 }

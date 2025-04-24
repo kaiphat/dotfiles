@@ -2,17 +2,17 @@ return {
 	'stevearc/oil.nvim',
 	keys = {
 		{
-			'<leader>o',
+			'<leader>so',
 			function()
 				require('oil').open()
 			end,
 		},
-		{
-			'<leader>O',
-			function()
-				require('oil').open(vim.loop.cwd())
-			end,
-		},
+		-- {
+		-- 	'<leader>O',
+		-- 	function()
+		-- 		require('oil').open(vim.uv.cwd())
+		-- 	end,
+		-- },
 	},
 	config = function()
 		vim.api.nvim_create_autocmd('FileType', {

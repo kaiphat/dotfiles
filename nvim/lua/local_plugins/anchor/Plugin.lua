@@ -29,7 +29,7 @@ function Plugin:add_keymaps()
 	for i = 1, #indexes do
 		local index = indexes:sub(i, i)
 		map('m' .. index, function()
-			self.manager:add_mark(index)
+			self.manager:add_anchor(index)
 			self.current_buf_anchor_index = index
 			vim.notify('Marked as ' .. index)
 		end)
@@ -39,26 +39,46 @@ function Plugin:add_keymaps()
 		end)
 	end
 
-	map('<leader>ms', function()
-		local items = {}
-		for anchor_index, item in pairs(self.manager.anchors) do
-			table.insert(items, {
-				idx = anchor_index,
-				anchor_index = anchor_index,
-				score = 1,
-				file = item.path,
-				text = anchor_index .. '   ' .. item.path,
-			})
-		end
+	map('<leader>bs', function()
 		Snacks.picker {
-			items = items,
+			finder = function()
+				local items = {}
+				for anchor_index, item in pairs(self.manager.anchors) do
+					table.insert(items, {
+						idx = anchor_index,
+						anchor_index = anchor_index,
+						score = 1,
+						file = item.path,
+					})
+				end
+				return items
+			end,
 			format = function(item)
 				local ret = {}
 				ret[#ret + 1] = { item.anchor_index .. '  ', 'SnacksPickerLabel' }
 				ret[#ret + 1] = { vim.fn.fnamemodify(item.file, ':~:.'), 'SnacksPickerComment' }
 				return ret
 			end,
+			win = {
+				input = {
+					keys = {
+						['<c-d>'] = { 'delete_anchor', mode = { 'n', 'i' } },
+					},
+				},
+			},
+			actions = {
+				delete_anchor = function(picker)
+					for _, selected in ipairs(picker:selected { fallback = true }) do
+						self.manager:remove_anchor(selected.anchor_index)
+					end
+					picker:find()
+				end,
+			},
 		}
+	end)
+
+	map('<leader>bf', function()
+		self.manager:move_cursor_to_anchor()
 	end)
 end
 
@@ -68,7 +88,6 @@ end
 
 function Plugin:setup()
 	self:create_manager()
-	self:add_keymaps()
 
 	vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
 		group = self.group,
@@ -88,6 +107,8 @@ function Plugin:setup()
 			self.current_buf_anchor_index = self.manager:get_buf_anchor_index(event.file)
 		end,
 	})
+
+	self:add_keymaps()
 end
 
 return Plugin
