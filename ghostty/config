@@ -1,30 +1,32 @@
 adjust-cell-width = 0
 adjust-font-baseline = 0
-adjust-cell-height = 2
+adjust-cell-height = 1
 adjust-cursor-height = 0
 
-#font-size = 11
+#font-size = 11.1
 #font-family = JetBrainsMono Nerd Font
-#font-style = Bold
+#font-style = Regular
 #font-family-bold = JetBrainsMono Nerd Font
-#font-style-bold = Bold
+#font-style-bold = Regular
 #font-family-italic = JetBrainsMono Nerd Font
-#font-style-italic = Bold
+#font-style-italic = Regular
 #font-family-bold-italic = JetBrainsMono Nerd Font
-#font-style-bold-italic = Bold
+#font-style-bold-italic = Regular
+#font-feature = ss01,cv03,cv04
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     mononoki     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-#font-size = 11.5
-#font-thicken-strength = 190
-#font-family = Mononoki Nerd Font
-#font-style = Regular
-#font-family-bold = Mononoki Nerd Font
-#font-style-bold = Regular
-#font-family-italic = Mononoki Nerd Font
-#font-style-italic = Regular
-#font-family-bold-italic = Mononoki Nerd Font
-#font-style-bold-italic = Regular
+ font-size = 11.5
+ font-thicken-strength = 190
+ font-family = Mononoki Nerd Font
+ font-style = Regular
+ font-family-bold = Mononoki Nerd Font
+ font-style-bold = Regular
+ font-family-italic = Mononoki Nerd Font
+ font-style-italic = Regular
+ font-family-bold-italic = Mononoki Nerd Font
+ font-style-bold-italic = Regular
+ adjust-cell-height = 3
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     agave     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -57,7 +59,7 @@ adjust-cursor-height = 0
 
 #font-size = 12.5
 #font-thicken-strength = 190
-#font-feature = +calt
+#font-feature = cv41=14,cv54=13,cv42=1,VSAG=3,VSAH=1,cv59=3
 #font-family = Iosevka Nerd Font
 #font-style = Regular
 #font-family-bold = Iosevka Nerd Font
@@ -66,7 +68,7 @@ adjust-cursor-height = 0
 #font-style-italic = Regular
 #font-family-bold-italic = Iosevka Nerd Font
 #font-style-bold-italic = Regular
-#adjust-cell-height = -2
+#adjust-cell-height = 0
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     hermit     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
@@ -115,17 +117,32 @@ adjust-cursor-height = 0
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     maple     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
- font-size = 11
- font-thicken-strength = 190
- font-feature = cv01,cv02,cv35,cv04,calt
- font-family = Maple Mono NF
- font-style = Medium
- font-family-bold = Maple Mono NF
- font-style-bold = Medium
- font-family-italic = Maple Mono NF
- font-style-italic = Medium
- font-family-bold-italic = Maple Mono NF
- font-style-bold-italic = Medium
+#font-size = 11
+#font-thicken-strength = 190
+#font-feature = cv01,cv02,cv35,cv04,calt
+#font-family = Maple Mono NF
+#font-style = Medium
+#font-family-bold = Maple Mono NF
+#font-style-bold = Medium
+#font-family-italic = Maple Mono NF
+#font-style-italic = Medium
+#font-family-bold-italic = Maple Mono NF
+#font-style-bold-italic = Medium
+
+# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     victor     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+#font-size = 12
+#font-thicken-strength = 190
+#font-family = VictorMono Nerd Font Mono
+#font-style = SemiBold
+#font-family-bold = VictorMono Nerd Font Mono
+#font-style-bold = SemiBold
+#font-family-italic = VictorMono Nerd Font Mono
+#font-style-italic = SemiBold
+#font-family-bold-italic = VictorMono Nerd Font Mono
+#font-style-bold-italic = SemiBold
+#adjust-cell-width = 1
+#adjust-cell-height = 0
 
 font-thicken = true
 # alpha-blending = native

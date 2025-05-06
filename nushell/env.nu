@@ -32,6 +32,7 @@ $env.PATH ++= [
     '/usr/local/go/bin'
     '/usr/.local/bin'
     '/usr/local/bin'
+    '/usr/sbin'
     $'($HOME)/.config/carapace/bin'
     $'($HOME)/go/bin'
     $'($HOME)/.cargo/bin'

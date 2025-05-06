@@ -24,7 +24,7 @@ vim.api.nvim_create_autocmd({ 'BufReadPost' }, {
 vim.api.nvim_create_autocmd('TextYankPost', {
 	group = kaiphat.utils.create_augroup 'text_yank_post',
 	callback = function()
-		vim.highlight.on_yank { timeout = 700 }
+		vim.highlight.on_yank { timeout = 100 }
 	end,
 })
 

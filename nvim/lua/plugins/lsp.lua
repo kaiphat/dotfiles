@@ -96,12 +96,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 		map('n', 'go', function()
 			vim.cmd 'vs'
-			vim.lsp.buf.definition {
-				reuse_win = false,
-			}
-			vim.schedule(function()
-				vim.api.nvim_input 'zz'
-			end)
+			Snacks.picker.lsp_definitions()
 		end)
 
 		map('n', 'gs', function()

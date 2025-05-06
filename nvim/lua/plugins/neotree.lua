@@ -1,20 +1,17 @@
-local M = {}
-
-vim.g.neo_tree_remove_legacy_commands = 1
-
-M.root_path = kaiphat.utils.get_full_path()
+local root_path = kaiphat.utils.get_full_path()
 
 return {
 	'nvim-neo-tree/neo-tree.nvim',
 	branch = 'v3.x',
 	dependencies = {
+		'nvim-lua/plenary.nvim',
 		'MunifTanjim/nui.nvim',
 	},
-	lazy = false,
+	lazy = true,
 	enabled = true,
 	keys = {
 		{
-			'<leader>o',
+			'<leader>e',
 			function()
 				require('neo-tree.command').execute {
 					source = 'filesystem',
@@ -24,15 +21,15 @@ return {
 				}
 			end,
 		},
-		{
-			'<leader>O',
-			function()
-				require('neo-tree.command').execute {
-					source = 'filesystem',
-					dir = M.root_path,
-				}
-			end,
-		},
+		-- {
+		-- 	'<leader>O',
+		-- 	function()
+		-- 		require('neo-tree.command').execute {
+		-- 			source = 'filesystem',
+		-- 			dir = root_path,
+		-- 		}
+		-- 	end,
+		-- },
 		{
 			'<leader><C-o>',
 			function()
@@ -103,12 +100,10 @@ return {
 						local node = state.tree:get_node()
 
 						if node.type == 'directory' then
-							fs.toggle_directory(state, node)
-
-							vim.defer_fn(function()
+							fs.toggle_directory(state, node, nil, nil, nil, function()
 								local ids = node:get_child_ids()
 								ui.focus_node(state, ids[1])
-							end, 60)
+							end)
 						else
 							fs_cmds.open(state)
 						end
@@ -141,6 +136,7 @@ return {
 					['c'] = 'copy',
 					['m'] = 'move',
 					['q'] = 'close_window',
+					['<C-e>'] = 'close_window',
 					['<C-c>'] = 'close_window',
 					['R'] = 'refresh',
 					['?'] = 'show_help',

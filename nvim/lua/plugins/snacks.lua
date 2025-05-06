@@ -25,7 +25,7 @@ local grep_exclude = kaiphat.utils.concat(grep_always_excludes, {
 
 return {
 	'folke/snacks.nvim',
-	priority = 1000,
+	priority = 2000,
 	lazy = false,
 	event = 'VeryLazy',
 	enabled = true,
@@ -283,16 +283,16 @@ return {
 				}
 			end,
 		},
-		{
-			'<leader>e',
-			function()
-				Snacks.picker.explorer {
-					cwd = kaiphat.utils.get_current_dir(),
-					follow_file = true,
-					matcher = {},
-				}
-			end,
-		},
+		-- {
+		-- 	'<leader>e',
+		-- 	function()
+		-- 		Snacks.picker.explorer {
+		-- 			cwd = kaiphat.utils.get_current_dir(),
+		-- 			follow_file = true,
+		-- 			matcher = {},
+		-- 		}
+		-- 	end,
+		-- },
 	},
 	opts = {
 		lazygit = {

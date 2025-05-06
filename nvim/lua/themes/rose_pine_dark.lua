@@ -38,7 +38,7 @@ return {
 				LocalHighlight = { underline = false, bg = 'foam', blend = 30 },
 				HopNextKey1 = { fg = 'love' },
 				HopNextKey2 = { fg = 'pine' },
-				Keyword = { bold = true, italic = true },
+				Keyword = { bold = false, italic = false },
 				VertSplit = { fg = '#405879' },
 				TreesitterContext = { link = 'Visual' },
 				TreesitterContextSeparator = { fg = 'rose' },

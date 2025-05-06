@@ -114,6 +114,7 @@ end
 return {
 	'feline-nvim/feline.nvim',
 	priority = 900,
+	event = 'VeryLazy',
 	enabled = true,
 	config = function()
 		local colors = get_colors()

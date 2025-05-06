@@ -77,7 +77,7 @@ function Plugin:add_keymaps()
 		}
 	end)
 
-	map('<leader>bf', function()
+	map([['']], function()
 		self.manager:move_cursor_to_anchor()
 	end)
 end
