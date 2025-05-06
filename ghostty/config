@@ -174,3 +174,4 @@ background-blur = false
 window-vsync = true
 
 auto-update-channel = tip
+initial-command = /bin/bash -l -c  "/opt/homebrew/bin/nu -l -i"

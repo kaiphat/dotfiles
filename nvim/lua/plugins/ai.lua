@@ -11,7 +11,7 @@ return {
 		config = function()
 			require('copilot').setup {
 				copilot_node_command = vim.fn.expand '$HOME'
-					.. '/.local/state/fnm_multishells/88464_1745309764095/bin/node', -- Node.js version must be > 20
+					.. '/.local/state/fnm_multishells/21008_1746545824329/bin/node', -- Node.js version must be > 20
 				panel = {
 					enabled = false,
 					keymap = {

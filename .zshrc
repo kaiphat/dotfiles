@@ -16,9 +16,6 @@ plugins=(git zsh-autosuggestions sudo web-search copydir history jsontools docke
 ZSH_HIGHLIGHT_STYLES[path]=none
 ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 
-source $ZSH/oh-my-zsh.sh
-source /home/ilya/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 SPACESHIP_EXEC_TIME_SHOW=false
 SPACESHIP_PROMPT_DEFAULT_PREFIX=' '
 SPACESHIP_PROMPT_ORDER=(
@@ -54,6 +51,7 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:/opt/homebrew/bin
 export PATH="$PATH:/opt/ReactNativeDebugger"
 
 # brew

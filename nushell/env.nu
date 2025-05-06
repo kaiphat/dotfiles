@@ -19,7 +19,7 @@ $env.TERMINAL = 'wezterm'
 $env.NODE_OPTIONS = '--max-old-space-size=4096'
 $env.SXHKD_SHELL = 'nu'
 $env.SHELL = 'nu'
-$env.JAVA_HOME = (/usr/libexec/java_home -v 1.7)
+$env.JAVA_HOME = '/opt/homebrew/opt/openjdk'
 $env.MANPAGER = 'nvim +Man! -c "set nowrap modifiable noreadonly buftype=nofile"'
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -28,11 +28,12 @@ $env.MANPAGER = 'nvim +Man! -c "set nowrap modifiable noreadonly buftype=nofile"
 
 let HOME = $env.HOME
 $env.PATH ++= [
-    '/opt/homebrew/bin'
-    '/usr/local/go/bin'
-    '/usr/.local/bin'
-    '/usr/local/bin'
-    '/usr/sbin'
+    /opt/homebrew/bin
+    /usr/local/go/bin
+    /usr/.local/bin
+    /usr/local/bin
+    /usr/sbin
+    /opt/homebrew/opt/openjdk/bin
     $'($HOME)/.config/carapace/bin'
     $'($HOME)/go/bin'
     $'($HOME)/.cargo/bin'
