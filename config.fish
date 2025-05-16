@@ -19,7 +19,7 @@ set -U ignoreeof true
 set -U SXHKD_SHELL sh
 set -U TERMINFO /usr/share/terminfo
 set -gx CPPFLAGS "-I/opt/homebrew/opt/openjdk@17/include"
-set -x JAVA_HOME (/usr/libexec/java_home -v 1.7)
+# set -x JAVA_HOME (/usr/libexec/java_home -v 1.7)
 
 bind \cd delete-char
 bind \cw backward-kill-word

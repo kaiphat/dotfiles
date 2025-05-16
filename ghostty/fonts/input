@@ -1,0 +1,11 @@
+font-size = 11
+font-thicken-strength = 190
+font-feature = +calt
+font-family = InputMono Nerd Font
+font-style = Regular
+font-family-bold = InputMono Nerd Font
+font-style-bold = Regular
+font-family-italic = InputMono Nerd Font
+font-style-italic = Regular
+font-family-bold-italic = InputMono Nerd Font
+font-style-bold-italic = Regular

@@ -48,17 +48,17 @@ return {
 	fonts = {
 		jet_brains = {
 			name = 'JetBrains Mono',
-			weight = weights.M,
+			weight = weights.R,
 			italic = false,
-			font_size = 11.2,
+			font_size = 11.5,
 			cell_width = 1,
 			line_height = 1,
 		},
 		victor = {
 			name = 'VictorMono Nerd Font',
 			italic = true,
-			weight = weights.M,
-			font_size = 11,
+			weight = weights.B,
+			font_size = 11.5,
 			cell_width = 1.1,
 			line_height = 1,
 			harfbuzz_features = {
@@ -246,7 +246,7 @@ return {
 			name = 'Mononoki Nerd Font',
 			italic = false,
 			weight = weights.B,
-			font_size = 12,
+			font_size = 11.9,
 			cell_width = 1,
 			line_height = 1.15,
 			scale = 0.7,

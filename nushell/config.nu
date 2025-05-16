@@ -13,3 +13,4 @@ use change_theme.nu
 use private.nu *
 use fnm.nu
 use prompt.nu
+source $"($nu.home-path)/.cargo/env.nu"

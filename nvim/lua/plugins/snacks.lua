@@ -391,7 +391,7 @@ return {
 		},
 
 		indent = {
-			enabled = false,
+			enabled = true,
 			indent = {
 				enabled = true,
 				char = kaiphat.constants.icons.VERTICAL_LINE_1,

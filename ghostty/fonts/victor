@@ -1,0 +1,12 @@
+font-size = 11
+font-family = VictorMono Nerd Font Mono
+font-style = Medium
+font-family-bold = VictorMono Nerd Font Mono
+font-style-bold = Medium
+font-family-italic = VictorMono Nerd Font Mono
+font-style-italic = Medium
+font-family-bold-italic = VictorMono Nerd Font Mono
+font-style-bold-italic = Medium
+adjust-cell-width = 1
+adjust-cell-height = 1
+font-feature = ss06,ss07,ss08

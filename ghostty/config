@@ -1,158 +1,9 @@
-adjust-cell-width = 0
-adjust-font-baseline = 0
-adjust-cell-height = 1
-adjust-cursor-height = 0
-
-#font-size = 11.1
-#font-family = JetBrainsMono Nerd Font
-#font-style = Regular
-#font-family-bold = JetBrainsMono Nerd Font
-#font-style-bold = Regular
-#font-family-italic = JetBrainsMono Nerd Font
-#font-style-italic = Regular
-#font-family-bold-italic = JetBrainsMono Nerd Font
-#font-style-bold-italic = Regular
-#font-feature = ss01,cv03,cv04
-
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     mononoki     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
- font-size = 11.5
- font-thicken-strength = 190
- font-family = Mononoki Nerd Font
- font-style = Regular
- font-family-bold = Mononoki Nerd Font
- font-style-bold = Regular
- font-family-italic = Mononoki Nerd Font
- font-style-italic = Regular
- font-family-bold-italic = Mononoki Nerd Font
- font-style-bold-italic = Regular
- adjust-cell-height = 3
-
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     agave     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-# font-size = 13
-# font-thicken-strength = 190
-# font-family = Agave
-# font-style = Regular
-# font-family-bold = Agave
-# font-style-bold = Regular
-# font-family-italic = Agave
-# font-style-italic = Regular
-# font-family-bold-italic = Agave
-# font-style-bold-italic = Regular
-
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     monaspace radon     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-#font-size = 11.5
-#font-thicken-strength = 20
-#font-feature = +calt
-#font-family = Monaspace Radon
-#font-style = Regular
-#font-family-bold = Monaspace Radon
-#font-style-bold = Regular
-#font-family-italic = Monaspace Radon
-#font-style-italic = Regular
-#font-family-bold-italic = Monaspace Radon
-#font-style-bold-italic = Regular
-
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     iosevka     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-#font-size = 12.5
-#font-thicken-strength = 190
-#font-feature = cv41=14,cv54=13,cv42=1,VSAG=3,VSAH=1,cv59=3
-#font-family = Iosevka Nerd Font
-#font-style = Regular
-#font-family-bold = Iosevka Nerd Font
-#font-style-bold = Regular
-#font-family-italic = Iosevka Nerd Font
-#font-style-italic = Regular
-#font-family-bold-italic = Iosevka Nerd Font
-#font-style-bold-italic = Regular
-#adjust-cell-height = 0
-
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     hermit     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-#font-size = 11
-#font-thicken-strength = 190
-#font-feature = +calt
-#font-family = Hermit
-#font-style = Regular
-#font-family-bold = Hermit
-#font-style-bold = Regular
-#font-family-italic = Hermit
-#font-style-italic = Regular
-#font-family-bold-italic = Hermit
-#font-style-bold-italic = Regular
-#adjust-cell-height = -2
-
-
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     0xproto     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-#font-size = 11
-#font-thicken-strength = 220
-#font-feature = +calt
-#font-family = 0xProto Nerd Font
-#font-style = Regular
-#font-family-bold = 0xProto Nerd Font
-#font-style-bold = Regular
-#font-family-italic = 0xProto Nerd Font
-#font-style-italic = Regular
-#font-family-bold-italic = 0xProto Nerd Font
-#font-style-bold-italic = Regular
-
-
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     input     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-#font-size = 11
-#font-thicken-strength = 190
-#font-feature = +calt
-#font-family = InputMono Nerd Font
-#font-style = Regular
-#font-family-bold = InputMono Nerd Font
-#font-style-bold = Regular
-#font-family-italic = InputMono Nerd Font
-#font-style-italic = Regular
-#font-family-bold-italic = InputMono Nerd Font
-#font-style-bold-italic = Regular
-
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     maple     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-#font-size = 11
-#font-thicken-strength = 190
-#font-feature = cv01,cv02,cv35,cv04,calt
-#font-family = Maple Mono NF
-#font-style = Medium
-#font-family-bold = Maple Mono NF
-#font-style-bold = Medium
-#font-family-italic = Maple Mono NF
-#font-style-italic = Medium
-#font-family-bold-italic = Maple Mono NF
-#font-style-bold-italic = Medium
-
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     victor     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-#font-size = 12
-#font-thicken-strength = 190
-#font-family = VictorMono Nerd Font Mono
-#font-style = SemiBold
-#font-family-bold = VictorMono Nerd Font Mono
-#font-style-bold = SemiBold
-#font-family-italic = VictorMono Nerd Font Mono
-#font-style-italic = SemiBold
-#font-family-bold-italic = VictorMono Nerd Font Mono
-#font-style-bold-italic = SemiBold
-#adjust-cell-width = 1
-#adjust-cell-height = 0
+config-file = ./fonts/hermit
+config-file = ./themes/rose_pine_dark
 
 font-thicken = true
-# alpha-blending = native
-
-theme = rose-pine-moon
-
-#theme = rose-pine-dawn
-#font-thicken-strength = 50
-
 fullscreen = true
+
 macos-non-native-fullscreen = false
 macos-option-as-alt = true
 
@@ -161,17 +12,19 @@ cursor-color = #5DE4C7
 cursor-text = #112233
 cursor-style-blink = false
 
+window-vsync = true
 window-padding-x = 10,10
 window-padding-y = 10,2
 
 confirm-close-surface = false
 mouse-hide-while-typing = true
-shell-integration = none
 
-keybind = cmd+shift+,=reload_config
 background-opacity = 1
 background-blur = false
-window-vsync = true
+
+shell-integration = none
+initial-command = /bin/bash -l -c  "/opt/homebrew/bin/nu -l -i"
 
 auto-update-channel = tip
-initial-command = /bin/bash -l -c  "/opt/homebrew/bin/nu -l -i"
+
+keybind = cmd+shift+,=reload_config

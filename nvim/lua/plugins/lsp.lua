@@ -1,4 +1,3 @@
--- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     diagnostic     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 vim.diagnostic.config {
 	float = {
 		focusable = true,
@@ -13,7 +12,6 @@ vim.diagnostic.config {
 	update_in_insert = false,
 }
 
--- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     lsp symbols     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 for _, hint in ipairs { 'Error', 'Information', 'Hint', 'Warning' } do
 	vim.fn.sign_define(
 		'LspDiagnosticsSign' .. hint,
@@ -21,7 +19,6 @@ for _, hint in ipairs { 'Error', 'Information', 'Hint', 'Warning' } do
 	)
 end
 
--- ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     keymaps     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 vim.api.nvim_create_autocmd('LspAttach', {
 	group = kaiphat.utils.create_augroup 'lsp_attach',
 	callback = function(event)
@@ -115,33 +112,56 @@ vim.api.nvim_create_autocmd('LspAttach', {
 	end,
 })
 
-kaiphat.setup_lsp_server = function(table)
-	local lsp = require 'lspconfig'
-	local capabilities = require('blink.cmp').get_lsp_capabilities()
-
-	local opts = {
-		capabilities = capabilities,
-		flags = {
-			debounce_text_changes = 150,
-		},
-		on_attach = function(client, bufnr)
-			-- if vim.lsp.handlers['textDocument/inlayHint'] then
-			-- 	vim.lsp.inlay_hint.enable(true)
-			-- end
-			if table.on_attach_hook then
-				table.on_attach_hook(client, bufnr)
-			end
-		end,
-	}
-
-	if table.opts then
-		opts = vim.tbl_extend('force', opts, table.opts)
-	end
-
-	lsp[table.name].setup(opts)
-end
-
 return {
+	{
+		'mason-org/mason.nvim',
+		event = 'BufReadPre',
+		cmd = { 'Mason' },
+		config = function()
+			require('mason').setup {
+				ui = {
+					border = 'rounded',
+					width = 0.7,
+				},
+			}
+		end,
+	},
+
+	{
+		'WhoIsSethDaniel/mason-tool-installer.nvim',
+		cmd = { 'MasonToolsInstall' },
+		config = function()
+			require('mason-tool-installer').setup {
+				auto_update = false,
+				run_on_start = false,
+				ensure_installed = {
+					-- ls
+					'lua-language-server',
+					'prettierd',
+					'prettier',
+					'rust-analyzer',
+					-- 'typescript-language-server',
+					'json-lsp',
+					'css-lsp',
+					'html-lsp',
+					'json-lsp',
+					'sql-formatter',
+					'emmet-language-server',
+					'stylua',
+					'python-lsp-server',
+					'eslint-lsp',
+					'marksman',
+					'vtsls',
+					'llm-ls',
+					'jdtls',
+
+					-- dap
+					'js-debug-adapter',
+				},
+			}
+		end,
+	},
+
 	{
 		'neovim/nvim-lspconfig',
 		event = 'BufReadPre',
@@ -150,16 +170,26 @@ return {
 			'yioneko/nvim-vtsls',
 			'saghen/blink.cmp',
 		},
-		init_options = {
-			userLanguages = {
-				eelixir = 'html-eex',
-				eruby = 'erb',
-				rust = 'html',
-			},
-		},
 		config = function()
-			for _, file in ipairs(vim.fn.readdir(vim.fn.stdpath 'config' .. '/lua/lsp')) do
-				require('lsp.' .. file:gsub('%.lua$', ''))
+			vim.lsp.config('*', {
+				capabilities = require('blink.cmp').get_lsp_capabilities {
+					textDocument = {
+						semanticTokens = {
+							multilineTokenSupport = true,
+						},
+					},
+				},
+				root_markers = { '.git' },
+			})
+
+			for _, server in ipairs {
+				'lua_ls',
+				'nushell',
+				'vtsls',
+				'eslint',
+				'rust_analyzer',
+			} do
+				vim.lsp.enable(server)
 			end
 		end,
 	},

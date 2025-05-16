@@ -3,14 +3,20 @@ local font_config = require 'wezterm.fonts'
 local theme = require 'wezterm.themes.rose_pine_dark'
 local config = require 'wezterm.config'
 
-config.set(font_config.build_font(font_config.fonts.jet_brains))
+config.set(font_config.build_font(font_config.fonts.victor))
 config.set(theme)
 config.set {
+	window_content_alignment = {
+		horizontal = 'Center',
+		vertical = 'Center',
+	},
+	default_prog = { '/opt/homebrew/bin/nu', '-l', '-i' },
 	automatically_reload_config = true,
 	enable_tab_bar = false,
 	enable_scroll_bar = false,
 	scrollback_lines = 1000,
 	max_fps = 240,
+	window_decorations = 'NONE',
 	animation_fps = 240,
 	cursor_blink_rate = 0,
 	default_cursor_style = 'SteadyBlock',
@@ -24,7 +30,7 @@ config.set {
 		left = '2cell',
 		right = '2cell',
 		top = '0.5cell',
-		bottom = '0cell',
+		bottom = '0.5cell',
 	},
 	mouse_bindings = {
 		{

@@ -10,7 +10,7 @@ local TAB_SIZE = 4
 -- o.winborder = 'rounded'
 
 -- has problem with nushell. Doesn't support < operator
-o.shell = 'fish'
+o.shell = 'bash'
 o.jumpoptions = 'stack'
 o.smoothscroll = true
 o.guicursor = 'a:blinkon1,i-ci-ve:ver25-blinkon1'

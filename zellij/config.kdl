@@ -4,7 +4,7 @@ theme "rose-pine"
 
 on_force_close     "quit"
 simplified_ui      true
-default_shell      "fish"
+default_shell      "nu"
 pane_frames        false
 #default_layout     "compact"
 mouse_mode         true

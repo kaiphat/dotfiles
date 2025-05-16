@@ -1,3 +1,5 @@
+-- todo: lazy file creation
+
 local Path = require 'plenary.path'
 
 local Manager = {}
