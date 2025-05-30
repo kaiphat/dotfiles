@@ -1,4 +1,4 @@
-config-file = ./fonts/hermit
+config-file = ./fonts/mononoki
 config-file = ./themes/rose_pine_dark
 
 font-thicken = true
@@ -7,14 +7,14 @@ fullscreen = true
 macos-non-native-fullscreen = false
 macos-option-as-alt = true
 
+cursor-style-blink = false
 cursor-style = block
 cursor-color = #5DE4C7
 cursor-text = #112233
-cursor-style-blink = false
 
 window-vsync = true
 window-padding-x = 10,10
-window-padding-y = 10,2
+window-padding-y = 6,2
 
 confirm-close-surface = false
 mouse-hide-while-typing = true

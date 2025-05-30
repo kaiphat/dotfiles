@@ -21,6 +21,7 @@ local themes = {
 	darkvoid_dark = 'darkvoid_dark',
 	solarized_dark = 'solarized_dark',
 	solarized_light = 'solarized_light',
+	ash = 'ash',
 }
 
 vim.o.background = 'dark'

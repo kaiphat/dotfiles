@@ -7,7 +7,7 @@ return {
 		'zbirenbaum/copilot.lua',
 		cmd = 'Copilot',
 		event = 'InsertEnter',
-		enabled = false,
+		enabled = true,
 		config = function()
 			require('copilot').setup {
 				copilot_node_command = vim.fn.expand '$HOME'

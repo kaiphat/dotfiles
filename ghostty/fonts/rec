@@ -1,0 +1,19 @@
+font-size = 11
+
+font-thicken-strength = 190
+font-family = RecMonoCasual Nerd Font Mono
+font-style = Regular
+font-family-bold = RecMonoCasual Nerd Font Mono
+font-style-bold = Regular
+font-family-italic = RecMonoCasual Nerd Font Mono
+font-style-italic = Italic
+font-family-bold-italic = RecMonoCasual Nerd Font Mono
+font-style-bold-italic = Italic
+
+adjust-cell-width = 0
+adjust-font-baseline = 0
+adjust-cell-height = 4
+adjust-cursor-height = 0
+
+#font-feature = ss01,ss20
+

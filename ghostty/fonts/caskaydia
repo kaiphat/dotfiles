@@ -1,0 +1,19 @@
+font-size = 11
+
+font-thicken-strength = 190
+font-family = CaskaydiaCove Nerd Font
+font-style = SemiLight
+font-family-bold = CaskaydiaCove Nerd Font
+font-style-bold = SemiLight
+font-family-italic = CaskaydiaCove Nerd Font
+font-style-italic = SemiLight Italic
+font-family-bold-italic = CaskaydiaCove Nerd Font
+font-style-bold-italic = SemiLight Italic
+
+adjust-cell-width = 0
+adjust-font-baseline = 0
+adjust-cell-height = 3
+adjust-cursor-height = 0
+
+font-feature = ss01,ss20
+

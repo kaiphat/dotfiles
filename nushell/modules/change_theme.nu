@@ -38,6 +38,7 @@ export def main [] {
     sd "themes/[a-zA-Z_]+.conf" $"themes/($theme).conf" ~/dotfiles/kitty/kitty.conf
     sd "themes/[a-zA-Z_]+.toml" $"themes/($theme).toml" ~/dotfiles/alacritty/alacritty.toml
     sd "wezterm.themes.[a-zA-Z_]+" $"wezterm.themes.($theme)" ~/dotfiles/wezterm/wezterm.lua
+    sd "themes/[a-zA-Z_]+" $"themes/($theme)" ~/dotfiles/ghostty/config
 
     replace ~/dotfiles/nvim/lua/plugins/themes.lua { |$it|
         $it 

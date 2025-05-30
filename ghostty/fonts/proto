@@ -1,11 +1,17 @@
 font-size = 11
-font-thicken-strength = 220
+
+font-thicken-strength = 50
 font-feature = +calt
 font-family = 0xProto Nerd Font
 font-style = Regular
 font-family-bold = 0xProto Nerd Font
 font-style-bold = Regular
 font-family-italic = 0xProto Nerd Font
-font-style-italic = Regular
+font-style-italic = Italic
 font-family-bold-italic = 0xProto Nerd Font
-font-style-bold-italic = Regular
+font-style-bold-italic = Italic
+
+adjust-cell-width = 0
+adjust-font-baseline = 0
+adjust-cell-height = 3
+adjust-cursor-height = 0

@@ -3,7 +3,10 @@ return {
 		'MeanderingProgrammer/markdown.nvim',
 		ft = 'markdown',
 		name = 'render-markdown',
-		dependencies = { 'nvim-treesitter/nvim-treesitter' },
+		dependencies = {
+			'nvim-treesitter/nvim-treesitter',
+			'echasnovski/mini.icons',
+		},
 		enabled = true,
 		config = function()
 			require('render-markdown').setup {
@@ -14,9 +17,15 @@ return {
 				code = {
 					style = 'normal',
 					width = 'full',
+					border = 'thick',
 				},
 				bullet = {
 					icons = { '•', '◦', '■', '◇ ' },
+				},
+				completions = {
+					blink = {
+						enabled = true,
+					},
 				},
 			}
 		end,

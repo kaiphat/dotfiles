@@ -7,6 +7,10 @@ font-family-italic = VictorMono Nerd Font Mono
 font-style-italic = Medium
 font-family-bold-italic = VictorMono Nerd Font Mono
 font-style-bold-italic = Medium
+
 adjust-cell-width = 1
-adjust-cell-height = 1
+adjust-font-baseline = 0
+adjust-cell-height = 4
+adjust-cursor-height = 0
+
 font-feature = ss06,ss07,ss08

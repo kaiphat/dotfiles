@@ -1,7 +1,13 @@
 return {
 	{
 		'sindrets/diffview.nvim',
-		cmd = { 'DiffviewOpen' },
+		keys = {
+			{ '<leader>gd', '<cmd>DiffviewOpen<cr>' },
+			{ '<leader>gp', '<cmd>DiffviewOpen HEAD~1<cr>' },
+			{ '<leader>gc', '<cmd>DiffviewClose<cr>' },
+			{ '<leader>gf', '<cmd>DiffviewFileHistory %<cr>' },
+			{ '<leader>gm', '<cmd>DiffviewOpen origin/master...HEAD --imply-local<cr>' },
+		},
 		config = function()
 			require('diffview').setup {
 				hooks = {

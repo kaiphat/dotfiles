@@ -150,20 +150,20 @@ local function substitute()
 	local width = vim.api.nvim_win_get_width(0)
 	local height = vim.api.nvim_win_get_height(0)
 
-	vim.keymap.set('n', 'q', function()
+	vim.keymap.set('n', '<Enter>', function()
 		vim.cmd 'q'
 	end, { buffer = bufnr })
 
-	local clear_enter = false
+	local no_action = false
 	vim.keymap.set('n', '<esc>', function()
-		clear_enter = true
+		no_action = true
 		vim.cmd 'q'
 	end, { buffer = bufnr })
 
 	vim.api.nvim_create_autocmd({ 'BufWinLeave' }, {
 		buffer = bufnr,
 		callback = function()
-			if clear_enter then
+			if no_action then
 				return
 			end
 			local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
@@ -190,7 +190,7 @@ local function substitute()
 		style = 'minimal',
 		border = 'rounded',
 		title = 'Replace',
-		title_pos = 'center',
+		title_pos = 'left',
 	})
 end
 map('n', '<leader>uw', function()
@@ -203,6 +203,9 @@ map('v', '<leader>uw', function()
 	substitute()
 end)
 
+map('n', 'zj', function()
+	vim.cmd.normal 'za'
+end)
 map('n', 'zf', function()
 	vim.cmd.normal 'zx'
 	vim.schedule(function()

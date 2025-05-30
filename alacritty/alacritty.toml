@@ -1,6 +1,6 @@
 [general]
 import = [
-    '~/dotfiles/alacritty/fonts/input.toml',
+    '~/dotfiles/alacritty/fonts/mononoki.toml',
     '~/dotfiles/alacritty/themes/rose_pine_dark.toml',
 ]
 
@@ -34,8 +34,10 @@ startup_mode = "SimpleFullscreen"
 
 [window.padding]
 x = 10
-y = 4
+y = 3
 
+[terminal]
+shell = { program = "/bin/bash", args = ["-l", "-c", "/opt/homebrew/bin/nu -l -i"] }
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     keymaps     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 [[keyboard.bindings]]

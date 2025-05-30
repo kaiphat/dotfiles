@@ -7,13 +7,16 @@ g.markdown_folding = 1
 
 local TAB_SIZE = 4
 
--- o.winborder = 'rounded'
+-- enable new messages ui
+require('vim._extui').enable {}
+
+o.winborder = 'rounded'
 
 -- has problem with nushell. Doesn't support < operator
 o.shell = 'bash'
 o.jumpoptions = 'stack'
 o.smoothscroll = true
-o.guicursor = 'a:blinkon1,i-ci-ve:ver25-blinkon1'
+--o.guicursor = 'a:blinkon1,i-ci-ve:ver25-blinkon1'
 o.selection = 'old'
 o.tabstop = TAB_SIZE
 o.softtabstop = TAB_SIZE
@@ -135,6 +138,17 @@ o.foldnestmax = 5
 o.foldlevel = 99
 o.foldlevelstart = 99
 o.foldopen = 'hor,mark,percent,quickfix,search,tag,undo'
+
+vim.api.nvim_create_autocmd('LspAttach', {
+	group = kaiphat.utils.create_augroup 'lsp_fold',
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		if client and client:supports_method 'textDocument/foldingRange' then
+			local win = vim.api.nvim_get_current_win()
+			vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+		end
+	end,
+})
 
 _G.get_foldtext = function()
 	local last_line = table.concat(vim.fn.getbufline(vim.api.nvim_get_current_buf(), vim.v.foldend))

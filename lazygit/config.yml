@@ -1,6 +1,6 @@
 gui:
   nerdFontsVersion: "3"
-  sidePanelWidth: 0.25
+  sidePanelWidth: 0.8
   commitLength:
     show: false
   showListFooter: false
@@ -22,9 +22,11 @@ git:
 promptToReturnFromSubprocess: false
 
 os:
-  editPreset: nvim
-  edit: nu ~/dotfiles/scripts/open-lazygit-in-neovim.nu {{filename}}
-  editAtLine: nu ~/dotfiles/scripts/open-lazygit-in-neovim.nu {{filename}} {{line}}
+  # editPreset: nvim
+  edit: "nu ~/dotfiles/scripts/open-lazygit-in-neovim.nu {{filename}}"
+  editAtLine: "nu ~/dotfiles/scripts/open-lazygit-in-neovim.nu {{filename}} {{line}}"
+  editAtLineAndWait: ""
+  editInTerminal: true
   # open isn't working for nvim, idk why, so just to use edit command in any case
   # open: nu ~/dotfiles/scripts/open-lazygit-in-neovim.nu {{filename}}
 
