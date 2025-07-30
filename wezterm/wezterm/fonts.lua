@@ -54,6 +54,14 @@ return {
 			cell_width = 1,
 			line_height = 1.2,
 		},
+		tx = {
+			name = 'TX-02',
+			weight = weights.B,
+			italic = false,
+			font_size = 12,
+			cell_width = 1,
+			line_height = 1,
+		},
 		victor = {
 			name = 'VictorMono Nerd Font',
 			italic = true,
@@ -313,8 +321,8 @@ return {
 		proto = {
 			name = '0xProto Nerd Font',
 			weight = weights.R,
-			font_size = 11.5,
-			line_height = 1,
+			font_size = 11,
+			line_height = 1.3,
 		},
 		radon = {
 			name = 'Monaspace Radon',

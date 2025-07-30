@@ -1,0 +1,15 @@
+font-size = 11
+font-family = Zed Mono
+font-style = Extended
+font-family-bold = Zed Mono
+font-style-bold = Extended
+font-family-italic = Zed Mono
+font-style-italic = Extended
+font-family-bold-italic = Zed Mono
+font-style-bold-italic = Extended
+
+adjust-cell-width = 0
+adjust-font-baseline = 0
+adjust-cell-height = 5
+adjust-cursor-height = 0
+

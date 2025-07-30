@@ -1,0 +1,17 @@
+font-size = 14
+
+font-family = Terminess Nerd Font
+font-style = Regular
+font-family-bold = Terminess Nerd Font
+font-style-bold = Regular
+font-family-italic = Terminess Nerd Font
+font-style-italic = Regular
+font-family-bold-italic = Terminess Nerd Font
+font-style-bold-italic = Regular
+
+adjust-cell-width = 0
+adjust-font-baseline = 0
+adjust-cell-height = 0
+adjust-cursor-height = 0
+
+font-thicken-strength = 190

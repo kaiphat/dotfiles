@@ -4,7 +4,7 @@
 
 $env.NU_LIB_DIRS = [
     ($nu.default-config-dir | path join 'modules')
-    ($env.HOME | path join 'notes/work')
+    ($env.HOME | path join 'secrets')
     ($nu.data-dir | path join 'completions') # default home for nushell completions
 ]
 $env.NU_PLUGIN_DIRS = [

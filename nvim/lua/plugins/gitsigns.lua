@@ -101,7 +101,7 @@ return {
 	},
 	config = function()
 		local gitsigns = require 'gitsigns'
-		local icon = icons.VERTICAL_LINE_SHORT_1
+		local icon = icons.VERTICAL_LINE_1
 
 		gitsigns.setup {
 			signs = {

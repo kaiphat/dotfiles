@@ -32,6 +32,7 @@
     chp  = checkout @{-1}
     chd  = checkout develop
     chb = checkout -b
+    cu   = !sh -c 'git add -A && git commit -m "update" --no-verify && git push origin HEAD'
     c   = commit -am
     ca  = commit --amend --no-edit
     s   = !sh -c 'git add -A && git stash'

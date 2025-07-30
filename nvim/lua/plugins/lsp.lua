@@ -188,6 +188,7 @@ return {
 				'vtsls',
 				'eslint',
 				'rust_analyzer',
+				-- 'denols',
 			} do
 				vim.lsp.enable(server)
 			end

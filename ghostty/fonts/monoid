@@ -1,16 +1,17 @@
 font-size = 10.5
 
-font-thicken-strength = 160
-font-family = Hurmit Nerd Font
+font-family = Monoid
 font-style = Regular
-font-family-bold = Hurmit Nerd Font
+font-family-bold = Monoid
 font-style-bold = Regular
-font-family-italic = Hurmit Nerd Font
+font-family-italic = Monoid
 font-style-italic = Regular
-font-family-bold-italic = Hurmit Nerd Font
+font-family-bold-italic = Monoid
 font-style-bold-italic = Regular
 
 adjust-cell-width = 0
 adjust-font-baseline = -1
 adjust-cell-height = 2
 adjust-cursor-height = 0
+
+font-thicken-strength = 250

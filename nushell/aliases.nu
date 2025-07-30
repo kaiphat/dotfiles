@@ -13,8 +13,8 @@ alias dcr = dc restart
 alias di = d inspect
 alias nvm = fnm
 alias yz = yazi
-alias tasks = nvim ~/notes/notes/tasks.md -c "set signcolumn=no"
-alias notes = nvim ~/notes/notes/notes.md -c "set signcolumn=no"
+alias tasks = nvim ~/notes/tasks.md -c "set signcolumn=no"
+alias notes = nvim ~/notes/notes.md -c "set signcolumn=no"
 alias nvim-pager = nvim +Man! -c "set nowrap modifiable noreadonly buftype=nofile"
 alias fzf = fzf --color="gutter:0,bg+:-1,fg+:#244566,pointer:#365987,current-bg:#393959,current-fg:#000022" --margin=0,2 --no-separator --info=inline-right --no-scrollbar --pointer='󱞩' --prompt='󰼛 ' --layout=reverse --bind ctrl-e:close
 
@@ -90,6 +90,7 @@ def docker-patch-nerd-fonts [] {
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     watson     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
 alias w = watson
+alias wr = watson report --day -c
 def ws [...args] {
     w stop | complete
     w start ...$args

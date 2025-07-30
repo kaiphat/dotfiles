@@ -41,8 +41,16 @@
         "prefix": "pall",
         "body": [
             "await Promise.all([",
-            "       ${1}",
+            "   ${1}",
             "])"
+        ]
+    },
+    "function": {
+        "prefix": "fu",
+        "body": [
+            "function () {",
+            "   ${1}",
+            "}"
         ]
     }
 }

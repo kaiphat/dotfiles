@@ -10,3 +10,9 @@
  (#match? @injection.content "local|redis")
  (#set! injection.language "lua")
 )
+
+(
+ (comment) @injection.content
+ (#match? @injection.content "^/\\*\\*")
+ (#set! injection.language "jsdoc")
+)

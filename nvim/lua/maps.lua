@@ -147,23 +147,29 @@ local function substitute()
 	local bufnr = vim.api.nvim_create_buf(false, true)
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { word })
 
-	local width = vim.api.nvim_win_get_width(0)
-	local height = vim.api.nvim_win_get_height(0)
+	vim.keymap.set({ 'n', 'i' }, '<Enter>', function()
+		local mode = vim.api.nvim_get_mode().mode
 
-	vim.keymap.set('n', '<Enter>', function()
-		vim.cmd 'q'
+		if mode == 'i' then
+			vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'n', false)
+		end
+
+		vim.schedule(function()
+			vim.cmd 'q'
+		end)
 	end, { buffer = bufnr })
 
-	local no_action = false
+	local noop = false
+
 	vim.keymap.set('n', '<esc>', function()
-		no_action = true
+		noop = true
 		vim.cmd 'q'
 	end, { buffer = bufnr })
 
 	vim.api.nvim_create_autocmd({ 'BufWinLeave' }, {
 		buffer = bufnr,
 		callback = function()
-			if no_action then
+			if noop then
 				return
 			end
 			local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
@@ -181,15 +187,16 @@ local function substitute()
 	})
 
 	local word_width = math.max(#word, 40)
+
 	vim.api.nvim_open_win(bufnr, true, {
-		relative = 'editor',
+		relative = 'win',
 		width = word_width,
 		height = 1,
-		col = math.ceil((width - word_width) / 2),
-		row = math.ceil(height / 2),
+		bufpos = { start_pos[2] - 1, start_pos[3] - 1 },
+		col = -1,
 		style = 'minimal',
 		border = 'rounded',
-		title = 'Replace',
+		title = '',
 		title_pos = 'left',
 	})
 end

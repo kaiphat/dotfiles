@@ -71,6 +71,16 @@ return {
 				Snacks.picker.files {
 					ignored = true,
 					hidden = true,
+					cwd = '~/secrets',
+				}
+			end,
+		},
+		{
+			'<leader>ec',
+			function()
+				Snacks.picker.files {
+					ignored = true,
+					hidden = true,
 					cwd = '~/dotfiles',
 				}
 			end,
@@ -228,26 +238,26 @@ return {
 			'<leader>fe',
 			function()
 				Snacks.picker.lsp_symbols {
-					tree = false,
-					workspace = true,
-					filter = {
-						default = {
-							'Variable',
-							'Class',
-							'Constructor',
-							'Enum',
-							'Field',
-							'Function',
-							'Interface',
-							'Method',
-							'Module',
-							'Namespace',
-							'Package',
-							'Property',
-							'Struct',
-							'Trait',
-						},
-					},
+					-- tree = false,
+					-- workspace = true,
+					-- filter = {
+					-- 	default = {
+					-- 		'Variable',
+					-- 		'Class',
+					-- 		'Constructor',
+					-- 		'Enum',
+					-- 		'Field',
+					-- 		'Function',
+					-- 		'Interface',
+					-- 		'Method',
+					-- 		'Module',
+					-- 		'Namespace',
+					-- 		'Package',
+					-- 		'Property',
+					-- 		'Struct',
+					-- 		'Trait',
+					-- 	},
+					-- },
 				}
 			end,
 		},
@@ -458,7 +468,7 @@ return {
 		},
 
 		indent = {
-			enabled = true,
+			enabled = false,
 			indent = {
 				enabled = true,
 				char = kaiphat.constants.icons.VERTICAL_LINE_1,

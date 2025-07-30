@@ -1,0 +1,17 @@
+font-size = 13
+
+font-family = Share Tech Mono
+font-style = Regular
+font-family-bold = Share Tech Mono
+font-style-bold = Regular
+font-family-italic = Share Tech Mono
+font-style-italic = Regular
+font-family-bold-italic = Share Tech Mono
+font-style-bold-italic = Regular
+
+adjust-cell-width = 0
+adjust-font-baseline = 0
+adjust-cell-height = 0
+adjust-cursor-height = 0
+
+font-thicken-strength = 120

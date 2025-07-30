@@ -8,6 +8,7 @@ local languages = {
 	'tsx',
 	'markdown',
 	'json',
+	'jsdoc',
 	'lua',
 	'make',
 	'css',
@@ -27,26 +28,6 @@ local languages = {
 	'nu',
 	'graphql',
 }
-
-local add_mixins = function()
-	-- vim.treesitter.language.register('fish', 'noext')
-end
-
-local add_folds = function()
-	local treesitter_parsers = require 'nvim-treesitter.parsers'
-
-	if treesitter_parsers.has_parser 'typescript' then
-		-- require('vim.treesitter.query').set(
-		-- 	'typescript',
-		-- 	'folds',
-		-- 	[[
-		--               [
-		--                   (statement_block)
-		--               ] @fold
-		--           ]]
-		-- )
-	end
-end
 
 return {
 	{
@@ -72,14 +53,11 @@ return {
 		event = 'VeryLazy',
 		build = ':TSUpdate',
 		dependencies = {
-			{ 'nushell/tree-sitter-nu', build = ':TSUpdate nu' },
 			'nvim-treesitter/nvim-treesitter-textobjects',
 		},
 		config = function()
 			local install = require 'nvim-treesitter.install'
 			local config = require 'nvim-treesitter.configs'
-
-			add_folds()
 
 			install.compilers = { 'gcc' }
 
@@ -134,8 +112,6 @@ return {
 					},
 				},
 			}
-
-			add_mixins()
 		end,
 	},
 }

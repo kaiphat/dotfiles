@@ -1,10 +1,10 @@
 return {
 	{
 		'folke/noice.nvim',
-		enabled = false,
+		enabled = true,
 		event = 'VeryLazy',
 		config = function()
-			local noice = require 'plugins.ui'
+			local noice = require 'noice'
 
 			local icon = ' ' .. kaiphat.constants.icons.ARROW
 
@@ -108,10 +108,10 @@ return {
 		end,
 	},
 
-	{
-		'j-hui/fidget.nvim',
-		opts = {
-			-- options
-		},
-	},
+	-- {
+	-- 	'j-hui/fidget.nvim',
+	-- 	opts = {
+	-- 		-- options
+	-- 	},
+	-- },
 }

@@ -85,11 +85,11 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'VimLeavePre' }, {
 -- 	end,
 -- })
 
--- vim.api.nvim_create_autocmd({ 'VimResized', 'WinEnter' }, {
--- 	group = kaiphat.utils.create_augroup 'resize_pane',
--- 	callback = function(event)
--- 		vim.cmd 'wincmd ='
--- 		vim.cmd 'vertical resize +20'
--- 		vim.cmd 'horizontal resize +10'
--- 	end,
--- })
+vim.api.nvim_create_autocmd({ 'VimResized', 'WinEnter' }, {
+	group = kaiphat.utils.create_augroup 'resize_pane',
+	callback = function(event)
+		vim.cmd 'wincmd ='
+		-- vim.cmd 'vertical resize +20'
+		-- vim.cmd 'horizontal resize +10'
+	end,
+})

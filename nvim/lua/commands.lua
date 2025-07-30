@@ -92,3 +92,61 @@ cmd('CopyGitHubFileLink', function()
 
 	kaiphat.utils.exec_nu('nu -l ~/dotfiles/nvim/lua/scripts/copy_git_hub_link.nu %s %d', path, row_index)
 end)
+
+cmd('SnakeCaseToCamelCase', function()
+	local mode = vim.api.nvim_get_mode().mode
+
+	if mode == 'n' then
+		vim.api.nvim_input 'viw'
+	end
+
+	vim.schedule(function()
+		local start_pos = vim.fn.getpos 'v'
+		local end_pos = vim.fn.getpos '.'
+
+		local line = vim.fn.getline(start_pos[2])
+		local word = vim.trim(string.sub(line, start_pos[3], end_pos[3]))
+
+		if word:match '^%s*$' then
+			print 'Word is empty'
+			return
+		end
+
+		local new_word = word:gsub('(%w)_(%w)', function(first, second)
+			return first .. second:upper()
+		end)
+
+		vim.cmd('let @+="' .. new_word .. '"')
+
+		vim.api.nvim_feedkeys('p', 'v', true)
+	end)
+end, { range = true })
+
+cmd('CamelCaseToSnakeCase', function()
+	local mode = vim.api.nvim_get_mode().mode
+
+	if mode == 'n' then
+		vim.api.nvim_input 'viw'
+	end
+
+	vim.schedule(function()
+		local start_pos = vim.fn.getpos 'v'
+		local end_pos = vim.fn.getpos '.'
+
+		local line = vim.fn.getline(start_pos[2])
+		local word = vim.trim(string.sub(line, start_pos[3], end_pos[3]))
+
+		if word:match '^%s*$' then
+			print 'Word is empty'
+			return
+		end
+
+		local new_word = word:gsub('(%w)(%u)', function(first, second)
+			return first .. '_' .. second:lower()
+		end)
+
+		vim.cmd('let @+="' .. new_word .. '"')
+
+		vim.api.nvim_feedkeys('p', 'v', true)
+	end)
+end, { range = true })

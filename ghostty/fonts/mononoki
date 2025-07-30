@@ -1,16 +1,16 @@
 font-size = 12
 font-thicken-strength = 190
 
-font-family = Mononoki Nerd Font
+font-family = mononoki
 font-style = Regular
-font-family-bold = Mononoki Nerd Font
+font-family-bold = mononoki
 font-style-bold = Regular
-font-family-italic = Mononoki Nerd Font
+font-family-italic = mononoki
 font-style-italic = Regular
-font-family-bold-italic = Mononoki Nerd Font
+font-family-bold-italic = mononoki
 font-style-bold-italic = Regular
 
 adjust-cell-width = 0
-adjust-font-baseline = 0
+adjust-font-baseline = 1
 adjust-cell-height = 5
-adjust-cursor-height = 0
+adjust-cursor-height = -1

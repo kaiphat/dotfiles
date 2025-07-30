@@ -1,7 +1,7 @@
 return {
 	'chrisgrieser/nvim-spider',
 	event = 'BufReadPre',
-	enabled = false,
+	enabled = true,
 	keys = {
 		{
 			'w',

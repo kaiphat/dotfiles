@@ -1,5 +1,6 @@
-config-file = ./fonts/mononoki
+config-file = ./fonts/tx
 config-file = ./themes/rose_pine_dark
+custom-shader = ./shaders/cursor.glsl
 
 font-thicken = true
 fullscreen = true
@@ -9,18 +10,22 @@ macos-option-as-alt = true
 
 cursor-style-blink = false
 cursor-style = block
-cursor-color = #5DE4C7
-cursor-text = #112233
+cursor-color = #FFB929
+cursor-text = #011115
+#cursor-color = #5DE4C7
+#cursor-text = #112233
 
 window-vsync = true
-window-padding-x = 10,10
-window-padding-y = 6,2
+window-padding-x = 10
+window-padding-y = 6
+window-padding-balance = true
 
 confirm-close-surface = false
 mouse-hide-while-typing = true
 
 background-opacity = 1
-background-blur = false
+background-blur = 10
+#background-image = "~/Downloads/2025-05-16 14.02.10.jpg"
 
 shell-integration = none
 initial-command = /bin/bash -l -c  "/opt/homebrew/bin/nu -l -i"

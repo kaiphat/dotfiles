@@ -1,4 +1,4 @@
-[mgr]
+[manager]
 ratio = [0, 4, 4]
 sort_by = 'mtime'
 sort_reverse = true

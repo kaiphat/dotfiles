@@ -1,6 +1,6 @@
 [general]
 import = [
-    '~/dotfiles/alacritty/fonts/mononoki.toml',
+    '~/dotfiles/alacritty/fonts/tx.toml',
     '~/dotfiles/alacritty/themes/rose_pine_dark.toml',
 ]
 

@@ -43,7 +43,7 @@ export def "g ch" [to_branch?] {
     let current_branch = ^git branch --show-current | str trim
     let branch = ^git bl 
         | split row (char newline)
-        | filter { $in | str contains $current_branch | not $in }
+        | where { $in | str contains $current_branch | not $in }
         | str join (char newline)
         | fzf --ansi 
         | complete

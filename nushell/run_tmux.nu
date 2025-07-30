@@ -1,4 +1,4 @@
-if ($env | get -i TMUX | is-empty) {
+if ($env | get -o TMUX | is-empty) {
     let output = tmux list-sessions | complete
 
     if $output.exit_code == 1 {
