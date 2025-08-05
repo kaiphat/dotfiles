@@ -1,0 +1,17 @@
+font-size = 10
+
+font-family = Monaspace Radon
+font-style = SemiWide Regular
+font-family-bold = Monaspace Radon
+font-style-bold = SemiWide Regular
+font-family-italic = Monaspace Radon
+font-style-italic = SemiWide Regular
+font-family-bold-italic = Monaspace Radon
+font-style-bold-italic = SemiWide Regular
+
+adjust-cell-width = 0
+adjust-font-baseline = 0
+adjust-cell-height = 4
+adjust-cursor-height = 0
+
+#font-thicken-strength = 190

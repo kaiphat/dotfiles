@@ -1,7 +1,7 @@
 [general]
 import = [
     '~/dotfiles/alacritty/fonts/tx.toml',
-    '~/dotfiles/alacritty/themes/rose_pine_dark.toml',
+    '~/dotfiles/alacritty/themes/catppuccin_dark.toml',
 ]
 
 [env]

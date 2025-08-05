@@ -235,29 +235,35 @@ return {
 			end,
 		},
 		{
+			'<leader>fr',
+			function()
+				Snacks.picker.lines {}
+			end,
+		},
+		{
 			'<leader>fe',
 			function()
 				Snacks.picker.lsp_symbols {
 					-- tree = false,
 					-- workspace = true,
-					-- filter = {
-					-- 	default = {
-					-- 		'Variable',
-					-- 		'Class',
-					-- 		'Constructor',
-					-- 		'Enum',
-					-- 		'Field',
-					-- 		'Function',
-					-- 		'Interface',
-					-- 		'Method',
-					-- 		'Module',
-					-- 		'Namespace',
-					-- 		'Package',
-					-- 		'Property',
-					-- 		'Struct',
-					-- 		'Trait',
-					-- 	},
-					-- },
+					filter = {
+						default = {
+							'Variable',
+							'Class',
+							'Constructor',
+							'Enum',
+							'Field',
+							'Function',
+							'Interface',
+							'Method',
+							'Module',
+							'Namespace',
+							'Package',
+							'Property',
+							'Struct',
+							'Trait',
+						},
+					},
 				}
 			end,
 		},

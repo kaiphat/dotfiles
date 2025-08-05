@@ -6,13 +6,13 @@ font-style = SemiLight
 font-family-bold = CaskaydiaCove Nerd Font
 font-style-bold = SemiLight
 font-family-italic = CaskaydiaCove Nerd Font
-font-style-italic = SemiLight Italic
+font-style-italic = SemiLight
 font-family-bold-italic = CaskaydiaCove Nerd Font
-font-style-bold-italic = SemiLight Italic
+font-style-bold-italic = SemiLight
 
 adjust-cell-width = 0
 adjust-font-baseline = 0
-adjust-cell-height = 3
+adjust-cell-height = 4
 adjust-cursor-height = 0
 
 font-feature = ss01,ss20

@@ -1,5 +1,5 @@
-config-file = ./fonts/tx
-config-file = ./themes/rose_pine_dark
+config-file = ./fonts/hermit
+config-file = ./themes/catppuccin_dark
 custom-shader = ./shaders/cursor.glsl
 
 font-thicken = true
@@ -10,10 +10,10 @@ macos-option-as-alt = true
 
 cursor-style-blink = false
 cursor-style = block
-cursor-color = #FFB929
-cursor-text = #011115
-#cursor-color = #5DE4C7
-#cursor-text = #112233
+#cursor-color = #FFB929
+#cursor-text = #011115
+cursor-color = #5DE4C7
+cursor-text = #112233
 
 window-vsync = true
 window-padding-x = 10

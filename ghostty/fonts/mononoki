@@ -1,3 +1,8 @@
+
+
+
+
+
 font-size = 12
 font-thicken-strength = 190
 
@@ -14,3 +19,5 @@ adjust-cell-width = 0
 adjust-font-baseline = 1
 adjust-cell-height = 5
 adjust-cursor-height = -1
+
+

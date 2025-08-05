@@ -222,3 +222,4 @@ end)
 map('n', 'zo', function()
 	vim.cmd.normal 'zO'
 end)
+-- map('x', 'C', 'y<cmd>let @/=@"<cr>cgn')

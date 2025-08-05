@@ -24,8 +24,9 @@ return {
 			sorts = {
 				-- 'exact',
 				-- defaults
+				'exact',
 				'score',
-				'sort_text',
+				-- 'sort_text',
 			},
 		},
 
@@ -109,7 +110,7 @@ return {
 				buffer = {
 					name = 'Buffer',
 					module = 'blink.cmp.sources.buffer',
-					score_offset = -2,
+					score_offset = -3,
 					max_items = 100,
 					min_keyword_length = 0,
 					opts = {
