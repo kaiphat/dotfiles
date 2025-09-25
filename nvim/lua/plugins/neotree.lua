@@ -8,7 +8,7 @@ return {
 		'MunifTanjim/nui.nvim',
 	},
 	lazy = true,
-	enabled = true,
+	enabled = false,
 	keys = {
 		{
 			'<leader>e',

@@ -19,7 +19,9 @@ return {
 			max_typos = function()
 				return 1
 			end,
-			use_frecency = true,
+			frecency = {
+                enabled = true
+            },
 			use_proximity = true,
 			sorts = {
 				-- 'exact',
@@ -75,6 +77,7 @@ return {
 					min_keyword_length = 0,
 					fallbacks = {}, -- if any of these providers return 0 items, it will fallback to this provider
 					score_offset = 0, -- boost/penalize the score of the items
+					timeout_ms = 10000,
 					override = nil, -- override the source's functions
 					async = false,
 				},

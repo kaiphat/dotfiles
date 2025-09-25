@@ -1,13 +1,14 @@
-font-size = 11
+font-size = 12
 
-font-thicken-strength = 150
-font-family = Input
+font-thicken-strength = 120
+
+font-family = Fantasque Sans Mono
 font-style = Regular
-font-family-bold = Input
+font-family-bold = Fantasque Sans Mono
 font-style-bold = Regular
-font-family-italic = Input
+font-family-italic = Fantasque Sans Mono
 font-style-italic = Regular
-font-family-bold-italic = Input
+font-family-bold-italic = Fantasque Sans Mono
 font-style-bold-italic = Regular
 
 adjust-cell-width = 0

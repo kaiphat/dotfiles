@@ -22,8 +22,9 @@ local themes = {
 	solarized_dark = 'solarized_dark',
 	solarized_light = 'solarized_light',
 	ash = 'ash',
+	material_dark = 'material_dark',
 }
 
 vim.o.background = 'dark'
 
-return require('themes.' .. themes.catppuccin_dark)
+return require('themes.' .. themes.rose_pine_dark)

@@ -66,4 +66,14 @@ return {
 			require('local_plugins.statusline').setup()
 		end,
 	},
+
+	{
+		name = 'cursorword',
+		dir = get_dir 'cursorword',
+		event = 'VeryLazy',
+		enabled = true,
+		config = function()
+			require('local_plugins.cursorword').setup()
+		end,
+	},
 }

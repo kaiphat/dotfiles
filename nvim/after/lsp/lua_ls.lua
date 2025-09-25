@@ -1,26 +1,12 @@
-local group = kaiphat.utils.create_augroup 'lsp_attach_lua'
-vim.api.nvim_create_autocmd('LspAttach', {
-	group = group,
-	callback = function(event)
-		local server = vim.lsp.get_client_by_id(event.data.client_id)
-
-		if not server or server.name ~= 'lua_ls' then
-			return
-		end
-
+vim.lsp.config('lua_ls', {
+	on_attach = function(client, bufnr)
 		vim.api.nvim_create_autocmd('BufWritePre', {
-			group = group,
-			buffer = event.buf,
+			buffer = bufnr,
 			callback = function()
-				-- vim.api.nvim_buf_call(event.buf, function()
 				vim.lsp.buf.format { timeout_ms = 5000 }
-				-- end)
 			end,
 		})
 	end,
-})
-
-vim.lsp.config('lua_ls', {
 	settings = {
 		Lua = {
 			workspace = {

@@ -1,6 +1,6 @@
-config-file = ./fonts/hermit
-config-file = ./themes/catppuccin_dark
-custom-shader = ./shaders/cursor.glsl
+config-file = ./fonts/annotation
+config-file = ./themes/rose_pine_dark
+#custom-shader = ./shaders/cursor.glsl
 
 font-thicken = true
 fullscreen = true

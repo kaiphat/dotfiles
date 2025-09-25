@@ -1,0 +1,42 @@
+font-size = 11
+
+font-family = Iosevka Term
+font-style = Extended
+font-family-bold = Iosevka Term
+font-style-bold = Extended
+font-family-italic = Iosevka Term
+font-style-italic = Extended
+font-family-bold-italic = Iosevka Term
+font-style-bold-italic = Extended
+
+adjust-cell-width = 0
+adjust-font-baseline = 0
+adjust-cell-height = 2
+adjust-cursor-height = 0
+
+font-thicken-strength = 150
+
+#abcd
+font-feature = cv36=9
+
+#f
+font-feature = cv41=6
+
+#t
+font-feature = cv54=12
+
+#g
+font-feature = cv42=7
+
+#r
+font-feature = cv52=6
+
+#s
+font-feature = cv53=4
+
+#m
+font-feature = cv48=8
+
+font-feature = VSAH=1
+font-feature = VSAT=1
+font-feature = VSAG=3

@@ -150,3 +150,19 @@ cmd('CamelCaseToSnakeCase', function()
 		vim.api.nvim_feedkeys('p', 'v', true)
 	end)
 end, { range = true })
+
+cmd('Testaaaa', function()
+	local bufnr = vim.api.nvim_create_buf(false, true)
+
+	vim.api.nvim_open_win(bufnr, true, {
+		relative = 'cursor',
+		width = 100,
+		height = 1,
+		bufpos = { 10, 10 },
+		col = -1,
+		style = 'minimal',
+		border = 'rounded',
+		title = '',
+		title_pos = 'left',
+	})
+end)

@@ -1,7 +1,7 @@
 return {
 	{
 		'folke/noice.nvim',
-		enabled = true,
+		enabled = false,
 		event = 'VeryLazy',
 		config = function()
 			local noice = require 'noice'

@@ -1,4 +1,28 @@
-local languages = {
+vim.treesitter.query.set(
+	'typescript',
+	'injections',
+	[[
+        (
+            (template_string (string_fragment) @injection.content)
+            (#match? @injection.content "FROM|ALTER|SELECT|CREATE|UPDATE|DELETE|INSERT|WITH")
+            (#set! injection.language "sql")
+        )
+
+        (
+            (template_string (string_fragment) @injection.content)
+            (#match? @injection.content "local|redis")
+            (#set! injection.language "lua")
+        )
+
+        (
+            (comment) @injection.content
+            (#match? @injection.content "^/\\*\\*")
+            (#set! injection.language "jsdoc")
+        )
+    ]]
+)
+
+local languges = {
 	'javascript',
 	'rust',
 	'typescript',
@@ -49,69 +73,22 @@ return {
 
 	{
 		'nvim-treesitter/nvim-treesitter',
-		version = false,
-		event = 'VeryLazy',
+		lazy = false,
+		branch = 'main',
 		build = ':TSUpdate',
-		dependencies = {
-			'nvim-treesitter/nvim-treesitter-textobjects',
-		},
 		config = function()
-			local install = require 'nvim-treesitter.install'
-			local config = require 'nvim-treesitter.configs'
-
-			install.compilers = { 'gcc' }
-
-			config.setup {
-				fold = {
-					enabled = true,
-				},
-				ensure_installed = languages,
-				query_linter = {
-					enable = true,
-					use_virtual_text = true,
-					lint_events = { 'BufWrite', 'CursorHold' },
-				},
-				autotag = {
-					enable = true,
-				},
-				endwise = {
-					enable = true,
-				},
-				textobjects = {
-					select = {
-						enable = false,
-						keymaps = {
-							['if'] = '@function.inner',
-						},
-					},
-					move = {
-						enable = true,
-						goto_next_start = {
-							[']f'] = '@function.outer',
-						},
-						goto_previous_start = {
-							['[f'] = '@function.outer',
-						},
-					},
-				},
-				highlight = {
-					enable = true,
-					use_languagetree = true,
-					additional_vim_regex_highlighting = false,
-				},
-				indent = {
-					enable = true,
-					disable = {},
-				},
-				incremental_selection = {
-					enable = false,
-					keymaps = {
-						init_selection = '<C-space>',
-						node_incremental = '<C-space>',
-						node_decremental = '<BS>',
-					},
-				},
+			require('nvim-treesitter').setup {
+				install_dir = vim.fn.stdpath 'data' .. '/site',
 			}
+
+			require('nvim-treesitter').install(languges)
+
+			vim.api.nvim_create_autocmd('FileType', {
+				pattern = languges,
+				callback = function()
+					vim.treesitter.start()
+				end,
+			})
 		end,
 	},
 }

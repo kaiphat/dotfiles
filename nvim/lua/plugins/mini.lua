@@ -82,7 +82,7 @@ return {
 	{
 		'echasnovski/mini.cursorword',
 		event = 'VeryLazy',
-		enabled = true,
+		enabled = false,
 		opts = {
 			delay = 150,
 		},

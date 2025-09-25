@@ -92,6 +92,31 @@ def docker-patch-nerd-fonts [] {
 alias w = watson
 alias wr = watson report --day -c
 def ws [...args] {
-    w stop | complete
+    let result = w stop | complete 
+
+    if $result.exit_code == 0 {
+        print $result.stdout
+    }
+
+    if ($args | is-empty)  {
+        return
+    }
+
     w start ...$args
+}
+
+export def "date from-ms" [ms] {
+    $ms * 1000000 | into datetime
+}
+
+export def radio [...search] {
+    let text = $search | str join ' ' | str trim
+
+    let id = tunein search $text 
+    | fzf --ansi 
+    | parse "{_} id: {id}"
+    | get id
+    | first
+
+    tunein play $id
 }

@@ -1,0 +1,17 @@
+font-size = 11
+
+font-family = Inconsolata LGC Nerd Font
+font-style = Regular
+font-family-bold = Inconsolata LGC Nerd Font
+font-style-bold = Regular
+font-family-italic = Inconsolata LGC Nerd Font
+font-style-italic = Regular
+font-family-bold-italic = Inconsolata LGC Nerd Font
+font-style-bold-italic = Regular
+
+adjust-cell-width = 0
+adjust-font-baseline = 0
+adjust-cell-height = 2
+adjust-cursor-height = 0
+
+#font-thicken-strength = 120

@@ -1,4 +1,4 @@
-source ./themes/catppuccin_dark.nu
+source ./themes/rose_pine_dark.nu
 source ./aliases.nu
 source ./main.nu
 source ./completer.nu

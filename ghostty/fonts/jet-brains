@@ -1,17 +1,19 @@
 font-size = 10
 
-font-family = JetBrainsMono Nerd Font
+#font-feature = cv01
+
+font-family = JetBrains Mono
 font-style = Light
-font-family-bold = JetBrainsMono Nerd Font
+font-family-bold = JetBrains Mono
 font-style-bold = Light
-font-family-italic = JetBrainsMono Nerd Font
+font-family-italic = JetBrains Mono
 font-style-italic = Light
-font-family-bold-italic = JetBrainsMono Nerd Font
+font-family-bold-italic = JetBrains Mono
 font-style-bold-italic = Light
 
-adjust-cell-width = 0
+adjust-cell-width = 1
 adjust-font-baseline = 0
 adjust-cell-height = 4
 adjust-cursor-height = 0
 
-#font-thicken-strength = 90
+#font-thicken-strength = 120

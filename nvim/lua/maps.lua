@@ -138,6 +138,7 @@ map('v', '<leader>us', function()
 	vim.api.nvim_input ':s/'
 end)
 local function substitute()
+	local current_buf = vim.api.nvim_get_current_buf()
 	local start_pos = vim.fn.getpos 'v'
 	local end_pos = vim.fn.getpos '.'
 

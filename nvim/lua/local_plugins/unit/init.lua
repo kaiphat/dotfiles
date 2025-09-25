@@ -1,5 +1,3 @@
-local ts = require 'nvim-treesitter.ts_utils'
-
 local function get_row_col()
 	local cursor = vim.api.nvim_win_get_cursor(0)
 	return {
@@ -12,21 +10,8 @@ local function get_line_text(bufnr, line)
 	return vim.api.nvim_buf_get_lines(bufnr, line - 1, line, false)[1]
 end
 
-local function get_node(coords)
-	local row = coords.row
-	local col = coords.col
-
-	local root = ts.get_root_for_position(row - 1, col)
-
-	if not root then
-		return
-	end
-
-	return root:named_descendant_for_range(row - 1, col, row - 1, col)
-end
-
 local function get_main_node(position)
-	local node = get_node(position)
+	local node = vim.treesitter.get_node(position)
 
 	if node == nil then
 		return
@@ -34,7 +19,7 @@ local function get_main_node(position)
 
 	local parent = node:parent()
 
-	local root = ts.get_root_for_node(node)
+	local root = node:tree():root()
 
 	local start_row = node:start()
 

@@ -20,7 +20,7 @@ return {
 				},
 				suggestion = {
 					enabled = true,
-					auto_trigger = false,
+					auto_trigger = true,
 					hide_during_completion = false,
 					debounce = 75,
 					keymap = {
@@ -130,5 +130,34 @@ return {
 				require('copilot-lsp.nes').apply_pending_nes()
 			end)
 		end,
+	},
+
+	{
+		'piersolenski/wtf.nvim',
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+			'MunifTanjim/nui.nvim',
+		},
+		opts = {
+			provider = 'copilot',
+		},
+		keys = {
+			{
+				'<leader>wd',
+				mode = { 'n', 'x' },
+				function()
+					require('wtf').diagnose()
+				end,
+				desc = 'Debug diagnostic with AI',
+			},
+			{
+				'<leader>wf',
+				mode = { 'n', 'x' },
+				function()
+					require('wtf').fix()
+				end,
+				desc = 'Fix diagnostic with AI',
+			},
+		},
 	},
 }

@@ -1,4 +1,4 @@
-font-size = 11
+font-size = 11.5
 
 font-thicken-strength = 190
 font-family = CaskaydiaCove Nerd Font
@@ -12,7 +12,7 @@ font-style-bold-italic = SemiLight
 
 adjust-cell-width = 0
 adjust-font-baseline = 0
-adjust-cell-height = 4
+adjust-cell-height = 5
 adjust-cursor-height = 0
 
 font-feature = ss01,ss20

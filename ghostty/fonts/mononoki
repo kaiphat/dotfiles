@@ -1,8 +1,3 @@
-
-
-
-
-
 font-size = 12
 font-thicken-strength = 190
 
@@ -17,7 +12,7 @@ font-style-bold-italic = Regular
 
 adjust-cell-width = 0
 adjust-font-baseline = 1
-adjust-cell-height = 5
+adjust-cell-height = 3
 adjust-cursor-height = -1
 
 
