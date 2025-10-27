@@ -10,6 +10,7 @@ const themes = [
     "github_dark"
     "solarized_light"
     "solarized_dark"
+    "poimandres_dark"
 ]
 
 def replace [file closure] {

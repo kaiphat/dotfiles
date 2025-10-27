@@ -1,6 +1,6 @@
 font-size = 10.5
 
-font-thicken-strength = 120
+font-thicken-strength = 0
 
 font-feature = +calt
 font-family = 0xProto Nerd Font

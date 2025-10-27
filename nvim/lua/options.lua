@@ -60,7 +60,6 @@ o.swapfile = false
 o.undolevels = 5000
 o.modifiable = true
 o.autoindent = true
-vim.bo.indentexpr = 'v:lua.require\'nvim-treesitter\'.indentexpr()'
 o.smartindent = true
 o.copyindent = false
 o.ignorecase = true
@@ -131,7 +130,7 @@ o.whichwrap:append '<>hl'
 o.conceallevel = 2
 
 o.foldmethod = 'expr'
-o.foldexpr = 'nvim_treesitter#foldexpr()'
+o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 o.foldtext = 'v:lua.get_foldtext()'
 o.foldcolumn = '0'
 o.foldminlines = 3
@@ -140,16 +139,16 @@ o.foldlevel = 99
 o.foldlevelstart = 99
 o.foldopen = 'hor,mark,percent,quickfix,search,tag,undo'
 
-vim.api.nvim_create_autocmd('LspAttach', {
-	group = kaiphat.utils.create_augroup 'lsp_fold',
-	callback = function(args)
-		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		if client and client:supports_method 'textDocument/foldingRange' then
-			local win = vim.api.nvim_get_current_win()
-			vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
-		end
-	end,
-})
+-- vim.api.nvim_create_autocmd('LspAttach', {
+-- 	group = kaiphat.utils.create_augroup 'lsp_fold',
+-- 	callback = function(args)
+-- 		local client = vim.lsp.get_client_by_id(args.data.client_id)
+-- 		if client and client:supports_method 'textDocument/foldingRange' then
+-- 			local win = vim.api.nvim_get_current_win()
+-- 			vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+-- 		end
+-- 	end,
+-- })
 
 _G.get_foldtext = function()
 	local last_line = table.concat(vim.fn.getbufline(vim.api.nvim_get_current_buf(), vim.v.foldend))
@@ -157,5 +156,3 @@ _G.get_foldtext = function()
 	local space_before_text = first_line:match '%s*'
 	return space_before_text .. ' ' .. vim.trim(first_line) .. ' ... ' .. vim.trim(last_line)
 end
-
-vim.cmd.filetype 'plugin indent on'

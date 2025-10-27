@@ -2,18 +2,22 @@ theme_dir "/Users/ilyapu/dotfiles/zellij/themes"
 
 theme "rose-pine"
 
+load_plugins {
+    https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm
+}
+
 on_force_close     "quit"
 simplified_ui      true
 default_shell      "nu"
 pane_frames        false
-#default_layout     "compact"
+default_layout     "default"
 mouse_mode         true
 scroll_buffer_size 40000
 copy_on_select     true
 scrollback_editor  "nvim"
 mirror_session     true
 styled_underlines  true
-auto_layout        true
+auto_layout        false
 
 ui {
     pane_frames {
@@ -145,6 +149,9 @@ plugins {
     strider location="zellij:strider"
     compact-bar location="zellij:compact-bar"
     session-manager location="zellij:session-manager"
+    welcome-screen location="zellij:session-manager" {
+        welcome_screen true
+    }
     filepicker location="zellij:strider" {
         cwd "/"
     }

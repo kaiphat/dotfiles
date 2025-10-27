@@ -32,7 +32,7 @@ return {
 	config = function()
 		require('catppuccin').setup {
 			term_colors = true,
-			flavour = 'macchiato', -- latte, frappe, macchiato, mocha
+			flavour = 'mocha', -- latte, frappe, macchiato, mocha
 			transparent_background = true,
 			auto_integrations = true,
 			styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
@@ -49,8 +49,23 @@ return {
 				types = {},
 				operators = {},
 			},
+			lsp_styles = {
+				virtual_text = {
+					errors = { 'italic' },
+					hints = { 'italic' },
+					warnings = { 'italic' },
+					information = { 'italic' },
+				},
+				underlines = {
+					errors = { 'undercurl' },
+					hints = { 'undercurl' },
+					warnings = { 'undercurl' },
+					information = { 'undercurl' },
+				},
+			},
 			color_overrides = {
 				all = {
+					marron = '#eb6f92',
 					-- green = '#81c8be',
 					-- red = '#eb6f92',
 					-- blue = '#a3b8ef',
@@ -76,27 +91,10 @@ return {
 					IndentBlanklineChar = { fg = colors.surface0 },
 					FzfLuaTitle = { bg = colors.green, fg = colors.base, bold = false },
 					FzfLuaHeaderText = { fg = colors.sky },
-					TreeSitterContext = { underline = false, bg = colors.surface0 },
-					TreeSitterContextBottom = { underline = false, bg = colors.surface0 },
+					TreeSitterContext = { underline = false, undercurl = false, bg = colors.surface0 },
+					TreeSitterContextBottom = { underline = false, undercurl = false, bg = colors.surface0 },
 				}
 			end,
-			integrations = {
-				native_lsp = {
-					enabled = true,
-					virtual_text = {
-						errors = { 'italic' },
-						hints = { 'italic' },
-						warnings = { 'italic' },
-						information = { 'italic' },
-					},
-					underlines = {
-						errors = { 'undercurl' },
-						hints = { 'undercurl' },
-						warnings = { 'undercurl' },
-						information = { 'undercurl' },
-					},
-				},
-			},
 		}
 
 		vim.cmd.colorscheme 'catppuccin'

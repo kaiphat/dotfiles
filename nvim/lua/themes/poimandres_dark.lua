@@ -34,7 +34,8 @@ return {
 
 		vim.cmd 'colorscheme poimandres'
 
-		vim.api.nvim_set_hl(0, 'VertSplit', { fg = palette.blueGray3 })
+		vim.api.nvim_set_hl(0, 'WinSeparator', { fg = palette.blueGray2 })
+		vim.api.nvim_set_hl(0, 'FloatBorder', { fg = palette.blueGray2 })
 		vim.api.nvim_set_hl(0, 'MiniCursorword', { bg = palette.background4, underline = false })
 	end,
 }

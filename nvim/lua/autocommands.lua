@@ -73,7 +73,7 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'VimLeavePre' }, {
 -- vim.api.nvim_create_autocmd('FileType', {
 -- 	group = kaiphat.utils.create_augroup 'set_format_options',
 -- 	callback = function(file)
--- 		vim.opt_local.formatoptions = 'tc'
+-- 		vim.opt_local.formatoptions = 'tjcroql'
 -- 	end,
 -- })
 

@@ -111,7 +111,7 @@ export def main [] {
 
         background: $color_palette.base
         foreground: $color_palette.text
-        cursor: $color_palette.blue
+        cursor: '#c0def4'
     }
 }
 
@@ -127,12 +127,10 @@ export def "update terminal" [] {
     # Set terminal colors
     let osc_screen_foreground_color = '10;'
     let osc_screen_background_color = '11;'
-    let osc_cursor_color = '12;'
         
     $"
     (ansi -o $osc_screen_foreground_color)($theme.foreground)(char bel)
     (ansi -o $osc_screen_background_color)($theme.background)(char bel)
-    (ansi -o $osc_cursor_color)($theme.cursor)(char bel)
     "
     # Line breaks above are just for source readability
     # but create extra whitespace when activating. Collapse
@@ -144,7 +142,6 @@ export def "update terminal" [] {
 export module activate {
     export-env {
         set color_config
-        update terminal
     }
 }
 

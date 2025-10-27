@@ -1,6 +1,6 @@
-config-file = ./fonts/annotation
-config-file = ./themes/rose_pine_dark
-#custom-shader = ./shaders/cursor.glsl
+config-file = ./fonts/mononoki
+config-file = ./themes/poimandres_dark
+custom-shader-animation = true
 
 font-thicken = true
 fullscreen = true
@@ -12,8 +12,10 @@ cursor-style-blink = false
 cursor-style = block
 #cursor-color = #FFB929
 #cursor-text = #011115
-cursor-color = #5DE4C7
-cursor-text = #112233
+#cursor-color = #5DE4C7
+#cursor-text = #112233
+cursor-color = #f4b8e4
+cursor-text = #000000
 
 window-vsync = true
 window-padding-x = 10
@@ -27,6 +29,7 @@ background-opacity = 1
 background-blur = 10
 #background-image = "~/Downloads/2025-05-16 14.02.10.jpg"
 
+link-url = true
 shell-integration = none
 initial-command = /bin/bash -l -c  "/opt/homebrew/bin/nu -l -i"
 

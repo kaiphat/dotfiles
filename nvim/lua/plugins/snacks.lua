@@ -15,7 +15,7 @@ local grep_exclude = kaiphat.utils.concat(grep_always_excludes, {
 	'.data/',
 	'test/',
 	'tests/',
-	'**/__tests__/*',
+	'__tests__/',
 	'**/__mocks__/*',
 	'*.log',
 	'.gitignore',
@@ -50,7 +50,8 @@ return {
 			function()
 				Snacks.picker.files {
 					exclude = {
-						'/test',
+						'test',
+						'__tests__',
 					},
 				}
 			end,
@@ -202,7 +203,27 @@ return {
 			function()
 				Snacks.picker.lsp_references {
 					include_declaration = false,
-					pattern = '!import !test/ ',
+					filter = {
+						filter = function(item)
+							for _, exclude in ipairs { 'test' } do
+								local found = item.file:find(exclude, 1, true)
+
+								if found then
+									return false
+								end
+							end
+
+							for _, exclude in ipairs { 'import' } do
+								local found = item.line:find(exclude, 1, true)
+
+								if found then
+									return false
+								end
+							end
+
+							return true
+						end,
+					},
 					jump = { tagstack = true, reuse_win = false },
 				}
 			end,
@@ -274,6 +295,14 @@ return {
 			end,
 		},
 		{
+			'<leader>fs',
+			function()
+				Snacks.picker.git_log_file {
+					confirm = 'open',
+				}
+			end,
+		},
+		{
 			'<leader>fc',
 			function()
 				Snacks.picker.git_log_file {
@@ -303,79 +332,88 @@ return {
 			'<leader>fd',
 			function()
 				Snacks.picker.git_diff {
-					finder = function(opts, ctx)
-						local file, line
-						local header, hunk = {}, {}
-						local header_len = 4
-						local finder = require('snacks.picker.source.proc').proc({
-							opts,
-							{
-								cmd = 'git',
-								args = {
-									'-c',
-									'core.quotepath=false',
-									'--no-pager',
-									'diff',
-									'origin/master...HEAD',
-									'--no-color',
-									'--no-ext-diff',
-								},
-							},
-						}, ctx)
-						return function(cb)
-							local function add()
-								if file and line and #hunk > 0 then
-									local diff = table.concat(header, '\n') .. '\n' .. table.concat(hunk, '\n')
-									cb {
-										text = file .. ':' .. line,
-										diff = diff,
-										file = file,
-										pos = { line, 0 },
-										preview = { text = diff, ft = 'diff', loc = false },
-									}
-								end
-								hunk = {}
-							end
-							finder(function(proc_item)
-								local text = proc_item.text
-								if text:find('diff', 1, true) == 1 then
-									add()
-									file = text:match '^diff .* a/(.*) b/.*$'
-									header = { text }
-									header_len = 4
-								elseif file and #header < header_len then
-									if text:find '^deleted file' then
-										header_len = 5
-									end
-									header[#header + 1] = text
-								elseif text:find('@', 1, true) == 1 then
-									add()
-									-- Hunk header
-									-- @example "@@ -157,20 +157,6 @@ some content"
-									line = tonumber(string.match(text, '@@ %-.*,.* %+(.*),.* @@'))
-									hunk = { text }
-								elseif #hunk > 0 then
-									hunk[#hunk + 1] = text
-								else
-									error('unexpected line: ' .. text)
-								end
-							end)
-							add()
-						end
-					end,
+					base = 'origin/master',
 				}
 			end,
 		},
 		-- {
-		-- 	'<leader>e',
+		-- 	'<leader>fd',
 		-- 	function()
-		-- 		Snacks.picker.explorer {
-		-- 			cwd = kaiphat.utils.get_current_dir(),
-		-- 			follow_file = true,
-		-- 			matcher = {},
+		-- 		-- todo: use base option
+		-- 		Snacks.picker.git_diff {
+		-- 			finder = function(opts, ctx)
+		-- 				local file, line
+		-- 				local header, hunk = {}, {}
+		-- 				local header_len = 4
+		-- 				local finder = require('snacks.picker.source.proc').proc({
+		-- 					opts,
+		-- 					{
+		-- 						cmd = 'git',
+		-- 						args = {
+		-- 							'-c',
+		-- 							'core.quotepath=false',
+		-- 							'--no-pager',
+		-- 							'diff',
+		-- 							'origin/master...HEAD',
+		-- 							'--no-color',
+		-- 							'--no-ext-diff',
+		-- 						},
+		-- 					},
+		-- 				}, ctx)
+		-- 				return function(cb)
+		-- 					local function add()
+		-- 						if file and line and #hunk > 0 then
+		-- 							local diff = table.concat(header, '\n') .. '\n' .. table.concat(hunk, '\n')
+		-- 							cb {
+		-- 								text = file .. ':' .. line,
+		-- 								diff = diff,
+		-- 								file = file,
+		-- 								pos = { line, 0 },
+		-- 								preview = { text = diff, ft = 'diff', loc = false },
+		-- 							}
+		-- 						end
+		-- 						hunk = {}
+		-- 					end
+		-- 					finder(function(proc_item)
+		-- 						local text = proc_item.text
+		-- 						if text:find('diff', 1, true) == 1 then
+		-- 							add()
+		-- 							file = text:match '^diff .* a/(.*) b/.*$'
+		-- 							header = { text }
+		-- 							header_len = 4
+		-- 						elseif file and #header < header_len then
+		-- 							if text:find '^deleted file' then
+		-- 								header_len = 5
+		-- 							end
+		-- 							header[#header + 1] = text
+		-- 						elseif text:find('@', 1, true) == 1 then
+		-- 							add()
+		-- 							-- Hunk header
+		-- 							-- @example "@@ -157,20 +157,6 @@ some content"
+		-- 							line = tonumber(string.match(text, '@@ %-.*,.* %+(.*),.* @@'))
+		-- 							hunk = { text }
+		-- 						elseif #hunk > 0 then
+		-- 							hunk[#hunk + 1] = text
+		-- 						else
+		-- 							error('unexpected line: ' .. text)
+		-- 						end
+		-- 					end)
+		-- 					add()
+		-- 				end
+		-- 			end,
 		-- 		}
 		-- 	end,
 		-- },
+		{
+			'<leader>e',
+			function()
+				Snacks.picker.explorer {
+					cwd = kaiphat.utils.get_current_dir(),
+					follow_file = true,
+					matcher = {},
+				}
+			end,
+		},
 	},
 	opts = {
 		lazygit = {
@@ -487,6 +525,10 @@ return {
 			scope = {
 				enabled = false,
 			},
+		},
+
+		image = {
+			enabled = true,
 		},
 
 		words = {

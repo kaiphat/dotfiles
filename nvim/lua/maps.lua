@@ -224,3 +224,7 @@ map('n', 'zo', function()
 	vim.cmd.normal 'zO'
 end)
 -- map('x', 'C', 'y<cmd>let @/=@"<cr>cgn')
+
+-- vim.keymap.set('x', 'an', function()
+-- 	vim.lsp.buf.selection_range(1)
+-- end, { desc = 'vim.lsp.buf.selection_range(\'outer\')' })

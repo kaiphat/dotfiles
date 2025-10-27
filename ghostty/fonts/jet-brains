@@ -1,4 +1,4 @@
-font-size = 10
+font-size = 10.5
 
 #font-feature = cv01
 
@@ -11,9 +11,9 @@ font-style-italic = Light
 font-family-bold-italic = JetBrains Mono
 font-style-bold-italic = Light
 
-adjust-cell-width = 1
+adjust-cell-width = 0
 adjust-font-baseline = 0
 adjust-cell-height = 4
 adjust-cursor-height = 0
 
-#font-thicken-strength = 120
+font-thicken-strength = 180

@@ -12,6 +12,6 @@ font-family-bold-italic = Hermit
 font-style-bold-italic = Regular
 
 adjust-cell-width = 0
-adjust-font-baseline = -1
+adjust-font-baseline = -2
 adjust-cell-height = 1
 adjust-cursor-height = 0

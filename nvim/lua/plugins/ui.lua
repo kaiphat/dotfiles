@@ -108,10 +108,10 @@ return {
 		end,
 	},
 
-	-- {
-	-- 	'j-hui/fidget.nvim',
-	-- 	opts = {
-	-- 		-- options
-	-- 	},
-	-- },
+	{
+		'j-hui/fidget.nvim',
+		opts = {
+			-- options
+		},
+	},
 }

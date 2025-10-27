@@ -2,20 +2,20 @@ local icons = kaiphat.constants.icons
 
 return {
 	{
-		'echasnovski/mini.align',
+		'nvim-mini/mini.align',
 		event = 'BufReadPre',
 		opts = {},
 	},
 
 	{
-		'echasnovski/mini.splitjoin',
+		'nvim-mini/mini.splitjoin',
 		event = 'BufReadPre',
 		enabled = false,
 		opts = {},
 	},
 
 	{
-		'echasnovski/mini.surround',
+		'nvim-mini/mini.surround',
 		event = 'BufReadPre',
 		config = function()
 			local key = '<leader>'
@@ -41,7 +41,7 @@ return {
 	},
 
 	{
-		'echasnovski/mini.trailspace',
+		'nvim-mini/mini.trailspace',
 		enabled = false,
 		event = 'BufReadPre',
 		keys = {
@@ -56,7 +56,7 @@ return {
 	},
 
 	{
-		'echasnovski/mini.indentscope',
+		'nvim-mini/mini.indentscope',
 		enabled = false,
 		event = 'BufReadPre',
 		opts = {
@@ -80,7 +80,7 @@ return {
 	},
 
 	{
-		'echasnovski/mini.cursorword',
+		'nvim-mini/mini.cursorword',
 		event = 'VeryLazy',
 		enabled = false,
 		opts = {
@@ -89,7 +89,7 @@ return {
 	},
 
 	{
-		'echasnovski/mini.icons',
+		'nvim-mini/mini.icons',
 		event = 'VeryLazy',
 		version = false,
 		opts = {
@@ -100,7 +100,7 @@ return {
 	},
 
 	{
-		'echasnovski/mini.pairs',
+		'nvim-mini/mini.pairs',
 		enabled = false,
 		event = 'VeryLazy',
 		config = function()
@@ -143,7 +143,7 @@ return {
 	},
 
 	{
-		'echasnovski/mini.ai',
+		'nvim-mini/mini.ai',
 		event = 'VeryLazy',
 		enabled = false,
 		config = function()
@@ -176,7 +176,7 @@ return {
 	},
 
 	{
-		'echasnovski/mini.bracketed',
+		'nvim-mini/mini.bracketed',
 		enabled = false,
 		event = 'VeryLazy',
 		config = function()
