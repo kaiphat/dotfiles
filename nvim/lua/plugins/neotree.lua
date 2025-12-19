@@ -1,5 +1,3 @@
-local root_path = kaiphat.utils.get_full_path()
-
 return {
 	'nvim-neo-tree/neo-tree.nvim',
 	branch = 'v3.x',
@@ -8,36 +6,32 @@ return {
 		'MunifTanjim/nui.nvim',
 	},
 	lazy = true,
-	enabled = false,
+	enabled = true,
 	keys = {
 		{
-			'<leader>e',
+			'<leader>fe',
 			function()
 				require('neo-tree.command').execute {
+					action = 'focus',
 					source = 'filesystem',
-					dir = kaiphat.utils.get_current_dir(),
 					reveal_force_cwd = true,
-					reveal_file = kaiphat.utils.get_full_path(),
+					position = 'left',
 				}
 			end,
 		},
+		-- Still experimental
 		-- {
-		-- 	'<leader>O',
+		-- 	'<leader>fw',
 		-- 	function()
+		-- 		opened_symbols = not opened_symbols
+		--
 		-- 		require('neo-tree.command').execute {
-		-- 			source = 'filesystem',
-		-- 			dir = root_path,
+		-- 			action = opened_symbols and 'focus' or 'close',
+		-- 			source = 'document_symbols',
+		-- 			position = 'left',
 		-- 		}
 		-- 	end,
 		-- },
-		{
-			'<leader><C-o>',
-			function()
-				require('neo-tree.command').execute {
-					source = 'git_status',
-				}
-			end,
-		},
 	},
 	config = function()
 		local tree = require 'neo-tree'
@@ -46,7 +40,14 @@ return {
 		local ui = require 'neo-tree.ui.renderer'
 
 		tree.setup {
-			popup_border_style = 'rounded',
+			sources = {
+				'filesystem',
+				'buffers',
+				'git_status',
+				'document_symbols',
+			},
+
+			popup_border_style = '',
 
 			default_component_configs = {
 				git_status = {
@@ -64,12 +65,33 @@ return {
 					enabled = false,
 				},
 			},
-			window = {
-				position = 'float',
-				mapping_options = {
-					noremap = true,
-					nowait = true,
+
+			document_symbols = {
+				follow_cursor = true,
+				client_filters = 'first',
+				renderers = {
+					root = {
+						{ 'indent' },
+						{ 'icon', default = 'C' },
+						{ 'name', zindex = 10 },
+					},
+					symbol = {
+						{ 'indent', with_expanders = true },
+						{ 'kind_icon', default = '?' },
+						{
+							'container',
+							content = {
+								{ 'name', zindex = 10 },
+								{ 'kind_name', zindex = 20, align = 'right' },
+							},
+						},
+					},
 				},
+			},
+
+			window = {
+				position = 'left',
+				width = 48,
 				popup = {
 					size = {
 						width = 120,
@@ -79,33 +101,44 @@ return {
 				mappings = {
 					['/'] = 'noop',
 					['f'] = 'filter_on_submit',
+					['F'] = 'clear_filter',
 					['S'] = 'open_split',
 					['<esc>'] = 'revert_preview',
 					['h'] = function(state)
 						local node = state.tree:get_node()
 						local parent_node = state.tree:get_node(node:get_parent_id())
+
 						if parent_node:is_expanded() then
 							ui.focus_node(state, node:get_parent_id())
-							fs.toggle_directory(state, parent_node)
+							fs.toggle_directory(state, parent_node, nil, nil, nil, function()
+								local pn = state.tree:get_node(state.tree:get_node():get_parent_id())
 
-							local pn = state.tree:get_node(state.tree:get_node():get_parent_id())
-
-							if not pn:is_expanded() then
-								fs_cmds.navigate_up(state)
-							end
+								if not pn:is_expanded() then
+									fs_cmds.navigate_up(state)
+								end
+							end)
 						end
 					end,
 					['w'] = 'open_split',
+					['<C-v>'] = 'open_vsplit',
 					['l'] = function(state)
 						local node = state.tree:get_node()
 
-						if node.type == 'directory' then
-							fs.toggle_directory(state, node, nil, nil, nil, function()
-								local ids = node:get_child_ids()
-								ui.focus_node(state, ids[1])
-							end)
-						else
+						if node.type ~= 'directory' then
 							fs_cmds.open(state)
+							return
+						end
+
+						local cb = function()
+							local ids = node:get_child_ids()
+							ui.focus_node(state, ids[1])
+						end
+
+						if node.loaded then
+							fs.toggle_directory(state, node)
+							cb()
+						else
+							fs.toggle_directory(state, node, nil, nil, nil, cb)
 						end
 					end,
 					['L'] = function(state)
@@ -149,10 +182,31 @@ return {
 			},
 			filesystem = {
 				bind_to_cwd = false,
+
 				filtered_items = {
-					hide_gitignored = false,
+					hide_gitignored = true,
 					hide_hidden = false,
 					hide_dotfiles = false,
+					-- hide_by_name = { -- uses glob style patterns
+					-- 	'node_modules',
+					-- 	'coverage',
+					-- 	'dist',
+					-- },
+				},
+
+				find_args = { -- you can specify extra args to pass to the find command.
+					fd = {
+						'--exclude',
+						'node_modules',
+						'--exclude',
+						'coverage',
+						'--exclude',
+						'dist',
+					},
+				},
+
+				follow_current_file = {
+					enabled = true,
 				},
 			},
 		}

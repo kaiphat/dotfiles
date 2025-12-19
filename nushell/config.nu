@@ -1,4 +1,4 @@
-source ./themes/poimandres_dark.nu
+source ./themes/rose_pine_light.nu
 source ./aliases.nu
 source ./main.nu
 source ./completer.nu

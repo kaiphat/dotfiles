@@ -43,13 +43,13 @@ return {
 				TreesitterContext = { link = 'Visual' },
 				TreesitterContextSeparator = { fg = 'rose' },
 				CmpItemKindCodeium = { fg = 'iris' },
-				IndentBlanklineChar = { fg = 'overlay' },
+				IndentBlanklineChar = { fg = 'highlight_med' },
+				IndentBlanklineContextChar = { fg = 'highlight_med' },
 				SnacksIndent = { fg = '#333344' },
 				Visual = { bg = '#394660', blend = 100 },
 				Search = { bg = '#424970', blend = 100 },
 				-- for blink selection highlight
 				PmenuSel = { bg = '#384561', blend = 100 },
-				IndentBlanklineContextChar = { fg = 'overlay' },
 				NoiceCmdlinePopupBorder = { link = 'NormalFloat' },
 				['@variable'] = { italic = false, fg = '#c4c6e7' },
 				['@lsp.type.property.typescript'] = { italic = false, fg = '#7a8bb1' },
@@ -61,7 +61,7 @@ return {
 				['@neorg.todo_items.done.norg'] = { fg = 'foam' },
 				['@markup.raw.markdown_inline'] = { fg = 'rose' },
 				['@punctuation'] = { fg = '#737994' },
-				['@punctuation.bracket'] = { fg = '#737994', italic = false },
+				['@punctuation.bracket'] = { fg = '#737994', italic = true },
 				['@punctuation.special'] = { fg = '#737994' },
 				['@punctuation.delimiter'] = { fg = '#737994' },
 				FzfLuaColorsBgSel = { fg = 'rose' },
@@ -70,6 +70,7 @@ return {
 				DiffChange = { bg = '#9ccfd8' },
 				DiffText = { bg = '#9ccfd8' },
 				['@diff.delta'] = { bg = '#31748f' },
+				FylerIndentMarker = { fg = 'highlight_med' },
 			},
 
 			before_highlight = function(group, h, p)

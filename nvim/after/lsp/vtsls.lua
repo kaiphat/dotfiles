@@ -30,6 +30,7 @@ vim.lsp.config('vtsls', {
 		end, { buffer = bufnr })
 	end,
 	settings = {
+		-- https://github.com/yioneko/vtsls/blob/main/packages/service/configuration.schema.json
 		typescript = {
 			format = {
 				allowRenameOfImportPath = true,
@@ -39,9 +40,14 @@ vim.lsp.config('vtsls', {
 				quotePreference = 'single',
 			},
 			inlayHints = {
-				parameterNames = { enabled = 'literals' },
-				parameterTypes = { enabled = true },
-				variableTypes = { enabled = true },
+				parameterNames = {
+					enabled = 'all',
+					suppressWhenArgumentMatchesName = false,
+				},
+				parameterTypes = {
+					enabled = true,
+				},
+				variableTypes = { enabled = false },
 				propertyDeclarationTypes = { enabled = true },
 				functionLikeReturnTypes = { enabled = true },
 				enumMemberValues = { enabled = true },

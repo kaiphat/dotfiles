@@ -1,6 +1,7 @@
-config-file = ./fonts/mononoki
-config-file = ./themes/poimandres_dark
+config-file = ./fonts/tx
+config-file = ./themes/rose_pine_light
 custom-shader-animation = true
+#custom-shader = ./shaders/cursor.glsl
 
 font-thicken = true
 fullscreen = true
@@ -16,6 +17,7 @@ cursor-style = block
 #cursor-text = #112233
 cursor-color = #f4b8e4
 cursor-text = #000000
+scrollbar = never
 
 window-vsync = true
 window-padding-x = 10

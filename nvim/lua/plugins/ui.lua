@@ -111,7 +111,12 @@ return {
 	{
 		'j-hui/fidget.nvim',
 		opts = {
-			-- options
+			notification = {
+				window = {
+					x_padding = 0,
+					-- border = 'rounded',
+				},
+			},
 		},
 	},
 }

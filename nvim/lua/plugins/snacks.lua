@@ -8,6 +8,7 @@ local grep_always_excludes = {
 	'Cargo.lock',
 	'coverage/',
 	'package-lock.json',
+	'pnpm-lock.yaml',
 }
 
 local grep_exclude = kaiphat.utils.concat(grep_always_excludes, {
@@ -23,14 +24,40 @@ local grep_exclude = kaiphat.utils.concat(grep_always_excludes, {
 	'*.json',
 })
 
+local function open_commit(picker, item)
+	local file = kaiphat.utils.exec_nu(
+		'nu -l ~/dotfiles/nvim/lua/scripts/open_commit.nu %s %s %s',
+		item.cwd,
+		item.file,
+		item.commit
+	)
+
+	if vim.trim(file) == '' then
+		print 'File not found in the commit'
+		return
+	end
+
+	picker:close()
+	vim.cmd 'vs'
+	vim.schedule(function()
+		vim.cmd('e ' .. file)
+	end)
+end
+
 return {
 	'folke/snacks.nvim',
-	priority = 2000,
+	priority = 950,
 	lazy = false,
 	event = 'VeryLazy',
 	enabled = true,
 	keys = {
 		-- lazygit
+		{
+			'<leader>p',
+			function()
+				Snacks.picker()
+			end,
+		},
 		{
 			'<leader>gl',
 			function()
@@ -48,12 +75,13 @@ return {
 		{
 			'<leader>fj',
 			function()
-				Snacks.picker.files {
-					exclude = {
-						'test',
-						'__tests__',
-					},
-				}
+				Snacks.picker.smart {}
+				-- Snacks.picker.files {
+				-- 	exclude = {
+				-- 		'test',
+				-- 		'__tests__',
+				-- 	},
+				-- }
 			end,
 		},
 		{
@@ -115,6 +143,7 @@ return {
 		{
 			'<leader>fl',
 			function()
+				-- TODO try to use simple search instead of regexp and add mapping to enable regexp
 				Snacks.picker.grep {
 					exclude = grep_exclude,
 				}
@@ -177,7 +206,7 @@ return {
 		{
 			'<leader>fg',
 			function()
-				Snacks.picker.git_status {}
+				Snacks.picker.git_grep_hunks {}
 			end,
 		},
 		{
@@ -245,24 +274,50 @@ return {
 				}
 			end,
 		},
-		{
-			'<leader>fw',
-			function()
-				Snacks.picker.lsp_workspace_symbols {
-					filter = {
-						default = true,
-					},
-				}
-			end,
-		},
+		-- not working with ts lsp
+		-- working with vtsls
+		-- {
+		-- 	'<leader>fw',
+		-- 	function()
+		-- 		Snacks.picker.lsp_workspace_symbols {
+		-- 			filter = {
+		-- 				default = true,
+		-- 			},
+		-- 		}
+		-- 	end,
+		-- },
 		{
 			'<leader>fr',
 			function()
 				Snacks.picker.lines {}
+				--
+				-- local curr_path = kaiphat.utils.get_full_path()
+				--
+				-- Snacks.picker.grep {
+				-- 	buffers = true,
+				-- 	transform = function(item)
+				-- 		local path = item.cwd and vim.fn.fnamemodify(item.cwd .. '/' .. item.file, ':p') or item.file
+				--
+				-- 		return curr_path == path
+				-- 	end,
+				-- 	layout = {
+				-- 		preview = 'main',
+				-- 		preset = 'ivy',
+				-- 	},
+				-- 	on_show = function(picker)
+				-- 		local cursor = vim.api.nvim_win_get_cursor(picker.main)
+				-- 		local info = vim.api.nvim_win_call(picker.main, vim.fn.winsaveview)
+				-- 		picker.list:view(cursor[1], info.topline)
+				-- 		picker:show_preview()
+				-- 	end,
+				-- 	sort = { fields = { 'score:desc', 'idx' } },
+				-- 	jump = { match = true },
+				-- 	main = { current = true },
+				-- }
 			end,
 		},
 		{
-			'<leader>fe',
+			'<leader>fs',
 			function()
 				Snacks.picker.lsp_symbols {
 					-- tree = false,
@@ -295,47 +350,45 @@ return {
 			end,
 		},
 		{
-			'<leader>fs',
-			function()
-				Snacks.picker.git_log_file {
-					confirm = 'open',
-				}
-			end,
-		},
-		{
 			'<leader>fc',
 			function()
 				Snacks.picker.git_log_file {
-					confirm = function(picker, item)
-						local file = kaiphat.utils.exec_nu(
-							'nu -l ~/dotfiles/nvim/lua/scripts/open_commit.nu %s %s %s',
-							item.cwd,
-							item.file,
-							item.commit
-						)
-
-						if vim.trim(file) == '' then
-							print 'File not found in the commit'
-							return
-						end
-
-						picker:close()
-						vim.cmd 'vs'
-						vim.schedule(function()
-							vim.cmd('e ' .. file)
-						end)
-					end,
+					confirm = open_commit,
 				}
 			end,
 		},
 		{
-			'<leader>fd',
+			'<leader>fq',
 			function()
-				Snacks.picker.git_diff {
-					base = 'origin/master',
+				Snacks.picker.git_log_line {
+					confirm = open_commit,
 				}
 			end,
 		},
+		{
+			'<leader>fn',
+			function()
+				Snacks.picker.diagnostics {}
+			end,
+		},
+		{
+			'<leader>fa',
+			function()
+				Snacks.picker.lsp_symbols {
+					layout = {
+						preset = 'vscode',
+						hidden = {},
+						preview = 'main',
+					},
+				}
+			end,
+		},
+		-- {
+		-- 	'<leader>fe',
+		-- 	function()
+		-- 		Snacks.explorer {}
+		-- 	end,
+		-- },
 		-- {
 		-- 	'<leader>fd',
 		-- 	function()
@@ -404,16 +457,6 @@ return {
 		-- 		}
 		-- 	end,
 		-- },
-		{
-			'<leader>e',
-			function()
-				Snacks.picker.explorer {
-					cwd = kaiphat.utils.get_current_dir(),
-					follow_file = true,
-					matcher = {},
-				}
-			end,
-		},
 	},
 	opts = {
 		lazygit = {
@@ -458,7 +501,7 @@ return {
 							end
 						end,
 						min_width = 80,
-						height = 0.8,
+						height = 0.9,
 						min_height = 30,
 						box = 'vertical',
 						border = 'none',
@@ -504,9 +547,122 @@ return {
 			},
 			sources = {
 				explorer = {
+					win = {
+						input = {
+							keys = {
+								-- ['o'] = {
+								-- 	'explorer_add',
+								-- 	mode = { 'i', 'n' },
+								-- },
+							},
+						},
+						list = {
+							keys = {
+								['o'] = {
+									'explorer_add',
+									mode = { 'i', 'n' },
+								},
+								['<Tab>'] = {
+									'select',
+									mode = { 'i', 'n' },
+								},
+							},
+						},
+					},
+					actions = {
+						select = function(picker)
+							picker.list:select()
+						end,
+					},
 					layout = {
 						preset = 'sidebar',
+						layout = {
+							width = 55,
+						},
 					},
+				},
+
+				git_grep_hunks = {
+					supports_live = false,
+					format = function(item, picker)
+						local file_format = Snacks.picker.format.file(item, picker)
+						vim.api.nvim_set_hl(0, 'SnacksPickerGitGrepLineNew', { link = 'Added' })
+						vim.api.nvim_set_hl(0, 'SnacksPickerGitGrepLineOld', { link = 'Removed' })
+						if item.sign == '+' then
+							file_format[#file_format - 1][2] = 'SnacksPickerGitGrepLineNew'
+						else
+							file_format[#file_format - 1][2] = 'SnacksPickerGitGrepLineOld'
+						end
+						return file_format
+					end,
+					finder = function(_, ctx)
+						local success, git_root = pcall(kaiphat.utils.get_git_root)
+
+						if not success then
+							vim.notify 'Not a git repository'
+							return
+						end
+
+						local hcount = 0
+						local header = {
+							file = '',
+							old = { start = 0, count = 0 },
+							new = { start = 0, count = 0 },
+						}
+
+						local sign_count = 0
+
+						return require('snacks.picker.source.proc').proc(
+							ctx:opts {
+								cmd = 'git',
+								args = { 'diff', '--unified=0' },
+								transform = function(item)
+									local line = item.text
+									-- [[Header]]
+									if line:match '^diff' then
+										hcount = 3
+									elseif hcount > 0 then
+										if hcount == 1 then
+											local git_root_relative_path = line:sub(7)
+											local full_path =
+												vim.fn.fnamemodify(git_root .. '/' .. git_root_relative_path, ':p')
+											header.file = full_path
+										end
+										hcount = hcount - 1
+									elseif line:match '^@@' then
+										local parts = vim.split(line:match '@@ ([^@]+) @@', ' ')
+										local old_start, old_count = parts[1]:match '-(%d+),?(%d*)'
+										local new_start, new_count = parts[2]:match '+(%d+),?(%d*)'
+										header.old.start, header.old.count =
+											tonumber(old_start), tonumber(old_count) or 1
+										header.new.start, header.new.count =
+											tonumber(new_start), tonumber(new_count) or 1
+										sign_count = 0
+									-- [[Body]]
+									elseif not line:match '^[+-]' then
+										sign_count = 0
+									elseif line:match '^[+-]%s*$' then
+										sign_count = sign_count + 1
+									else
+										item.sign = line:sub(1, 1)
+										vim.print(header)
+										item.file = header.file
+										item.line = line:sub(2)
+										if item.sign == '+' then
+											item.pos = { header.new.start + sign_count, 0 }
+											sign_count = sign_count + 1
+										else
+											item.pos = { header.new.start, 0 }
+											sign_count = 0
+										end
+										return true
+									end
+									return false
+								end,
+							},
+							ctx
+						)
+					end,
 				},
 			},
 		},
@@ -527,6 +683,10 @@ return {
 			},
 		},
 
+		scope = {
+			enabled = false,
+		},
+
 		image = {
 			enabled = true,
 		},
@@ -545,7 +705,7 @@ return {
 		},
 
 		explorer = {
-			enabled = true,
+			enabled = false,
 			replace_netrw = true,
 		},
 	},

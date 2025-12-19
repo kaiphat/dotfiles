@@ -20,7 +20,7 @@ cmd('DeleteSpaces', function()
 end)
 
 cmd('CopyFilePath', function()
-	vim.cmd 'silent! let @+=expand("%:p")'
+	vim.cmd 'silent! let @+=expand("%:r")'
 	print 'File path was yanked'
 end)
 
@@ -82,8 +82,9 @@ end)
 
 cmd('RunTest', function()
 	local relative_path = kaiphat.utils.get_relative_path()
+	local full_path = kaiphat.utils.get_full_path()
 
-	kaiphat.utils.exec_nu('nu ~/dotfiles/nvim/lua/scripts/run_test.nu %s', relative_path)
+	kaiphat.utils.exec_nu('nu ~/dotfiles/nvim/lua/scripts/run_test.nu %s %s', relative_path, full_path)
 end)
 
 cmd('CopyGitHubFileLink', function()
@@ -166,3 +167,10 @@ cmd('Testaaaa', function()
 		title_pos = 'left',
 	})
 end)
+
+cmd('RandomColor', function(opts)
+	local group = opts.fargs[1]
+	local random_hex = string.format('#%06x', math.random(0, 0xFFFFFF))
+	vim.print(random_hex)
+	vim.api.nvim_set_hl(0, group, { fg = random_hex })
+end, { nargs = '*' })

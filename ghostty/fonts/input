@@ -1,6 +1,7 @@
 font-size = 11
 
-font-thicken-strength = 150
+font-thicken-strength = 10
+
 font-family = Input
 font-style = Regular
 font-family-bold = Input

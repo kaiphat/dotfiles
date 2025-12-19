@@ -185,13 +185,53 @@ return {
 			for _, server in ipairs {
 				'lua_ls',
 				'nushell',
-				'vtsls',
+				-- 'vtsls',
 				'eslint',
 				'rust_analyzer',
 				-- 'denols',
 			} do
 				vim.lsp.enable(server)
 			end
+		end,
+	},
+
+	{
+		'pmizio/typescript-tools.nvim',
+		dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+		config = function()
+			require('typescript-tools').setup {
+				on_attach = function(client, bufnr)
+					vim.keymap.set('n', '<leader>ti', function()
+						vim.cmd 'TSToolsAddMissingImports'
+					end, { buffer = bufnr })
+
+					vim.keymap.set('n', '<leader>tr', function()
+						vim.cmd 'TSToolsRenameFile'
+					end, { buffer = bufnr })
+
+					vim.keymap.set('n', '<leader>td', function()
+						vim.cmd 'TSToolsRemoveUnusedImports'
+					end, { buffer = bufnr })
+
+					vim.keymap.set('n', '<leader>to', function()
+						vim.cmd 'TSToolsOrganizeImports'
+					end, { buffer = bufnr })
+				end,
+				settings = {
+					tsserver_file_preferences = {
+						includeInlayParameterNameHints = 'all',
+						includeCompletionsForModuleExports = true,
+						quotePreference = 'auto',
+					},
+					tsserver_format_options = {
+						allowIncompleteCompletions = false,
+						allowRenameOfImportPath = false,
+						insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
+						insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = false,
+						insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
+					},
+				},
+			}
 		end,
 	},
 

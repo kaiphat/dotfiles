@@ -63,6 +63,7 @@ o.autoindent = true
 o.smartindent = true
 o.copyindent = false
 o.ignorecase = true
+o.smartcase = true
 o.ruler = false
 o.cursorline = false
 o.cursorcolumn = false
@@ -96,7 +97,8 @@ o.fillchars = {
 	foldopen = '',
 	foldclose = '',
 	diff = '╱',
-	lastline = ' ',
+	-- not working ???!
+	lastline = '·',
 	stl = ' ',
 	stlnc = ' ',
 }

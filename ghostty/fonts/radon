@@ -11,9 +11,9 @@ font-style-italic = Light
 font-family-bold-italic = Monaspace Radon
 font-style-bold-italic = Light
 
-adjust-cell-width = -1
+adjust-cell-width = 0
 adjust-font-baseline = 0
 adjust-cell-height = 3
 adjust-cursor-height = 0
 
-font-thicken-strength = 190
+font-thicken-strength = 50

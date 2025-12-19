@@ -1,62 +1,62 @@
--- vim.treesitter.query.set(
--- 	'typescript',
--- 	'injections',
--- 	[[
---         (
---             (template_string (string_fragment) @injection.content)
---             (#match? @injection.content "FROM|ALTER|SELECT|CREATE|UPDATE|DELETE|INSERT|WITH")
---             (#set! injection.language "sql")
---         )
---
---         (
---             (template_string (string_fragment) @injection.content)
---             (#match? @injection.content "local|redis")
---             (#set! injection.language "lua")
---         )
---
---         (
---             (comment) @injection.content
---             (#match? @injection.content "^/\\*\\*")
---             (#set! injection.language "jsdoc")
---         )
---     ]]
--- )
---
-local languges = {
-	'javascript',
-	'rust',
+vim.treesitter.query.set(
 	'typescript',
-	'toml',
-	'yaml',
-	'vim',
-	'tsx',
-	'markdown',
-	'json',
-	'jsdoc',
-	'lua',
-	'make',
-	'css',
-	'html',
-	'scss',
-	'dockerfile',
-	'fish',
-	'glimmer',
-	'scheme',
-	'sql',
-	'python',
-	'bash',
-	'regex',
-	'kdl',
-	'proto',
-	'markdown_inline',
-	'nu',
-	'graphql',
-	'latex',
-	'norg',
-	'svelte',
-	'typst',
-	'vue',
-	'ecma',
+	'injections',
+	[[
+        (
+            (template_string (string_fragment) @injection.content)
+            (#match? @injection.content "FROM|ALTER|SELECT|CREATE|UPDATE|DELETE|INSERT|WITH")
+            (#set! injection.language "sql")
+        )
+
+        (
+            (template_string (string_fragment) @injection.content)
+            (#match? @injection.content "local|redis")
+            (#set! injection.language "lua")
+        )
+
+        (
+            (comment) @injection.content
+            (#match? @injection.content "^/\\*\\*")
+            (#set! injection.language "jsdoc")
+        )
+    ]]
+)
+
+local languges = {
+'javascript',
+'rust',
+'typescript',
+'toml',
+'yaml',
+'vim',
+'tsx',
+'markdown',
+'json',
+'jsdoc',
+'lua',
+'make',
+'css',
+'html',
+'scss',
+'dockerfile',
+'fish',
+'glimmer',
+'scheme',
+'sql',
+'python',
+'bash',
+'regex',
+'kdl',
+'proto',
+'markdown_inline',
+'nu',
+'graphql',
+'latex',
+'norg',
+'svelte',
+'typst',
+'vue',
+'ecma',
 }
 
 return {
@@ -73,7 +73,7 @@ return {
 			},
 		},
 		opts = {
-			max_lines = 2,
+			max_lines = 3,
 		},
 	},
 
@@ -94,6 +94,7 @@ return {
 			require('nvim-treesitter').install(languges)
 
 			vim.api.nvim_create_autocmd('FileType', {
+				group = kaiphat.utils.create_augroup 'treesitter_indent',
 				callback = function(info)
 					if vim.treesitter.language.add(vim.bo[info.buf].filetype) then
 						vim.bo.indentexpr = 'v:lua.require("nvim-treesitter").indentexpr()'

@@ -1,4 +1,10 @@
-export def main [path] {
+export def main [path full_path] {
+    if ($full_path =~ 'rdc_social_network') {
+        tmux respawn-pane -t 1 -k $'nu -e "pnpm test ($path)"';
+
+        return
+    }
+
     let container_name = docker ps -a 
         | from ssv -a 
         | where NAMES =~ 'reservecool-test'

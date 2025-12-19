@@ -1,29 +1,31 @@
 return {
 	{
-		'MeanderingProgrammer/markdown.nvim',
-		ft = 'markdown',
-		name = 'render-markdown',
+		'MeanderingProgrammer/render-markdown.nvim',
+		ft = { 'markdown' },
 		dependencies = {
 			'nvim-treesitter/nvim-treesitter',
 			'echasnovski/mini.icons',
 		},
 		enabled = true,
 		config = function()
+			vim.treesitter.language.register('markdown', 'copilot-chat')
+
 			require('render-markdown').setup {
-				heading = {
-					sign = false,
-					icons = { '◇ ', '◇ ', '◇ ', '◇ ', '◇ ', '◇ ' },
-				},
-				code = {
-					style = 'normal',
-					width = 'full',
-					border = 'thick',
-				},
+				file_types = { 'markdown', 'copilot-chat' },
+				-- heading = {
+				-- 	sign = true,
+				-- 	icons = { '◇ ', '◇ ', '◇ ', '◇ ', '◇ ', '◇ ' },
+				-- },
+				-- code = {
+				-- 	style = 'normal',
+				-- 	width = 'full',
+				-- 	border = 'thick',
+				-- },
 				bullet = {
 					icons = { '•', '◦', '■', '◇ ' },
 				},
 				completions = {
-					blink = {
+					lsp = {
 						enabled = true,
 					},
 				},

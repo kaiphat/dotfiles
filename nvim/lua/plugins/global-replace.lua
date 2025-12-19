@@ -1,22 +1,5 @@
 return {
 	{
-
-		'nvim-pack/nvim-spectre',
-		enabled = false,
-		keys = {
-			{
-				'<leader>r',
-				function()
-					require('plugins.global-replace').toggle()
-				end,
-			},
-		},
-		config = function()
-			require('plugins.global-replace').setup()
-		end,
-	},
-
-	{
 		'MagicDuck/grug-far.nvim',
 		keys = {
 			{

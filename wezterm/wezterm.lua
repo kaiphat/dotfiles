@@ -1,9 +1,9 @@
 local wezterm = require 'wezterm'
 local font_config = require 'wezterm.fonts'
-local theme = require 'wezterm.themes.poimandres_dark'
+local theme = require 'wezterm.themes.rose_pine_light'
 local config = require 'wezterm.config'
 
-config.set(font_config.build_font(font_config.fonts.proto))
+config.set(font_config.build_font(font_config.fonts.tx))
 config.set(theme)
 config.set {
 	window_content_alignment = {

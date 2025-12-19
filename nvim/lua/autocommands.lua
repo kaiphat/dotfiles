@@ -55,6 +55,10 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'VimLeavePre' }, {
 			return
 		end
 
+		if vim.bo.filetype == 'fyler' then
+			return
+		end
+
 		if event.file == '' then
 			return
 		end
@@ -85,12 +89,12 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'VimLeavePre' }, {
 -- 	end,
 -- })
 
-local FOCUSED_WIDTH = 100
-local MIN_WIDTH = 5
-local SUPPORTED_BUF_TYPES = {
-	[''] = true,
-	acwrite = true,
-}
+-- local FOCUSED_WIDTH = 100
+-- local MIN_WIDTH = 5
+-- local SUPPORTED_BUF_TYPES = {
+-- 	[''] = true,
+-- 	acwrite = true,
+-- }
 
 -- vim.api.nvim_create_autocmd({ 'WinEnter', 'VimResized' }, {
 -- 	callback = function()

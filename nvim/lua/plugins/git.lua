@@ -41,10 +41,4 @@ return {
 			}
 		end,
 	},
-
-	{
-		'tpope/vim-fugitive',
-		enabled = false,
-		config = function() end,
-	},
 }

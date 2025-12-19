@@ -20,8 +20,8 @@ return {
 				return 1
 			end,
 			frecency = {
-                enabled = true
-            },
+				enabled = true,
+			},
 			use_proximity = true,
 			sorts = {
 				-- 'exact',
@@ -53,6 +53,10 @@ return {
 						timeout_ms = 400,
 					},
 				},
+			},
+
+			trigger = {
+				show_on_blocked_trigger_characters = { ' ', '\n', '\t', '@' },
 			},
 
 			ghost_text = {

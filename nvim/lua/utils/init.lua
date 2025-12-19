@@ -55,6 +55,14 @@ function M.exec_nu(...)
 	return vim.fn.system(string.format('nu -c "%s"', string.format(...)))
 end
 
+function M.exec(cmd)
+	return vim.trim(vim.fn.system(cmd))
+end
+
+function M.get_git_root()
+	return M.exec 'git rev-parse --show-toplevel'
+end
+
 function M.get_git_branch()
 	local git_branch = vim.fn.systemlist('git branch --show-current')[1]
 	if string.find(git_branch, 'fatal') then

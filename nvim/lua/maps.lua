@@ -138,7 +138,7 @@ map('v', '<leader>us', function()
 	vim.api.nvim_input ':s/'
 end)
 local function substitute()
-	local current_buf = vim.api.nvim_get_current_buf()
+	local win = vim.api.nvim_get_current_win()
 	local start_pos = vim.fn.getpos 'v'
 	local end_pos = vim.fn.getpos '.'
 
@@ -175,6 +175,9 @@ local function substitute()
 			end
 			local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
 			local new_word = vim.trim(lines[1])
+
+			vim.api.nvim_set_current_win(win)
+
 			vim.schedule(function()
 				vim.cmd('let @/="' .. word .. '"') -- path to register to call witn n or p
 				vim.cmd('let @+="' .. new_word .. '"')
@@ -228,3 +231,5 @@ end)
 -- vim.keymap.set('x', 'an', function()
 -- 	vim.lsp.buf.selection_range(1)
 -- end, { desc = 'vim.lsp.buf.selection_range(\'outer\')' })
+
+--map('n', '<Enter>', function() end)

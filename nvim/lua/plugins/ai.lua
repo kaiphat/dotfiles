@@ -52,6 +52,14 @@ return {
 	{
 		'CopilotC-Nvim/CopilotChat.nvim',
 		enabled = true,
+		dependencies = {
+			{ 'nvim-lua/plenary.nvim', branch = 'master' },
+			{
+				'MeanderingProgrammer/render-markdown.nvim',
+				ft = { 'markdown', 'copilot-chat' },
+			},
+		},
+		build = 'make tiktoken',
 		keys = {
 			{
 				'<leader>cc',
