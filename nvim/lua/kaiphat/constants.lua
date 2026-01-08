@@ -1,6 +1,6 @@
-local module = {}
+local M = {}
 
-module.icons = {
+M.icons = {
 	CIRCLE_SMALL = '•',
 	CIRCLE_MEDIUM = '󰧞',
 	CIRCLE_LARGE = '',
@@ -22,4 +22,4 @@ module.icons = {
 	SEMICOLON = ';',
 }
 
-kaiphat.constants = module
+kaiphat.constants = M

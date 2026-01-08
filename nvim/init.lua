@@ -1,9 +1,7 @@
 _G.kaiphat = {}
 
-require 'utils'
+require 'kaiphat'
 require 'options'
-require 'scripts'
-require 'constants'
 require 'autocommands'
 require 'commands'
 require 'maps'
