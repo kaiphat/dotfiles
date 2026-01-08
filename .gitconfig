@@ -66,6 +66,7 @@
     ra  = rebase --abort
     cp  = cherry-pick
     create-pr = !sh -c 'gh pr create --fill-first -w'
+    add-then-diff = !sh -c 'git add -A && git diff --unified=0 HEAD'
 
 [difftool]
     prompt = true

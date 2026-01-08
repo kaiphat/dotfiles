@@ -25,6 +25,6 @@ local themes = {
 	material_dark = 'material_dark',
 }
 
-vim.o.background = 'light'
+vim.o.background = 'dark'
 
-return require('themes.' .. themes.rose_pine_light)
+return require('themes.' .. themes.rose_pine_dark)

@@ -32,9 +32,7 @@ return {
 					end
 					local relpath = vim.fn.fnamemodify(dir .. entry.name, ':.')
 
-					vim.fn.setreg('+', relpath)
-
-					print('Path yanked: ' .. relpath)
+					kaiphat.utils.copy_into_clipboard(relpath)
 				end, { buffer = event.buf })
 			end,
 		})

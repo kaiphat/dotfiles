@@ -60,7 +60,7 @@ return {
 
 				lsp = {
 					progress = {
-						enabled = true,
+						enabled = false,
 						format = 'lsp_progress',
 						format_done = 'lsp_progress_done',
 						throttle = 1000 / 30, -- frequency to update lsp progress message
@@ -118,5 +118,50 @@ return {
 				},
 			},
 		},
+	},
+
+	{
+		'folke/which-key.nvim',
+		event = 'VeryLazy',
+		opts = {
+			preset = 'helix',
+			delay = 800,
+		},
+		keys = {
+			{
+				'<leader>?',
+				function()
+					require('which-key').show { global = false }
+				end,
+				desc = 'Buffer Local Keymaps (which-key)',
+			},
+		},
+	},
+
+	{
+		'kevinhwang91/nvim-hlslens',
+		event = 'BufEnter',
+		config = function()
+			require('hlslens').setup {
+				nearest_only = true,
+			}
+
+			local opts = { noremap = true, silent = true }
+
+			vim.api.nvim_set_keymap(
+				'n',
+				'n',
+				[[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+				opts
+			)
+			vim.api.nvim_set_keymap(
+				'n',
+				'N',
+				[[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+				opts
+			)
+			vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], opts)
+			vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], opts)
+		end,
 	},
 }

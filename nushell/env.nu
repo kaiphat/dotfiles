@@ -36,6 +36,7 @@ $env.PATH ++= [
     /opt/homebrew/opt/openjdk/bin
     $'($HOME)/.config/carapace/bin'
     $'($HOME)/go/bin'
+    $'($HOME)/.local/bin'
     $'($HOME)/.cargo/bin'
     $'($HOME)/.krew/bin'
 ]

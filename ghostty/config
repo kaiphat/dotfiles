@@ -1,5 +1,5 @@
-config-file = ./fonts/tx
-config-file = ./themes/rose_pine_light
+config-file = ./fonts/input
+config-file = ./themes/rose_pine_dark
 custom-shader-animation = true
 #custom-shader = ./shaders/cursor.glsl
 

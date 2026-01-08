@@ -8,7 +8,7 @@ g.markdown_folding = 1
 local TAB_SIZE = 4
 
 -- enable new messages ui
-require('vim._extui').enable {}
+-- require('vim._extui').enable {}
 
 o.winborder = 'rounded'
 

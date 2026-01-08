@@ -100,6 +100,7 @@ return {
 				},
 				mappings = {
 					['/'] = 'noop',
+					['<C-f>'] = 'fuzzy_finder',
 					['f'] = 'filter_on_submit',
 					['F'] = 'clear_filter',
 					['S'] = 'open_split',
@@ -164,6 +165,10 @@ return {
 					['d'] = 'delete',
 					['r'] = 'rename',
 					['y'] = 'copy_to_clipboard',
+					['<C-y>'] = function(state)
+						local node = state.tree:get_node()
+						kaiphat.utils.copy_into_clipboard(node.name)
+					end,
 					['x'] = 'cut_to_clipboard',
 					['p'] = 'paste_from_clipboard',
 					['c'] = 'copy',
@@ -206,7 +211,7 @@ return {
 				},
 
 				follow_current_file = {
-					enabled = true,
+					enabled = false,
 				},
 			},
 		}

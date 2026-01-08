@@ -1,6 +1,6 @@
-kaiphat.scripts = {}
+local M = {}
 
-kaiphat.scripts.lazygit_open_file = function(filename, line_number)
+M.lazygit_open_file = function(filename, line_number)
 	line_number = tonumber(line_number) or 1
 
 	vim.api.nvim_feedkeys('q', 'n', true)
@@ -10,3 +10,5 @@ kaiphat.scripts.lazygit_open_file = function(filename, line_number)
 		vim.api.nvim_command('edit +' .. line_number .. ' ' .. filename)
 	end)
 end
+
+kaiphat.scripts = M

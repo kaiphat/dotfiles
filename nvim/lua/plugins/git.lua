@@ -2,11 +2,31 @@ return {
 	{
 		'sindrets/diffview.nvim',
 		keys = {
-			{ '<leader>gd', '<cmd>DiffviewOpen<cr>' },
-			{ '<leader>gp', '<cmd>DiffviewOpen HEAD~1<cr>' },
-			{ '<leader>gc', '<cmd>DiffviewClose<cr>' },
-			{ '<leader>gf', '<cmd>DiffviewFileHistory %<cr>' },
-			{ '<leader>gm', '<cmd>DiffviewOpen origin/master...HEAD --imply-local<cr>' },
+			{
+				'<leader>gd',
+				'<cmd>DiffviewOpen<cr>',
+				desc = 'Open Diffview',
+			},
+			{
+				'<leader>gp',
+				'<cmd>DiffviewOpen HEAD~1<cr>',
+				desc = 'Open Diffview for previous commit',
+			},
+			{
+				'<leader>gc',
+				'<cmd>DiffviewClose<cr>',
+				desc = 'Close Diffview',
+			},
+			{
+				'<leader>gf',
+				'<cmd>DiffviewFileHistory %<cr>',
+				desc = 'Open Diffview file history for current file',
+			},
+			{
+				'<leader>gm',
+				'<cmd>DiffviewOpen origin/master...HEAD --imply-local<cr>',
+				desc = 'Open Diffview for changes with master',
+			},
 		},
 		config = function()
 			require('diffview').setup {

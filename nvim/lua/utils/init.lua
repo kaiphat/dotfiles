@@ -75,4 +75,10 @@ function M.get_root_dir()
 	return vim.loop.cwd()
 end
 
+function M.copy_into_clipboard(str)
+	vim.fn.setreg('+', str)
+
+	print('Copied: ' .. str)
+end
+
 kaiphat.utils = M

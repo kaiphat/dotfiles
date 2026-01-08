@@ -7,8 +7,8 @@ return {
 	config = function()
 		require('aerial').setup {
 			layout = {
-				max_width = { 100, 0.3 },
-				width = 80,
+				max_width = { 70, 0.3 },
+				width = 40,
 				min_width = 10,
 				placement = 'editor',
 				default_direction = 'left',

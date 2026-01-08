@@ -57,32 +57,25 @@ return {
 			function()
 				Snacks.picker()
 			end,
-		},
-		{
-			'<leader>gl',
-			function()
-				Snacks.lazygit()
-			end,
-		},
-		{
-			'<leader>gL',
-			function()
-				Snacks.lazygit.log_file()
-			end,
+			desc = 'Open Snacks Picker',
 		},
 
 		-- picker
 		{
 			'<leader>fj',
 			function()
-				Snacks.picker.smart {}
-				-- Snacks.picker.files {
-				-- 	exclude = {
-				-- 		'test',
-				-- 		'__tests__',
-				-- 	},
-				-- }
+				Snacks.picker.files {
+					sort = {
+						fields = { 'score:desc', 'idx' },
+					},
+
+					-- exclude = {
+					-- 'test',
+					-- '__tests__',
+					-- },
+				}
 			end,
+			desc = 'Find files (smart)',
 		},
 		{
 			'<leader>fJ',
@@ -93,6 +86,7 @@ return {
 					hidden = true,
 				}
 			end,
+			desc = 'Find files in current dir',
 		},
 		{
 			'<leader>es',
@@ -103,6 +97,7 @@ return {
 					cwd = '~/secrets',
 				}
 			end,
+			desc = 'Find files in secrets',
 		},
 		{
 			'<leader>ec',
@@ -113,6 +108,7 @@ return {
 					cwd = '~/dotfiles',
 				}
 			end,
+			desc = 'Find files in dotfiles',
 		},
 		{
 			'<leader>en',
@@ -123,12 +119,14 @@ return {
 					cwd = '~/notes',
 				}
 			end,
+			desc = 'Find files in notes',
 		},
 		{
 			'<leader>dj',
 			function()
 				Snacks.picker.files {}
 			end,
+			desc = 'Find files (all)',
 		},
 		{
 			'<leader>dJ',
@@ -138,16 +136,18 @@ return {
 					hidden = true,
 				}
 			end,
+			desc = 'Find files (all including ignored and hidden)',
 		},
 
 		{
 			'<leader>fl',
 			function()
-				-- TODO try to use simple search instead of regexp and add mapping to enable regexp
+				-- use <A-r> to disable regex
 				Snacks.picker.grep {
 					exclude = grep_exclude,
 				}
 			end,
+			desc = 'Grep (exclude common dirs)',
 		},
 		{
 			'<leader>dl',
@@ -156,6 +156,7 @@ return {
 					exclude = grep_always_excludes,
 				}
 			end,
+			desc = 'Grep (exclude always excluded dirs)',
 		},
 		{
 			'<leader>fL',
@@ -164,6 +165,7 @@ return {
 					cwd = kaiphat.utils.get_current_dir(),
 				}
 			end,
+			desc = 'Grep in current dir',
 		},
 		{
 			'<leader>dL',
@@ -172,12 +174,14 @@ return {
 					args = { '-U' },
 				}
 			end,
+			desc = 'Grep (no excludes)',
 		},
 		{
 			'<leader>fp',
 			function()
 				Snacks.picker.resume()
 			end,
+			desc = 'Resume last picker',
 		},
 		{
 			'<leader>fo',
@@ -196,18 +200,21 @@ return {
 					},
 				}
 			end,
+			desc = 'Open recent files',
 		},
 		{
 			'<leader>fb',
 			function()
 				Snacks.picker.buffers {}
 			end,
+			desc = 'Open buffers',
 		},
 		{
 			'<leader>fg',
 			function()
-				Snacks.picker.git_grep_hunks {}
+				Snacks.picker.git_diff {}
 			end,
+			desc = 'Git grep hunks',
 		},
 		{
 			'<leader>fh',
@@ -217,6 +224,7 @@ return {
 				}
 			end,
 			mode = { 'n', 'v' },
+			desc = 'Grep word under cursor',
 		},
 		{
 			'<leader>dh',
@@ -226,6 +234,7 @@ return {
 				}
 			end,
 			mode = { 'n', 'v' },
+			desc = 'Grep word under cursor (no excludes)',
 		},
 		{
 			'<leader>fi',
@@ -256,6 +265,7 @@ return {
 					jump = { tagstack = true, reuse_win = false },
 				}
 			end,
+			desc = 'LSP references',
 		},
 		{
 			'<leader>fI',
@@ -264,6 +274,7 @@ return {
 					jump = { tagstack = true, reuse_win = false },
 				}
 			end,
+			desc = 'LSP implementations',
 		},
 		{
 			'<leader>di',
@@ -273,6 +284,7 @@ return {
 					jump = { tagstack = true, reuse_win = false },
 				}
 			end,
+			desc = 'LSP references (no filter)',
 		},
 		-- not working with ts lsp
 		-- working with vtsls
@@ -315,6 +327,7 @@ return {
 				-- 	main = { current = true },
 				-- }
 			end,
+			desc = 'Find lines in current buffer',
 		},
 		{
 			'<leader>fs',
@@ -342,12 +355,14 @@ return {
 					},
 				}
 			end,
+			desc = 'LSP symbols (filtered)',
 		},
 		{
 			'<leader>fm',
 			function()
 				Snacks.picker.help()
 			end,
+			desc = 'Help tags',
 		},
 		{
 			'<leader>fc',
@@ -356,6 +371,7 @@ return {
 					confirm = open_commit,
 				}
 			end,
+			desc = 'Git file commits',
 		},
 		{
 			'<leader>fq',
@@ -364,12 +380,14 @@ return {
 					confirm = open_commit,
 				}
 			end,
+			desc = 'Git line commits',
 		},
 		{
 			'<leader>fn',
 			function()
 				Snacks.picker.diagnostics {}
 			end,
+			desc = 'LSP diagnostics',
 		},
 		{
 			'<leader>fa',
@@ -382,6 +400,7 @@ return {
 					},
 				}
 			end,
+			desc = 'LSP symbols (all)',
 		},
 		-- {
 		-- 	'<leader>fe',
@@ -615,7 +634,7 @@ return {
 						return require('snacks.picker.source.proc').proc(
 							ctx:opts {
 								cmd = 'git',
-								args = { 'diff', '--unified=0' },
+								args = { 'diff' },
 								transform = function(item)
 									local line = item.text
 									-- [[Header]]
@@ -645,7 +664,6 @@ return {
 										sign_count = sign_count + 1
 									else
 										item.sign = line:sub(1, 1)
-										vim.print(header)
 										item.file = header.file
 										item.line = line:sub(2)
 										if item.sign == '+' then
