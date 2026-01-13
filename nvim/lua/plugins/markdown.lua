@@ -12,15 +12,18 @@ return {
 
 			require('render-markdown').setup {
 				file_types = { 'markdown', 'copilot-chat' },
-				-- heading = {
-				-- 	sign = true,
-				-- 	icons = { '◇ ', '◇ ', '◇ ', '◇ ', '◇ ', '◇ ' },
-				-- },
-				-- code = {
-				-- 	style = 'normal',
-				-- 	width = 'full',
-				-- 	border = 'thick',
-				-- },
+				heading = {
+					sign = false,
+					icons = { '◇ ', '◇ ', '◇ ', '◇ ', '◇ ', '◇ ' },
+				},
+				code = {
+					sign = false,
+					style = 'full',
+					width = 'full',
+					border = 'thick',
+					language = false,
+					language_icon = false,
+				},
 				bullet = {
 					icons = { '•', '◦', '■', '◇ ' },
 				},
@@ -28,6 +31,9 @@ return {
 					lsp = {
 						enabled = true,
 					},
+				},
+				dash = {
+					icon = '─',
 				},
 			}
 		end,

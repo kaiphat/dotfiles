@@ -169,23 +169,29 @@ return {
 			'nvimtools/none-ls.nvim',
 			'yioneko/nvim-vtsls',
 			'saghen/blink.cmp',
+			'antosha417/nvim-lsp-file-operations',
 		},
 		config = function()
-			vim.lsp.config('*', {
-				capabilities = require('blink.cmp').get_lsp_capabilities {
-					textDocument = {
-						semanticTokens = {
-							multilineTokenSupport = true,
-						},
+			local init_capabilities = {
+				textDocument = {
+					semanticTokens = {
+						multilineTokenSupport = true,
 					},
 				},
+			}
+
+			local capabilities =
+				vim.tbl_deep_extend('force', init_capabilities, require('lsp-file-operations').default_capabilities())
+
+			vim.lsp.config('*', {
+				capabilities = require('blink.cmp').get_lsp_capabilities(capabilities),
 				root_markers = { '.git' },
 			})
 
 			for _, server in ipairs {
 				'lua_ls',
 				'nushell',
-				-- 'vtsls',
+				'vtsls',
 				'eslint',
 				'rust_analyzer',
 				-- 'denols',
@@ -198,6 +204,7 @@ return {
 	{
 		'pmizio/typescript-tools.nvim',
 		dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+		enabled = false,
 		config = function()
 			require('typescript-tools').setup {
 				on_attach = function(client, bufnr)
@@ -280,5 +287,15 @@ return {
 				root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
 			}
 		end,
+	},
+
+	{
+		'antosha417/nvim-lsp-file-operations',
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+			'nvim-neo-tree/neo-tree.nvim',
+		},
+		event = 'LspAttach',
+		opts = {},
 	},
 }

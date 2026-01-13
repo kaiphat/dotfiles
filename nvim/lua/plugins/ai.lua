@@ -68,7 +68,20 @@ return {
 				end,
 			},
 		},
-		opts = {},
+		opts = {
+			headers = {
+				user = 'Me',
+				assistant = '🤖 Copilot',
+				tool = '🔧 Tool',
+			},
+			highlight_headers = false,
+			separator = '---',
+			error_header = '> [!ERROR] Error',
+			show_folds = false,
+			mappings = {
+				reset = { normal = '<C-l>ll', insert = '<C-l>ll' },
+			},
+		},
 	},
 
 	{

@@ -66,6 +66,8 @@ return {
 				hl.StatusLine = { bg = 'NONE', fg = c.comment }
 				hl.StatusLineNC = { bg = 'NONE', fg = c.comment }
 				hl.ColorColumn = { bg = c.fg_gutter }
+				hl.MiniCursorword = { underline = false, link = 'Visual' }
+				hl.MiniCursorwordCurrent = { link = 'MiniCursorword' }
 			end,
 		}
 

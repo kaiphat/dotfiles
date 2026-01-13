@@ -24,20 +24,36 @@ function Plugin:create_manager()
 end
 
 function Plugin:add_keymaps()
-	local indexes = 'abcdefghijklmnopqrstuvwxyz123456789'
+	map('m', function()
+		local ok, key = pcall(vim.fn.getchar)
 
-	for i = 1, #indexes do
-		local index = indexes:sub(i, i)
-		map('m' .. index, function()
-			self.manager:add_anchor(index)
-			self.current_buf_anchor_index = index
-			vim.notify('Marked as ' .. index)
-		end)
+		if not ok then
+			return
+		end
 
-		map([[']] .. index, function()
-			self.manager:load_buffer(index)
-		end)
-	end
+		if type(key) == 'number' then
+			local char = vim.fn.nr2char(key)
+
+			self.manager:add_anchor(char)
+			self.current_buf_anchor_index = char
+
+			vim.notify('Marked as ' .. char)
+		end
+	end)
+
+	map([[']], function()
+		local ok, key = pcall(vim.fn.getchar)
+
+		if not ok then
+			return
+		end
+
+		if type(key) == 'number' then
+			local char = vim.fn.nr2char(key)
+
+			self.manager:load_buffer(char)
+		end
+	end)
 
 	map('<leader>bs', function()
 		Snacks.picker {
@@ -75,10 +91,6 @@ function Plugin:add_keymaps()
 				end,
 			},
 		}
-	end)
-
-	map([['']], function()
-		self.manager:move_cursor_to_anchor()
 	end)
 end
 

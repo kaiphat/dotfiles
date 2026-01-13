@@ -31,6 +31,7 @@ local languges = {
 	'vim',
 	'tsx',
 	'markdown',
+	'markdown_inline',
 	'json',
 	'jsdoc',
 	'lua',
@@ -48,7 +49,6 @@ local languges = {
 	'regex',
 	'kdl',
 	'proto',
-	'markdown_inline',
 	'nu',
 	'graphql',
 	'latex',
@@ -95,7 +95,13 @@ return {
 			vim.api.nvim_create_autocmd('FileType', {
 				group = kaiphat.utils.create_augroup 'treesitter_indent',
 				callback = function(info)
-					if vim.treesitter.language.add(vim.bo[info.buf].filetype) then
+					local ft = vim.bo[info.buf].filetype
+
+					if ft == 'copilot-chat' then
+						ft = 'markdown'
+					end
+
+					if vim.treesitter.language.add(ft) then
 						vim.bo.indentexpr = 'v:lua.require("nvim-treesitter").indentexpr()'
 
 						vim.treesitter.start()

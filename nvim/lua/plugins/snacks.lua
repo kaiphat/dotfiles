@@ -288,16 +288,16 @@ return {
 		},
 		-- not working with ts lsp
 		-- working with vtsls
-		-- {
-		-- 	'<leader>fw',
-		-- 	function()
-		-- 		Snacks.picker.lsp_workspace_symbols {
-		-- 			filter = {
-		-- 				default = true,
-		-- 			},
-		-- 		}
-		-- 	end,
-		-- },
+		{
+			'<leader>fw',
+			function()
+				Snacks.picker.lsp_workspace_symbols {
+					filter = {
+						default = true,
+					},
+				}
+			end,
+		},
 		{
 			'<leader>fr',
 			function()

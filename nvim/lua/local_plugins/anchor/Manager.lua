@@ -1,5 +1,3 @@
--- todo: lazy file creation
-
 local Path = require 'plenary.path'
 
 local Manager = {}
@@ -20,13 +18,13 @@ function Manager:new(opts)
 end
 
 function Manager:setup()
-	if not self.path:exists() then
-		self.path:write(vim.json.encode {}, 'w')
+	local anchors = {}
+
+	if self.path:exists() then
+		anchors = vim.json.decode(self.path:read())
 	end
 
-	local out_data = self.path:read()
-
-	self.anchors = vim.json.decode(out_data)
+	self.anchors = anchors
 end
 
 function Manager:save_json()
@@ -46,6 +44,7 @@ function Manager:load_buffer(index)
 	end
 
 	local bufnr = vim.fn.bufnr(anchor.path)
+	local cur_buf = vim.api.nvim_get_current_buf()
 
 	if bufnr == -1 then
 		bufnr = vim.fn.bufnr(anchor.path, true)
@@ -59,23 +58,13 @@ function Manager:load_buffer(index)
 	end
 
 	vim.api.nvim_set_current_buf(bufnr)
-end
 
-function Manager:move_cursor_to_anchor()
-	local file = kaiphat.utils.get_full_path()
-	local index = self:get_buf_anchor_index(file)
-
-	if not index then
-		return
+	if bufnr == cur_buf then
+		vim.api.nvim_win_set_cursor(0, {
+			anchor.row or 1,
+			anchor.col or 0,
+		})
 	end
-
-	local anchor = self.anchors[index]
-
-	vim.cmd.normal 'm\''
-	vim.api.nvim_win_set_cursor(0, {
-		anchor.row or 1,
-		anchor.col or 0,
-	})
 end
 
 function Manager:add_anchor(new_index)

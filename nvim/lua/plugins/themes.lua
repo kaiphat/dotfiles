@@ -27,4 +27,4 @@ local themes = {
 
 vim.o.background = 'dark'
 
-return require('themes.' .. themes.rose_pine_dark)
+return require('themes.' .. themes.tokyo_dark)

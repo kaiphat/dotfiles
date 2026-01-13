@@ -131,19 +131,28 @@ map('n', '<leader>lw', function()
 	vim.cmd.normal 'j=='
 end)
 
-map('n', '<leader>us', function()
-	vim.api.nvim_input ':%s/'
+map({ 'n', 'v' }, '<leader>us', function()
+	local mode = vim.api.nvim_get_mode().mode
+
+	if mode == 'n' then
+		vim.api.nvim_input 'viw'
+	end
+
+	vim.schedule(function()
+		local word = kaiphat.utils.get_word_under_cursor()
+
+		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'n', false)
+
+		vim.schedule(function()
+			vim.api.nvim_input(':%s/' .. word .. '/' .. word)
+		end)
+	end)
 end)
-map('v', '<leader>us', function()
-	vim.api.nvim_input ':s/'
-end)
+
 local function substitute()
 	local win = vim.api.nvim_get_current_win()
 	local start_pos = vim.fn.getpos 'v'
-	local end_pos = vim.fn.getpos '.'
-
-	local line = vim.fn.getline(start_pos[2])
-	local word = vim.trim(string.sub(line, start_pos[3], end_pos[3]))
+	local word = kaiphat.utils.get_word_under_cursor()
 
 	local bufnr = vim.api.nvim_create_buf(false, true)
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { word })
@@ -152,7 +161,7 @@ local function substitute()
 		local mode = vim.api.nvim_get_mode().mode
 
 		if mode == 'i' then
-			vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'n', false)
+			vim.api.nvim_feedkeys(vim.api.nvim_replace_aaa_termcodes('<Esc>', true, false, true), 'n', false)
 		end
 
 		vim.schedule(function()
@@ -182,7 +191,7 @@ local function substitute()
 				vim.cmd('let @/="' .. word .. '"') -- path to register to call witn n or p
 				vim.cmd('let @+="' .. new_word .. '"')
 				vim.api.nvim_feedkeys(
-					vim.api.nvim_replace_termcodes('cgn' .. new_word .. '<esc>', true, false, true),
+					vim.api.nvim_replace_aaa_termcodes('cgn' .. new_word .. '<esc>', true, false, true),
 					'',
 					true
 				)

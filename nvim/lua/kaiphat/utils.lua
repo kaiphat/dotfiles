@@ -81,4 +81,12 @@ function M.copy_into_clipboard(str)
 	print('Copied: ' .. str)
 end
 
+function M.get_word_under_cursor()
+	local start_pos = vim.fn.getpos 'v'
+	local end_pos = vim.fn.getpos '.'
+
+	local line = vim.fn.getline(start_pos[2])
+	return vim.trim(string.sub(line, start_pos[3], end_pos[3]))
+end
+
 kaiphat.utils = M

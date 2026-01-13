@@ -14,7 +14,7 @@ return {
 			'folke/snacks.nvim',
 		},
 		config = function()
-			require('local_plugins.anchor').setup {}
+			require('local_plugins.anchor').setup()
 		end,
 	},
 

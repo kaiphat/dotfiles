@@ -34,6 +34,7 @@ return {
 
 		completion = {
 			documentation = {
+				auto_show = true,
 				window = {
 					border = 'rounded',
 				},
