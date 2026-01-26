@@ -1,4 +1,4 @@
-source ./themes/tokyo_dark.nu
+source ./themes/gruvbox_light.nu
 source ./aliases.nu
 source ./main.nu
 source ./completer.nu
@@ -13,4 +13,4 @@ use change_theme.nu
 use private.nu *
 use fnm.nu
 use prompt.nu
-source $"($nu.home-path)/.cargo/env.nu"
+source $"($nu.home-dir)/.cargo/env.nu"

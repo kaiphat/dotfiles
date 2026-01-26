@@ -23,7 +23,7 @@ map('n', 'J', function()
 	end)
 end)
 
-map({ 'c', 'i' }, '<C-r>', '<C-r>+', { noremap = false })
+map({ 'i' }, '<C-r>', '<C-r>+', { noremap = false })
 map('n', '<C-h>', '<cmd>wincmd h<cr>')
 map('n', '<C-j>', '<cmd>wincmd j<cr>')
 map('n', '<C-k>', '<cmd>wincmd k<cr>')
@@ -161,7 +161,7 @@ local function substitute()
 		local mode = vim.api.nvim_get_mode().mode
 
 		if mode == 'i' then
-			vim.api.nvim_feedkeys(vim.api.nvim_replace_aaa_termcodes('<Esc>', true, false, true), 'n', false)
+			vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'n', false)
 		end
 
 		vim.schedule(function()
@@ -191,7 +191,7 @@ local function substitute()
 				vim.cmd('let @/="' .. word .. '"') -- path to register to call witn n or p
 				vim.cmd('let @+="' .. new_word .. '"')
 				vim.api.nvim_feedkeys(
-					vim.api.nvim_replace_aaa_termcodes('cgn' .. new_word .. '<esc>', true, false, true),
+					vim.api.nvim_replace_termcodes('cgn' .. new_word .. '<esc>', true, false, true),
 					'',
 					true
 				)

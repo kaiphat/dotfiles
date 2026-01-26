@@ -25,7 +25,6 @@ return {
 			use_proximity = true,
 			sorts = {
 				-- 'exact',
-				-- defaults
 				'exact',
 				'score',
 				-- 'sort_text',
@@ -102,7 +101,7 @@ return {
 				snippets = {
 					name = 'Snippets',
 					module = 'blink.cmp.sources.snippets',
-					score_offset = 2,
+					score_offset = 3,
 					min_keyword_length = 1,
 					opts = {
 						friendly_snippets = false,

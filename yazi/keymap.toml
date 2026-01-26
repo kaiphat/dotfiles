@@ -1,0 +1,5 @@
+[[mgr.prepend_keymap]]
+on   = "<C-p>"
+for  = "macos"
+run  = "shell -- zip -r \"$(basename %h)\".zip ./\"$(basename %h)\""
+desc = "ComPress directory"

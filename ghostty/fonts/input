@@ -1,4 +1,4 @@
-font-size = 10.5
+font-size = 8.5
 
 font-thicken-strength = 70
 
@@ -12,6 +12,6 @@ font-family-bold-italic = Input
 font-style-bold-italic = Regular
 
 adjust-cell-width = 0
-adjust-font-baseline = 0
-adjust-cell-height = 3
+adjust-font-baseline = -1
+adjust-cell-height = 0
 adjust-cursor-height = 0

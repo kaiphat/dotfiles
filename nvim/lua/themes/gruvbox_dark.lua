@@ -4,7 +4,7 @@ return {
 	priority = 1000,
 	config = function()
 		require('gruvbox').setup {
-			variant = 'light',
+			variant = 'hard',
 
 			enable = {
 				terminal = true,
@@ -27,7 +27,7 @@ return {
 			},
 		}
 
-		vim.o.background = 'light' -- or "light" for light mode
+		vim.o.background = 'dark' -- or "light" for light mode
 
 		vim.cmd 'colorscheme gruvbox'
 	end,

@@ -126,7 +126,6 @@ export def "update terminal" [] {
 export module activate {
     export-env {
         set color_config
-        update terminal
     }
 }
 

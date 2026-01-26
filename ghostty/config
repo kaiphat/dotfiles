@@ -1,7 +1,8 @@
-config-file = ./fonts/mononoki
-config-file = ./themes/tokyo_dark
-custom-shader-animation = false
-#custom-shader = ./shaders/zoom.glsl
+config-file = ./fonts/maple
+config-file = ./themes/gruvbox_light
+
+custom-shader-animation = true
+custom-shader = ./shaders/warp_cursor.glsl
 
 font-thicken = true
 fullscreen = true
@@ -13,10 +14,10 @@ cursor-style-blink = false
 cursor-style = block
 #cursor-color = #FFB929
 #cursor-text = #011115
-#cursor-color = #5DE4C7
-#cursor-text = #112233
-cursor-color = #f4b8e4
-cursor-text = #000000
+cursor-color = #eD84a7
+cursor-text = #112233
+# cursor-color = #f4b8e4
+# cursor-text = #000000
 
 adjust-cursor-height = 100%
 adjust-cursor-thickness = 1
@@ -25,8 +26,8 @@ scrollbar = never
 shell-integration-features = no-cursor,no-title
 
 window-vsync = true
-window-padding-x = 6
-window-padding-y = 2
+window-padding-x = 10
+window-padding-y = 3
 window-padding-balance = true
 
 confirm-close-surface = false

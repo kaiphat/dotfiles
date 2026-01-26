@@ -3,7 +3,7 @@ local function on_reject(msg)
 	print('Vtsls error: ' .. msg)
 end
 
-vim.lsp.config('vtsls', {
+return {
 	filetypes = {
 		'javascript',
 		'javascriptreact',
@@ -65,4 +65,4 @@ vim.lsp.config('vtsls', {
 			},
 		},
 	},
-})
+}

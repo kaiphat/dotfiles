@@ -92,7 +92,7 @@ return {
 
 				window = {
 					position = 'left',
-					width = 48,
+					width = 55,
 					popup = {
 						size = {
 							width = 120,
@@ -188,6 +188,7 @@ return {
 				},
 				filesystem = {
 					bind_to_cwd = false,
+					search_limit = 500,
 
 					filtered_items = {
 						hide_gitignored = true,
@@ -204,6 +205,8 @@ return {
 						fd = {
 							'--exclude',
 							'node_modules',
+							'--exclude',
+							'.git',
 							'--exclude',
 							'coverage',
 							'--exclude',

@@ -1,4 +1,4 @@
-vim.lsp.config('rust_analyzer', {
+return {
 	settings = {
 		['rust-analyzer'] = {
 			assist = {
@@ -22,4 +22,4 @@ vim.lsp.config('rust_analyzer', {
 			},
 		},
 	},
-})
+}

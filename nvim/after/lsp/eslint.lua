@@ -1,4 +1,4 @@
-vim.lsp.config('eslint', {
+return {
 	on_attach = function(client, buffer)
 		vim.api.nvim_create_autocmd('BufWritePre', {
 			buffer = buffer,
@@ -21,4 +21,4 @@ vim.lsp.config('eslint', {
 		workingDirectory = { mode = 'auto' },
 		codeActionOnSave = { enable = true, mode = 'problems' },
 	},
-})
+}

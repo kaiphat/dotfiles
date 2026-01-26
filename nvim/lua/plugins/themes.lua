@@ -7,6 +7,7 @@ local themes = {
 	rose_pine_dark = 'rose_pine_dark',
 	rose_pine_light = 'rose_pine_light',
 	gruvbox_light = 'gruvbox_light',
+	gruvbox_dark = 'gruvbox_dark',
 	kanagawa_dark = 'kanagawa_dark',
 	everforest = 'everforest',
 	poimandres_dark = 'poimandres_dark',
@@ -25,6 +26,6 @@ local themes = {
 	material_dark = 'material_dark',
 }
 
-vim.o.background = 'dark'
+vim.o.background = 'light'
 
-return require('themes.' .. themes.tokyo_dark)
+return require('themes.' .. themes.gruvbox_light)
