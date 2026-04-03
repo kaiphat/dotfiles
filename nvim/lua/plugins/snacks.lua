@@ -11,7 +11,7 @@ local grep_always_excludes = {
 	'pnpm-lock.yaml',
 }
 
-local grep_exclude = kaiphat.utils.concat(grep_always_excludes, {
+local grep_exclude = __.utils.concat(grep_always_excludes, {
 	'data/',
 	'.data/',
 	'test/',
@@ -25,12 +25,8 @@ local grep_exclude = kaiphat.utils.concat(grep_always_excludes, {
 })
 
 local function open_commit(picker, item)
-	local file = kaiphat.utils.exec_nu(
-		'nu -l ~/dotfiles/nvim/lua/scripts/open_commit.nu %s %s %s',
-		item.cwd,
-		item.file,
-		item.commit
-	)
+	local file =
+		__.utils.exec_nu('nu -l ~/dotfiles/nvim/lua/scripts/open_commit.nu %s %s %s', item.cwd, item.file, item.commit)
 
 	if vim.trim(file) == '' then
 		print 'File not found in the commit'
@@ -47,7 +43,6 @@ end
 return {
 	'folke/snacks.nvim',
 	priority = 950,
-	lazy = false,
 	event = 'VeryLazy',
 	enabled = true,
 	keys = {
@@ -81,7 +76,7 @@ return {
 			'<leader>fJ',
 			function()
 				Snacks.picker.files {
-					cwd = kaiphat.utils.get_current_dir(),
+					cwd = __.utils.get_current_dir(),
 					ignored = true,
 					hidden = true,
 				}
@@ -162,7 +157,7 @@ return {
 			'<leader>fL',
 			function()
 				Snacks.picker.grep {
-					cwd = kaiphat.utils.get_current_dir(),
+					cwd = __.utils.get_current_dir(),
 				}
 			end,
 			desc = 'Grep in current dir',
@@ -489,7 +484,7 @@ return {
 		},
 
 		picker = {
-			prompt = ' ' .. kaiphat.constants.icons.BRACKET .. ' ',
+			prompt = ' ' .. __.constants.icons.BRACKET .. ' ',
 			ui_select = true,
 			formatters = {
 				file = {
@@ -523,13 +518,13 @@ return {
 						height = 0.9,
 						min_height = 30,
 						box = 'vertical',
-						border = 'none',
+						border = 'top',
 						title = '{title} {live} {flags}',
 						title_pos = 'center',
 						{
 							win = 'input',
 							height = 1,
-							border = 'rounded',
+							border = 'bottom',
 						},
 						{ win = 'list', height = 15, border = 'hpad' },
 						{ win = 'preview', border = 'rounded' },
@@ -615,7 +610,7 @@ return {
 						return file_format
 					end,
 					finder = function(_, ctx)
-						local success, git_root = pcall(kaiphat.utils.get_git_root)
+						local success, git_root = pcall(_.utils.get_git_root)
 
 						if not success then
 							vim.notify 'Not a git repository'
@@ -689,7 +684,7 @@ return {
 			enabled = false,
 			indent = {
 				enabled = true,
-				char = kaiphat.constants.icons.VERTICAL_LINE_1,
+				char = __.constants.icons.VERTICAL_LINE_1,
 			},
 
 			animate = {
@@ -727,4 +722,12 @@ return {
 			replace_netrw = true,
 		},
 	},
+	init = function()
+		vim.api.nvim_create_autocmd('User', {
+			pattern = 'VeryLazy',
+			callback = function()
+				__.picker = Snacks.picker
+			end,
+		})
+	end,
 }

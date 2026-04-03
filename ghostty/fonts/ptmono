@@ -1,0 +1,16 @@
+font-size = 10.5
+
+#font-thicken-strength = 190
+font-family = PT Mono
+font-style = Regular
+font-family-bold = PT Mono
+font-style-bold = Regular
+font-family-italic = PT Mono
+font-style-italic = Regular
+font-family-bold-italic = PT Mono
+font-style-bold-italic = Regular
+
+adjust-cell-width = 0
+adjust-font-baseline = 0
+adjust-cell-height = 5
+adjust-cursor-height = 0

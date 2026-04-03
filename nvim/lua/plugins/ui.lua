@@ -6,7 +6,7 @@ return {
 		config = function()
 			local noice = require 'noice'
 
-			local icon = ' ' .. kaiphat.constants.icons.ARROW
+			local icon = ' ' .. __.constants.icons.ARROW
 
 			noice.setup {
 				views = {
@@ -110,6 +110,7 @@ return {
 
 	{
 		'j-hui/fidget.nvim',
+		enabled = false,
 		opts = {
 			notification = {
 				window = {

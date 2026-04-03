@@ -34,7 +34,7 @@ return {
 				indentscope = {
 					enabled = true,
 					group = 'FylerIndentMarker',
-					marker = kaiphat.constants.icons.VERTICAL_LINE_1,
+					marker = __.constants.icons.VERTICAL_LINE_1,
 				},
 
 				mappings = {

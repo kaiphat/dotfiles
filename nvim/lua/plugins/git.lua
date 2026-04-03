@@ -33,7 +33,7 @@ return {
 				hooks = {
 					diff_buf_read = function(bufnr)
 						vim.api.nvim_create_autocmd({ 'VimResized', 'WinEnter' }, {
-							group = kaiphat.utils.create_augroup 'resize_pane',
+							group = __.utils.create_augroup 'resize_pane',
 							buffer = bufnr,
 							callback = function(event)
 								vim.cmd 'wincmd ='

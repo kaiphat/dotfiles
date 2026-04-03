@@ -1,4 +1,4 @@
-source ./themes/gruvbox_light.nu
+source ./themes/poimandres_dark.nu
 source ./aliases.nu
 source ./main.nu
 source ./completer.nu

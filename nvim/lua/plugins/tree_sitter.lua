@@ -24,6 +24,8 @@ vim.treesitter.query.set(
 
 local languges = {
 	'javascript',
+	'java',
+	'javadoc',
 	'rust',
 	'typescript',
 	'toml',
@@ -56,6 +58,7 @@ local languges = {
 	'typst',
 	'vue',
 	'ecma',
+	'dart',
 }
 
 return {
@@ -93,7 +96,7 @@ return {
 			require('nvim-treesitter').install(languges)
 
 			vim.api.nvim_create_autocmd('FileType', {
-				group = kaiphat.utils.create_augroup 'treesitter_indent',
+				group = __.utils.create_augroup 'treesitter_indent',
 				callback = function(info)
 					local ft = vim.bo[info.buf].filetype
 

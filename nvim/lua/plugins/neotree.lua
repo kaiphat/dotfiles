@@ -168,7 +168,7 @@ return {
 						['y'] = 'copy_to_clipboard',
 						['<C-y>'] = function(state)
 							local node = state.tree:get_node()
-							kaiphat.utils.copy_into_clipboard(node.name)
+							__.utils.copy_into_clipboard(node.name)
 						end,
 						['x'] = 'cut_to_clipboard',
 						['p'] = 'paste_from_clipboard',

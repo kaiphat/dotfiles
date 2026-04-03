@@ -89,4 +89,4 @@ function M.get_word_under_cursor()
 	return vim.trim(string.sub(line, start_pos[3], end_pos[3]))
 end
 
-kaiphat.utils = M
+__.utils = M

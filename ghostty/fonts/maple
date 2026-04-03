@@ -11,7 +11,7 @@ font-family-bold-italic = Maple Mono NF
 font-style-bold-italic = Light
 
 adjust-cell-width = 0
-adjust-font-baseline = 1
+adjust-font-baseline = 0
 adjust-cell-height = 1
 adjust-cursor-height = 0
 

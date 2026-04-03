@@ -8,15 +8,15 @@ g.markdown_folding = 1
 local TAB_SIZE = 4
 
 -- enable new messages ui
-require('vim._extui').enable {}
+require('vim._core.ui2').enable {}
 
 o.winborder = 'rounded'
+o.guicursor = 'n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,t:ver25'
 
 -- has problem with nushell. Doesn't support < operator
 o.shell = 'bash'
 o.jumpoptions = 'stack'
 o.smoothscroll = true
---o.guicursor = 'a:blinkon1,i-ci-ve:ver25-blinkon1'
 o.selection = 'old'
 o.tabstop = TAB_SIZE
 o.softtabstop = TAB_SIZE
@@ -155,6 +155,9 @@ o.foldopen = 'hor,mark,percent,quickfix,search,tag,undo'
 _G.get_foldtext = function()
 	local last_line = table.concat(vim.fn.getbufline(vim.api.nvim_get_current_buf(), vim.v.foldend))
 	local first_line = table.concat(vim.fn.getbufline(vim.api.nvim_get_current_buf(), vim.v.foldstart))
-	local space_before_text = first_line:match '%s*'
+
+	local tab_width = vim.o.tabstop
+	local space_before_text = first_line:match('^%s*'):gsub('\t', string.rep(' ', tab_width))
+
 	return space_before_text .. ' ' .. vim.trim(first_line) .. ' ... ' .. vim.trim(last_line)
 end

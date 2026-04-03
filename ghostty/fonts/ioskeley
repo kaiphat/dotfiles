@@ -1,0 +1,18 @@
+font-size = 13
+
+font-family = Ioskeley Mono
+font-style = Regular
+font-family-bold = Ioskeley Mono
+font-style-bold = Regular
+font-family-italic = Ioskeley Mono
+font-style-italic = Regular
+font-family-bold-italic = Ioskeley Mono
+font-style-bold-italic = Regular
+
+adjust-cell-width = 0
+adjust-font-baseline = 0
+adjust-cell-height = 0
+adjust-cursor-height = 0
+adjust-underline-position = 2
+
+font-thicken-strength = 100

@@ -10,15 +10,15 @@ Plugin.__index = Plugin
 
 function Plugin:new()
 	return setmetatable({
-		group = kaiphat.utils.create_augroup 'anchor_plugin_group',
+		group = __.utils.create_augroup 'anchor_plugin_group',
 		current_buf_anchor_index = nil,
 	}, self)
 end
 
 function Plugin:create_manager()
 	self.manager = Manager:new {
-		git_branch = kaiphat.utils.get_git_branch(),
-		cwd = kaiphat.utils.get_root_dir(),
+		git_branch = __.utils.get_git_branch(),
+		cwd = __.utils.get_root_dir(),
 	}
 	self.manager:setup()
 end

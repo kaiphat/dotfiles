@@ -103,10 +103,10 @@ local root_path
 
 map('n', '<leader>ur', function()
 	if is_root then
-		vim.cmd('lcd ' .. kaiphat.utils.get_current_dir())
+		vim.cmd('lcd ' .. __.utils.get_current_dir())
 		vim.notify 'cwd changed to current place'
 		is_root = false
-		root_path = kaiphat.utils.get_current_dir()
+		root_path = __.utils.get_current_dir()
 	else
 		vim.cmd('lcd ' .. root_path)
 		vim.notify 'cwd changed to root'
@@ -118,13 +118,13 @@ map('n', '<leader>lw', function()
 	local ft = vim.bo.filetype
 
 	local var = vim.fn.expand '<cword>'
-	local row = kaiphat.utils.get_row_col()
+	local row = __.utils.get_row_col()
 
 	local new_line
 	if ft == 'typescript' or ft == 'javascript' then
 		new_line = 'console.log(\'%o\', {' .. var .. '})'
 	elseif ft == 'rust' then
-		new_line = 'println!("\\x1b[36m' .. var .. ': {:?}\\x1b[0m", ' .. var .. ');'
+		new_line = 'dbg!(&' .. var .. ');'
 	end
 
 	vim.api.nvim_buf_set_lines(0, row, row, true, { new_line })
@@ -139,7 +139,7 @@ map({ 'n', 'v' }, '<leader>us', function()
 	end
 
 	vim.schedule(function()
-		local word = kaiphat.utils.get_word_under_cursor()
+		local word = __.utils.get_word_under_cursor()
 
 		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'n', false)
 
@@ -152,7 +152,7 @@ end)
 local function substitute()
 	local win = vim.api.nvim_get_current_win()
 	local start_pos = vim.fn.getpos 'v'
-	local word = kaiphat.utils.get_word_under_cursor()
+	local word = __.utils.get_word_under_cursor()
 
 	local bufnr = vim.api.nvim_create_buf(false, true)
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { word })
@@ -226,6 +226,8 @@ end)
 map('n', 'zj', function()
 	vim.cmd.normal 'za'
 end)
+
+-- use 'zr' to open folds on one level
 map('n', 'zf', function()
 	vim.cmd.normal 'zx'
 	vim.schedule(function()
@@ -235,10 +237,3 @@ end)
 map('n', 'zo', function()
 	vim.cmd.normal 'zO'
 end)
--- map('x', 'C', 'y<cmd>let @/=@"<cr>cgn')
-
--- vim.keymap.set('x', 'an', function()
--- 	vim.lsp.buf.selection_range(1)
--- end, { desc = 'vim.lsp.buf.selection_range(\'outer\')' })
-
---map('n', '<Enter>', function() end)

@@ -28,7 +28,7 @@ font-thicken-strength = 150
 # #abcd
 # font-feature = cv36=9
 # 
-# #f
+#f
 # font-feature = cv41=6
 # 
 # #t

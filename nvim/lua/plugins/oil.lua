@@ -17,7 +17,7 @@ return {
 	enabled = true,
 	config = function()
 		vim.api.nvim_create_autocmd('FileType', {
-			group = kaiphat.utils.create_augroup 'oil',
+			group = __.utils.create_augroup 'oil',
 			pattern = 'oil',
 			callback = function(event)
 				local oil = require 'oil'
@@ -32,7 +32,7 @@ return {
 					end
 					local relpath = vim.fn.fnamemodify(dir .. entry.name, ':.')
 
-					kaiphat.utils.copy_into_clipboard(relpath)
+					__.utils.copy_into_clipboard(relpath)
 				end, { buffer = event.buf })
 			end,
 		})

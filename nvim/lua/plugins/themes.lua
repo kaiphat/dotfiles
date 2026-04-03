@@ -24,8 +24,11 @@ local themes = {
 	solarized_light = 'solarized_light',
 	ash = 'ash',
 	material_dark = 'material_dark',
+	vesper = 'vesper',
+	lume_dark = 'lume_dark',
+	mfd_dark = 'mfd_dark',
 }
 
-vim.o.background = 'light'
+vim.o.background = 'dark'
 
-return require('themes.' .. themes.gruvbox_light)
+return require('themes.' .. themes.poimandres_dark)

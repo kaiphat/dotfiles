@@ -49,7 +49,9 @@ return {
 
 		vim.api.nvim_set_hl(0, 'FlashLabel', { bg = palette.background4, fg = palette.teal1 })
 		vim.api.nvim_set_hl(0, 'Function', { fg = '#8fb1cc' })
-		vim.api.nvim_set_hl(0, 'Normal', { fg = '#e0eefa' })
+		vim.api.nvim_set_hl(0, 'Normal', { fg = '#cfdaff' })
+		vim.api.nvim_set_hl(0, '@text', { link = 'Normal' })
+		vim.api.nvim_set_hl(0, '@variable', { link = 'Normal' })
 		vim.api.nvim_set_hl(0, 'Visual', { bg = palette.background4, fg = nil })
 		vim.api.nvim_set_hl(0, 'LspInlayHint', { fg = palette.blueGray2, bg = palette.background1 })
 

@@ -33,7 +33,7 @@ cmd('CreateSubTitle', function(opts)
 
 	char = (char == '' or char == nil) and '#' or char
 
-	local row = kaiphat.utils.get_row_col()
+	local row = __.utils.get_row_col()
 
 	local line = vim.trim(vim.api.nvim_get_current_line():gsub(char, ''):gsub(DEFAULT_CHAR, ''))
 	local free_space = MAX_LENGTH - #line - SPACE_LENGTH * 2
@@ -56,7 +56,7 @@ cmd('CreateTitle', function(opts)
 
 	char = (char == '' or char == nil) and '#' or char
 
-	local row = kaiphat.utils.get_row_col()
+	local row = __.utils.get_row_col()
 
 	local line = vim.trim(vim.api.nvim_get_current_line():gsub(char, ''):gsub(DEFAULT_CHAR, ''))
 	local left_line_length = math.floor((MAX_LENGTH - #line - SPACE_LENGTH * 2) / 2)
@@ -81,17 +81,17 @@ cmd('FileType', function()
 end)
 
 cmd('RunTest', function()
-	local relative_path = kaiphat.utils.get_relative_path()
-	local full_path = kaiphat.utils.get_full_path()
+	local relative_path = __.utils.get_relative_path()
+	local full_path = __.utils.get_full_path()
 
-	kaiphat.utils.exec_nu('nu ~/dotfiles/nvim/lua/scripts/run_test.nu %s %s', relative_path, full_path)
+	__.utils.exec_nu('nu ~/dotfiles/nvim/lua/scripts/run_test.nu %s %s', relative_path, full_path)
 end)
 
 cmd('CopyGitHubFileLink', function()
 	local path = vim.api.nvim_buf_get_name(0)
 	local row_index = vim.api.nvim_win_get_cursor(0)[1]
 
-	kaiphat.utils.exec_nu('nu -l ~/dotfiles/nvim/lua/scripts/copy_git_hub_link.nu %s %d', path, row_index)
+	__.utils.exec_nu('nu -l ~/dotfiles/nvim/lua/scripts/copy_git_hub_link.nu %s %d', path, row_index)
 end)
 
 cmd('SnakeCaseToCamelCase', function()

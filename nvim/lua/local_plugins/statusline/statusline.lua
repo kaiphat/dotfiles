@@ -20,7 +20,7 @@ function Statusline:get()
 		statusline = statusline .. provider.value
 	end
 
-    return statusline
+	return statusline
 end
 
 function Statusline:update()
@@ -45,7 +45,7 @@ return {
 			fg = '#00ffff',
 		})
 
-		kaiphat.generate_statusline = function()
+		__.generate_statusline = function()
 			return statusline:get()
 		end
 

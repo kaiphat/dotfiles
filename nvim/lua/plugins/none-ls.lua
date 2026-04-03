@@ -64,7 +64,7 @@ return {
 					'-l',
 					'postgresql',
 					'-c',
-					kaiphat.utils.add_to_home_path 'dotfiles/sql_formatter.json',
+					__.utils.add_to_home_path 'dotfiles/sql_formatter.json',
 				},
 			},
 		}

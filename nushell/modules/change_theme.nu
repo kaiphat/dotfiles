@@ -13,6 +13,7 @@ const themes = [
     "poimandres_dark"
     "gruvbox_light"
     "gruvbox_dark"
+    "lume_dark"
 ]
 
 def replace [file closure] {

@@ -1,10 +1,10 @@
-config-file = ./fonts/maple
-config-file = ./themes/gruvbox_light
+config-file = ./fonts/tx
+config-file = ./themes/poimandres_dark
 
-custom-shader-animation = true
-custom-shader = ./shaders/warp_cursor.glsl
+#custom-shader-animation = true
+#custom-shader = ./shaders/warp_cursor.glsl
 
-font-thicken = true
+font-thicken = false
 fullscreen = true
 
 macos-non-native-fullscreen = false
@@ -12,9 +12,9 @@ macos-option-as-alt = true
 
 cursor-style-blink = false
 cursor-style = block
-#cursor-color = #FFB929
+cursor-color = #FFB929
 #cursor-text = #011115
-cursor-color = #eD84a7
+#cursor-color = #eD84a7
 cursor-text = #112233
 # cursor-color = #f4b8e4
 # cursor-text = #000000
@@ -33,9 +33,11 @@ window-padding-balance = true
 confirm-close-surface = false
 mouse-hide-while-typing = true
 
-background-opacity = 1
-background-blur = 10
-#background-image = "~/Downloads/2025-05-16 14.02.10.jpg"
+# background-opacity = 1
+# background-image-opacity = 0.7
+# background-blur = 10
+# background-image = ~/Downloads/kate-chikina-HAxoGmx2AYw-unsplash.jpg
+# background-image-fit = cover
 
 link-url = true
 shell-integration = none

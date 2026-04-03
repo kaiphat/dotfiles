@@ -5,7 +5,7 @@ vim.diagnostic.config {
 		style = 'minimal',
 		prefix = '',
 	},
-	virtual_text = false,
+	virtual_text = true,
 	severity_sort = true,
 	signs = false,
 	underline = true,
@@ -15,19 +15,53 @@ vim.diagnostic.config {
 for _, hint in ipairs { 'Error', 'Information', 'Hint', 'Warning' } do
 	vim.fn.sign_define(
 		'LspDiagnosticsSign' .. hint,
-		{ text = kaiphat.constants.icons.CIRCLE_SMALL, numhl = 'LspDiagnosticsSign' .. hint }
+		{ text = __.constants.icons.CIRCLE_SMALL, numhl = 'LspDiagnosticsSign' .. hint }
 	)
 end
 
+vim.api.nvim_create_autocmd('LspProgress', {
+	callback = function(ev)
+		local value = ev.data.params.value or {}
+		local msg = value.message or 'done'
+
+		-- rust analyszer in particular has really long LSP messages so truncate them
+		if #msg > 40 then
+			msg = msg:sub(1, 37) .. '...'
+		end
+
+		vim.api.nvim_echo(
+			{
+				{
+					msg,
+				},
+			},
+			false,
+			{
+				id = 'lsp',
+				source = 'lsp',
+				kind = 'progress',
+				title = value.title,
+				status = value.kind ~= 'end' and 'running' or 'success',
+				percent = value.percentage,
+			}
+		)
+	end,
+})
+
 vim.api.nvim_create_autocmd('LspAttach', {
-	group = kaiphat.utils.create_augroup 'lsp_attach',
+	group = __.utils.create_augroup 'lsp_attach',
 	callback = function(event)
 		local map = function(mode, keys, cmd)
 			vim.keymap.set(mode, keys, cmd, { buffer = event.buf })
 		end
 
 		map('n', 'gd', function()
-			Snacks.picker.lsp_definitions()
+			__.picker.lsp_definitions()
+		end)
+
+		map('n', 'go', function()
+			vim.cmd 'vs'
+			__.picker.lsp_definitions()
 		end)
 
 		map('n', 'K', function()
@@ -88,12 +122,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		end)
 
 		map('n', '<space>lcl', function()
-			vim.lsp.codelens.refresh()
-		end)
-
-		map('n', 'go', function()
-			vim.cmd 'vs'
-			Snacks.picker.lsp_definitions()
+			vim.lsp.codelens.enable(true)
 		end)
 
 		map('n', 'gs', function()
@@ -296,5 +325,11 @@ return {
 		},
 		event = 'LspAttach',
 		opts = {},
+	},
+	{
+		'mrcjkb/rustaceanvim',
+		version = '^8', -- Recommended
+		enabled = false,
+		lazy = false, -- This plugin is already lazy
 	},
 }

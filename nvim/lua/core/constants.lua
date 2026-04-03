@@ -22,4 +22,4 @@ M.icons = {
 	SEMICOLON = ';',
 }
 
-kaiphat.constants = M
+__.constants = M

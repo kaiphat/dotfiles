@@ -28,7 +28,9 @@ function Manager:setup()
 end
 
 function Manager:save_json()
-	self.path:write(vim.json.encode(self.anchors or {}), 'w')
+	if self.anchors and #self.anchors > 0 then
+		self.path:write(vim.json.encode(self.anchors), 'w')
+	end
 end
 
 function Manager:remove_anchor(index)
@@ -68,8 +70,8 @@ function Manager:load_buffer(index)
 end
 
 function Manager:add_anchor(new_index)
-	local row, col = kaiphat.utils.get_row_col()
-	local current_path = kaiphat.utils.get_full_path()
+	local row, col = __.utils.get_row_col()
+	local current_path = __.utils.get_full_path()
 
 	for index, anchor in pairs(self.anchors) do
 		if anchor.path == current_path and index ~= new_index then

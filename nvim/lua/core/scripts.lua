@@ -11,4 +11,4 @@ M.lazygit_open_file = function(filename, line_number)
 	end)
 end
 
-kaiphat.scripts = M
+__.scripts = M

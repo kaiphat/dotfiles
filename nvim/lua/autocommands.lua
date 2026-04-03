@@ -1,6 +1,6 @@
 -- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
-	group = kaiphat.utils.create_augroup 'checktime',
+	group = __.utils.create_augroup 'checktime',
 	callback = function()
 		if vim.o.buftype ~= 'nofile' then
 			vim.cmd 'checktime'
@@ -9,7 +9,7 @@ vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
 })
 
 vim.api.nvim_create_autocmd({ 'BufReadPost' }, {
-	group = kaiphat.utils.create_augroup 'last_position',
+	group = __.utils.create_augroup 'last_position',
 	callback = function()
 		local test_line_data = vim.api.nvim_buf_get_mark(0, '"')
 		local test_line = test_line_data[1]
@@ -22,14 +22,14 @@ vim.api.nvim_create_autocmd({ 'BufReadPost' }, {
 })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
-	group = kaiphat.utils.create_augroup 'text_yank_post',
+	group = __.utils.create_augroup 'text_yank_post',
 	callback = function()
 		vim.highlight.on_yank { timeout = 100 }
 	end,
 })
 
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-	group = kaiphat.utils.create_augroup 'auto_create_dir',
+	group = __.utils.create_augroup 'auto_create_dir',
 	callback = function(event)
 		if event.match:match '^%w%w+://' then
 			return
@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
 
 -- Fix conceallevel for json files
 vim.api.nvim_create_autocmd({ 'FileType' }, {
-	group = kaiphat.utils.create_augroup 'json_conceal',
+	group = __.utils.create_augroup 'json_conceal',
 	pattern = { 'json', 'jsonc', 'json5' },
 	callback = function()
 		vim.opt_local.conceallevel = 0
@@ -49,7 +49,7 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
 })
 
 vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'VimLeavePre' }, {
-	group = kaiphat.utils.create_augroup 'autosave',
+	group = __.utils.create_augroup 'autosave',
 	callback = function(event)
 		if vim.bo.filetype == 'oil' then
 			return

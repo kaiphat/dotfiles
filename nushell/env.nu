@@ -19,7 +19,7 @@ $env.TERMINAL = 'wezterm'
 $env.NODE_OPTIONS = '--max-old-space-size=4096'
 $env.SXHKD_SHELL = 'nu'
 $env.SHELL = 'nu'
-# $env.JAVA_HOME = (/usr/libexec/java_home -v 1.7)
+$env.JAVA_HOME = "/opt/homebrew/opt/openjdk@21"
 $env.MANPAGER = 'nvim +Man! -c "set nowrap modifiable noreadonly buftype=nofile"'
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -39,6 +39,7 @@ $env.PATH ++= [
     $'($HOME)/.local/bin'
     $'($HOME)/.cargo/bin'
     $'($HOME)/.krew/bin'
+    $'($env.JAVA_HOME)/bin'
 ]
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈

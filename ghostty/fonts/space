@@ -1,0 +1,15 @@
+font-size = 9
+# font-thicken-strength = 140
+
+font-family = Space Mono
+font-style = Regular
+font-family-bold = Space Mono
+font-style-bold = Regular
+font-family-italic = Space Mono
+font-style-italic = Regular
+font-family-bold-italic = Space Mono
+font-style-bold-italic = Regular
+
+adjust-cell-width = 0
+adjust-font-baseline = 0
+adjust-cell-height = -4

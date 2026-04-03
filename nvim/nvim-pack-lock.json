@@ -1,5 +1,13 @@
 {
   "plugins": {
+    "aaa": {
+      "rev": "645d108a5242ec7b378cbe643eb6d04d4223f034",
+      "src": "https://github.com/stevearc/aerial.nvim"
+    },
+    "aerial.nvim": {
+      "rev": "645d108a5242ec7b378cbe643eb6d04d4223f034",
+      "src": "https://github.com/stevearc/aerial.nvim"
+    },
     "nvim-treesitter": {
       "rev": "645f42e85d8665c91a9911c3896afb57d6b8a923",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"

@@ -1,4 +1,4 @@
-local u = require 'utils'
+local u = require 'core.utils'
 local H = {}
 local c = {
 	bg = '#202837',
