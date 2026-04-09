@@ -1,6 +1,6 @@
 __.add_plugin {
 	'MeanderingProgrammer/render-markdown.nvim',
-	-- TODO implement fyletype load
+	ft = { 'markdown' },
 	deps = {
 		'nvim-treesitter',
 		'mini.icons',

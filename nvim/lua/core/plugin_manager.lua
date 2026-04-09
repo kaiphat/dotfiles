@@ -134,6 +134,18 @@ __.add_plugin = function(opts)
 		})
 	end
 
+	if opts.ft then
+		plugins[name].is_instant = false
+
+		vim.api.nvim_create_autocmd({ 'FileType' }, {
+			pattern = opts.ft,
+			once = true,
+			callback = function()
+				load_plugin(name)
+			end,
+		})
+	end
+
 	if opts.keys then
 		plugins[name].is_instant = false
 
@@ -141,7 +153,9 @@ __.add_plugin = function(opts)
 			vim.keymap.set(map.mode or 'n', map[1], function()
 				load_plugin(name)
 				map[2](plugins[name].package)
-			end)
+			end, {
+				desc = map.desc,
+			})
 		end
 	end
 end

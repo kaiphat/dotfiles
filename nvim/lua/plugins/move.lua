@@ -5,7 +5,7 @@ __.add_plugin {
 	keys = {
 		{
 			's',
-			function(_k)
+			function(_)
 				_.hint_char1 {}
 			end,
 		},

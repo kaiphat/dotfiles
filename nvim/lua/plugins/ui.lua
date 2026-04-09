@@ -1,5 +1,6 @@
 __.add_plugin {
 	'folke/which-key.nvim',
+	event = 'BufReadPre',
 	keys = {
 		{
 			'<leader>?',
