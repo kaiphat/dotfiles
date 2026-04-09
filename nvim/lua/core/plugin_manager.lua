@@ -4,7 +4,7 @@ local function load_plugin(name)
 	local opts = plugins[name]
 
 	if not opts then
-		vim.print('Plugin ' .. name .. ' does not exist')
+		vim.notify('Plugin ' .. name .. ' does not exist', vim.log.levels.ERROR)
 		return
 	end
 
@@ -13,7 +13,7 @@ local function load_plugin(name)
 	end
 
 	if opts.is_loading then
-		vim.print('Circular deps in ' .. name)
+		vim.notify('Circular deps in ' .. name, vim.log.levels.ERROR)
 		return
 	end
 
@@ -58,21 +58,24 @@ end
 ---	   is_theme?: boolean,
 ---	   skip_require?: boolean,
 ---	   cmds?: string[],
+---	   keys?: {}[],
 ---	   ft?: string[],
 ---	   event?: string,
 ---}
 __.add_plugin = function(opts)
-	local src = opts[1]
-	local name = opts.dir or opts.name or src:match('/([%w_.-]+)$'):gsub('%.nvim$', '')
-
 	if opts.enabled == false then
 		return
 	end
 
-	-- TODO add duplicate check
-	plugins[name] = {
+	local src = opts[1]
+	local name = opts.dir or opts.name or src:match('/([%w_.-]+)$'):gsub('.nvim$', ''):gsub('^nvim%-', '')
+
+	if plugins[name] then
+		vim.notify('Plugin duplicated ' .. name, vim.log.levels.ERROR)
+	end
+
+	local plugin = {
 		is_instant = true,
-		is_loaded = false,
 		deps = opts.deps,
 		user_opts = opts.opts,
 		src = src,
@@ -81,14 +84,16 @@ __.add_plugin = function(opts)
 		skip_require = opts.skip_require,
 	}
 
+	plugins[name] = plugin
+
 	if opts.is_theme then
-		plugins[name].is_instant = false
+		plugin.is_instant = false
 
 		load_plugin(name)
 	end
 
 	if opts.cmds then
-		plugins[name].is_instant = false
+		plugin.is_instant = false
 
 		for _, cmd in ipairs(opts.cmds) do
 			vim.api.nvim_create_user_command(cmd, function(event)
@@ -138,7 +143,7 @@ __.add_plugin = function(opts)
 	end
 
 	if opts.event then
-		plugins[name].is_instant = false
+		plugin.is_instant = false
 
 		vim.api.nvim_create_autocmd(opts.event, {
 			once = true,
@@ -149,7 +154,7 @@ __.add_plugin = function(opts)
 	end
 
 	if opts.ft then
-		plugins[name].is_instant = false
+		plugin.is_instant = false
 
 		vim.api.nvim_create_autocmd({ 'FileType' }, {
 			pattern = opts.ft,
@@ -161,7 +166,7 @@ __.add_plugin = function(opts)
 	end
 
 	if opts.keys then
-		plugins[name].is_instant = false
+		plugin.is_instant = false
 
 		for _, map in ipairs(opts.keys) do
 			vim.keymap.set(map.mode or 'n', map[1], function()

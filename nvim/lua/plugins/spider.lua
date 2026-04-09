@@ -1,6 +1,5 @@
 __.add_plugin {
 	'chrisgrieser/nvim-spider',
-	name = 'spider',
 	event = 'BufReadPre',
 	keys = {
 		{

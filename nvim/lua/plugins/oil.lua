@@ -1,5 +1,8 @@
 __.add_plugin {
 	'stevearc/oil.nvim',
+	deps = {
+		'mini.icons',
+	},
 	keys = {
 		{
 			'<leader>o',

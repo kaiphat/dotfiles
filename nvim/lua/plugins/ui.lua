@@ -18,7 +18,6 @@ __.add_plugin {
 
 __.add_plugin {
 	'kevinhwang91/nvim-hlslens',
-	name = 'hlslens',
 	event = 'BufEnter',
 	config = function(_)
 		_.setup {

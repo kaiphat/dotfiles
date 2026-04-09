@@ -144,7 +144,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 __.add_plugin {
 	'mason-org/mason.nvim',
 	event = 'BufReadPre',
-	-- TODO add support for cmd lazy loading
 	cmds = { 'Mason' },
 	load = function(_)
 		_.setup {
@@ -194,7 +193,6 @@ __.add_plugin {
 
 __.add_plugin {
 	'neovim/nvim-lspconfig',
-	name = 'lspconfig',
 	event = 'BufReadPre',
 	deps = {
 		'null-ls',
@@ -232,24 +230,15 @@ __.add_plugin {
 
 __.add_plugin {
 	'yioneko/nvim-vtsls',
-	name = 'vtsls',
 	event = 'LspAttach',
 	load = function() end,
 }
 
 __.add_plugin {
 	'antosha417/nvim-lsp-file-operations',
-	name = 'lsp-file-operations',
 	deps = {
 		'plenary',
 		'neo-tree',
 	},
 	event = 'LspAttach',
 }
-
--- {
--- 	'mrcjkb/rustaceanvim',
--- 	version = '^8', -- Recommended
--- 	enabled = false,
--- 	lazy = false, -- This plugin is already lazy
--- },
