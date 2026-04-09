@@ -8,7 +8,11 @@ g.markdown_folding = 1
 local TAB_SIZE = 4
 
 -- enable new messages ui
-require('vim._core.ui2').enable {}
+require('vim._core.ui2').enable {
+	msg = {
+		targets = 'cmd',
+	},
+}
 
 o.winborder = 'rounded'
 o.guicursor = 'n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,t:ver25'
@@ -131,8 +135,8 @@ o.shortmess:append 'sIWcC'
 o.whichwrap:append '<>hl'
 o.conceallevel = 2
 
-o.foldmethod = 'expr'
-o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+-- o.foldmethod = 'expr'
+-- o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 o.foldtext = 'v:lua.get_foldtext()'
 o.foldcolumn = '0'
 o.foldminlines = 3

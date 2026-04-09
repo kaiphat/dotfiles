@@ -1,40 +1,38 @@
-return {
+__.add_plugin {
 	'chrisgrieser/nvim-spider',
+	name = 'spider',
 	event = 'BufReadPre',
-	enabled = true,
 	keys = {
 		{
 			'w',
-			function()
-				require('spider').motion 'w'
+			function(_)
+				_.motion 'w'
 			end,
 			mode = { 'n', 'o', 'x' },
 		},
 		{
 			'e',
-			function()
-				require('spider').motion 'e'
+			function(_)
+				_.motion 'e'
 			end,
 			mode = { 'n', 'o', 'x' },
 		},
 		{
 			'b',
-			function()
-				require('spider').motion 'b'
+			function(_)
+				_.motion 'b'
 			end,
 			mode = { 'n', 'o', 'x' },
 		},
 		{
 			'ge',
-			function()
-				require('spider').motion 'ge'
+			function(_)
+				_.motion 'ge'
 			end,
 			mode = { 'n', 'o', 'x' },
 		},
 	},
-	config = function()
-		require('spider').setup {
-			skipInsignificantPunctuation = false,
-		}
-	end,
+	opts = {
+		skipInsignificantPunctuation = false,
+	},
 }

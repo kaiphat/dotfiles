@@ -1,15 +1,13 @@
-return {
+__.add_plugin {
 	'pwntester/octo.nvim',
-	cmd = { 'Octo' },
-	dependencies = {
-		'nvim-lua/plenary.nvim',
-		'folke/snacks.nvim',
-		'nvim-tree/nvim-web-devicons',
+	cmds = { 'Octo' },
+	deps = {
+		'plenary',
+		'snacks',
+		'nvim-web-devicons',
 	},
-	config = function()
-		require('octo').setup {
-			use_local_fs = true,
-			picker = 'snacks',
-		}
-	end,
+	opts = {
+		use_local_fs = true,
+		picker = 'snacks',
+	},
 }

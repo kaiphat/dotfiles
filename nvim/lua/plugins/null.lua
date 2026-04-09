@@ -1,7 +1,3 @@
-local eslint_condition = function(utils)
-	return utils.has_file { '.eslintrc.json', '.eslintrc.js', '.eslintrc' }
-end
-
 local prettier_condition = function(utils)
 	if utils.has_file { '.prettierrc.toml' } then
 		return true
@@ -22,14 +18,12 @@ local prettier_condition = function(utils)
 	end
 end
 
-return {
+__.add_plugin {
 	'nvimtools/none-ls.nvim',
-	enabled = true,
+	name = 'null-ls',
 	event = 'BufReadPre',
-	config = function()
-		local null_ls = require 'null-ls'
-
-		local formattings = null_ls.builtins.formatting
+	load = function(_)
+		local formattings = _.builtins.formatting
 
 		local sources = {
 			formattings.prettier.with {
@@ -69,7 +63,7 @@ return {
 			},
 		}
 
-		null_ls.setup {
+		_.setup {
 			debounce = 100,
 			sources = sources,
 		}

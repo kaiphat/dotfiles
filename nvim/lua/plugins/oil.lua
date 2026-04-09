@@ -1,4 +1,4 @@
-return {
+__.add_plugin {
 	'stevearc/oil.nvim',
 	keys = {
 		{
@@ -14,8 +14,7 @@ return {
 			end,
 		},
 	},
-	enabled = true,
-	config = function()
+	load = function(_)
 		vim.api.nvim_create_autocmd('FileType', {
 			group = __.utils.create_augroup 'oil',
 			pattern = 'oil',
@@ -37,7 +36,7 @@ return {
 			end,
 		})
 
-		require('oil').setup {
+		_.setup {
 			watch_for_changes = true,
 			delete_to_trash = true,
 			columns = { 'icon' },

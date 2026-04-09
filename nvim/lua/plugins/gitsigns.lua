@@ -1,7 +1,8 @@
 local icons = __.constants.icons
 local base_keys = '<leader>h'
+local icon = icons.VERTICAL_LINE_1
 
-return {
+__.add_plugin {
 	'lewis6991/gitsigns.nvim',
 	event = 'BufReadPre',
 	keys = {
@@ -99,59 +100,54 @@ return {
 			mode = { 'o', 'x' },
 		},
 	},
-	config = function()
-		local gitsigns = require 'gitsigns'
-		local icon = icons.VERTICAL_LINE_1
-
-		gitsigns.setup {
-			signs = {
-				add = {
-					text = icon,
-				},
-				change = {
-					text = icon,
-				},
-				delete = {
-					text = icon,
-				},
-				topdelete = {
-					text = icon,
-				},
-				changedelete = {
-					text = icon,
-				},
-				untracked = {
-					text = icon,
-				},
+	opts = {
+		signs = {
+			add = {
+				text = icon,
 			},
-			signcolumn = true,
-			linehl = false,
-			numhl = false,
-			current_line_blame = false,
-			sign_priority = 6,
-			update_debounce = 100,
-			status_formatter = nil,
-			signs_staged_enable = true,
-			signs_staged = {
-				add = {
-					text = icon,
-				},
-				change = {
-					text = icon,
-				},
-				delete = {
-					text = icon,
-				},
-				topdelete = {
-					text = icon,
-				},
-				changedelete = {
-					text = icon,
-				},
+			change = {
+				text = icon,
 			},
-			preview_config = {
-				border = 'rounded',
+			delete = {
+				text = icon,
 			},
-		}
-	end,
+			topdelete = {
+				text = icon,
+			},
+			changedelete = {
+				text = icon,
+			},
+			untracked = {
+				text = icon,
+			},
+		},
+		signcolumn = true,
+		linehl = false,
+		numhl = false,
+		current_line_blame = false,
+		sign_priority = 6,
+		update_debounce = 100,
+		status_formatter = nil,
+		signs_staged_enable = true,
+		signs_staged = {
+			add = {
+				text = icon,
+			},
+			change = {
+				text = icon,
+			},
+			delete = {
+				text = icon,
+			},
+			topdelete = {
+				text = icon,
+			},
+			changedelete = {
+				text = icon,
+			},
+		},
+		preview_config = {
+			border = 'rounded',
+		},
+	},
 }

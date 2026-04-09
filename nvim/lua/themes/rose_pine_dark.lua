@@ -16,12 +16,11 @@
 -- highlight_high = "#524f67",
 -- none = "NONE",
 
-return {
+__.add_plugin {
 	'rose-pine/neovim',
-	priority = 1000,
-	lazy = false,
 	name = 'rose-pine',
-	config = function()
+	is_theme = true,
+	load = function(_)
 		require('rose-pine').setup {
 			dim_nc_background = false,
 			disable_background = true,

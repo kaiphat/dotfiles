@@ -111,16 +111,13 @@ local function get_components(c)
 	}
 end
 
-return {
+__.add_plugin {
 	'feline-nvim/feline.nvim',
-	priority = 900,
-	event = 'VeryLazy',
-	enabled = true,
-	config = function()
+	load = function(_)
 		local colors = get_colors()
 		local components = get_components(colors)
 
-		require('feline').setup {
+		_.setup {
 			theme = { bg = 'NONE', fg = 'NONE' },
 			disable = {},
 			components = {

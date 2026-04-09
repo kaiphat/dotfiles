@@ -1,5 +1,4 @@
-return {
+__.add_plugin {
 	'norcalli/nvim-colorizer.lua',
-	cmd = 'ColorizerToggle',
-	opts = {},
+	cmds = { 'ColorizerToggle' },
 }

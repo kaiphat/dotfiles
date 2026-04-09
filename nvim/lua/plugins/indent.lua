@@ -1,6 +1,5 @@
 local char_highlight_group = '@IndentBlanklineChar'
 local context_char_highlight_group = '@IndentBlanklineContextChar'
-local constants = __.constants
 
 local excluded_filetypes = {
 	'help',
@@ -60,51 +59,48 @@ local nodes = {
 	'with',
 }
 
-return {
-	{
-		'lukas-reineke/indent-blankline.nvim',
-		enabled = true,
-		main = 'ibl',
-		event = 'BufReadPre',
-		config = function()
-			local ibl = require 'ibl'
-			local hooks = require 'ibl.hooks'
+__.add_plugin {
+	'lukas-reineke/indent-blankline.nvim',
+	name = 'ibl',
+	version = 'ibl',
+	event = 'BufReadPre',
+	load = function()
+		local ibl = require 'ibl'
+		local hooks = require 'ibl.hooks'
 
-			hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-				vim.api.nvim_set_hl(0, char_highlight_group, { link = 'IndentBlanklineChar' })
-				vim.api.nvim_set_hl(0, context_char_highlight_group, { link = 'IndentBlanklineContextChar' })
-			end)
+		hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+			vim.api.nvim_set_hl(0, char_highlight_group, { link = 'IndentBlanklineChar' })
+			vim.api.nvim_set_hl(0, context_char_highlight_group, { link = 'IndentBlanklineContextChar' })
+		end)
 
-			hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
-			hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_tab_indent_level)
+		hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
+		hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_tab_indent_level)
 
-			ibl.setup {
-				indent = {
-					char = constants.icons.VERTICAL_LINE_1,
-					highlight = char_highlight_group,
+		ibl.setup {
+			indent = {
+				char = __.constants.icons.VERTICAL_LINE_1,
+				highlight = char_highlight_group,
+			},
+			scope = {
+				enabled = false,
+				show_start = false,
+				show_end = false,
+				include = {
+					node_type = { ['*'] = nodes },
 				},
-				scope = {
-					enabled = false,
-					show_start = false,
-					show_end = false,
-					include = {
-						node_type = { ['*'] = nodes },
-					},
-					highlight = context_char_highlight_group,
+				highlight = context_char_highlight_group,
+			},
+			exclude = {
+				buftypes = {
+					'terminal',
 				},
-				exclude = {
-					buftypes = {
-						'terminal',
-					},
-					filetypes = excluded_filetypes,
-				},
-			}
-		end,
-	},
+				filetypes = excluded_filetypes,
+			},
+		}
+	end,
+}
 
-	{
-		'nmac427/guess-indent.nvim',
-		event = 'VeryLazy',
-		opts = {},
-	},
+__.add_plugin {
+	'nmac427/guess-indent.nvim',
+	event = 'BufReadPre',
 }

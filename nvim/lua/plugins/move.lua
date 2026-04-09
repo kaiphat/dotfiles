@@ -1,25 +1,18 @@
-return {
-	{
-		'phaazon/hop.nvim',
-		branch = 'v2',
-		event = 'VeryLazy',
-		enabled = true,
-		keys = {
-			{
-				's',
-				function()
-					require('hop').hint_char1 {}
-				end,
-			},
+__.add_plugin {
+	'phaazon/hop.nvim',
+	version = 'v2',
+	event = 'BufReadPre',
+	keys = {
+		{
+			's',
+			function(_k)
+				_.hint_char1 {}
+			end,
 		},
-		config = function()
-			local hop = require 'hop'
-
-			hop.setup {
-				keys = 'jkldfsahpioqwertyuzxcvbnm',
-				case_insensitive = false,
-				-- uppercase_labels = true,
-			}
-		end,
+	},
+	opts = {
+		keys = 'jkldfsahpioqwertyuzxcvbnm',
+		case_insensitive = false,
+		-- uppercase_labels = true,
 	},
 }

@@ -40,11 +40,8 @@ local function open_commit(picker, item)
 	end)
 end
 
-return {
+__.add_plugin {
 	'folke/snacks.nvim',
-	priority = 950,
-	event = 'VeryLazy',
-	enabled = true,
 	keys = {
 		-- lazygit
 		{
@@ -472,262 +469,259 @@ return {
 		-- 	end,
 		-- },
 	},
-	opts = {
-		lazygit = {
-			configure = false,
-			win = {
-				style = 'lazygit',
+	load = function(p)
+		p.setup {
+			lazygit = {
+				configure = false,
+				win = {
+					style = 'lazygit',
+				},
+				config = {
+					os = nil,
+				},
 			},
-			config = {
-				os = nil,
-			},
-		},
 
-		picker = {
-			prompt = ' ' .. __.constants.icons.BRACKET .. ' ',
-			ui_select = true,
-			formatters = {
-				file = {
-					filename_first = true, -- display filename before the file path
-					truncate = 100,
+			picker = {
+				enabled = true,
+				prompt = ' ' .. __.constants.icons.BRACKET .. ' ',
+				ui_select = true,
+				formatters = {
+					file = {
+						filename_first = true, -- display filename before the file path
+						truncate = 100,
+					},
 				},
-			},
-			matcher = {
-				smartcase = false,
-				ignorecase = true,
-				filename_bonus = true,
-				file_pos = false,
+				matcher = {
+					smartcase = false,
+					ignorecase = true,
+					filename_bonus = true,
+					file_pos = false,
 
-				cwd_bonus = false,
-				frecency = true,
-				history_bonus = true,
-			},
-			layouts = {
-				custom = {
-					layout = {
-						backdrop = false,
-						width = function()
-							local c = vim.o.columns
-							if c > 160 then
-								return 0.7
-							else
-								return 0.9
-							end
-						end,
-						min_width = 80,
-						height = 0.9,
-						min_height = 30,
-						box = 'vertical',
-						border = 'top',
-						title = '{title} {live} {flags}',
-						title_pos = 'center',
-						{
-							win = 'input',
-							height = 1,
-							border = 'bottom',
-						},
-						{ win = 'list', height = 15, border = 'hpad' },
-						{ win = 'preview', border = 'rounded' },
-					},
+					cwd_bonus = false,
+					frecency = true,
+					history_bonus = true,
 				},
-			},
-			layout = {
-				preset = 'custom',
-			},
-			win = {
-				input = {
-					keys = {
-						['<c-e>'] = { 'close', mode = 'i' },
-						['<c-d>'] = { 'preview_scroll_down', mode = { 'i', 'n' } },
-						['<c-u>'] = { 'preview_scroll_up', mode = { 'i', 'n' } },
-						['<c-n>'] = { 'history_forward', mode = { 'i', 'n' } },
-						['<c-p>'] = { 'history_back', mode = { 'i', 'n' } },
-					},
-				},
-				preview = {
-					wo = {
-						number = false,
-						relativenumber = false,
-						signcolumn = 'no',
-						foldcolumn = '1',
-						foldenable = false,
-					},
-				},
-			},
-			previewers = {
-				git = {
-					native = false, -- use native (terminal) or Neovim for previewing git diffs and commits
-				},
-			},
-			sources = {
-				explorer = {
-					win = {
-						input = {
-							keys = {
-								-- ['o'] = {
-								-- 	'explorer_add',
-								-- 	mode = { 'i', 'n' },
-								-- },
-							},
-						},
-						list = {
-							keys = {
-								['o'] = {
-									'explorer_add',
-									mode = { 'i', 'n' },
-								},
-								['<Tab>'] = {
-									'select',
-									mode = { 'i', 'n' },
-								},
-							},
-						},
-					},
-					actions = {
-						select = function(picker)
-							picker.list:select()
-						end,
-					},
-					layout = {
-						preset = 'sidebar',
+				layouts = {
+					custom = {
 						layout = {
-							width = 55,
+							backdrop = false,
+							width = function()
+								local c = vim.o.columns
+								if c > 160 then
+									return 0.7
+								else
+									return 0.9
+								end
+							end,
+							min_width = 80,
+							height = 0.9,
+							min_height = 30,
+							box = 'vertical',
+							border = 'top',
+							title = '{title} {live} {flags}',
+							title_pos = 'center',
+							{
+								win = 'input',
+								height = 1,
+								border = 'bottom',
+							},
+							{ win = 'list', height = 15, border = 'hpad' },
+							{ win = 'preview', border = 'rounded' },
 						},
 					},
 				},
+				layout = {
+					preset = 'custom',
+				},
+				win = {
+					input = {
+						keys = {
+							['<c-e>'] = { 'close', mode = 'i' },
+							['<c-d>'] = { 'preview_scroll_down', mode = { 'i', 'n' } },
+							['<c-u>'] = { 'preview_scroll_up', mode = { 'i', 'n' } },
+							['<c-n>'] = { 'history_forward', mode = { 'i', 'n' } },
+							['<c-p>'] = { 'history_back', mode = { 'i', 'n' } },
+						},
+					},
+					preview = {
+						wo = {
+							number = false,
+							relativenumber = false,
+							signcolumn = 'no',
+							foldcolumn = '1',
+							foldenable = false,
+						},
+					},
+				},
+				previewers = {
+					git = {
+						native = false, -- use native (terminal) or Neovim for previewing git diffs and commits
+					},
+				},
+				sources = {
+					explorer = {
+						win = {
+							input = {
+								keys = {
+									-- ['o'] = {
+									-- 	'explorer_add',
+									-- 	mode = { 'i', 'n' },
+									-- },
+								},
+							},
+							list = {
+								keys = {
+									['o'] = {
+										'explorer_add',
+										mode = { 'i', 'n' },
+									},
+									['<Tab>'] = {
+										'select',
+										mode = { 'i', 'n' },
+									},
+								},
+							},
+						},
+						actions = {
+							select = function(picker)
+								picker.list:select()
+							end,
+						},
+						layout = {
+							preset = 'sidebar',
+							layout = {
+								width = 55,
+							},
+						},
+					},
 
-				git_grep_hunks = {
-					supports_live = false,
-					format = function(item, picker)
-						local file_format = Snacks.picker.format.file(item, picker)
-						vim.api.nvim_set_hl(0, 'SnacksPickerGitGrepLineNew', { link = 'Added' })
-						vim.api.nvim_set_hl(0, 'SnacksPickerGitGrepLineOld', { link = 'Removed' })
-						if item.sign == '+' then
-							file_format[#file_format - 1][2] = 'SnacksPickerGitGrepLineNew'
-						else
-							file_format[#file_format - 1][2] = 'SnacksPickerGitGrepLineOld'
-						end
-						return file_format
-					end,
-					finder = function(_, ctx)
-						local success, git_root = pcall(_.utils.get_git_root)
+					git_grep_hunks = {
+						supports_live = false,
+						format = function(item, picker)
+							local file_format = Snacks.picker.format.file(item, picker)
+							vim.api.nvim_set_hl(0, 'SnacksPickerGitGrepLineNew', { link = 'Added' })
+							vim.api.nvim_set_hl(0, 'SnacksPickerGitGrepLineOld', { link = 'Removed' })
+							if item.sign == '+' then
+								file_format[#file_format - 1][2] = 'SnacksPickerGitGrepLineNew'
+							else
+								file_format[#file_format - 1][2] = 'SnacksPickerGitGrepLineOld'
+							end
+							return file_format
+						end,
+						finder = function(_, ctx)
+							local success, git_root = pcall(_.utils.get_git_root)
 
-						if not success then
-							vim.notify 'Not a git repository'
-							return
-						end
+							if not success then
+								vim.notify 'Not a git repository'
+								return
+							end
 
-						local hcount = 0
-						local header = {
-							file = '',
-							old = { start = 0, count = 0 },
-							new = { start = 0, count = 0 },
-						}
+							local hcount = 0
+							local header = {
+								file = '',
+								old = { start = 0, count = 0 },
+								new = { start = 0, count = 0 },
+							}
 
-						local sign_count = 0
+							local sign_count = 0
 
-						return require('snacks.picker.source.proc').proc(
-							ctx:opts {
-								cmd = 'git',
-								args = { 'diff' },
-								transform = function(item)
-									local line = item.text
-									-- [[Header]]
-									if line:match '^diff' then
-										hcount = 3
-									elseif hcount > 0 then
-										if hcount == 1 then
-											local git_root_relative_path = line:sub(7)
-											local full_path =
-												vim.fn.fnamemodify(git_root .. '/' .. git_root_relative_path, ':p')
-											header.file = full_path
-										end
-										hcount = hcount - 1
-									elseif line:match '^@@' then
-										local parts = vim.split(line:match '@@ ([^@]+) @@', ' ')
-										local old_start, old_count = parts[1]:match '-(%d+),?(%d*)'
-										local new_start, new_count = parts[2]:match '+(%d+),?(%d*)'
-										header.old.start, header.old.count =
-											tonumber(old_start), tonumber(old_count) or 1
-										header.new.start, header.new.count =
-											tonumber(new_start), tonumber(new_count) or 1
-										sign_count = 0
-									-- [[Body]]
-									elseif not line:match '^[+-]' then
-										sign_count = 0
-									elseif line:match '^[+-]%s*$' then
-										sign_count = sign_count + 1
-									else
-										item.sign = line:sub(1, 1)
-										item.file = header.file
-										item.line = line:sub(2)
-										if item.sign == '+' then
-											item.pos = { header.new.start + sign_count, 0 }
+							return require('snacks.picker.source.proc').proc(
+								ctx:opts {
+									cmd = 'git',
+									args = { 'diff' },
+									transform = function(item)
+										local line = item.text
+										-- [[Header]]
+										if line:match '^diff' then
+											hcount = 3
+										elseif hcount > 0 then
+											if hcount == 1 then
+												local git_root_relative_path = line:sub(7)
+												local full_path =
+													vim.fn.fnamemodify(git_root .. '/' .. git_root_relative_path, ':p')
+												header.file = full_path
+											end
+											hcount = hcount - 1
+										elseif line:match '^@@' then
+											local parts = vim.split(line:match '@@ ([^@]+) @@', ' ')
+											local old_start, old_count = parts[1]:match '-(%d+),?(%d*)'
+											local new_start, new_count = parts[2]:match '+(%d+),?(%d*)'
+											header.old.start, header.old.count =
+												tonumber(old_start), tonumber(old_count) or 1
+											header.new.start, header.new.count =
+												tonumber(new_start), tonumber(new_count) or 1
+											sign_count = 0
+										-- [[Body]]
+										elseif not line:match '^[+-]' then
+											sign_count = 0
+										elseif line:match '^[+-]%s*$' then
 											sign_count = sign_count + 1
 										else
-											item.pos = { header.new.start, 0 }
-											sign_count = 0
+											item.sign = line:sub(1, 1)
+											item.file = header.file
+											item.line = line:sub(2)
+											if item.sign == '+' then
+												item.pos = { header.new.start + sign_count, 0 }
+												sign_count = sign_count + 1
+											else
+												item.pos = { header.new.start, 0 }
+												sign_count = 0
+											end
+											return true
 										end
-										return true
-									end
-									return false
-								end,
-							},
-							ctx
-						)
-					end,
+										return false
+									end,
+								},
+								ctx
+							)
+						end,
+					},
 				},
 			},
-		},
 
-		indent = {
-			enabled = false,
 			indent = {
-				enabled = true,
-				char = __.constants.icons.VERTICAL_LINE_1,
-			},
-
-			animate = {
 				enabled = false,
+				indent = {
+					enabled = true,
+					char = __.constants.icons.VERTICAL_LINE_1,
+				},
+
+				animate = {
+					enabled = false,
+				},
+
+				scope = {
+					enabled = false,
+				},
 			},
 
 			scope = {
 				enabled = false,
 			},
-		},
 
-		scope = {
-			enabled = false,
-		},
+			image = {
+				enabled = true,
+			},
 
-		image = {
-			enabled = true,
-		},
+			words = {
+				enabled = false,
+				debounce = 400,
+			},
 
-		words = {
-			enabled = false,
-			debounce = 400,
-		},
+			quickfile = {
+				enabled = true,
+			},
 
-		quickfile = {
-			enabled = true,
-		},
+			bigfile = {
+				enabled = true,
+			},
 
-		bigfile = {
-			enabled = true,
-		},
+			explorer = {
+				enabled = false,
+				replace_netrw = true,
+			},
+		}
 
-		explorer = {
-			enabled = false,
-			replace_netrw = true,
-		},
-	},
-	init = function()
-		vim.api.nvim_create_autocmd('User', {
-			pattern = 'VeryLazy',
-			callback = function()
-				__.picker = Snacks.picker
-			end,
-		})
+		__.picker = Snacks.picker
 	end,
 }

@@ -141,195 +141,110 @@ vim.api.nvim_create_autocmd('LspAttach', {
 	end,
 })
 
-return {
-	{
-		'mason-org/mason.nvim',
-		event = 'BufReadPre',
-		cmd = { 'Mason' },
-		config = function()
-			require('mason').setup {
-				ui = {
-					border = 'rounded',
-					width = 0.7,
-				},
-			}
-		end,
-	},
-
-	{
-		'WhoIsSethDaniel/mason-tool-installer.nvim',
-		cmd = { 'MasonToolsInstall' },
-		config = function()
-			require('mason-tool-installer').setup {
-				auto_update = false,
-				run_on_start = false,
-				ensure_installed = {
-					-- ls
-					'lua-language-server',
-					'prettierd',
-					'prettier',
-					'rust-analyzer',
-					-- 'typescript-language-server',
-					'json-lsp',
-					'css-lsp',
-					'html-lsp',
-					'json-lsp',
-					'sql-formatter',
-					'emmet-language-server',
-					'stylua',
-					'python-lsp-server',
-					'eslint-lsp',
-					'marksman',
-					'vtsls',
-					'llm-ls',
-					'jdtls',
-
-					-- dap
-					'js-debug-adapter',
-				},
-			}
-		end,
-	},
-
-	{
-		'neovim/nvim-lspconfig',
-		event = 'BufReadPre',
-		dependencies = {
-			'nvimtools/none-ls.nvim',
-			'yioneko/nvim-vtsls',
-			'saghen/blink.cmp',
-			'antosha417/nvim-lsp-file-operations',
-		},
-		config = function()
-			local init_capabilities = {
-				textDocument = {
-					semanticTokens = {
-						multilineTokenSupport = true,
-					},
-				},
-			}
-
-			local capabilities =
-				vim.tbl_deep_extend('force', init_capabilities, require('lsp-file-operations').default_capabilities())
-
-			vim.lsp.config('*', {
-				capabilities = require('blink.cmp').get_lsp_capabilities(capabilities),
-				root_markers = { '.git' },
-			})
-
-			for _, server in ipairs {
-				'lua_ls',
-				'nushell',
-				'vtsls',
-				'eslint',
-				'rust_analyzer',
-			} do
-				vim.lsp.enable(server)
-			end
-		end,
-	},
-
-	{
-		'pmizio/typescript-tools.nvim',
-		dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-		enabled = false,
-		config = function()
-			require('typescript-tools').setup {
-				on_attach = function(client, bufnr)
-					vim.keymap.set('n', '<leader>ti', function()
-						vim.cmd 'TSToolsAddMissingImports'
-					end, { buffer = bufnr })
-
-					vim.keymap.set('n', '<leader>tr', function()
-						vim.cmd 'TSToolsRenameFile'
-					end, { buffer = bufnr })
-
-					vim.keymap.set('n', '<leader>td', function()
-						vim.cmd 'TSToolsRemoveUnusedImports'
-					end, { buffer = bufnr })
-
-					vim.keymap.set('n', '<leader>to', function()
-						vim.cmd 'TSToolsOrganizeImports'
-					end, { buffer = bufnr })
-				end,
-				settings = {
-					tsserver_file_preferences = {
-						includeInlayParameterNameHints = 'all',
-						includeCompletionsForModuleExports = true,
-						quotePreference = 'auto',
-					},
-					tsserver_format_options = {
-						allowIncompleteCompletions = false,
-						allowRenameOfImportPath = false,
-						insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
-						insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = false,
-						insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
-					},
-				},
-			}
-		end,
-	},
-
-	{
-		'mfussenegger/nvim-jdtls',
-		ft = { 'java' },
-		enabled = false,
-		config = function()
-			local mason_path = vim.fn.stdpath 'data' .. '/mason'
-			local jdtls_path = mason_path .. '/packages/jdtls'
-			local lombok_path = jdtls_path .. '/lombok.jar'
-			local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-			local workspace_dir = vim.fn.stdpath 'data' .. '/jdtls-workspace/' .. project_name
-
-			local os = 'unknown-os'
-			if vim.fn.has 'mac' == 1 then
-				os = 'mac'
-			elseif vim.fn.has 'unix' == 1 then
-				os = 'linux'
-			elseif vim.fn.has 'win32' == 1 then
-				os = 'win'
-			end
-
-			require('jdtls').start_or_attach {
-				cmd = {
-					'java',
-					'-javaagent:' .. lombok_path,
-					'-Declipse.application=org.eclipse.jdt.ls.core.id1',
-					'-Dosgi.bundles.defaultStartLevel=4',
-					'-Declipse.product=org.eclipse.jdt.ls.core.product',
-					'-Dlog.protocol=true',
-					'-Dlog.level=ALL',
-					'-Xmx1g',
-					'--add-modules=ALL-SYSTEM',
-					'--add-opens',
-					'java.base/java.util=ALL-UNNAMED',
-					'--add-opens',
-					'java.base/java.lang=ALL-UNNAMED',
-					'-jar',
-					vim.fn.glob(jdtls_path .. '/plugins/org.eclipse.equinox.launcher_*.jar'),
-					'-configuration',
-					jdtls_path .. '/config_' .. os,
-					'-data',
-					workspace_dir,
-				},
-				root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
-			}
-		end,
-	},
-
-	{
-		'antosha417/nvim-lsp-file-operations',
-		dependencies = {
-			'nvim-lua/plenary.nvim',
-			'nvim-neo-tree/neo-tree.nvim',
-		},
-		event = 'LspAttach',
-		opts = {},
-	},
-	{
-		'mrcjkb/rustaceanvim',
-		version = '^8', -- Recommended
-		enabled = false,
-		lazy = false, -- This plugin is already lazy
-	},
+__.add_plugin {
+	'mason-org/mason.nvim',
+	event = 'BufReadPre',
+	-- TODO add support for cmd lazy loading
+	cmds = { 'Mason' },
+	load = function(_)
+		_.setup {
+			ui = {
+				border = 'rounded',
+				width = 0.7,
+			},
+		}
+	end,
 }
+
+__.add_plugin {
+	'WhoIsSethDaniel/mason-tool-installer.nvim',
+	deps = { 'mason' },
+	cmds = { 'MasonToolsInstall' },
+	load = function(_)
+		_.setup {
+			auto_update = false,
+			run_on_start = false,
+			ensure_installed = {
+				-- ls
+				'lua-language-server',
+				'prettierd',
+				'prettier',
+				'rust-analyzer',
+				-- 'typescript-language-server',
+				'json-lsp',
+				'css-lsp',
+				'html-lsp',
+				'json-lsp',
+				'sql-formatter',
+				'emmet-language-server',
+				'stylua',
+				'python-lsp-server',
+				'eslint-lsp',
+				'marksman',
+				'vtsls',
+				'llm-ls',
+				'jdtls',
+
+				-- dap
+				'js-debug-adapter',
+			},
+		}
+	end,
+}
+
+__.add_plugin {
+	'neovim/nvim-lspconfig',
+	name = 'lspconfig',
+	event = 'BufReadPre',
+	-- deps = {
+	-- 	'nvimtools/none-ls.nvim',
+	-- 	'yioneko/nvim-vtsls',
+	-- 	'saghen/blink.cmp',
+	-- 	'antosha417/nvim-lsp-file-operations',
+	-- },
+	load = function()
+		local init_capabilities = {
+			textDocument = {
+				semanticTokens = {
+					multilineTokenSupport = true,
+				},
+			},
+		}
+
+		-- local capabilities =
+		-- 	vim.tbl_deep_extend('force', init_capabilities, require('lsp-file-operations').default_capabilities())
+		--
+		-- vim.lsp.config('*', {
+		-- 	capabilities = require('blink.cmp').get_lsp_capabilities(capabilities),
+		-- 	root_markers = { '.git' },
+		-- })
+
+		for _, server in ipairs {
+			'lua_ls',
+			'nushell',
+			'vtsls',
+			'eslint',
+			'rust_analyzer',
+		} do
+			vim.lsp.enable(server)
+		end
+	end,
+}
+
+-- TODO
+-- __.add_plugin {
+--     'nvim-lsp-file-operations',
+-- 'antosha417/nvim-lsp-file-operations',
+-- deps = {
+--     'nvim-lua/plenary.nvim',
+--     'nvim-neo-tree/neo-tree.nvim',
+-- },
+-- event = 'LspAttach',
+-- opts = {},
+-- }
+-- {
+-- 	'mrcjkb/rustaceanvim',
+-- 	version = '^8', -- Recommended
+-- 	enabled = false,
+-- 	lazy = false, -- This plugin is already lazy
+-- },

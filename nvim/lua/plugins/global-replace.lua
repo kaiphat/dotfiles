@@ -1,30 +1,28 @@
-return {
-	{
-		'MagicDuck/grug-far.nvim',
-		keys = {
-			{
-				'<leader>r',
-				function()
-					require('grug-far').open()
-				end,
-			},
-			{
-				'<leader>R',
-				function()
-					require('grug-far').open {
-						prefills = {
-							paths = vim.fn.expand '%',
-						},
-					}
-				end,
-			},
+__.add_plugin {
+	'MagicDuck/grug-far.nvim',
+	keys = {
+		{
+			'<leader>r',
+			function(_)
+				_.open()
+			end,
 		},
-		config = function()
-			vim.g.maplocalleader = ','
-
-			require('grug-far').setup {
-				startInInsertMode = false,
-			}
-		end,
+		{
+			'<leader>R',
+			function(_)
+				_.open {
+					prefills = {
+						paths = vim.fn.expand '%',
+					},
+				}
+			end,
+		},
 	},
+	load = function(_)
+		vim.g.maplocalleader = ','
+
+		_.setup {
+			startInInsertMode = false,
+		}
+	end,
 }

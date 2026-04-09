@@ -61,56 +61,50 @@ local languges = {
 	'dart',
 }
 
-return {
-	{
-		'nvim-treesitter/nvim-treesitter-context',
-		event = 'BufReadPre',
-		enabled = true,
-		keys = {
-			{
-				'[c',
-				function()
-					require('treesitter-context').go_to_context()
-				end,
+__.add_plugin {
+	'nvim-treesitter/nvim-treesitter',
+	version = 'main',
+	load = function(p)
+		p.setup {
+			install_dir = vim.fn.stdpath 'data' .. '/site',
+			indent = {
+				enable = true,
 			},
-		},
-		opts = {
-			max_lines = 3,
-		},
-	},
+		}
 
-	{
-		'nvim-treesitter/nvim-treesitter',
-		lazy = false,
-		branch = 'main',
-		enabled = true,
-		build = ':TSUpdate',
-		config = function()
-			require('nvim-treesitter').setup {
-				install_dir = vim.fn.stdpath 'data' .. '/site',
-				indent = {
-					enable = true,
-				},
-			}
+		p.install(languges)
 
-			require('nvim-treesitter').install(languges)
+		vim.api.nvim_create_autocmd('FileType', {
+			group = __.utils.create_augroup 'treesitter_indent',
+			callback = function(info)
+				local ft = vim.bo[info.buf].filetype
 
-			vim.api.nvim_create_autocmd('FileType', {
-				group = __.utils.create_augroup 'treesitter_indent',
-				callback = function(info)
-					local ft = vim.bo[info.buf].filetype
+				if ft == 'copilot-chat' then
+					ft = 'markdown'
+				end
 
-					if ft == 'copilot-chat' then
-						ft = 'markdown'
-					end
+				if vim.treesitter.language.add(ft) then
+					vim.bo.indentexpr = 'v:lua.require("nvim-treesitter").indentexpr()'
 
-					if vim.treesitter.language.add(ft) then
-						vim.bo.indentexpr = 'v:lua.require("nvim-treesitter").indentexpr()'
+					vim.treesitter.start()
 
-						vim.treesitter.start()
-					end
-				end,
-			})
-		end,
-	},
+					vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+					vim.wo[0][0].foldmethod = 'expr'
+				end
+			end,
+		})
+	end,
 }
+
+vim.api.nvim_create_autocmd('PackChanged', {
+	callback = function(ev)
+		local name, kind = ev.data.spec.name, ev.data.kind
+		if name == 'nvim-treesitter' and kind == 'update' then
+			if not ev.data.active then
+				vim.cmd.packadd 'nvim-treesitter'
+			end
+
+			vim.cmd 'TSUpdate'
+		end
+	end,
+})

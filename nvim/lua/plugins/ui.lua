@@ -1,168 +1,44 @@
-return {
-	{
-		'folke/noice.nvim',
-		enabled = false,
-		event = 'VeryLazy',
-		config = function()
-			local noice = require 'noice'
-
-			local icon = ' ' .. __.constants.icons.ARROW
-
-			noice.setup {
-				views = {
-					cmdline_popup = {
-						position = {
-							row = '40%',
-							col = '50%',
-						},
-						win_options = {
-							winhighlight = {
-								Normal = 'NormalFloat',
-								FloatBorder = 'FloatBorder',
-							},
-						},
-					},
-
-					mini = {
-						timeout = 7000,
-						win_options = {
-							winblend = 0,
-						},
-						position = {
-							row = -2,
-							col = '100%',
-						},
-					},
-				},
-
-				cmdline = {
-					view = 'cmdline',
-					format = {
-						cmdline = { title = '', pattern = '^:', icon = icon, lang = 'vim' },
-						search_down = {
-							title = '',
-							kind = 'search',
-							pattern = '^/',
-							icon = icon,
-							lang = 'regex',
-						},
-						search_up = { title = '', kind = 'search', pattern = '^%?', icon = icon, lang = 'regex' },
-						filter = { pattern = '^:%s*!', icon = icon, lang = 'bash' },
-						lua = { pattern = '^:%s*lua%s+', icon = '', lang = 'lua' },
-						help = { pattern = '^:%s*h%s+', icon = icon },
-						input = { view = 'cmdline' },
-					},
-				},
-
-				notify = {
-					view = 'mini',
-				},
-
-				lsp = {
-					progress = {
-						enabled = false,
-						format = 'lsp_progress',
-						format_done = 'lsp_progress_done',
-						throttle = 1000 / 30, -- frequency to update lsp progress message
-						view = 'mini',
-					},
-					override = {
-						['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-						['vim.lsp.util.stylize_markdown'] = true,
-						['cmp.entry.get_documentation'] = false,
-					},
-				},
-
-				format = {},
-
-				presets = {
-					bottom_search = true,
-					long_message_to_split = true,
-					lsp_doc_border = true,
-					command_palette = false,
-					inc_rename = false,
-				},
-
-				routes = {
-					{
-						filter = {
-							event = 'msg_show',
-							kind = '',
-							find = 'written',
-						},
-						opts = { skip = true },
-					},
-					{
-						view = 'notify',
-						filter = {
-							event = 'msg_show',
-							find = '%d+L, %d+B',
-						},
-					},
-				},
-
-				health = {
-					checker = false,
-				},
-			}
-		end,
-	},
-
-	{
-		'j-hui/fidget.nvim',
-		enabled = false,
-		opts = {
-			notification = {
-				window = {
-					x_padding = 0,
-					-- border = 'rounded',
-				},
-			},
+__.add_plugin {
+	'folke/which-key.nvim',
+	keys = {
+		{
+			'<leader>?',
+			function(_)
+				_.show { global = false }
+			end,
+			desc = 'Buffer Local Keymaps (which-key)',
 		},
 	},
-
-	{
-		'folke/which-key.nvim',
-		event = 'VeryLazy',
-		opts = {
-			preset = 'helix',
-			delay = 800,
-		},
-		keys = {
-			{
-				'<leader>?',
-				function()
-					require('which-key').show { global = false }
-				end,
-				desc = 'Buffer Local Keymaps (which-key)',
-			},
-		},
+	opts = {
+		preset = 'helix',
+		delay = 800,
 	},
+}
 
-	{
-		'kevinhwang91/nvim-hlslens',
-		event = 'BufEnter',
-		config = function()
-			require('hlslens').setup {
-				nearest_only = true,
-			}
+__.add_plugin {
+	'kevinhwang91/nvim-hlslens',
+	name = 'hlslens',
+	event = 'BufEnter',
+	config = function(_)
+		_.setup {
+			nearest_only = true,
+		}
 
-			local opts = { noremap = true, silent = true }
+		local opts = { noremap = true, silent = true }
 
-			vim.api.nvim_set_keymap(
-				'n',
-				'n',
-				[[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
-				opts
-			)
-			vim.api.nvim_set_keymap(
-				'n',
-				'N',
-				[[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
-				opts
-			)
-			vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], opts)
-			vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], opts)
-		end,
-	},
+		vim.api.nvim_set_keymap(
+			'n',
+			'n',
+			[[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+			opts
+		)
+		vim.api.nvim_set_keymap(
+			'n',
+			'N',
+			[[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+			opts
+		)
+		vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], opts)
+		vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], opts)
+	end,
 }

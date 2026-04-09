@@ -1,8 +1,6 @@
-return {
+__.add_plugin {
 	'saghen/blink.cmp',
-	enabled = true,
-	lazy = false,
-	version = '*',
+	version = vim.version.range '1',
 	opts = {
 		keymap = {
 			['<C-j>'] = { 'show', 'select_next', 'fallback' },
@@ -150,3 +148,12 @@ return {
 		},
 	},
 }
+
+vim.api.nvim_create_autocmd('PackChanged', {
+	callback = function(ev)
+		local name, kind = ev.data.spec.name, ev.data.kind
+		if name == 'blink.cmp' and (kind == 'install' or kind == 'update') then
+			vim.system({ 'cargo', 'build', '--release' }, { cwd = ev.data.path })
+		end
+	end,
+})

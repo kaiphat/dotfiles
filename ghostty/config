@@ -1,5 +1,5 @@
-config-file = ./fonts/tx
-config-file = ./themes/poimandres_dark
+config-file = ./fonts/maple
+config-file = ./themes/rose_pine_dark
 
 #custom-shader-animation = true
 #custom-shader = ./shaders/warp_cursor.glsl
