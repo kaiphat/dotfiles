@@ -1,50 +1,50 @@
 local plugins = {}
 
 local function load_plugin(name)
-	local opts = plugins[name]
+	local P = plugins[name]
 
-	if not opts then
+	if not P then
 		vim.notify('Plugin ' .. name .. ' does not exist', vim.log.levels.ERROR)
 		return
 	end
 
-	if opts.is_loaded then
+	if P.is_loaded then
 		return
 	end
 
-	if opts.is_loading then
+	if P.is_loading then
 		vim.notify('Circular deps in ' .. name, vim.log.levels.ERROR)
 		return
 	end
 
-	opts.is_loading = true
+	P.is_loading = true
 
-	if opts.deps then
-		for _, plugin in ipairs(opts.deps) do
+	if P.deps then
+		for _, plugin in ipairs(P.deps) do
 			load_plugin(plugin)
 		end
 	end
 
-	if not opts.is_local then
+	if not P.is_local then
 		vim.pack.add {
 			{
-				src = 'https://github.com/' .. opts.src,
-				version = opts.version,
+				src = 'https://github.com/' .. P.src,
+				version = P.version,
 			},
 		}
 	end
 
-	if not opts.skip_require then
-		opts.package = require(name)
+	if not P.skip_require then
+		P.package = require(name)
 	end
 
-	if opts.user_load then
-		opts.user_load(opts.package)
+	if P.user_load then
+		P.user_load(P.package)
 	else
-		opts.package.setup(opts.user_opts)
+		P.package.setup(P.user_opts)
 	end
 
-	opts.is_loaded = true
+	P.is_loaded = true
 end
 
 ---@param opts {
@@ -170,6 +170,7 @@ __.add_plugin = function(opts)
 
 		for _, map in ipairs(opts.keys) do
 			vim.keymap.set(map.mode or 'n', map[1], function()
+				vim.print(name)
 				load_plugin(name)
 				map[2](plugins[name].package)
 			end, {

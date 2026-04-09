@@ -63,6 +63,7 @@ local languges = {
 
 __.add_plugin {
 	'nvim-treesitter/nvim-treesitter',
+	name = 'nvim-treesitter',
 	version = 'main',
 	load = function(p)
 		p.setup {

@@ -33,13 +33,13 @@ __.add_plugin {
 				vim.api.nvim_create_autocmd({ 'VimResized', 'WinEnter' }, {
 					group = __.utils.create_augroup 'resize_pane',
 					buffer = bufnr,
-					callback = function(event)
+					callback = function()
 						vim.cmd 'wincmd ='
 					end,
 				})
 				vim.opt_local.wrap = true
 			end,
-			view_opened = function(view)
+			view_opened = function()
 				-- vim.cmd ':WindowsDisableAutowidth'
 			end,
 		},
