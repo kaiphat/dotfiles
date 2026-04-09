@@ -184,3 +184,7 @@ vim.api.nvim_create_autocmd('VimEnter', {
 		end
 	end,
 })
+
+vim.api.nvim_create_user_command('Update', function()
+	vim.pack.update(nil, {})
+end, {})
