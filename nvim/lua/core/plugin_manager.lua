@@ -47,6 +47,20 @@ local function load_plugin(name)
 	opts.is_loaded = true
 end
 
+---@param opts {
+---	   [1]: string,
+---	   enabled?: boolean,
+---	   dir?: string,
+---	   name?: string,
+---	   opts?: {},
+---	   deps?: string[],
+---	   load?: fun(plugin: {}),
+---	   is_theme?: boolean,
+---	   skip_require?: boolean,
+---	   cmds?: string[],
+---	   ft?: string[],
+---	   event?: string,
+---}
 __.add_plugin = function(opts)
 	local src = opts[1]
 	local name = opts.dir or opts.name or src:match('/([%w_.-]+)$'):gsub('%.nvim$', '')

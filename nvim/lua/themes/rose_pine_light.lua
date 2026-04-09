@@ -1,12 +1,9 @@
-return {
+__.add_plugin {
 	'rose-pine/neovim',
-	priority = 1000,
-	lazy = false,
+	is_theme = true,
 	name = 'rose-pine',
-	config = function()
-		local rp = require 'rose-pine'
-
-		rp.setup {
+	load = function(_)
+		_.setup {
 			variant = 'dawn',
 			dark_variant = 'dawn',
 			dim_nc_background = false,

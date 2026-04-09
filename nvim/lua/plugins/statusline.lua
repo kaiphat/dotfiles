@@ -113,6 +113,9 @@ end
 
 __.add_plugin {
 	'feline-nvim/feline.nvim',
+	deps = {
+		'local_plugins.anchor',
+	},
 	load = function(_)
 		local colors = get_colors()
 		local components = get_components(colors)

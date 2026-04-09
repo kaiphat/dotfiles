@@ -29,6 +29,6 @@ local themes = {
 	mfd_dark = 'mfd_dark',
 }
 
-vim.o.background = 'dark'
+vim.o.background = 'light'
 
-return require('themes.' .. themes.rose_pine_dark)
+return require('themes.' .. themes.rose_pine_light)

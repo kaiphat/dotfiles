@@ -196,12 +196,11 @@ __.add_plugin {
 	'neovim/nvim-lspconfig',
 	name = 'lspconfig',
 	event = 'BufReadPre',
-	-- deps = {
-	-- 	'nvimtools/none-ls.nvim',
-	-- 	'yioneko/nvim-vtsls',
-	-- 	'saghen/blink.cmp',
-	-- 	'antosha417/nvim-lsp-file-operations',
-	-- },
+	deps = {
+		'null-ls',
+		'blink.cmp',
+		'lsp-file-operations',
+	},
 	load = function()
 		local init_capabilities = {
 			textDocument = {
@@ -211,13 +210,13 @@ __.add_plugin {
 			},
 		}
 
-		-- local capabilities =
-		-- 	vim.tbl_deep_extend('force', init_capabilities, require('lsp-file-operations').default_capabilities())
-		--
-		-- vim.lsp.config('*', {
-		-- 	capabilities = require('blink.cmp').get_lsp_capabilities(capabilities),
-		-- 	root_markers = { '.git' },
-		-- })
+		local capabilities =
+			vim.tbl_deep_extend('force', init_capabilities, require('lsp-file-operations').default_capabilities())
+
+		vim.lsp.config('*', {
+			capabilities = require('blink.cmp').get_lsp_capabilities(capabilities),
+			root_markers = { '.git' },
+		})
 
 		for _, server in ipairs {
 			'lua_ls',
@@ -231,17 +230,23 @@ __.add_plugin {
 	end,
 }
 
--- TODO
--- __.add_plugin {
---     'nvim-lsp-file-operations',
--- 'antosha417/nvim-lsp-file-operations',
--- deps = {
---     'nvim-lua/plenary.nvim',
---     'nvim-neo-tree/neo-tree.nvim',
--- },
--- event = 'LspAttach',
--- opts = {},
--- }
+__.add_plugin {
+	'yioneko/nvim-vtsls',
+	name = 'vtsls',
+	event = 'LspAttach',
+	load = function() end,
+}
+
+__.add_plugin {
+	'antosha417/nvim-lsp-file-operations',
+	name = 'lsp-file-operations',
+	deps = {
+		'plenary',
+		'neo-tree',
+	},
+	event = 'LspAttach',
+}
+
 -- {
 -- 	'mrcjkb/rustaceanvim',
 -- 	version = '^8', -- Recommended
