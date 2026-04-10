@@ -42,6 +42,9 @@ end
 
 __.add_plugin {
 	'folke/snacks.nvim',
+	deps = {
+		'mini.icons',
+	},
 	keys = {
 		-- lazygit
 		{

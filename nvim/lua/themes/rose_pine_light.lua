@@ -1,6 +1,6 @@
 __.add_plugin {
 	'rose-pine/neovim',
-	is_theme = true,
+	is_instant = true,
 	name = 'rose-pine',
 	load = function(_)
 		_.setup {

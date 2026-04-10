@@ -4,18 +4,18 @@ local function map(keys, cmd)
 	vim.keymap.set('n', keys, cmd, { noremap = true, silent = true })
 end
 
-local Plugin = {}
+local P = {}
 
-Plugin.__index = Plugin
+P.__index = P
 
-function Plugin:new()
+function P:new()
 	return setmetatable({
 		group = __.utils.create_augroup 'anchor_plugin_group',
 		current_buf_anchor_index = nil,
 	}, self)
 end
 
-function Plugin:create_manager()
+function P:create_manager()
 	self.manager = Manager:new {
 		git_branch = __.utils.get_git_branch(),
 		cwd = __.utils.get_root_dir(),
@@ -23,7 +23,7 @@ function Plugin:create_manager()
 	self.manager:setup()
 end
 
-function Plugin:add_keymaps()
+function P:add_keymaps()
 	map('m', function()
 		local ok, key = pcall(vim.fn.getchar)
 
@@ -56,6 +56,8 @@ function Plugin:add_keymaps()
 	end)
 
 	map('<leader>bs', function()
+		__.load_plugin 'snacks'
+
 		Snacks.picker {
 			finder = function()
 				local items = {}
@@ -94,11 +96,11 @@ function Plugin:add_keymaps()
 	end)
 end
 
-function Plugin:get_anchor_index()
+function P:get_anchor_index()
 	return self.current_buf_anchor_index
 end
 
-function Plugin:setup()
+function P:setup()
 	self:create_manager()
 
 	vim.api.nvim_create_autocmd({ 'VimLeavePre' }, {
@@ -123,4 +125,4 @@ function Plugin:setup()
 	self:add_keymaps()
 end
 
-return Plugin
+return P

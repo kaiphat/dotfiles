@@ -1,6 +1,6 @@
 __.add_plugin {
 	'stevearc/aerial.nvim',
-	event = 'BufEnter',
+	event = 'BufReadPost',
 	deps = {
 		'nvim-treesitter',
 	},

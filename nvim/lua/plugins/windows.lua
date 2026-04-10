@@ -1,5 +1,6 @@
 __.add_plugin {
 	'anuvyklack/middleclass',
+	event = 'BufReadPost',
 	load = function() end,
 }
 
@@ -8,7 +9,7 @@ __.add_plugin {
 	deps = {
 		'middleclass',
 	},
-	event = 'BufReadPre',
+	event = 'BufReadPost',
 	opst = {
 		autowidth = {
 			enable = true,

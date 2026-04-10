@@ -1,8 +1,6 @@
-local Path = require 'plenary.path'
+local M = {}
 
-local Manager = {}
-
-Manager.__index = Manager
+M.__index = M
 
 local function build_path(git_branch, cwd)
 	local file_name = string.format('kaiphat_anchor:%s:%s.json', cwd, git_branch or 'nobranch')
@@ -10,14 +8,14 @@ local function build_path(git_branch, cwd)
 	return string.format('%s/%s', vim.fn.stdpath 'data', escaped)
 end
 
-function Manager:new(opts)
+function M:new(opts)
 	return setmetatable({
-		path = Path:new(build_path(opts.git_branch, opts.cwd)),
+		path = require('plenary.path'):new(build_path(opts.git_branch, opts.cwd)),
 		anchors = nil,
 	}, self)
 end
 
-function Manager:setup()
+function M:setup()
 	local anchors = {}
 
 	if self.path:exists() then
@@ -27,17 +25,17 @@ function Manager:setup()
 	self.anchors = anchors
 end
 
-function Manager:save_json()
+function M:save_json()
 	if self.anchors and #self.anchors > 0 then
 		self.path:write(vim.json.encode(self.anchors), 'w')
 	end
 end
 
-function Manager:remove_anchor(index)
+function M:remove_anchor(index)
 	self.anchors[index] = nil
 end
 
-function Manager:load_buffer(index)
+function M:load_buffer(index)
 	local anchor = self.anchors[index]
 
 	if anchor == nil then
@@ -69,7 +67,7 @@ function Manager:load_buffer(index)
 	end
 end
 
-function Manager:add_anchor(new_index)
+function M:add_anchor(new_index)
 	local row, col = __.utils.get_row_col()
 	local current_path = __.utils.get_full_path()
 
@@ -87,7 +85,7 @@ function Manager:add_anchor(new_index)
 	}
 end
 
-function Manager:get_buf_anchor_index(file)
+function M:get_buf_anchor_index(file)
 	if not self.anchors then
 		return
 	end
@@ -99,4 +97,4 @@ function Manager:get_buf_anchor_index(file)
 	end
 end
 
-return Manager
+return M

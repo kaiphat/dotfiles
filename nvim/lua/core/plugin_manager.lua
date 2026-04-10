@@ -1,6 +1,6 @@
 local plugins = {}
 
-local function load_plugin(name)
+__.load_plugin = function(name)
 	local P = plugins[name]
 
 	if not P then
@@ -21,7 +21,7 @@ local function load_plugin(name)
 
 	if P.deps then
 		for _, plugin in ipairs(P.deps) do
-			load_plugin(plugin)
+			__.load_plugin(plugin)
 		end
 	end
 
@@ -36,12 +36,12 @@ local function load_plugin(name)
 
 	if not P.skip_require then
 		P.package = require(name)
-	end
 
-	if P.user_load then
-		P.user_load(P.package)
-	else
-		P.package.setup(P.user_opts)
+		if P.user_load then
+			P.user_load(P.package)
+		else
+			P.package.setup(P.user_opts)
+		end
 	end
 
 	P.is_loaded = true
@@ -55,12 +55,12 @@ end
 ---	   opts?: {},
 ---	   deps?: string[],
 ---	   load?: fun(plugin: {}),
----	   is_theme?: boolean,
 ---	   skip_require?: boolean,
 ---	   cmds?: string[],
 ---	   keys?: {}[],
 ---	   ft?: string[],
----	   event?: string,
+---	   event?: vim.api.keyset.events,
+---	   is_instant?: boolean,
 ---}
 __.add_plugin = function(opts)
 	if opts.enabled == false then
@@ -74,8 +74,7 @@ __.add_plugin = function(opts)
 		vim.notify('Plugin duplicated ' .. name, vim.log.levels.ERROR)
 	end
 
-	local plugin = {
-		is_instant = true,
+	local P = {
 		deps = opts.deps,
 		user_opts = opts.opts,
 		src = src,
@@ -84,17 +83,14 @@ __.add_plugin = function(opts)
 		skip_require = opts.skip_require,
 	}
 
-	plugins[name] = plugin
+	plugins[name] = P
 
-	if opts.is_theme then
-		plugin.is_instant = false
-
-		load_plugin(name)
+	if opts.is_instant then
+		__.load_plugin(name)
+		return
 	end
 
 	if opts.cmds then
-		plugin.is_instant = false
-
 		for _, cmd in ipairs(opts.cmds) do
 			vim.api.nvim_create_user_command(cmd, function(event)
 				local command = {
@@ -111,7 +107,7 @@ __.add_plugin = function(opts)
 					command.range = { event.line1, event.line2 }
 				end
 
-				load_plugin(name)
+				__.load_plugin(name)
 
 				local info = vim.api.nvim_get_commands({})[cmd] or vim.api.nvim_buf_get_commands(0, {})[cmd]
 				if not info then
@@ -143,35 +139,28 @@ __.add_plugin = function(opts)
 	end
 
 	if opts.event then
-		plugin.is_instant = false
-
 		vim.api.nvim_create_autocmd(opts.event, {
 			once = true,
 			callback = function()
-				load_plugin(name)
+				__.load_plugin(name)
 			end,
 		})
 	end
 
 	if opts.ft then
-		plugin.is_instant = false
-
 		vim.api.nvim_create_autocmd({ 'FileType' }, {
 			pattern = opts.ft,
 			once = true,
 			callback = function()
-				load_plugin(name)
+				__.load_plugin(name)
 			end,
 		})
 	end
 
 	if opts.keys then
-		plugin.is_instant = false
-
 		for _, map in ipairs(opts.keys) do
 			vim.keymap.set(map.mode or 'n', map[1], function()
-				vim.print(name)
-				load_plugin(name)
+				__.load_plugin(name)
 				map[2](plugins[name].package)
 			end, {
 				desc = map.desc,
@@ -179,17 +168,6 @@ __.add_plugin = function(opts)
 		end
 	end
 end
-
-vim.api.nvim_create_autocmd('VimEnter', {
-	once = true,
-	callback = function()
-		for plugin, opts in pairs(plugins) do
-			if opts.is_instant then
-				load_plugin(plugin)
-			end
-		end
-	end,
-})
 
 vim.api.nvim_create_user_command('Update', function()
 	vim.pack.update(nil, {})

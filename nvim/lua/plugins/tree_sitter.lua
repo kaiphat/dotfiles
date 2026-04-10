@@ -65,6 +65,7 @@ __.add_plugin {
 	'nvim-treesitter/nvim-treesitter',
 	name = 'nvim-treesitter',
 	version = 'main',
+	event = 'BufReadPre',
 	load = function(p)
 		p.setup {
 			install_dir = vim.fn.stdpath 'data' .. '/site',

@@ -1,5 +1,6 @@
 __.add_plugin {
 	'saghen/blink.cmp',
+	event = 'InsertEnter',
 	version = vim.version.range '1',
 	opts = {
 		keymap = {

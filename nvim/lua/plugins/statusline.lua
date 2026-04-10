@@ -41,8 +41,12 @@ local function get_marks_component(c, gap)
 	return {
 		icon = ' ',
 		enabled = function()
-			local index = require('local_plugins.anchor').get_anchor_index()
-			return index ~= nil
+			local error, result = pcall(function()
+				local index = require('local_plugins.anchor').get_anchor_index()
+				return index ~= nil
+			end)
+
+			return error and false or result
 		end,
 		provider = function()
 			return require('local_plugins.anchor').get_anchor_index():upper()
@@ -113,6 +117,7 @@ end
 
 __.add_plugin {
 	'feline-nvim/feline.nvim',
+	event = 'VimEnter',
 	deps = {
 		'local_plugins.anchor',
 	},

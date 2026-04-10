@@ -1,10 +1,6 @@
 __.add_plugin {
 	dir = 'local_plugins.anchor',
 	event = 'BufReadPre',
-	deps = {
-		'plenary',
-		'snacks',
-	},
 }
 
 __.add_plugin {

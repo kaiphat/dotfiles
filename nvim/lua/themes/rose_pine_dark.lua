@@ -19,9 +19,10 @@
 __.add_plugin {
 	'rose-pine/neovim',
 	name = 'rose-pine',
-	is_theme = true,
+	is_instant = true,
 	load = function(_)
-		require('rose-pine').setup {
+		vim.print 'loaded'
+		_.setup {
 			dim_nc_background = false,
 			disable_background = true,
 			disable_float_background = true,

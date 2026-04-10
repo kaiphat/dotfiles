@@ -1,12 +1,8 @@
 local Plugin = require 'local_plugins.anchor.Plugin'
 
-local plugin = Plugin:new()
-
 return {
-	setup = function()
-		plugin:setup()
-	end,
+	setup = function() end,
 	get_anchor_index = function()
-		return plugin:get_anchor_index()
+		return nil
 	end,
 }

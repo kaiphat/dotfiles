@@ -18,7 +18,7 @@ __.add_plugin {
 
 __.add_plugin {
 	'kevinhwang91/nvim-hlslens',
-	event = 'BufEnter',
+	event = 'BufReadPost',
 	config = function(_)
 		_.setup {
 			nearest_only = true,

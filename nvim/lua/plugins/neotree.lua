@@ -1,5 +1,6 @@
 __.add_plugin {
 	'nvim-tree/nvim-web-devicons',
+	name = 'nvim-web-devicons',
 	skip_require = true,
 	load = function() end,
 }
@@ -16,6 +17,7 @@ __.add_plugin {
 	deps = {
 		'plenary',
 		'nui',
+		'nvim-web-devicons',
 	},
 	keys = {
 		{
