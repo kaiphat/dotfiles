@@ -66,33 +66,34 @@ __.add_plugin {
 	name = 'nvim-treesitter',
 	version = 'main',
 	event = 'BufReadPre',
-	load = function(p)
-		p.setup {
+	load = function(_)
+		_.setup {
 			install_dir = vim.fn.stdpath 'data' .. '/site',
 			indent = {
 				enable = true,
 			},
 		}
 
-		p.install(languges)
+		_.install(languges)
 
 		vim.api.nvim_create_autocmd('FileType', {
 			group = __.utils.create_augroup 'treesitter_indent',
-			callback = function(info)
-				local ft = vim.bo[info.buf].filetype
+			callback = function(event)
+				local ft = event.match
 
-				if ft == 'copilot-chat' then
+				local added = vim.treesitter.language.add(ft)
+
+				if not added then
 					ft = 'markdown'
+					vim.treesitter.language.add(ft)
 				end
 
-				if vim.treesitter.language.add(ft) then
-					vim.bo.indentexpr = 'v:lua.require("nvim-treesitter").indentexpr()'
+				vim.treesitter.start(event.buf, ft)
 
-					vim.treesitter.start()
+				vim.bo.indentexpr = 'v:lua.require("nvim-treesitter").indentexpr()'
 
-					vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-					vim.wo[0][0].foldmethod = 'expr'
-				end
+				vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+				vim.wo[0][0].foldmethod = 'expr'
 			end,
 		})
 	end,

@@ -102,5 +102,5 @@ __.add_plugin {
 
 __.add_plugin {
 	'nmac427/guess-indent.nvim',
-	event = 'BufReadPre',
+	event = 'BufReadPost',
 }

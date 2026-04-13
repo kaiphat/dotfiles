@@ -51,7 +51,7 @@ vim.api.nvim_create_autocmd('LspProgress', {
 vim.api.nvim_create_autocmd('LspAttach', {
 	group = __.utils.create_augroup 'lsp_attach',
 	callback = function(event)
-		local map = function(mode, keys, cmd)
+		local function map(mode, keys, cmd)
 			vim.keymap.set(mode, keys, cmd, { buffer = event.buf })
 		end
 
@@ -143,7 +143,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 __.add_plugin {
 	'mason-org/mason.nvim',
-	event = 'BufReadPre',
 	cmds = { 'Mason' },
 	load = function(_)
 		_.setup {
@@ -193,9 +192,10 @@ __.add_plugin {
 
 __.add_plugin {
 	'neovim/nvim-lspconfig',
-	event = 'BufReadPre',
+	event = 'LspAttach',
 	deps = {
 		'null-ls',
+		'mason',
 		'blink.cmp',
 		'lsp-file-operations',
 	},
@@ -229,16 +229,8 @@ __.add_plugin {
 }
 
 __.add_plugin {
-	'yioneko/nvim-vtsls',
-	event = 'LspAttach',
-	load = function() end,
-}
-
-__.add_plugin {
 	'antosha417/nvim-lsp-file-operations',
 	deps = {
 		'plenary',
-		'neo-tree',
 	},
-	event = 'LspAttach',
 }

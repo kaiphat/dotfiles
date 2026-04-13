@@ -4,7 +4,7 @@ local icon = icons.VERTICAL_LINE_1
 
 __.add_plugin {
 	'lewis6991/gitsigns.nvim',
-	event = 'BufReadPre',
+	event = 'BufReadPost',
 	keys = {
 		{
 			base_keys .. 'n',

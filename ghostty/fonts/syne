@@ -1,12 +1,12 @@
 font-size = 11.5
 
-font-family = TX-02
+font-family = Syne Mono
 font-style = Regular
-font-family-bold = TX-02
+font-family-bold = Syne Mono
 font-style-bold = Regular
-font-family-italic = TX-02
+font-family-italic = Syne Mono
 font-style-italic = Italic
-font-family-bold-italic = TX-02
+font-family-bold-italic = Syne Mono
 font-style-bold-italic = Italic
 
 adjust-cell-width = 0

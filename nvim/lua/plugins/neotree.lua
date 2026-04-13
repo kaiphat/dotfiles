@@ -2,13 +2,11 @@ __.add_plugin {
 	'nvim-tree/nvim-web-devicons',
 	name = 'nvim-web-devicons',
 	skip_require = true,
-	load = function() end,
 }
 
 __.add_plugin {
 	'MunifTanjim/nui.nvim',
 	skip_require = true,
-	load = function() end,
 }
 
 __.add_plugin {
@@ -18,6 +16,7 @@ __.add_plugin {
 		'plenary',
 		'nui',
 		'nvim-web-devicons',
+		'lsp-file-operations',
 	},
 	keys = {
 		{

@@ -21,7 +21,10 @@ end
 __.add_plugin {
 	'nvimtools/none-ls.nvim',
 	name = 'null-ls',
-	event = 'BufReadPre',
+	event = 'BufReadPost',
+	deps = {
+		'plenary',
+	},
 	load = function(_)
 		local formattings = _.builtins.formatting
 

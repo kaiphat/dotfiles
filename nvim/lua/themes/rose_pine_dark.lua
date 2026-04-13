@@ -21,7 +21,6 @@ __.add_plugin {
 	name = 'rose-pine',
 	is_instant = true,
 	load = function(_)
-		vim.print 'loaded'
 		_.setup {
 			dim_nc_background = false,
 			disable_background = true,

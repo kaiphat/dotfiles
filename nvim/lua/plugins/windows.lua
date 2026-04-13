@@ -1,7 +1,6 @@
 __.add_plugin {
 	'anuvyklack/middleclass',
-	event = 'BufReadPost',
-	load = function() end,
+	skip_require = true,
 }
 
 __.add_plugin {

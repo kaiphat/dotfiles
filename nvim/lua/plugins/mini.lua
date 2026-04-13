@@ -1,11 +1,11 @@
 __.add_plugin {
 	'nvim-mini/mini.align',
-	event = 'BufReadPre',
+	event = 'BufReadPost',
 }
 
 __.add_plugin {
 	'nvim-mini/mini.surround',
-	event = 'BufReadPre',
+	event = 'BufReadPost',
 	load = function(_)
 		local key = '<leader>'
 

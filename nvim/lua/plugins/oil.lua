@@ -6,14 +6,14 @@ __.add_plugin {
 	keys = {
 		{
 			'<leader>o',
-			function()
-				require('oil').open()
+			function(_)
+				_.open()
 			end,
 		},
 		{
 			'<leader>O',
-			function()
-				require('oil').open(vim.uv.cwd())
+			function(_)
+				_.open(vim.uv.cwd())
 			end,
 		},
 	},

@@ -1,6 +1,8 @@
 __.add_plugin {
 	'MeanderingProgrammer/render-markdown.nvim',
-	ft = { 'markdown' },
+	ft = {
+		'markdown',
+	},
 	deps = {
 		'nvim-treesitter',
 		'mini.icons',

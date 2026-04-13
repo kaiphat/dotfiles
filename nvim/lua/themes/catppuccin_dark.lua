@@ -25,12 +25,12 @@
 -- 	mantle = "#292c3c",
 -- 	crust = "#232634",
 
-return {
+__.add_plugin {
 	'catppuccin/nvim',
 	name = 'catppuccin',
-	priority = 1000,
-	config = function()
-		require('catppuccin').setup {
+	is_instant = true,
+	load = function(_)
+		_.setup {
 			term_colors = true,
 			flavour = 'mocha', -- latte, frappe, macchiato, mocha
 			transparent_background = true,
