@@ -192,7 +192,7 @@ __.add_plugin {
 
 __.add_plugin {
 	'neovim/nvim-lspconfig',
-	event = 'LspAttach',
+	event = 'BufReadPre',
 	deps = {
 		'null-ls',
 		'mason',

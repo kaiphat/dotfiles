@@ -8,6 +8,7 @@ return {
 				if #diagnostics > 0 then
 					vim.lsp.buf.format {
 						async = false,
+						timeout_ms = 5000,
 						filter = function(formatter)
 							return formatter.name == 'eslint'
 						end,

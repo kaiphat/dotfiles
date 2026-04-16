@@ -1,7 +1,7 @@
 __.add_plugin {
 	'saghen/blink.cmp',
 	event = 'InsertEnter',
-	version = vim.version.range '1',
+	version = vim.version.range '*',
 	opts = {
 		keymap = {
 			['<C-j>'] = { 'show', 'select_next', 'fallback' },

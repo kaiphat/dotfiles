@@ -1,6 +1,22 @@
 __.add_plugin {
 	dir = 'local_plugins.anchor',
-	event = 'BufReadPre',
+	deps = {
+		'plenary',
+	},
+	keys = {
+		{
+			'm',
+			function(_)
+				_.add_anchor()
+			end,
+		},
+		{
+			'\'',
+			function(_)
+				_.go_to_anchor()
+			end,
+		},
+	},
 }
 
 __.add_plugin {

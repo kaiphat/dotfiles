@@ -12,4 +12,7 @@ __.add_plugin {
 			end,
 		},
 	},
+	opts = {
+		disable_max_lines = 20000,
+	},
 }

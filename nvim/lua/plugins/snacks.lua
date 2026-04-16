@@ -40,8 +40,13 @@ local function open_commit(picker, item)
 	end)
 end
 
+vim.schedule(function()
+	__.load_plugin 'snacks'
+end)
+
 __.add_plugin {
 	'folke/snacks.nvim',
+	evnet = 'VimEnter',
 	deps = {
 		'mini.icons',
 	},
@@ -521,7 +526,8 @@ __.add_plugin {
 							min_height = 30,
 							box = 'vertical',
 							border = 'top',
-							title = '{title} {live} {flags}',
+							-- title = '{title} {live} {flags}',
+							title = '',
 							title_pos = 'center',
 							{
 								win = 'input',
