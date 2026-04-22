@@ -1,13 +1,13 @@
 font-size = 11.5
 
 font-family = TX-02
-font-style = Regular
+font-style = Medium
 font-family-bold = TX-02
-font-style-bold = Regular
+font-style-bold = Medium
 font-family-italic = TX-02
-font-style-italic = Italic
+font-style-italic = Medium
 font-family-bold-italic = TX-02
-font-style-bold-italic = Italic
+font-style-bold-italic = Medium
 
 adjust-cell-width = 0
 adjust-font-baseline = 0
@@ -15,6 +15,7 @@ adjust-cell-height = 0
 adjust-cursor-height = 0
 adjust-underline-position = 2
 
+font-feature = -liga, -calt, -dlig
 #font-thicken-strength = 100
 #font-thicken = true
 

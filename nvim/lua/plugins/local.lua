@@ -51,3 +51,11 @@ __.add_plugin {
 	dir = 'local_plugins.cursorword',
 	event = 'BufReadPre',
 }
+
+__.add_plugin {
+	dir = 'local_plugins.statusline',
+	event = 'VimEnter',
+	deps = {
+		'local_plugins.anchor',
+	},
+}

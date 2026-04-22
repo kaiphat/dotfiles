@@ -48,7 +48,7 @@ function M.get_terminal_width()
 end
 
 function M.create_augroup(name)
-	return vim.api.nvim_create_augroup('kaiphat:' .. name, {})
+	return vim.api.nvim_create_augroup('kaiphat:' .. name, { clear = true })
 end
 
 function M.exec_nu(...)

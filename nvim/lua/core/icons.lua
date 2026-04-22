@@ -1,6 +1,4 @@
-local M = {}
-
-M.icons = {
+__.icons = {
 	CIRCLE_SMALL = '•',
 	CIRCLE_MEDIUM = '󰧞',
 	CIRCLE_LARGE = '',
@@ -20,6 +18,12 @@ M.icons = {
 	BIG_SEARCH = ' ',
 	TRIANGLE = '󰼛',
 	SEMICOLON = ';',
-}
 
-__.constants = M
+	BRANCH = '',
+	FLAG = '',
+	HONEY = '󰛡',
+
+	CIRCLE_WITH_CROSS = '',
+	EMPTY_CIRCLE = '',
+	LIGHTNING = '',
+}

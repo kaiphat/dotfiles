@@ -491,7 +491,7 @@ __.add_plugin {
 
 			picker = {
 				enabled = true,
-				prompt = ' ' .. __.constants.icons.BRACKET .. ' ',
+				prompt = ' ' .. __.icons.BRACKET .. ' ',
 				ui_select = true,
 				formatters = {
 					file = {
@@ -692,7 +692,7 @@ __.add_plugin {
 				enabled = false,
 				indent = {
 					enabled = true,
-					char = __.constants.icons.VERTICAL_LINE_1,
+					char = __.icons.VERTICAL_LINE_1,
 				},
 
 				animate = {

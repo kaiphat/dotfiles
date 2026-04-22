@@ -78,7 +78,7 @@ __.add_plugin {
 
 		ibl.setup {
 			indent = {
-				char = __.constants.icons.VERTICAL_LINE_1,
+				char = __.icons.VERTICAL_LINE_1,
 				highlight = char_highlight_group,
 			},
 			scope = {

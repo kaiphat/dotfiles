@@ -1,4 +1,4 @@
-local icons = __.constants.icons
+local icons = __.icons
 local base_keys = '<leader>h'
 local icon = icons.VERTICAL_LINE_1
 

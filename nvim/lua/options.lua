@@ -10,7 +10,7 @@ local TAB_SIZE = 4
 -- enable new messages ui
 require('vim._core.ui2').enable {
 	msg = {
-		targets = 'cmd',
+		targets = 'msg',
 	},
 }
 
