@@ -40,13 +40,9 @@ local function open_commit(picker, item)
 	end)
 end
 
-vim.schedule(function()
-	__.load_plugin 'snacks'
-end)
-
 __.add_plugin {
 	'folke/snacks.nvim',
-	evnet = 'VimEnter',
+	event = 'VimEnter',
 	deps = {
 		'mini.icons',
 	},

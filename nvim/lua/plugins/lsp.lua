@@ -47,7 +47,7 @@ end
 -- 		)
 -- 	end,
 -- })
---
+
 vim.api.nvim_create_autocmd('LspAttach', {
 	group = __.utils.create_augroup 'lsp_attach',
 	callback = function(event)
@@ -216,15 +216,13 @@ __.add_plugin {
 			root_markers = { '.git' },
 		})
 
-		for _, server in ipairs {
+		vim.lsp.enable {
 			'lua_ls',
 			'nushell',
 			'vtsls',
 			'eslint',
 			'rust_analyzer',
-		} do
-			vim.lsp.enable(server)
-		end
+		}
 	end,
 }
 

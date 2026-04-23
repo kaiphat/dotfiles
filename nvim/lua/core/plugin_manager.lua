@@ -71,7 +71,9 @@ __.add_plugin = function(opts)
 	local name = opts.dir or opts.name or src:match('/([%w_.-]+)$'):gsub('.nvim$', ''):gsub('^nvim%-', '')
 
 	if plugins[name] then
-		vim.notify('Plugin duplicated ' .. name, vim.log.levels.ERROR)
+		-- TODO: return warning, but now lsp load file in after directory twice
+		-- vim.notify('Plugin duplicated ' .. name, vim.log.levels.ERROR)
+		return
 	end
 
 	local P = {

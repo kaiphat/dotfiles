@@ -65,9 +65,15 @@ end
 
 function M.get_git_branch()
 	local git_branch = vim.fn.systemlist('git branch --show-current')[1]
+
+	if not git_branch then
+		return nil
+	end
+
 	if string.find(git_branch, 'fatal') then
 		return nil
 	end
+
 	return git_branch
 end
 

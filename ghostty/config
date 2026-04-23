@@ -1,8 +1,8 @@
-config-file = ./fonts/tx
+config-file = ./fonts/maple
 config-file = ./themes/rose_pine_light
 
-#custom-shader-animation = true
-#custom-shader = ./shaders/warp_cursor.glsl
+custom-shader-animation = true
+custom-shader = ./shaders/warp_cursor.glsl
 
 font-thicken = false
 fullscreen = true

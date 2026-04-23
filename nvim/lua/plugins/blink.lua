@@ -1,7 +1,15 @@
 __.add_plugin {
+	'saghen/blink.lib',
+	skip_require = true,
+}
+
+__.add_plugin {
 	'saghen/blink.cmp',
 	event = 'InsertEnter',
 	version = vim.version.range '*',
+	deps = {
+		'blink.lib',
+	},
 	opts = {
 		keymap = {
 			['<C-j>'] = { 'show', 'select_next', 'fallback' },
@@ -34,12 +42,14 @@ __.add_plugin {
 			documentation = {
 				auto_show = true,
 				window = {
-					border = 'rounded',
+					--border = 'rounded',
+					border = nil,
 				},
 			},
 
 			menu = {
-				border = 'rounded',
+				--border = 'rounded',
+				border = nil,
 			},
 
 			accept = {
@@ -154,7 +164,7 @@ vim.api.nvim_create_autocmd('PackChanged', {
 	callback = function(ev)
 		local name, kind = ev.data.spec.name, ev.data.kind
 		if name == 'blink.cmp' and (kind == 'install' or kind == 'update') then
-			vim.system({ 'cargo', 'build', '--release' }, { cwd = ev.data.path })
+			require('blink.cmp').build():wait(60000)
 		end
 	end,
 })

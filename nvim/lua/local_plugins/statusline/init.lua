@@ -132,14 +132,13 @@ end
 local function setup()
 	vim.api.nvim_create_autocmd('LspProgress', {
 		group = __.utils.create_augroup 'statusline_lsp_progress',
-		-- pattern = { 'begin', 'end' },
 		callback = function(args)
 			if not args.data then
 				return
 			end
 
 			progress_status_client = vim.lsp.get_client_by_id(args.data.client_id).name
-			progress_status_title = args.data.params.value.title
+			progress_status_title = args.data.params.value.message or 'done'
 
 			if args.data.params.value.kind == 'end' then
 				progress_status_title = nil
@@ -148,7 +147,7 @@ local function setup()
 				-- Wait a bit before clearing the status.
 				vim.defer_fn(function()
 					vim.api.nvim__redraw { statusline = true }
-				end, 2000)
+				end, 1000)
 			else
 				vim.api.nvim__redraw { statusline = true }
 			end
