@@ -1,5 +1,5 @@
 __.add_plugin {
-	'phaazon/hop.nvim',
+	'smoka7/hop.nvim',
 	version = 'v2',
 	event = 'BufReadPre',
 	keys = {

@@ -1,11 +1,11 @@
 _G.__ = {}
 
 __.read_all = function(dir)
-	local dir_path = vim.fn.stdpath 'config' .. '/lua/' .. dir
+	for _, file in ipairs(vim.api.nvim_get_runtime_file('lua/' .. dir .. '/*.lua', true)) do
+		local filename = vim.fn.fnamemodify(file, ':t:r')
 
-	for _, file in ipairs(vim.fn.readdir(dir_path)) do
-		if file ~= 'init.lua' then
-			dofile(dir_path .. '/' .. file)
+		if filename ~= 'init' then
+			require(dir .. '.' .. filename)
 		end
 	end
 end

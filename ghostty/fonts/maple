@@ -2,13 +2,13 @@ font-size = 8.5
 font-feature = cv01,cv02,cv35,cv04,calt
 
 font-family = Maple Mono NF
-font-style = Light
+font-style = Regular
 font-family-bold = Maple Mono NF
-font-style-bold = Light
+font-style-bold = Regular
 font-family-italic = Maple Mono NF
-font-style-italic = Light
+font-style-italic = Regular
 font-family-bold-italic = Maple Mono NF
-font-style-bold-italic = Light
+font-style-bold-italic = Regular
 
 adjust-cell-width = 0
 adjust-font-baseline = 0

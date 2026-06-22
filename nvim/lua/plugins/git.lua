@@ -3,27 +3,37 @@ __.add_plugin {
 	keys = {
 		{
 			'<leader>gd',
-			'<cmd>DiffviewOpen<cr>',
+			function()
+				vim.cmd 'DiffviewOpen'
+			end,
 			desc = 'Open Diffview',
 		},
 		{
 			'<leader>gp',
-			'<cmd>DiffviewOpen HEAD~1<cr>',
+			function()
+				vim.cmd 'DiffviewOpen HEAD~1'
+			end,
 			desc = 'Open Diffview for previous commit',
 		},
 		{
 			'<leader>gc',
-			'<cmd>DiffviewClose<cr>',
+			function()
+				vim.cmd 'DiffviewClose'
+			end,
 			desc = 'Close Diffview',
 		},
 		{
 			'<leader>gf',
-			'<cmd>DiffviewFileHistory %<cr>',
+			function()
+				vim.cmd 'DiffviewFileHistory'
+			end,
 			desc = 'Open Diffview file history for current file',
 		},
 		{
 			'<leader>gm',
-			'<cmd>DiffviewOpen origin/master...HEAD --imply-local<cr>',
+			function()
+				vim.cmd 'DiffviewOpen origin/master...HEAD --imply-local'
+			end,
 			desc = 'Open Diffview for changes with master',
 		},
 	},

@@ -47,7 +47,7 @@ export def main [] {
     replace ~/dotfiles/nvim/lua/plugins/themes.lua { |$it|
         $it 
             | str replace -r "(vim.o.background\\s*=\\s*')(.*)(')" $"${1}($theme_type)${3}"
-            | str replace -r "(return require\\('themes.'\\s*..\\s*themes.)(\\w+)" $"${1}($theme)"
+            | str replace -r "(require \\'themes.)(\\w+)" $"${1}($theme)"
     }
     replace ~/dotfiles/.tmux.conf { |$it|
         $it | str replace -r "(dark_theme=)[01]" $"${1}($dark_theme_enabled)"

@@ -22,12 +22,12 @@ local palette = {
 	none = 'NONE',
 }
 
-return {
+__.add_plugin {
 	'olivercederborg/poimandres.nvim',
-	lazy = false,
-	priority = 1000,
-	config = function()
-		require('poimandres').setup {
+	name = 'poimandres',
+	is_instant = true,
+	load = function(_)
+		_.setup {
 			disable_background = true,
 			disable_float_background = true,
 		}

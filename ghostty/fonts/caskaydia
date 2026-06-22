@@ -2,13 +2,13 @@ font-size = 9
 
 font-thicken-strength = 0
 font-family = CaskaydiaCove Nerd Font
-font-style = SemiLight
+font-style = SemiLight Italic
 font-family-bold = CaskaydiaCove Nerd Font
-font-style-bold = SemiLight
+font-style-bold = SemiLight Italic
 font-family-italic = CaskaydiaCove Nerd Font
-font-style-italic = SemiLight
+font-style-italic = SemiLight Italic
 font-family-bold-italic = CaskaydiaCove Nerd Font
-font-style-bold-italic = SemiLight
+font-style-bold-italic = SemiLight Italic
 
 adjust-cell-width = 0
 adjust-font-baseline = 0

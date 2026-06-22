@@ -714,11 +714,11 @@ __.add_plugin {
 			},
 
 			quickfile = {
-				enabled = true,
+				enabled = false,
 			},
 
 			bigfile = {
-				enabled = true,
+				enabled = false,
 			},
 
 			explorer = {

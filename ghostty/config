@@ -1,4 +1,4 @@
-config-file = ./fonts/maple
+config-file = ./fonts/radon
 config-file = ./themes/rose_pine_light
 
 custom-shader-animation = true

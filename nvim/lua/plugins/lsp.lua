@@ -216,13 +216,11 @@ __.add_plugin {
 			root_markers = { '.git' },
 		})
 
-		vim.lsp.enable {
-			'lua_ls',
-			'nushell',
-			'vtsls',
-			'eslint',
-			'rust_analyzer',
-		}
+		for _, file in ipairs(vim.api.nvim_get_runtime_file('after/lsp/*.lua', true)) do
+			local server = vim.fn.fnamemodify(file, ':t:r')
+
+			vim.lsp.enable(server)
+		end
 	end,
 }
 

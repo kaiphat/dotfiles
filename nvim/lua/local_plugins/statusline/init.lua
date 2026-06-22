@@ -14,6 +14,7 @@ local flag_icon = hl 'StatusLineFlag' .. __.icons.FLAG .. dhl
 local modified_icon = ' ' .. hl 'StatusLineFileChanged' .. __.icons.LIGHTNING
 
 local statusline_groups = {
+	StatusLine = { link = 'Normal' },
 	StatusLineFileChanged = { link = 'DiagnosticWarn' },
 	StatusLineLspError = { link = 'DiagnosticError' },
 	StatusLineFlag = { link = '@operator' },
@@ -74,7 +75,7 @@ end
 local function file()
 	local path = __.utils.get_relative_path()
 	local modified = vim.bo.modified and modified_icon or ''
-	return path .. hl 'StatusLineFileChanged' .. modified
+	return ' ' .. path .. hl 'StatusLineFileChanged' .. modified
 end
 
 local function position()

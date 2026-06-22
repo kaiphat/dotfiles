@@ -1,6 +1,6 @@
+local default = { noremap = true, silent = true }
 local map = function(mode, keys, cmd, opts)
-	opts = opts or { noremap = true, silent = true }
-	vim.keymap.set(mode, keys, cmd, opts)
+	vim.keymap.set(mode, keys, cmd, opts or default)
 end
 
 map('v', 'y', 'ygv<esc>')

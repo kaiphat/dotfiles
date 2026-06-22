@@ -38,9 +38,17 @@ __.load_plugin = function(name)
 		P.package = require(name)
 
 		if P.user_load then
-			P.user_load(P.package)
+			local ok, res = pcall(P.user_load, P.package)
+
+			if not ok then
+				vim.notify(res, vim.log.levels.ERROR)
+			end
 		else
-			P.package.setup(P.user_opts)
+			local ok, res = pcall(P.package.setup, P.user_opts)
+
+			if not ok then
+				vim.notify(res, vim.log.levels.ERROR)
+			end
 		end
 	end
 

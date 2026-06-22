@@ -3,7 +3,7 @@ return {
 		vim.api.nvim_create_autocmd('BufWritePre', {
 			buffer = buffer,
 			callback = function(event)
-				local namespace = vim.lsp.diagnostic.get_namespace(client.id, 'eslint')
+				local namespaces = vim.diagnostic.get_namespace(client.id)
 				local diagnostics = vim.diagnostic.get(event.buf, { namespace = namespace })
 				if #diagnostics > 0 then
 					vim.lsp.buf.format {

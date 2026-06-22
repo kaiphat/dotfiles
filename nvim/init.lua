@@ -1,3 +1,5 @@
+vim.loader.enable()
+
 require 'core'
 require 'options'
 require 'autocommands'

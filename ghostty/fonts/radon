@@ -1,19 +1,19 @@
 font-size = 10.5
 
-font-feature = calt
+font-feature = +calt
 
 font-family = Monaspace Radon
-font-style = Light
+font-style = Regular
 font-family-bold = Monaspace Radon
-font-style-bold = Light
+font-style-bold = Regular
 font-family-italic = Monaspace Radon
-font-style-italic = Light
+font-style-italic = Regular
 font-family-bold-italic = Monaspace Radon
-font-style-bold-italic = Light
+font-style-bold-italic = Regular
 
 adjust-cell-width = 0
 adjust-font-baseline = 0
 adjust-cell-height = 3
 adjust-cursor-height = 0
 
-font-thicken-strength = 50
+#font-thicken-strength = 50

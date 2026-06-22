@@ -1,5 +1,6 @@
 __.add_plugin {
-	'stevearc/oil.nvim',
+	'barrettruth/canola.nvim',
+	name = 'oil',
 	deps = {
 		'mini.icons',
 	},

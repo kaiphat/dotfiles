@@ -163,7 +163,13 @@ __.add_plugin {
 vim.api.nvim_create_autocmd('PackChanged', {
 	callback = function(ev)
 		local name, kind = ev.data.spec.name, ev.data.kind
+
 		if name == 'blink.cmp' and (kind == 'install' or kind == 'update') then
+			if not ev.data.active then
+				vim.cmd.packadd 'blink.lib'
+				vim.cmd.packadd 'blink.cmp'
+			end
+
 			require('blink.cmp').build():wait(60000)
 		end
 	end,
