@@ -100,3 +100,17 @@ alias gcn="cd ~/.config/nvim"
 export NODE_EXTRA_CA_CERTS="/Library/Application Support/Playtika Corp. IT/Certs/Playtika-SCA.pem"
 
 . "$HOME/.local/bin/env"
+
+# SSL Certificate Configuration for Python
+export CURL_CA_BUNDLE='/Library/Certs/Cacert.pem'
+export REQUESTS_CA_BUNDLE='/Library/Certs/Cacert.pem'
+export SSL_CERT_FILE='/Library/Certs/Cacert.pem'
+
+# YARN SSL Certificate Configuration
+export YARN_CA_FILE='/Library/Certs/Cacert.pem'
+
+# Elixir/Hex SSL Certificate Configuration
+export HEX_CACERTS_PATH='/Library/Certs/Cacert.pem'
+
+# Flutter/Dart SSL Certificate Configuration
+export DART_VM_OPTIONS='--root-certs-file=/Library/Certs/Cacert.pem'

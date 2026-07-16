@@ -70,3 +70,7 @@
 
 [difftool]
     prompt = true
+
+[http]
+	sslCAPath = /Library/Certs/Cacert.pem
+	sslCAInfo = /Library/Certs/Cacert.pem

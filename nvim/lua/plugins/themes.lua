@@ -29,4 +29,4 @@
 
 vim.o.background = 'light'
 
-require 'themes.rose_pine_light'
+require 'themes.github_light'

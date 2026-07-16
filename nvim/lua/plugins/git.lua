@@ -25,7 +25,7 @@ __.add_plugin {
 		{
 			'<leader>gf',
 			function()
-				vim.cmd 'DiffviewFileHistory'
+				vim.cmd 'DiffviewFileHistory %'
 			end,
 			desc = 'Open Diffview file history for current file',
 		},

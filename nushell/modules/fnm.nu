@@ -9,7 +9,7 @@ export-env {
         )
         for v in $var_table  {
             mut value: any = null
-            if ($v.key | str downcase) == 'path' {
+            if ($v.key | str lowercase) == 'path' {
                 $value = ($v.value | split row (char esep))
             } else {
                 $value = $v.value

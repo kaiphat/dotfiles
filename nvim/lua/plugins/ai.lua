@@ -1,5 +1,6 @@
 __.add_plugin {
 	'CopilotC-Nvim/CopilotChat.nvim',
+	enabled = false,
 	deps = {
 		'plenary',
 		'render-markdown',
@@ -39,6 +40,7 @@ vim.api.nvim_create_autocmd('PackChanged', {
 
 __.add_plugin {
 	'zbirenbaum/copilot.lua',
+	enabled = false,
 	name = 'copilot',
 	cmds = { 'Copilot' },
 	event = 'InsertEnter',
