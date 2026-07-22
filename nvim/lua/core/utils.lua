@@ -52,7 +52,7 @@ function M.create_augroup(name)
 end
 
 function M.exec_nu(...)
-	return vim.fn.system(string.format('nu -c "%s"', string.format(...)))
+	return vim.fn.system('nu-run ' .. string.format(...))
 end
 
 function M.exec(cmd)

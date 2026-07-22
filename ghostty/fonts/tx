@@ -12,7 +12,6 @@ font-style-bold-italic = Regular
 adjust-cell-width = 0
 adjust-font-baseline = 0
 adjust-cell-height = 0
-adjust-cursor-height = 0
 adjust-underline-position = 2
 
 font-feature = -liga, -calt, -dlig

@@ -26,7 +26,7 @@ local grep_exclude = __.utils.concat(grep_always_excludes, {
 
 local function open_commit(picker, item)
 	local file =
-		__.utils.exec_nu('nu -l ~/dotfiles/nvim/lua/scripts/open_commit.nu %s %s %s', item.cwd, item.file, item.commit)
+		__.utils.exec_nu('~/dotfiles/nvim/lua/scripts/open_commit.nu %s %s %s', item.cwd, item.file, item.commit)
 
 	if vim.trim(file) == '' then
 		print 'File not found in the commit'

@@ -10,7 +10,7 @@ def main [] {
         ~/.config/pgcli 
         ~/.config/litecli 
         ~/.config/starship.toml 
-        ~/.config/fish/config.fish 
+        ~/.config/fish
         ~/.config/zk 
         ~/.config/nvim 
         ~/.config/alacritty 

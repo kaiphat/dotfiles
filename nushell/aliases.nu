@@ -1,7 +1,6 @@
 alias g = git
 alias lg = lazygit
 alias t = tmux
-# alias n = nvim
 alias n = nvim --listen $"/tmp/nvim-(tmux display-message -p '#S-#I-#{pane_pid}')"
 alias d = docker
 alias y = yarn
@@ -17,12 +16,7 @@ alias tasks = nvim ~/notes/tasks.md -c "set signcolumn=no"
 alias notes = nvim ~/notes/notes.md -c "set signcolumn=no"
 alias nvim-pager = nvim +Man! -c "set nowrap modifiable noreadonly buftype=nofile"
 alias fzf = fzf --color="gutter:0,bg+:-1,fg+:#244566,pointer:#365987,current-bg:#393959,current-fg:#000022" --margin=0,2 --no-separator --info=inline-right --no-scrollbar --pointer='󱞩' --prompt='󰼛 ' --layout=reverse --bind ctrl-e:close
-
-# there is bug with -l (login) flag, so i should use such hack
-alias run-nu-script = nu --config ~/dotfiles/nushell/config.nu --env-config ~/dotfiles/nushell/env.nu
 alias chrome = `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`
-alias nu-open = open
-alias open = ^open
 
 def browser [link] {
     # firefox $link
@@ -119,4 +113,47 @@ export def radio [...search] {
     | first
 
     tunein play $id
+}
+
+export def youtube [url] {
+    let cur_dir = pwd
+
+    mkdir ~/Downloads/youtube
+    cd ~/Downloads/youtube
+
+    let result = yt-dlp --write-auto-subs --sub-lang en --convert-subs lrc --skip-download --restrict-filenames $url
+
+    print $'downloaded'
+
+    let filename = $result 
+    | sed -n 's/.*file//p'
+    | sed -E 's/(.*)\.vtt .*/\1.lrc/'
+    | str trim
+
+    print $'filename: ($filename)'
+
+    cat $filename 
+    | grep -v '^\[.*\]$' 
+    | sed -E 's/\[[0-9:\.]*\]//g' 
+    | awk '!seen[$0]++' 
+    | grep -v '^[[:space:]]*$'
+    | tr '\n' ' '
+    | sed -E 's/\.+/./g; s/\.\s*/. /g; s/[[:space:]]+/ /g; s/^[[:space:]]+|[[:space:]]+$//g'
+    | save -f $filename
+
+    print $'file saved'
+
+    let file = cat $filename
+
+    truncate -s 0 $filename
+
+    print $'file truncated'
+
+    echo $file | deepl  translate | save -a $filename
+
+    mv $filename $"($filename).md"
+
+    nvim -c "lua vim.api.nvim_input('gg')" -c "FormatText" -c "w" -c "set number" $"($filename).md"
+
+    cd $cur_dir
 }

@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Run nushell with dotfiles config (env.nu + config.nu). Pass-through args:
+#   run-nu script.nu
+#   run-nu -c 'foo'
+#   run-nu --no-config-file   # still prepends our config flags; put nu flags after if needed
+#
+#
+#   Run 
+#   ln -sf ~/dotfiles/scripts/nu-run ~/.local/bin/nu-run
+#   to add into bin
+
+set -euo pipefail
+
+if [[ -n "${NUSHELL_CONFIG_DIR:-}" ]]; then
+  config_dir="$NUSHELL_CONFIG_DIR"
+elif [[ -d "$HOME/dotfiles/nushell" ]]; then
+  config_dir="$HOME/dotfiles/nushell"
+else
+  config_dir="$HOME/Library/Application Support/nushell"
+fi
+
+config="$config_dir/config.nu"
+env_config="$config_dir/env.nu"
+
+if [[ ! -f "$config" || ! -f "$env_config" ]]; then
+  echo "run-nu: missing config under $config_dir" >&2
+  exit 1
+fi
+
+exec nu --config "$config" --env-config "$env_config" "$@"

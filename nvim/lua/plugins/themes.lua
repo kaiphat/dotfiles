@@ -27,6 +27,6 @@
 -- lume_dark
 -- mfd_dark
 
-vim.o.background = 'light'
+vim.o.background = 'dark'
 
-require 'themes.github_light'
+require 'themes.rose_pine_dark'

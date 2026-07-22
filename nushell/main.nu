@@ -4,7 +4,6 @@ $env.config.table.mode = 'rounded'
 $env.config.render_right_prompt_on_last_line = false # true or false to enable or disable right prompt to be rendered on last line of the prompt.
 $env.config.use_kitty_protocol = false # enables keyboard enhancement protocol implemented by kitty console, only if your terminal support this.
 $env.config.edit_mode = 'vi'
-$env.config.edit_mode = 'vi'
 $env.config.history = {
     max_size: 100_000 # Session has to be reloaded for this to take effect
     sync_on_enter: false # Enable to share history between multiple sessions, else you have to close the session to write history to file

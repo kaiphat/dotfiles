@@ -1,10 +1,14 @@
+const FISH_COMPLETE_COMMANDS = [
+    nu git docker docker-compose kubectl ssh scp curl wget rg fd
+]
+
 let fish_completer = {|spans|
     fish --command $"complete '--do-complete=($spans | str replace --all "'" "\\'" | str join ' ')'"
         | from tsv --flexible --noheaders --no-infer
         | rename value description
         | update value {|row|
             let value = $row.value
-                let need_quote = ['\' ',' '[' ']' '(' ')' ' ' '\t' "'" '"' "`"] | any {$in in $value}
+            let need_quote = ['\' ',' '[' ']' '(' ')' ' ' '\t' "'" '"' "`"] | any {$in in $value}
             if ($need_quote and ($value | path exists)) {
                 let expanded_path = if ($value starts-with ~) {$value | path expand --no-symlink} else {$value}
                 $'"($expanded_path | str replace --all "\"" "\\\"")"'
@@ -13,30 +17,44 @@ let fish_completer = {|spans|
 }
 
 let carapace_completer = {|spans: list<string>|
-    carapace $spans.0 nushell ...$spans
-    | from json
-    | if ($in | default [] | where value =~ '^-.*ERR$' | is-empty) { $in } else { null }
+    try {
+        carapace $spans.0 nushell ...$spans
+        | from json
+        | if ($in | default [] | where value =~ '^-.*ERR$' | is-empty) { $in } else { null }
+    } catch {
+        null
+    }
+}
+
+def expand-alias-spans [spans: list<string>] {
+    mut result = $spans
+    mut depth = 0
+    loop {
+        if $depth >= 5 {
+            return $result
+        }
+        let expansion = scope aliases
+            | where name == $result.0
+            | get -o expansion.0
+
+        if $expansion == null {
+            return $result
+        }
+
+        $result = ($expansion | split row ' ') | append ($result | skip 1)
+        $depth = $depth + 1
+    }
 }
 
 $env.config.completions.algorithm = 'fuzzy'
 $env.config.completions.external.enable = true
 $env.config.completions.external.max_results = 50
 $env.config.completions.external.completer = {|spans|
-    let expanded_alias = scope aliases
-    | where name == $spans.0
-    | get -o 0.expansion
+    let spans = expand-alias-spans $spans
 
-    let spans = if $expanded_alias != null {
-        $spans
-        | skip 1
-        | prepend ($expanded_alias | split row ' ' | take 1)
+    if ($spans.0 in $FISH_COMPLETE_COMMANDS) {
+        do $fish_completer $spans
     } else {
-        $spans
+        do $carapace_completer $spans
     }
-
-    match $spans.0 {
-        nu => $fish_completer
-        git => $fish_completer
-        _ => $carapace_completer
-    } | do $in $spans
 }

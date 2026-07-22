@@ -11,15 +11,13 @@ $env.NU_PLUGIN_DIRS = [
     ($nu.default-config-dir | path join 'plugins') # add <nushell-config-dir>/plugins
 ]
 
-$env.ANDROID_HOME = '$HOME/Android/Sdk'
 $env.EDITOR = 'nvim'
-$env.MANPAGER = 'most'
 $env.PAGER = 'nvim -c "set nowrap" -R'
 $env.TERMINAL = 'wezterm'
 $env.NODE_OPTIONS = '--max-old-space-size=4096'
 $env.SXHKD_SHELL = 'nu'
 $env.SHELL = 'nu'
-$env.JAVA_HOME = "/opt/homebrew/opt/openjdk@21"
+$env.JAVA_HOME = '/opt/homebrew/opt/openjdk@21'
 $env.MANPAGER = 'nvim +Man! -c "set nowrap modifiable noreadonly buftype=nofile"'
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
@@ -30,7 +28,6 @@ let HOME = $env.HOME
 $env.PATH ++= [
     /opt/homebrew/bin
     /usr/local/go/bin
-    /usr/.local/bin
     /usr/local/bin
     /usr/sbin
     /opt/homebrew/opt/openjdk/bin
@@ -39,6 +36,7 @@ $env.PATH ++= [
     $'($HOME)/.local/bin'
     $'($HOME)/.cargo/bin'
     $'($HOME)/.krew/bin'
+    $'($HOME)/Library/Python/3.9/bin'
     $'($env.JAVA_HOME)/bin'
 ]
 

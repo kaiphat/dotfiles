@@ -84,14 +84,14 @@ cmd('RunTest', function()
 	local relative_path = __.utils.get_relative_path()
 	local full_path = __.utils.get_full_path()
 
-	__.utils.exec_nu('nu ~/dotfiles/nvim/lua/scripts/run_test.nu %s %s', relative_path, full_path)
+	__.utils.exec_nu('~/dotfiles/nvim/lua/scripts/run_test.nu %s %s', relative_path, full_path)
 end)
 
 cmd('CopyGitHubFileLink', function()
 	local path = vim.api.nvim_buf_get_name(0)
 	local row_index = vim.api.nvim_win_get_cursor(0)[1]
 
-	__.utils.exec_nu('nu -l ~/dotfiles/nvim/lua/scripts/copy_git_hub_link.nu %s %d', path, row_index)
+	__.utils.exec_nu('~/dotfiles/nvim/lua/scripts/copy_git_hub_link.nu %s %d', path, row_index)
 end)
 
 cmd('SnakeCaseToCamelCase', function()
@@ -151,3 +151,39 @@ cmd('CamelCaseToSnakeCase', function()
 		vim.api.nvim_feedkeys('p', 'v', true)
 	end)
 end, { range = true })
+
+cmd('FormatText', function()
+	local row = vim.api.nvim_win_get_cursor(0)[1]
+	local line = vim.api.nvim_get_current_line()
+
+	local result = {}
+	local current = line
+
+	local line_length = 150
+
+	while #current > line_length do
+		-- Find the last space before the 100th character
+		local break_at = current:sub(1, line_length):match '.*()%s+'
+		if not break_at then
+			break
+		end -- no spaces, can't split safely!
+		table.insert(result, current:sub(1, break_at - 1))
+		current = current:sub(break_at + 1)
+	end
+	table.insert(result, current) -- add the remainder
+
+	-- Replace the current line and insert new lines below
+	vim.api.nvim_set_current_line(result[1])
+	if #result > 1 then
+		vim.api.nvim_buf_set_lines(0, row, row, false, { unpack(result, 2) })
+	end
+end)
+
+cmd('FormatYoutubeSubtles', function()
+	pcall(function()
+		vim.cmd '%join'
+		vim.cmd 'DeleteSpaces'
+		vim.cmd 's/ \\././g'
+	end)
+	vim.cmd 'FormatText'
+end)

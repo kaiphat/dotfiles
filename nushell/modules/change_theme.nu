@@ -17,7 +17,7 @@ const themes = [
 ]
 
 def replace [file closure] {
-    nu-open ($file | path relative-to '') | lines | each $closure | save -f $file
+    open ($file | path relative-to '') | lines | each $closure | save -f $file
 }
 
 export def main [] {
