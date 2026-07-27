@@ -33,17 +33,15 @@ def "nu-complete zoxide path" [context: string] {
 def --env --wrapped __zoxide_z [...rest: string] {
     let path = $rest | last 1
 
-    let norm_path = match $path {
-        nil => {'~'}
-        '-' => {'-'}
-        $arg if ($arg | path type) == 'dir' => {$arg}
-        _ => {
-            if ($path | path exists | first) {
-                zoxide query --exclude $env.PWD -- ...$path | str trim -r -c "\n"
-            } else {
-                zoxide query --exclude $env.PWD -- ...$rest | str trim -r -c "\n"
-            }
-        }
+    if ($path | is-empty) {
+        cd
+        return
+    }
+
+    let norm_path = if ($path | path exists | first) {
+        zoxide query --exclude $env.PWD -- ...$path | str trim -r -c "\n"
+    } else {
+        zoxide query --exclude $env.PWD -- ...$rest | str trim -r -c "\n"
     }
 
     cd $norm_path

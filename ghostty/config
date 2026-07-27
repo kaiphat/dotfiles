@@ -1,4 +1,4 @@
-config-file = ./fonts/mononoki
+config-file = ./fonts/jet-brains
 config-file = ./themes/rose_pine_dark
 
 custom-shader-animation = true

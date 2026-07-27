@@ -83,21 +83,21 @@ def docker-patch-nerd-fonts [] {
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     watson     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-alias w = watson
-alias wr = watson report --day -c
-def ws [...args] {
-    let result = w stop | complete 
-
-    if $result.exit_code == 0 {
-        print $result.stdout
-    }
-
-    if ($args | is-empty)  {
-        return
-    }
-
-    w start ...$args
-}
+# alias w = watson
+# alias wr = watson report --day -c
+# def ws [...args] {
+#     let result = w stop | complete 
+#
+#     if $result.exit_code == 0 {
+#         print $result.stdout
+#     }
+#
+#     if ($args | is-empty)  {
+#         return
+#     }
+#
+#     w start ...$args
+# }
 
 export def "date from-ms" [ms] {
     $ms * 1000000 | into datetime
@@ -132,13 +132,22 @@ export def youtube [url] {
 
     print $'filename: ($filename)'
 
+    let filename = 'If_Faide_Says_I_Can_t_Move_He_s_LYING_apexlegends-[xzPJIAb60HI].en.lrc'
+
+    mut i = 1
+    while (cat $filename | is-empty) and $i < 10 {
+        print 'file is empty'
+        sleep 1sec
+        $i += 1
+    }
+
     cat $filename 
     | grep -v '^\[.*\]$' 
     | sed -E 's/\[[0-9:\.]*\]//g' 
     | awk '!seen[$0]++' 
     | grep -v '^[[:space:]]*$'
     | tr '\n' ' '
-    | sed -E 's/\.+/./g; s/\.\s*/. /g; s/[[:space:]]+/ /g; s/^[[:space:]]+|[[:space:]]+$//g'
+    | sed -E 's/\.+/./g; s/\.\s*/. /g; s/[[:space:]]+/ /g; s/^[[:space:]]+|[[:space:]]+$//g; s/\>\> //g'
     | save -f $filename
 
     print $'file saved'

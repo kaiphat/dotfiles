@@ -5,11 +5,12 @@
 $env.NU_LIB_DIRS = [
     ($nu.default-config-dir | path join 'modules')
     ($env.HOME | path join 'secrets')
-    ($nu.data-dir | path join 'completions') # default home for nushell completions
+    # ($nu.data-dir | path join 'completions') # default home for nushell completions
 ]
-$env.NU_PLUGIN_DIRS = [
-    ($nu.default-config-dir | path join 'plugins') # add <nushell-config-dir>/plugins
-]
+
+# $env.NU_PLUGIN_DIRS = [
+#     ($nu.default-config-dir | path join 'plugins') # add <nushell-config-dir>/plugins
+# ]
 
 $env.EDITOR = 'nvim'
 $env.PAGER = 'nvim -c "set nowrap" -R'
@@ -24,28 +25,17 @@ $env.MANPAGER = 'nvim +Man! -c "set nowrap modifiable noreadonly buftype=nofile"
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   PATHS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-let HOME = $env.HOME
 $env.PATH ++= [
     /opt/homebrew/bin
     /usr/local/go/bin
     /usr/local/bin
     /usr/sbin
     /opt/homebrew/opt/openjdk/bin
-    $'($HOME)/.config/carapace/bin'
-    $'($HOME)/go/bin'
-    $'($HOME)/.local/bin'
-    $'($HOME)/.cargo/bin'
-    $'($HOME)/.krew/bin'
-    $'($HOME)/Library/Python/3.9/bin'
-    $'($env.JAVA_HOME)/bin'
+    $env.HOME + '/.config/carapace/bin'
+    $env.HOME + '/go/bin'
+    $env.HOME + '/.local/bin'
+    $env.HOME + '/.cargo/bin'
+    $env.HOME + '/.krew/bin'
+    $env.HOME + '/Library/Python/3.9/bin'
+    $env.JAVA_HOME + '/bin'
 ]
-
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈   PLUGINS   ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-# ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     carapace     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
-
-# $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
-# mkdir ~/.cache/carapace
-# carapace _carapace nushell | save --force ~/.cache/carapace/init.nu

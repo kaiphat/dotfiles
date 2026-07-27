@@ -24,15 +24,14 @@ export def nvim-review [] {
 }
 
 export def open-pr [] {
-    let url = gh pr list -s open --limit 20 --json title,url,author
+    gh pr list -s open --limit 20 --json title,url,author
     | from json
     | each { $"($in.url) (ansi green)($in.author.login) (ansi red)($in.title)" }
-    | str join (char newline) 
+    | to text
     | fzf --ansi --with-nth 2..
-    | split row ' '
+    | split row (char space)
     | first
-
-    browser-work $url
+    | browser-work $in
 }
 
 export def "g ch" [to_branch?] {
@@ -41,14 +40,15 @@ export def "g ch" [to_branch?] {
     }
 
     let current_branch = ^git branch --show-current | str trim
-    let branch = ^git bl 
+
+    try {
+        ^git bl 
         | split row (char newline)
         | where { $in | str contains $current_branch | not $in }
-        | str join (char newline)
-        | fzf --ansi 
-        | complete
-
-    if ($branch.stdout | str length) > 0 {
-        $branch.stdout | split row ' ' | first | ^git ch $in
+        | to text
+        | fzf --ansi
+        | split row (char space)
+        | first 
+        | ^git ch $in 
     }
 }
