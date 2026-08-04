@@ -48,17 +48,7 @@ map({ 'n', 'v' }, '<C-d>', '3j')
 map({ 'n', 'v' }, '<C-u>', '3k')
 
 map('n', 'x', function()
-	if vim.fn.col '.' == 1 then
-		local line = vim.fn.getline '.'
-		if line:match '^%s*$' then
-			vim.api.nvim_feedkeys('dd', 'n', false)
-			vim.api.nvim_feedkeys('$', 'n', false)
-		else
-			vim.api.nvim_feedkeys('"_x', 'n', false)
-		end
-	else
-		vim.api.nvim_feedkeys('"_x', 'n', false)
-	end
+	vim.api.nvim_feedkeys('"_x', 'n', false)
 end)
 
 map('n', '<A-->', ':vertical resize -10<cr>')

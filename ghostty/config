@@ -1,5 +1,5 @@
-config-file = ./fonts/jet-brains
-config-file = ./themes/rose_pine_dark
+config-file = ./fonts/annotation
+config-file = ./themes/rose_pine_light
 
 custom-shader-animation = true
 custom-shader = ./shaders/warp_cursor.glsl
@@ -19,7 +19,7 @@ cursor-text = #112233
 # cursor-color = #f4b8e4
 # cursor-text = #000000
 
-adjust-cursor-height = 20%
+#adjust-cursor-height = 20%
 adjust-cursor-thickness = 1
 
 scrollbar = never

@@ -1,5 +1,6 @@
 __.add_plugin {
 	'sindrets/diffview.nvim',
+	enabled = false,
 	keys = {
 		{
 			'<leader>gd',
@@ -71,7 +72,28 @@ __.add_plugin {
 
 __.add_plugin {
 	'esmuellert/codediff.nvim',
-	enabled = false,
+	enabled = true,
 	deps = { 'nui' },
 	cmds = { 'CodeDiff' },
+	opts = {
+		explorer = {
+			view_mode = 'tree',
+		},
+	},
+	keys = {
+		{
+			'<leader>gd',
+			function()
+				vim.cmd 'CodeDiff'
+			end,
+			desc = 'Open CodeDiff',
+		},
+		{
+			'<leader>gf',
+			function()
+				vim.cmd 'CodeDiff history %'
+			end,
+			desc = 'Open CodeDiff file history for current file',
+		},
+	},
 }

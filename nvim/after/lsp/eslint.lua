@@ -4,7 +4,7 @@ return {
 			buffer = buffer,
 			callback = function(event)
 				local namespaces = vim.diagnostic.get_namespace(client.id)
-				local diagnostics = vim.diagnostic.get(event.buf, { namespace = namespace })
+				local diagnostics = vim.diagnostic.get(event.buf, { namespace = namespaces })
 				if #diagnostics > 0 then
 					vim.lsp.buf.format {
 						async = false,

@@ -19,34 +19,11 @@ for _, hint in ipairs { 'Error', 'Information', 'Hint', 'Warning' } do
 	)
 end
 
--- vim.api.nvim_create_autocmd('LspProgress', {
--- 	callback = function(ev)
--- 		local value = ev.data.params.value or {}
--- 		local msg = value.message or 'done'
---
--- 		-- rust analyszer in particular has really long LSP messages so truncate them
--- 		if #msg > 40 then
--- 			msg = msg:sub(1, 37) .. '...'
--- 		end
---
--- 		vim.api.nvim_echo(
--- 			{
--- 				{
--- 					msg,
--- 				},
--- 			},
--- 			false,
--- 			{
--- 				id = 'lsp',
--- 				source = 'lsp',
--- 				kind = 'progress',
--- 				title = value.title,
--- 				status = value.kind ~= 'end' and 'running' or 'success',
--- 				percent = value.percentage,
--- 			}
--- 		)
--- 	end,
--- })
+local on_jump = function()
+	vim.diagnostic.open_float {
+		focus = false,
+	}
+end
 
 vim.api.nvim_create_autocmd('LspAttach', {
 	group = __.utils.create_augroup 'lsp_attach',
@@ -77,25 +54,31 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		end)
 
 		map('n', '[d', function()
-			vim.diagnostic.jump { count = -1, float = true }
+			vim.diagnostic.jump {
+				count = -1,
+				on_jump = on_jump,
+			}
 		end)
 
 		map('n', '[D', function()
 			vim.diagnostic.jump {
 				count = -1,
-				float = true,
+				on_jump = on_jump,
 				severity = vim.diagnostic.severity.ERROR,
 			}
 		end)
 
 		map('n', ']d', function()
-			vim.diagnostic.jump { count = 1, float = true }
+			vim.diagnostic.jump {
+				count = 1,
+				on_jump = on_jump,
+			}
 		end)
 
 		map('n', ']D', function()
 			vim.diagnostic.jump {
 				count = 1,
-				float = true,
+				on_jump = on_jump,
 				severity = vim.diagnostic.severity.ERROR,
 			}
 		end)

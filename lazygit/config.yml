@@ -1,6 +1,5 @@
 gui:
-  nerdFontsVersion: "3"
-  sidePanelWidth: 0.8
+  sidePanelWidth: 0.4
   commitLength:
     show: false
   showListFooter: false
@@ -11,13 +10,26 @@ gui:
   # border: 'rounded'
   border: 'hidden'
   filterMode: 'fuzzy'
+  # mainPanelSplitMode: 'flexible'
 
 git:
-  paging:
-    colorArg: always
-    pager: diff-so-fancy
-    # externalDiffCommand: difft --color=always --display=side-by-side-show-both --syntax-highlight=on
-    # pager: delta --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+  diffRenderers:
+    - command: delta --dark --paging=never
+    - command: ydiff -p cat
+      colorArg: never
+    - type: extDiff
+      command: difft --color=always --context={{diffContext}}
+    - type: rawGit
+      args: --color-words
+      name: color-words
+    - type: rawGit # git's default diff
+      name: default
+
+  # colorArg: always
+  # # pager: diff-so-fancy
+  # # externalDiffCommand: difft --color=always --display=side-by-side-show-both --syntax-highlight=on
+  # # pager: delta --dark --paging=never
+  # externalDiffCommand: 'delta --dark --paging=never --line-numbers --hyperlinks --hunk-header-style="syntax bold box" --hunk-header-decoration-style="blue box"'
 
 promptToReturnFromSubprocess: false
 

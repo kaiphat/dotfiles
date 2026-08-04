@@ -1,15 +1,13 @@
 alias g = git
 alias lg = lazygit
 alias t = tmux
+alias tn = t new-session -s
+alias ta = t attach-session -t
+alias td  = t detach
 alias n = nvim --listen $"/tmp/nvim-(tmux display-message -p '#S-#I-#{pane_pid}')"
 alias d = docker
 alias y = yarn
 alias dc = docker-compose
-alias tn = t new-session -s
-alias ta = t attach-session -t
-alias td  = t detach
-alias dcr = dc restart
-alias di = d inspect
 alias nvm = fnm
 alias yz = yazi
 alias tasks = nvim ~/notes/tasks.md -c "set signcolumn=no"
@@ -54,11 +52,6 @@ def trans [...words] {
         'en:ru'
     }
 
-    if ($words | length) == 1 {
-        ^trans $lan -show-original no -show-prompt-message no -show-languages no $text;
-        return
-    }
-
     ^trans $lan -show-original no -show-prompt-message no -show-languages no $text;
 }
 
@@ -66,7 +59,7 @@ def dl [] {
     let result = d ps -a 
     | from ssv -a 
     | each { $"(ansi red)($in.NAMES) (ansi white)($in.PORTS)" } 
-    | str join (char newline) 
+    | to text
     | fzf --ansi 
     | split row ' '
     | first
@@ -99,23 +92,20 @@ def docker-patch-nerd-fonts [] {
 #     w start ...$args
 # }
 
-export def "date from-ms" [ms] {
+def "date from-ms" [ms] {
     $ms * 1000000 | into datetime
 }
 
-export def radio [...search] {
-    let text = $search | str join ' ' | str trim
-
-    let id = tunein search $text 
+def radio [...search] {
+    let id = tunein search ($search | str join ' ' | str trim)
     | fzf --ansi 
     | parse "{_} id: {id}"
-    | get id
-    | first
+    | $in.id.0
 
     tunein play $id
 }
 
-export def youtube [url] {
+def youtube [url] {
     let cur_dir = pwd
 
     mkdir ~/Downloads/youtube
@@ -158,11 +148,20 @@ export def youtube [url] {
 
     print $'file truncated'
 
-    echo $file | deepl  translate | save -a $filename
+    echo $file | deepl translate | save -a $filename
 
     mv $filename $"($filename).md"
 
     nvim -c "lua vim.api.nvim_input('gg')" -c "FormatText" -c "w" -c "set number" $"($filename).md"
 
     cd $cur_dir
+}
+
+def notify:apple [] {
+    tee { $in }
+    osascript -e 'display notification "Finished" sound name "Blow"'
+}
+
+def cut_image_for_pocket_book [img] {
+  magick $img -resize "1072x1448^" -gravity center -extent 1072x1448 -colorspace Gray -level 5%,95% output.jpg
 }

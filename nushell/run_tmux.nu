@@ -1,24 +1,11 @@
 if ($env | get -o TMUX | is-empty) {
-    let output = tmux list-sessions | complete
-
-    if $output.exit_code == 1 {
+    try {
+        tmux list-sessions 
+        | lines 
+        | split column ':' session
+        | where session == 'main'
+        | if ($in | is-empty) { ignore; tn main } else { ignore; ta main }
+    } catch {
         tn main
-        return
     }
-
-    let sessions = $output.stdout | lines | split column ':' session
-
-    if ($sessions | length) == 0 {
-        tn main
-        return
-    }
-
-    let main_session = $sessions | where session == 'main'
-
-    if ($main_session | length) == 0 {
-        tn main
-        return
-    }
-
-    ta main
 }
