@@ -15,15 +15,17 @@ gui:
 git:
   diffRenderers:
     - command: delta --dark --paging=never
-    - command: ydiff -p cat
-      colorArg: never
-    - type: extDiff
-      command: difft --color=always --context={{diffContext}}
-    - type: rawGit
-      args: --color-words
-      name: color-words
-    - type: rawGit # git's default diff
-      name: default
+      name: delta
+      type: "stdinFilter"
+    # - command: ydiff -p cat
+    #   colorArg: never
+    # - type: extDiff
+    #   command: difft --color=always --context={{diffContext}}
+    # - type: rawGit
+    #   args: --color-words
+    #   name: color-words
+    # - type: rawGit # git's default diff
+      # name: default
 
   # colorArg: always
   # # pager: diff-so-fancy

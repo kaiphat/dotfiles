@@ -120,10 +120,6 @@ def youtube [url] {
     | sed -E 's/(.*)\.vtt .*/\1.lrc/'
     | str trim
 
-    print $'filename: ($filename)'
-
-    let filename = 'If_Faide_Says_I_Can_t_Move_He_s_LYING_apexlegends-[xzPJIAb60HI].en.lrc'
-
     mut i = 1
     while (cat $filename | is-empty) and $i < 10 {
         print 'file is empty'

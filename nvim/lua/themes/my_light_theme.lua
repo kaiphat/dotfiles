@@ -7,7 +7,11 @@ local _ = function(group)
 end
 
 local visual = '#d9d9ee'
-local red = '#bb5555'
+local line = '#ccccdd'
+local text = '#993333'
+local keyword = '#115577'
+
+local red = '#993333'
 
 _ 'Normal' { bg = '' }
 _ 'NormalFloat' { bg = '' }
@@ -16,8 +20,8 @@ _ 'ColorColumn' { bg = '' }
 _ 'PmenuSel' { bg = visual }
 _ 'Visual' { bg = visual }
 _ 'CurSearch' { bg = visual }
-_ 'String' { fg = red }
-_ 'Keyword' { fg = '#335599' }
+_ 'String' { fg = text }
+_ 'Keyword' { fg = keyword }
 
 _ 'MiniCursorword' { bg = visual, underline = false }
 _ 'MiniCursorwordCurrent' { bg = visual, underline = false }
@@ -28,3 +32,7 @@ _ 'DiagnosticUnderlineHint' { underline = false, undercurl = true }
 _ 'DiagnosticUnderlineInfo' { underline = false, undercurl = true }
 _ 'DiagnosticUnderlineWarn' { underline = false, undercurl = true }
 _ 'DiagnosticUnderlineError' { fg = red, underline = false, undercurl = true }
+
+_ 'WinSeparator' { fg = line }
+_ 'IndentBlanklineChar' { fg = line }
+_ 'IndentBlanklineContextChar' { fg = line }

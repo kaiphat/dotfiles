@@ -1,4 +1,4 @@
-config-file = ./fonts/annotation
+config-file = ./fonts/input
 config-file = ./themes/rose_pine_light
 
 custom-shader-animation = true
