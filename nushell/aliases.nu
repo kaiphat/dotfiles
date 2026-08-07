@@ -76,21 +76,21 @@ def docker-patch-nerd-fonts [] {
 
 # ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈     watson     ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 
-# alias w = watson
-# alias wr = watson report --day -c
-# def ws [...args] {
-#     let result = w stop | complete 
-#
-#     if $result.exit_code == 0 {
-#         print $result.stdout
-#     }
-#
-#     if ($args | is-empty)  {
-#         return
-#     }
-#
-#     w start ...$args
-# }
+alias w = watson
+alias wr = watson report --day -c
+def ws [...args] {
+    let result = w stop | complete 
+
+    if $result.exit_code == 0 {
+        print $result.stdout
+    }
+
+    if ($args | is-empty)  {
+        return
+    }
+
+    w start ...$args
+}
 
 def "date from-ms" [ms] {
     $ms * 1000000 | into datetime

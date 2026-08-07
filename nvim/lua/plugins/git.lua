@@ -79,6 +79,10 @@ __.add_plugin {
 		explorer = {
 			view_mode = 'tree',
 		},
+		history = {
+			position = 'left',
+			view_mode = 'tree',
+		},
 	},
 	keys = {
 		{
@@ -91,9 +95,19 @@ __.add_plugin {
 		{
 			'<leader>gf',
 			function()
-				vim.cmd 'CodeDiff history %'
+				local mode = vim.api.nvim_get_mode().mode
+
+				if mode == 'n' then
+					vim.cmd 'CodeDiff history %'
+				else
+					vim.api.nvim_input ':CodeDiff history'
+					vim.schedule(function()
+						vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Enter>', true, false, true), 'n', false)
+					end)
+				end
 			end,
 			desc = 'Open CodeDiff file history for current file',
+			mode = { 'n', 'v' },
 		},
 	},
 }

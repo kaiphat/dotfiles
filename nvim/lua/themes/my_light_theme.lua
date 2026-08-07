@@ -12,6 +12,7 @@ local text = '#993333'
 local keyword = '#115577'
 
 local red = '#993333'
+local red_bg = '#ffcccc'
 
 _ 'Normal' { bg = '' }
 _ 'NormalFloat' { bg = '' }
@@ -36,3 +37,5 @@ _ 'DiagnosticUnderlineError' { fg = red, underline = false, undercurl = true }
 _ 'WinSeparator' { fg = line }
 _ 'IndentBlanklineChar' { fg = line }
 _ 'IndentBlanklineContextChar' { fg = line }
+
+_ 'DiffDelete' { bg = red_bg }

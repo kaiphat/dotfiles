@@ -30,25 +30,37 @@ def current_dir_style [] {
 
 def git_before [branch] {
   {
-    git log --oneline --max-count=1 $'($branch)..origin/($branch)'
-    | str length
-    | if $in > 0 { $'(ansi red)(char branch_behind)(ansi reset)' } else { '' }
+    let commits = ^git log --oneline --max-count=1 $'($branch)..origin/($branch)' | complete
+
+    if ($commits.stdout | str length) > 0 {
+      return $'(ansi red)(char branch_behind)(ansi reset)'
+    }
+
+    ''
   }
 }
 
 def git_after [branch] {
   {
-    git log --oneline --max-count=1 $'origin/($branch)..($branch)'
-    | str length
-    | if $in > 0 { $'(ansi red)(char branch_ahead)(ansi reset)' } else { '' }
+    let commits = ^git log --oneline --max-count=1 $'origin/($branch)..($branch)' | complete
+
+    if ($commits.stdout | str length) > 0 {
+      return $'(ansi red)(char branch_ahead)(ansi reset)'
+    }
+
+    ''
   }
 }
 
 def git_draft [] {
   {
-    git log --oneline --max-count=1
-    | str contains 'DRAFT' 
-    | if $in { $'(ansi red)D(ansi reset)' } else { '' }
+    let commit = ^git log --oneline --max-count=1 | complete
+
+    if ($commit.stdout | str contains 'DRAFT') {
+      return $'(ansi red)D(ansi reset)'
+    }
+
+    ''
   }
 }
 
@@ -56,24 +68,22 @@ def git_draft [] {
 def git_changes [] {
   {
     let result = $'(ansi red)(char hamburger)(ansi reset)'
-
-    git diff --quiet 
-    | complete
-    | if $in.exit_code == 1 { return $result }
-
-    git diff --cached --quiet 
-    | complete
-    | if $in.exit_code == 1 { return $result }
+    let unstaged = (^git diff --quiet | complete).exit_code == 1
+    if $unstaged {
+      return $result
+    }
+    let staged = (^git diff --cached --quiet | complete).exit_code == 1
+    if $staged {
+      return $result
+    }
 
     ''
   }
 }
 
 def git_async [] {
-  let branch = git rev-parse --abbrev-ref HEAD 
-  | complete
-  | $in.stdout
-  | str trim
+  let git_exists = ^git rev-parse --abbrev-ref HEAD | complete
+  let branch = $git_exists.stdout | str trim
 
   if $branch == '' {
     return ''

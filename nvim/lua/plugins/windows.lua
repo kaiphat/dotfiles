@@ -22,7 +22,7 @@ __.add_plugin {
 
 		ignore = {
 			buftype = { 'quickfix' },
-			filetype = { 'NvimTree', 'neo-tree', 'undotree', 'gundo' },
+			filetype = { 'NvimTree', 'neo-tree', 'undotree', 'gundo', 'codediff-history' },
 		},
 
 		animation = {

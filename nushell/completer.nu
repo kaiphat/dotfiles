@@ -1,5 +1,5 @@
 const FISH_COMPLETE_COMMANDS = [
-    nu git docker docker-compose kubectl ssh scp curl wget rg fd
+    nu git docker docker-compose kubectl ssh scp curl wget rg fd watson
 ]
 
 let fish_completer = {|spans|
