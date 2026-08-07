@@ -7,31 +7,16 @@ gui:
   showBottomLine: false
   showCommandLog: false
   showPanelJumps: false
-  # border: 'rounded'
-  border: 'hidden'
+  border: 'rounded'
+  # border: 'hidden'
   filterMode: 'fuzzy'
   # mainPanelSplitMode: 'flexible'
 
 git:
   diffRenderers:
-    - command: delta --dark --paging=never
-      name: delta
-      type: "stdinFilter"
-    # - command: ydiff -p cat
-    #   colorArg: never
-    # - type: extDiff
-    #   command: difft --color=always --context={{diffContext}}
-    # - type: rawGit
-    #   args: --color-words
-    #   name: color-words
-    # - type: rawGit # git's default diff
-      # name: default
-
-  # colorArg: always
-  # # pager: diff-so-fancy
-  # # externalDiffCommand: difft --color=always --display=side-by-side-show-both --syntax-highlight=on
-  # # pager: delta --dark --paging=never
-  # externalDiffCommand: 'delta --dark --paging=never --line-numbers --hyperlinks --hunk-header-style="syntax bold box" --hunk-header-decoration-style="blue box"'
+    - command: delta --light --paging=never --line-numbers --hyperlinks --hunk-header-style="syntax bold box" --hunk-header-decoration-style="blue box"
+    - command: diff-so-fancy
+    - type: rawGit # git's default diff
 
 promptToReturnFromSubprocess: false
 

@@ -2,13 +2,13 @@ font-size = 9.5
 
 #font-thicken-strength = 70
 
-font-family = Input
+font-family = Input Mono Condensed
 font-style = Regular
-font-family-bold = Input
+font-family-bold = Input Mono Condensed
 font-style-bold = Regular
-font-family-italic = Input
+font-family-italic = Input Mono Condensed
 font-style-italic = Regular
-font-family-bold-italic = Input
+font-family-bold-italic = Input Mono Condensed
 font-style-bold-italic = Regular
 
 adjust-cell-width = 0

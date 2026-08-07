@@ -1,3 +1,4 @@
 #!/bin/bash
+# ln -sf ~/dotfiles/scripts/nvim_pager ~/.local/bin/nvim_pager
 
 nvim +Man! -c "set nowrap modifiable noreadonly buftype=nofile" $@

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Run nushell with dotfiles config (env.nu + config.nu). Pass-through args:
-#   run-nu script.nu
-#   run-nu -c 'foo'
-#   run-nu --no-config-file   # still prepends our config flags; put nu flags after if needed
+#   nu-run script.nu
+#   nu-run -c 'foo'
+#   nu-run --no-config-file   # still prepends our config flags; put nu flags after if needed
 #
 #
 #   Run 

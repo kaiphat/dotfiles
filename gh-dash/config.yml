@@ -14,5 +14,5 @@ prSections:
 
 keybindings:
   prs:
-    - command: nu /Users/ilyapu/dotfiles/scripts/code_review.nu
+    - command: nu ~/dotfiles/scripts/code_review.nu
       key: I

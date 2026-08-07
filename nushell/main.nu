@@ -85,7 +85,11 @@ $env.config.keybindings = [
         modifier: control
         keycode: char_r
         mode: [emacs, vi_insert, vi_normal]
-        event: { send: menu name: history_menu }
+        # event: { send: menu name: history_menu }
+        event: {
+            send: executehostcommand,
+            cmd: history-fzf
+        }
     }
     {
         name: help_menu
