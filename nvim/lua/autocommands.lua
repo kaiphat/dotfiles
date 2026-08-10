@@ -48,6 +48,17 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
 	end,
 })
 
+-- to show overrides
+-- :verbose set shiftwidth?
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = { 'nu', 'gql' },
+	callback = function()
+		vim.opt_local.shiftwidth = 4
+		vim.opt_local.tabstop = 4
+		vim.opt_local.softtabstop = 4
+	end,
+})
+
 vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'VimLeavePre' }, {
 	group = __.utils.create_augroup 'autosave',
 	callback = function(event)

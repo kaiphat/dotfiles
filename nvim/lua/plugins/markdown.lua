@@ -35,6 +35,11 @@ __.add_plugin {
 			dash = {
 				icon = '─',
 			},
+			checkbox = {
+				unchecked = { icon = '✘ ' },
+				checked = { icon = '✔ ' },
+				custom = { todo = { rendered = '◯ ' } },
+			},
 		}
 	end,
 }

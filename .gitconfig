@@ -12,9 +12,9 @@
     autocrlf = input
     safecrlf = false
     editor = nvim
+    pager = nvim_pager
     ; npm i -g diff-so-fancy
     ; pager = "diff-so-fancy | less --tabs=4 -RFX"
-    pager = delta
     diffFilter = "diff-so-fancy --patch"
 
 [interactive]

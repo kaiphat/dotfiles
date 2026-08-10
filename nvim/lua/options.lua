@@ -5,9 +5,8 @@ g.mapleader = ' '
 g.maplocalleader = ','
 g.markdown_folding = 1
 
-local TAB_SIZE = 4
-
 -- enable new messages ui
+-- Use <Enter> or g< to focus
 require('vim._core.ui2').enable {
 	msg = {
 		targets = 'msg',
@@ -22,9 +21,9 @@ o.shell = 'bash'
 o.jumpoptions = 'stack'
 o.smoothscroll = true
 o.selection = 'old'
-o.tabstop = TAB_SIZE
-o.softtabstop = TAB_SIZE
-o.shiftwidth = TAB_SIZE
+o.tabstop = 4
+o.softtabstop = 4
+o.shiftwidth = 4
 o.expandtab = true
 o.fileencoding = 'utf-8'
 o.wildmenu = true

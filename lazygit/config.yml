@@ -1,5 +1,5 @@
 gui:
-  sidePanelWidth: 0.4
+  sidePanelWidth: 0.2
   commitLength:
     show: false
   showListFooter: false
