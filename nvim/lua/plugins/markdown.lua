@@ -1,4 +1,29 @@
 __.add_plugin {
+	'jakewvincent/mkdnflow.nvim',
+	ft = { 'markdown' },
+	opts = {
+		to_do = {
+			highlight = false,
+			statuses = {
+				not_started = { marker = ' ' },
+				in_progress = { marker = '-' },
+				complete = { marker = 'x' },
+			},
+			status_order = { 'not_started', 'in_progress', 'complete' },
+			status_propagation = { up = true, down = true },
+			sort = {
+				on_status_change = false,
+				recursive = false,
+				cursor_behavior = { track = true },
+			},
+		},
+		mappings = {
+			MkdnToggleToDo = { { 'n', 'v' }, 'tt' }, -- Multiple modes
+		},
+	},
+}
+
+__.add_plugin {
 	'MeanderingProgrammer/render-markdown.nvim',
 	ft = {
 		'markdown',
@@ -36,9 +61,9 @@ __.add_plugin {
 				icon = '─',
 			},
 			checkbox = {
-				unchecked = { icon = '✘ ' },
-				checked = { icon = '✔ ' },
-				custom = { todo = { rendered = '◯ ' } },
+				-- unchecked = { icon = '✘ ' },
+				-- checked = { icon = '✔ ' },
+				-- custom = { todo = { rendered = '◯ ' } },
 			},
 		}
 	end,

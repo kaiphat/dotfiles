@@ -37,6 +37,7 @@ __.add_plugin {
 
 __.add_plugin {
 	dir = 'local_plugins.restore',
+	enabled = false,
 	keys = {
 		{
 			'<leader>ur',

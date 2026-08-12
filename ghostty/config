@@ -1,8 +1,8 @@
 config-file = ./fonts/input
 config-file = ./themes/rose_pine_light
 
-custom-shader-animation = true
-custom-shader = ./shaders/warp_cursor.glsl
+# custom-shader-animation = true
+# custom-shader = ./shaders/warp_cursor.glsl
 
 font-thicken = false
 fullscreen = true
@@ -20,7 +20,7 @@ cursor-text = #112233
 # cursor-text = #000000
 
 #adjust-cursor-height = 20%
-adjust-cursor-thickness = 1
+#adjust-cursor-thickness = 1
 
 scrollbar = never
 shell-integration-features = no-cursor,no-title

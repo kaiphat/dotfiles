@@ -11,10 +11,13 @@ alias dc = docker-compose
 alias nvm = fnm
 alias yz = yazi
 alias tasks = nvim ~/notes/tasks.md -c "set signcolumn=no"
+alias todo = tasks
 alias notes = nvim ~/notes/notes.md -c "set signcolumn=no"
+alias pgcli-history = nvim ~/.config/pgcli_history 
+alias q = agent --mode=ask --workspace ~/fun
 
 let color = if (($env | get -o tmux_var_dark_theme) == '0') { 
-    'gutter:0,bg+:-1,fg+:#244566,pointer:#365987,current-bg:#f0f0f0,current-fg:#000022' 
+    'gutter:0,fg+:#244566,pointer:#365987,bg+:#f0f0f0,fg+:#000022,hl:#993333,hl+:#993333' 
 } else { 
     'gutter:0,bg+:-1,fg+:#244566,pointer:#365987,current-bg:#550000,current-fg:#000022' 
 }
@@ -48,6 +51,7 @@ def dps [name = ''] {
     }
 }
 
+# brew install translate-shell
 def trans [...words] {
     let text = $words | str join ' ' | str trim
     let first_letter = $words.0 | split chars | $in.0
@@ -189,3 +193,4 @@ def history-fzf [] {
         | commandline edit $in
     }
 }
+

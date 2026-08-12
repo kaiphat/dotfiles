@@ -80,6 +80,7 @@ __.add_plugin {
 			view_mode = 'tree',
 		},
 		history = {
+			width = 40,
 			position = 'left',
 			view_mode = 'tree',
 		},

@@ -84,3 +84,31 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'VimLeavePre' }, {
 		end
 	end,
 })
+
+local exclude_filetypes = {
+	'',
+	'neo-tree',
+	'undotree',
+	'codediff-history',
+}
+vim.api.nvim_create_autocmd('WinEnter', {
+	group = __.utils.create_augroup 'auto_resize_splits',
+	callback = function()
+		-- Ignore floating windows and special temporary buffers (like filetrees, quickfix, popups)
+		local win_config = vim.api.nvim_win_get_config(0)
+
+		if win_config.relative ~= '' or vim.tbl_contains(exclude_filetypes, vim.bo.filetype) then
+			return
+		end
+
+		local w, h = vim.o.winwidth, vim.o.winheight
+
+		vim.o.winwidth = 120
+		vim.o.winheight = 40
+
+		vim.cmd.wincmd '='
+
+		vim.o.winwidth = w
+		vim.o.winheight = h
+	end,
+})

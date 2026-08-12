@@ -13,6 +13,8 @@ local keyword = '#115577'
 
 local red = '#993333'
 local red_bg = '#ffcccc'
+local yellow_bg = '#FCE094'
+local visual = yellow_bg
 
 _ 'Normal' { bg = '' }
 _ 'NormalFloat' { bg = '' }
@@ -20,12 +22,10 @@ _ 'Pmenu' { bg = '' }
 _ 'ColorColumn' { bg = '' }
 _ 'PmenuSel' { bg = visual }
 _ 'Visual' { bg = visual }
+_ 'MatchParen' { link = 'Visual' }
 _ 'CurSearch' { bg = visual }
 _ 'String' { fg = text }
 _ 'Keyword' { fg = keyword }
-
-_ 'MiniCursorword' { bg = visual, underline = false }
-_ 'MiniCursorwordCurrent' { bg = visual, underline = false }
 
 _ 'DiagnosticWarn' { link = 'DiagnosticError' }
 _ 'DiagnosticUnderlineOk' { underline = false, undercurl = true }
@@ -39,3 +39,7 @@ _ 'IndentBlanklineChar' { fg = line }
 _ 'IndentBlanklineContextChar' { fg = line }
 
 _ 'DiffDelete' { bg = red_bg }
+_ 'DiffText' { bg = red_bg }
+
+_ 'RenderMarkdownH1Bg' { bg = '#ffeeee' }
+_ 'RenderMarkdownH2Bg' { bg = '#eeffee' }

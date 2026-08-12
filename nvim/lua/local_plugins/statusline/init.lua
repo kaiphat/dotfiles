@@ -139,7 +139,10 @@ local function setup()
 			end
 
 			progress_status_client = vim.lsp.get_client_by_id(args.data.client_id).name
-			progress_status_title = args.data.params.value.message or 'done'
+
+			local info = args.data.params.value
+
+			progress_status_title = (info.title or '') .. ' ' .. (info.message or '')
 
 			if args.data.params.value.kind == 'end' then
 				progress_status_title = nil
