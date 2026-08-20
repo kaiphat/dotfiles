@@ -37,3 +37,17 @@ __.add_plugin {
 		},
 	},
 }
+
+__.add_plugin {
+	'nvim-mini/mini.indentscope',
+	event = 'BufReadPost',
+	load = function(_)
+		_.setup {
+			draw = {
+				delay = 500,
+				animation = require('mini.indentscope').gen_animation.none(),
+			},
+			symbol = __.icons.VERTICAL_LINE_1,
+		}
+	end,
+}

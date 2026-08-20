@@ -31,20 +31,16 @@ def "nu-complete zoxide path" [context: string] {
 }
 
 def --env --wrapped __zoxide_z [...rest: string] {
-    let path = $rest | last 1
-
-    if ($path | is-empty) {
+    if ($rest | is-empty) {
         cd
         return
     }
 
-    let norm_path = if ($path | path exists | first) {
-        zoxide query --exclude $env.PWD -- ...$path | str trim -r -c "\n"
+    let norm_path = if ($rest | last | path exists) {
+        cd ($rest | last)
     } else {
-        zoxide query --exclude $env.PWD -- ...$rest | str trim -r -c "\n"
+        cd (zoxide query --exclude $env.PWD -- ...$rest | str trim -r -c "\n")
     }
-
-    cd $norm_path
 }
 
 def --env --wrapped z [...rest: string@"nu-complete zoxide path"] {

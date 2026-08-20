@@ -1,16 +1,18 @@
 font-size = 12
 
+font-thicken = false
+
 font-thicken-strength = 10
-font-family = ComicShannsMono Nerd Font Mono
+font-family = Comic
 font-style = Regular
-font-family-bold = ComicShannsMono Nerd Font Mono
+font-family-bold = Comic
 font-style-bold = Regular
-font-family-italic = ComicShannsMono Nerd Font Mono
+font-family-italic = Comic
 font-style-italic = Regular
-font-family-bold-italic = ComicShannsMono Nerd Font Mono
+font-family-bold-italic = Comic
 font-style-bold-italic = Regular
 
 adjust-cell-width = 0
-adjust-font-baseline = -1
-adjust-cell-height = 4
+adjust-font-baseline = 0
+adjust-cell-height = 0
 adjust-cursor-height = 0

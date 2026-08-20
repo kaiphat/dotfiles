@@ -20,8 +20,6 @@ local grep_exclude = __.utils.concat(grep_always_excludes, {
 	'**/__mocks__/*',
 	'*.log',
 	'.gitignore',
-	'*.md',
-	'*.json',
 })
 
 local function open_commit(picker, item)
@@ -71,7 +69,7 @@ __.add_plugin {
 					-- },
 				}
 			end,
-			desc = 'Find files (smart)',
+			desc = 'Find files',
 		},
 		{
 			'<leader>fJ',
@@ -394,6 +392,24 @@ __.add_plugin {
 						hidden = {},
 						preview = 'main',
 					},
+					filter = {
+						default = {
+							'Class',
+							'Constructor',
+							'Enum',
+							-- 'Field',
+							'Function',
+							'Interface',
+							'Method',
+							'Module',
+							'Namespace',
+							'Package',
+							-- 'Property',
+							'Struct',
+							'Trait',
+							'Variable',
+						},
+					},
 				}
 			end,
 			desc = 'LSP symbols (all)',
@@ -686,8 +702,9 @@ __.add_plugin {
 
 			indent = {
 				enabled = false,
+
 				indent = {
-					enabled = true,
+					enabled = false,
 					char = __.icons.VERTICAL_LINE_1,
 				},
 
@@ -696,7 +713,7 @@ __.add_plugin {
 				},
 
 				scope = {
-					enabled = false,
+					enabled = true,
 				},
 			},
 

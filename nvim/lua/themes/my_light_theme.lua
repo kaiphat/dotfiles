@@ -6,7 +6,7 @@ local _ = function(group)
 	end
 end
 
-local visual = '#d9d9ee'
+local visual_fg = '#d9d9ee'
 local line = '#ccccdd'
 local text = '#993333'
 local keyword = '#115577'
@@ -27,6 +27,13 @@ _ 'CurSearch' { bg = visual }
 _ 'String' { fg = text }
 _ 'Keyword' { fg = keyword }
 
+_ 'HopNextKey' { bg = '#FF007C', fg = '#ffffff' }
+_ 'HopNextKey1' { link = 'HopNextKey' }
+_ 'HopNextKey2' { link = 'HopNextKey' }
+
+_ 'MiniIndentscopeSymbol' { fg = visual_fg }
+_ 'MiniIndentscopeSymbolOff' { fg = visual_fg }
+
 _ 'DiagnosticWarn' { link = 'DiagnosticError' }
 _ 'DiagnosticUnderlineOk' { underline = false, undercurl = true }
 _ 'DiagnosticUnderlineHint' { underline = false, undercurl = true }
@@ -43,3 +50,5 @@ _ 'DiffText' { bg = red_bg }
 
 _ 'RenderMarkdownH1Bg' { bg = '#ffeeee' }
 _ 'RenderMarkdownH2Bg' { bg = '#eeffee' }
+
+_ 'Underlined' { underline = false }

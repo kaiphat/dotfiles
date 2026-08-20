@@ -21,9 +21,11 @@ $env.MANPAGER = 'nvim +Man! -c "set nowrap modifiable noreadonly buftype=nofile"
 
 $env.PATH ++= [
     /opt/homebrew/bin
+    /opt/homebrew/opt/llvm/bin
     /usr/local/go/bin
     /usr/local/bin
     /usr/sbin
+    /Library/Developer/CommandLineTools/usr/bin
     $env.HOME + '/.config/carapace/bin'
     $env.HOME + '/go/bin'
     $env.HOME + '/.local/bin'

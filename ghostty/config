@@ -1,13 +1,16 @@
-config-file = ./fonts/input
+# https://ghostty.org/docs/config/reference
+
+font-thicken = true
+
+config-file = ./fonts/maple
 config-file = ./themes/rose_pine_light
 
 # custom-shader-animation = true
 # custom-shader = ./shaders/warp_cursor.glsl
 
-font-thicken = false
-fullscreen = true
+fullscreen = non-native-visible-menu
+window-decoration = false
 
-macos-non-native-fullscreen = false
 macos-option-as-alt = true
 
 cursor-style-blink = false
@@ -19,15 +22,15 @@ cursor-text = #112233
 # cursor-color = #f4b8e4
 # cursor-text = #000000
 
-#adjust-cursor-height = 20%
+adjust-cursor-height = 10%
 #adjust-cursor-thickness = 1
 
 scrollbar = never
 shell-integration-features = no-cursor,no-title
 
-window-vsync = true
+window-vsync = false
 window-padding-x = 10
-window-padding-y = 3
+window-padding-y = 0
 window-padding-balance = true
 
 confirm-close-surface = false

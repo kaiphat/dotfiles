@@ -12,13 +12,14 @@ __.add_plugin {
 			status_order = { 'not_started', 'in_progress', 'complete' },
 			status_propagation = { up = true, down = true },
 			sort = {
-				on_status_change = false,
-				recursive = false,
+				on_status_change = true,
+				recursive = true,
 				cursor_behavior = { track = true },
 			},
 		},
 		mappings = {
 			MkdnToggleToDo = { { 'n', 'v' }, 'tt' }, -- Multiple modes
+			MkdnCreateLinkFromClipboard = false,
 		},
 	},
 }

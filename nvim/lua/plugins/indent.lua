@@ -64,6 +64,7 @@ __.add_plugin {
 	name = 'ibl',
 	version = 'ibl',
 	event = 'BufReadPre',
+	enabled = false,
 	load = function()
 		local ibl = require 'ibl'
 		local hooks = require 'ibl.hooks'

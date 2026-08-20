@@ -174,7 +174,7 @@ def cut_image_for_pocket_book [img] {
 
 def history-fzf [] {
     let h = history 
-    | update command { |$item| $item.command | str trim }
+    | upsert command { |$item| $item.command | str trim }
     | uniq-by command
 
     try {
