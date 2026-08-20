@@ -14,7 +14,7 @@ require('vim._core.ui2').enable {
 }
 
 o.winborder = 'rounded'
-o.guicursor = 'n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,t:ver25'
+--o.guicursor = 'n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,t:ver25'
 
 -- has problem with nushell. Doesn't support < operator
 o.shell = 'bash'

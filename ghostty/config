@@ -22,13 +22,13 @@ cursor-text = #112233
 # cursor-color = #f4b8e4
 # cursor-text = #000000
 
-adjust-cursor-height = 10%
+adjust-cursor-height = 20%
 #adjust-cursor-thickness = 1
 
 scrollbar = never
-shell-integration-features = no-cursor,no-title
+#shell-integration-features = no-cursor,no-title
 
-window-vsync = false
+window-vsync = true
 window-padding-x = 10
 window-padding-y = 0
 window-padding-balance = true

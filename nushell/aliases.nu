@@ -194,3 +194,5 @@ def history-fzf [] {
     }
 }
 
+def test [] {
+}
