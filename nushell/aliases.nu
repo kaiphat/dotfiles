@@ -54,7 +54,6 @@ def dps [name = ''] {
 # brew install translate-shell
 def trans [...words] {
     let text = $words | str join ' ' | str trim
-    let first_letter = $words.0 | split chars | $in.0
 
     let lan = if ($text =~ '[а-яА-Я]') {
         'ru:en'

@@ -38,8 +38,6 @@ def main [] {
     ]
 
     $paths | each {
-        print "----------------------------------------"
-
         let path = $in | path relative-to ''
         let item = $path | path basename
         let dir = $path | path dirname 

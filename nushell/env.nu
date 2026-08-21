@@ -25,7 +25,6 @@ $env.PATH ++= [
     /usr/local/go/bin
     /usr/local/bin
     /usr/sbin
-    /Library/Developer/CommandLineTools/usr/bin
     $env.HOME + '/.config/carapace/bin'
     $env.HOME + '/go/bin'
     $env.HOME + '/.local/bin'

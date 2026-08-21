@@ -40,6 +40,7 @@ __.add_plugin {
 
 __.add_plugin {
 	'nvim-mini/mini.indentscope',
+	enabled = false,
 	event = 'BufReadPost',
 	load = function(_)
 		_.setup {
