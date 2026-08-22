@@ -52,3 +52,15 @@ export def "g ch" [to_branch?] {
         | ^git ch $in 
     }
 }
+
+export def "g clone" [url: string] {
+    git clone url
+
+    url 
+    | parse '{_}/{folder}.git' 
+    | get folder
+    | first
+    | if $in != null {
+        cd $in
+    }
+}
